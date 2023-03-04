@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useWorkspaces": true,
+  "conventionalCommits": true,
+  "npmClient": "yarn",
+  "npmClientArgs": ["--no-lockfile"],
+  "packages": ["packages/*"],
+  "version": "independent",
+  "registry": "https://registry.npmjs.org",
+  "command": {
+    "create": {
+      "homepage": "https://github.com/cosmology-tech/cosmology-ui-v2",
+      "license": "SEE LICENSE IN LICENSE",
+      "access": "restricted"
+    },
+    "publish": {
+      "allowBranch": "main",
+      "message": "chore(release): publish"
+    }
+  }
+}

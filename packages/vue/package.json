@@ -1,0 +1,33 @@
+{
+  "name": "@cosmology-mitosis/vue",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "yyyyaaa <phatghaa@gmail.com>",
+  "homepage": "https://github.com/cosmology-tech/cosmology-ui-v2/tree/main/packages/vue#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "./dist/cosmology-mitosis-vue.umd.js",
+  "module": "./dist/cosmology-mitosis-vue.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/cosmology-mitosis-vue.es.js",
+      "require": "./dist/cosmology-mitosis-vue.umd.js"
+    }
+  },
+  "peerDependencies": {
+    "vue": "^3.x"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  }
+}
