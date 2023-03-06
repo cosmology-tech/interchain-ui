@@ -70,11 +70,6 @@ module.exports = (options) => {
           external,
           plugins: [
             ...plugins,
-            // Convert styled sheets to separate CSS files
-            vanillaExtractPlugin({
-              identifiers: "debug", // Can be configured to 'short' hash
-            }),
-            depsExternal(),
             resolve.nodeResolve({ extensions: [".js", ".ts", ".tsx"] }),
             json(),
             typescript({
@@ -83,6 +78,11 @@ module.exports = (options) => {
                 emitDeclarationOnly: true,
               },
             }),
+            // Convert styled sheets to separate CSS files
+            vanillaExtractPlugin({
+              identifiers: "debug", // Can be 'short' hash
+            }),
+            depsExternal(),
             babel({
               plugins: [
                 [
@@ -114,5 +114,5 @@ module.exports = (options) => {
       : null,
   ];
 
-  return inputs.filter((x) => !!x);
+  return inputs.filter((x) => x);
 };
