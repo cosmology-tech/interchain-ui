@@ -1,6 +1,6 @@
 import { onMount, Show, useMetadata, useStore } from "@builder.io/mitosis";
-import { buttonStyles } from "./Button.css";
-import type { ButtonProps, ButtonState } from "./Button.types";
+import { buttonStyles } from "./button.css";
+import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
 

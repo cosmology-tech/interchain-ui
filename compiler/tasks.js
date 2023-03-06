@@ -19,7 +19,7 @@ const optionDefinitions = [
 (async () => {
   const cliConfig = commandLineArgs(optionDefinitions);
   const execa = (await import("execa")).command;
-  cliConfig.lint = cliConfig.lint && !cliConfig["no-lint"];
+  cliConfig.lint = cliConfig.lint && !cliConfig["no-lint"]; // TODO: add linting
 
   const tasks = new Listr([
     {

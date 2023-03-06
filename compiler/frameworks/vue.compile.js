@@ -1,3 +1,4 @@
+// @ts-check
 const compiler = require("../base");
 const fs = require("fs");
 
@@ -12,13 +13,15 @@ const DEFAULT_OPTIONS = {
   function customReplace(props) {
     const { outFile, outPath, isFirstCompilation } = props;
 
-    if (isFirstCompilation) {
+    if (true || isFirstCompilation) {
       const data = fs.readFileSync(`${outPath}/src/index.ts`, "utf8");
       const result = data
         // Add .vue to index
-        .replace(/(export)(.*)\/(.+)';/g, "$1$2/$3/$3.vue';")
+        .replace(/(export)(.*)\/(.+)";/g, `$1$2/$3/$3.vue";`)
         .replace(/(extensions)\/(.*)\.vue/g, "$1/$2")
         .replace(/\/helpers\.vue/g, "");
+
+      console.log("adding .vue", data);
 
       fs.writeFileSync(`${outPath}/src/index.ts`, result, "utf8");
     }

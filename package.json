@@ -51,6 +51,7 @@
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
     "@vanilla-extract/rollup-plugin": "^1.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "@vue/babel-preset-app": "^5.0.8",
     "autoprefixer": "^10.4.13",
     "chokidar-cli": "^3.0.0",
@@ -80,6 +81,7 @@
     "rollup-plugin-node-externals": "^5.1.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-ts": "^3.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-visualizer": "^5.9.0",
     "rollup-plugin-vue": "^6.0.0",
     "rollup-preset-solid": "^2.0.1",
@@ -97,6 +99,7 @@
   "dependencies": {
     "@vanilla-extract/css": "^1.9.5",
     "@vanilla-extract/recipes": "^0.3.0",
-    "@vanilla-extract/sprinkles": "^1.5.1"
+    "@vanilla-extract/sprinkles": "^1.5.1",
+    "vue": "^3.2.47"
   }
 }
