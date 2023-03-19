@@ -9,3 +9,5 @@ export enum Intent {
 export const intents = Object.entries(Intent).map(
   ([key, value]: [string, string]) => ({ key, value })
 );
+
+export type ThemeVariant = "light" | "dark";

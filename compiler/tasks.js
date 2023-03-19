@@ -66,7 +66,7 @@ const optionDefinitions = [
       title: `Bundle Packages: ${cliConfig.platforms?.join(", ") || ""}`,
       task: () =>
         execa(
-          `yarn lerna --scope=@cosmology-mitosis/${
+          `yarn lerna --verbose --scope=@cosmology-mitosis/${
             cliConfig.platforms.length > 1
               ? `{${cliConfig.platforms?.join(",")}}`
               : cliConfig.platforms

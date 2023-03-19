@@ -1,9 +1,10 @@
 {
   "name": "@cosmology-mitosis/react",
   "version": "1.0.0",
+  "type": "module",
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/cosmology-ui-v2/tree/main/packages/react#readme",
+  "homepage": "https://github.com/cosmology-tech/cosmology-mitosis/tree/main/packages/react#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cosmology-mitosis-react.umd.js",
   "module": "./dist/cosmology-mitosis-react.es.js",
@@ -12,9 +13,15 @@
     ".": {
       "import": "./dist/cosmology-mitosis-react.es.js",
       "require": "./dist/cosmology-mitosis-react.umd.js"
+    },
+    "./themes.css": {
+      "import": "./dist/styles/themes.css.ts.vanilla.css",
+      "require": "./dist/styles/themes.css.ts.vanilla.css"
     }
   },
   "peerDependencies": {
+    "zustand": "^4.3.6",
+    "immer": "^9.0.19",
     "react": "^16.8.0 || 17.x || 18.x",
     "react-dom": "^16.8.0 || 17.x || 18.x"
   },
@@ -30,6 +37,6 @@
   },
   "scripts": {
     "prebuild": "yarn install",
-    "build": "rollup -c"
+    "build": "rollup -c --bundleConfigAsCjs"
   }
 }

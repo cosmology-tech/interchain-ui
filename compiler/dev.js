@@ -25,11 +25,11 @@ const ora = require("ora");
     {
       title: "Bundle React",
       task: () =>
-        execa("yarn lerna --scope=@cosmology-mitosis/react build").catch(
-          (error) => {
-            throw new Error("Error bundling React " + error);
-          }
-        ),
+        execa(
+          "yarn lerna --verbose --scope=@cosmology-mitosis/react build"
+        ).catch((error) => {
+          throw new Error("Error bundling React " + error);
+        }),
     },
     {
       title: "Launch Watcher",

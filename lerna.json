@@ -9,13 +9,15 @@
   "registry": "https://registry.npmjs.org",
   "command": {
     "create": {
-      "homepage": "https://github.com/cosmology-tech/cosmology-ui-v2",
+      "homepage": "https://github.com/cosmology-tech/cosmology-mitosis",
       "license": "SEE LICENSE IN LICENSE",
       "access": "restricted"
     },
     "publish": {
       "allowBranch": "main",
-      "message": "chore(release): publish"
+      "message": "chore(release): publish",
+      "conventionalCommits": true,
+      "ignoreChanges": ["*.md", "stats.html", ".spec.ts", ".stories.ts"]
     }
   }
 }
