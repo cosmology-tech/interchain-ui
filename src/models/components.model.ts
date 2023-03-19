@@ -1,6 +1,6 @@
 export type ComponentRef<T = HTMLElement> = T & ((el: T) => void);
 
-export interface BaseComponentProps<T> {
+export interface BaseComponentProps<T = HTMLDivElement> {
   className?: string;
   class?: string; // Fallback className
   classList?: string; // Fallback class

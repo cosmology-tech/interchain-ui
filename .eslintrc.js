@@ -4,8 +4,6 @@ const ERROR = 2;
 
 module.exports = {
   parser: "@typescript-eslint/parser",
-  // Specifies the ESLint parser
-  plugins: ["@builder.io/mitosis"],
   extends: [
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
@@ -27,6 +25,7 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": DISABLED,
     "@typescript-eslint/interface-name-prefix": DISABLED,
     "@typescript-eslint/no-empty-interface": DISABLED,
+    "@typescript-eslint/no-empty-function": DISABLED,
     "@typescript-eslint/no-var-requires": DISABLED,
     "@typescript-eslint/no-non-null-assertion": DISABLED,
     "react/prop-types": DISABLED,
@@ -38,12 +37,5 @@ module.exports = {
         varsIgnorePattern: "^_",
       },
     ],
-    "@builder.io/mitosis/no-unused-expressions": DISABLED,
-    "@builder.io/mitosis/no-var-name-same-as-state-property": ERROR,
-    "@builder.io/mitosis/jsx-callback-arg-name": ERROR,
-    "@builder.io/mitosis/jsx-callback-arrow-function": ERROR,
-    "@builder.io/mitosis/no-assign-props-to-state": ERROR,
-    "@builder.io/mitosis/no-conditional-logic-in-component-render": ERROR,
-    "@builder.io/mitosis/no-state-destructuring": ERROR,
   },
 };

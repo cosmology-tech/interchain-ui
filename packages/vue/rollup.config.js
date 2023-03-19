@@ -1,6 +1,6 @@
-const config = require("../../rollup.config");
 const vue = require("rollup-plugin-vue");
 const ts = require("rollup-plugin-typescript");
+const config = require("../../rollup.config");
 
 module.exports = config({
   dir: __dirname,
