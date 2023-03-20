@@ -15,9 +15,13 @@
       "require": "./dist/cosmology-mitosis-vue.umd.js"
     }
   },
-  "peerDependencies": {
+  "dependencies": {
+    "@zag-js/dialog": "^0.2.13",
+    "@zag-js/vue": "^0.2.10",
     "zustand": "^4.3.6",
-    "immer": "^9.0.19",
+    "immer": "^9.0.19"
+  },
+  "peerDependencies": {
     "vue": "^3.x"
   },
   "directories": {

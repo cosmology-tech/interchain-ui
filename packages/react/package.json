@@ -19,9 +19,13 @@
       "require": "./dist/styles/themes.css.ts.vanilla.css"
     }
   },
-  "peerDependencies": {
+  "dependencies": {
+    "@zag-js/dialog": "^0.2.13",
+    "@zag-js/react": "^0.3.10",
     "zustand": "^4.3.6",
-    "immer": "^9.0.19",
+    "immer": "^9.0.19"
+  },
+  "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",
     "react-dom": "^16.8.0 || 17.x || 18.x"
   },

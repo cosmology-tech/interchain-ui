@@ -54,6 +54,9 @@
     "@vanilla-extract/rollup-plugin": "^1.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/babel-preset-app": "^5.0.8",
+    "@zag-js/dialog": "^0.2.13",
+    "@zag-js/react": "^0.3.10",
+    "@zag-js/vue": "^0.2.10",
     "autoprefixer": "^10.4.13",
     "chokidar-cli": "^3.0.0",
     "command-line-args": "^5.2.1",
@@ -98,11 +101,11 @@
     "@types/react": "^18.0.27"
   },
   "dependencies": {
-    "zustand": "^4.3.6",
-    "immer": "^9.0.19",
     "@vanilla-extract/css": "^1.9.5",
     "@vanilla-extract/recipes": "^0.3.0",
     "@vanilla-extract/sprinkles": "^1.5.1",
-    "vue": "^3.2.47"
+    "immer": "^9.0.19",
+    "vue": "^3.2.47",
+    "zustand": "^4.3.6"
   }
 }
