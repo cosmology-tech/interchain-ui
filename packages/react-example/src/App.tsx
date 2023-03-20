@@ -1,37 +1,17 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { Button } from "@cosmology-mitosis/react";
+import cls from "clsx";
+import { Button, ThemeProvider } from "@cosmology-mitosis/react";
 import "@cosmology-mitosis/react/themes.css";
-import "./App.css";
+import { useCosmologyStore } from "./hooks/useCosmologyStore";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { themeClass, setTheme } = useCosmologyStore();
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider>
+      <div id="app-root" className={cls("app", themeClass)}>
+        <Button>Custom button</Button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-
-      <Button>Custom button</Button>
-    </div>
+    </ThemeProvider>
   );
 }
 

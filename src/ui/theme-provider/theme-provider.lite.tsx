@@ -7,6 +7,8 @@ import {
 } from "@builder.io/mitosis";
 import { mediaQueryColorScheme } from "../../helpers/dom";
 import { store } from "../../models/store";
+import { darkThemeClass, lightThemeClass } from "../../styles/themes.css";
+import "../../styles/global.css";
 import type { ThemeProviderProps } from "./theme-provider.types";
 
 export default function ThemeProvider(props: ThemeProviderProps) {
@@ -32,26 +34,42 @@ export default function ThemeProvider(props: ThemeProviderProps) {
   });
 
   onMount(() => {
-    store.getState().setTheme(props.defaultTheme || "dark");
+    const preferredTheme = props.defaultTheme || "dark";
+    store
+      .getState()
+      .setTheme(
+        preferredTheme,
+        preferredTheme === "dark" ? darkThemeClass : lightThemeClass
+      );
   });
 
   onUpdate(() => {
-    if (state.isDark) {
-      return store.getState().setTheme("dark");
+    if (typeof props.defaultTheme === "string") {
+      const preferredTheme = props.defaultTheme || "dark";
+      return store
+        .getState()
+        .setTheme(
+          preferredTheme,
+          preferredTheme === "dark" ? darkThemeClass : lightThemeClass
+        );
     }
 
-    return store.getState().setTheme("light");
-  }, [state.isDark, state.isLight]);
+    if (state.isDark) {
+      return store.getState().setTheme("dark", darkThemeClass);
+    }
+
+    return store.getState().setTheme("light", lightThemeClass);
+  }, [state.isDark, state.isLight, props.defaultTheme]);
 
   onMount(() => {
     const darkListener = ({ matches }: MediaQueryListEvent) => {
       if (matches) {
-        store.getState().setTheme("dark");
+        store.getState().setTheme("dark", darkThemeClass);
       }
     };
     const lightListener = ({ matches }: MediaQueryListEvent) => {
       if (matches) {
-        store.getState().setTheme("light");
+        store.getState().setTheme("light", lightThemeClass);
       }
     };
 

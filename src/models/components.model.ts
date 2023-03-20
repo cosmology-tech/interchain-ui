@@ -1,4 +1,5 @@
 export type ComponentRef<T = HTMLElement> = T & ((el: T) => void);
+export type Children = any; // TODO
 
 export interface BaseComponentProps<T = HTMLDivElement> {
   className?: string;
@@ -11,8 +12,6 @@ export interface BaseComponentProps<T = HTMLDivElement> {
 export type BaseState = {
   loaded: boolean;
 };
-
-export type Children = any; // TODO
 
 export type CSS = Partial<CSSStyleDeclaration> & {
   [key: string]: Partial<CSSStyleDeclaration> | string;

@@ -122,6 +122,7 @@ async function compile(defaultOptions) {
           force: true,
           state: options.state,
           styles: options.styles,
+          typescript: true,
         },
         array: [filepath],
       },

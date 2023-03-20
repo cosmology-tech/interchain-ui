@@ -15,13 +15,19 @@ const DEFAULT_OPTIONS = {
 
     if (true || isFirstCompilation) {
       const data = fs.readFileSync(`${outPath}/src/index.ts`, "utf8");
+      console.log("Before", data);
+
+      // .vue extension already added, don't process
+      // TODO: add a map to check for duplicated work
+      if (data.indexOf(".vue") !== -1) return data;
+
       const result = data
         // Add .vue to index
-        .replace(/(export)(.*)\/(.+)";/g, `$1$2/$3/$3.vue";`)
+        .replace(/(export)(.*)\/ui\/(.+)";/g, `$1$2/ui/$3/$3.vue";`)
         .replace(/(extensions)\/(.*)\.vue/g, "$1/$2")
         .replace(/\/helpers\.vue/g, "");
 
-      console.log("adding .vue", data);
+      console.log("adding .vue", result);
 
       fs.writeFileSync(`${outPath}/src/index.ts`, result, "utf8");
     }
@@ -34,7 +40,7 @@ const DEFAULT_OPTIONS = {
       .replace("import", "import { ref } from 'vue';\nimport")
       // Replace vue html .values for refs
       .replace(/\.value \}\}/g, "}}")
-      // TODO: Temporal meanwhile we find another why but this is stable
+      // TODO: Temporarily meanwhile we find another why but this is stable
       .replace(/getData\(\);/g, "getData.bind(this)();");
 
     fs.writeFileSync(outFile, result, "utf8");
