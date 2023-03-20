@@ -67,7 +67,6 @@
     "glob": "^8.0.3",
     "gluegun": "^5.1.2",
     "husky": "^8.0.2",
-    "immer": "^9.0.19",
     "lerna": "^6.5.1",
     "listr2": "^5.0.5",
     "lz-string": "^1.4.4",
@@ -93,13 +92,14 @@
     "ts-node": "10.9.1",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "typescript": "^4.9.5",
-    "vite": "^4.1.4",
-    "zustand": "^4.3.6"
+    "vite": "^4.1.4"
   },
   "resolutions": {
     "@types/react": "^18.0.27"
   },
   "dependencies": {
+    "zustand": "^4.3.6",
+    "immer": "^9.0.19",
     "@vanilla-extract/css": "^1.9.5",
     "@vanilla-extract/recipes": "^0.3.0",
     "@vanilla-extract/sprinkles": "^1.5.1",
