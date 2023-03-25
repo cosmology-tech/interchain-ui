@@ -1,6 +1,6 @@
 // @ts-check
-const compiler = require("../base");
 const fs = require("fs");
+const compiler = require("../base");
 
 const DEFAULT_OPTIONS = {
   target: "react",

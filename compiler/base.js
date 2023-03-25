@@ -25,8 +25,38 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
+const scaffoldRe = {
+  Modal: {
+    re: /ScaffoldModal/g,
+    importLine: `import Modal from "../modal";`,
+  },
+};
+
 function pascalName(name) {
   return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function appendToImportsBlock(componentFile, appendee) {
+  // Split the file into lines
+  const lines = componentFile.split("\n");
+  // Find the index of the last import statement
+  let lastImportIndex = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes("import")) {
+      lastImportIndex = i;
+    }
+  }
+
+  // If there are no import statements, return the original file
+  if (lastImportIndex === -1) {
+    return componentFile;
+  }
+
+  // Append the comment to the last import statement
+  lines.splice(lastImportIndex + 1, 0, appendee);
+
+  // Join the lines back into a string and return it
+  return lines.join("\n");
 }
 
 async function compile(defaultOptions) {
@@ -107,6 +137,10 @@ async function compile(defaultOptions) {
     fs.writeFileSync(`${outPath}/src/index.ts`, indexResult, "utf8");
   }
 
+  function copyScaffoldsIntoSrcDir() {
+    fs.copySync(`${outPath}/scaffolds`, `${outPath}/src/ui`);
+  }
+
   async function compileMitosisComponent(filepath) {
     const file = path.parse(filepath);
     const outFile = `${outPath}/${file.dir}/${file.name.replace(".lite", "")}.${
@@ -138,9 +172,19 @@ async function compile(defaultOptions) {
 
   function replacePropertiesFromCompiledFiles(outFile) {
     const data = fs.readFileSync(outFile, "utf8");
-    const result = data
+    let result = data
       // Fix alias
       .replace(/\~\//g, "../../../");
+
+    // Apply framework scaffolds
+    for (const [scaffoldName, scaffold] of Object.entries(scaffoldRe)) {
+      const { re, importLine } = scaffold;
+      if (!re.test(result)) continue;
+
+      // Rename scaffold JSX tag name to real tag name
+      result = result.replace(re, scaffoldName);
+      result = appendToImportsBlock(result, importLine);
+    }
 
     fs.writeFileSync(outFile, result, "utf8");
   }
@@ -153,6 +197,8 @@ async function compile(defaultOptions) {
     spinner.text = fileName;
 
     copyBasicFilesOnFirstCompilation(isFirstCompilation);
+    copyScaffoldsIntoSrcDir();
+
     const { outFile } = await compileMitosisComponent(fileName);
     replacePropertiesFromCompiledFiles(outFile);
     options.customReplace({ file, outFile, outPath, isFirstCompilation });

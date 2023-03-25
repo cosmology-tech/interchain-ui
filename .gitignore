@@ -9,7 +9,6 @@ packages/**/module
 packages/**/dist/
 packages/**/lib/
 packages/**/types/
-packages/**/tsconfig.*
 packages/react/src/
 packages/vue/src/
 storybook-static/

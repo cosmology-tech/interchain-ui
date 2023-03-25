@@ -8,10 +8,25 @@ const peerDepsExternal = require("rollup-plugin-peer-deps-external");
 const depsExternal = require("rollup-plugin-node-externals");
 const { vanillaExtractPlugin } = require("@vanilla-extract/rollup-plugin");
 const json = require("@rollup/plugin-json");
+const analyze = require("rollup-plugin-analyzer");
+
+const BUNDLE_LIMIT_BYTES = 1.5e5; // 150KB
+
+const checkBundleSizeLimit = ({ bundleSize }) => {
+  if (bundleSize < BUNDLE_LIMIT_BYTES) return;
+
+  console.log(
+    "\x1b[31m",
+    `Bundle size exceeds LIMIT of ${BUNDLE_LIMIT_BYTES} bytes: ${bundleSize} bytes`
+  );
+
+  return process.exit(1);
+};
 
 module.exports = (options) => {
   const {
     dir,
+    tsConfigDir,
     packageJson,
     plugins = [],
     external = [],
@@ -22,7 +37,11 @@ module.exports = (options) => {
     disableCoreCompilation = false,
   } = options;
 
-  const tsconfig = require(path.resolve(__dirname, "./tsconfig.json"));
+  const tsconfig =
+    typeof tsConfigDir === "string"
+      ? require(tsConfigDir)
+      : require(path.resolve(__dirname, "./tsconfig.json"));
+
   tsconfig.compilerOptions = {
     ...tsconfig.compilerOptions,
     ...compilerOptions,
@@ -101,6 +120,9 @@ module.exports = (options) => {
             }),
             peerDepsExternal(),
             commonjs(),
+            analyze({
+              onAnalysis: checkBundleSizeLimit,
+            }),
           ],
         },
     dts && !disableCoreCompilation

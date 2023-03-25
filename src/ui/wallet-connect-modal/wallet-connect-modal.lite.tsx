@@ -4,8 +4,8 @@ import type { WalletConnectModalProps } from "./wallet-connect-modal.types";
 
 export default function WalletConnectModal(props: WalletConnectModalProps) {
   return (
-    <Modal isOpen>
+    <ScaffoldModal>
       <div ref={props.forwardedRef}>{props.children}</div>
-    </Modal>
+    </ScaffoldModal>
   );
 }
