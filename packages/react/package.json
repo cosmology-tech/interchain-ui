@@ -2,6 +2,7 @@
   "name": "@cosmology-mitosis/react",
   "version": "1.0.0",
   "type": "module",
+  "private": true,
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/cosmology-mitosis/tree/main/packages/react#readme",
