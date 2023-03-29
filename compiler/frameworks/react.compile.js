@@ -16,7 +16,7 @@ const DEFAULT_OPTIONS = {
     const data = fs.readFileSync(outFile, "utf8");
     const result = data
       // Fix generic type for forwardRef not supported yet
-      .replace(/forwardedRef\s+\)/g, "forwardedRef: any)")
+      // .replace(/forwardedRef\s+\)/g, "forwardedRef: any)")
       // fix contenteditable
       .replace(
         /contentEditable\=(.*)/g,

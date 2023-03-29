@@ -1,7 +1,8 @@
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
-import { vars, breakpoints } from "./themes.css";
+import { themeVars } from "./themes.css";
+import { breakpoints } from "./tokens";
 
-const { space, colors, fontSize, radii, boxShadow } = vars;
+const { space, colors, fontSize, radii, boxShadow } = themeVars;
 
 const unresponsiveProperties = defineProperties({
   properties: {

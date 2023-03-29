@@ -3,9 +3,9 @@ import { onMount, Show, useStore } from "@builder.io/mitosis";
 import type { WalletConnectModalProps } from "./wallet-connect-modal.types";
 
 export default function WalletConnectModal(props: WalletConnectModalProps) {
-  return (
-    <ScaffoldModal>
-      <div ref={props.forwardedRef}>{props.children}</div>
-    </ScaffoldModal>
-  );
+  return <div ref={props.forwardedRef}>{props.children}</div>;
+  // return (
+  //   <ScaffoldModal>
+  //   </ScaffoldModal>
+  // );
 }
