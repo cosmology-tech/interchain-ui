@@ -2,7 +2,7 @@
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useWorkspaces": true,
   "conventionalCommits": true,
-  "npmClient": "yarn",
+  "npmClient": "pnpm",
   "npmClientArgs": ["--no-lockfile"],
   "packages": ["packages/*"],
   "version": "independent",

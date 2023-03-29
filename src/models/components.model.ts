@@ -6,7 +6,7 @@ export interface BaseComponentProps<T = HTMLDivElement> {
   class?: string; // Fallback className
   classList?: string; // Fallback class
   children?: Children;
-  forwardedRef?: ComponentRef<T>;
+  forwardedRef?: any;
 }
 
 export type BaseState = {

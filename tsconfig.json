@@ -22,5 +22,6 @@
       "~/models/*": ["./src/models/*"],
       "~/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["src"]
 }

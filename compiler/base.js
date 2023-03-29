@@ -25,12 +25,13 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
-const scaffoldRe = {
-  Modal: {
-    re: /ScaffoldModal/g,
-    importLine: `import Modal from "../modal";`,
-  },
-};
+// TODO: move into mitosis plugin
+// const scaffoldRe = {
+//   Modal: {
+//     re: /ScaffoldModal/g,
+//     importLine: `import Modal from "../modal";`,
+//   },
+// };
 
 function pascalName(name) {
   return name.charAt(0).toUpperCase() + name.slice(1);
@@ -97,7 +98,7 @@ async function compile(defaultOptions) {
       const data = fs.readFileSync(element, "utf8");
       const result = data
         // Fix alias
-        .replace(/\~\//g, "../../../")
+        .replace(/\~\//g, "../../")
         // Remove .lite
         .replace(/\.lite/g, "");
 
@@ -174,17 +175,17 @@ async function compile(defaultOptions) {
     const data = fs.readFileSync(outFile, "utf8");
     let result = data
       // Fix alias
-      .replace(/\~\//g, "../../../");
+      .replace(/\~\//g, "../../");
 
     // Apply framework scaffolds
-    for (const [scaffoldName, scaffold] of Object.entries(scaffoldRe)) {
-      const { re, importLine } = scaffold;
-      if (!re.test(result)) continue;
+    // for (const [scaffoldName, scaffold] of Object.entries(scaffoldRe)) {
+    //   const { re, importLine } = scaffold;
+    //   if (!re.test(result)) continue;
 
-      // Rename scaffold JSX tag name to real tag name
-      result = result.replace(re, scaffoldName);
-      result = appendToImportsBlock(result, importLine);
-    }
+    //   // Rename scaffold JSX tag name to real tag name
+    //   result = result.replace(re, scaffoldName);
+    //   result = appendToImportsBlock(result, importLine);
+    // }
 
     fs.writeFileSync(outFile, result, "utf8");
   }
@@ -197,7 +198,7 @@ async function compile(defaultOptions) {
     spinner.text = fileName;
 
     copyBasicFilesOnFirstCompilation(isFirstCompilation);
-    copyScaffoldsIntoSrcDir();
+    // copyScaffoldsIntoSrcDir();
 
     const { outFile } = await compileMitosisComponent(fileName);
     replacePropertiesFromCompiledFiles(outFile);
