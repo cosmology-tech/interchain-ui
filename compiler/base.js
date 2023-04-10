@@ -25,39 +25,8 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
-// TODO: move into mitosis plugin
-// const scaffoldRe = {
-//   Modal: {
-//     re: /ScaffoldModal/g,
-//     importLine: `import Modal from "../modal";`,
-//   },
-// };
-
 function pascalName(name) {
   return name.charAt(0).toUpperCase() + name.slice(1);
-}
-
-function appendToImportsBlock(componentFile, appendee) {
-  // Split the file into lines
-  const lines = componentFile.split("\n");
-  // Find the index of the last import statement
-  let lastImportIndex = -1;
-  for (let i = 0; i < lines.length; i++) {
-    if (lines[i].includes("import")) {
-      lastImportIndex = i;
-    }
-  }
-
-  // If there are no import statements, return the original file
-  if (lastImportIndex === -1) {
-    return componentFile;
-  }
-
-  // Append the comment to the last import statement
-  lines.splice(lastImportIndex + 1, 0, appendee);
-
-  // Join the lines back into a string and return it
-  return lines.join("\n");
 }
 
 async function compile(defaultOptions) {
@@ -157,7 +126,7 @@ async function compile(defaultOptions) {
           force: true,
           state: options.state,
           styles: options.styles,
-          typescript: true,
+          config: "./compiler/mitosis.config",
         },
         array: [filepath],
       },
@@ -177,16 +146,6 @@ async function compile(defaultOptions) {
       // Fix alias
       .replace(/\~\//g, "../../");
 
-    // Apply framework scaffolds
-    // for (const [scaffoldName, scaffold] of Object.entries(scaffoldRe)) {
-    //   const { re, importLine } = scaffold;
-    //   if (!re.test(result)) continue;
-
-    //   // Rename scaffold JSX tag name to real tag name
-    //   result = result.replace(re, scaffoldName);
-    //   result = appendToImportsBlock(result, importLine);
-    // }
-
     fs.writeFileSync(outFile, result, "utf8");
   }
 
@@ -194,15 +153,22 @@ async function compile(defaultOptions) {
     const file = path.parse(fileName);
     const isFirstCompilation =
       !fs.existsSync(`${outPath}/src`) || options.isDev;
-
+    const name = file.name.replace(".lite", "");
     spinner.text = fileName;
 
     copyBasicFilesOnFirstCompilation(isFirstCompilation);
-    // copyScaffoldsIntoSrcDir();
+    copyScaffoldsIntoSrcDir();
 
     const { outFile } = await compileMitosisComponent(fileName);
     replacePropertiesFromCompiledFiles(outFile);
-    options.customReplace({ file, outFile, outPath, isFirstCompilation });
+    options.customReplace({
+      name,
+      pascalName: pascalName(name),
+      file,
+      outFile,
+      outPath,
+      isFirstCompilation,
+    });
     spinner.stop();
   }
 }

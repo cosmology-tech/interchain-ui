@@ -8,4 +8,4 @@ export { default as ThemeProvider } from "./ui/theme-provider";
 export { default as WalletConnectModal } from "./ui/wallet-connect-modal";
 export { default as FadeIn } from "./ui/fade-in";
 
-setPlatform(Platform.Default);
+setPlatform(Platform.React);

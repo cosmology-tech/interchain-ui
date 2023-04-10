@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
 
 export const modalContainer = style({
   position: `fixed`,
@@ -24,13 +24,27 @@ export const modalContainer = style({
   },
 });
 
-export const modalBackdrop = style({
+const modalBackdropBase = style({
   position: `absolute`,
   top: 0,
   left: 0,
   width: `100%`,
   height: `100%`,
-  backgroundColor: `rgba(0, 0, 0, 0.5)`,
+});
+
+export const modalBackdrop = styleVariants({
+  light: [
+    modalBackdropBase,
+    {
+      backgroundColor: `rgba(0, 0, 0, 0.48)`, // blackAlpha600
+    },
+  ],
+  dark: [
+    modalBackdropBase,
+    {
+      backgroundColor: `rgba(0, 0, 0, 0.48)`, // blackAlpha600
+    },
+  ],
 });
 
 export const modalContent = style({

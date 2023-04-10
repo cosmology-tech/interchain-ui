@@ -36,6 +36,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
+    "prebuild": "pnpm install",
     "build": "rollup -c --bundleConfigAsCjs"
   }
 }

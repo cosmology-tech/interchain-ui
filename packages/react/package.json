@@ -26,6 +26,9 @@
     "@vanilla-extract/css": "^1.9.5",
     "@vanilla-extract/recipes": "^0.3.0",
     "@vanilla-extract/sprinkles": "^1.5.1",
+    "@zag-js/dialog": "^0.2.15",
+    "@zag-js/react": "^0.3.12",
+    "animejs": "^3.2.1",
     "immer": "^9.0.19",
     "react-aria": "3.23.1",
     "react-stately": "3.19.0",
@@ -47,7 +50,10 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "prebuild": "yarn install",
+    "prebuild": "pnpm install",
     "build": "rollup -c --bundleConfigAsCjs"
+  },
+  "devDependencies": {
+    "@types/animejs": "^3.1.7"
   }
 }
