@@ -1,4 +1,8 @@
-import { createThemeContract, createTheme } from "@vanilla-extract/css";
+import {
+  createThemeContract,
+  createTheme,
+  fontFace,
+} from "@vanilla-extract/css";
 import {
   colors,
   SYSTEM_FONT_STACK,
@@ -11,6 +15,13 @@ import {
   borderWidth,
   space,
 } from "./tokens";
+
+const fontInter = fontFace({
+  src: `url(https://fonts.googleapis.com/css?family=Inter)`,
+  fontWeight: 400,
+  fontStyle: `normal`,
+  fontDisplay: `swap`,
+});
 
 export const boxShadow = {
   xs: `0 0 0 1px rgba(0, 0, 0, 0.05)`,
@@ -181,7 +192,7 @@ export const themeVars = createThemeContract({
 
 const commonVars = {
   font: {
-    body: SYSTEM_FONT_STACK,
+    body: [fontInter, SYSTEM_FONT_STACK].join(`, `),
   },
   fontSize,
   fontWeight,

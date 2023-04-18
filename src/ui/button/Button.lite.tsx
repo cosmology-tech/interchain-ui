@@ -15,9 +15,7 @@ export default function Button(props: ButtonProps) {
 
   return (
     <Show when={state.loaded}>
-      <button ref={props.forwardedRef} class={buttonStyles}>
-        {props.children}
-      </button>
+      <button class={buttonStyles}>{props.children}</button>
     </Show>
   );
 }

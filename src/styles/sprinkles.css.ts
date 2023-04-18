@@ -57,11 +57,9 @@ function transformBreakpoints<Output>(input: Record<string, any>) {
 }
 
 const responsiveProperties = defineProperties({
-  conditions: transformBreakpoints<{
-    mobile: object;
-    tablet: object;
-    desktop: object;
-  }>(breakpoints),
+  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {} }>(
+    breakpoints
+  ),
   defaultCondition: `mobile`,
   responsiveArray: [`mobile`, `tablet`, `desktop`],
   properties: {

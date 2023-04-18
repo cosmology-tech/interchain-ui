@@ -9,5 +9,5 @@ const DEFAULT_OPTIONS = {
 };
 
 (async () => {
-  await compiler.compile(DEFAULT_OPTIONS);
+  await compiler.compile({ ...DEFAULT_OPTIONS });
 })();

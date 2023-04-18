@@ -8,7 +8,6 @@ module.exports = function reactCompilerPlugin() {
         const comp = {
           ...json,
         };
-
         const scaffoldMetaData = {
           modal: {
             // {from, to}
@@ -67,7 +66,6 @@ module.exports = function reactCompilerPlugin() {
             }
 
             changeJsxTag(comp, scaffold);
-            console.log(">>> imports", comp.imports);
           });
         }
 

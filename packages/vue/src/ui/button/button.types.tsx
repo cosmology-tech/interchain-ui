@@ -1,5 +1,5 @@
-import { BaseComponentProps, BaseState } from "~/models/components.model";
-import { Intent } from "~/models/system.model";
+import { BaseComponentProps, BaseState } from "../../models/components.model";
+import { Intent } from "../../models/system.model";
 
 type ButtonVariant = "outlined" | "solid" | "ghost" | "unstyled";
 
