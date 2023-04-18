@@ -1,4 +1,4 @@
-import { BaseComponentProps } from "~/models/components.model";
+import { BaseComponentProps } from "../../models/components.model";
 
 export interface FadeInProps {
   isVisible: boolean;

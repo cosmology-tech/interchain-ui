@@ -25,8 +25,16 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
-function pascalName(name) {
-  return name.charAt(0).toUpperCase() + name.slice(1);
+function pascalName(string) {
+  return `${string}`
+    .toLowerCase()
+    .replace(new RegExp(/[-_]+/, "g"), " ")
+    .replace(new RegExp(/[^\w\s]/, "g"), "")
+    .replace(
+      new RegExp(/\s+(.)(\w*)/, "g"),
+      ($1, $2, $3) => `${$2.toUpperCase() + $3}`
+    )
+    .replace(new RegExp(/\w/), (s) => s.toUpperCase());
 }
 
 async function compile(defaultOptions) {
@@ -108,7 +116,9 @@ async function compile(defaultOptions) {
   }
 
   function copyScaffoldsIntoSrcDir() {
-    fs.copySync(`${outPath}/scaffolds`, `${outPath}/src/ui`);
+    const inputDir = `${outPath}/scaffolds`;
+    if (!fs.existsSync(inputDir)) return;
+    fs.copySync(inputDir, `${outPath}/src/ui`);
   }
 
   async function compileMitosisComponent(filepath) {

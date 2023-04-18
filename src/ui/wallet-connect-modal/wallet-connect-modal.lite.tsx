@@ -8,9 +8,8 @@ useMetadata({
 
 export default function WalletConnectModal(props: WalletConnectModalProps) {
   return (
-    <ScaffoldModal ref={props.forwardedRef}>
+    <ScaffoldModal trigger={<Button>hello</Button>}>
       {props.children}
-      <Button>hello</Button>
     </ScaffoldModal>
   );
 }

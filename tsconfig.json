@@ -16,7 +16,6 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "importsNotUsedAsValues": "preserve",
     "paths": {
       "~/utils/*": ["./src/utils/*"],
       "~/models/*": ["./src/models/*"],

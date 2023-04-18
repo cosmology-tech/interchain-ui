@@ -1,22 +1,20 @@
 import * as React from "react";
 import * as dialog from "@zag-js/dialog";
-
+import { create } from "zustand";
 import { useMachine, normalizeProps, Portal } from "@zag-js/react";
-import { useColorScheme } from "../hooks/use-color-scheme";
+import { store } from "../../models/store";
 import FadeIn from "../fade-in";
 import * as styles from "./modal.css";
-
-type ElementRenderer = (props: any) => React.ReactNode;
 
 export interface ModalProps {
   defaultIsOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
   initialFocusRef?: React.MutableRefObject<any>;
-  renderTrigger: ElementRenderer;
-  renderTitle?: ElementRenderer;
-  renderDescription?: ElementRenderer;
-  renderCloseButton?: ElementRenderer;
+  trigger?: React.ReactElement;
+  title?: React.ReactElement;
+  description?: React.ReactElement;
+  closeButton?: React.ReactElement;
   children?: React.ReactNode;
   closeOnClickaway?: boolean;
   preventScroll?: boolean;
@@ -24,70 +22,75 @@ export interface ModalProps {
   className?: string;
 }
 
-const Modal: React.FC<ModalProps> = (props) => {
-  const scheme = useColorScheme();
+const useStore = create(store);
 
-  const {
-    defaultIsOpen,
-    onOpen,
-    onClose,
-    children,
-    renderTrigger,
-    initialFocusRef,
-    closeOnClickaway = true,
-    preventScroll = true,
-    role = `dialog`,
-    className,
-  } = props;
-  const id = React.useId();
+const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
+  (props, forwardedRef) => {
+    const theme = useStore((state) => state.theme);
 
-  const [state, send] = useMachine(
-    dialog.machine({
-      defaultOpen: !!defaultIsOpen,
+    const {
+      defaultIsOpen,
       onOpen,
       onClose,
-      id,
-      initialFocusEl: initialFocusRef?.current,
-      closeOnOutsideClick: closeOnClickaway,
-      preventScroll,
-      role,
-    })
-  );
+      children,
+      trigger,
+      title,
+      description,
+      closeButton,
+      initialFocusRef,
+      closeOnClickaway = true,
+      preventScroll = true,
+      role = `dialog`,
+      className,
+    } = props;
+    const id = React.useId();
 
-  const api = dialog.connect(state, send, normalizeProps);
+    const [state, send] = useMachine(
+      dialog.machine({
+        defaultOpen: !!defaultIsOpen,
+        onOpen,
+        onClose,
+        id,
+        initialFocusEl: initialFocusRef?.current,
+        closeOnOutsideClick: closeOnClickaway,
+        preventScroll,
+        role,
+      })
+    );
 
-  return (
-    <>
-      {renderTrigger(api.triggerProps)}
-      {api.isOpen && (
-        <Portal>
-          <div className={className}>
-            <div
-              {...api.backdropProps}
-              className={styles.modalBackdrop[scheme]}
-            />
-            <div {...api.containerProps} className={styles.modalContainer}>
-              <FadeIn isVisible={api.isOpen}>
-                <div {...api.contentProps} className={styles.modalContent}>
-                  <h2 {...api.titleProps}>Edit profile</h2>
-                  <p {...api.descriptionProps}>
-                    Make changes to your profile here. Click save when you are
-                    done.
-                  </p>
+    const api = dialog.connect(state, send, normalizeProps);
 
-                  <div>{children}</div>
+    return (
+      <>
+        {trigger && React.cloneElement(trigger, api.triggerProps)}
 
-                  <button type="button" {...api.closeTriggerProps}>
-                    Close
-                  </button>
-                </div>
-              </FadeIn>
+        {api.isOpen && (
+          <Portal>
+            <div ref={forwardedRef} className={className}>
+              <div
+                {...api.backdropProps}
+                className={styles.modalBackdrop[theme]}
+              />
+              <div {...api.containerProps} className={styles.modalContainer}>
+                <FadeIn isVisible={api.isOpen}>
+                  <div {...api.contentProps} className={styles.modalContent}>
+                    {title && React.cloneElement(title, api.titleProps)}
+                    {description &&
+                      React.cloneElement(description, api.descriptionProps)}
+
+                    <div>{children}</div>
+
+                    {closeButton &&
+                      React.cloneElement(closeButton, api.closeTriggerProps)}
+                  </div>
+                </FadeIn>
+              </div>
             </div>
-          </div>
-        </Portal>
-      )}
-    </>
-  );
-};
+          </Portal>
+        )}
+      </>
+    );
+  }
+);
 
 export default Modal;
