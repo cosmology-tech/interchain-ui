@@ -1,6 +1,7 @@
 // @ts-check
 const { Listr } = require("listr2");
 const commandLineArgs = require("command-line-args");
+const { rimraf } = require("rimraf");
 
 const optionDefinitions = [
   { name: "elements", alias: "e", type: String, multiple: true },
@@ -29,10 +30,17 @@ const optionDefinitions = [
           [
             {
               title: "Clean output",
-              task: () =>
-                execa("yarn clean").catch(() => {
-                  throw new Error("Cannot remove output directory");
-                }),
+              task: () => {
+                const platforms = Array.isArray(cliConfig.platforms)
+                  ? cliConfig.platforms
+                  : [cliConfig.platforms];
+
+                return rimraf(
+                  `packages/{${platforms.join(
+                    ","
+                  )}}/{src,dist,lib,types,node_modules,stats.html}`
+                );
+              },
             },
           ],
           { concurrent: true }

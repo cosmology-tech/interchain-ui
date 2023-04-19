@@ -1,14 +1,7 @@
-import {
-  ConditionalValue,
-  RequiredConditionalValue,
-  createMapValueFn,
-  createNormalizeValueFn,
-  createSprinkles,
-  defineProperties,
-} from "@vanilla-extract/sprinkles";
+import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 import { calc } from "@vanilla-extract/css-utils";
 import { themeVars } from "./themes.css";
-import { breakpoints } from "./tokens";
+import { breakpoints, Breakpoint, breakpointNames } from "./tokens";
 
 const {
   space,
@@ -240,3 +233,12 @@ export const sprinkles = createSprinkles(
 );
 
 export type Sprinkles = Parameters<typeof sprinkles>[0];
+
+export type OptionalResponsiveObject<Value> =
+  | Value
+  | Partial<Record<Breakpoint, Value>>;
+
+export type RequiredResponsiveObject<Value> = Partial<
+  Record<Breakpoint, Value>
+> &
+  Record<(typeof breakpointNames)[0], Value>;
