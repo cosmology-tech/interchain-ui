@@ -10,11 +10,8 @@ packages/**/dist/
 packages/**/lib/
 packages/**/types/
 storybook-static/
-packages/react/src/**
-packages/vue/src/**
-packages/webcomponents/custom-elements.json
-packages/svelte/.svelte-kit
-packages/qwik/tsconfig.tsbuildinfo
+packages/react/src
+packages/vue/src
 **/stats.html
 .idea
 /.yarnrc
