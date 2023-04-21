@@ -8,6 +8,7 @@
   "scripts": {
     "bootstrap": "pnpm install; lerna bootstrap;",
     "compile": "node ./compiler",
+    "build_packages": "pnpm --stream --filter \"@cosmology-mitosis/react\" --filter \"@cosmology-mitosis/vue\" run build",
     "c:react": "node ./compiler -p react",
     "dev": "node ./compiler/dev",
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 --no-manager-cache",
@@ -29,6 +30,7 @@
     "@builder.io/mitosis-cli": "0.0.55",
     "@builder.io/qwik": "^0.100.0",
     "@custom-elements-manifest/analyzer": "^0.8.0",
+    "@parcel/watcher": "^2.1.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.1.0",
     "@rollup/plugin-dynamic-import-vars": "^2.0.3",
@@ -46,7 +48,6 @@
     "@zag-js/react": "^0.3.12",
     "@zag-js/vue": "^0.2.12",
     "autoprefixer": "^10.4.14",
-    "chokidar-cli": "^3.0.0",
     "command-line-args": "^5.2.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
@@ -79,7 +80,7 @@
     "ts-node": "10.9.1",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "^4.9.5",
-    "vite": "^4.2.1",
+    "vite": "^4.3.1",
     "vue": "^3.2.47",
     "vue-tsc": "^1.2.0"
   },

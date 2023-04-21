@@ -7,6 +7,7 @@ const {
   space,
   colors,
   fontSize,
+  font,
   fontWeight,
   radii,
   boxShadow,
@@ -40,9 +41,8 @@ const margins = {
 const unresponsiveProperties = defineProperties({
   properties: {
     fontSize,
-    lineHeight: fontSize,
+    fontFamily: font,
     textAlign: [`center`, `left`, `right`],
-    fontWeight: [400, 500, 600, 700, 800],
     textDecoration: [`none`, `underline`],
     borderRadius: radii,
     boxShadow,

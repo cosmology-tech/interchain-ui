@@ -1,7 +1,7 @@
 import {
   createThemeContract,
   createTheme,
-  fontFace,
+  globalFontFace,
 } from "@vanilla-extract/css";
 import {
   colors,
@@ -16,9 +16,11 @@ import {
   space,
 } from "./tokens";
 
-const fontInter = fontFace({
+const fontInterName = "Inter";
+
+globalFontFace(fontInterName, {
   src: `url(https://fonts.googleapis.com/css?family=Inter)`,
-  fontWeight: 400,
+  fontWeight: [100, 200, 300, 400, 500, 600, 700, 800, 900],
   fontStyle: `normal`,
   fontDisplay: `swap`,
 });
@@ -192,7 +194,7 @@ export const themeVars = createThemeContract({
 
 const commonVars = {
   font: {
-    body: [fontInter, SYSTEM_FONT_STACK].join(`, `),
+    body: [fontInterName, SYSTEM_FONT_STACK].join(`, `),
   },
   fontSize,
   fontWeight,
