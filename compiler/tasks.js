@@ -72,16 +72,18 @@ const optionDefinitions = [
     },
     {
       title: `Bundle Packages: ${cliConfig.platforms?.join(", ") || ""}`,
-      task: () =>
-        execa(
-          `yarn lerna --verbose --scope=@cosmology-mitosis/${
-            cliConfig.platforms.length > 1
-              ? `{${cliConfig.platforms?.join(",")}}`
-              : cliConfig.platforms
-          } build`
-        ).catch((error) => {
+      task: () => {
+        const filters = cliConfig.platforms
+          .map((platform) => `--filter "@cosmology-mitosis/${platform}"`)
+          .join(" ");
+
+        // const command = `pnpm --stream ${filters} run build`;
+        const command = `pnpm --stream --filter "@cosmology-mitosis/react" run build`;
+
+        return execa(`pnpm run build_packages`).catch((error) => {
           throw new Error("Error bundling Packages " + error);
-        }),
+        });
+      },
     },
   ]);
 
@@ -89,3 +91,7 @@ const optionDefinitions = [
     console.error(err);
   });
 })();
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
