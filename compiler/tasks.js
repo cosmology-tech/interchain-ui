@@ -2,6 +2,8 @@
 const { Listr } = require("listr2");
 const commandLineArgs = require("command-line-args");
 const { rimraf } = require("rimraf");
+const util = require("util");
+const exec = util.promisify(require("child_process").exec);
 
 const optionDefinitions = [
   { name: "elements", alias: "e", type: String, multiple: true },
@@ -72,17 +74,21 @@ const optionDefinitions = [
     },
     {
       title: `Bundle Packages: ${cliConfig.platforms?.join(", ") || ""}`,
-      task: () => {
+      task: async () => {
         const filters = cliConfig.platforms
           .map((platform) => `--filter "@cosmology-mitosis/${platform}"`)
           .join(" ");
 
-        // const command = `pnpm --stream ${filters} run build`;
-        const command = `pnpm --stream --filter "@cosmology-mitosis/react" run build`;
+        const command = `pnpm --stream ${filters} run build`;
 
-        return execa(`pnpm run build_packages`).catch((error) => {
-          throw new Error("Error bundling Packages " + error);
-        });
+        try {
+          const { stderr } = await exec(command);
+          if (stderr) {
+            throw new Error("Error bundling packages " + stderr);
+          }
+        } catch (error) {
+          throw new Error("Error bundling packages " + error);
+        }
       },
     },
   ]);
