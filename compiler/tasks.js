@@ -19,6 +19,8 @@ const optionDefinitions = [
   { name: "no-lint", type: Boolean },
 ];
 
+const shouldMinify = process.env.MINIFY === "on";
+
 (async () => {
   const cliConfig = commandLineArgs(optionDefinitions);
   const execa = (await import("execa")).command;
@@ -79,12 +81,14 @@ const optionDefinitions = [
           .map((platform) => `--filter "@cosmology-mitosis/${platform}"`)
           .join(" ");
 
-        const command = `pnpm --stream ${filters} run build`;
+        const buildCmd = `pnpm --stream ${filters} run build`;
 
         try {
-          const { stderr } = await exec(command);
-          if (stderr) {
-            throw new Error("Error bundling packages " + stderr);
+          await exec(buildCmd);
+
+          if (shouldMinify) {
+            const minifyCssCmd = `pnpm --stream ${filters} run minifyCss`;
+            await exec(minifyCssCmd);
           }
         } catch (error) {
           throw new Error("Error bundling packages " + error);

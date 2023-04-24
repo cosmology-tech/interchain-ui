@@ -51,9 +51,11 @@
   },
   "scripts": {
     "prebuild": "pnpm install",
-    "build": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "minifyCss": "cleancss --batch --batch-suffix '' dist/**/*.css"
   },
   "devDependencies": {
+    "clean-css-cli": "^5.6.2",
     "@types/animejs": "^3.1.7"
   }
 }

@@ -22,6 +22,9 @@
     "zustand": "^4.3.6",
     "immer": "^9.0.19"
   },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2"
+  },
   "peerDependencies": {
     "vue": "^3.x"
   },
@@ -37,6 +40,7 @@
   },
   "scripts": {
     "prebuild": "pnpm install",
-    "build": "rollup -c --bundleConfigAsCjs"
+    "build": "rollup -c --bundleConfigAsCjs",
+    "minifyCss": "cleancss --batch --batch-suffix '' dist/**/*.css"
   }
 }
