@@ -3,6 +3,8 @@ const { Listr } = require("listr2");
 const watcher = require("@parcel/watcher");
 const path = require("path");
 const ora = require("ora");
+const util = require("util");
+const exec = util.promisify(require("child_process").exec);
 
 (async () => {
   const execa = (await import("execa")).command;
@@ -26,12 +28,13 @@ const ora = require("ora");
     },
     {
       title: "Bundle React",
-      task: () =>
-        execa(`pnpm --filter "@cosmology-mitosis/react" run build`).catch(
-          (error) => {
-            throw new Error("Error bundling React " + error);
-          }
-        ),
+      task: async () => {
+        try {
+          await exec(`pnpm --filter "@cosmology-mitosis/react" run build`);
+        } catch (error) {
+          throw new Error("Error bundling React " + error);
+        }
+      },
     },
     {
       title: "Launch Watcher",
@@ -41,9 +44,10 @@ const ora = require("ora");
 
         const recompile = async () => {
           try {
-            await execa("node ./compiler/frameworks/react.compile.js --dev");
-            // await execa("yarn lerna --scope=@cosmology-mitosis/react build");
-            await execa(`pnpm --filter "@cosmology-mitosis/react" run build`);
+            // await execa("node ./compiler/frameworks/react.compile.js --dev");
+            // await execa(`pnpm --filter "@cosmology-mitosis/react" run build`);
+            await exec("node ./compiler/frameworks/react.compile");
+            await exec(`pnpm --filter "@cosmology-mitosis/react" run build`);
           } catch (e) {
             throw e;
           }

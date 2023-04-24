@@ -11,6 +11,7 @@
     "module": "ESNext",
     "downlevelIteration": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "sourceMap": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,

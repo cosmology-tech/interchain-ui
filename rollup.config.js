@@ -20,7 +20,7 @@ const checkBundleSizeLimit = ({ bundleSize }) => {
     `Bundle size exceeds LIMIT of ${BUNDLE_LIMIT_BYTES} bytes: ${bundleSize} bytes`
   );
 
-  // return process.exit(1);
+  return process.exit(1);
 };
 
 module.exports = (options) => {
