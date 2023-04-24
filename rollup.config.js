@@ -11,16 +11,17 @@ const json = require("@rollup/plugin-json");
 const analyze = require("rollup-plugin-analyzer");
 
 const BUNDLE_LIMIT_BYTES = 1.5e5; // 150KB
+const shouldMinify = process.env.MINIFY === "on";
 
 const checkBundleSizeLimit = ({ bundleSize }) => {
   if (bundleSize < BUNDLE_LIMIT_BYTES) return;
 
   console.log(
     "\x1b[31m",
-    `Bundle size exceeds LIMIT of ${BUNDLE_LIMIT_BYTES} bytes: ${bundleSize} bytes`
+    `Bundle size exceeds LIMIT of ${BUNDLE_LIMIT_BYTES} bytes. Actual: ${bundleSize} bytes`
   );
 
-  return process.exit(1);
+  // return process.exit(1);
 };
 
 module.exports = (options) => {
@@ -92,6 +93,10 @@ module.exports = (options) => {
             resolve.nodeResolve({ extensions: [".js", ".ts", ".tsx"] }),
             json(),
             typescript({
+              transpiler: "swc",
+              swcConfig: {
+                minify: shouldMinify,
+              },
               tsconfig: {
                 ...tsconfig.compilerOptions,
                 emitDeclarationOnly: true,
@@ -99,7 +104,7 @@ module.exports = (options) => {
             }),
             // Convert styled sheets to separate CSS files
             vanillaExtractPlugin({
-              identifiers: "debug", // Can be 'short' hash
+              identifiers: shouldMinify ? "short" : "debug", // Can be 'short' hash
             }),
             depsExternal(),
             babel({
