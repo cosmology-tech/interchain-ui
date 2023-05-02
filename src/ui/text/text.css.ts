@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeVars } from "../../styles/themes.css";
+import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 const variant = {
   body: style({
@@ -37,8 +38,10 @@ export const variants = recipe({
   },
 });
 
-export type Variants = {
-  variant?: "body" | "heading";
-  ellipsis?: boolean | undefined;
-  underline?: boolean | undefined;
-};
+export type Variants = RecipeVariants<typeof variants>;
+
+// export type Variants = {
+//   variant?: "body" | "heading";
+//   ellipsis?: boolean | undefined;
+//   underline?: boolean | undefined;
+// };

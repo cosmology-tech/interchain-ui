@@ -1,5 +1,5 @@
 import cls from "clsx";
-import { Button, ThemeProvider, Modal } from "@cosmology-mitosis/react";
+import { Button, ThemeProvider, Box } from "@cosmology-mitosis/react";
 import "@cosmology-mitosis/react/themes.css";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 
@@ -9,14 +9,25 @@ function App() {
   return (
     <ThemeProvider>
       <div id="app-root" className={cls("app", themeClass)}>
-        <Button>Custom button</Button>
+        <div
+          style={{
+            width: "100vw",
+            height: "100vh",
+            overflow: "hidden",
+            backgroundColor: "rgb(15 23 42)",
+          }}
+        >
+          <Box mx="2" my="4" p="15">
+            <Button>Custom button</Button>
+          </Box>
+        </div>
       </div>
 
-      <Modal
+      {/* <Modal
         id="wallet-modal"
         renderTrigger={(props: any) => <button {...props}>Open modal</button>}
         renderContent={() => <div>hello content</div>}
-      />
+      /> */}
     </ThemeProvider>
   );
 }

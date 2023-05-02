@@ -5,7 +5,7 @@ import {
   onUnMount,
   useRef,
 } from "@builder.io/mitosis";
-import { mediaQueryColorScheme } from "../../helpers/dom";
+import { mediaQueryColorScheme } from "../../helpers/style";
 import { store } from "../../models/store";
 import { darkThemeClass, lightThemeClass } from "../../styles/themes.css";
 import "../../styles/global.css";

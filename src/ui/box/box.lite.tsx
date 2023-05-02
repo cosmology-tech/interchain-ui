@@ -21,17 +21,18 @@ export default function Box(props: BoxProps) {
   const state = useStore<{
     atomProps: Record<string, unknown>;
     nativeProps: Record<string, unknown>;
-    sprinklesClass: string;
+    className: string;
     calculateStyles: () => void;
   }>({
     atomProps: {},
     nativeProps: {},
-    sprinklesClass: "",
+    className: "",
     calculateStyles() {
       let atoms = {};
       let natives = {};
 
       Object.keys(props).forEach((key) => {
+        // @ts-ignore
         if (sprinkles.properties.has(key as keyof Sprinkles)) {
           atoms[key] = props[key as keyof typeof props];
         } else {
@@ -41,9 +42,7 @@ export default function Box(props: BoxProps) {
 
       state.atomProps = atoms;
       state.nativeProps = natives;
-      state.sprinklesClass = sprinkles({
-        ...state.atomProps,
-      });
+      state.className = clsx(sprinkles(atoms), props.className);
     },
   });
 
@@ -55,9 +54,5 @@ export default function Box(props: BoxProps) {
     state.calculateStyles();
   }, [props]);
 
-  return (
-    <props.as className={clsx(state.sprinklesClass, props.className)}>
-      {props.children}
-    </props.as>
-  );
+  return <props.as className={state.className}>{props.children}</props.as>;
 }
