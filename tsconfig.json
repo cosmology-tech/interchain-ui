@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2015",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "jsxImportSource": "@builder.io/mitosis",
+    "module": "ESNext",
+    "downlevelIteration": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "~/utils/*": ["./src/utils/*"],
+      "~/models/*": ["./src/models/*"],
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["src"]
+}

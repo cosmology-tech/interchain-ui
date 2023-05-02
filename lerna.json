@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useWorkspaces": true,
+  "conventionalCommits": true,
+  "npmClient": "pnpm",
+  "npmClientArgs": ["--no-lockfile"],
+  "packages": ["packages/*"],
+  "version": "independent",
+  "registry": "https://registry.npmjs.org",
+  "command": {
+    "create": {
+      "homepage": "https://github.com/cosmology-tech/cosmology-mitosis",
+      "license": "SEE LICENSE IN LICENSE",
+      "access": "restricted"
+    },
+    "publish": {
+      "allowBranch": "main",
+      "message": "chore(release): publish",
+      "conventionalCommits": true,
+      "ignoreChanges": ["*.md", "stats.html", ".spec.ts", ".stories.ts"]
+    }
+  }
+}
