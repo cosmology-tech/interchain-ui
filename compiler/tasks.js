@@ -1,7 +1,6 @@
 // @ts-check
 const { Listr } = require("listr2");
 const commandLineArgs = require("command-line-args");
-const { rimraf } = require("rimraf");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 
@@ -34,16 +33,19 @@ const shouldMinify = process.env.MINIFY === "on";
           [
             {
               title: "Clean output",
-              task: () => {
+              task: (_, task) => {
                 const platforms = Array.isArray(cliConfig.platforms)
                   ? cliConfig.platforms
                   : [cliConfig.platforms];
 
-                return rimraf(
-                  `packages/{${platforms.join(
-                    ","
-                  )}}/{src,dist,lib,types,node_modules,stats.html}`
-                );
+                const platformPkgRoot =
+                  platforms.length === 1
+                    ? `${platforms}`
+                    : `{${platforms.join(",")}}`;
+
+                const cleanCmd = `rimraf packages/${platformPkgRoot}/{src,dist,lib,types,node_modules,stats.html}`;
+                task.output = `Cleaning dir: ${cleanCmd}`;
+                return exec(cleanCmd);
               },
             },
           ],

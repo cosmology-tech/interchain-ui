@@ -44,8 +44,6 @@ const exec = util.promisify(require("child_process").exec);
 
         const recompile = async () => {
           try {
-            // await execa("node ./compiler/frameworks/react.compile.js --dev");
-            // await execa(`pnpm --filter "@cosmology-mitosis/react" run build`);
             await exec("node ./compiler/frameworks/react.compile");
             await exec(`pnpm --filter "@cosmology-mitosis/react" run build`);
           } catch (e) {

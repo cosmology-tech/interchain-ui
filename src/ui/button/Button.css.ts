@@ -1,22 +1,84 @@
 import { style } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
+import type { RecipeVariants } from "@vanilla-extract/recipes";
 
-export const buttonStyles = style({
-  border: `none`,
-  background: `none`,
-  color: themeVars.colors.link,
-  borderWidth: `1px`,
-  borderStyle: `solid`,
-  borderColor: `transparent`,
-  transition: `all 0.3s ease-in-out`,
-  borderRadius: themeVars.radii.sm,
-  paddingLeft: themeVars.space[4],
-  paddingRight: themeVars.space[4],
-  selectors: {
-    "&:hover": {
-      color: themeVars.colors.linkHover,
-      cursor: `pointer`,
-      borderColor: themeVars.colors.linkHover,
+const variant = {
+  solid: style({
+    borderRadius: themeVars.radii.md,
+    fontWeight: themeVars.fontWeight.semibold,
+  }),
+  outlined: style({}),
+  link: style({}),
+  ghost: style({}),
+};
+
+const intent = {
+  primary: style({
+    backgroundColor: themeVars.colors.primary,
+    color: themeVars.colors.white,
+    ":hover": {
+      backgroundColor: themeVars.colors.primary400,
     },
+  }),
+  secondary: style({
+    backgroundColor: themeVars.colors.gray100,
+    color: themeVars.colors.body,
+    ":hover": {
+      backgroundColor: themeVars.colors.gray300,
+    },
+  }),
+  disabled: style({
+    cursor: "not-allowed",
+    color: "#B4BECC",
+    backgroundColor: themeVars.colors.gray50,
+  }),
+};
+
+const size = {
+  sm: s({
+    fontSize: "sm",
+    px: "6",
+    py: "4",
+  }),
+  md: s({
+    fontSize: "lg",
+    px: "8",
+    py: "6",
+  }),
+  lg: s({
+    fontSize: "xl",
+    px: "9",
+    py: "9",
+  }),
+};
+
+export const variants = recipe({
+  base: style({
+    fontFamily: themeVars.font.body,
+    fontWeight: themeVars.fontWeight.semibold,
+    cursor: "pointer",
+    appearance: "none",
+    border: "none",
+    position: "relative",
+    userSelect: "none",
+    whiteSpace: "nowrap",
+    verticalAlign: "middle",
+    lineHeight: 1.2,
+    transitionProperty:
+      "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
+    transitionDuration: "200ms",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "auto",
+  }),
+  variants: {
+    variant,
+    intent,
+    size,
   },
 });
+
+export type Variants = RecipeVariants<typeof variants>;

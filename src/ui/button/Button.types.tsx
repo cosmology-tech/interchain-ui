@@ -1,12 +1,7 @@
 import { BaseComponentProps, BaseState } from "../../models/components.model";
-import { Intent } from "../../models/system.model";
+import type { Variants } from "./button.css";
 
-type ButtonVariant = "outlined" | "solid" | "ghost" | "unstyled";
-
-export interface ButtonProps extends BaseComponentProps {
-  variant?: ButtonVariant;
-  intent?: Intent;
-  outline?: boolean;
+export interface ButtonProps extends BaseComponentProps, Variants {
   disabled?: boolean;
 }
 

@@ -57,14 +57,17 @@ importers:
         specifier: ^0.0.14
         version: 0.0.14(eslint@8.39.0)
       '@builder.io/mitosis-cli':
-        specifier: 0.0.55
-        version: 0.0.55(postcss@8.4.23)(ts-node@10.9.1)
+        specifier: 0.0.58
+        version: 0.0.58(postcss@8.4.23)(ts-node@10.9.1)
       '@builder.io/qwik':
         specifier: ^0.100.0
         version: 0.100.0(undici@5.22.0)
       '@custom-elements-manifest/analyzer':
         specifier: ^0.8.0
         version: 0.8.0
+      '@fastify/deepmerge':
+        specifier: ^1.3.0
+        version: 1.3.0
       '@parcel/watcher':
         specifier: ^2.1.0
         version: 2.1.0
@@ -104,6 +107,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^5.59.0
         version: 5.59.0(eslint@8.39.0)(typescript@4.9.5)
+      '@vanilla-extract/dynamic':
+        specifier: ^2.0.3
+        version: 2.0.3
       '@vanilla-extract/rollup-plugin':
         specifier: ^1.2.1
         version: 1.2.1(@types/node@18.15.11)(rollup@3.21.0)
@@ -230,6 +236,9 @@ importers:
 
   packages/react:
     dependencies:
+      '@fastify/deepmerge':
+        specifier: ^1.3.0
+        version: 1.3.0
       '@heroicons/react':
         specifier: 1.0.6
         version: 1.0.6(react@18.2.0)
@@ -239,6 +248,9 @@ importers:
       '@vanilla-extract/css':
         specifier: ^1.9.5
         version: 1.11.0
+      '@vanilla-extract/dynamic':
+        specifier: ^2.0.3
+        version: 2.0.3
       '@vanilla-extract/recipes':
         specifier: ^0.3.0
         version: 0.3.0(@vanilla-extract/css@1.11.0)
@@ -322,12 +334,30 @@ importers:
 
   packages/vue:
     dependencies:
+      '@fastify/deepmerge':
+        specifier: ^1.3.0
+        version: 1.3.0
+      '@vanilla-extract/css':
+        specifier: ^1.9.5
+        version: 1.11.0
+      '@vanilla-extract/dynamic':
+        specifier: ^2.0.3
+        version: 2.0.3
+      '@vanilla-extract/recipes':
+        specifier: ^0.3.0
+        version: 0.3.0(@vanilla-extract/css@1.11.0)
+      '@vanilla-extract/sprinkles':
+        specifier: ^1.5.1
+        version: 1.6.0(@vanilla-extract/css@1.11.0)
       '@zag-js/dialog':
         specifier: ^0.2.13
         version: 0.2.15
       '@zag-js/vue':
         specifier: ^0.2.10
         version: 0.2.12(vue@3.2.47)
+      animejs:
+        specifier: ^3.2.1
+        version: 3.2.1
       immer:
         specifier: ^9.0.19
         version: 9.0.21
@@ -758,7 +788,6 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.21.4
-    dev: true
 
   /@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@7.18.6(@babel/core@7.21.4):
     resolution: {integrity: sha512-Dgxsyg54Fx1d4Nge8UnvTrED63vrwOdPmyvPzlNN/boaliRP54pm3pGzZD1SJUwrBA+Cs/xdG8kXX6Mn/RfISQ==}
@@ -1901,7 +1930,6 @@ packages:
       '@babel/helper-string-parser': 7.19.4
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
-    dev: true
 
   /@builder.io/eslint-plugin-mitosis@0.0.14(eslint@8.39.0):
     resolution: {integrity: sha512-u1fDN00/NdhyrftEHnUPXMivCK73egVPiZmdgkIgp2F757+7DNwPUtpLDP7kiPdQMhZurP26meZ/bORbQTcHAw==}
@@ -1913,12 +1941,12 @@ packages:
       ts-pattern: 3.3.5
     dev: true
 
-  /@builder.io/mitosis-cli@0.0.55(postcss@8.4.23)(ts-node@10.9.1):
-    resolution: {integrity: sha512-Gqi6+WRjwRDMbZSwaYXTmSSltQVECJo9DamOMNn/5OLZ8N1bMpuBOE9UTycdAgiA9DMvCFCU8ka+UMV0xPpXdA==}
+  /@builder.io/mitosis-cli@0.0.58(postcss@8.4.23)(ts-node@10.9.1):
+    resolution: {integrity: sha512-NSe+OctODJI5Dtvr6PNq43GPe1d/wZ/Y+KBalupdzd5cx0bgg70g2drz1sJNAMFJKTXqq+Sq7JWMVWQ8Yr1Efw==}
     hasBin: true
     dependencies:
       '@babel/core': 7.21.4
-      '@builder.io/mitosis': 0.0.96(debug@4.3.4)(postcss@8.4.23)(prettier@2.8.8)(ts-node@10.9.1)
+      '@builder.io/mitosis': 0.0.99(debug@4.3.4)(postcss@8.4.23)(ts-node@10.9.1)
       '@vue/compiler-sfc': 3.2.47
       babel-preset-solid: 1.7.3(@babel/core@7.21.4)
       chalk: 4.1.2
@@ -1950,8 +1978,8 @@ packages:
       - ts-node
     dev: true
 
-  /@builder.io/mitosis@0.0.96(debug@4.3.4)(postcss@8.4.23)(prettier@2.8.8)(ts-node@10.9.1):
-    resolution: {integrity: sha512-xsaR/Q9XYHHfTTmTNTZKzZWQZcGgpWSV2wN/hSQOc9iRAmmX8iWK7K+d8AZlm0cd79hDKC+76Xi4SMXKXYQARA==}
+  /@builder.io/mitosis@0.0.99(debug@4.3.4)(postcss@8.4.23)(ts-node@10.9.1):
+    resolution: {integrity: sha512-lB9YHEs2txdg7+jK4Z5ksALMF6Zdk+nJXiFQOKbaRxIAjfg/Nbo8ns/sRKlGfPAz6J2JUUBFNTWZX1eLbc2U2w==}
     dependencies:
       '@angular/compiler': 11.2.14
       '@babel/core': 7.14.5
@@ -1969,7 +1997,6 @@ packages:
       axios-cache-adapter: 2.7.3(axios@0.21.4)
       coffeescript: 2.7.0
       csstype: 3.1.2
-      dedent: 0.7.0
       fp-ts: 2.14.0
       globby: 11.1.0
       hash-sum: 2.0.0
@@ -1981,6 +2008,7 @@ packages:
       module: 1.2.5
       object-hash: 2.2.0
       postcss-load-config: 4.0.1(postcss@8.4.23)(ts-node@10.9.1)
+      prettier: 2.8.8
       prettier-plugin-marko: 1.4.3(@marko/compiler@5.27.7)(prettier@2.8.8)
       prettier-plugin-organize-imports: 2.3.4(prettier@2.8.8)(typescript@4.9.5)
       prettier-plugin-svelte: 2.10.0(prettier@2.8.8)(svelte@3.58.0)
@@ -1996,7 +2024,6 @@ packages:
       - less
       - node-sass
       - postcss
-      - prettier
       - pug
       - stylus
       - sugarss
@@ -2595,6 +2622,9 @@ packages:
     resolution: {integrity: sha512-kf9RB0Fg7NZfap83B3QOqOGg9QmD9yBudqQXzzOtn3i4y7ZUXe5ONeW34Gwi+TxhH4mvj72R1Zc300KUMa9Bng==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@fastify/deepmerge@1.3.0:
+    resolution: {integrity: sha512-J8TOSBq3SoZbDhM9+R/u77hP93gz/rajSA+K2kGyijPpORPWUXHUpTaleoj+92As0S9uPRP7Oi8IqMf0u+ro6A==}
 
   /@formatjs/ecma402-abstract@1.14.3:
     resolution: {integrity: sha512-SlsbRC/RX+/zg4AApWIFNDdkLtFbkq3LNoZWXZCE/nHVKqoIJyaoQyge/I0Y38vLxowUn9KTtXgusLD91+orbg==}
@@ -5175,6 +5205,11 @@ packages:
       media-query-parser: 2.0.2
       outdent: 0.8.0
 
+  /@vanilla-extract/dynamic@2.0.3:
+    resolution: {integrity: sha512-Rglfw2gXAYiBzAQ4jgUG7rBgE2c88e/zcG27ZVoIqMHVq56wf2C1katGMm1yFMNBgzqM7oBNYzz4YOMzznydkg==}
+    dependencies:
+      '@vanilla-extract/private': 1.0.3
+
   /@vanilla-extract/integration@6.2.1(@types/node@18.15.11):
     resolution: {integrity: sha512-+xYJz07G7TFAMZGrOqArOsURG+xcYvqctujEkANjw2McCBvGEK505RxQqOuNiA9Mi9hgGdNp2JedSa94f3eoLg==}
     dependencies:
@@ -5525,7 +5560,7 @@ packages:
   /@vue/compiler-sfc@3.2.47:
     resolution: {integrity: sha512-rog05W+2IFfxjMcFw10tM9+f7i/+FFpZJJ5XHX72NP9eC2uRD+42M3pYcQqDXVYoj74kHMSEdQ/WmCjt8JFksQ==}
     dependencies:
-      '@babel/parser': 7.21.3
+      '@babel/parser': 7.21.4
       '@vue/compiler-core': 3.2.47
       '@vue/compiler-dom': 3.2.47
       '@vue/compiler-ssr': 3.2.47

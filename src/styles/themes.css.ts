@@ -192,7 +192,7 @@ export const themeVars = createThemeContract({
   },
 });
 
-const commonVars = {
+export const commonVars = {
   font: {
     body: [fontInterName, SYSTEM_FONT_STACK].join(`, `),
   },
@@ -210,8 +210,8 @@ const commonVars = {
 export const lightThemeClass = createTheme(themeVars, {
   ...commonVars,
   colors: {
-    primary: colors.blue500,
-    body: colors.gray700,
+    primary: colors.primary500,
+    body: colors.gray800,
     background: colors.gray100,
     link: colors.blue800,
     linkHover: colors.blue600,
@@ -222,7 +222,7 @@ export const lightThemeClass = createTheme(themeVars, {
 export const darkThemeClass = createTheme(themeVars, {
   ...commonVars,
   colors: {
-    primary: colors.blue400,
+    primary: colors.primary400,
     body: colors.gray300,
     background: colors.gray800,
     link: colors.blue200,

@@ -33,6 +33,14 @@ const negativeSpace = {
   ["-6"]: `${calc(space["4"]).negate()}`,
 };
 
+const extendedSpace = {
+  "1/4": "25%",
+  "1/3": "33.333333%",
+  "1/2": "50%",
+  "2/3": "66.666667%",
+  "3/4": "75%",
+};
+
 const margins = {
   ...space,
   ...negativeSpace,
@@ -191,7 +199,12 @@ const responsiveProperties = defineProperties({
     maxHeight: space,
     maxWidth: {
       ...space,
+      ...extendedSpace,
       none: "none",
+    },
+    width: {
+      ...space,
+      ...extendedSpace,
     },
     minHeight: space,
     minWidth: space,
@@ -204,7 +217,6 @@ const responsiveProperties = defineProperties({
     right: space,
     textAlign: ["center", "left", "right"],
     top: space,
-    width: space,
   },
   shorthands: {
     borderLeftRadius: ["borderBottomLeftRadius", "borderTopLeftRadius"],
@@ -212,17 +224,11 @@ const responsiveProperties = defineProperties({
     borderTopRadius: ["borderTopLeftRadius", "borderTopRightRadius"],
     borderBottomRadius: ["borderBottomLeftRadius", "borderBottomRightRadius"],
     p: [`paddingTop`, `paddingBottom`, `paddingLeft`, `paddingRight`],
-    padding: [`paddingTop`, `paddingBottom`, `paddingLeft`, `paddingRight`],
     px: [`paddingLeft`, `paddingRight`],
     py: [`paddingTop`, `paddingBottom`],
-    paddingX: ["paddingLeft", "paddingRight"],
-    paddingY: ["paddingTop", "paddingBottom"],
     m: [`marginTop`, `marginBottom`, `marginLeft`, `marginRight`],
-    margin: [`marginTop`, `marginBottom`, `marginLeft`, `marginRight`],
     mx: [`marginLeft`, `marginRight`],
     my: [`marginTop`, `marginBottom`],
-    marginX: ["marginLeft", "marginRight"],
-    marginY: ["marginTop", "marginBottom"],
   },
 });
 
