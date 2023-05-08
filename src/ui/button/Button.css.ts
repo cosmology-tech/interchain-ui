@@ -16,17 +16,21 @@ const variant = {
 
 const intent = {
   primary: style({
-    backgroundColor: themeVars.colors.primary,
+    backgroundColor: themeVars.colors.primary500,
     color: themeVars.colors.white,
-    ":hover": {
-      backgroundColor: themeVars.colors.primary400,
+    selectors: {
+      "&:hover": {
+        backgroundColor: themeVars.colors.primary400,
+      },
     },
   }),
   secondary: style({
     backgroundColor: themeVars.colors.gray100,
     color: themeVars.colors.body,
-    ":hover": {
-      backgroundColor: themeVars.colors.gray300,
+    selectors: {
+      "&:hover": {
+        backgroundColor: themeVars.colors.gray300,
+      },
     },
   }),
   disabled: style({
@@ -78,6 +82,11 @@ export const variants = recipe({
     variant,
     intent,
     size,
+  },
+  defaultVariants: {
+    variant: "solid",
+    intent: "primary",
+    size: "md",
   },
 });
 

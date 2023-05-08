@@ -1,6 +1,5 @@
 import cls from "clsx";
-import { Button, ThemeProvider, Box } from "@cosmology-mitosis/react";
-import "@cosmology-mitosis/react/themes.css";
+import { Button, ThemeProvider, Box, Text } from "@cosmology-mitosis/react";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 
 function App() {
@@ -9,18 +8,11 @@ function App() {
   return (
     <ThemeProvider>
       <div id="app-root" className={cls("app", themeClass)}>
-        <div
-          style={{
-            width: "100vw",
-            height: "100vh",
-            overflow: "hidden",
-            backgroundColor: "rgb(15 23 42)",
-          }}
-        >
-          <Box mx="2" my="4" p="15">
-            <Button>Custom button</Button>
-          </Box>
-        </div>
+        <Box p="15" backgroundColor="white">
+          <Text>Demo</Text>
+
+          <Button leftIcon="walletFilled">Custom button</Button>
+        </Box>
       </div>
 
       {/* <Modal

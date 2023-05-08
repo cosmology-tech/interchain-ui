@@ -122,7 +122,7 @@ const colorProperties = defineProperties({
   defaultCondition: [`light`, `dark`],
   properties: {
     color: colors,
-    background: colors,
+    bg: colors,
     borderColor: colors,
   },
 });

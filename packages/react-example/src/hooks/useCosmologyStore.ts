@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import shallow from "zustand/shallow";
-import { store } from "@cosmology-mitosis/react";
+import { store, UIStore } from "@cosmology-mitosis/react";
 
-const useStore = create(store);
+const useStore = create<UIStore>(store);
 
 export const useCosmologyStore = () => {
   return useStore(
