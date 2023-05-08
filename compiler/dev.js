@@ -15,7 +15,7 @@ const exec = util.promisify(require("child_process").exec);
     {
       title: "Clean output",
       task: () =>
-        execa("pnpm run clean").catch(() => {
+        execa("lerna run clean").catch(() => {
           throw new Error("Cannot remove output directory");
         }),
     },
@@ -30,7 +30,7 @@ const exec = util.promisify(require("child_process").exec);
       title: "Bundle React",
       task: async () => {
         try {
-          await exec(`pnpm --filter "@cosmology-mitosis/react" run build`);
+          await exec(`lerna run --scope=@cosmology-mitosis/react build`);
         } catch (error) {
           throw new Error("Error bundling React " + error);
         }
@@ -45,7 +45,7 @@ const exec = util.promisify(require("child_process").exec);
         const recompile = async () => {
           try {
             await exec("node ./compiler/frameworks/react.compile");
-            await exec(`pnpm --filter "@cosmology-mitosis/react" run build`);
+            await exec(`lerna run --scope=@cosmology-mitosis/react build`);
           } catch (e) {
             throw e;
           }

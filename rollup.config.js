@@ -4,6 +4,7 @@ const resolve = require("@rollup/plugin-node-resolve");
 const babel = require("@rollup/plugin-babel");
 const dtsPlugin = require("rollup-plugin-dts").default;
 const typescript = require("rollup-plugin-ts");
+const image = require("@rollup/plugin-image");
 const peerDepsExternal = require("rollup-plugin-peer-deps-external");
 const depsExternal = require("rollup-plugin-node-externals");
 const { vanillaExtractPlugin } = require("@vanilla-extract/rollup-plugin");
@@ -125,6 +126,7 @@ module.exports = (options) => {
             }),
             peerDepsExternal(),
             commonjs(),
+            image(),
             analyze({
               onAnalysis: checkBundleSizeLimit,
             }),

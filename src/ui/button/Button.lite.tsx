@@ -1,22 +1,12 @@
-import {
-  onMount,
-  Show,
-  useMetadata,
-  useStore,
-  useDefaultProps,
-} from "@builder.io/mitosis";
+import { onMount, Show, useMetadata, useStore } from "@builder.io/mitosis";
 import { variants } from "./button.css";
+import Icon from "../icon";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
 
 export default function Button(props: ButtonProps) {
-  useDefaultProps({
-    variant: "solid",
-    intent: "primary",
-    size: "md",
-  });
-
   const state = useStore<ButtonState>({
     loaded: false,
   });
@@ -34,7 +24,15 @@ export default function Button(props: ButtonProps) {
           intent: props.disabled ? "disabled" : props.intent,
         })}
       >
+        <Show when={!!props.leftIcon}>
+          <Icon name={props.leftIcon} className={s({ marginRight: "2" })} />
+        </Show>
+
         {props.children}
+
+        <Show when={!!props.rightIcon}>
+          <Icon name={props.rightIcon} className={s({ marginLeft: "2" })} />
+        </Show>
       </button>
     </Show>
   );
