@@ -54,6 +54,9 @@
   "scripts": {
     "prebuild": "yarn install",
     "build": "rollup -c --bundleConfigAsCjs",
+    "build:dev": "cross-env NODE_ENV=development rollup -c --bundleConfigAsCjs",
+    "clean": "rimraf ./dist",
+    "dts": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir ./dist --skipLibCheck",
     "minifyCss": "cleancss --batch --batch-suffix '' dist/**/*.css"
   },
   "devDependencies": {

@@ -43,7 +43,7 @@ const shouldMinify = process.env.MINIFY === "on";
                     ? `${platforms}`
                     : `{${platforms.join(",")}}`;
 
-                const cleanCmd = `rimraf packages/${platformPkgRoot}/{src,dist,lib,types,node_modules,stats.html}`;
+                const cleanCmd = `rimraf packages/${platformPkgRoot}/{src,dist,lib,types,stats.html}`;
                 task.output = `Cleaning dir: ${cleanCmd}`;
                 return exec(cleanCmd);
               },
@@ -101,6 +101,34 @@ const shouldMinify = process.env.MINIFY === "on";
           }
         } catch (error) {
           throw new Error("Error bundling packages " + error);
+        }
+      },
+    },
+    {
+      title: "Emit types",
+      task: async () => {
+        const platforms = Array.isArray(cliConfig.platforms)
+          ? cliConfig.platforms
+          : [cliConfig.platforms];
+
+        const platformGlob =
+          platforms.length === 1
+            ? platforms
+            : `{${cliConfig.platforms.join(",")}}`;
+
+        const filters = `--scope=@cosmology-mitosis/${platformGlob}`;
+
+        const buildCmd = `lerna run --stream ${filters} dts`;
+
+        try {
+          await exec(buildCmd);
+
+          if (shouldMinify) {
+            const minifyCssCmd = `lerna run --stream ${filters} minifyCss`;
+            await exec(minifyCssCmd);
+          }
+        } catch (error) {
+          throw new Error("Error emitting types for packages " + error);
         }
       },
     },

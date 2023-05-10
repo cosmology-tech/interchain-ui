@@ -1,5 +1,11 @@
 import cls from "clsx";
-import { Button, ThemeProvider, Box, Text } from "@cosmology-mitosis/react";
+import {
+  Button,
+  ThemeProvider,
+  Box,
+  Stack,
+  Text,
+} from "@cosmology-mitosis/react";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 
 function App() {
@@ -9,9 +15,27 @@ function App() {
     <ThemeProvider>
       <div id="app-root" className={cls("app", themeClass)}>
         <Box p="15" backgroundColor="white">
-          <Text>Demo</Text>
+          <Stack space="4" direction="column">
+            <Text>Buttons</Text>
 
-          <Button leftIcon="walletFilled">Custom button</Button>
+            <div>
+              <Button>Connect</Button>
+            </div>
+            <div>
+              <Button leftIcon="walletFilled">Connect</Button>
+            </div>
+            <div>
+              <Button rightIcon="closeFilled">Close</Button>
+            </div>
+            <div>
+              <Button intent="secondary">Custom button</Button>
+            </div>
+            <div>
+              <Button intent="secondary" leftIcon="walletFilled">
+                Connect
+              </Button>
+            </div>
+          </Stack>
         </Box>
       </div>
 

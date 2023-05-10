@@ -8,4 +8,5 @@ export interface StackProps extends BoxProps {
   justify?: BoxProps["justifyContent"];
   space?: BoxProps["gap"];
   wrap?: OptionalResponsiveObject<true | false>;
+  direction?: "row" | "column";
 }

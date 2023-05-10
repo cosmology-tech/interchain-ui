@@ -26,10 +26,11 @@ const intent = {
   }),
   secondary: style({
     backgroundColor: themeVars.colors.gray100,
-    color: themeVars.colors.body,
+    color: themeVars.colors.gray600,
     selectors: {
       "&:hover": {
-        backgroundColor: themeVars.colors.gray300,
+        color: themeVars.colors.gray500,
+        backgroundColor: themeVars.colors.gray200,
       },
     },
   }),

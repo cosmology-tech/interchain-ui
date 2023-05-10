@@ -1,9 +1,11 @@
-// const path = require("path");
-const baseConfig = require("../../rollup.config");
+const baseDevConfig = require("../../rollup.config.dev");
+const baseProdConfig = require("../../rollup.config");
 
-module.exports = baseConfig({
+const config =
+  process.env.NODE_ENV === "production" ? baseProdConfig : baseDevConfig;
+
+module.exports = config({
   dir: __dirname,
-  // tsConfigDir: path.resolve("./tsconfig.json"),
   packageJson: require("./package.json"),
   babelPresets: ["@babel/preset-react"],
   compilerOptions: {

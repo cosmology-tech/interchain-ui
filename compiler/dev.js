@@ -15,7 +15,7 @@ const exec = util.promisify(require("child_process").exec);
     {
       title: "Clean output",
       task: () =>
-        execa("lerna run clean").catch(() => {
+        execa("lerna run clean:assets").catch(() => {
           throw new Error("Cannot remove output directory");
         }),
     },
