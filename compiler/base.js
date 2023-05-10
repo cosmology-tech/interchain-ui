@@ -136,7 +136,7 @@ async function compile(defaultOptions) {
           force: true,
           state: options.state,
           styles: options.styles,
-          config: "./compiler/mitosis.config",
+          config: "./compiler/mitosis.config.js",
         },
         array: [filepath],
       },

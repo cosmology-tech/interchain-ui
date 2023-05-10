@@ -8,7 +8,7 @@ export default function Stack(props: StackProps) {
       as={props.as}
       display="flex"
       flex={props.flex}
-      flexDirection={props.flexDirection}
+      flexDirection={props.direction}
       flexWrap={props.flexWrap}
       gap={props.space}
       justifyContent={props.justify}

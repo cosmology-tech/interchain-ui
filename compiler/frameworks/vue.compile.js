@@ -137,13 +137,16 @@ const DEFAULT_OPTIONS = {
 
       // .vue extension already added, don't process
       // TODO: add a map to check for duplicated work
-      if (data.indexOf(".vue") !== -1) return data;
+      // if (data.indexOf(".vue") !== -1) return data;
 
+      console.log("Before", data);
       const result = data
         // Add .vue to index
         .replace(/(export)(.*)\/ui\/(.+)";/g, `$1$2/ui/$3/$3.vue";`)
         .replace(/(extensions)\/(.*)\.vue/g, "$1/$2")
         .replace(/\/helpers\.vue/g, "");
+
+      console.log("After", result);
 
       fs.writeFileSync(`${outPath}/src/index.ts`, result, "utf8");
 

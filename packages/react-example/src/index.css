@@ -26,8 +26,10 @@ body {
   display: flex;
   place-items: center;
   overflow: hidden;
+  position: relative;
   min-width: 320px;
   min-height: 100vh;
+  background-color: rgb(15 23 42);
 }
 
 @media (prefers-color-scheme: light) {
@@ -44,7 +46,11 @@ body {
 }
 
 .app {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100vw;
   height: 100vw;
-  background-color: rgb(15 23 42);
 }
