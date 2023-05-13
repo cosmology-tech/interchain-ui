@@ -29,7 +29,13 @@
     "immer": "^9.0.19"
   },
   "devDependencies": {
-    "clean-css-cli": "^5.6.2"
+    "@parcel/compressor-brotli": "^2.8.3",
+    "@parcel/compressor-gzip": "^2.8.3",
+    "@parcel/transformer-typescript-tsc": "^2.8.3",
+    "@parcel/transformer-typescript-types": "2.8.3",
+    "@types/animejs": "^3.1.7",
+    "@vanilla-extract/parcel-transformer": "^1.0.0",
+    "parcel": "^2.8.3"
   },
   "peerDependencies": {
     "vue": "^3.x"

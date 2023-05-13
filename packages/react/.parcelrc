@@ -1,0 +1,18 @@
+{
+  "extends": "@parcel/config-default",
+  "transformers": {
+    "*.css.ts": [
+      "@vanilla-extract/parcel-transformer"
+    ],
+    "*.{ts,tsx}": [
+      "@parcel/transformer-typescript-tsc"
+    ]
+  },
+  "compressors": {
+    "*.{html,css,js,svg,map}": [
+      "...",
+      "@parcel/compressor-gzip",
+      "@parcel/compressor-brotli"
+    ]
+  }
+}

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ES2015",
+    "lib": ["DOM", "ESNext"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -16,11 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "paths": {
-      "~/utils/*": ["./src/utils/*"],
-      "~/models/*": ["./src/models/*"],
-      "~/*": ["./src/*"]
-    }
+    "isolatedModules": true
   },
   "include": ["src"]
 }
