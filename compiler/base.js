@@ -57,11 +57,7 @@ async function compile(defaultOptions) {
     : glob.sync(options.elements);
   const outPath = `${options.dest}/${options.target}`;
 
-  function copyBasicFilesOnFirstCompilation(isFirstCompilation) {
-    if (!isFirstCompilation) {
-      return;
-    }
-
+  function copyNonMitosisLiteFiles() {
     // Move src to all the package folder
     fs.copySync("src", `${outPath}/src`);
 
@@ -166,7 +162,7 @@ async function compile(defaultOptions) {
     const name = file.name.replace(".lite", "");
     spinner.text = fileName;
 
-    copyBasicFilesOnFirstCompilation(isFirstCompilation);
+    copyNonMitosisLiteFiles();
     copyScaffoldsIntoSrcDir();
 
     const { outFile } = await compileMitosisComponent(fileName);

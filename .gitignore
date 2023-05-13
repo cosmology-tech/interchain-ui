@@ -16,3 +16,4 @@ packages/vue/src
 .idea
 /.yarnrc
 /.npmrc
+.parcel-cache

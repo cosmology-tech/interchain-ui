@@ -104,34 +104,6 @@ const shouldMinify = process.env.MINIFY === "on";
         }
       },
     },
-    {
-      title: "Emit types",
-      task: async () => {
-        const platforms = Array.isArray(cliConfig.platforms)
-          ? cliConfig.platforms
-          : [cliConfig.platforms];
-
-        const platformGlob =
-          platforms.length === 1
-            ? platforms
-            : `{${cliConfig.platforms.join(",")}}`;
-
-        const filters = `--scope=@cosmology-mitosis/${platformGlob}`;
-
-        const buildCmd = `lerna run --stream ${filters} dts`;
-
-        try {
-          await exec(buildCmd);
-
-          if (shouldMinify) {
-            const minifyCssCmd = `lerna run --stream ${filters} minifyCss`;
-            await exec(minifyCssCmd);
-          }
-        } catch (error) {
-          throw new Error("Error emitting types for packages " + error);
-        }
-      },
-    },
   ]);
 
   tasks.run().catch((err) => {
