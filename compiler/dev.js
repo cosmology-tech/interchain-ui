@@ -29,7 +29,7 @@ const { spawn } = require("node:child_process");
       title: "Bundle React",
       task: async () => {
         try {
-          await execa(`lerna run --scope=@cosmology-mitosis/react build`);
+          await execa(`lerna run --scope=@cosmology-ui/react build`);
         } catch (error) {
           throw new Error("Error bundling react" + error);
         }
@@ -83,7 +83,7 @@ const { spawn } = require("node:child_process");
               title: "Parcel watch",
               task: async () => {
                 return spawn(
-                  "lerna run --stream --scope=@cosmology-mitosis/react watch",
+                  "lerna run --stream --scope=@cosmology-ui/react watch",
                   [],
                   { shell: true }
                 ).stdout;

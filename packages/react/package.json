@@ -1,14 +1,14 @@
 {
-  "name": "@cosmology-mitosis/react",
+  "name": "@cosmology-ui/react",
   "version": "1.0.0",
   "private": true,
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/cosmology-mitosis/tree/main/packages/react#readme",
+  "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/react#readme",
   "license": "SEE LICENSE IN LICENSE",
   "source": "./src/index.ts",
-  "main": "./dist/cosmology-mitosis-react.umd.js",
-  "module": "./dist/cosmology-mitosis-react.es.js",
+  "main": "./dist/cosmology-ui-kit-react.umd.js",
+  "module": "./dist/cosmology-ui-kit-react.es.js",
   "types": "./dist/index.d.ts",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {

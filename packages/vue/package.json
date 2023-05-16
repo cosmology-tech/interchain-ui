@@ -1,11 +1,11 @@
 {
-  "name": "@cosmology-mitosis/vue",
+  "name": "@cosmology-ui/vue",
   "version": "1.0.0",
   "type": "module",
   "private": true,
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/cosmology-mitosis/tree/main/packages/vue#readme",
+  "homepage": "https://github.com/cosmology-tech/cosmology-ui/tree/main/packages/vue#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cosmology-mitosis-vue.umd.js",
   "module": "./dist/cosmology-mitosis-vue.es.js",
