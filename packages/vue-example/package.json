@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology-mitosis/vue-example",
+  "name": "@cosmology-ui/vue-example",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cosmology-mitosis/vue": "*",
+    "@cosmology-ui/vue": "*",
     "zustand": "^4.3.6",
     "immer": "^9.0.19",
     "vue": "^3.2.47"

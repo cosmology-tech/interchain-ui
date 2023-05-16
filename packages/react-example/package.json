@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology-mitosis/react-example",
+  "name": "@cosmology-ui/react-example",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cosmology-mitosis/react": "*",
+    "@cosmology-ui/react": "*",
     "zustand": "^4.3.6",
     "immer": "^9.0.19",
     "clsx": "^1.2.1",

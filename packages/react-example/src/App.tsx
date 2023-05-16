@@ -1,11 +1,5 @@
 import cls from "clsx";
-import {
-  Button,
-  ThemeProvider,
-  Box,
-  Stack,
-  Text,
-} from "@cosmology-mitosis/react";
+import { Button, ThemeProvider, Box, Stack, Text } from "@cosmology-ui/react";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 
 function App() {
