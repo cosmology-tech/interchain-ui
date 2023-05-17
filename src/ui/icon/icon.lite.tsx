@@ -1,6 +1,6 @@
 import { Show } from "@builder.io/mitosis";
 import clsx from "clsx";
-import allIcons from "url:./icons.svg";
+import allIcons from "./icons.svg";
 import { IconProps } from "./icon.types";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 
