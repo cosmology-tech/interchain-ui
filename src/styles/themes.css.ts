@@ -207,7 +207,32 @@ export const commonVars = {
   borderStyle,
 };
 
-export const lightThemeClass = createTheme(themeVars, {
+// Note that lightSchemeClass and darkSchemeClass only means "vars in prefers-color-scheme: light/dark"
+// Users can supply an array of theme vars and we can dynamically replace those values to match.
+// For example:
+// const customThemes = [
+//   {
+//     name: 'theme1',
+//     tokens: {
+//        // Providing 2 objects light and dark for each mode
+//        light: {
+//         ...
+//        },
+//        dark: {
+//         ...
+//        }
+//      }
+//   },
+//   {
+//     name: 'theme2',
+//     tokens: {
+//        // Or just 1 object for both light and dark mode, same as not caring about the prefers-color-scheme
+//        ...<custom values>
+//     }
+//   }
+// ]
+
+export const lightSchemeClass = createTheme(themeVars, {
   ...commonVars,
   colors: {
     primary: colors.primary500,
@@ -219,7 +244,7 @@ export const lightThemeClass = createTheme(themeVars, {
   },
 });
 
-export const darkThemeClass = createTheme(themeVars, {
+export const darkSchemeClass = createTheme(themeVars, {
   ...commonVars,
   colors: {
     primary: colors.primary400,
