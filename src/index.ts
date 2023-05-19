@@ -12,5 +12,6 @@ export { default as Text } from "./ui/text";
 export { default as Button } from "./ui/button";
 export { default as ThemeProvider } from "./ui/theme-provider";
 export { default as FadeIn } from "./ui/fade-in";
+export { default as PoolsHeader } from "./ui/pools-header";
 
 setPlatform(Platform.Default);

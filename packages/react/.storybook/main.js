@@ -24,15 +24,6 @@ const config = {
     return mergeConfig(config, {
       plugins: [
         require("@vanilla-extract/vite-plugin").vanillaExtractPlugin(),
-        // require("vite-plugin-replace").replaceCodePlugin({
-        //   replacements: [
-        //     {
-        //       // from: /url:/g,
-        //       from: "url:",
-        //       to: "",
-        //     }
-        //   ],
-        // }),
       ],
     });
   },
