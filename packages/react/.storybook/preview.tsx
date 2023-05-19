@@ -1,6 +1,8 @@
+import React from "react";
+import type { Preview } from "@storybook/react";
 import WithThemeDecorator from "./WithThemeDecorator";
-/** @type { import('@storybook/react').Preview } */
-const preview = {
+
+const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
@@ -11,10 +13,10 @@ const preview = {
     },
   },
   decorators: [
-    (Story) => (
+    (story) => (
       <WithThemeDecorator>
-          {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-          <Story />
+        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
+        {story()}
       </WithThemeDecorator>
     ),
   ],

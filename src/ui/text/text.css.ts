@@ -19,7 +19,6 @@ const variant = {
 export const variants = recipe({
   base: style({
     fontFamily: themeVars.font.body,
-    color: themeVars.colors.gray700,
   }),
   variants: {
     variant,
