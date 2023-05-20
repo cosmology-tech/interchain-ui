@@ -11,11 +11,11 @@ export default function Text(props: TextProps) {
   return (
     <Box
       as={props.as}
-      className={variants({
+      className={`${variants({
         variant: props.variant,
         ellipsis: props.ellipsis ? true : undefined,
         underline: props.underline ? true : undefined,
-      })}
+      })} ${props.className}`}
       color={props.color}
       fontSize={props.size}
       fontWeight={props.weight}
