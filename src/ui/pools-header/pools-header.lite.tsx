@@ -41,24 +41,50 @@ export default function PoolsHeader(props) {
 
   // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
   //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
+  function Semocolon() {
+    return (
+      <Text className={styles.semocolon} as="span" color="tip" weight="semibold" size="4xl">
+        :
+      </Text>
+    );
+  }
+
   return (
     <Stack space="10" width="1" backgroundColor="primary">
       <Box p="10" className={styles.greyBox}>
         <Stack align="center">
-          <img className={styles.image} src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg" />
-          <Stack direction={"column"}>
-            <Text color={'primary'} fontSize={'15xl'}>OSMO Price</Text>
-            <Stack align="center">
-              <Text color='content'>$</Text>
-              <Text color={'content'} fontSize={'4xl'}>0.98</Text>
+          <img
+            className={styles.image}
+            src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+          />
+          <Stack direction="column" justify="center" lineHeight="shorter">
+            <Text color="tip" weight="semibold">
+              OSMO Price
+            </Text>
+            <Stack align="flex-end">
+              <Text className={styles.dollar} color="content" weight="semibold" lineHeight="shorter">
+                $
+              </Text>
+              <Text
+                color="content"
+                size="4xl"
+                weight="semibold"
+                lineHeight="short"
+              >
+                0.98
+              </Text>
             </Stack>
           </Stack>
         </Stack>
       </Box>
       <Box p="10" className={styles.greyBox}>
         <Stack direction="column" justify="center">
-          <Text className={styles.smContent}>Reward distribution in</Text>
-          <Text className={styles.content4xl}>12 : 19 : 48</Text>
+          <Text color="tip" weight="semibold">
+            Reward distribution in
+          </Text>
+          <Text color="content" weight="semibold" size="4xl">
+            12 <Semocolon /> 19 <Semocolon /> 48
+          </Text>
         </Stack>
       </Box>
       <Box p="10" className={styles.greenBox}>

@@ -9,56 +9,50 @@ import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { breakpoints } from "~/styles/tokens";
 
 const base = style([
-  s({
-    width: {
-      tablet: "1/2",
-      desktop: "1/3",
-    },
-  }),
+  // s({
+  //   width: {
+  //     tablet: "1/2",
+  //     desktop: "1/3",
+  //   },
+  // }),
   {
-    // "@media": {
-    //   "screen and (max-width: 700px)": {
-    //     padding: 10,
-    //   },
-    // },
     borderRadius: "7px",
   },
 ]);
-// const widths: RequiredResponsiveObject<string> = {
-//   mobile: '1/3',
-//   tablet: '1/2',
-//   desktop: '1',
-// }
-
-export const smTip = style({
-  color: themeVars.colors.tip,
-});
-export const smContent = style({
-  color: 'red',
-});
-export const content4xl = style([
-  s({ fontSize: "4xl" }),
-  {
-    color: themeVars.colors.content,
-  },
-]);
-
 
 export const image = style({
-  width: '53px',
-  height: '53px',
+  width: "53px",
+  height: "53px",
   "@media": {
     [`screen and (max-width: ${breakpoints.desktop}px)`]: {
-      width: '40px',
-      height: '40px'
+      width: "40px",
+      height: "40px",
     },
   },
-})
+});
+
+export const semocolon = style({
+  margin: "0 8px",
+});
+
+export const dollar = style({
+  marginBottom: "5px",
+});
 
 export const greyBox = style([
   base,
   {
     backgroundColor: themeVars.colors.cardBg,
+    width: "234px",
+    height: "92px",
+    paddingLeft: "17px",
+    "@media": {
+      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+        width: "179",
+        height: "96px",
+        paddingLeft: "15px",
+      },
+    },
   },
 ]);
 
