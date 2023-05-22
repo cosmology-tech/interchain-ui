@@ -1,4 +1,5 @@
 import { onMount, Show, useMetadata, useStore } from "@builder.io/mitosis";
+import clx from "clsx";
 import { variants } from "./button.css";
 import Icon from "../icon";
 import { sprinkles as s } from "../../styles/sprinkles.css";
@@ -18,20 +19,37 @@ export default function Button(props: ButtonProps) {
   return (
     <Show when={state.loaded}>
       <button
-        class={variants({
-          variant: props.variant,
-          size: props.size,
-          intent: props.disabled ? "disabled" : props.intent,
-        })}
+        onClick={(event) => props.onClick?.(event)}
+        disabled={props.disabled}
+        className={clx(
+          variants({
+            variant: props.variant,
+            size: props.size,
+            intent: props.disabled ? "disabled" : props.intent,
+          }),
+          props.className
+        )}
       >
         <Show when={!!props.leftIcon}>
-          <Icon name={props.leftIcon} className={s({ marginRight: "2" })} />
+          <Icon
+            name={props.leftIcon}
+            size={props.iconSize}
+            className={s({
+              marginRight: !props.children ? "0" : "2",
+            })}
+          />
         </Show>
 
         {props.children}
 
         <Show when={!!props.rightIcon}>
-          <Icon name={props.rightIcon} className={s({ marginLeft: "2" })} />
+          <Icon
+            name={props.rightIcon}
+            size={props.iconSize}
+            className={s({
+              marginLeft: !props.children ? "0" : "2",
+            })}
+          />
         </Show>
       </button>
     </Show>

@@ -1,47 +1,92 @@
-import { style } from "@vanilla-extract/css";
+import { style, createVar, ComplexStyleRule } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
+
+const buttonBgVar = createVar();
+const buttonHoverBgVar = createVar();
+const buttonTextColorVar = createVar();
+const buttonHoverTextColorVar = createVar();
+
+const outlinedBaseStyle: ComplexStyleRule = {
+  borderRadius: themeVars.radii.md,
+  borderWidth: "1px",
+  borderStyle: "solid",
+  borderColor: buttonTextColorVar,
+  color: buttonTextColorVar,
+  backgroundColor: buttonBgVar,
+  selectors: {
+    "&:hover": {
+      opacity: 0.8,
+      color: buttonHoverTextColorVar,
+      borderColor: buttonHoverTextColorVar,
+    },
+  },
+};
 
 const variant = {
   solid: style({
     borderRadius: themeVars.radii.md,
     fontWeight: themeVars.fontWeight.semibold,
   }),
-  outlined: style({}),
+  outlined: style(outlinedBaseStyle),
   link: style({}),
-  ghost: style({}),
+  ghost: style({
+    borderRadius: themeVars.radii.md,
+    fontWeight: themeVars.fontWeight.semibold,
+    backgroundColor: "transparent",
+    selectors: {
+      "&:hover": {
+        backgroundColor: buttonBgVar,
+      },
+    },
+  }),
 };
 
 const intent = {
   primary: style({
-    backgroundColor: themeVars.colors.primary500,
-    color: themeVars.colors.white,
+    vars: {
+      [buttonTextColorVar]: themeVars.colors.white,
+      [buttonBgVar]: themeVars.colors.primary500,
+      [buttonHoverBgVar]: themeVars.colors.primary400,
+    },
+    color: buttonTextColorVar,
+    backgroundColor: buttonBgVar,
     selectors: {
       "&:hover": {
-        backgroundColor: themeVars.colors.primary400,
+        backgroundColor: buttonHoverBgVar,
       },
     },
   }),
   secondary: style({
-    backgroundColor: themeVars.colors.gray100,
-    color: themeVars.colors.gray600,
+    vars: {
+      [buttonTextColorVar]: themeVars.colors.gray600,
+      [buttonBgVar]: themeVars.colors.gray100,
+      [buttonHoverBgVar]: themeVars.colors.gray200,
+      [buttonHoverTextColorVar]: themeVars.colors.gray500,
+    },
+    color: buttonTextColorVar,
+    backgroundColor: buttonBgVar,
     selectors: {
       "&:hover": {
-        color: themeVars.colors.gray500,
-        backgroundColor: themeVars.colors.gray200,
+        color: buttonHoverTextColorVar,
+        backgroundColor: buttonHoverBgVar,
       },
     },
   }),
   disabled: style({
+    vars: {
+      [buttonTextColorVar]: "#B4BECC",
+      [buttonBgVar]: themeVars.colors.gray50,
+    },
     cursor: "not-allowed",
-    color: "#B4BECC",
-    backgroundColor: themeVars.colors.gray50,
+    color: buttonTextColorVar,
+    backgroundColor: buttonBgVar,
   }),
 };
 
-const size = {
+export const size = {
   sm: s({
     fontSize: "sm",
     px: "6",
@@ -84,6 +129,35 @@ export const variants = recipe({
     intent,
     size,
   },
+  // Applied when multiple variants are set at once
+  compoundVariants: [
+    {
+      variants: {
+        variant: "ghost",
+        intent: "secondary",
+      },
+      style: {
+        vars: {
+          [buttonBgVar]: "transparent",
+        },
+      },
+    },
+    {
+      variants: {
+        variant: "outlined",
+        intent: "primary",
+      },
+      style: {
+        vars: {
+          [buttonBgVar]: "rgba(37, 57, 201, 0.1)",
+          [buttonHoverBgVar]: "rgba(37, 57, 201, 0.1)",
+          [buttonTextColorVar]: themeVars.colors.primary500,
+          [buttonHoverTextColorVar]: themeVars.colors.primary400,
+        },
+        ...outlinedBaseStyle,
+      },
+    },
+  ],
   defaultVariants: {
     variant: "solid",
     intent: "primary",
