@@ -1,11 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolsHeader } from "@cosmology-ui/react";
+import { PoolList } from "@cosmology-ui/react";
 
-const meta: Meta<typeof PoolsHeader> = {
-  component: PoolsHeader,
-  title: "PoolsHeader",
+const meta: Meta<typeof PoolList> = {
+  component: PoolList,
+  title: "Pool/PoolList",
   tags: ["autodocs"],
   argTypes: {},
 };

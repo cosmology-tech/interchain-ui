@@ -8,6 +8,20 @@ import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { breakpoints } from "~/styles/tokens";
 
+export const container = style([
+  {
+    minWidth: "400px",
+    marginTop: "27px",
+    transition: "ease all .5s",
+    flexWrap: "nowrap",
+    "@media": {
+      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+        flexWrap: "wrap",
+      },
+    },
+  },
+]);
+
 const base = style([
   // s({
   //   width: {
@@ -16,17 +30,24 @@ const base = style([
   //   },
   // }),
   {
+    display: "flex",
+    alignItems: "center",
     borderRadius: "7px",
   },
 ]);
+export const mb3 = style({
+  marginBottom: "3px",
+});
 
 export const image = style({
   width: "53px",
   height: "53px",
+  marginRight: "21px",
   "@media": {
     [`screen and (max-width: ${breakpoints.desktop}px)`]: {
       width: "40px",
       height: "40px",
+      marginRight: "13px",
     },
   },
 });
@@ -39,29 +60,46 @@ export const dollar = style({
   marginBottom: "5px",
 });
 
-export const greyBox = style([
+export const baseBox = style([
   base,
   {
     backgroundColor: themeVars.colors.cardBg,
-    width: "234px",
+    minWidth: "234px",
     height: "92px",
     paddingLeft: "17px",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-        width: "179",
+        minWidth: "179px",
         height: "96px",
         paddingLeft: "15px",
+        paddingRight: "0px",
       },
     },
   },
 ]);
 
-export const greenBox = style([
+export const rewardBox = style([
   base,
   {
-    backgroundColor: themeVars.colors.greenBg,
+    backgroundColor: themeVars.colors.rewardBg,
+    color: themeVars.colors.rewardContent,
+    minWidth: "234px",
+    height: "92px",
+    paddingLeft: "15px",
+    "@media": {
+      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+        minWidth: "382px",
+        height: "96px",
+        paddingLeft: "15px",
+        paddingRight: "0px",
+      },
+    },
   },
 ]);
+
+export const osom = style({
+  margin: "0 14px 3px 2px",
+});
 
 // const variant = {
 //   solid: style({

@@ -9,4 +9,5 @@ export interface StackProps extends BoxProps {
   space?: BoxProps["gap"];
   wrap?: OptionalResponsiveObject<true | false>;
   direction?: "row" | "column";
+  className?: BoxProps["className"];
 }

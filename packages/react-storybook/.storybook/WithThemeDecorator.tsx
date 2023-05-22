@@ -14,7 +14,11 @@ const WithThemeDecorator = (props) => {
   ]);
 
   return (
-    <div style={{ backgroundColor: theme === "light" ? "#fff" : "#2C3137" }}>
+    <div
+      style={{
+        backgroundColor: theme === "light" ? "#fff" : "#2C3137",
+      }}
+    >
       <ThemeProvider defaultTheme="light">
         <div id="app-root1" className={cls("app", themeClass)}>
           {props.children}

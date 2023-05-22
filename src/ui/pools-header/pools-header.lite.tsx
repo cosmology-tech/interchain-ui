@@ -43,60 +43,87 @@ export default function PoolsHeader(props) {
   //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
   function Semocolon() {
     return (
-      <Text className={styles.semocolon} as="span" color="tip" weight="semibold" size="4xl">
+      <Text
+        className={styles.semocolon}
+        as="span"
+        color="tip"
+        weight="semibold"
+        size="4xl"
+      >
         :
       </Text>
     );
   }
 
   return (
-    <Stack space="10" width="1" backgroundColor="primary">
-      <Box p="10" className={styles.greyBox}>
-        <Stack align="center">
-          <img
-            className={styles.image}
-            src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
-          />
-          <Stack direction="column" justify="center" lineHeight="shorter">
-            <Text color="tip" weight="semibold">
-              OSMO Price
+    <Box>
+      <Text color="content" size="xl" weight="semibold">
+        Liquidity Pools
+      </Text>
+      <Stack className={styles.container} space="10">
+        <Box className={styles.baseBox}>
+          <Stack align="center">
+            <img
+              className={styles.image}
+              src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+            />
+            <Stack direction="column" justify="center" lineHeight="shorter">
+              <Text color="tip" weight="semibold" className={styles.mb3}>
+                OSMO Price
+              </Text>
+              <Stack align="flex-end">
+                <Text
+                  className={styles.dollar}
+                  color="content"
+                  weight="semibold"
+                  lineHeight="shorter"
+                >
+                  $
+                </Text>
+                <Text color="content" size="4xl" weight="semibold">
+                  0.98
+                </Text>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Box>
+        <Box className={styles.baseBox}>
+          <Stack direction="column" justify="center">
+            <Text color="tip" weight="semibold" className={styles.mb3}>
+              Reward distribution in
             </Text>
-            <Stack align="flex-end">
-              <Text className={styles.dollar} color="content" weight="semibold" lineHeight="shorter">
-                $
+            <Text color="content" weight="semibold" size="4xl">
+              12 <Semocolon /> 19 <Semocolon /> 48
+            </Text>
+          </Stack>
+        </Box>
+        <Box className={styles.rewardBox}>
+          <Stack direction="column" justify={"center"}>
+            <Text
+              className={styles.mb3}
+              color="rewardContent"
+              weight="semibold"
+            >
+              Yesterdays rewards
+            </Text>
+            <Stack align={"flex-end"}>
+              <Text color="rewardContent" size="4xl" weight="semibold">
+                12.87
               </Text>
               <Text
-                color="content"
-                size="4xl"
+                className={styles.osom}
+                color="rewardContent"
                 weight="semibold"
-                lineHeight="short"
               >
-                0.98
+                OSMO
+              </Text>
+              <Text className={styles.mb3} color="rewardContent">
+                $12.87
               </Text>
             </Stack>
           </Stack>
-        </Stack>
-      </Box>
-      <Box p="10" className={styles.greyBox}>
-        <Stack direction="column" justify="center">
-          <Text color="tip" weight="semibold">
-            Reward distribution in
-          </Text>
-          <Text color="content" weight="semibold" size="4xl">
-            12 <Semocolon /> 19 <Semocolon /> 48
-          </Text>
-        </Stack>
-      </Box>
-      <Box p="10" className={styles.greenBox}>
-        <Stack direction="column" justify={"center"}>
-          <Text>Yesterdays rewards</Text>
-          <Stack align={"flex-end"}>
-            <Text>12.87</Text>
-            <Text>OSMO</Text>
-            <Text>$12.87</Text>
-          </Stack>
-        </Stack>
-      </Box>
-    </Stack>
+        </Box>
+      </Stack>
+    </Box>
   );
 }
