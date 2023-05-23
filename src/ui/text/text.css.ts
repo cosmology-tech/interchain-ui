@@ -2,17 +2,18 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
+import { sprinkles } from "../../styles/sprinkles.css";
 
 const variant = {
-  body: style({
-    fontSize: themeVars.fontSize.sm,
-    fontWeight: themeVars.fontWeight.normal,
-    lineHeight: themeVars.lineHeight.normal,
+  body: sprinkles({
+    fontSize: "sm",
+    fontWeight: "normal",
+    lineHeight: "normal",
   }),
   heading: style({
-    fontSize: themeVars.fontSize.md,
-    fontWeight: themeVars.fontWeight.semibold,
-    lineHeight: themeVars.lineHeight.tall,
+    fontSize: "md",
+    fontWeight: "semibold",
+    lineHeight: "tall",
   }),
 };
 
@@ -34,6 +35,9 @@ export const variants = recipe({
         textDecoration: `underline`,
       }),
     },
+  },
+  defaultVariants: {
+    variant: "body",
   },
 });
 

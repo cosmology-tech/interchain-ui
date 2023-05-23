@@ -5,7 +5,6 @@ import type { TextProps } from "./text.types";
 
 export default function Text(props: TextProps) {
   useDefaultProps({
-    variant: "body",
     color: "gray700",
   });
 
