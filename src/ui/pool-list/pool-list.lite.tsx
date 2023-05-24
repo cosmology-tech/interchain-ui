@@ -30,6 +30,23 @@ export default function PoolList(props) {
     titles: ["Pool", "Liquidity", "24H Volume", "7D Fees", "APR"],
   });
 
+  const item = {
+    token1: {
+      name: "ATOM",
+      imgSrc:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
+    },
+    token2: {
+      name: "OSOM",
+      imgSrc:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
+    },
+    liquidity: 168767639,
+    volume: 3288612,
+    fees: 59075,
+    apr: 24,
+  };
+
   return (
     <Box className={styles.container}>
       <Text color="tip" size="xl" weight="semibold">
@@ -50,8 +67,23 @@ export default function PoolList(props) {
         </For>
       </Stack>
       <Box className={styles.listContainer}>
-        <PoolListItem />
-        <PoolListItem />
+        <PoolListItem
+          token1={{
+            name: "ATOM",
+            imgSrc:
+              "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
+          }}
+          token2={{
+            name: "OSOM",
+            imgSrc:
+              "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
+          }}
+          poolLiquidity={168767639}
+          volume={3288612}
+          fees={59075}
+          apr={24}
+        />
+        {/* <PoolListItem {...item} /> */}
       </Box>
     </Box>
   );

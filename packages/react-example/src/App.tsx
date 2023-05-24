@@ -1,5 +1,5 @@
 import cls from "clsx";
-import { Button, ThemeProvider, Box, Stack, Text } from "@cosmology-ui/react";
+import { Button, ThemeProvider, Box, Stack, Text, PoolsHeader, PoolList } from "@cosmology-ui/react";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <ThemeProvider>
       <div id="app-root" className={cls("app", themeClass)}>
         <Box p="15" backgroundColor="white">
-          <Stack space="4" direction="column">
+          {/* <Stack space="4" direction="column">
             <Text>Buttons</Text>
 
             <div>
@@ -29,6 +29,10 @@ function App() {
                 Connect
               </Button>
             </div>
+          </Stack> */}
+          <Stack direction="column" align="center">
+            <PoolsHeader />
+            <PoolList />
           </Stack>
         </Box>
       </div>

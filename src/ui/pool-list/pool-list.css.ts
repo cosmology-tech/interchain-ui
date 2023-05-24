@@ -33,7 +33,8 @@ export const container = style([
     width: "752px",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-        width: "400px",
+        width: "100%",
+        minWidth: "400px",
       },
     },
   },

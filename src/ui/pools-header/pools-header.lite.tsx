@@ -7,14 +7,16 @@ import {
   onUnMount,
   useRef,
 } from "@builder.io/mitosis";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import Box from "../box";
 import Stack from "../Stack";
 import Text from "../Text";
 import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
 import { themeVars } from "../../styles/themes.css";
+import { PoolsHeaderProps } from "./pools-header.types";
 
-export default function PoolsHeader(props) {
+export default function PoolsHeader(props: PoolsHeaderProps) {
   const state = useStore({
     theme: "",
   });
@@ -62,12 +64,17 @@ export default function PoolsHeader(props) {
       </Text>
       <Stack className={styles.container} space="10">
         <Box className={styles.baseBox}>
-          <Stack align="center">
+          <Stack className={s({ overflow: "hidden" })} align="center">
             <img
               className={styles.image}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
             />
-            <Stack direction="column" justify="center" lineHeight="shorter">
+            <Stack
+              className={styles.flex1}
+              direction="column"
+              justify="center"
+              lineHeight="shorter"
+            >
               <Text color="tip" weight="semibold" className={styles.mb3}>
                 OSMO Price
               </Text>
@@ -80,8 +87,14 @@ export default function PoolsHeader(props) {
                 >
                   $
                 </Text>
-                <Text color="content" size="4xl" weight="semibold">
-                  0.98
+                <Text
+                  flex={1}
+                  color="content"
+                  size="4xl"
+                  weight="semibold"
+                  ellipsis={true}
+                >
+                  {props.price}
                 </Text>
               </Stack>
             </Stack>
@@ -108,7 +121,7 @@ export default function PoolsHeader(props) {
             </Text>
             <Stack align={"flex-end"}>
               <Text color="rewardContent" size="4xl" weight="semibold">
-                12.87
+                {props.rewards}
               </Text>
               <Text
                 className={styles.osom}
@@ -118,7 +131,7 @@ export default function PoolsHeader(props) {
                 OSMO
               </Text>
               <Text className={styles.mb3} color="rewardContent">
-                $12.87
+                {props.$rewards}
               </Text>
             </Stack>
           </Stack>

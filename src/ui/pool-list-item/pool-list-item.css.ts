@@ -14,7 +14,8 @@ export const container = style([
     justifyContent: "flex-start",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-        width: "400px",
+        width: "100%",
+        minWidth: "400px",
         flexWrap: "wrap",
         justifyContent: "space-between",
       },
@@ -32,12 +33,12 @@ export const rank = style({
       marginLeft: "-46px",
     },
   },
-})
+});
 
 export const responsiveText = s({
   width: {
     desktop: "1/5",
-    mobile: "1/3"
+    mobile: "1/3",
   },
 });
 
@@ -96,5 +97,23 @@ export const onlySm = style({
       display: "block",
     },
   },
+});
 
+const baseIcon = style([
+  {
+    width: "38px",
+    height: "38px",
+    cursor: "pointer"
+  },
+  s({
+    borderRadius: "base",
+  })
+])
+export const iconConntainer = styleVariants({
+  light: [baseIcon, {
+    backgroundColor: "#EEF2F8"
+  }],
+  dark: [baseIcon, {
+    backgroundColor: "#1D2024"
+  }],
 })
