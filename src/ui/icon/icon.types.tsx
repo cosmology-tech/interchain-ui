@@ -1,7 +1,14 @@
 import { BaseComponentProps } from "../../models/components.model";
 import { Sprinkles } from "../../styles/sprinkles.css";
 
-type IconName = "walletFilled" | "chevronRight" | "closeFilled" | "verticalMore";
+type IconName =
+  | "walletFilled"
+  | "chevronRight"
+  | "closeFilled"
+  | "copy"
+  | "checkboxCircle"
+  | "chromeBrowser"
+  | "verticalMore";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

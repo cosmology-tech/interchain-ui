@@ -2,13 +2,15 @@ import { BaseComponentProps, BaseState } from "../../models/components.model";
 import type { Variants } from "./button.css";
 import type { IconProps } from "../icon/icon.types";
 
-export interface ButtonProps extends BaseComponentProps, Variants {
+export interface ButtonProps extends BaseComponentProps {
+  variant?: Variants["variant"];
+  intent?: Variants["intent"];
+  size?: Variants["size"];
   disabled?: boolean;
-  /**
-   * Icon of button's left side========
-   */
+  iconSize?: IconProps["size"];
   leftIcon?: IconProps["name"];
   rightIcon?: IconProps["name"];
+  onClick?: (event: any) => void;
 }
 
 export interface ButtonState extends BaseState {}
