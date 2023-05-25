@@ -6,7 +6,7 @@ import {
 } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
-import { breakpoints } from "~/styles/tokens";
+import { breakpoints } from "../../styles/tokens";
 
 // export const container = style([
 //   s({

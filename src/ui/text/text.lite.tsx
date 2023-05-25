@@ -25,6 +25,10 @@ export default function Text(props: TextProps) {
       textTransform={props.transform}
       whiteSpace={props.whiteSpace}
       wordBreak={props.wordBreak}
+      marginTop={props.marginTop}
+      marginRight={props.marginRight}
+      marginLeft={props.marginLeft}
+      marginBottom={props.marginBottom}
     >
       {props.children}
     </Box>

@@ -10,9 +10,10 @@ import {
 import clsx from "clsx";
 import { sprinkles } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import Icon from "../icon";
+import PoolName from "../pool/components/pool-name";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
 import { themeVars } from "../../styles/themes.css";
@@ -49,8 +50,12 @@ export default function PoolListItem(props: PoolListItemProps) {
 
   function APR(aprProps: { className?: string }) {
     return (
-      <Stack className={aprProps.className} justify="space-between" align="center">
-        <Text color="content" weight="semibold">
+      <Stack
+        className={aprProps.className}
+        justify="space-between"
+        align="center"
+      >
+        <Text color="content" weight="semibold" marginRight="4">
           {props.apr}%
         </Text>
         <Stack
@@ -78,6 +83,8 @@ export default function PoolListItem(props: PoolListItemProps) {
         <Text
           color="tip"
           className={clsx(styles.onlySm, sprinkles({ marginBottom: "2" }))}
+          wordBreak="break-word"
+          marginRight="4"
         >
           {props.title}
         </Text>
@@ -88,11 +95,10 @@ export default function PoolListItem(props: PoolListItemProps) {
 
   return (
     <Stack align="center" className={styles.container}>
-      <Box className={styles.imageBox}>
+      {/* <Box className={styles.imageBox}>
         <img className={styles.image1} src={props.token1.imgSrc} />
         <img className={styles.image2} src={props.token2.imgSrc} />
       </Box>
-      {/* <Stack className={styles.contentContainer} align="center"> */}
       <Stack
         className={clsx(styles.responsiveText, styles.rank)}
         direction="column"
@@ -106,37 +112,47 @@ export default function PoolListItem(props: PoolListItemProps) {
           {props.token1.name}/{props.token2.name}
         </Text>
         <Text color="tip">Pool #1</Text>
-      </Stack>
+      </Stack> */}
+      <PoolName
+        className={styles.nameContainer}
+        token1={props.token1}
+        token2={props.token2}
+      />
       <CellWithTitle className={styles.onlySm} title="APR">
-        <APR />
+        <APR className={styles.onlySm} />
       </CellWithTitle>
       <Box className={styles.onlySm} width="full" height="9" />
       <CellWithTitle title="Liquidity">
         <Text
-          className={styles.responsiveText}
+          // className={styles.responsiveText}
           color="content"
           weight="semibold"
+          wordBreak="break-word"
+          marginRight="4"
         >
           ${props.poolLiquidity.toLocaleString()}
         </Text>
       </CellWithTitle>
       <CellWithTitle title="24H Volume">
         <Text
-          className={styles.responsiveText}
+          // className={styles.responsiveText}
           color="content"
           weight="semibold"
+          wordBreak="break-word"
+          marginRight="4"
         >
           ${props.volume.toLocaleString()}
         </Text>
       </CellWithTitle>
       <CellWithTitle title="7D Fees">
         <Text
-          className={styles.responsiveText}
+          // className={styles.responsiveText}
           color="content"
           weight="semibold"
+          wordBreak="break-word"
+          marginRight="4"
         >
           ${props.fees.toLocaleString()}
-
         </Text>
       </CellWithTitle>
       <APR className={clsx(styles.responsiveText, styles.lgAPR)} />

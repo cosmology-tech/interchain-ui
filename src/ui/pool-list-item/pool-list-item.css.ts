@@ -1,7 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
-import { breakpoints } from "~/styles/tokens";
+import { breakpoints } from "../../styles/tokens";
 
 export const container = style([
   s({
@@ -35,12 +35,26 @@ export const rank = style({
   },
 });
 
-export const responsiveText = s({
-  width: {
-    desktop: "1/5",
-    mobile: "1/3",
+export const responsiveText = style([
+  s({
+    width: {
+      desktop: "1/5",
+      mobile: "1/3",
+    },
+  })
+]);
+
+export const nameContainer = style({
+  "@media": {
+    [`screen and (min-width: ${breakpoints.tablet}px)`]: {
+      minWidth: "calc(72px + 20%)",
+    },
+    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      width: "calc(88px + 33.33%)",
+    },
   },
-});
+
+})
 
 export const imageBox = style([
   s({
@@ -85,16 +99,18 @@ export const smAPR = style({
 export const lgAPR = style({
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-      display: "none",
+      display: "none !important",
     },
   },
 });
 
 export const onlySm = style({
-  display: "none",
   "@media": {
+    [`screen and (min-width: ${breakpoints.tablet}px)`]: {
+      display: "none !important",
+    },
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-      display: "block",
+      display: "flex !important",
     },
   },
 });

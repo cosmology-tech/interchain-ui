@@ -92,7 +92,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                   color="content"
                   size="4xl"
                   weight="semibold"
-                  ellipsis={true}
+                  wordBreak="break-word"
                 >
                   {props.price}
                 </Text>
@@ -105,7 +105,8 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             <Text color="tip" weight="semibold" className={styles.mb3}>
               Reward distribution in
             </Text>
-            <Text color="content" weight="semibold" size="4xl">
+            <Text color="content" weight="semibold" size="4xl"
+                  wordBreak="break-word">
               12 <Semocolon /> 19 <Semocolon /> 48
             </Text>
           </Stack>

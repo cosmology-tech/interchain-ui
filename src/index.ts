@@ -15,5 +15,7 @@ export { default as FadeIn } from "./ui/fade-in";
 export { default as PoolsHeader } from "./ui/pools-header";
 export { default as PoolList } from "./ui/pool-list";
 export { default as PoolListItem } from "./ui/pool-list-item";
+export { default as PoolCard } from "./ui/pool-card";
+export { default as PoolCardList } from "./ui/pool-card-list";
 
 setPlatform(Platform.Default);

@@ -9,14 +9,15 @@ import {
 } from "@builder.io/mitosis";
 import { sprinkles } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import PoolListItem from "../pool-list-item";
 import { store } from "../../models/store";
 import * as styles from "./pool-list.css";
 import { themeVars } from "../../styles/themes.css";
+import { PoolListProps } from "./pool-list.types";
 
-export default function PoolList(props) {
+export default function PoolList(props: PoolListProps) {
   // image
   // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
   //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
@@ -53,36 +54,28 @@ export default function PoolList(props) {
         Your Pools
       </Text>
       <Stack className={styles.titleContainer}>
-        {/* <Text color="tip">Pool</Text>
-        <Text color="tip">Liquidity</Text>
-        <Text color="tip">24H Volume</Text>
-        <Text color="tip">7D Fees</Text>
-        <Text color="tip">APR</Text> */}
         <For each={state.titles}>
           {(item, index) => (
-            <Text className={styles.title} color="tip">
+            <Text key={index} className={styles.title} color="tip">
               {item}
             </Text>
           )}
         </For>
       </Stack>
       <Box className={styles.listContainer}>
-        <PoolListItem
-          token1={{
-            name: "ATOM",
-            imgSrc:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
-          }}
-          token2={{
-            name: "OSOM",
-            imgSrc:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-          }}
-          poolLiquidity={168767639}
-          volume={3288612}
-          fees={59075}
-          apr={24}
-        />
+        <For each={props.list}>
+          {(item, index) => (
+            <PoolListItem
+              token1={item.token1}
+              token2={item.token2}
+              poolLiquidity={item.poolLiquidity}
+              volume={item.volume}
+              fees={item.fees}
+              apr={item.apr}
+            />
+          )}
+        </For>
+
         {/* <PoolListItem {...item} /> */}
       </Box>
     </Box>

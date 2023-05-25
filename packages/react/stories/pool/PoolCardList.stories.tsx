@@ -1,17 +1,18 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolList } from "../../src";
+import { PoolCardList } from "../../src";
 
-const meta: Meta<typeof PoolList> = {
-  component: PoolList,
-  title: "Pool/PoolList",
+const meta: Meta<typeof PoolCardList> = {
+  component: PoolCardList,
+  title: "Pool/PoolCardList",
   tags: ["autodocs"],
   argTypes: {
     list: {
       description: "List of pool item",
       table: {
         type: {
-          summary: "PoolListItemProps []",
+          summary: "PoolCardProps []",
           detail:
   `{
     /**
@@ -28,10 +29,11 @@ const meta: Meta<typeof PoolList> = {
       name: string,
       imgSrc: string,
     },
-    poolLiquidity: number,
-    volume: number,
-    fees: number,
-    apr: number,
+    poolLiquidity: number;
+    fees: number;
+    apr: number;
+    yourLiquidity: number;
+    bonded: number;
 }
 `,
         },
@@ -63,6 +65,8 @@ export const Primary: Story = {
         volume: 3288612,
         fees: 59075,
         apr: 24,
+        yourLiquidity: 1329.32,
+        bonded: 600.0,
       },
       {
         token1: {
@@ -79,6 +83,8 @@ export const Primary: Story = {
         volume: 3288612,
         fees: 59075,
         apr: 24,
+        yourLiquidity: 1329.32,
+        bonded: 600.0,
       },
     ],
   },

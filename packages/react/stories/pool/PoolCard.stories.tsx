@@ -1,11 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolListItem } from "../../src";
+import { PoolCard } from "../../src";
 
-const meta: Meta<typeof PoolListItem> = {
-  component: PoolListItem,
-  title: "Pool/PoolListItem",
+const meta: Meta<typeof PoolCard> = {
+  component: PoolCard,
+  title: "Pool/PoolCard",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -31,5 +31,7 @@ export const Primary: Story = {
     volume: 3288612,
     fees: 59075,
     apr: 24,
+    yourLiquidity: 1329.32,
+    bonded: 600.00,
   },
 };

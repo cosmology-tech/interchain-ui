@@ -1,20 +1,7 @@
-import { BaseComponentProps, BaseState } from "../../models/components.model";
+import { BaseComponentProps } from "../../models/components.model";
+import { PoolNameProps } from "../pool/components/pool-name/pool-name.types";
 
-export interface PoolListItemProps extends BaseComponentProps {
-  /**
-   * Token1
-   */
-  token1: {
-    name: string
-    imgSrc: string,
-  },
-  /**
-   * Token2
-   */
-  token2: {
-    name: string,
-    imgSrc: string,
-  },
+export interface PoolListItemProps extends PoolNameProps {
   poolLiquidity: number,
   volume: number,
   fees: number,

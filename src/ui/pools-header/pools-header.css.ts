@@ -6,7 +6,7 @@ import {
 } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
-import { breakpoints } from "~/styles/tokens";
+import { breakpoints } from "../../styles/tokens";
 
 export const container = style([
   {
@@ -23,16 +23,17 @@ export const container = style([
 ]);
 
 const base = style([
-  // s({
-  //   width: {
-  //     tablet: "1/2",
-  //     desktop: "1/3",
-  //   },
-  // }),
+  s({
+    paddingTop: "9",
+    paddingRight: "8",
+    paddingBottom: "9",
+    paddingLeft: "8",
+  }),
   {
     display: "flex",
     alignItems: "center",
     borderRadius: "7px",
+    minHeight: "92px",
   },
 ]);
 export const mb3 = style({
@@ -66,16 +67,12 @@ export const baseBox = style([
     backgroundColor: themeVars.colors.cardBg,
     width: "234px",
     maxWidth: "234px",
-    height: "92px",
-    paddingLeft: "17px",
+    height: "fit-content",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         width: "calc(50% - 12px)",
         maxWidth: "calc(50% - 12px)",
         minWidth: "179px",
-        height: "96px",
-        paddingLeft: "15px",
-        paddingRight: "0px",
       },
     },
   },
@@ -88,16 +85,12 @@ export const rewardBox = style([
     color: themeVars.colors.rewardContent,
     width: "234px",
     maxWidth: "234px",
-    height: "92px",
-    paddingLeft: "15px",
+    height: "fit-content",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         width: "100%",
         maxWidth: "100%",
         minWidth: "382px",
-        height: "96px",
-        paddingLeft: "15px",
-        paddingRight: "0px",
       },
     },
   },
