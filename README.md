@@ -43,6 +43,10 @@ There are some rules of thumbs and some tips for creating Mitosis components:
 - To quickly test to see the compilation result from one Mitosis to any framework source code, please use
 [mitosis sandbox](https://mitosis.builder.io/). It's similar to TS playground but for Mitosis testing purpose.
 
+## Icon
+
+Check ![Icon guide](./docs/icons.md) to know how to add more icons
+
 ## Our Website
 
 ⚛️ https://cosmoskit.com/
