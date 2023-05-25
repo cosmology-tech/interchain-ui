@@ -25,8 +25,9 @@
     "@zag-js/dialog": "^0.2.13",
     "@zag-js/vue": "^0.2.10",
     "animejs": "^3.2.1",
-    "zustand": "^4.3.6",
-    "immer": "^9.0.19"
+    "copy-to-clipboard": "^3.3.3",
+    "immer": "^9.0.19",
+    "zustand": "^4.3.6"
   },
   "devDependencies": {
     "@parcel/compressor-brotli": "^2.8.3",

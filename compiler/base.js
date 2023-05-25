@@ -8,6 +8,8 @@ const printTools = require("gluegun/print");
 const commandLineArgs = require("command-line-args");
 const ora = require("ora");
 const compileCommand = require("@builder.io/mitosis-cli/dist/commands/compile");
+const _ = require("lodash");
+const scaffoldConfig = require("./scaffold.config.js");
 
 const DEFAULT_OPTIONS = {
   elements: "src/**/*.lite.tsx",
@@ -25,16 +27,15 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
-function pascalName(string) {
-  return `${string}`
-    .toLowerCase()
-    .replace(new RegExp(/[-_]+/, "g"), " ")
-    .replace(new RegExp(/[^\w\s]/, "g"), "")
-    .replace(
-      new RegExp(/\s+(.)(\w*)/, "g"),
-      ($1, $2, $3) => `${$2.toUpperCase() + $3}`
-    )
-    .replace(new RegExp(/\w/), (s) => s.toUpperCase());
+function pascalName(str) {
+  return _.startCase(str).replace(/\s/g, "");
+}
+
+function getScaffoldsDirs(rootPath) {
+  return {
+    inDir: `${rootPath}/scaffolds`,
+    outDir: `${rootPath}/src/ui`,
+  };
 }
 
 async function compile(defaultOptions) {
@@ -57,12 +58,12 @@ async function compile(defaultOptions) {
     : glob.sync(options.elements);
   const outPath = `${options.dest}/${options.target}`;
 
-  function copyNonMitosisLiteFiles() {
+  function copyNonMitosisLiteFiles(scaffoldsExist = false) {
     // Move src to all the package folder
     fs.copySync("src", `${outPath}/src`);
 
     // Remove unnecessary files moved
-    const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.{mdx,lite.tsx}`);
+    const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.lite.tsx`);
     unnecessaryFiles.forEach((element) => fs.removeSync(element));
 
     // Fix aliases
@@ -78,15 +79,9 @@ async function compile(defaultOptions) {
       fs.writeFileSync(element, result, "utf8");
     });
 
-    // Create specific README
-    const data = fs.readFileSync("README.md", "utf8");
-    const result = data.replace(/\/\[target\].+/g, `/${options.target}`);
-
-    fs.writeFileSync(`${outPath}/README.md`, result, "utf8");
-
     let fileExports = "$2";
 
-    // Export only the elements we want
+    // Export only the elements we want in case flag --elements is provided
     if (cliConfig.elements) {
       fileExports = options.elements
         .map((fileName) => {
@@ -100,7 +95,7 @@ async function compile(defaultOptions) {
     }
 
     const indexData = fs.readFileSync(`${outPath}/src/index.ts`, "utf8");
-    const indexResult = indexData
+    let indexResult = indexData
       // Export only needed components
       .replace(
         /(\/\/ Init Components)(.+?)(\/\/ End Components)/s,
@@ -108,13 +103,27 @@ async function compile(defaultOptions) {
       )
       .replace(/Platform.Default/g, `Platform.${pascalName(options.target)}`);
 
-    fs.writeFileSync(`${outPath}/src/index.ts`, indexResult, "utf8");
-  }
+    // Adding scaffolds imports to index.ts
+    if (scaffoldsExist) {
+      const scaffoldNames = Object.keys(scaffoldConfig).map((name) => ({
+        name,
+        Comp: pascalName(name),
+      }));
 
-  function copyScaffoldsIntoSrcDir() {
-    const inputDir = `${outPath}/scaffolds`;
-    if (!fs.existsSync(inputDir)) return;
-    fs.copySync(inputDir, `${outPath}/src/ui`);
+      const scaffoldImports = scaffoldNames
+        .map(
+          (item) =>
+            `export { default as ${item.Comp} } from './ui/${item.name}';`
+        )
+        .join("\n");
+
+      indexResult = indexResult.replace(
+        /(\/\/ Init Components)(.+?)(\/\/ End Components)/s,
+        `$1$2${scaffoldImports}\n$3`
+      );
+    }
+
+    fs.writeFileSync(`${outPath}/src/index.ts`, indexResult, "utf8");
   }
 
   async function compileMitosisComponent(filepath) {
@@ -162,9 +171,16 @@ async function compile(defaultOptions) {
     const name = file.name.replace(".lite", "");
     spinner.text = fileName;
 
-    copyNonMitosisLiteFiles();
-    copyScaffoldsIntoSrcDir();
+    // Copying files
+    const { inDir, outDir } = getScaffoldsDirs(outPath);
+    const scaffoldsExist = fs.existsSync(inDir);
+    copyNonMitosisLiteFiles(scaffoldsExist);
 
+    if (scaffoldsExist) {
+      fs.copySync(inDir, outDir);
+    }
+
+    // Compile using Mitosis CLI
     const { outFile } = await compileMitosisComponent(fileName);
     replacePropertiesFromCompiledFiles(outFile);
     options.customReplace({

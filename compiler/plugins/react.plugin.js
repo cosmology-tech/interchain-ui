@@ -1,3 +1,5 @@
+const scaffoldConfig = require("../scaffold.config");
+
 /**
  * @type {import('@builder.io/mitosis').Plugin}
  */
@@ -8,23 +10,11 @@ module.exports = function reactCompilerPlugin() {
         const comp = {
           ...json,
         };
-        const scaffoldMetaData = {
-          modal: {
-            // {from, to}
-            jsxMap: {
-              ScaffoldModal: "Modal",
-            },
-            import: {
-              imports: { Modal: "default" },
-              path: "../modal",
-            },
-          },
-        };
 
         const scaffolds = comp.meta.useMetadata?.scaffolds ?? [];
 
         const changeJsxTag = (component, scaffoldName) => {
-          const scaffoldMeta = scaffoldMetaData[scaffoldName];
+          const scaffoldMeta = scaffoldConfig[scaffoldName];
 
           // Check if the node has a name property that contains "Scaffold"
           if (component.name && component.name.includes("Scaffold")) {
@@ -59,7 +49,7 @@ module.exports = function reactCompilerPlugin() {
           //   path: './wallet-connect-modal.types'
           // }
           scaffolds.forEach((scaffold) => {
-            const scaffoldMeta = scaffoldMetaData[scaffold];
+            const scaffoldMeta = scaffoldConfig[scaffold];
 
             if (scaffoldMeta) {
               comp.imports.push(scaffoldMeta.import);

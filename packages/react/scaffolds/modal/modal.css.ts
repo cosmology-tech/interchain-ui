@@ -51,3 +51,15 @@ export const modalContent = style({
   position: `relative`,
   zIndex: 1,
 });
+
+export const modalHeader = style({
+  position: "relative",
+  display: "flex",
+});
+
+export const modalCloseButton = style({
+  position: "absolute",
+  right: 0,
+  top: "50%",
+  transform: "translateY(-50%)",
+});

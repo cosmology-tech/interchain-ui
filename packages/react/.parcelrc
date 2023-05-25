@@ -10,12 +10,5 @@
     "*.{ts,tsx}": [
       "@parcel/transformer-typescript-tsc"
     ]
-  },
-  "compressors": {
-    "*.{html,css,js,svg,map}": [
-      "...",
-      "@parcel/compressor-gzip",
-      "@parcel/compressor-brotli"
-    ]
   }
 }

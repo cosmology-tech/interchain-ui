@@ -49,7 +49,10 @@ const margins = {
 
 const unresponsiveProperties = defineProperties({
   properties: {
-    fontSize,
+    fontSize: {
+      ...fontSize,
+      inherit: "inherit",
+    },
     fontFamily: font,
     textAlign: [`center`, `left`, `right`],
     textDecoration: [`none`, `underline`],

@@ -19,10 +19,11 @@
     "@vanilla-extract/dynamic": "^2.0.3",
     "@vanilla-extract/recipes": "^0.3.0",
     "@vanilla-extract/sprinkles": "^1.5.1",
-    "@zag-js/dialog": "^0.2.15",
-    "@zag-js/react": "^0.3.12",
+    "@zag-js/dialog": "^0.9.2",
+    "@zag-js/react": "^0.9.2",
     "animejs": "^3.2.1",
     "clsx": "^1.2.1",
+    "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "zustand": "^4.3.6"
   },
