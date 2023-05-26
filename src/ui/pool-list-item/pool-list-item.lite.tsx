@@ -124,7 +124,6 @@ export default function PoolListItem(props: PoolListItemProps) {
       <Box className={styles.onlySm} width="full" height="9" />
       <CellWithTitle title="Liquidity">
         <Text
-          // className={styles.responsiveText}
           color="content"
           weight="semibold"
           wordBreak="break-word"
@@ -135,7 +134,6 @@ export default function PoolListItem(props: PoolListItemProps) {
       </CellWithTitle>
       <CellWithTitle title="24H Volume">
         <Text
-          // className={styles.responsiveText}
           color="content"
           weight="semibold"
           wordBreak="break-word"
@@ -146,7 +144,6 @@ export default function PoolListItem(props: PoolListItemProps) {
       </CellWithTitle>
       <CellWithTitle title="7D Fees">
         <Text
-          // className={styles.responsiveText}
           color="content"
           weight="semibold"
           wordBreak="break-word"

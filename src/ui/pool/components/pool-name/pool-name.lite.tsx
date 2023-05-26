@@ -24,7 +24,6 @@ export default function PoolName(props: PoolNameProps) {
       </Box>
       {/* <Stack className={styles.contentContainer} align="center"> */}
       <Stack
-        // className={clsx(styles.responsiveText, styles.rank)}
         direction="column"
         justify="center"
       >
