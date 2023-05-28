@@ -1,28 +1,9 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { recipe } from "@vanilla-extract/recipes";
 import {
   sprinkles as s,
-  RequiredResponsiveObject,
 } from "../../styles/sprinkles.css";
-import { themeVars } from "../../styles/themes.css";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { breakpoints } from "../../styles/tokens";
 
-// export const container = style([
-//   s({
-//     marginLeft: "9",
-//   }),
-//   {
-//     minWidth: "400px",
-//     marginTop: "27px",
-//     flexWrap: "nowrap",
-// "@media": {
-//   [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-//     flexWrap: "wrap",
-//   },
-// },
-//   },
-// ]);
 
 export const container = style([
   s({

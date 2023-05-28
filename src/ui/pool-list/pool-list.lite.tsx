@@ -51,7 +51,7 @@ export default function PoolList(props: PoolListProps) {
   return (
     <Box className={styles.container}>
       <Text color="tip" size="xl" weight="semibold">
-        Your Pools
+        {props.title}
       </Text>
       <Stack className={styles.titleContainer}>
         <For each={state.titles}>

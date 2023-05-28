@@ -22,6 +22,7 @@ export { default as PoolCardList } from "./ui/pool-card-list";
 export { default as ConnectModalWalletButton } from "./ui/connect-modal-wallet-button";
 export { default as ConnectModal } from "./ui/connect-modal";
 export { default as ConnectModalStatus } from "./ui/connect-modal-status";
+export { default as ShowMore } from "./ui/show-more";
 // End Components
 
 setPlatform(Platform.Default);

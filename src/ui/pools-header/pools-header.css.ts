@@ -66,7 +66,7 @@ export const baseBox = style([
   {
     backgroundColor: themeVars.colors.cardBg,
     width: "234px",
-    maxWidth: "234px",
+    // maxWidth: "234px",
     height: "fit-content",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
