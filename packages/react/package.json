@@ -29,7 +29,8 @@
   },
   "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",
-    "react-dom": "^16.8.0 || 17.x || 18.x"
+    "react-dom": "^16.8.0 || 17.x || 18.x",
+    "lodash": "^4.x"
   },
   "directories": {
     "lib": "lib",

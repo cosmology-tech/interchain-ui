@@ -66,6 +66,7 @@ export default function PoolList(props: PoolListProps) {
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem
+              key={index}
               token1={item.token1}
               token2={item.token2}
               poolLiquidity={item.poolLiquidity}

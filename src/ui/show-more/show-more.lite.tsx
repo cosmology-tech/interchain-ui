@@ -6,15 +6,16 @@ import {
   useDefaultProps,
   useStore,
   Show,
+  onUnMount,
 } from "@builder.io/mitosis";
 import clsx from "clsx";
 import anime from "animejs";
 import type { AnimeInstance } from "animejs";
-import FadeIn from "../fade-in";
+import debounce from "lodash/debounce";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
-import Button from "../button";
+import { store } from "../../models/store";
 import type { ShowMoreProps } from "./show-more.types";
 import * as styles from "./show-more.css";
 
@@ -25,69 +26,83 @@ export default function ShowMore(props: ShowMoreProps) {
     showLessTitle: "Show less",
   });
   let eleHeight = useRef<number | null>(null);
+  let initHeightRef = useRef<number | null>(0);
+  let isVisibleRef = useRef<boolean>(false);
   let animationRef = useRef<AnimeInstance | null>(null);
   const elementRef = useRef(null);
   const state = useStore({
     isVisible: false,
     toggle() {
+      isVisibleRef = !state.isVisible;
       state.isVisible = !state.isVisible;
     },
-  });
-
-  // onUpdate(() => {
-
-  //   console.log("onUpdate before===", elementRef, elementRef.offsetHeight, elementRef.height)
-  // })
-
-  onMount(() => {
-    // Simulate useLayoutEffect
-    setTimeout(() => {
-      if (!eleHeight) {
-        eleHeight = elementRef.offsetHeight;
-        console.log("elementRef clie===", eleHeight);
-      }
+    updateAnimationRef() {
       animationRef = anime({
         targets: elementRef,
-        height: [eleHeight * props.initialHeightPercent, eleHeight],
+        height: [eleHeight * initHeightRef, eleHeight],
         duration: 250,
         direction: `alternate`,
         loop: false,
         autoplay: false,
         easing: `easeInOutExpo`,
       });
-      console.log("animationRef====", animationRef);
+      state.isVisible = false
+    },
+    theme: "",
+  });
+  let cleanupRef = useRef<() => void>(null);
+  let resizeRef = useRef<() => void>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+    cleanupRef = store.subscribe((newState, prevState) => {
+      state.theme = newState.theme;
+    });
+
+    // Listen the resize event to get container height
+    resizeRef = debounce(() => {
+      elementRef.style.height = "auto";
+      eleHeight = elementRef.offsetHeight;
+      elementRef.style.height = isVisibleRef
+        ? `${eleHeight}px`
+        : `${eleHeight * initHeightRef}px`;
+        state.updateAnimationRef();
+    }, 300);
+    window.addEventListener("resize", resizeRef);
+
+    // Simulate useLayoutEffect
+    setTimeout(() => {
+      if (!eleHeight) {
+        eleHeight = elementRef.offsetHeight;
+      }
+
+      state.updateAnimationRef();
     }, 500);
   });
 
   onUpdate(() => {
-    // console.log('initialHeightPercent change', props.initialHeightPercent)
-    animationRef = anime({
-      targets: elementRef,
-      height: [eleHeight * props.initialHeightPercent, eleHeight],
-      duration: 250,
-      direction: `alternate`,
-      loop: false,
-      autoplay: false,
-      easing: `easeInOutExpo`,
-    });
+    initHeightRef = props.initialHeightPercent;
+    state.updateAnimationRef();
   }, [props.initialHeightPercent]);
 
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+    window.removeEventListener("resize", resizeRef);
+  });
+
   return (
-    <div
-      ref={elementRef}
-      className={styles.container}
-    >
+    <div ref={elementRef} className={styles.container}>
       {props.children}
       <Show when={!state.isVisible}>
         <Stack
-          className={clsx(styles.moreBox, styles.shadow)}
+          className={clsx(styles.moreBox, styles.shadow[state.theme])}
           justify="center"
           align="flex-end"
         >
           <div
             onClick={() => {
-              animationRef?.play();
               state.toggle();
+              animationRef?.play();
             }}
             className={styles.btnContainer}
           >
@@ -102,9 +117,9 @@ export default function ShowMore(props: ShowMoreProps) {
         <Stack className={styles.moreBox} justify="center" align="flex-end">
           <div
             onClick={() => {
+              state.toggle();
               animationRef?.reverse();
               animationRef?.play();
-              state.toggle();
             }}
             className={styles.btnContainer}
           >
