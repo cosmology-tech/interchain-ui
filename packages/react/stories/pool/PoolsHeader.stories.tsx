@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     // children: "Button",
-    price: 0.98,
+    price: 123456,
     rewards: 12.87,
     $rewards: 12.87,
   },

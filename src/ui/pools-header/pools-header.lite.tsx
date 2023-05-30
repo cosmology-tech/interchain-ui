@@ -15,6 +15,7 @@ import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
 import { themeVars } from "../../styles/themes.css";
 import { PoolsHeaderProps } from "./pools-header.types";
+import {NumberFormatter} from "../../models/system.model"
 
 export default function PoolsHeader(props: PoolsHeaderProps) {
   const state = useStore({
@@ -34,15 +35,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
-  // image
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-  //         "theme": {
-  //           "primary_color_hex": "#5c09a0"
-  //         }
 
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
   function Semocolon() {
     return (
       <Text
@@ -94,7 +87,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                   weight="semibold"
                   wordBreak="break-word"
                 >
-                  {props.price}
+                  {store.getState()?.formatNumber?.({value: props.price})}
                 </Text>
               </Stack>
             </Stack>

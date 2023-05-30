@@ -1,6 +1,6 @@
 import { createStore } from "zustand/vanilla";
 import { immer } from "zustand/middleware/immer";
-import { ThemeVariant } from "./system.model";
+import { ThemeVariant, NumberFormatter } from "./system.model";
 
 export interface UIState {
   theme: ThemeVariant;
@@ -11,7 +11,14 @@ export interface UIAction {
   setTheme: (theme: ThemeVariant, themeClass: string) => void;
 }
 
-export interface UIStore extends UIState, UIAction {}
+export interface I18nState {
+  formatNumber: NumberFormatter;
+}
+export interface I18nAction {
+  setFormatNumberFn: (fn: NumberFormatter) => void;
+}
+
+export interface UIStore extends UIState, UIAction, I18nState, I18nAction {}
 
 export const store = createStore(
   immer<UIStore>((set) => ({
@@ -21,6 +28,11 @@ export const store = createStore(
       set((state) => {
         state.theme = newTheme;
         state.themeClass = themeClass;
+      }),
+    formatNumber: null,
+    setFormatNumberFn: (fn: NumberFormatter) =>
+      set((state) => {
+        state.formatNumber = fn;
       }),
   }))
 );

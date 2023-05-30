@@ -23,6 +23,7 @@ export { default as ConnectModalWalletButton } from "./ui/connect-modal-wallet-b
 export { default as ConnectModal } from "./ui/connect-modal";
 export { default as ConnectModalStatus } from "./ui/connect-modal-status";
 export { default as ShowMore } from "./ui/show-more";
+export { default as I18nProvider } from "./ui/i18n-provider";
 // End Components
 
 setPlatform(Platform.Default);
