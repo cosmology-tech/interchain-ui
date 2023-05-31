@@ -31,10 +31,10 @@ export default function PoolListItem(props) {
   function APR(props: { className?: string }) {
     return (
       <Stack className={props.className} justify="space-between">
-        <Text color="content" weight="semibold">
+        <Text color="text" weight="semibold">
           24%
         </Text>
-        <Text color="content" weight="semibold">
+        <Text color="text" weight="semibold">
           ...
         </Text>
       </Stack>
@@ -52,7 +52,10 @@ export default function PoolListItem(props) {
         direction="column"
         justify="center"
       >
-        <Text color="tip" className={clsx(styles.onlySm, sprinkles({ marginBottom: "2" }))}>
+        <Text
+          color="textSecondary"
+          className={clsx(styles.onlySm, sprinkles({ marginBottom: "2" }))}
+        >
           {props.title}
         </Text>
         {props.children}
@@ -78,47 +81,39 @@ export default function PoolListItem(props) {
         direction="column"
         justify="center"
       >
-        <Text color="content" weight="semibold" className={sprinkles({ marginBottom: "2" })}>
+        <Text
+          color="text"
+          weight="semibold"
+          className={sprinkles({ marginBottom: "2" })}
+        >
           ATOM/OSMO
         </Text>
-        <Text color="tip">Pool #1</Text>
+        <Text color="textSecondary">Pool #1</Text>
       </Stack>
       <CellWithTitle className={styles.onlySm} title="APR">
         <APR />
       </CellWithTitle>
       <Box className={styles.onlySm} width="full" height="9" />
       <CellWithTitle title="24H Volume">
-        <Text
-          className={styles.responsiveText}
-          color="content"
-          weight="semibold"
-        >
+        <Text className={styles.responsiveText} color="text" weight="semibold">
           $168,767,639
         </Text>
       </CellWithTitle>
       <CellWithTitle title="7D Fees">
-        <Text
-          className={styles.responsiveText}
-          color="content"
-          weight="semibold"
-        >
+        <Text className={styles.responsiveText} color="text" weight="semibold">
           $3,288,612
         </Text>
       </CellWithTitle>
       <CellWithTitle title="Liquidity">
-        <Text
-          className={styles.responsiveText}
-          color="content"
-          weight="semibold"
-        >
+        <Text className={styles.responsiveText} color="text" weight="semibold">
           $59,075
         </Text>
       </CellWithTitle>
       <APR className={clsx(styles.responsiveText, styles.lgAPR)} />
       <Box className={styles.onlySm} width="full" height="4" />
       {/* <Stack className={clsx(styles.responsiveText, styles.lgAPR)} justify="space-between">
-          <Text color="content" weight="semibold">24%</Text>
-          <Text className={styles.responsiveText} color="content" weight="semibold">...</Text>
+          <Text color="text" weight="semibold">24%</Text>
+          <Text className={styles.responsiveText} color="text" weight="semibold">...</Text>
         </Stack> */}
       {/* </Stack> */}
     </Stack>
