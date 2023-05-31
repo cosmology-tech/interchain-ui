@@ -155,8 +155,8 @@ export default function PoolListItem(props: PoolListItemProps) {
       <APR className={clsx(styles.responsiveText, styles.lgAPR)} />
       <Box className={styles.onlySm} width="full" height="4" />
       {/* <Stack className={clsx(styles.responsiveText, styles.lgAPR)} justify="space-between">
-          <Text color="content" weight="semibold">24%</Text>
-          <Text className={styles.responsiveText} color="content" weight="semibold">...</Text>
+          <Text color="text" weight="semibold">24%</Text>
+          <Text className={styles.responsiveText} color="text" weight="semibold">...</Text>
         </Stack> */}
       {/* </Stack> */}
     </Stack>

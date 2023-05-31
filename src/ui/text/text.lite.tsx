@@ -5,7 +5,7 @@ import type { TextProps } from "./text.types";
 
 export default function Text(props: TextProps) {
   useDefaultProps({
-    color: "gray700",
+    color: "text",
   });
 
   return (
@@ -25,10 +25,22 @@ export default function Text(props: TextProps) {
       textTransform={props.transform}
       whiteSpace={props.whiteSpace}
       wordBreak={props.wordBreak}
-      marginTop={props.marginTop}
-      marginRight={props.marginRight}
-      marginLeft={props.marginLeft}
+      mx={props.mx}
+      my={props.my}
+      px={props.px}
+      py={props.py}
       marginBottom={props.marginBottom}
+      marginTop={props.marginTop}
+      marginLeft={props.marginLeft}
+      marginRight={props.marginRight}
+      paddingBottom={props.paddingBottom}
+      paddingTop={props.paddingTop}
+      paddingLeft={props.paddingLeft}
+      paddingRight={props.paddingRight}
+      width={props.width}
+      maxWidth={props.maxWidth}
+      height={props.height}
+      maxHeight={props.maxHeight}
     >
       {props.children}
     </Box>
