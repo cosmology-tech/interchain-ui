@@ -32,18 +32,18 @@ export default function PoolList(props) {
 
   return (
     <Box className={styles.container}>
-      <Text color="tip" size="xl" weight="semibold">
+      <Text color="textSecondary" size="xl" weight="semibold">
         Your Pools
       </Text>
       <Stack className={styles.titleContainer}>
-        {/* <Text color="tip">Pool</Text>
-        <Text color="tip">Liquidity</Text>
-        <Text color="tip">24H Volume</Text>
-        <Text color="tip">7D Fees</Text>
-        <Text color="tip">APR</Text> */}
+        {/* <Text color="textSecondary">Pool</Text>
+        <Text color="textSecondary">Liquidity</Text>
+        <Text color="textSecondary">24H Volume</Text>
+        <Text color="textSecondary">7D Fees</Text>
+        <Text color="textSecondary">APR</Text> */}
         <For each={state.titles}>
           {(item, index) => (
-            <Text className={styles.title} color="tip">
+            <Text className={styles.title} color="textSecondary">
               {item}
             </Text>
           )}

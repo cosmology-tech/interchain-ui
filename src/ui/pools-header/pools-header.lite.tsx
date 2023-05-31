@@ -46,7 +46,7 @@ export default function PoolsHeader(props) {
       <Text
         className={styles.semocolon}
         as="span"
-        color="tip"
+        color="textSecondary"
         weight="semibold"
         size="4xl"
       >
@@ -57,7 +57,7 @@ export default function PoolsHeader(props) {
 
   return (
     <Box>
-      <Text color="content" size="xl" weight="semibold">
+      <Text color="text" size="xl" weight="semibold">
         Liquidity Pools
       </Text>
       <Stack className={styles.container} space="10">
@@ -68,19 +68,23 @@ export default function PoolsHeader(props) {
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
             />
             <Stack direction="column" justify="center" lineHeight="shorter">
-              <Text color="tip" weight="semibold" className={styles.mb3}>
+              <Text
+                color="textSecondary"
+                weight="semibold"
+                className={styles.mb3}
+              >
                 OSMO Price
               </Text>
               <Stack align="flex-end">
                 <Text
                   className={styles.dollar}
-                  color="content"
+                  color="text"
                   weight="semibold"
                   lineHeight="shorter"
                 >
                   $
                 </Text>
-                <Text color="content" size="4xl" weight="semibold">
+                <Text color="text" size="4xl" weight="semibold">
                   0.98
                 </Text>
               </Stack>
@@ -89,10 +93,14 @@ export default function PoolsHeader(props) {
         </Box>
         <Box className={styles.baseBox}>
           <Stack direction="column" justify="center">
-            <Text color="tip" weight="semibold" className={styles.mb3}>
+            <Text
+              color="textSecondary"
+              weight="semibold"
+              className={styles.mb3}
+            >
               Reward distribution in
             </Text>
-            <Text color="content" weight="semibold" size="4xl">
+            <Text color="text" weight="semibold" size="4xl">
               12 <Semocolon /> 19 <Semocolon /> 48
             </Text>
           </Stack>
