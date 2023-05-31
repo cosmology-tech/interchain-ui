@@ -30,7 +30,7 @@ export const Primary: Story = {
     children: (
       <Stack direction="column" space="5">
         {Array.from(Array(10).keys()).map((item, i) => (
-          <Text color="content" size="4xl" weight="semibold">
+          <Text color="text" size="4xl" weight="semibold">
             {" "}
             {i + 1}{" "}
           </Text>

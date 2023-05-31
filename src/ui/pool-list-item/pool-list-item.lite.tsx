@@ -55,7 +55,7 @@ export default function PoolListItem(props: PoolListItemProps) {
         justify="space-between"
         align="center"
       >
-        <Text color="content" weight="semibold" marginRight="4">
+        <Text color="text" weight="semibold" marginRight="4">
           {props.apr}%
         </Text>
         <Stack
@@ -63,7 +63,7 @@ export default function PoolListItem(props: PoolListItemProps) {
           justify="center"
           align="center"
         >
-          <Icon name="verticalMore" color="content" />
+          <Icon name="verticalMore" color="text" />
         </Stack>
       </Stack>
     );
@@ -81,7 +81,7 @@ export default function PoolListItem(props: PoolListItemProps) {
         justify="center"
       >
         <Text
-          color="tip"
+          color="textSecondary"
           className={clsx(styles.onlySm, sprinkles({ marginBottom: "2" }))}
           wordBreak="break-word"
           marginRight="4"
@@ -105,13 +105,13 @@ export default function PoolListItem(props: PoolListItemProps) {
         justify="center"
       >
         <Text
-          color="content"
+          color="text"
           weight="semibold"
           className={sprinkles({ marginBottom: "2" })}
         >
           {props.token1.name}/{props.token2.name}
         </Text>
-        <Text color="tip">Pool #1</Text>
+        <Text color="textSecondary">Pool #1</Text>
       </Stack> */}
       <PoolName
         className={styles.nameContainer}
@@ -124,7 +124,7 @@ export default function PoolListItem(props: PoolListItemProps) {
       <Box className={styles.onlySm} width="full" height="9" />
       <CellWithTitle title="Liquidity">
         <Text
-          color="content"
+          color="text"
           weight="semibold"
           wordBreak="break-word"
           marginRight="4"
@@ -134,7 +134,7 @@ export default function PoolListItem(props: PoolListItemProps) {
       </CellWithTitle>
       <CellWithTitle title="24H Volume">
         <Text
-          color="content"
+          color="text"
           weight="semibold"
           wordBreak="break-word"
           marginRight="4"
@@ -144,7 +144,7 @@ export default function PoolListItem(props: PoolListItemProps) {
       </CellWithTitle>
       <CellWithTitle title="7D Fees">
         <Text
-          color="content"
+          color="text"
           weight="semibold"
           wordBreak="break-word"
           marginRight="4"

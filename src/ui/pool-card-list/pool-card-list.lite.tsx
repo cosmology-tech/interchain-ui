@@ -36,7 +36,7 @@ export default function PoolCardList(props: PoolCardListProps) {
   });
   return (
     <Box>
-      <Text size="lg" color="tip" weight="semibold" marginBottom="10">
+      <Text size="lg" color="textSecondary" weight="semibold" marginBottom="10">
         Highlighted Pools
       </Text>
       <Stack space="10" flexWrap="wrap">

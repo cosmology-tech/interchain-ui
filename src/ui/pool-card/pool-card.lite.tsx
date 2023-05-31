@@ -37,33 +37,33 @@ export default function PoolCard(props: PoolCardProps) {
     <Stack space="6" className={styles.container} direction="column" justify="center">
       <PoolName token1={props.token1} token2={props.token2} />
       <Stack justify="space-between">
-        <Text color="content">APR</Text>
-        <Text color="content" size="2xl" weight="semibold"  marginLeft="4" wordBreak="break-word">
+        <Text color="text">APR</Text>
+        <Text color="text" size="2xl" weight="semibold"  marginLeft="4" wordBreak="break-word">
           {props.apr}%
         </Text>
       </Stack>
       <Stack justify="space-between">
-        <Text color="tip">Liquidity</Text>
-        <Text color="content" weight="semibold" marginLeft="4" wordBreak="break-word">
+        <Text color="textSecondary">Liquidity</Text>
+        <Text color="text" weight="semibold" marginLeft="4" wordBreak="break-word">
           ${props.poolLiquidity.toLocaleString()}
         </Text>
       </Stack>
       <Stack justify="space-between">
-        <Text color="tip">7D Fees</Text>
-        <Text color="content" weight="semibold" marginLeft="4" wordBreak="break-word">
+        <Text color="textSecondary">7D Fees</Text>
+        <Text color="text" weight="semibold" marginLeft="4" wordBreak="break-word">
           ${props.fees.toLocaleString()}
         </Text>
       </Stack>
       <Box width="full" height="1" className={styles.divider[state.theme]} />
       <Stack justify="space-between">
-        <Text color="content">Your Liquidity</Text>
-        <Text color="content" weight="semibold">
+        <Text color="text">Your Liquidity</Text>
+        <Text color="text" weight="semibold">
           ${props.yourLiquidity.toLocaleString()}
         </Text>
       </Stack>
       <Stack justify="space-between">
-        <Text color="content">Bonded</Text>
-        <Text color="content" weight="semibold" marginLeft="4" wordBreak="break-word">
+        <Text color="text">Bonded</Text>
+        <Text color="text" weight="semibold" marginLeft="4" wordBreak="break-word">
           ${props.bonded.toLocaleString()}
         </Text>
       </Stack>

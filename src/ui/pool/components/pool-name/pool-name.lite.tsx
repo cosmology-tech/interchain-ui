@@ -28,13 +28,13 @@ export default function PoolName(props: PoolNameProps) {
         justify="center"
       >
         <Text
-          color="content"
+          color="text"
           weight="semibold"
           className={sprinkles({ marginBottom: "2" })}
         >
           {props.token1.name}/{props.token2.name}
         </Text>
-        <Text color="tip">Pool #1</Text>
+        <Text color="textSecondary">Pool #1</Text>
       </Stack>
     </Stack>
   );
