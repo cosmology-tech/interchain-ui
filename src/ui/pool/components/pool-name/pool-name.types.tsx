@@ -1,13 +1,12 @@
-
 export interface PoolNameProps {
-  className?: string,
+  className?: string;
+  id: string;
   token1: {
-    name: string
-    imgSrc: string,
-  },
+    name: string;
+    imgSrc: string;
+  };
   token2: {
-    name: string,
-    imgSrc: string,
-  },
+    name: string;
+    imgSrc: string;
+  };
 }
-

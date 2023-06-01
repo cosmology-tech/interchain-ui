@@ -24,6 +24,8 @@ export { default as ConnectModal } from "./ui/connect-modal";
 export { default as ConnectModalStatus } from "./ui/connect-modal-status";
 export { default as ShowMore } from "./ui/show-more";
 export { default as I18nProvider } from "./ui/i18n-provider";
+export { default as PoolInfoHeader } from "./ui/pool-info-header";
+export { default as ManageLiquidityCard } from "./ui/manage-liquidity-card";
 // End Components
 
 setPlatform(Platform.Default);
