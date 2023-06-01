@@ -75,6 +75,31 @@ const intent = {
       },
     },
   }),
+  tertiary: style({
+    vars: {
+      [buttonTextColorVar]: themeVars.colors.white,
+      [buttonBgVar]: themeVars.colors.text,
+      [buttonHoverBgVar]: themeVars.colors.blackAlpha900,
+      [buttonHoverTextColorVar]: themeVars.colors.whiteAlpha900,
+    },
+    "@media": {
+      "(prefers-color-scheme: dark)": {
+        vars: {
+          [buttonTextColorVar]: themeVars.colors.cardBg,
+          [buttonHoverBgVar]: themeVars.colors.whiteAlpha900,
+          [buttonHoverTextColorVar]: themeVars.colors.blackAlpha900,
+        },
+      },
+    },
+    color: buttonTextColorVar,
+    backgroundColor: buttonBgVar,
+    selectors: {
+      "&:hover": {
+        color: buttonHoverTextColorVar,
+        backgroundColor: buttonHoverBgVar,
+      },
+    },
+  }),
   disabled: style({
     vars: {
       [buttonTextColorVar]: "#B4BECC",
@@ -154,6 +179,40 @@ export const variants = recipe({
           [buttonTextColorVar]: themeVars.colors.primary500,
           [buttonHoverTextColorVar]: themeVars.colors.primary400,
         },
+        ...outlinedBaseStyle,
+      },
+    },
+    {
+      variants: {
+        variant: "outlined",
+        intent: "tertiary",
+      },
+      style: {
+        vars: {
+          [buttonBgVar]: "transparent",
+          [buttonTextColorVar]: themeVars.colors.text,
+        },
+        ...outlinedBaseStyle,
+      },
+    },
+    {
+      variants: {
+        variant: "outlined",
+        intent: "tertiary",
+      },
+      style: {
+        vars: {
+          [buttonBgVar]: "transparent",
+          [buttonTextColorVar]: themeVars.colors.text,
+        },
+
+    "@media": {
+      "(prefers-color-scheme: dark)": {
+        vars: {
+          [buttonTextColorVar]: themeVars.colors.text,
+        },
+      },
+    },
         ...outlinedBaseStyle,
       },
     },
