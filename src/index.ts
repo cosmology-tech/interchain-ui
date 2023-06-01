@@ -33,6 +33,8 @@ export { default as BondingList } from "./ui/bonding-list";
 export { default as BondingListItemSm } from "./ui/bonding-list-item-sm";
 export { default as BondingListSm } from "./ui/bonding-list-sm";
 export { default as BondingArea } from "./ui/bonding-area";
+export { default as QRCode } from "./ui/qrcode";
+export { default as ConnectModalQRCode } from "./ui/connect-modal-qrcode";
 // End Components
 
 setPlatform(Platform.Default);

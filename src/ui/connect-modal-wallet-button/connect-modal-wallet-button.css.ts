@@ -1,8 +1,10 @@
-import { style } from "@vanilla-extract/css";
+import { style, createVar } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
+
+export const myButtonVar = createVar();
 
 const connectButtonShapeVariants = {
   square: style({
@@ -147,3 +149,41 @@ export const buttonTextVariants = recipe({
     variant: "square",
   },
 });
+
+export const mobileIconStyleSquare = style([
+  {
+    display: "flex",
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    border: "2px solid",
+    right: "-8px",
+    bottom: "-8px",
+  },
+  s({
+    borderRadius: "full",
+    backgroundColor: {
+      light: "gray100",
+      dark: "gray700",
+    },
+    borderColor: {
+      light: "gray100",
+      dark: "gray700",
+    },
+  }),
+]);
+
+export const mobileIconStyleList = style([
+  {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  s({
+    backgroundColor: "transparent",
+    borderRadius: "full",
+    marginRight: "2",
+  }),
+]);

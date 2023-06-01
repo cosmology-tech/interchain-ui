@@ -1,8 +1,6 @@
 import { style, createVar } from "@vanilla-extract/css";
-import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export const connectModalShadowVar = createVar();
 
