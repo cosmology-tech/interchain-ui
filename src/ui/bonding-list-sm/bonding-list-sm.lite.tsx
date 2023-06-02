@@ -16,13 +16,23 @@ export default function BondingListSm(props: BondingListSmProps) {
       <Text>
         Bond your tokens to earn additional OSMO rewards to the swap fees.
       </Text>
-      <Text color="textSecondary" weight="semibold" marginTop="10">
+      <Text
+        color="textSecondary"
+        weight="semibold"
+        attributes={{
+          marginTop: "10",
+        }}
+      >
         Unbonded
       </Text>
       <Text size="4xl" weight="semibold">
         {props.unbondedAmt}
       </Text>
-      <Stack>
+      <Stack
+        attributes={{
+          marginBottom: "9",
+        }}
+      >
         <Text weight="semibold">{props.unbondedShares}</Text>
         <Text>&nbsp; pool shares</Text>
       </Stack>

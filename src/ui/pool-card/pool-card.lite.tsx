@@ -34,23 +34,44 @@ export default function PoolCard(props: PoolCardProps) {
     if (typeof cleanupRef === "function") cleanupRef();
   });
   return (
-    <Stack space="6" className={styles.container} direction="column" justify="center">
+    <Stack
+      space="6"
+      className={styles.container}
+      direction="column"
+      justify="center"
+    >
       <PoolName token1={props.token1} token2={props.token2} />
       <Stack justify="space-between">
         <Text color="text">APR</Text>
-        <Text color="text" size="2xl" weight="semibold"  marginLeft="4" wordBreak="break-word">
+        <Text
+          color="text"
+          size="2xl"
+          weight="semibold"
+          marginLeft="4"
+          wordBreak="break-word"
+        >
           {props.apr}%
         </Text>
       </Stack>
       <Stack justify="space-between">
         <Text color="textSecondary">Liquidity</Text>
-        <Text color="text" weight="semibold" marginLeft="4" wordBreak="break-word">
+        <Text
+          color="text"
+          weight="semibold"
+          marginLeft="4"
+          wordBreak="break-word"
+        >
           ${props.poolLiquidity.toLocaleString()}
         </Text>
       </Stack>
       <Stack justify="space-between">
         <Text color="textSecondary">7D Fees</Text>
-        <Text color="text" weight="semibold" marginLeft="4" wordBreak="break-word">
+        <Text
+          color="text"
+          weight="semibold"
+          marginLeft="4"
+          wordBreak="break-word"
+        >
           ${props.fees.toLocaleString()}
         </Text>
       </Stack>
@@ -63,7 +84,14 @@ export default function PoolCard(props: PoolCardProps) {
       </Stack>
       <Stack justify="space-between">
         <Text color="text">Bonded</Text>
-        <Text color="text" weight="semibold" marginLeft="4" wordBreak="break-word">
+        <Text
+          color="text"
+          weight="semibold"
+          wordBreak="break-word"
+          attributes={{
+            marginLeft: "4",
+          }}
+        >
           ${props.bonded.toLocaleString()}
         </Text>
       </Stack>

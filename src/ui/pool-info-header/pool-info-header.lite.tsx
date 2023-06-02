@@ -40,7 +40,12 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         <Text size="xl" weight="semibold">
           {props.token1.name} / {props.token2.name}
         </Text>
-        <Text color="textSecondary" marginBottom="13">
+        <Text
+          color="textSecondary"
+          attributes={{
+            marginBottom: "13",
+          }}
+        >
           Pool #{props.id}
         </Text>
       </Stack>
@@ -54,7 +59,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
           <Stack align="baseline">
             <Text>$</Text>
             <Text size="4xl" weight="semibold">
-              {store.getState()?.formatNumber?.({value: props.poolLiquidity})}
+              {store.getState()?.formatNumber?.({ value: props.poolLiquidity })}
             </Text>
           </Stack>
         </Stack>
@@ -73,7 +78,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
           <Stack align="baseline">
             <Text>$</Text>
             <Text size="4xl" weight="semibold">
-              {store.getState()?.formatNumber?.({value: props.volume24H})}
+              {store.getState()?.formatNumber?.({ value: props.volume24H })}
             </Text>
           </Stack>
         </Stack>

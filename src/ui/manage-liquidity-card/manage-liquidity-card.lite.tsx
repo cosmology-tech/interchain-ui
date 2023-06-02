@@ -48,12 +48,18 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
         </Stack>
         <Text>No pool shares yet</Text>
-        <Button className={styles.mt11} size="sm" intent="tertiary">Add Liquidity</Button>
+        <Button className={styles.mt11} size="sm" intent="tertiary">
+          Add Liquidity
+        </Button>
       </Stack>
       <Stack direction="column" align="flex-end">
         <Stack>
           <img className={styles.image} src={props.token1.imgSrc} />
-          <Text px="4" color="textSecondary" weight="semibold">
+          <Text
+            color="textSecondary"
+            weight="semibold"
+            attributes={{ px: "4" }}
+          >
             {props.token1.asset}
           </Text>
           <Text color="textSecondary">{props.token1.name}</Text>
@@ -61,12 +67,18 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         <Box height="5" />
         <Stack>
           <img className={styles.image} src={props.token2.imgSrc} />
-          <Text px="4" color="textSecondary" weight="semibold">
+          <Text
+            attributes={{ px: "4" }}
+            color="textSecondary"
+            weight="semibold"
+          >
             {props.token2.asset}
           </Text>
           <Text color="textSecondary">{props.token2.name}</Text>
         </Stack>
-        <Button className={styles.mt11} size="sm" intent="tertiary">Remove Liquidity</Button>
+        <Button className={styles.mt11} size="sm" intent="tertiary">
+          Remove Liquidity
+        </Button>
       </Stack>
       <Stack direction="column" className={styles.tokenContainer}>
         <Text color="textSecondary" weight="semibold">
@@ -79,7 +91,14 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
         </Stack>
         <Text>No pool shares yet</Text>
-        <Button className={styles.mt11} size="sm" intent="tertiary" variant="outlined">Start earning</Button>
+        <Button
+          className={styles.mt11}
+          size="sm"
+          intent="tertiary"
+          variant="outlined"
+        >
+          Start earning
+        </Button>
       </Stack>
     </Stack>
   );

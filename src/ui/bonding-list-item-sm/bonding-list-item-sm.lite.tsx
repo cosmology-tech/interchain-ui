@@ -13,7 +13,13 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
           <Text color="textSecondary" weight="semibold">
             {props.title}
           </Text>
-          <Stack marginTop="3" marginBottom="9" align="baseline">
+          <Stack
+            align="baseline"
+            attributes={{
+              marginTop: "3",
+              marginBottom: "9",
+            }}
+          >
             <Text color="textSecondary" weight="semibold">
               APR
             </Text>
@@ -32,7 +38,12 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               {props.amount}
             </Text>
           </Stack>
-          <Stack marginTop="3" marginBottom="9">
+          <Stack
+            attributes={{
+              marginTop: "3",
+              marginBottom: "9",
+            }}
+          >
             <Text weight="semibold">{props.poolShares}&nbsp;</Text>
             <Text>pool shares</Text>
           </Stack>

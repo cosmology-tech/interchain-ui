@@ -13,7 +13,7 @@ import Stack from "../../../stack";
 import Box from "../../../box";
 import Text from "../../../text";
 import { PoolNameProps } from "./pool-name.types";
-import * as styles from './pool-name.css'
+import * as styles from "./pool-name.css";
 
 export default function PoolName(props: PoolNameProps) {
   return (
@@ -23,14 +23,13 @@ export default function PoolName(props: PoolNameProps) {
         <img className={styles.image2} src={props.token2.imgSrc} />
       </Box>
       {/* <Stack className={styles.contentContainer} align="center"> */}
-      <Stack
-        direction="column"
-        justify="center"
-      >
+      <Stack direction="column" justify="center">
         <Text
           color="text"
           weight="semibold"
-          className={sprinkles({ marginBottom: "2" })}
+          attributes={{
+            marginBottom: "2",
+          }}
         >
           {props.token1.name}/{props.token2.name}
         </Text>

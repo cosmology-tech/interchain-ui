@@ -46,7 +46,7 @@ export default function ShowMore(props: ShowMoreProps) {
         autoplay: false,
         easing: `easeInOutExpo`,
       });
-      state.isVisible = false
+      state.isVisible = false;
     },
     theme: "",
   });
@@ -66,7 +66,7 @@ export default function ShowMore(props: ShowMoreProps) {
       elementRef.style.height = isVisibleRef
         ? `${eleHeight}px`
         : `${eleHeight * initHeightRef}px`;
-        state.updateAnimationRef();
+      state.updateAnimationRef();
     }, 300);
     window.addEventListener("resize", resizeRef);
 
@@ -106,7 +106,13 @@ export default function ShowMore(props: ShowMoreProps) {
             }}
             className={styles.btnContainer}
           >
-            <Text color="textSecondary" weight="semibold" marginRight="5">
+            <Text
+              color="textSecondary"
+              weight="semibold"
+              attributes={{
+                marginRight: "5",
+              }}
+            >
               {props.showMoreTitle}
             </Text>
             <Icon name="arrowDownS" color="textSecondary" />
@@ -123,7 +129,13 @@ export default function ShowMore(props: ShowMoreProps) {
             }}
             className={styles.btnContainer}
           >
-            <Text color="textSecondary" weight="semibold" marginRight="5">
+            <Text
+              color="textSecondary"
+              weight="semibold"
+              attributes={{
+                marginRight: "5",
+              }}
+            >
               {props.showLessTitle}
             </Text>
             <Icon name="arrowUpS" color="textSecondary" />

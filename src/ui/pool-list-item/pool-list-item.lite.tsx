@@ -55,7 +55,13 @@ export default function PoolListItem(props: PoolListItemProps) {
         justify="space-between"
         align="center"
       >
-        <Text color="text" weight="semibold" marginRight="4">
+        <Text
+          color="text"
+          weight="semibold"
+          attributes={{
+            marginRight: "4",
+          }}
+        >
           {props.apr}%
         </Text>
         <Stack
@@ -82,9 +88,12 @@ export default function PoolListItem(props: PoolListItemProps) {
       >
         <Text
           color="textSecondary"
-          className={clsx(styles.onlySm, sprinkles({ marginBottom: "2" }))}
+          className={styles.onlySm}
           wordBreak="break-word"
-          marginRight="4"
+          attributes={{
+            marginRight: "4",
+            marginBottom: "2",
+          }}
         >
           {props.title}
         </Text>
@@ -95,24 +104,6 @@ export default function PoolListItem(props: PoolListItemProps) {
 
   return (
     <Stack align="center" className={styles.container}>
-      {/* <Box className={styles.imageBox}>
-        <img className={styles.image1} src={props.token1.imgSrc} />
-        <img className={styles.image2} src={props.token2.imgSrc} />
-      </Box>
-      <Stack
-        className={clsx(styles.responsiveText, styles.rank)}
-        direction="column"
-        justify="center"
-      >
-        <Text
-          color="text"
-          weight="semibold"
-          className={sprinkles({ marginBottom: "2" })}
-        >
-          {props.token1.name}/{props.token2.name}
-        </Text>
-        <Text color="textSecondary">Pool #1</Text>
-      </Stack> */}
       <PoolName
         className={styles.nameContainer}
         token1={props.token1}
@@ -127,7 +118,9 @@ export default function PoolListItem(props: PoolListItemProps) {
           color="text"
           weight="semibold"
           wordBreak="break-word"
-          marginRight="4"
+          attributes={{
+            marginRight: "4",
+          }}
         >
           ${props.poolLiquidity.toLocaleString()}
         </Text>
@@ -137,7 +130,9 @@ export default function PoolListItem(props: PoolListItemProps) {
           color="text"
           weight="semibold"
           wordBreak="break-word"
-          marginRight="4"
+          attributes={{
+            marginRight: "4",
+          }}
         >
           ${props.volume.toLocaleString()}
         </Text>
@@ -147,18 +142,15 @@ export default function PoolListItem(props: PoolListItemProps) {
           color="text"
           weight="semibold"
           wordBreak="break-word"
-          marginRight="4"
+          attributes={{
+            marginRight: "4",
+          }}
         >
           ${props.fees.toLocaleString()}
         </Text>
       </CellWithTitle>
       <APR className={clsx(styles.responsiveText, styles.lgAPR)} />
       <Box className={styles.onlySm} width="full" height="4" />
-      {/* <Stack className={clsx(styles.responsiveText, styles.lgAPR)} justify="space-between">
-          <Text color="text" weight="semibold">24%</Text>
-          <Text className={styles.responsiveText} color="text" weight="semibold">...</Text>
-        </Stack> */}
-      {/* </Stack> */}
     </Stack>
   );
 }
