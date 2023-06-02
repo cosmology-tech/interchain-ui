@@ -2,6 +2,7 @@ import { onMount, Show, useMetadata, useStore } from "@builder.io/mitosis";
 import clx from "clsx";
 import { variants } from "./button.css";
 import Icon from "../icon";
+import Box from "../box";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import type { ButtonProps, ButtonState } from "./button.types";
 
@@ -18,9 +19,13 @@ export default function Button(props: ButtonProps) {
 
   return (
     <Show when={state.loaded}>
-      <button
-        onClick={(event) => props.onClick?.(event)}
-        disabled={props.disabled}
+      <Box
+        as="button"
+        {...props.attributes}
+        attributes={{
+          onClick: (event) => props.onClick?.(event),
+          disabled: props.disabled,
+        }}
         className={clx(
           variants({
             variant: props.variant,
@@ -51,7 +56,7 @@ export default function Button(props: ButtonProps) {
             })}
           />
         </Show>
-      </button>
+      </Box>
     </Show>
   );
 }

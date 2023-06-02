@@ -26,4 +26,5 @@ export interface TextProps extends BoxProps, Variants {
   wordBreak?: BoxProps["wordBreak"];
   underline?: boolean;
   className?: BoxProps["className"];
+  attributes?: BoxProps;
 }

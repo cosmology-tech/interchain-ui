@@ -54,5 +54,9 @@ export default function Box(props: BoxProps) {
     state.calculateStyles();
   }, [props]);
 
-  return <props.as className={state.className}>{props.children}</props.as>;
+  return (
+    <props.as {...props.attributes} className={state.className}>
+      {props.children}
+    </props.as>
+  );
 }

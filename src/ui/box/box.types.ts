@@ -6,6 +6,7 @@ export type BoxProps = Sprinkles & {
   className?: ClassValue;
   children?: any;
   forwardedRef?: any;
+  attributes?: any;
 };
 
 export const DEFAULT_VALUES = {
