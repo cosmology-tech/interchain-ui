@@ -48,7 +48,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
         </Stack>
         <Text>No pool shares yet</Text>
-        <Button className={styles.mt11}>Add Liquidity</Button>
+        <Button className={styles.mt11} size="sm" intent="tertiary">Add Liquidity</Button>
       </Stack>
       <Stack direction="column" align="flex-end">
         <Stack>
@@ -66,7 +66,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
           <Text color="textSecondary">{props.token2.name}</Text>
         </Stack>
-        <Button className={styles.mt11}>Remove Liquidity</Button>
+        <Button className={styles.mt11} size="sm" intent="tertiary">Remove Liquidity</Button>
       </Stack>
       <Stack direction="column" className={styles.tokenContainer}>
         <Text color="textSecondary" weight="semibold">
@@ -79,7 +79,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
         </Stack>
         <Text>No pool shares yet</Text>
-        <Button className={styles.mt11}>Start earning</Button>
+        <Button className={styles.mt11} size="sm" intent="tertiary" variant="outlined">Start earning</Button>
       </Stack>
     </Stack>
   );

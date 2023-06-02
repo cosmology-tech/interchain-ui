@@ -6,6 +6,7 @@ import { themeVars } from "../../styles/themes.css";
 
 export const container = style([
   {
+    minWidth: "325px",
     backgroundColor: themeVars.colors.cardBg,
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
