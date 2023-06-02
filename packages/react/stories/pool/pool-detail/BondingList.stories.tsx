@@ -1,11 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BondingList } from "../../src";
+import { BondingList } from "../../../src";
 
 const meta: Meta<typeof BondingList> = {
   component: BondingList,
-  title: "Pool/BondingList",
+  title: "Pool/pool-detail/bonding-list",
   tags: ["autodocs"],
   argTypes: {
     list: {

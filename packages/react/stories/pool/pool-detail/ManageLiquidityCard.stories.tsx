@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ManageLiquidityCard } from "../../src";
+import { ManageLiquidityCard } from "../../../src";
 
 const meta: Meta<typeof ManageLiquidityCard> = {
   component: ManageLiquidityCard,
-  title: "Pool/ManageLiquidityCard",
+  title: "Pool/pool-detail/manage-liquidity-card",
   tags: ["autodocs"],
   argTypes: {},
 };

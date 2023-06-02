@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolInfoHeader } from "../../src";
+import { PoolInfoHeader } from "../../../src";
 
 const meta: Meta<typeof PoolInfoHeader> = {
   component: PoolInfoHeader,
-  title: "Pool/PoolInfoHeader",
+  title: "Pool/pool-detail/pool-info-header",
   tags: ["autodocs"],
   argTypes: {},
 };
