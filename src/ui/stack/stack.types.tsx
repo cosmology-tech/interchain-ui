@@ -10,4 +10,5 @@ export interface StackProps extends BoxProps {
   wrap?: OptionalResponsiveObject<true | false>;
   direction?: "row" | "column";
   className?: BoxProps["className"];
+  attributes?: BoxProps;
 }

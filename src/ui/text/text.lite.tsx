@@ -11,6 +11,7 @@ export default function Text(props: TextProps) {
 
   return (
     <Box
+      {...props.attributes}
       as={props.as}
       className={`${variants({
         variant: props.variant,
@@ -26,22 +27,6 @@ export default function Text(props: TextProps) {
       textTransform={props.transform}
       whiteSpace={props.whiteSpace}
       wordBreak={props.wordBreak}
-      mx={props.mx}
-      my={props.my}
-      px={props.px}
-      py={props.py}
-      marginBottom={props.marginBottom}
-      marginTop={props.marginTop}
-      marginLeft={props.marginLeft}
-      marginRight={props.marginRight}
-      paddingBottom={props.paddingBottom}
-      paddingTop={props.paddingTop}
-      paddingLeft={props.paddingLeft}
-      paddingRight={props.paddingRight}
-      width={props.width}
-      maxWidth={props.maxWidth}
-      height={props.height}
-      maxHeight={props.maxHeight}
     >
       {props.children}
     </Box>

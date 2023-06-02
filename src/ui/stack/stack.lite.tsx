@@ -4,6 +4,7 @@ import type { StackProps } from "./stack.types";
 export default function Stack(props: StackProps) {
   return (
     <Box
+      {...props.attributes}
       className={props.className}
       alignItems={props.align}
       as={props.as}
