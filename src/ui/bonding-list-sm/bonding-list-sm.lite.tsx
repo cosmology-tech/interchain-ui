@@ -9,7 +9,7 @@ import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-ite
 
 export default function BondingListSm(props: BondingListSmProps) {
   return (
-    <Box>
+    <Box width="full">
       <Text size="xl" weight="semibold">
         Bond your liquidity
       </Text>

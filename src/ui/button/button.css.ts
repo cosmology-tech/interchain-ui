@@ -11,16 +11,14 @@ const buttonHoverTextColorVar = createVar();
 
 const outlinedBaseStyle: ComplexStyleRule = {
   borderRadius: themeVars.radii.md,
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: buttonTextColorVar,
-  color: buttonTextColorVar,
+  outlineWidth: "2px",
+  outlineStyle: "solid",
+  outlineColor: buttonTextColorVar,
+  outlineOffset: "-2px",
   backgroundColor: buttonBgVar,
   selectors: {
     "&:hover": {
       opacity: 0.8,
-      color: buttonHoverTextColorVar,
-      borderColor: buttonHoverTextColorVar,
     },
   },
 };
@@ -79,15 +77,11 @@ const intent = {
     vars: {
       [buttonTextColorVar]: themeVars.colors.white,
       [buttonBgVar]: themeVars.colors.text,
-      [buttonHoverBgVar]: themeVars.colors.blackAlpha900,
-      [buttonHoverTextColorVar]: themeVars.colors.whiteAlpha900,
     },
     "@media": {
       "(prefers-color-scheme: dark)": {
         vars: {
           [buttonTextColorVar]: themeVars.colors.cardBg,
-          [buttonHoverBgVar]: themeVars.colors.whiteAlpha900,
-          [buttonHoverTextColorVar]: themeVars.colors.blackAlpha900,
         },
       },
     },
@@ -95,20 +89,18 @@ const intent = {
     backgroundColor: buttonBgVar,
     selectors: {
       "&:hover": {
-        color: buttonHoverTextColorVar,
-        backgroundColor: buttonHoverBgVar,
+        opacity: 0.8,
       },
     },
   }),
-  disabled: style({
-    vars: {
-      [buttonTextColorVar]: "#B4BECC",
-      [buttonBgVar]: themeVars.colors.gray50,
-    },
+};
+
+
+export const disabled = {
+  true: style({
     cursor: "not-allowed",
-    color: buttonTextColorVar,
-    backgroundColor: buttonBgVar,
-  }),
+    opacity: 0.6,
+  })
 };
 
 export const size = {
@@ -152,6 +144,7 @@ export const variants = recipe({
   variants: {
     variant,
     intent,
+    disabled,
     size,
   },
   // Applied when multiple variants are set at once
@@ -206,14 +199,19 @@ export const variants = recipe({
           [buttonTextColorVar]: themeVars.colors.text,
         },
 
-    "@media": {
-      "(prefers-color-scheme: dark)": {
-        vars: {
-          [buttonTextColorVar]: themeVars.colors.text,
+        "@media": {
+          "(prefers-color-scheme: dark)": {
+            vars: {
+              [buttonTextColorVar]: themeVars.colors.text,
+            },
+          },
         },
-      },
-    },
         ...outlinedBaseStyle,
+        selectors: {
+          "&:hover": {
+            opacity: 0.8,
+          },
+        },
       },
     },
   ],

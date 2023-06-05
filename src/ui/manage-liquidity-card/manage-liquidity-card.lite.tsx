@@ -36,7 +36,16 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
   });
 
   return (
-    <Stack className={styles.container} align="flex-end" flexWrap="wrap">
+    <Stack
+      className={styles.container}
+      align="flex-end"
+      flexWrap="wrap"
+      attributes={{
+        marginTop: "16",
+        marginBottom: "10",
+        borderRadius: "lg",
+      }}
+    >
       <Stack className={styles.poolBalanceContainer} direction="column">
         <Text color="textSecondary" weight="semibold">
           Your pool balance

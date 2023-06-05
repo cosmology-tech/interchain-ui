@@ -32,6 +32,7 @@ export { default as BondingListItem } from "./ui/bonding-list-item";
 export { default as BondingList } from "./ui/bonding-list";
 export { default as BondingListItemSm } from "./ui/bonding-list-item-sm";
 export { default as BondingListSm } from "./ui/bonding-list-sm";
+export { default as BondingArea } from "./ui/bonding-area";
 // End Components
 
 setPlatform(Platform.Default);
