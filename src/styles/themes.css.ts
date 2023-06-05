@@ -52,6 +52,9 @@ export const themeVars = createThemeContract({
     rewardBg: ``,
     rewardContent: ``,
     cardBg: ``,
+    comboboxItemBg: ``,
+    comboboxItemBgHover: ``,
+    comboboxItemBgActive: ``,
     ...colors,
   },
   font: {
@@ -225,6 +228,9 @@ export const lightThemeClass = createTheme(themeVars, {
     rewardBg: "#E5FFE4",
     rewardContent: "#36BB35",
     cardBg: "#F5F7FB",
+    comboboxItemBg: "#EFF2F8",
+    comboboxItemBgHover: "#DDE4ED",
+    comboboxItemBgActive: "#D0D9E3",
     ...colors,
   },
 });
@@ -242,6 +248,9 @@ export const darkThemeClass = createTheme(themeVars, {
     rewardBg: "#2F4139",
     rewardContent: "#AEFFAB",
     cardBg: "#1D2024",
+    comboboxItemBg: "#232529",
+    comboboxItemBgHover: "#333333",
+    comboboxItemBgActive: "#2C3137",
     ...colors,
   },
 });

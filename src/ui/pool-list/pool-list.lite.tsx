@@ -9,8 +9,8 @@ import {
 } from "@builder.io/mitosis";
 import { sprinkles } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import PoolListItem from "../pool-list-item";
 import { store } from "../../models/store";
 import * as styles from "./pool-list.css";

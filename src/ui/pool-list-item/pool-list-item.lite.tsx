@@ -10,8 +10,8 @@ import {
 import clsx from "clsx";
 import { sprinkles } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
 import { themeVars } from "../../styles/themes.css";

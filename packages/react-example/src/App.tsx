@@ -8,6 +8,7 @@ import {
   ConnectModal,
   ClipboardCopyText,
   ConnectModalStatus,
+  ComboboxItem,
 } from "@cosmology-ui/react";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 import { mockWallets } from "./wallets-config";
@@ -77,6 +78,24 @@ function App() {
                 >
                   Connect
                 </Button>
+              </div>
+              <div
+                style={{
+                  marginTop: "20px",
+                  padding: "5px",
+                  backgroundColor: "white",
+                }}
+              >
+                <Text py="4">Combobox</Text>
+
+                <Stack space="2" direction="column">
+                  <ComboboxItem>Item #1</ComboboxItem>
+                  <ComboboxItem>Item #2</ComboboxItem>
+                  <ComboboxItem isActive>Item #3 (Active)</ComboboxItem>
+                  <ComboboxItem>Item #4</ComboboxItem>
+                  <ComboboxItem>Item #5</ComboboxItem>
+                  <ComboboxItem>Item #6</ComboboxItem>
+                </Stack>
               </div>
             </Stack>
 

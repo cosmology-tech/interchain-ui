@@ -20,6 +20,7 @@ export { default as PoolListItem } from "./ui/pool-list-item";
 export { default as ConnectModalWalletButton } from "./ui/connect-modal-wallet-button";
 export { default as ConnectModal } from "./ui/connect-modal";
 export { default as ConnectModalStatus } from "./ui/connect-modal-status";
+export { default as ComboboxItem } from "./ui/combobox-item";
 // End Components
 
 setPlatform(Platform.Default);

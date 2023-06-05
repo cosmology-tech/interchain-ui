@@ -25,7 +25,8 @@
     "clsx": "^1.2.1",
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.6",
+    "polished": "^4.2.2"
   },
   "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",

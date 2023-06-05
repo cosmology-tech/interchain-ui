@@ -8,8 +8,8 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
 import { themeVars } from "../../styles/themes.css";
