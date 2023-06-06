@@ -15,7 +15,6 @@ import { I18nProviderProps } from "./i18n-provider.types";
 import { NumberFormatProps } from "../../models/system.model";
 
 export default function I18nProvider(props: I18nProviderProps) {
-  console.log(props);
   let numberFormatterRef = useRef<Intl.NumberFormat>(null);
   let formatNumberFnRef = useRef<(NumberFormatProps) => string>(null);
   let initialCurrencyConfigRef = useRef({
@@ -28,23 +27,6 @@ export default function I18nProvider(props: I18nProviderProps) {
     minimumSignificantDigits: props.minimumSignificantDigits,
     maximumSignificantDigits: props.maximumSignificantDigits,
   });
-  // const formatNumber = (value: number): string => {
-  //   return safelyFormatNumberWithFallback(numberFormatterRef, value);
-  // };
-
-  // const numberFormatter: Intl.NumberFormat = getCurrencyFormatter(
-  //   props.locale,
-  //   {
-  //     currency: props.currency,
-  //     currencySign: props.currencySign,
-  //     useGrouping: props.useGrouping,
-  //     minimumIntegerDigits: props.minimumIntegerDigits,
-  //     minimumFractionDigits: props.minimumFractionDigits,
-  //     maximumFractionDigits: props.maximumFractionDigits,
-  //     minimumSignificantDigits: props.minimumSignificantDigits,
-  //     maximumSignificantDigits: props.maximumSignificantDigits,
-  //   }
-  // );
 
   onMount(() => {
     numberFormatterRef = getCurrencyFormatter(
@@ -64,10 +46,5 @@ export default function I18nProvider(props: I18nProviderProps) {
     store.getState().setFormatNumberFn(formatNumberFnRef);
   });
 
-  // return <I18nContext.Provider value={{
-  //   formatNumber(value): string {
-  //     return safelyFormatNumberWithFallback(numberFormatter, value);
-  //   }
-  // }}>{props.children}</I18nContext.Provider>;
   return <div>{props.children}</div>;
 }

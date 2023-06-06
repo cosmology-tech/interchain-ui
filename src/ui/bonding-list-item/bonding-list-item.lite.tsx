@@ -19,9 +19,11 @@ export default function BondingListItem(props: BondingListItemProps) {
       <Text className={styles.item}  color="textSecondary" size="xs">
         {props.per}
       </Text>
-      <Text className={styles.item}  weight="semibold" size="xs">
-        Unbond All
-      </Text>
+      <div className={styles.unbond} onClick={(e) => props.onUnbond(e)}>
+        <Text className={styles.item}  weight="semibold" size="xs">
+          Unbond All
+        </Text>
+      </div>
     </Stack>
   );
 }

@@ -21,5 +21,6 @@ export const Primary: Story = {
     apr: "2.43%",
     amount: 59075,
     per: "24%",
+    onUnbond: () => console.log("unbond"),
   },
 };

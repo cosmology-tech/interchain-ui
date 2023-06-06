@@ -38,17 +38,8 @@ export default function PoolListItem(props: PoolListItemProps) {
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
-  // image
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-  //         "theme": {
-  //           "primary_color_hex": "#5c09a0"
-  //         }
 
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
-
-  function APR(aprProps: { className?: string }) {
+  function APR(aprProps: { className?: string; apr: number }) {
     return (
       <Stack
         className={aprProps.className}
@@ -62,7 +53,7 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "4",
           }}
         >
-          {props.apr}%
+          {aprProps.apr}%
         </Text>
         <Stack
           className={styles.iconConntainer[state.theme]}
@@ -75,14 +66,14 @@ export default function PoolListItem(props: PoolListItemProps) {
     );
   }
 
-  function CellWithTitle(props: {
+  function CellWithTitle(cellProps: {
     title: string;
     className?: string;
     children: BaseComponentProps["children"];
   }) {
     return (
       <Stack
-        className={clsx(styles.responsiveText, props.className)}
+        className={clsx(styles.responsiveText, cellProps.className)}
         direction="column"
         justify="center"
       >
@@ -95,9 +86,9 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginBottom: "2",
           }}
         >
-          {props.title}
+          {cellProps.title}
         </Text>
-        {props.children}
+        {cellProps.children}
       </Stack>
     );
   }
@@ -110,7 +101,7 @@ export default function PoolListItem(props: PoolListItemProps) {
         token2={props.token2}
       />
       <CellWithTitle className={styles.onlySm} title="APR">
-        <APR className={styles.onlySm} />
+        <APR className={styles.onlySm} apr={props.apr} />
       </CellWithTitle>
       <Box className={styles.onlySm} width="full" height="9" />
       <CellWithTitle title="Liquidity">
@@ -149,7 +140,10 @@ export default function PoolListItem(props: PoolListItemProps) {
           ${props.fees.toLocaleString()}
         </Text>
       </CellWithTitle>
-      <APR className={clsx(styles.responsiveText, styles.lgAPR)} />
+      <APR
+        className={clsx(styles.responsiveText, styles.lgAPR)}
+        apr={props.apr}
+      />
       <Box className={styles.onlySm} width="full" height="4" />
     </Stack>
   );

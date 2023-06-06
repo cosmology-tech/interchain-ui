@@ -9,9 +9,9 @@ export const container = style([
     paddingBottom: "10",
     paddingLeft: "10",
     paddingRight: "10",
+    borderRadius: "lg",
   }),
   {
-    borderRadius: "7px",
     height: "fit-content",
     "@media": {
       [`screen and (min-width: ${breakpoints.tablet}px)`]: {
@@ -30,7 +30,6 @@ export const divider = styleVariants({
     backgroundColor: "#D1D6DD"
   },
   dark: {
-    backgroundColor: "##434B55"
+    backgroundColor: "#434B55"
   }
-
 })

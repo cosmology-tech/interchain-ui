@@ -3,4 +3,5 @@ export interface BondingListItemProps {
   apr: string;
   amount: number;
   per: string;
+  onUnbond: (e: MouseEvent) => void
 }

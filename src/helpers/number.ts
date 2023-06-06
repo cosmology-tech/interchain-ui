@@ -21,37 +21,7 @@ export function getCurrencyFormatter(
   locale: string,
   options?: Intl.NumberFormatOptions
 ): Intl.NumberFormat {
-  try {
-    return new Intl.NumberFormat(locale, options);
-  } catch {
-    if (options?.style === "currency" && options?.currency) {
-      const rootFormatter = new Intl.NumberFormat(
-        locale,
-        Object.assign({}, options, { currency: "BTC" })
-      );
-
-      return {
-        format: (x: number | bigint | undefined) =>
-          rootFormatter
-            .formatToParts(x)
-            .map((part) =>
-              part.type === "currency" ? options.currency : part.value
-            )
-            .join(""),
-        formatToParts: (x: number | bigint | undefined) =>
-          rootFormatter.formatToParts(x).map((part) =>
-            part.type === "currency"
-              ? (Object.assign({}, part, {
-                  value: options.currency,
-                }) as Intl.NumberFormatPart)
-              : part
-          ),
-        resolvedOptions: rootFormatter.resolvedOptions,
-      } as Intl.NumberFormat;
-    }
-
-    return getNoOpFormatter(locale, options);
-  }
+  return new Intl.NumberFormat(locale, options);
 }
 
 export function safelyFormatNumberWithFallback(

@@ -5,6 +5,12 @@ import { themeVars } from "../../styles/themes.css";
 
 
 export const container = style([
+  s({
+    paddingTop: "9",
+    paddingRight: "10",
+    paddingBottom: "10",
+    paddingLeft: "9"
+  }),
   {
     minWidth: "325px",
     backgroundColor: themeVars.colors.cardBg,
@@ -12,8 +18,7 @@ export const container = style([
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         padding: themeVars.space[9],
       },
-    },
-    padding: "20px 24px 26px 20px",
+    }
   },
 ]);
 
