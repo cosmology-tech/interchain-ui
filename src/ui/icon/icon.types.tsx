@@ -14,7 +14,9 @@ type IconName =
   | "mobileWallet"
   | "mobileWalletCircle"
   | "restart"
-  | "arrowLeftSLine";
+  | "arrowLeftSLine"
+  | "add"
+  | "subtract";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

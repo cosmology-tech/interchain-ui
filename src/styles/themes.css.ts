@@ -52,6 +52,10 @@ export const themeVars = createThemeContract({
     rewardBg: ``,
     rewardContent: ``,
     cardBg: ``,
+    inputBorder: ``,
+    progressBg: ``,
+    progressValue: ``,
+    progressCursor: ``,
     ...colors,
   },
   font: {
@@ -225,6 +229,10 @@ export const lightThemeClass = createTheme(themeVars, {
     rewardBg: "#E5FFE4",
     rewardContent: "#36BB35",
     cardBg: "#F5F7FB",
+    inputBorder: "#D1D6DD",
+    progressBg: `#EEF2F8`,
+    progressValue: `#697584`,
+    progressCursor: `2C3137`,
     ...colors,
   },
 });
@@ -242,6 +250,10 @@ export const darkThemeClass = createTheme(themeVars, {
     rewardBg: "#2F4139",
     rewardContent: "#AEFFAB",
     cardBg: "#1D2024",
+    inputBorder: "#434B55",
+    progressBg: `#1D2024`,
+    progressValue: `#A7B4C2`,
+    progressCursor: `#EEF2F8`,
     ...colors,
   },
 });

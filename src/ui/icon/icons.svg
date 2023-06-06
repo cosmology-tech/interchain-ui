@@ -45,6 +45,13 @@
     <path
       d="M11.9997 10.8284L7.04996 15.7782L5.63574 14.364L11.9997 8L18.3637 14.364L16.9495 15.7782L11.9997 10.8284Z"></path>
   </symbol>
+  <symbol id="add" viewBox="0 0 24 24">
+    <path
+      fill="currentColor" d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+  </symbol>
+  <symbol id="subtract" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M5 11V13H19V11H5Z"></path>
+  </symbol>
   <symbol id="mobileWallet" viewBox="0 0 385 236">
     <g clip-path="url(#mobileWallet__path)">
       <path
