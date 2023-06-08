@@ -1,4 +1,4 @@
-import Big from "big.js";
+import BigNumber from "bignumber.js";
 function getNoOpFormatter(
   // locale: string = "default",
   locale: string,
@@ -26,16 +26,11 @@ export function getCurrencyFormatter(
 
 export function safelyFormatNumberWithFallback(
   formatter: Intl.NumberFormat,
-  value: Big
+  value: BigNumber
 ): string {
-  // First, attempt to format the Big as a number primitive
+  // First, attempt to format the BigNumber as a number primitive
   try {
     return formatter.format(value.toNumber());
-  } catch {}
-
-  // Second, attempt to format the Big as a string primitive
-  try {
-    return formatter.format(value.toString());
   } catch {}
 
   // As a fallback, simply return the ugly string value
