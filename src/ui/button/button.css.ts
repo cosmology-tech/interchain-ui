@@ -40,6 +40,7 @@ const variant = {
       },
     },
   }),
+  unstyled: style({}),
 };
 
 const intent = {
@@ -53,7 +54,7 @@ const intent = {
     backgroundColor: buttonBgVar,
     selectors: {
       "&:hover": {
-        backgroundColor: buttonHoverBgVar,
+        opacity: 0.8,
       },
     },
   }),
@@ -211,6 +212,19 @@ export const variants = recipe({
             opacity: 0.8,
           },
         },
+      },
+    },
+    {
+      variants: {
+        variant: "unstyled",
+        intent: "primary",
+      },
+      style: {
+        vars: {
+          [buttonTextColorVar]: themeVars.colors.text,
+        },
+        backgroundColor: "transparent",
+        color: buttonTextColorVar,
       },
     },
   ],

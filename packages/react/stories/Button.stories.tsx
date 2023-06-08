@@ -54,3 +54,10 @@ export const Small: Story = {
     size: "sm",
   },
 };
+
+export const Unstyled: Story = {
+  args: {
+    variant: "unstyled",
+    leftIcon: "copy",
+  },
+};
