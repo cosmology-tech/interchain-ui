@@ -42,6 +42,7 @@ export { default as QRCode } from "./ui/qrcode";
 export { default as ProgressBar } from "./ui/progress-bar";
 export { default as CircularProgressBar } from "./ui/circular-progress-bar";
 export { default as TokenInput } from "./ui/token-input";
+export { default as AddLiquidity } from "./ui/add-liquidity";
 // End Components
 
 setPlatform(Platform.Default);

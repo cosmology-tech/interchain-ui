@@ -36,10 +36,8 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
   onUpdate(() => {
     let updatedOffset =
       state.circumference - (props.progress / 100) * state.circumference;
-    if (updatedOffset > 0) {
       state.offset = updatedOffset;
-    }
-  }, [props.progress]);
+  }, [props.progress, state.circumference]);
   return (
     <div
       className={styles.container}

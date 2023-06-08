@@ -5,11 +5,9 @@ import { themeVars } from "../../styles/themes.css";
 export const circle = style({
   fill: "transparent",
   stroke: themeVars.colors.cardBg,
-  strokeLinecap: "round",
 });
 export const filledCircle = style({
   fill: "transparent",
-  strokeLinecap: "round",
   stroke: themeVars.colors.text,
   transform: "rotate(-90deg)",
   transformOrigin: "50% 50%",
