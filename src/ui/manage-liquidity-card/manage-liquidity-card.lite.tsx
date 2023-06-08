@@ -51,7 +51,9 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           Your pool balance
         </Text>
         <Stack align="baseline">
-          <Text weight="semibold">$</Text>
+          <Text weight="semibold" attributes={{ marginRight: "1" }}>
+            $
+          </Text>
           <Text size="4xl" weight="semibold">
             {props.pollBalance}
           </Text>
@@ -94,7 +96,9 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           Available LP Tokens
         </Text>
         <Stack align="baseline">
-          <Text weight="semibold">$</Text>
+          <Text weight="semibold" attributes={{ marginRight: "1" }}>
+            $
+          </Text>
           <Text size="4xl" weight="semibold">
             {props.lpTokens}
           </Text>

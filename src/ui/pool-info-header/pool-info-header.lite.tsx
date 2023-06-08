@@ -57,7 +57,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         <Stack className={styles.longText} direction="column">
           <Text color="textSecondary">Pool liquidity</Text>
           <Stack align="baseline">
-            <Text>$</Text>
+            <Text attributes={{ marginRight: "1" }}>$</Text>
             <Text size="4xl" weight="semibold">
               {store.getState()?.formatNumber?.({ value: props.poolLiquidity })}
             </Text>
@@ -76,7 +76,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         <Stack className={styles.longText} direction="column">
           <Text color="textSecondary">24h trading volume</Text>
           <Stack align="baseline">
-            <Text>$</Text>
+            <Text attributes={{ marginRight: "1" }}>$</Text>
             <Text size="4xl" weight="semibold">
               {store.getState()?.formatNumber?.({ value: props.volume24H })}
             </Text>
