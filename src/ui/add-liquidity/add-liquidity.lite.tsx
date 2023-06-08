@@ -68,7 +68,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     <Stack direction="column" space="10">
       <Stack direction="column">
         <Text size="xl" weight="semibold">
-          Add Liquidity
+          Add liquidity
         </Text>
         <Stack align="center">
           <Text color="textSecondary">{props.token1.symbol}</Text>
