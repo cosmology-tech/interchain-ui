@@ -4,6 +4,12 @@ import type { ConnectModalStatusProps } from "../connect-modal-status/connect-mo
 
 export type ConnectModalStep = "init" | "connecting" | "connectingMobile";
 
+export const connectModalStepByValue: Record<ConnectModalStep, number> = {
+  init: 0,
+  connecting: 1,
+  connectingMobile: 1,
+};
+
 export interface ConnectModalProps extends BaseComponentProps {
   defaultIsOpen?: boolean;
   onOpen?: () => void;

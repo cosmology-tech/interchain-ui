@@ -6,8 +6,11 @@ import {
   Stack,
   Text,
   ConnectModal,
+  QRCode,
   ClipboardCopyText,
   ConnectModalStatus,
+  ConnectModalQRCode,
+  ConnectModalWalletButton,
 } from "@cosmology-ui/react";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 import { mockWallets } from "./wallets-config";
@@ -35,13 +38,17 @@ const allStatuses = [
 }));
 
 function App() {
-  const { themeClass, setTheme } = useCosmologyStore();
+  const { themeClass, setTheme, theme } = useCosmologyStore();
   const [status, setStatus] = useState<ConnStatus>("disconnected");
 
   return (
     <ThemeProvider>
       <div id="app-root" className={cls("app", themeClass)}>
-        <Box height="viewHeight" p="15" backgroundColor="white">
+        <Box height="viewHeight" p="15" backgroundColor={"background"}>
+          <Text marginBottom="10" size="xl">
+            prefers-color-scheme: {theme}
+          </Text>
+
           <div
             style={{
               display: "grid",
@@ -62,7 +69,9 @@ function App() {
                 <Button rightIcon="copy">Copy</Button>
               </div>
               <div>
-                <Button intent="secondary">Custom button</Button>
+                <Button intent="secondary" leftIcon="restart">
+                  Custom button
+                </Button>
               </div>
               <div>
                 <Button intent="secondary" leftIcon="walletFilled">
@@ -83,9 +92,10 @@ function App() {
             <Stack space="4" direction="column">
               <Text>Connect Modal</Text>
 
-              {/* <Stack direction="column" space="6">
+              <Stack direction="column" space="6">
                 <ConnectModalWalletButton
                   variant="square"
+                  isMobile={true}
                   name="Keplr"
                   logo="https://user-images.githubusercontent.com/545047/202085372-579be3f3-36e0-4e0b-b02f-48182af6e577.svg"
                   onClick={() => console.log("hello")}
@@ -93,11 +103,12 @@ function App() {
 
                 <ConnectModalWalletButton
                   variant="list"
+                  isMobile={true}
                   name="Keplr"
                   logo="https://user-images.githubusercontent.com/545047/202085372-579be3f3-36e0-4e0b-b02f-48182af6e577.svg"
                   onClick={() => console.log("hello")}
                 />
-              </Stack> */}
+              </Stack>
 
               <ConnectModal wallets={mockWallets} status={status}>
                 <div
@@ -129,6 +140,24 @@ function App() {
                 </div>
               </ConnectModal>
 
+              {/* <QRCode
+                size={320}
+                value={"https://picturesofpeoplescanningqrcodes.tumblr.com/"}
+                level="L"
+                includeMargin={false}
+                fgColor="black"
+                bgColor="white"
+              /> */}
+
+              <ConnectModalQRCode
+                status="Error"
+                description="Hello there"
+                link="https://google.com"
+                errorTitle={"Seems something went wrong :("}
+                errorDesc={
+                  "Dolor lorem ipsum sit amet consectetur adipisicing elit. Eos necessitatibus eveniet ipsa itaque provident recusandae exercitationem numquam aperiam officia facere."
+                }
+              />
               {/* <ConnectModalStatus
                 wallet={mockWallets[0]}
                 status="connected"

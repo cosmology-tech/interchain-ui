@@ -10,7 +10,10 @@ type IconName =
   | "chromeBrowser"
   | "verticalMore"
   | "arrowDownS"
-  | "arrowUpS";
+  | "arrowUpS"
+  | "mobileWallet"
+  | "mobileWalletCircle"
+  | "restart";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

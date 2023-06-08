@@ -11,8 +11,8 @@ import {
   connectingLogoFrame,
   notExistLogoFrame,
   errorDescription,
-  bottomShadow,
 } from "./connect-modal-status.css";
+import { bottomShadow } from "../shared/shared.css";
 import type { ConnectModalStatusProps } from "./connect-modal-status.types";
 
 export default function ConnectModalStatus(props: ConnectModalStatusProps) {

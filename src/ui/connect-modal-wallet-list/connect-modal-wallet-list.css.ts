@@ -1,8 +1,6 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
-
-const listBottomShadowBgVar = createVar();
 
 export const container = style({
   position: "relative",
@@ -42,19 +40,4 @@ export const listWallets = style([
   s({
     paddingBottom: "4",
   }),
-]);
-
-export const bottomShadow = style([
-  {
-    vars: {
-      [listBottomShadowBgVar]:
-        "linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.85) 24%, rgba(255,255,255,0.75) 32%, rgba(255,255,255,0.65) 48%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 95%);",
-    },
-    height: "36px",
-    position: "absolute",
-    left: 0,
-    bottom: 0,
-    width: "100%",
-    background: listBottomShadowBgVar,
-  },
 ]);
