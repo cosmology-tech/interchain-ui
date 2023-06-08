@@ -9,14 +9,15 @@ import {
 } from "@builder.io/mitosis";
 import { sprinkles } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import PoolListItem from "../pool-list-item";
 import { store } from "../../models/store";
 import * as styles from "./pool-list.css";
 import { themeVars } from "../../styles/themes.css";
+import { PoolListProps } from "./pool-list.types";
 
-export default function PoolList(props) {
+export default function PoolList(props: PoolListProps) {
   // image
   // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
   //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
@@ -30,28 +31,53 @@ export default function PoolList(props) {
     titles: ["Pool", "Liquidity", "24H Volume", "7D Fees", "APR"],
   });
 
+  const item = {
+    token1: {
+      name: "ATOM",
+      imgSrc:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
+    },
+    token2: {
+      name: "OSOM",
+      imgSrc:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
+    },
+    liquidity: 168767639,
+    volume: 3288612,
+    fees: 59075,
+    apr: 24,
+  };
+
   return (
     <Box className={styles.container}>
       <Text color="textSecondary" size="xl" weight="semibold">
-        Your Pools
+        {props.title}
       </Text>
       <Stack className={styles.titleContainer}>
-        {/* <Text color="textSecondary">Pool</Text>
-        <Text color="textSecondary">Liquidity</Text>
-        <Text color="textSecondary">24H Volume</Text>
-        <Text color="textSecondary">7D Fees</Text>
-        <Text color="textSecondary">APR</Text> */}
         <For each={state.titles}>
           {(item, index) => (
-            <Text className={styles.title} color="textSecondary">
+            <Text key={index} className={styles.title} color="textSecondary">
               {item}
             </Text>
           )}
         </For>
       </Stack>
       <Box className={styles.listContainer}>
-        <PoolListItem />
-        <PoolListItem />
+        <For each={props.list}>
+          {(item, index) => (
+            <PoolListItem
+              key={index}
+              token1={item.token1}
+              token2={item.token2}
+              poolLiquidity={item.poolLiquidity}
+              volume={item.volume}
+              fees={item.fees}
+              apr={item.apr}
+            />
+          )}
+        </For>
+
+        {/* <PoolListItem {...item} /> */}
       </Box>
     </Box>
   );

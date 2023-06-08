@@ -30,7 +30,8 @@ export default function Button(props: ButtonProps) {
           variants({
             variant: props.variant,
             size: props.size,
-            intent: props.disabled ? "disabled" : props.intent,
+            intent: props.intent,
+            disabled: props.disabled ? true : undefined,
           }),
           props.className
         )}

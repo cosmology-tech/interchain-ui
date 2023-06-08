@@ -11,16 +11,14 @@ const buttonHoverTextColorVar = createVar();
 
 const outlinedBaseStyle: ComplexStyleRule = {
   borderRadius: themeVars.radii.md,
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: buttonTextColorVar,
-  color: buttonTextColorVar,
+  outlineWidth: "2px",
+  outlineStyle: "solid",
+  outlineColor: buttonTextColorVar,
+  outlineOffset: "-2px",
   backgroundColor: buttonBgVar,
   selectors: {
     "&:hover": {
       opacity: 0.8,
-      color: buttonHoverTextColorVar,
-      borderColor: buttonHoverTextColorVar,
     },
   },
 };
@@ -75,14 +73,32 @@ const intent = {
       },
     },
   }),
-  disabled: style({
+  tertiary: style({
     vars: {
-      [buttonTextColorVar]: "#B4BECC",
-      [buttonBgVar]: themeVars.colors.gray50,
+      [buttonTextColorVar]: themeVars.colors.white,
+      [buttonBgVar]: themeVars.colors.text,
     },
-    cursor: "not-allowed",
+    "@media": {
+      "(prefers-color-scheme: dark)": {
+        vars: {
+          [buttonTextColorVar]: themeVars.colors.cardBg,
+        },
+      },
+    },
     color: buttonTextColorVar,
     backgroundColor: buttonBgVar,
+    selectors: {
+      "&:hover": {
+        opacity: 0.8,
+      },
+    },
+  }),
+};
+
+export const disabled = {
+  true: style({
+    cursor: "not-allowed",
+    opacity: 0.6,
   }),
 };
 
@@ -127,6 +143,7 @@ export const variants = recipe({
   variants: {
     variant,
     intent,
+    disabled,
     size,
   },
   // Applied when multiple variants are set at once
@@ -155,6 +172,45 @@ export const variants = recipe({
           [buttonHoverTextColorVar]: themeVars.colors.primary400,
         },
         ...outlinedBaseStyle,
+      },
+    },
+    {
+      variants: {
+        variant: "outlined",
+        intent: "tertiary",
+      },
+      style: {
+        vars: {
+          [buttonBgVar]: "transparent",
+          [buttonTextColorVar]: themeVars.colors.text,
+        },
+        ...outlinedBaseStyle,
+      },
+    },
+    {
+      variants: {
+        variant: "outlined",
+        intent: "tertiary",
+      },
+      style: {
+        vars: {
+          [buttonBgVar]: "transparent",
+          [buttonTextColorVar]: themeVars.colors.text,
+        },
+
+        "@media": {
+          "(prefers-color-scheme: dark)": {
+            vars: {
+              [buttonTextColorVar]: themeVars.colors.text,
+            },
+          },
+        },
+        ...outlinedBaseStyle,
+        selectors: {
+          "&:hover": {
+            opacity: 0.8,
+          },
+        },
       },
     },
   ],

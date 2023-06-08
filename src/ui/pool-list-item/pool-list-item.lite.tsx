@@ -8,114 +8,109 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import clsx from "clsx";
-import { sprinkles } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
+import Icon from "../icon";
+import PoolName from "../pool/components/pool-name";
+import APR from "./components/apr";
+import CellWithTitle from "./components/cell-with-title";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
-import { themeVars } from "../../styles/themes.css";
-import { BaseComponentProps } from "../../models/components.model";
+import { PoolListItemProps } from "./pool-list-item.types";
 
-export default function PoolListItem(props) {
-  // image
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-  //         "theme": {
-  //           "primary_color_hex": "#5c09a0"
-  //         }
+export default function PoolListItem(props: PoolListItemProps) {
+  const state = useStore({
+    theme: "",
+  });
 
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
+  let cleanupRef = useRef<() => void>(null);
 
-  function APR(props: { className?: string }) {
-    return (
-      <Stack className={props.className} justify="space-between">
-        <Text color="text" weight="semibold">
-          24%
-        </Text>
-        <Text color="text" weight="semibold">
-          ...
-        </Text>
-      </Stack>
-    );
-  }
+  onMount(() => {
+    state.theme = store.getState().theme;
 
-  function CellWithTitle(props: {
-    title: string;
-    className?: string;
-    children: BaseComponentProps["children"];
-  }) {
-    return (
-      <Stack
-        className={clsx(styles.responsiveText, props.className)}
-        direction="column"
-        justify="center"
-      >
-        <Text
-          color="textSecondary"
-          className={clsx(styles.onlySm, sprinkles({ marginBottom: "2" }))}
-        >
-          {props.title}
-        </Text>
-        {props.children}
-      </Stack>
-    );
-  }
+    cleanupRef = store.subscribe((newState, prevState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
 
   return (
     <Stack align="center" className={styles.container}>
-      <Box className={styles.imageBox}>
-        <img
-          className={styles.image1}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+      <PoolName
+        className={styles.nameContainer}
+        token1={props.token1}
+        token2={props.token2}
+      />
+      <CellWithTitle
+        className={clsx(styles.responsiveText, styles.onlySm)}
+        innerClassName={styles.onlySm}
+        title="APR"
+      >
+        <APR
+          className={styles.onlySm}
+          apr={props.apr}
+          innerClassName={styles.iconConntainer[state.theme]}
         />
-        <img
-          className={styles.image2}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
-        />
-      </Box>
-      {/* <Stack className={styles.contentContainer} align="center"> */}
-      <Stack
-        className={clsx(styles.responsiveText, styles.rank)}
-        direction="column"
-        justify="center"
+      </CellWithTitle>
+      <Box className={styles.onlySm} width="full" height="9" />
+      <CellWithTitle
+        className={styles.responsiveText}
+        innerClassName={styles.onlySm}
+        title="Liquidity"
       >
         <Text
           color="text"
           weight="semibold"
-          className={sprinkles({ marginBottom: "2" })}
+          wordBreak="break-word"
+          attributes={{
+            marginRight: "4",
+          }}
         >
-          ATOM/OSMO
-        </Text>
-        <Text color="textSecondary">Pool #1</Text>
-      </Stack>
-      <CellWithTitle className={styles.onlySm} title="APR">
-        <APR />
-      </CellWithTitle>
-      <Box className={styles.onlySm} width="full" height="9" />
-      <CellWithTitle title="24H Volume">
-        <Text className={styles.responsiveText} color="text" weight="semibold">
-          $168,767,639
+          ${props.poolLiquidity.toLocaleString()}
         </Text>
       </CellWithTitle>
-      <CellWithTitle title="7D Fees">
-        <Text className={styles.responsiveText} color="text" weight="semibold">
-          $3,288,612
+      <CellWithTitle
+        className={styles.responsiveText}
+        innerClassName={styles.onlySm}
+        title="24H Volume"
+      >
+        <Text
+          color="text"
+          weight="semibold"
+          wordBreak="break-word"
+          attributes={{
+            marginRight: "4",
+          }}
+        >
+          ${props.volume.toLocaleString()}
         </Text>
       </CellWithTitle>
-      <CellWithTitle title="Liquidity">
-        <Text className={styles.responsiveText} color="text" weight="semibold">
-          $59,075
+      <CellWithTitle
+        className={styles.responsiveText}
+        innerClassName={styles.onlySm}
+        title="7D Fees"
+      >
+        <Text
+          color="text"
+          weight="semibold"
+          wordBreak="break-word"
+          attributes={{
+            marginRight: "4",
+          }}
+        >
+          ${props.fees.toLocaleString()}
         </Text>
       </CellWithTitle>
-      <APR className={clsx(styles.responsiveText, styles.lgAPR)} />
+      <APR
+        className={clsx(styles.responsiveText, styles.lgAPR)}
+        apr={props.apr}
+        innerClassName={styles.iconConntainer[state.theme]}
+      />
       <Box className={styles.onlySm} width="full" height="4" />
-      {/* <Stack className={clsx(styles.responsiveText, styles.lgAPR)} justify="space-between">
-          <Text color="text" weight="semibold">24%</Text>
-          <Text className={styles.responsiveText} color="text" weight="semibold">...</Text>
-        </Stack> */}
-      {/* </Stack> */}
     </Stack>
   );
 }

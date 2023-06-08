@@ -7,14 +7,17 @@ import {
   onUnMount,
   useRef,
 } from "@builder.io/mitosis";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import Box from "../box";
-import Stack from "../Stack";
-import Text from "../Text";
+import Stack from "../stack";
+import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
 import { themeVars } from "../../styles/themes.css";
+import { PoolsHeaderProps } from "./pools-header.types";
+import {NumberFormatter} from "../../models/system.model"
 
-export default function PoolsHeader(props) {
+export default function PoolsHeader(props: PoolsHeaderProps) {
   const state = useStore({
     theme: "",
   });
@@ -32,15 +35,7 @@ export default function PoolsHeader(props) {
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
-  // image
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-  //         "theme": {
-  //           "primary_color_hex": "#5c09a0"
-  //         }
 
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
   function Semocolon() {
     return (
       <Text
@@ -62,7 +57,7 @@ export default function PoolsHeader(props) {
       </Text>
       <Stack className={styles.container} space="10">
         <Box className={styles.baseBox}>
-          <Stack align="center">
+          <Stack className={s({ overflow: "hidden" })} align="center">
             <img
               className={styles.image}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
@@ -85,7 +80,7 @@ export default function PoolsHeader(props) {
                   $
                 </Text>
                 <Text color="text" size="4xl" weight="semibold">
-                  0.98
+                  {store.getState()?.formatNumber?.({value: props.price})}
                 </Text>
               </Stack>
             </Stack>
@@ -116,7 +111,7 @@ export default function PoolsHeader(props) {
             </Text>
             <Stack align={"flex-end"}>
               <Text color="rewardContent" size="4xl" weight="semibold">
-                12.87
+                {props.rewards}
               </Text>
               <Text
                 className={styles.osom}
@@ -126,7 +121,7 @@ export default function PoolsHeader(props) {
                 OSMO
               </Text>
               <Text className={styles.mb3} color="rewardContent">
-                $12.87
+                {props.$rewards}
               </Text>
             </Stack>
           </Stack>

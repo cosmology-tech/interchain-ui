@@ -6,6 +6,7 @@ import type { TextProps } from "./text.types";
 export default function Text(props: TextProps) {
   useDefaultProps({
     color: "text",
+    wordBreak: "break-word"
   });
 
   return (

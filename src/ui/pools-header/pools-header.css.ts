@@ -6,7 +6,7 @@ import {
 } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
-import { breakpoints } from "~/styles/tokens";
+import { breakpoints } from "../../styles/tokens";
 
 export const container = style([
   {
@@ -23,16 +23,17 @@ export const container = style([
 ]);
 
 const base = style([
-  // s({
-  //   width: {
-  //     tablet: "1/2",
-  //     desktop: "1/3",
-  //   },
-  // }),
+  s({
+    paddingTop: "9",
+    paddingRight: "8",
+    paddingBottom: "9",
+    paddingLeft: "8",
+  }),
   {
     display: "flex",
     alignItems: "center",
     borderRadius: "7px",
+    minHeight: "92px",
   },
 ]);
 export const mb3 = style({
@@ -44,7 +45,7 @@ export const image = style({
   height: "53px",
   marginRight: "21px",
   "@media": {
-    [`screen and (max-width: ${breakpoints.desktop}px)`]: {
+    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       width: "40px",
       height: "40px",
       marginRight: "13px",
@@ -64,15 +65,14 @@ export const baseBox = style([
   base,
   {
     backgroundColor: themeVars.colors.cardBg,
-    minWidth: "234px",
-    height: "92px",
-    paddingLeft: "17px",
+    width: "234px",
+    // maxWidth: "234px",
+    height: "fit-content",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+        width: "calc(50% - 12px)",
+        maxWidth: "calc(50% - 12px)",
         minWidth: "179px",
-        height: "96px",
-        paddingLeft: "15px",
-        paddingRight: "0px",
       },
     },
   },
@@ -83,15 +83,14 @@ export const rewardBox = style([
   {
     backgroundColor: themeVars.colors.rewardBg,
     color: themeVars.colors.rewardContent,
-    minWidth: "234px",
-    height: "92px",
-    paddingLeft: "15px",
+    width: "234px",
+    maxWidth: "234px",
+    height: "fit-content",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+        width: "100%",
+        maxWidth: "100%",
         minWidth: "382px",
-        height: "96px",
-        paddingLeft: "15px",
-        paddingRight: "0px",
       },
     },
   },
@@ -101,91 +100,12 @@ export const osom = style({
   margin: "0 14px 3px 2px",
 });
 
-// const variant = {
-//   solid: style({
-//     borderRadius: themeVars.radii.md,
-//     fontWeight: themeVars.fontWeight.semibold,
-//   }),
-//   outlined: style({}),
-//   link: style({}),
-//   ghost: style({}),
-// };
-
-// const intent = {
-//   primary: style({
-//     backgroundColor: themeVars.colors.primary500,
-//     color: themeVars.colors.white,
-//     selectors: {
-//       "&:hover": {
-//         backgroundColor: themeVars.colors.primary400,
-//       },
-//     },
-//   }),
-//   secondary: style({
-//     backgroundColor: themeVars.colors.gray100,
-//     color: themeVars.colors.gray600,
-//     selectors: {
-//       "&:hover": {
-//         color: themeVars.colors.gray500,
-//         backgroundColor: themeVars.colors.gray200,
-//       },
-//     },
-//   }),
-//   disabled: style({
-//     cursor: "not-allowed",
-//     color: "#B4BECC",
-//     backgroundColor: themeVars.colors.gray50,
-//   }),
-// };
-
-// // const size = {
-// //   sm: s({
-// //     fontSize: "sm",
-// //     px: "6",
-// //     py: "4",
-// //   }),
-// //   md: s({
-// //     fontSize: "lg",
-// //     px: "8",
-// //     py: "6",
-// //   }),
-// //   lg: s({
-// //     fontSize: "xl",
-// //     px: "9",
-// //     py: "9",
-// //   }),
-// // };
-
-// export const variants = recipe({
-//   base: style({
-//     // fontFamily: themeVars.font.body,
-//     // fontWeight: themeVars.fontWeight.semibold,
-//     // cursor: "pointer",
-//     // appearance: "none",
-//     // border: "none",
-//     // position: "relative",
-//     // userSelect: "none",
-//     // whiteSpace: "nowrap",
-//     // verticalAlign: "middle",
-//     // lineHeight: 1.2,
-//     // transitionProperty:
-//     //   "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
-//     // transitionDuration: "200ms",
-//     // display: "flex",
-//     // justifyContent: "center",
-//     // alignItems: "center",
-//     // height: "auto",
-//   }),
-//   variants: {
-//     // variant,
-//     // intent,
-//     // size,
-//   },
-//   defaultVariants: {
-//     // variant: "solid",
-//     // intent: "primary",
-//     // size: "md",
-//   },
-// });
-
-// export type Variants = RecipeVariants<typeof variants>;
+export const flex1 = style([
+  s({
+    paddingRight: "5",
+  }),
+  {
+    flex: 1,
+    overflow: "hidden"
+  },
+]);

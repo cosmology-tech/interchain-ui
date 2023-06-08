@@ -7,7 +7,10 @@ type IconName =
   | "closeFilled"
   | "copy"
   | "checkboxCircle"
-  | "chromeBrowser";
+  | "chromeBrowser"
+  | "verticalMore"
+  | "arrowDownS"
+  | "arrowUpS";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

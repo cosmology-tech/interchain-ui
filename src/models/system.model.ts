@@ -11,3 +11,9 @@ export const intents = Object.entries(Intent).map(
 );
 
 export type ThemeVariant = "light" | "dark";
+
+export interface NumberFormatProps {
+  value: number;
+  style?: string;
+}
+export type NumberFormatter = (props: NumberFormatProps) => string;
