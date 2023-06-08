@@ -19,8 +19,6 @@ import {
   qrCodeContainer,
   qrCodeBgVar,
   qrCodeFgVar,
-  qrCodeTitleError,
-  qrCodeTitleExpired,
   qrCodeDesc,
   qrCodeDescContent,
   qrCodeDescShadow,
@@ -130,13 +128,35 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Show>
 
       <Show when={!!props.errorTitle}>
-        <p
-          className={
-            props.status === "Error" ? qrCodeTitleError : qrCodeTitleExpired
-          }
-        >
-          {props.errorTitle}
-        </p>
+        <Show when={props.status === "Error"}>
+          <Text
+            as="p"
+            fontWeight="medium"
+            size="md"
+            marginTop="2"
+            color={{
+              light: "red500",
+              dark: "red400",
+            }}
+          >
+            {props.errorTitle}
+          </Text>
+
+          <Show when={props.status === "Expired"}>
+            <Text
+              as="p"
+              fontWeight="medium"
+              size="md"
+              marginTop="2"
+              color={{
+                light: "orange300",
+                dark: "orange200",
+              }}
+            >
+              {props.errorTitle}
+            </Text>
+          </Show>
+        </Show>
       </Show>
 
       <Show when={!!props.errorDesc}>

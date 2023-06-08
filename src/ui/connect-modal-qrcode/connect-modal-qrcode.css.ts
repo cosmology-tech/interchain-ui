@@ -49,46 +49,6 @@ export const qrCodeContainer = style([
 export const qrCodeErrorFgVar = createVar();
 export const qrCodeExpiredFgVar = createVar();
 
-const qrCodeTitleBase = s({
-  fontWeight: "medium",
-  fontSize: "md",
-  marginTop: "2",
-});
-
-export const qrCodeTitleError = style([
-  {
-    vars: {
-      [qrCodeErrorFgVar]: themeVars.colors.red500,
-    },
-    "@media": {
-      "(prefers-color-scheme: dark)": {
-        vars: {
-          [qrCodeErrorFgVar]: themeVars.colors.red400,
-        },
-      },
-    },
-    color: qrCodeErrorFgVar,
-  },
-  qrCodeTitleBase,
-]);
-
-export const qrCodeTitleExpired = style([
-  {
-    vars: {
-      [qrCodeExpiredFgVar]: themeVars.colors.orange300,
-    },
-    "@media": {
-      "(prefers-color-scheme: dark)": {
-        vars: {
-          [qrCodeExpiredFgVar]: themeVars.colors.orange200,
-        },
-      },
-    },
-    color: qrCodeExpiredFgVar,
-  },
-  qrCodeTitleBase,
-]);
-
 export const qrCodeDesc = style([
   {
     position: "relative",
