@@ -95,12 +95,11 @@ const intent = {
   }),
 };
 
-
 export const disabled = {
   true: style({
     cursor: "not-allowed",
     opacity: 0.6,
-  })
+  }),
 };
 
 export const size = {
