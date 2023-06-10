@@ -94,16 +94,36 @@ const intent = {
       },
     },
   }),
+  text: style({
+    vars: {
+      [buttonTextColorVar]: themeVars.colors.textSecondary,
+      [buttonBgVar]: themeVars.colors.progressBg,
+    },
+    color: buttonTextColorVar,
+    backgroundColor: buttonBgVar,
+    height: "fit-content !important",
+    selectors: {
+      "&:hover": {
+        opacity: 0.8,
+      },
+    },
+  }),
 };
 
 export const disabled = {
   true: style({
     cursor: "not-allowed",
     opacity: 0.6,
+    pointerEvents: "none",
   }),
 };
 
 export const size = {
+  xs: s({
+    fontSize: "sm",
+    px: "3",
+    py: "2",
+  }),
   sm: s({
     fontSize: "sm",
     px: "6",
