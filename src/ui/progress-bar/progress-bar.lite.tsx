@@ -11,19 +11,12 @@ import * as styles from "./progress-bar.css";
 import { ProgressBarProps } from "./progress-bar.types";
 
 export default function ProgressBar(props: ProgressBarProps) {
-  const state = useStore<{
-    percent: number;
-  }>({
-    percent: 0,
-  });
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   onMount(() => {
-    state.percent = props.progress;
     inputRef.style.backgroundSize = `${props.progress}% 100%`;
   });
   onUpdate(() => {
-    state.percent = props.progress;
     inputRef.style.backgroundSize = `${props.progress}% 100%`;
   }, [props.progress]);
   return (
@@ -50,12 +43,12 @@ export default function ProgressBar(props: ProgressBarProps) {
           let val = e.target.value;
           const result = ((val - min) * 100) / (max - min);
           e.target.style.backgroundSize = `${result}% 100%`;
-          state.percent = result;
+          props.onProgressChange(result);
           console.log(e.target.value);
         }}
         min="0"
         max="100"
-        value={state.percent}
+        value={props.progress}
       />
     </Box>
   );

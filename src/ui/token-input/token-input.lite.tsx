@@ -11,6 +11,7 @@ import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Box from "../box";
+import { sprinkles } from "../../styles/sprinkles.css";
 import CicularProgressBar from "../circular-progress-bar";
 import * as styles from "./token-input.css";
 

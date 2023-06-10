@@ -44,6 +44,7 @@ export { default as CircularProgressBar } from "./ui/circular-progress-bar";
 export { default as TokenInput } from "./ui/token-input";
 export { default as AddLiquidity } from "./ui/add-liquidity";
 export { default as RemoveLiquidity } from "./ui/remove-liquidity";
+export { default as BondingMore } from "./ui/bonding-more";
 // End Components
 
 setPlatform(Platform.Default);

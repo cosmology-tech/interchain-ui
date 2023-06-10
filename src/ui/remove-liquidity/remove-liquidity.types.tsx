@@ -1,5 +1,5 @@
 type Token = {
-  imgUrl: string;
+  imgSrc: string;
   amount: number | string;
   symbol: string;
 }
