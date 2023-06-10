@@ -50,6 +50,7 @@ export default function PoolCardList(props: PoolCardListProps) {
         <For each={props.list}>
           {(item: PoolCardProps, index: number) => (
             <PoolCard
+              id={item.id}
               key={index}
               token1={item.token1}
               token2={item.token2}

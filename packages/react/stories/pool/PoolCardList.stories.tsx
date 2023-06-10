@@ -15,6 +15,7 @@ const meta: Meta<typeof PoolCardList> = {
           summary: "PoolCardProps []",
           detail:
   `{
+    id: string;
     /**
      * Token1
      */
@@ -51,6 +52,7 @@ export const Primary: Story = {
   args: {
     list: [
       {
+        id: "1",
         token1: {
           name: "ATOM",
           imgSrc:
@@ -62,13 +64,13 @@ export const Primary: Story = {
             "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
         },
         poolLiquidity: 168767639,
-        volume: 3288612,
         fees: 59075,
         apr: 24,
         yourLiquidity: 1329.32,
         bonded: 600.0,
       },
       {
+        id: "2",
         token1: {
           name: "ATOM",
           imgSrc:
@@ -80,7 +82,6 @@ export const Primary: Story = {
             "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
         },
         poolLiquidity: 168767639,
-        volume: 3288612,
         fees: 59075,
         apr: 24,
         yourLiquidity: 1329.32,

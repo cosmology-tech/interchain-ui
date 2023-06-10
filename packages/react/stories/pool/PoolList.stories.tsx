@@ -14,6 +14,7 @@ const meta: Meta<typeof PoolList> = {
           summary: "PoolListItemProps []",
           detail:
   `{
+    id: string;
     /**
      * Token1
      */
@@ -49,6 +50,7 @@ export const Primary: Story = {
   args: {
     list: [
       {
+        id: "1",
         token1: {
           name: "ATOM",
           imgSrc:
@@ -65,6 +67,7 @@ export const Primary: Story = {
         apr: 24,
       },
       {
+        id: "2",
         token1: {
           name: "ATOM",
           imgSrc:
