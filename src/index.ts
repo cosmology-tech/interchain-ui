@@ -19,9 +19,14 @@ export { default as PoolList } from "./ui/pool-list";
 export { default as PoolListItem } from "./ui/pool-list-item";
 export { default as PoolCard } from "./ui/pool-card";
 export { default as PoolCardList } from "./ui/pool-card-list";
-export { default as ConnectModalWalletButton } from "./ui/connect-modal-wallet-button";
 export { default as ConnectModal } from "./ui/connect-modal";
+export { default as ConnectModalHead } from "./ui/connect-modal-head";
+export { default as ConnectModalQRCode } from "./ui/connect-modal-qrcode";
+export { default as ConnectModalQRCodeError } from "./ui/connect-modal-qrcode-error";
+export { default as ConnectModalQRCodeSkeleton } from "./ui/connect-modal-qrcode-skeleton";
 export { default as ConnectModalStatus } from "./ui/connect-modal-status";
+export { default as ConnectModalWalletButton } from "./ui/connect-modal-wallet-button";
+export { default as ConnectModalWalletList } from "./ui/connect-modal-wallet-list";
 export { default as ShowMore } from "./ui/show-more";
 export { default as I18nProvider } from "./ui/i18n-provider";
 export { default as PoolInfoHeader } from "./ui/pool-info-header";
@@ -34,7 +39,6 @@ export { default as BondingListItemSm } from "./ui/bonding-list-item-sm";
 export { default as BondingListSm } from "./ui/bonding-list-sm";
 export { default as BondingArea } from "./ui/bonding-area";
 export { default as QRCode } from "./ui/qrcode";
-export { default as ConnectModalQRCode } from "./ui/connect-modal-qrcode";
 // End Components
 
 setPlatform(Platform.Default);

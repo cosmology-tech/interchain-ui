@@ -13,7 +13,8 @@ type IconName =
   | "arrowUpS"
   | "mobileWallet"
   | "mobileWalletCircle"
-  | "restart";
+  | "restart"
+  | "arrowLeftSLine";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

@@ -19,7 +19,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
   return (
     <div className={clx(modalStatusContainer, props.className)}>
       {/* Status disconnected */}
-      <Show when={props.status === "disconnected"}>
+      <Show when={props.status === "Disconnected"}>
         <div
           className={clx(
             statusLogo,
@@ -86,7 +86,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </Show>
       </Show>
       {/* Status connecting */}
-      <Show when={props.status === "connecting"}>
+      <Show when={props.status === "Connecting"}>
         <div
           className={clx(
             statusLogo,
@@ -116,7 +116,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             },
           })}
         >
-          Connecting Wallet
+          {props.contentHeader}
         </p>
 
         <p
@@ -127,12 +127,12 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             textAlign: "center",
           })}
         >
-          Open browser extension/app to connect your wallet.
+          {props.contentDesc}
         </p>
       </Show>
 
       {/* Status connected */}
-      <Show when={props.status === "connected"}>
+      <Show when={props.status === "Connected"}>
         <div
           className={clx(
             statusLogo,
@@ -205,7 +205,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       </Show>
 
       {/* Status notExist */}
-      <Show when={props.status === "notExist"}>
+      <Show when={props.status === "NotExist"}>
         <div
           className={clx(
             statusLogo,
@@ -234,7 +234,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             },
           })}
         >
-          Wallet Not Installed
+          {props.contentHeader}
         </p>
 
         <p
@@ -249,23 +249,39 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             textAlign: "center",
           })}
         >
-          Please install wallet
+          {props.contentDesc}
         </p>
 
         <div className={s({ width: "full" })}>
           <Button
             intent="primary"
             variant="outlined"
-            leftIcon="chromeBrowser"
+            onClick={() => props.onInstall?.()}
             className={s({ width: "full" })}
+            disabled={!!props.disableInstall}
           >
-            Install {props.wallet.name}
+            <span
+              className={s({
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              })}
+            >
+              <span>{props.installIcon}</span>
+              <span
+                className={s({
+                  marginLeft: "4",
+                })}
+              >
+                Install {props.wallet.name}
+              </span>
+            </span>
           </Button>
         </div>
       </Show>
 
       {/* Status rejected */}
-      <Show when={props.status === "rejected"}>
+      <Show when={props.status === "Rejected"}>
         <div
           className={clx(
             statusLogo,
@@ -294,7 +310,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             },
           })}
         >
-          Request Rejected
+          {props.contentHeader}
         </p>
 
         <p
@@ -309,7 +325,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             textAlign: "center",
           })}
         >
-          Connection permission is denied.
+          {props.contentDesc}
         </p>
 
         <div
@@ -325,13 +341,13 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               marginBottom: "3",
             })}
           >
-            Connect wallet
+            Reconnect
           </Button>
         </div>
       </Show>
 
       {/* Status error */}
-      <Show when={props.status === "error"}>
+      <Show when={props.status === "Error"}>
         <div
           className={clx(
             statusLogo,
@@ -360,7 +376,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             },
           })}
         >
-          Oops! Something wrong...
+          {props.contentHeader}
         </p>
 
         <div className={s({ position: "relative" })}>
@@ -377,7 +393,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
                 textAlign: "center",
               })}
             >
-              {props.errorInfo?.message}
+              {props.contentDesc}
             </p>
           </div>
           <div className={bottomShadow} />

@@ -11,7 +11,9 @@ import {
   ConnectModalStatus,
   ConnectModalQRCode,
   ConnectModalWalletButton,
+  ConnectModalHead,
 } from "@cosmology-ui/react";
+import { FaAndroid } from "react-icons/fa";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 import { mockWallets } from "./wallets-config";
 import { useState } from "react";
@@ -40,6 +42,8 @@ const allStatuses = [
 function App() {
   const { themeClass, setTheme, theme } = useCosmologyStore();
   const [status, setStatus] = useState<ConnStatus>("disconnected");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const onClose = () => setIsOpen(false);
 
   return (
     <ThemeProvider>
@@ -110,35 +114,29 @@ function App() {
                 />
               </Stack>
 
-              <ConnectModal wallets={mockWallets} status={status}>
-                <div
-                  style={{
-                    outline: "1px dashed red",
-                    padding: "8px",
-                    marginTop: "20px",
-                  }}
-                >
-                  <p
-                    style={{
-                      color: "red",
-                      fontWeight: "600",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    DEBUG ONLY
-                  </p>
-                  <Select
-                    options={allStatuses}
-                    onChange={(newValue) => {
-                      if (newValue?.value) {
-                        setStatus(
-                          (newValue?.value ?? "disconnected") as ConnStatus
-                        );
-                      }
-                    }}
+              <Button onClick={() => setIsOpen(true)}>Open modal</Button>
+
+              {/* <ConnectModal
+                isOpen={isOpen}
+                onClose={onClose}
+                header={
+                  <ConnectModalHead
+                    title="Hello"
+                    hasCloseButton
+                    hasBackButton
                   />
-                </div>
-              </ConnectModal>
+                }
+              >
+                <ConnectModalQRCode
+                  status="Error"
+                  description="Hello there"
+                  link="https://google.com"
+                  errorTitle={"Seems something went wrong :("}
+                  errorDesc={
+                    "Dolor lorem ipsum sit amet consectetur adipisicing elit. Eos necessitatibus eveniet ipsa itaque provident recusandae exercitationem numquam aperiam officia facere."
+                  }
+                />
+              </ConnectModal> */}
 
               {/* <QRCode
                 size={320}
@@ -149,30 +147,12 @@ function App() {
                 bgColor="white"
               /> */}
 
-              <ConnectModalQRCode
-                status="Error"
-                description="Hello there"
-                link="https://google.com"
-                errorTitle={"Seems something went wrong :("}
-                errorDesc={
-                  "Dolor lorem ipsum sit amet consectetur adipisicing elit. Eos necessitatibus eveniet ipsa itaque provident recusandae exercitationem numquam aperiam officia facere."
-                }
-              />
-              {/* <ConnectModalStatus
+              <ConnectModalStatus
                 wallet={mockWallets[0]}
-                status="connected"
-                bottomLink="https://www.google.com"
-                connectedInfo={{
-                  name: "David Dave Ruppert",
-                  avatarUrl:
-                    "https://user-images.githubusercontent.com/545047/202085372-579be3f3-36e0-4e0b-b02f-48182af6e577.svg",
-                  address: "cosmos1veawurwraxw4kq30ygdpjn85jjxv67x3remaxu",
-                }}
-                errorInfo={{
-                  message:
-                    "Seems something went wrong :(\n\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque repellat exercitationem, obcaecati, ipsa deleniti iure consequuntur excepturi optio quas nihil perferendis suscipit pariatur nulla amet beatae itaque unde fuga! Laboriosam, veniam? Beatae, rem rerum perspiciatis placeat obcaecati earum itaque laboriosam fugiat et ipsa praesentium non repellendus officia dolore quos ullam sint voluptates eligendi debitis magnam? Voluptas quis error, facere aspernatur velit suscipit cumque voluptate excepturi accusantium cum architecto rem, totam harum minus odio voluptatum illo veritatis voluptates nulla repellat culpa! At repellendus nemo harum, vitae enim autem natus quaerat possimus, eum, mollitia neque dolore accusantium! Officiis repellat itaque quae qui.",
-                }}
-              /> */}
+                status="NotExist"
+                contentHeader="Please install wallet"
+                installIcon={<FaAndroid />}
+              />
             </Stack>
           </div>
         </Box>
