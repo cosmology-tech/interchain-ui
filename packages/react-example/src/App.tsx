@@ -13,6 +13,8 @@ import {
   ConnectModalWalletButton,
   ConnectModalHead,
 } from "@cosmology-ui/react";
+import "@cosmology-ui/react/styles.css";
+
 import { FaAndroid } from "react-icons/fa";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";
 import { mockWallets } from "./wallets-config";
