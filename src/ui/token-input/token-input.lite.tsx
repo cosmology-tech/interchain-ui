@@ -49,7 +49,7 @@ export default function TokenInput(props: TokenInputProps) {
     }
   }, [props.progress]);
   return (
-    <Stack flexWrap="wrap">
+    <Stack flexWrap="wrap" align="center">
       <Stack
         className={clsx({ [styles.disabled]: state.disabled })}
         attributes={{
