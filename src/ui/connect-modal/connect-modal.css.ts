@@ -1,21 +1,7 @@
 import { style, createVar } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
-import { themeVars } from "../../styles/themes.css";
 
 export const connectModalShadowVar = createVar();
-
-export const headerText = s({
-  display: "block",
-  textAlign: "center",
-  fontSize: "md",
-  fontWeight: "semibold",
-  width: "full",
-  height: "full",
-  color: {
-    light: "gray700",
-    dark: "whiteAlpha900",
-  },
-});
 
 export const modalContent = style([
   {
@@ -45,11 +31,14 @@ export const modalContent = style([
   }),
 ]);
 
-export const modalHeader = s({
-  px: "8",
-  py: "8",
-});
-
-export const modalCloseButton = style({
-  marginRight: themeVars.space[5],
-});
+export const modalChildren = style([
+  {
+    maxWidth: "320px",
+  },
+  s({
+    paddingLeft: "10",
+    paddingRight: "10",
+    paddingTop: "10",
+    paddingBottom: "14",
+  }),
+]);

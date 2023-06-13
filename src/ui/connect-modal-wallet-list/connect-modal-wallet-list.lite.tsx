@@ -1,4 +1,5 @@
 import {
+  Show,
   useStore,
   onMount,
   onUnMount,
@@ -55,7 +56,9 @@ export default function ConnectModalWalletList(
       measureRef.addEventListener("scroll", scrollHandler);
 
       cleanupRef = () => {
-        measureRef.removeEventListener("scroll", scrollHandler);
+        if (measureRef) {
+          measureRef.removeEventListener("scroll", scrollHandler);
+        }
       };
     }
   });
@@ -92,21 +95,30 @@ export default function ConnectModalWalletList(
   return (
     <div className={clx(container, props.className)}>
       <div ref={measureRef} className={walletList}>
-        <div className={squareWallets}>
-          {/* First 2 wallets are square */}
-          <For each={props.wallets.slice(0, 2)}>
-            {(wallet, index) => (
-              <WalletButton
-                key={wallet.name}
-                variant="square"
-                name={wallet.name}
-                logo={wallet.logo}
-                isMobile={wallet.isMobile}
-                onClick={() => props.onWalletItemClick?.(wallet)}
-              />
-            )}
-          </For>
-        </div>
+        <Show
+          when={props.wallets
+            .slice(0, 2)
+            .every((wallet) => wallet.shape === "square")}
+        >
+          <div className={squareWallets}>
+            {/* First 2 wallets are square */}
+            <For each={props.wallets.slice(0, 2)}>
+              {(wallet, index) => (
+                <WalletButton
+                  key={wallet.name}
+                  variant="square"
+                  name={wallet.name}
+                  logo={wallet.logo}
+                  isMobile={wallet.isMobile}
+                  onClick={() =>
+                    props.onWalletItemClick?.(wallet.originalWallet)
+                  }
+                />
+              )}
+            </For>
+          </div>
+        </Show>
+
         <div className={listWallets}>
           <For each={props.wallets.slice(2)}>
             {(wallet, index) => (
@@ -116,7 +128,7 @@ export default function ConnectModalWalletList(
                 name={wallet.name}
                 logo={wallet.logo}
                 isMobile={wallet.isMobile}
-                onClick={() => props.onWalletItemClick?.(wallet)}
+                onClick={() => props.onWalletItemClick?.(wallet.originalWallet)}
               />
             )}
           </For>

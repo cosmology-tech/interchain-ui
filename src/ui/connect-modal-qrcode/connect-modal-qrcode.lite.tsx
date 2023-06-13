@@ -63,7 +63,9 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       measureRef.addEventListener("scroll", scrollHandler);
 
       cleanupRef = () => {
-        measureRef.removeEventListener("scroll", scrollHandler);
+        if (measureRef) {
+          measureRef.removeEventListener("scroll", scrollHandler);
+        }
       };
     }
   });
