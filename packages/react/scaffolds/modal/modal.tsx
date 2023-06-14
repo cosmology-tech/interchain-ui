@@ -8,14 +8,12 @@ import FadeIn from "../fade-in";
 import * as styles from "./modal.css";
 
 export interface ModalProps {
-  defaultIsOpen?: boolean;
+  isOpen: boolean;
   onOpen?: () => void;
   onClose?: () => void;
   initialFocusRef?: React.MutableRefObject<any>;
   trigger?: React.ReactElement;
-  title?: React.ReactElement;
-  description?: React.ReactElement;
-  closeButton?: React.ReactElement;
+  header: React.ReactElement;
   children?: React.ReactNode;
   closeOnClickaway?: boolean;
   preventScroll?: boolean;
@@ -23,8 +21,6 @@ export interface ModalProps {
   className?: string;
   contentClassName?: string;
   childrenClassName?: string;
-  headerClassName?: string;
-  closeButtonClassName?: string;
 }
 
 const useStore = create(store);
@@ -37,29 +33,24 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
     }));
 
     const {
-      defaultIsOpen,
+      isOpen,
       onOpen,
       onClose,
       children,
       trigger,
-      title,
-      description,
-      closeButton,
+      header,
       initialFocusRef,
       closeOnClickaway = true,
       preventScroll = true,
       role = `dialog`,
       className,
       contentClassName,
-      headerClassName,
       childrenClassName,
-      closeButtonClassName,
     } = props;
     const id = React.useId();
 
     const [state, send] = useMachine(
       dialog.machine({
-        open: !!defaultIsOpen,
         onOpen,
         onClose,
         id,
@@ -67,7 +58,15 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
         closeOnOutsideClick: closeOnClickaway,
         preventScroll,
         role,
-      })
+      }),
+      {
+        context: React.useMemo(
+          () => ({
+            open: isOpen,
+          }),
+          [props.isOpen]
+        ),
+      }
     );
 
     const api = dialog.connect(state, send, normalizeProps);
@@ -91,27 +90,26 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
                   <div
                     {...api.contentProps}
                     className={clx(styles.modalContent, contentClassName)}
+                    data-modal-part="content"
                   >
-                    <div className={clx(styles.modalHeader, headerClassName)}>
-                      {title && React.cloneElement(title, api.titleProps)}
-                      {description &&
-                        React.cloneElement(description, api.descriptionProps)}
+                    {React.cloneElement(header, {
+                      titleProps: api.titleProps,
+                      descriptionProps: api.descriptionProps,
+                      closeButtonProps: {
+                        ...api.closeTriggerProps,
+                        onClick: (event: any) => {
+                          api.closeTriggerProps.onClick?.(event);
+                          onClose?.();
+                        },
+                      },
+                    })}
 
-                      <div
-                        className={clx(
-                          styles.modalCloseButton,
-                          closeButtonClassName
-                        )}
-                      >
-                        {closeButton &&
-                          React.cloneElement(
-                            closeButton,
-                            api.closeTriggerProps
-                          )}
-                      </div>
+                    <div
+                      className={childrenClassName}
+                      data-modal-part="children"
+                    >
+                      {children}
                     </div>
-
-                    <div className={childrenClassName}>{children}</div>
                   </div>
                 </FadeIn>
               </div>

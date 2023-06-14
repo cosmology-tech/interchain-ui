@@ -7,26 +7,26 @@ export interface ConnectedInfo {
   address: string;
 }
 
-export interface ErrorInfo {
-  message: string;
-}
-
 export interface ConnectModalStatusProps extends BaseComponentProps {
   wallet: Wallet;
   status:
-    | "disconnected"
-    | "connecting"
-    | "connected"
-    | "notExist"
-    | "rejected"
-    | "error";
+    | "Disconnected"
+    | "Connecting"
+    | "Connected"
+    | "NotExist"
+    | "Rejected"
+    | "Error";
+  contentHeader?: string;
+  contentDesc?: string;
   bottomLink?: string;
   // disconnected props
   onConnect?: () => void;
   // connected props
   connectedInfo?: ConnectedInfo;
   onDisconnect?: () => void;
-  // error props
-  errorInfo?: ErrorInfo;
   onChangeWallet?: () => void;
+  // notExist props
+  disableInstall?: boolean;
+  onInstall?: () => void;
+  installIcon?: BaseComponentProps["children"];
 }

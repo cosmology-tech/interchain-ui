@@ -29,6 +29,16 @@
     "lodash": "^4.17.21",
     "zustand": "^4.3.6"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/cosmology-ui-kit-react.es.js",
+      "require": "./dist/cosmology-ui-kit-react.umd.js"
+    },
+    "./styles.css": {
+      "import": "./dist/cosmology-ui-kit-react.umd.css",
+      "require": "./dist/cosmology-ui-kit-react.umd.css"
+    }
+  },
   "peerDependencies": {
     "react": "^16.8.0 || 17.x || 18.x",
     "react-dom": "^16.8.0 || 17.x || 18.x"

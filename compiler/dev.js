@@ -26,16 +26,6 @@ const { spawn } = require("node:child_process");
         }),
     },
     {
-      title: "Bundle React",
-      task: async () => {
-        try {
-          await execa(`lerna run --scope=@cosmology-ui/react build`);
-        } catch (error) {
-          throw new Error("Error bundling react" + error);
-        }
-      },
-    },
-    {
       title: "Launch Watcher",
       task: () => {
         return new Listr(
