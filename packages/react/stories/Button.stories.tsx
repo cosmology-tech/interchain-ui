@@ -54,3 +54,18 @@ export const Small: Story = {
     size: "sm",
   },
 };
+
+export const Unstyled: Story = {
+  args: {
+    variant: "unstyled",
+    children: "Unbond All",
+  },
+};
+
+export const Text: Story = {
+  args: {
+    children: "100%",
+    intent: "text",
+    size: "xs",
+  },
+};

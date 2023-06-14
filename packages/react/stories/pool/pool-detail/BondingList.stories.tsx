@@ -39,18 +39,21 @@ export const Primary: Story = {
         apr: "2.43%",
         amount: 59075,
         per: "24%",
+        onUnbond: () => console.log("unbond - a day")
       },
       {
         title: "7 days",
         apr: "2.43%",
         amount: 59075,
         per: "24%",
+        onUnbond: () => console.log("unbond - 7 days")
       },
       {
         title: "14 days",
         apr: "2.43%",
         amount: 59075,
         per: "24%",
+        onUnbond: () => console.log("unbond - 14 days")
       },
     ],
   },
