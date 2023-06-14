@@ -62,7 +62,7 @@ export default function ShowMore(props: ShowMoreProps) {
     // Listen the resize event to get container height
     resizeRef = debounce(() => {
       elementRef.style.height = "auto";
-      eleHeight = elementRef.offsetHeight;
+      eleHeight = elementRef.offsetHeight + 50;
       elementRef.style.height = isVisibleRef
         ? `${eleHeight}px`
         : `${eleHeight * initHeightRef}px`;
@@ -73,7 +73,7 @@ export default function ShowMore(props: ShowMoreProps) {
     // Simulate useLayoutEffect
     setTimeout(() => {
       if (!eleHeight) {
-        eleHeight = elementRef.offsetHeight;
+        eleHeight = elementRef.offsetHeight + 50;
       }
 
       state.updateAnimationRef();
