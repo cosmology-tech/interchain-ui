@@ -5,7 +5,8 @@
       "@parcel/transformer-raw"
     ],
     "*.css.ts": [
-      "@vanilla-extract/parcel-transformer"
+      "@vanilla-extract/parcel-transformer",
+      "@parcel/transformer-css"
     ],
     "*.{ts,tsx}": [
       "@parcel/transformer-typescript-tsc"

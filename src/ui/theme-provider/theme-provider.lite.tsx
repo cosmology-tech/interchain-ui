@@ -8,7 +8,6 @@ import {
 import { mediaQueryColorScheme } from "../../helpers/style";
 import { store } from "../../models/store";
 import { darkThemeClass, lightThemeClass } from "../../styles/themes.css";
-import "../../styles/global.css";
 import type { ThemeProviderProps } from "./theme-provider.types";
 
 export default function ThemeProvider(props: ThemeProviderProps) {
