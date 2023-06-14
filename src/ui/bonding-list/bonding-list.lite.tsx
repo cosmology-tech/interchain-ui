@@ -10,16 +10,14 @@ import {
 import { store } from "../../models/store";
 import Stack from "../stack";
 import Box from "../box";
-import Text from "../text";
 import BondingListItem from "../bonding-list-item";
-import * as styles from "./bonding-list.css";
 import { BondingListProps } from "./bonding-list.types";
 import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.types";
 
 export default function BondingList(props: BondingListProps) {
   return (
     <Box>
-      <Stack space="10" direction="column">
+      <Stack direction="column">
         <For each={props.list}>
           {(item: BondingListItemProps, index: number) => (
             <BondingListItem
@@ -28,6 +26,7 @@ export default function BondingList(props: BondingListProps) {
               apr={item.apr}
               amount={item.amount}
               per={item.per}
+              onUnbond={(e) => item.onUnbond?.(e)}
             />
           )}
         </For>
