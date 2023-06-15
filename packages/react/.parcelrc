@@ -11,5 +11,11 @@
     "*.{ts,tsx}": [
       "@parcel/transformer-typescript-tsc"
     ]
+  },
+  "optimizers": {
+    "*.js": [
+      "...",
+      "parcel-optimizer-unlink-css"
+    ]
   }
 }

@@ -1,0 +1,34 @@
+{
+  "name": "parcel-optimizer-unlink-css",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Parcel Optimizer to unlink CSS assets from JS bundles",
+  "author": "yyyyaaa <phatghaa@gmail.com>",
+  "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/parcel-optimizer-unlink-css#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "engines": {
+    "parcel": "^2.8.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmology-tech/ui-kit.git"
+  },
+  "scripts": {},
+  "bugs": {
+    "url": "https://github.com/cosmology-tech/ui-kit/issues"
+  },
+  "dependencies": {
+    "@parcel/plugin": "2.8.3",
+    "@parcel/utils": "2.8.3"
+  }
+}
