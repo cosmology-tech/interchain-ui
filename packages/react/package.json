@@ -72,6 +72,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.12",
-    "vite-plugin-replace": "^0.1.1"
+    "vite-plugin-replace": "^0.1.1",
+    "parcel-optimizer-unlink-css": "*"
   }
 }
