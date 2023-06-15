@@ -3,12 +3,13 @@ import AssetList from "../asset-list";
 import Stack from "../stack";
 import Text from "../text";
 import ShowMore from "../show-more";
+import * as styles from "./cross-chain.css";
 import { CrossChainProps } from "./cross-chain.types";
 
 export default function CrossChain(props: CrossChainProps) {
   return (
     <ShowMore>
-      <Stack direction="column">
+      <Stack className={styles.container} direction="column">
         <AssetListHeader
           isSingle={props.header.isSingle}
           total={props.header.total}

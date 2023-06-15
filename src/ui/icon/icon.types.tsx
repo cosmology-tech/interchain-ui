@@ -16,7 +16,9 @@ type IconName =
   | "restart"
   | "arrowLeftSLine"
   | "add"
-  | "subtract";
+  | "subtract"
+  | "arrowRightLine"
+  | "timeLine";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;
