@@ -2,6 +2,7 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Icon from "../icon";
+import TokenInput from "../token-input";
 import * as styles from "./asset-item-transfer.css";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { AssetItemTransferProps } from "./asset-item-transfer.types";
@@ -18,8 +19,34 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         </Text>
       </Stack>
 
-      <Stack attributes={{ marginTop: "13" }}>
-        <Stack direction="column" attributes={{ flex: 1 }}>
+      <Stack
+        className={styles.onlySm}
+        justify="center"
+        align="center"
+        attributes={{ marginTop: "11", marginBottom: "13" }}
+      >
+        <img
+          className={styles.img}
+          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
+        />
+        <Icon
+          name="arrowRightLine"
+          color="textSecondary"
+          size="xl"
+          className={sprinkles({ mx: "9" })}
+        />
+        <img
+          className={styles.img}
+          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+        />
+      </Stack>
+      <Stack
+        justify="center"
+        align="flex-end"
+        className={styles.onlyLg}
+        attributes={{ marginTop: "13", marginBottom: "10" }}
+      >
+        <Stack direction="column" className={styles.flex1}>
           <Text
             color="textSecondary"
             weight="semibold"
@@ -45,109 +72,102 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Icon
           name="arrowRightLine"
           color="textSecondary"
-          size="2xs"
-          className={sprinkles({ px: "4" })}
+          size="md"
+          className={sprinkles({
+            mx: "4",
+            marginBottom: "9",
+          })}
         />
-      </Stack>
-
-      <Stack
-        direction="column"
-        attributes={{
-          backgroundColor: "progressBg",
-          borderRadius: "lg",
-          paddingTop: "7",
-          paddingLeft: "9",
-          paddingRight: "5",
-          paddingBottom: "8",
-        }}
-      >
-        <Stack
-          justify="flex-end"
-          align="center"
-          attributes={{ marginBottom: "7" }}
-        >
-          <Text color="textSecondary" weight="semibold">
-            Available
-          </Text>
+        <Stack direction="column" className={styles.flex1}>
           <Text
+            color="textSecondary"
             weight="semibold"
-            attributes={{ marginLeft: "4", marginRight: "9" }}
+            attributes={{ marginBottom: "6" }}
           >
-            713.32
+            From Cosmos Hub
           </Text>
-          <Button intent="text" size="xs">
-            Max
-          </Button>
-        </Stack>
-        <Stack justify="space-between" align="center">
-          <Stack align="center">
+          <Stack
+            align="center"
+            attributes={{
+              p: "6",
+              backgroundColor: "cardBg",
+              borderRadius: "lg",
+            }}
+          >
             <img
-              className={styles.img}
+              className={styles.smImg}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
             />
-            <Stack direction="column" attributes={{ marginLeft: "9" }}>
-              <Stack align="center">
-                <Text
-                  size="2xl"
-                  weight="semibold"
-                  attributes={{ marginRight: "5" }}
-                >
-                  UMEE
-                </Text>
-                <Icon name="arrowDownS" color="textSecondary" />
-              </Stack>
-              <Text color="textSecondary">Umee</Text>
-            </Stack>
-          </Stack>
-          <Stack direction="column">
-            <input />
-            <Text
-              color="textSecondary"
-              size="xs"
-              align="right"
-              attributes={{ marginTop: "1" }}
-            >
-              ~ $98.23
-            </Text>
+            <Text color="textSecondary">atom1xy5y...m6wwz9a</Text>
           </Stack>
         </Stack>
       </Stack>
+      <TokenInput
+        hasProgressBar={false}
+        progress={50}
+        symbol="OMSO"
+        denom="Osmosis"
+        available={0.71263}
+        amount={10}
+        imgSrc="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
+      />
+
       <Stack
-        justify="center"
-        align="center"
-        attributes={{ marginTop: "11", marginBottom: "13" }}
+        justify="flex-end"
+        space="5"
+        attributes={{ marginTop: "5", marginBottom: "11" }}
       >
-        <img
-          className={styles.img}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
-        />
-        <Icon
-          name="arrowRightLine"
-          color="textSecondary"
-          size="xl"
-          className={sprinkles({ mx: "9" })}
-        />
-        <img
-          className={styles.img}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
-        />
+        <Button intent="text" size="xs">
+          Max
+        </Button>
+        <Button intent="text" size="xs">
+          1/2
+        </Button>
+        <Button intent="text" size="xs">
+          1/3
+        </Button>
       </Stack>
+      <Stack
+        className={styles.onlyLg}
+        align="center"
+        attributes={{
+          p: "6",
+          borderRadius: "md",
+          backgroundColor: "cardBg",
+          marginBottom: "9",
+        }}
+      >
+        <Icon
+          name="timeLine"
+          size="md"
+          className={sprinkles({
+            marginRight: "7",
+          })}
+        />
+        <Text>Estimated time:</Text>
+        <Text weight="semibold"> 20 seconds</Text>
+      </Stack>
+
       <Button intent="tertiary">
         <Stack align="center">
           <Text className={styles.btnText} size="lg" weight="semibold">
             Transfer
           </Text>
-          <Icon
-            name="timeLine"
-            size="xs"
-            className={sprinkles({
-              marginLeft: "8",
-              marginRight: "4",
-            })}
-          />
-          <Text className={styles.btnText} size="xs">
-            ≈ 20 seconds
-          </Text>
+
+          <Stack className={styles.onlyLg} align="center">
+            <Icon
+              name="timeLine"
+              size="xs"
+              className={sprinkles({
+                marginLeft: "8",
+                marginRight: "4",
+              })}
+            />
+
+            <Text size="xs" className={styles.btnText}>
+              ≈ 20 seconds
+            </Text>
+          </Stack>
         </Stack>
       </Button>
       <Button variant="unstyled">Cancel</Button>

@@ -1,6 +1,7 @@
 import { style, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
+import { sprinkles } from "../../styles/sprinkles.css";
 
 const buttonTextColorVar = createVar();
 const textButtonBgVar = createVar();
@@ -9,10 +10,10 @@ export const container = style({
   minWidth: "480px"
 })
 
-export const img = style({
-  width: "50px",
-  height: "50px",
-});
+export const img = sprinkles({
+  width: "15",
+  height: "15",
+})
 
 export const btnText =  style({
   vars: {

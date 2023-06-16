@@ -4,14 +4,16 @@ import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
 
 export const progressContainer = style([
-  // sprinkles({
-  //   width: "17"
-  // }),
+  sprinkles({
+    marginRight: "10",
+  }),
   {
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         width: "100%",
         justifyContent: "space-between",
+        marginBottom: themeVars.space[7],
+        marginRight: 0,
       },
     },
   },
@@ -44,7 +46,6 @@ export const icon = sprinkles({
 export const inputBox = style([
   sprinkles({
     borderColor: "inputBorder",
-    marginLeft: "10",
     borderRadius: "md",
     backgroundColor: "cardBg",
     position: "relative",
@@ -57,8 +58,6 @@ export const inputBox = style([
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         width: "100%",
-        marginLeft: 0,
-        marginTop: themeVars.space[7],
       },
     },
   },
@@ -85,6 +84,7 @@ export const token = style([
   sprinkles({
     width: "full",
     backgroundColor: "cardBg",
+    borderRadius: "lg",
   }),
   {
     border: 0,
@@ -103,4 +103,8 @@ export const caulator = style([
 export const disabled = style({
   opacity: 0.6,
   cursor: "not-allowed",
+});
+
+export const inputTitle = style({
+  flex: 1,
 });
