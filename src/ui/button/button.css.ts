@@ -97,11 +97,10 @@ const intent = {
   text: style({
     vars: {
       [buttonTextColorVar]: themeVars.colors.textSecondary,
-      [buttonBgVar]: themeVars.colors.progressBg,
+      [buttonBgVar]: themeVars.colors.cardBg,
     },
     color: buttonTextColorVar,
     backgroundColor: buttonBgVar,
-    height: "fit-content !important",
     selectors: {
       "&:hover": {
         opacity: 0.8,
@@ -120,24 +119,28 @@ export const disabled = {
 
 export const size = {
   xs: s({
-    fontSize: "sm",
-    px: "3",
-    py: "2",
+    fontSize: "xs",
+    px: "4",
+    height: "10",
+    minWidth: "10",
   }),
   sm: s({
     fontSize: "sm",
     px: "6",
-    py: "4",
+    height: "12",
+    minWidth: "12",
   }),
   md: s({
-    fontSize: "lg",
+    fontSize: "md",
     px: "8",
-    py: "6",
+    height: "14",
+    minWidth: "14",
   }),
   lg: s({
-    fontSize: "xl",
-    px: "9",
-    py: "9",
+    fontSize: "lg",
+    px: "10",
+    height: "15",
+    minWidth: "15",
   }),
 };
 
@@ -159,7 +162,6 @@ export const variants = recipe({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "auto",
   }),
   variants: {
     variant,
