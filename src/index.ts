@@ -54,6 +54,7 @@ export { default as OverviewTransfer } from "./ui/overview-transfer";
 export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
+export { default as IconButton } from "./ui/icon-button";
 // End Components
 
 setPlatform(Platform.Default);
