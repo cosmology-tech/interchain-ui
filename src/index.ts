@@ -58,6 +58,7 @@ export { default as NftMint } from "./ui/nft-mint";
 export { default as SwapPrice } from "./ui/swap-price";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
+export { default as IconButton } from "./ui/icon-button";
 // End Components
 
 setPlatform(Platform.Default);
