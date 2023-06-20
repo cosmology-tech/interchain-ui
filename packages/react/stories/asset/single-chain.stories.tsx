@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     header: {
-      isSingle: false,
+      isSingle: true,
       total: "144.23",
       totalOnAll: "732.16",
       canDeposit: true,
