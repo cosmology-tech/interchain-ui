@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>;
 /* This is primary button */
 export const Primary: Story = {
   args: {
+    id: "1",
     token1: {
       name: "ATOM",
       imgSrc:
@@ -28,7 +29,6 @@ export const Primary: Story = {
         "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
     },
     poolLiquidity: 168767639,
-    volume: 3288612,
     fees: 59075,
     apr: 24,
     yourLiquidity: 1329.32,

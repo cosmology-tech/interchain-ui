@@ -112,7 +112,7 @@ const intent = {
 
 export const disabled = {
   true: style({
-    cursor: "not-allowed",
+    cursor: "not-allowed !important",
     opacity: 0.6,
     pointerEvents: "none",
   }),

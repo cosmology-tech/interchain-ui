@@ -41,6 +41,7 @@ export default function PoolListItem(props: PoolListItemProps) {
   return (
     <Stack align="center" className={styles.container}>
       <PoolName
+        id={props.id}
         className={styles.nameContainer}
         token1={props.token1}
         token2={props.token2}
