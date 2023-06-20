@@ -87,7 +87,10 @@ export default function ShowMore(props: ShowMoreProps) {
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
-    window.removeEventListener("resize", resizeRef);
+
+    if (window) {
+      window.removeEventListener("resize", resizeRef);
+    }
   });
 
   return (

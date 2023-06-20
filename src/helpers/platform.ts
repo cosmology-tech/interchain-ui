@@ -23,3 +23,7 @@ export function setPlatform(newPlatform: Platform) {
 export function getPlatform(): Platform {
   return platform;
 }
+
+export function isSSR() {
+  return typeof window === "undefined";
+}
