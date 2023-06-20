@@ -40,7 +40,7 @@ export default function PoolCard(props: PoolCardProps) {
       direction="column"
       justify="center"
     >
-      <PoolName token1={props.token1} token2={props.token2} />
+      <PoolName id={props.id} token1={props.token1} token2={props.token2} />
       <Stack justify="space-between">
         <Text color="text">APR</Text>
         <Text

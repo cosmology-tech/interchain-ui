@@ -18,15 +18,6 @@ import { themeVars } from "../../styles/themes.css";
 import { PoolListProps } from "./pool-list.types";
 
 export default function PoolList(props: PoolListProps) {
-  // image
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-  //         "theme": {
-  //           "primary_color_hex": "#5c09a0"
-  //         }
-
-  // "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
-  //         "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg",
   const state = useStore({
     titles: ["Pool", "Liquidity", "24H Volume", "7D Fees", "APR"],
   });
@@ -66,6 +57,7 @@ export default function PoolList(props: PoolListProps) {
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem
+            id={item.id}
               key={index}
               token1={item.token1}
               token2={item.token2}

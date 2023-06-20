@@ -33,7 +33,7 @@ export default function PoolName(props: PoolNameProps) {
         >
           {props.token1.name}/{props.token2.name}
         </Text>
-        <Text color="textSecondary">Pool #1</Text>
+        <Text color="textSecondary">Pool #{props.id}</Text>
       </Stack>
     </Stack>
   );

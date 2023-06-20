@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>;
 /* This is primary button */
 export const Primary: Story = {
   args: {
+    id: "1",
     token1: {
       name: "ATOM",
       imgSrc:

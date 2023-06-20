@@ -21,7 +21,7 @@
     "@zag-js/dialog": "^0.9.2",
     "@zag-js/react": "^0.9.2",
     "animejs": "^3.2.1",
-    "big.js": "^6.2.1",
+    "bignumber.js": "^9.1.1",
     "clsx": "^1.2.1",
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
