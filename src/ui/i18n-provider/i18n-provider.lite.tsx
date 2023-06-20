@@ -5,7 +5,7 @@ import {
   onUnMount,
   useRef,
 } from "@builder.io/mitosis";
-import Big from "big.js";
+import BigNumber from "bignumber.js";
 import {
   getCurrencyFormatter,
   safelyFormatNumberWithFallback,
@@ -40,7 +40,7 @@ export default function I18nProvider(props: I18nProviderProps) {
       );
       return safelyFormatNumberWithFallback(
         numberFormatterRef,
-        new Big(subProps.value)
+        new BigNumber(subProps.value)
       );
     };
     store.getState().setFormatNumberFn(formatNumberFnRef);
