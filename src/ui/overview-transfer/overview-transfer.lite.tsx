@@ -37,7 +37,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
           >
             713.32
           </Text>
-          <Button intent="text" size="xs">
+          <Button className={styles.textBtn} size="xs">
             Max
           </Button>
         </Stack>
