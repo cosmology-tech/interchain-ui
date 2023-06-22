@@ -1,10 +1,8 @@
 import { style, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { breakpoints } from "../../styles/tokens";
 import { sprinkles } from "../../styles/sprinkles.css";
 
 const buttonTextColorVar = createVar();
-const textButtonBgVar = createVar();
 
 export const container = style({
   minWidth: "480px"
@@ -29,17 +27,3 @@ export const btnText =  style({
   color: buttonTextColorVar,
 })
 
-export const textBtn = style({
-  vars: {
-    [textButtonBgVar]: "#A2AEBB",
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
-      vars: {
-        [textButtonBgVar]: "#434B55",
-      },
-    },
-  },
-  color: themeVars.colors.white,
-  backgroundColor: textButtonBgVar,
-})
