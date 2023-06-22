@@ -1,4 +1,11 @@
-import { useRef, onMount, useStore, Show, For } from "@builder.io/mitosis";
+import {
+  useRef,
+  onMount,
+  onUnMount,
+  useStore,
+  Show,
+  For,
+} from "@builder.io/mitosis";
 import { animate } from "motion";
 import cloneDeep from "lodash/cloneDeep";
 import clsx from "clsx";
@@ -9,8 +16,10 @@ import Box from "../box";
 import Button from "../button";
 import SwapPrice from "../swap-price";
 import { sprinkles } from "../../styles/sprinkles.css";
+import { store } from "../../models/store";
 import TransferItem from "../transfer-item";
 import { IconProps } from "../icon/icon.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 import * as styles from "./swap-token.css";
 import { SwapItemProps, SwapTokenProps } from "./swap-token.types";
@@ -19,7 +28,10 @@ export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
   let animationRef = useRef(null);
   let toteranceRef = useRef(null);
+  let cleanupRef = useRef<() => void>(null);
+
   let state = useStore<{
+    theme: ThemeVariant;
     swapIcon: IconProps["name"];
     tolerance: number;
     isSetting: boolean;
@@ -30,6 +42,7 @@ export default function SwapToken(props: SwapTokenProps) {
     setToterance: (per: number) => void;
     exchange: () => void;
   }>({
+    theme: "light",
     swapIcon: "arrowDownLine",
     tolerance: 1,
     isSetting: false,
@@ -87,7 +100,18 @@ export default function SwapToken(props: SwapTokenProps) {
         "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
       availableAmount: 0.00633,
     };
+
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
   });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Stack direction="column" className={styles.swapTokenContainer}>
       <Text size="lg" weight="semibold" attributes={{ marginBottom: "8" }}>
@@ -107,7 +131,7 @@ export default function SwapToken(props: SwapTokenProps) {
         <div className={sprinkles({ position: "relative" })} ref={swapIconRef}>
           <IconButton
             size="lg"
-            className={styles.swapIcon}
+            className={styles.swapIcon[state.theme]}
             icon={state.swapIcon}
             isRound={true}
             intent="text"

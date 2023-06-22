@@ -55,9 +55,9 @@ export { default as SingleChain } from "./ui/single-chain";
 export { default as OverviewTransfer } from "./ui/overview-transfer";
 export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
 export { default as NftMint } from "./ui/nft-mint";
+export { default as SwapPrice } from "./ui/swap-price";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
-export { default as SwapPrice } from "./ui/swap-price";
 // End Components
 
 setPlatform(Platform.Default);
