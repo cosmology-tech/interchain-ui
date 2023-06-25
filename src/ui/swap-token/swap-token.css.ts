@@ -20,7 +20,6 @@ const swapIconBase = style([
     vars: {
       [swapBorderColorVar]: themeVars.colors.white,
     },
-
     position: "absolute",
     left: "50%",
     top: "50%",
