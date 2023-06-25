@@ -4,7 +4,7 @@ import { PoolInfoHeader } from "../../../src";
 
 const meta: Meta<typeof PoolInfoHeader> = {
   component: PoolInfoHeader,
-  title: "Pool/pool-detail/pool-info-header",
+  title: "Pool/PoolDetail/PoolInfoHeader",
   tags: ["autodocs"],
   argTypes: {},
 };

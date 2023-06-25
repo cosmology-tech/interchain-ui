@@ -5,7 +5,7 @@ import { PoolInfoHeader, ManageLiquidityCard, BondingArea } from "../../../src";
 
 const meta: Meta<typeof BondingArea> = {
   component: BondingArea,
-  title: "Pool/pool-detail/pool-detail-modal",
+  title: "Pool/PoolDetail/PoolDetailPage",
   // tags: ["autodocs"],
   argTypes: {},
 };

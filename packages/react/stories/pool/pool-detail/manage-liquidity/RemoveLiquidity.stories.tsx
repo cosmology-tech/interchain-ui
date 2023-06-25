@@ -5,7 +5,7 @@ import { RemoveLiquidity } from "../../../../src";
 
 const meta: Meta<typeof RemoveLiquidity> = {
   component: RemoveLiquidity,
-  title: "Pool/pool-detail/manage-liquidity/remove-liquidity",
+  title: "Pool/PoolDetail/ManageLiquidity/RemoveLiquidity",
   tags: ["autodocs"],
   argTypes: {},
 };
