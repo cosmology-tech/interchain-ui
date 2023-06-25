@@ -7,7 +7,13 @@ import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
   return (
-    <Box px="8" py="10" backgroundColor="cardBg" borderRadius="lg">
+    <Box
+      px="8"
+      py="10"
+      backgroundColor="cardBg"
+      borderRadius="lg"
+      className={styles.container}
+    >
       <Stack justify="space-between">
         <Stack direction="column">
           <Text color="textSecondary" weight="semibold">
@@ -20,11 +26,23 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               marginBottom: "9",
             }}
           >
-            <Text color="textSecondary" weight="semibold" attributes={{ marginRight: "5" }}>
+            <Text
+              color="textSecondary"
+              weight="semibold"
+              attributes={{ marginRight: "5" }}
+            >
               APR
             </Text>
-            <Text size="4xl" color="textSecondary" weight="semibold">
+            <Text
+              size="4xl"
+              color="textSecondary"
+              weight="semibold"
+              attributes={{ marginRight: "3" }}
+            >
               {props.apr}
+            </Text>
+            <Text color="textSecondary" weight="semibold">
+              %
             </Text>
           </Stack>
           <Button size="sm" intent="tertiary" variant="outlined">
@@ -33,7 +51,9 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
         </Stack>
         <Stack direction="column">
           <Stack align="baseline">
-            <Text weight="semibold" attributes={{ marginRight: "1" }}>$</Text>
+            <Text weight="semibold" attributes={{ marginRight: "1" }}>
+              $
+            </Text>
             <Text weight="semibold" size="4xl">
               {props.amount}
             </Text>

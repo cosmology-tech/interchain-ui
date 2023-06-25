@@ -5,13 +5,11 @@ import { breakpoints } from "../../styles/tokens";
 export const container = style([
   sprinkles({
     backgroundColor: "cardBg",
-    paddingTop: "10",
-    paddingBottom: "10",
-    paddingLeft: "10",
-    paddingRight: "10",
+    p: "10",
     borderRadius: "lg",
   }),
   {
+    boxSizing: "border-box",
     height: "fit-content",
     "@media": {
       [`screen and (min-width: ${breakpoints.tablet}px)`]: {
@@ -27,9 +25,9 @@ export const container = style([
 
 export const divider = styleVariants({
   light: {
-    backgroundColor: "#D1D6DD"
+    backgroundColor: "#D1D6DD",
   },
   dark: {
-    backgroundColor: "#434B55"
-  }
-})
+    backgroundColor: "#434B55",
+  },
+});

@@ -23,6 +23,7 @@ export default function APR(props: {
         justify="center"
         align="center"
       >
+        {/* TODO: Replace with IconButton later */}
         <Icon name="verticalMore" color="text" />
       </Stack>
     </Stack>

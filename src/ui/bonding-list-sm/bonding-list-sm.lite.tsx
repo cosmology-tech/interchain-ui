@@ -13,7 +13,7 @@ export default function BondingListSm(props: BondingListSmProps) {
       <Text size="xl" weight="semibold">
         Bond your liquidity
       </Text>
-      <Text>
+      <Text attributes={{ marginTop: "2" }}>
         Bond your tokens to earn additional OSMO rewards to the swap fees.
       </Text>
       <Text
@@ -25,7 +25,7 @@ export default function BondingListSm(props: BondingListSmProps) {
       >
         Unbonded
       </Text>
-      <Text size="4xl" weight="semibold">
+      <Text size="4xl" weight="semibold" attributes={{ my: "2" }}>
         {props.unbondedAmt}
       </Text>
       <Stack

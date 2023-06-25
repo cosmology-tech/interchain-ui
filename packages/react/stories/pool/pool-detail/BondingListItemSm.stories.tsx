@@ -20,6 +20,6 @@ export const Primary: Story = {
     title: 'Bonded 1 day',
     amount: 0.33,
     poolShares: 0,
-    apr: "2.46%",
+    apr: "2.46",
   },
 };
