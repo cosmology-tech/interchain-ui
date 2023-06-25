@@ -24,6 +24,8 @@ export default function Button(props: ButtonProps) {
         {...props.attributes}
         attributes={{
           onClick: (event) => props.onClick?.(event),
+          onMouseEnter: (event) => props.onHoverStart?.(event),
+          onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
         }}
         className={clx(

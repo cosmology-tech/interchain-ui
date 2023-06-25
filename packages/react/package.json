@@ -26,6 +26,7 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "lodash": "^4.17.21",
+    "motion": "^10.16.2",
     "zustand": "^4.3.6"
   },
   "peerDependencies": {
@@ -68,11 +69,11 @@
     "@vanilla-extract/parcel-transformer": "^1.0.0",
     "@vanilla-extract/vite-plugin": "^3.8.1",
     "parcel": "^2.8.3",
+    "parcel-optimizer-unlink-css": "*",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.12",
-    "vite-plugin-replace": "^0.1.1",
-    "parcel-optimizer-unlink-css": "*"
+    "vite-plugin-replace": "^0.1.1"
   }
 }
