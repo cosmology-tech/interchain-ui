@@ -10,7 +10,6 @@ import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
 import { ThemeVariant } from "../../models/system.model";
 import { resolveThemeMode } from "../../helpers/style";
-import { darkThemeClass, lightThemeClass } from "../../styles/themes.css";
 import type { ThemeProviderProps } from "./theme-provider.types";
 
 export default function ThemeProvider(props: ThemeProviderProps) {
@@ -48,21 +47,16 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     const theme = store.getState().theme;
 
     if (theme === "system") {
-      if (state.preferredMode === "dark") {
-        return store.getState().setTheme("dark", darkThemeClass);
-      }
-
-      return store.getState().setTheme("light", lightThemeClass);
+      console.log("ThemeProvider: system");
+      return store.getState().setTheme(state.preferredMode);
     }
-
-    const themeClass = { dark: darkThemeClass, light: lightThemeClass }[theme];
-
-    return store.getState().setTheme(theme, themeClass ?? lightThemeClass);
   }, [state.preferredMode, store.getState().theme, state.isMounted]);
 
   onMount(() => {
-    resolveThemeMode(state.isDark, props.defaultTheme);
+    const resolved = resolveThemeMode(props.defaultTheme);
+    console.log("onMount", resolved);
     state.isMounted = true;
+
     const darkListener = ({ matches }: MediaQueryListEvent) => {
       if (matches) {
         state.preferredMode = "dark";

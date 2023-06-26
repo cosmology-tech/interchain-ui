@@ -24,6 +24,10 @@ export function getPlatform(): Platform {
   return platform;
 }
 
-export function isSSR() {
-  return typeof window === "undefined";
+export function isSSR(): boolean {
+  try {
+    return typeof window === undefined;
+  } catch (error) {}
+
+  return true;
 }

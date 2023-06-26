@@ -7,7 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "module": "ESNext",
     "downlevelIteration": true,
     "declaration": true,
@@ -19,5 +19,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

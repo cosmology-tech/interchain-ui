@@ -28,7 +28,8 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "polished": "^4.2.2",
-    "zustand": "^4.3.8"
+    "zustand": "^4.3.8",
+    "motion": "^10.16.2"
   },
   "devDependencies": {
     "@parcel/compressor-brotli": "^2.8.3",

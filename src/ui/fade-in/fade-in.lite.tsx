@@ -21,7 +21,7 @@ export default function FadeIn(props: FadeInProps) {
         direction: `alternate`,
         loop: false,
         autoplay: false,
-        easing: `easeInOutSine`,
+        easing: "spring(1, 80, 10, 0)",
       });
     }
 

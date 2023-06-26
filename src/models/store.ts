@@ -2,6 +2,8 @@ import { createStore } from "zustand/vanilla";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { ModePreference, NumberFormatter } from "./system.model";
+import { isPreferDarkMode, isPreferLightMode } from "../helpers/style";
+import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
 
 export const STORAGE_NAME = "cosmology-ui-store";
 
@@ -14,7 +16,7 @@ export interface UIState {
 }
 
 export interface UIAction {
-  setTheme: (theme: ModePreference, themeClass: string) => void;
+  setTheme: (theme: ModePreference) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
 }
 
@@ -31,13 +33,25 @@ export interface UIStore extends UIState, UIAction, I18nState, I18nAction {}
 export const store = createStore(
   persist(
     immer<UIStore>((set) => ({
-      theme: "dark",
+      theme: null,
       themeClass: "",
       _hasHydrated: false,
-      setTheme: (newTheme: ModePreference, themeClass: string) =>
+      setTheme: (newTheme: ModePreference) =>
         set((state) => {
           state.theme = newTheme;
-          state.themeClass = themeClass;
+
+          const themeClass = { dark: darkThemeClass, light: lightThemeClass }[
+            newTheme
+          ];
+
+          const resolveSystem = () => {
+            if (isPreferDarkMode()) return darkThemeClass;
+            if (isPreferLightMode()) return lightThemeClass;
+            return "";
+          };
+
+          state.themeClass =
+            newTheme === "system" ? resolveSystem() : themeClass;
         }),
       formatNumber: null,
       setFormatNumberFn: (fn: NumberFormatter) =>

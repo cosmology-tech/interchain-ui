@@ -33,7 +33,7 @@ export const modalContent = style([
 
 export const modalChildren = style([
   {
-    maxWidth: "320px",
+    minWidth: "320px",
   },
   s({
     paddingLeft: "10",

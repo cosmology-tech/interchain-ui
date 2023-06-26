@@ -1,11 +1,6 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import deepmerge from "@fastify/deepmerge";
-import {
-  themeVars,
-  darkThemeClass,
-  lightThemeClass,
-  commonVars,
-} from "../styles/themes.css";
+import { themeVars, commonVars } from "../styles/themes.css";
 import { store } from "../models/store";
 import { ModePreference, ModePreferences } from "../models/system.model";
 import { isSSR } from "./platform";
@@ -18,8 +13,13 @@ export const mediaQueryColorScheme = (mode: string) =>
 export const createCustomTheme = (customTheme: typeof themeVars) =>
   assignInlineVars(themeVars, merge(commonVars, customTheme));
 
+const isValidThemeMode = (mode: ModePreference) => {
+  return ModePreferences.includes(mode);
+};
+
+// Resolve theme mode by priority:
+// props.defaultProps > system theme > saved theme
 export const resolveThemeMode = (
-  isDark: boolean,
   defaultTheme?: ModePreference
 ): ModePreference => {
   const hasHydrated = store.getState()._hasHydrated;
@@ -28,24 +28,9 @@ export const resolveThemeMode = (
   // TODO: document for package consumer to provide fallback UI using _hasHydrated to prevent flashing content
   if (isSSR() || !hasHydrated) return "light";
 
-  const resolveThemeClass = (mode: ModePreference) => {
-    if (mode === "dark" || mode === "light") {
-      return { dark: darkThemeClass, light: lightThemeClass }[mode];
-    }
-
-    if (isDark) {
-      return darkThemeClass;
-    }
-
-    return lightThemeClass;
-  };
-
-  const isValidThemeMode = (mode: ModePreference) => {
-    return ModePreferences.includes(mode);
-  };
-
   if (isValidThemeMode(defaultTheme)) {
-    store.getState().setTheme(defaultTheme, resolveThemeClass(defaultTheme));
+    console.log("resolveThemeMode: defaultProp", defaultTheme);
+    store.getState().setTheme(defaultTheme);
     return defaultTheme;
   }
 
@@ -53,13 +38,21 @@ export const resolveThemeMode = (
   const persistedTheme = store.getState().theme;
 
   if (isValidThemeMode(persistedTheme)) {
-    store
-      .getState()
-      .setTheme(persistedTheme, resolveThemeClass(persistedTheme));
+    console.log("resolveThemeMode: persisted", persistedTheme);
+    store.getState().setTheme(persistedTheme);
     return persistedTheme;
   }
 
+  console.log("resolveThemeMode: system", persistedTheme);
   // persisted value not a valid theme mode, fallback to 'system'
-  store.getState().setTheme("system", resolveThemeClass("system"));
+  store.getState().setTheme("system");
   return "system";
 };
+
+export const isPreferLightMode = () =>
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: light)").matches;
+
+export const isPreferDarkMode = () =>
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches;

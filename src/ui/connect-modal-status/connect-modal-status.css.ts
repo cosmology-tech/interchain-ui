@@ -69,6 +69,14 @@ export const statusLogoImage = s({
   justifyContent: "center",
 });
 
+export const statusLogoImageSvg = s({
+  width: "19",
+  height: "19",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
 export const rotateAnim = keyframes({
   "0%": { transform: "rotate(0deg)" },
   "100%": { transform: "rotate(360deg)" },

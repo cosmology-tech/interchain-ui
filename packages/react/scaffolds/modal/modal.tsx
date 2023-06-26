@@ -75,24 +75,21 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       <>
         {trigger && React.cloneElement(trigger, api.triggerProps)}
 
-        {api.isOpen && (
-          <Portal>
+        <Portal>
+          <FadeIn isVisible={api.isOpen}>
             <div
               ref={forwardedRef}
               className={clx(themeStore.themeClass, className)}
             >
-              <div
-                {...api.backdropProps}
-                className={styles.modalBackdrop[themeStore.theme]}
-              />
+              <div {...api.backdropProps} className={styles.modalBackdrop} />
               <div {...api.containerProps} className={styles.modalContainer}>
-                <FadeIn isVisible={api.isOpen}>
-                  <div
-                    {...api.contentProps}
-                    className={clx(styles.modalContent, contentClassName)}
-                    data-modal-part="content"
-                  >
-                    {React.cloneElement(header, {
+                <div
+                  {...api.contentProps}
+                  className={clx(styles.modalContent, contentClassName)}
+                  data-modal-part="content"
+                >
+                  {header &&
+                    React.cloneElement(header, {
                       titleProps: api.titleProps,
                       descriptionProps: api.descriptionProps,
                       closeButtonProps: {
@@ -104,18 +101,14 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
                       },
                     })}
 
-                    <div
-                      className={childrenClassName}
-                      data-modal-part="children"
-                    >
-                      {children}
-                    </div>
+                  <div className={childrenClassName} data-modal-part="children">
+                    {children}
                   </div>
-                </FadeIn>
+                </div>
               </div>
             </div>
-          </Portal>
-        )}
+          </FadeIn>
+        </Portal>
       </>
     );
   }
