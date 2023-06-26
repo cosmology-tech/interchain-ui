@@ -4,7 +4,7 @@ import { OverviewTransfer } from "../../src";
 
 const meta: Meta<typeof OverviewTransfer> = {
   component: OverviewTransfer,
-  title: "Asset/overview-transfer",
+  title: "Asset/OverviewTransfer",
   tags: ["autodocs"],
   argTypes: {},
 };

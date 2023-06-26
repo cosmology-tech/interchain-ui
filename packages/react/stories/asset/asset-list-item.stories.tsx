@@ -5,7 +5,7 @@ import { AssetListItem } from "../../src";
 
 const meta: Meta<typeof AssetListItem> = {
   component: AssetListItem,
-  title: "Asset/asset-list-item",
+  title: "Asset/AssetListItem",
   tags: ["autodocs"],
   argTypes: {},
 };

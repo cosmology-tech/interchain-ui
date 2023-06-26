@@ -4,7 +4,7 @@ import { AssetItemTransfer } from "../../src";
 
 const meta: Meta<typeof AssetItemTransfer> = {
   component: AssetItemTransfer,
-  title: "Asset/asset-item-transfer",
+  title: "Asset/AssetItemTransfer",
   tags: ["autodocs"],
   argTypes: {},
 };

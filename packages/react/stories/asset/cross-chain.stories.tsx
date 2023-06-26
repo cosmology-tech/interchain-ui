@@ -4,7 +4,7 @@ import { CrossChain } from "../../src";
 
 const meta: Meta<typeof CrossChain> = {
   component: CrossChain,
-  title: "Asset/cross-chain",
+  title: "Asset/CrossChain",
   tags: ["autodocs"],
   argTypes: {},
 };
