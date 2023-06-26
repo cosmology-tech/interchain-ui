@@ -29,7 +29,7 @@ export default function AssetListItem(props: AssetListItemProps) {
     state.size = props.isOtherChains ? "xs" : "sm";
   });
   return (
-    <Stack align="center">
+    <Stack className={styles.assetListItem} align="center">
       <Box className={styles.imageContainer}>
         <img
           src={props.imgSrc}

@@ -8,8 +8,8 @@ import { CrossChainProps } from "./cross-chain.types";
 
 export default function CrossChain(props: CrossChainProps) {
   return (
-    <ShowMore>
-      <Stack className={styles.container} direction="column">
+    <ShowMore className={styles.container}>
+      <Stack direction="column">
         <AssetListHeader
           isSingle={props.header.isSingle}
           total={props.header.total}

@@ -1,13 +1,12 @@
 import { style, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { breakpoints } from "../../styles/tokens";
 import { sprinkles } from "../../styles/sprinkles.css";
 
 const buttonTextColorVar = createVar();
 const textButtonBgVar = createVar();
 
-export const container = style({
-  minWidth: "480px"
+export const overviewTransfer = style({
+  minWidth: "670px"
 })
 
 export const img = sprinkles({

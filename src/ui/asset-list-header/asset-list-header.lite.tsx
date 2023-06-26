@@ -11,7 +11,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
     isSingle: false,
   });
   return (
-    <Stack direction="column">
+    <Stack className={styles.assetListHeader} direction="column">
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
         Your assets
       </Text>

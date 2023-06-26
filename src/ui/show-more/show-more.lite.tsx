@@ -91,7 +91,7 @@ export default function ShowMore(props: ShowMoreProps) {
   });
 
   return (
-    <div ref={elementRef} className={styles.container}>
+    <div ref={elementRef} className={clsx(styles.container, props.className)}>
       {props.children}
       <Show when={!state.isVisible}>
         <Stack

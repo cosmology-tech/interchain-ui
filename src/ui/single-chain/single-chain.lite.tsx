@@ -3,13 +3,13 @@ import AssetList from "../asset-list";
 import Stack from "../stack";
 import Text from "../text";
 import ShowMore from "../show-more";
-import * as styles from './single-chain.css'
+import * as styles from "./single-chain.css";
 import { SingleChainProps } from "./single-chain.types";
 
 export default function SingleChain(props: SingleChainProps) {
   return (
-    <ShowMore>
-      <Stack className={styles.container} direction="column">
+    <ShowMore className={styles.container}>
+      <Stack direction="column">
         <AssetListHeader
           isSingle={props.header.isSingle}
           total={props.header.total}

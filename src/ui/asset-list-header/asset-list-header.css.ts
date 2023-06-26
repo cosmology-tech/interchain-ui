@@ -1,10 +1,14 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 
+export const assetListHeader = style({
+  minWidth: "720px",
+  boxSizing: "border-box",
+});
+
 export const crossContainer = style([
   {
     minHeight: "103px",
-    minWidth: "400px",
   },
 ]);
 
@@ -19,7 +23,6 @@ export const crossBtn = sprinkles({
   width: "1/3",
 });
 
-
 export const singleContainer = style([
   sprinkles({
     width: "full",
@@ -29,6 +32,6 @@ export const singleContainer = style([
     borderRadius: "lg",
   }),
   {
-    minWidth: "400px",
+    boxSizing: "border-box",
   },
 ]);

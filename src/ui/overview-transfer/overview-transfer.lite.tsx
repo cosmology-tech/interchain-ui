@@ -8,7 +8,7 @@ import { OverviewTransferProps } from "./overview-transfer.types";
 
 export default function OverviewTransfer(props: OverviewTransferProps) {
   return (
-    <Stack direction="column">
+    <Stack className={styles.overviewTransfer} direction="column">
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
         {props.type}
       </Text>
