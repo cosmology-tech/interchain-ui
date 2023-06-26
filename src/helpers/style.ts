@@ -29,7 +29,6 @@ export const resolveThemeMode = (
   if (isSSR() || !hasHydrated) return "light";
 
   if (isValidThemeMode(defaultTheme)) {
-    console.log("resolveThemeMode: defaultProp", defaultTheme);
     store.getState().setTheme(defaultTheme);
     return defaultTheme;
   }
@@ -38,12 +37,10 @@ export const resolveThemeMode = (
   const persistedTheme = store.getState().theme;
 
   if (isValidThemeMode(persistedTheme)) {
-    console.log("resolveThemeMode: persisted", persistedTheme);
     store.getState().setTheme(persistedTheme);
     return persistedTheme;
   }
 
-  console.log("resolveThemeMode: system", persistedTheme);
   // persisted value not a valid theme mode, fallback to 'system'
   store.getState().setTheme("system");
   return "system";

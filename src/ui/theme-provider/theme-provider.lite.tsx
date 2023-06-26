@@ -47,14 +47,12 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     const theme = store.getState().theme;
 
     if (theme === "system") {
-      console.log("ThemeProvider: system");
       return store.getState().setTheme(state.preferredMode);
     }
   }, [state.preferredMode, store.getState().theme, state.isMounted]);
 
   onMount(() => {
-    const resolved = resolveThemeMode(props.defaultTheme);
-    console.log("onMount", resolved);
+    resolveThemeMode(props.defaultTheme);
     state.isMounted = true;
 
     const darkListener = ({ matches }: MediaQueryListEvent) => {
