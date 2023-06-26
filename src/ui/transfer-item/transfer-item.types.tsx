@@ -4,6 +4,10 @@ export interface TransferItemProps {
   imgSrc: string;
   availableAmount: number;
   /**
+   * If show the available amount
+   */
+  hasAvailable?: boolean;
+  /**
    * Is there a half button
    */
   halfBtn?: boolean;

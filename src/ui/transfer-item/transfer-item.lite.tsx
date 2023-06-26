@@ -11,6 +11,7 @@ export default function TransferItem(props: TransferItemProps) {
   useDefaultProps({
     halfBtn: false,
     maxBtn: false,
+    hasAvailable: false,
     title: "",
   });
   return (
@@ -23,25 +24,27 @@ export default function TransferItem(props: TransferItemProps) {
         paddingTop: "7",
         paddingLeft: "9",
         paddingRight: "5",
-        paddingBottom: "8",
+        paddingBottom: "9",
       }}
     >
       <Stack
         justify="space-between"
         align="center"
-        attributes={{ marginBottom: "5" }}
+        attributes={{ marginBottom: "7", minHeight: "10" }}
       >
         <Text color="textSecondary">{props.title}</Text>
         <Stack align="center">
-          <Text color="textSecondary" weight="semibold">
-            Available
-          </Text>
-          <Text
-            weight="semibold"
-            attributes={{ marginLeft: "4", marginRight: "9" }}
-          >
-            {props.availableAmount}
-          </Text>
+          <Show when={props.hasAvailable}>
+            <Text color="textSecondary" weight="semibold">
+              Available
+            </Text>
+            <Text
+              weight="semibold"
+              attributes={{ marginLeft: "4", marginRight: "9" }}
+            >
+              {props.availableAmount}
+            </Text>
+          </Show>
           <Show when={props.halfBtn}>
             <Button
               className={styles.textBtn}
@@ -87,7 +90,7 @@ export default function TransferItem(props: TransferItemProps) {
             color="textSecondary"
             size="xs"
             align="right"
-            attributes={{ marginTop: "1" }}
+            attributes={{ marginTop: "2" }}
           >
             ~ $98.23
           </Text>
