@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ProgressBar } from "../src";
@@ -17,9 +17,14 @@ type Story = StoryObj<typeof meta>;
 /* This is primary ProgressBar */
 export const Primary: Story = {
   args: {
+    progress: 50,
   },
-  render: () => {
-    const [progress, setProgress] = useState(50);
+  render: (props) => {
+    const [progress, setProgress] = useState(props.progress);
+
+    useEffect(() => {
+      setProgress(props.progress);
+    }, [props.progress]);
 
     return (
       <ProgressBar

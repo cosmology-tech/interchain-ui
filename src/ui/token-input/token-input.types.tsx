@@ -3,8 +3,9 @@ export interface TokenInputProps {
   symbol: string;
   denom: string;
   available: number;
-  amount?: string | undefined;
   imgSrc: string;
-  onProgressChange: (progress: number) => void;
-  onAmountChange: (value: string) => void;
+  amount?: number | undefined;
+  hasProgressBar?: boolean;
+  onProgressChange?: (progress: number) => void;
+  onAmountChange?: (value: string) => void;
 }
