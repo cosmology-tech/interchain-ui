@@ -1,4 +1,11 @@
-import * as React from "react";
+import React, {
+  useMemo,
+  useId,
+  useState,
+  useEffect,
+  forwardRef,
+  cloneElement,
+} from "react";
 import * as dialog from "@zag-js/dialog";
 import clx from "clsx";
 import { create } from "zustand";
@@ -25,93 +32,119 @@ export interface ModalProps {
 
 const useStore = create(store);
 
-const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
-  (props, forwardedRef) => {
-    const themeStore = useStore((state) => ({
-      theme: state.theme,
-      themeClass: state.themeClass,
-    }));
+const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
+  const themeStore = useStore((state) => ({
+    theme: state.theme,
+    themeClass: state.themeClass,
+  }));
 
-    const {
-      isOpen,
+  const {
+    isOpen,
+    onOpen,
+    onClose,
+    children,
+    trigger,
+    header,
+    initialFocusRef,
+    closeOnClickaway = true,
+    preventScroll = true,
+    role = `dialog`,
+    className,
+    contentClassName,
+    childrenClassName,
+  } = props;
+  const id = useId();
+  const [_internalOpen, _setInternalOpen] = useState(isOpen);
+
+  // Add some transition to the close state to prevent abrupt close
+  // useEffect(() => {
+  //   if (props.isOpen && !_internalOpen) {
+  //     _setInternalOpen(true);
+  //   }
+
+  //   if (!props.isOpen && _internalOpen) {
+  //     setTimeout(() => {
+  //       console.log("1000");
+  //       _setInternalOpen(false);
+  //     }, 300);
+  //   }
+  // }, [props.isOpen, _internalOpen]);
+
+  useEffect(() => {
+    if (props.isOpen) {
+      _setInternalOpen(true);
+    }
+  }, [props.isOpen]);
+
+  const [state, send] = useMachine(
+    dialog.machine({
       onOpen,
       onClose,
-      children,
-      trigger,
-      header,
-      initialFocusRef,
-      closeOnClickaway = true,
-      preventScroll = true,
-      role = `dialog`,
-      className,
-      contentClassName,
-      childrenClassName,
-    } = props;
-    const id = React.useId();
+      id,
+      initialFocusEl: initialFocusRef?.current,
+      closeOnOutsideClick: closeOnClickaway,
+      preventScroll,
+      role,
+    }),
+    {
+      context: useMemo(
+        () => ({
+          open: props.isOpen,
+        }),
+        [props.isOpen]
+      ),
+    }
+  );
 
-    const [state, send] = useMachine(
-      dialog.machine({
-        onOpen,
-        onClose,
-        id,
-        initialFocusEl: initialFocusRef?.current,
-        closeOnOutsideClick: closeOnClickaway,
-        preventScroll,
-        role,
-      }),
-      {
-        context: React.useMemo(
-          () => ({
-            open: isOpen,
-          }),
-          [props.isOpen]
-        ),
-      }
-    );
+  const api = dialog.connect(state, send, normalizeProps);
 
-    const api = dialog.connect(state, send, normalizeProps);
+  const onCloseButtonClick = (event: any) => {
+    _setInternalOpen(false);
 
-    return (
-      <>
-        {trigger && React.cloneElement(trigger, api.triggerProps)}
+    // Add an artificial delay for the close animation to show
+    setTimeout(() => {
+      api.closeTriggerProps.onClick?.(event);
+      onClose?.();
+    }, 300);
+  };
 
-        <Portal>
-          <FadeIn isVisible={api.isOpen}>
-            <div
-              ref={forwardedRef}
-              className={clx(themeStore.themeClass, className)}
-            >
-              <div {...api.backdropProps} className={styles.modalBackdrop} />
-              <div {...api.containerProps} className={styles.modalContainer}>
-                <div
-                  {...api.contentProps}
-                  className={clx(styles.modalContent, contentClassName)}
-                  data-modal-part="content"
-                >
-                  {header &&
-                    React.cloneElement(header, {
-                      titleProps: api.titleProps,
-                      descriptionProps: api.descriptionProps,
-                      closeButtonProps: {
-                        ...api.closeTriggerProps,
-                        onClick: (event: any) => {
-                          api.closeTriggerProps.onClick?.(event);
-                          onClose?.();
-                        },
-                      },
-                    })}
+  return (
+    <>
+      {trigger && cloneElement(trigger, api.triggerProps)}
 
-                  <div className={childrenClassName} data-modal-part="children">
-                    {children}
-                  </div>
+      <Portal>
+        <FadeIn isVisible={_internalOpen}>
+          <div
+            ref={forwardedRef}
+            className={clx(themeStore.themeClass, className)}
+          >
+            <div {...api.backdropProps} className={styles.modalBackdrop} />
+            <div {...api.containerProps} className={styles.modalContainer}>
+              <div
+                {...api.contentProps}
+                className={clx(styles.modalContent, contentClassName)}
+                data-modal-part="content"
+              >
+                {header &&
+                  cloneElement(header, {
+                    titleProps: api.titleProps,
+                    descriptionProps: api.descriptionProps,
+                    closeButtonProps: {
+                      ...api.closeTriggerProps,
+                      onClick: onCloseButtonClick,
+                    },
+                  })}
+
+                <div className={childrenClassName} data-modal-part="children">
+                  {children}
                 </div>
               </div>
             </div>
-          </FadeIn>
-        </Portal>
-      </>
-    );
-  }
-);
+          </div>
+        </FadeIn>
+      </Portal>
+    </>
+  );
+});
 
 export default Modal;

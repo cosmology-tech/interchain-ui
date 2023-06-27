@@ -8,7 +8,7 @@
     "strict": false,
     "skipLibCheck": true,
     "jsx": "react-jsx",
-    "module": "ESNext",
+    "module": "es2020",
     "downlevelIteration": true,
     "declaration": true,
     "emitDeclarationOnly": true,
@@ -19,6 +19,5 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }
