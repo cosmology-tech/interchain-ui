@@ -1,14 +1,18 @@
 import { createStore } from "zustand/vanilla";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { ModePreference, NumberFormatter } from "./system.model";
+import { ModePreference, ThemeVariant, NumberFormatter } from "./system.model";
 import { isPreferDarkMode, isPreferLightMode } from "../helpers/style";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
 
 export const STORAGE_NAME = "cosmology-ui-store";
 
 export interface UIState {
-  theme: ModePreference;
+  // This is the value persisted in localstorage
+  themeMode: ModePreference;
+  // This is the value that our theme system uses for styling .ie styleVariants
+  // which is derived from themeMode
+  theme: ThemeVariant;
   themeClass: string;
   // Useful for use in SSR frameworks to check if the store has hydrated
   // and merged state with localstorage yet
@@ -16,7 +20,8 @@ export interface UIState {
 }
 
 export interface UIAction {
-  setTheme: (theme: ModePreference) => void;
+  setThemeMode: (mode: ModePreference) => void;
+  setTheme: (theme: ThemeVariant, themeClass: string) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
 }
 
@@ -33,25 +38,36 @@ export interface UIStore extends UIState, UIAction, I18nState, I18nAction {}
 export const store = createStore(
   persist(
     immer<UIStore>((set) => ({
+      themeMode: null,
       theme: null,
       themeClass: "",
       _hasHydrated: false,
-      setTheme: (newTheme: ModePreference) =>
+      setTheme: (newTheme: ThemeVariant, themeClass: string) =>
         set((state) => {
           state.theme = newTheme;
-
+          state.themeClass = themeClass;
+        }),
+      setThemeMode: (newThemeMode: ModePreference) =>
+        set((state) => {
           const themeClass = { dark: darkThemeClass, light: lightThemeClass }[
-            newTheme
+            newThemeMode
           ];
 
-          const resolveSystem = () => {
-            if (isPreferDarkMode()) return darkThemeClass;
-            if (isPreferLightMode()) return lightThemeClass;
-            return "";
+          const resolveSystemMode = (): [ThemeVariant, string] => {
+            if (isPreferDarkMode()) {
+              return ["dark", darkThemeClass];
+            }
+            if (isPreferLightMode()) {
+              return ["light", lightThemeClass];
+            }
           };
 
+          const [resolvedTheme, resolvedClass] = resolveSystemMode();
+
+          state.themeMode = newThemeMode;
+          state.theme = resolvedTheme;
           state.themeClass =
-            newTheme === "system" ? resolveSystem() : themeClass;
+            newThemeMode === "system" ? resolvedClass : themeClass;
         }),
       formatNumber: null,
       setFormatNumberFn: (fn: NumberFormatter) =>
@@ -71,7 +87,7 @@ export const store = createStore(
       },
       // Only choose to persist theme preference, ignore other state
       partialize: (state) => ({
-        theme: state.theme,
+        themeMode: state.themeMode,
       }),
     }
   )
