@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-beta.0](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.0.1-beta.1...@cosmology-ui/react@1.1.0-beta.0) (2023-06-27)
+
+### Bug Fixes
+
+- Added "id" props for pool-card and pool-list-item ([06bee30](https://github.com/cosmology-tech/ui-kit/commit/06bee30c4d2dd2f5ed7067df16adf35ee88bf587))
+- Fixed progress-bar story ui ([aeecf25](https://github.com/cosmology-tech/ui-kit/commit/aeecf255abd3b87510f18b27a64358fed7755e40))
+- improve and fix some nextjs related bugs ([#32](https://github.com/cosmology-tech/ui-kit/issues/32)) ([ae5b352](https://github.com/cosmology-tech/ui-kit/commit/ae5b35247b1a2e12f956363761c56e00e1fb9818))
+- Replace big.js to big number.js for aligning with the standard ([bf4dcd7](https://github.com/cosmology-tech/ui-kit/commit/bf4dcd7c90e72030a34b61ebd8f0505c03018e83))
+
+### Features
+
+- Add pool-info-header & manage-liquidity-card components ([6657eb7](https://github.com/cosmology-tech/ui-kit/commit/6657eb7af71e45ab0fe8a750ee1594f7d7fc1faa))
+- Add progress-bar components ([f6d8de7](https://github.com/cosmology-tech/ui-kit/commit/f6d8de778ed274e5640662c792cf336a757ec2bd))
+- Add related components for bonding ([3a762bc](https://github.com/cosmology-tech/ui-kit/commit/3a762bc277bc67ac2ac47d87f3576045d15a5817))
+- Added add-liquidity & token-input components ([17db018](https://github.com/cosmology-tech/ui-kit/commit/17db018aef2247c3b606cf8d95b689f997028bfa))
+- Added asset-item-transfer component ([0cf0f14](https://github.com/cosmology-tech/ui-kit/commit/0cf0f14d550acfb27b02af81d85882f87fb4d3ab))
+- Added asset-list related components ([925ab52](https://github.com/cosmology-tech/ui-kit/commit/925ab523571ce40fc23b5963ef0aee7426e1f048))
+- Added icon-button component ([76cefab](https://github.com/cosmology-tech/ui-kit/commit/76cefabffa13b54944dcb64ff3c926fb1f8d1c12))
+- Added overview-transfer ([f3b44bb](https://github.com/cosmology-tech/ui-kit/commit/f3b44bb341ab4ed8b644149fec74f3076f2505ff))
+- Added remove-liquidity & bonding-more components ([b4ddd7f](https://github.com/cosmology-tech/ui-kit/commit/b4ddd7f127aebdb1f91a4edf309c42244ef391d1))
+- **build:** add unlink css post processing ([#31](https://github.com/cosmology-tech/ui-kit/issues/31)) ([3d40e8a](https://github.com/cosmology-tech/ui-kit/commit/3d40e8ac4f83f362f376d2af0e890f33684a552f))
+
 ## [1.0.1-beta.1](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.0.1-beta.0...@cosmology-ui/react@1.0.1-beta.1) (2023-06-14)
 
 **Note:** Version bump only for package @cosmology-ui/react
