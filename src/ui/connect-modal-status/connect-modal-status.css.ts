@@ -12,7 +12,7 @@ export const modalStatusContainer = style([
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "20rem",
+    width: "100%",
   },
   s({
     px: "8",

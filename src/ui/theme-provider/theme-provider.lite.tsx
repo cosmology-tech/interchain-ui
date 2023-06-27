@@ -41,13 +41,14 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     },
   });
 
+  // System mode: change based on user preference
   onUpdate(() => {
     if (!state.preferredMode || !state.isMounted) return;
 
-    const theme = store.getState().theme;
+    const themeMode = store.getState().themeMode;
 
-    if (theme === "system") {
-      return store.getState().setTheme(state.preferredMode);
+    if (themeMode === "system") {
+      return store.getState().setThemeMode(themeMode);
     }
   }, [state.preferredMode, store.getState().theme, state.isMounted]);
 

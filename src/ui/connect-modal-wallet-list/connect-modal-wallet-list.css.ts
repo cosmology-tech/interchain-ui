@@ -9,6 +9,7 @@ export const container = style({
 export const walletList = style([
   {
     maxHeight: "320px",
+    width: "100%",
     overflow: "auto",
     scrollbarWidth: "none",
     selectors: {
@@ -18,18 +19,22 @@ export const walletList = style([
     },
   },
   s({
-    paddingTop: "2",
     paddingBottom: "8",
-    px: "8",
+    paddingTop: "1",
   }),
 ]);
 
-export const squareWallets = style({
-  display: "grid",
-  columnGap: themeVars.space[5],
-  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-  marginBottom: themeVars.space[5],
-});
+export const squareWallets = style([
+  {
+    display: "grid",
+    columnGap: themeVars.space[5],
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    marginBottom: themeVars.space[5],
+  },
+  s({
+    mx: "1",
+  }),
+]);
 
 export const listWallets = style([
   {
@@ -39,5 +44,6 @@ export const listWallets = style([
   },
   s({
     paddingBottom: "4",
+    mx: "1",
   }),
 ]);
