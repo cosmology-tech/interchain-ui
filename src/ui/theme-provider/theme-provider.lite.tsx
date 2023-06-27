@@ -6,69 +6,63 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import { mediaQueryColorScheme } from "../../helpers/style";
+import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
-import { darkThemeClass, lightThemeClass } from "../../styles/themes.css";
+import { ThemeVariant } from "../../models/system.model";
+import { resolveThemeMode } from "../../helpers/style";
 import type { ThemeProviderProps } from "./theme-provider.types";
 
 export default function ThemeProvider(props: ThemeProviderProps) {
   let cleanupRef = useRef<() => void>(null);
+
   const state = useStore<{
     lightQuery: any;
     darkQuery: any;
     isDark: boolean;
     isLight: boolean;
+    isMounted: boolean;
+    preferredMode: ThemeVariant | null;
   }>({
+    preferredMode: null,
+    isMounted: false,
     get lightQuery() {
-      return window.matchMedia?.(mediaQueryColorScheme(`light`));
+      if (isSSR()) return null;
+      return window?.matchMedia?.(mediaQueryColorScheme(`light`));
     },
     get darkQuery() {
-      return window.matchMedia?.(mediaQueryColorScheme(`dark`));
+      if (isSSR()) return null;
+      return window?.matchMedia?.(mediaQueryColorScheme(`dark`));
     },
     get isDark() {
-      return state.darkQuery?.matches;
+      return !!state.darkQuery?.matches;
     },
     get isLight() {
-      return state.lightQuery?.matches;
+      return !!state.lightQuery?.matches;
     },
-  });
-
-  onMount(() => {
-    const preferredTheme = props.defaultTheme || "dark";
-    store
-      .getState()
-      .setTheme(
-        preferredTheme,
-        preferredTheme === "dark" ? darkThemeClass : lightThemeClass
-      );
   });
 
   onUpdate(() => {
-    if (typeof props.defaultTheme === "string") {
-      const preferredTheme = props.defaultTheme || "dark";
-      return store
-        .getState()
-        .setTheme(
-          preferredTheme,
-          preferredTheme === "dark" ? darkThemeClass : lightThemeClass
-        );
-    }
+    if (!state.preferredMode || !state.isMounted) return;
 
-    if (state.isDark) {
-      return store.getState().setTheme("dark", darkThemeClass);
-    }
+    const theme = store.getState().theme;
 
-    return store.getState().setTheme("light", lightThemeClass);
-  }, [state.isDark, state.isLight, props.defaultTheme]);
+    if (theme === "system") {
+      return store.getState().setTheme(state.preferredMode);
+    }
+  }, [state.preferredMode, store.getState().theme, state.isMounted]);
 
   onMount(() => {
+    resolveThemeMode(props.defaultTheme);
+    state.isMounted = true;
+
     const darkListener = ({ matches }: MediaQueryListEvent) => {
       if (matches) {
-        store.getState().setTheme("dark", darkThemeClass);
+        state.preferredMode = "dark";
       }
     };
     const lightListener = ({ matches }: MediaQueryListEvent) => {
       if (matches) {
-        store.getState().setTheme("light", lightThemeClass);
+        state.preferredMode = "light";
       }
     };
 
