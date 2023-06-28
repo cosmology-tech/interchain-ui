@@ -1,3 +1,4 @@
+/// <reference types="./global.d.ts" />
 import { setPlatform, Platform } from "./helpers";
 
 export { setDebugLevel, createCustomTheme, DebugLevel } from "./helpers";

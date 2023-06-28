@@ -1,18 +1,8 @@
-import {
-  Show,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
-import clsx from "clsx";
+import { useStore, onUpdate } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import TokenInput from "../token-input";
-
-import * as styles from "./add-liquidity.css";
 import { AddLiquidityProps } from "./add-liquidity.types";
 
 export default function AddLiquidity(props: AddLiquidityProps) {
@@ -84,7 +74,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         denom={props.token1.denom}
         available={props.token1.available}
         imgSrc={props.token1.imgSrc}
-        amount={state.amount1}
+        amount={Number(state.amount1)}
         onProgressChange={(v) => state.handleProgress1Change(v)}
         onAmountChange={(value) => state.handleAmoount1Change(value)}
       />
@@ -94,7 +84,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         denom={props.token2.denom}
         available={props.token2.available}
         imgSrc={props.token2.imgSrc}
-        amount={state.amount2}
+        amount={Number(state.amount2)}
         onProgressChange={(v) => state.handleProgress2Change(v)}
         onAmountChange={(value) => state.handleAmoount2Change(value)}
       />
