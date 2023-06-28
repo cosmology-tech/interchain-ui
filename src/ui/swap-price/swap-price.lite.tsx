@@ -1,4 +1,11 @@
-import { useRef, onMount, useStore, Show, For } from "@builder.io/mitosis";
+import {
+  useRef,
+  onMount,
+  useStore,
+  Show,
+  For,
+  Fragment,
+} from "@builder.io/mitosis";
 import clsx from "clsx";
 import { animate } from "motion";
 import Stack from "../stack";
@@ -6,7 +13,7 @@ import Box from "../box";
 import Text from "../text";
 import IconButton from "../icon-button";
 import * as styles from "./swap-price.css";
-import { SwapPriceProps } from "./swap-price.types";
+import { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
 
 export default function SwapPrice(props: SwapPriceProps) {
   const priceRef = useRef(null);
@@ -43,12 +50,14 @@ export default function SwapPrice(props: SwapPriceProps) {
       >
         <Text color="text">Price</Text>
         <Stack align="center">
-          <Text weight="semibold">1 OSMO = 1.6423 USDC</Text>
+          <Text weight="semibold">
+            {`1 ${props?.tokenOutSymbol} = ${props?.price?.priceRate} ${props?.tokenOutSymbol}`}
+          </Text>
           <Text
             color="textSecondary"
             attributes={{ marginLeft: "9", marginRight: "13" }}
           >
-            ~ $1,013
+            {`~ $${props?.price?.dollarValue}`}
           </Text>
           <IconButton
             intent={state.isExpanded ? "tertiary" : "text"}
@@ -67,7 +76,7 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Text color="textSecondary">Price Impact</Text>
             <Text color="textSecondary" weight="bold">
-              -0.07
+              {props.priceImpact}
             </Text>
           </Stack>
           <Stack
@@ -75,9 +84,11 @@ export default function SwapPrice(props: SwapPriceProps) {
             align="center"
             attributes={{ marginBottom: "10" }}
           >
-            <Text color="textSecondary">Swap Fee (0.199%)</Text>
+            <Text color="textSecondary">
+              Swap Fee ({props?.swapFee?.percentage})
+            </Text>
             <Text color="textSecondary" weight="bold">
-              ~ $0.01
+              {`~ ${props?.swapFee?.value}`}
             </Text>
           </Stack>
           <Stack
@@ -87,7 +98,7 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Text color="textSecondary">Expected Output</Text>
             <Text color="textSecondary" weight="bold">
-              ~ 0.00096882373984234982 HUAHUA
+              {`~ ${props?.expectedOutput} ${props?.tokenOutSymbol}`}
             </Text>
           </Stack>
           <Stack
@@ -97,7 +108,7 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Text color="textSecondary">Minimum received after slippage</Text>
             <Text color="textSecondary" weight="bold">
-              0.00096882373984234982 HUAHUA
+              {`${props?.minimumReceived} ${props?.tokenOutSymbol}`}
             </Text>
           </Stack>
           <Text color="textSecondary" attributes={{ py: "10" }}>
@@ -110,49 +121,52 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Box marginRight="6">
               <img
+                alt={props?.routeDetail?.tokenIn?.symbol}
                 className={styles.img}
-                src="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
+                src={props?.routeDetail?.tokenIn?.logoUrl}
               />
             </Box>
             <Box className={styles.routeDivider} />
-            <Box
-              width="16"
-              height="12"
-              marginLeft="6"
-              marginRight="5"
-              position="relative"
-            >
-              <img
-                className={styles.img}
-                src="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
-              />
-              <img
-                className={clsx(styles.img, styles.absImg)}
-                src="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
-              />
-            </Box>
-            <Box className={styles.routeDivider} />
-            <Box
-              width="16"
-              height="12"
-              marginLeft="6"
-              marginRight="5"
-              position="relative"
-            >
-              <img
-                className={styles.img}
-                src="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
-              />
-              <img
-                className={clsx(styles.img, styles.absImg)}
-                src="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
-              />
-            </Box>
-            <Box className={styles.routeDivider} />
+            {/* Mapping routeDetail */}
+
+            <For each={props?.routeDetail?.routes}>
+              {(item: SwapPriceDetailRoute, index: number) => (
+                <Fragment key={item.poolId}>
+                  <Box
+                    width="16"
+                    height="12"
+                    marginLeft="6"
+                    marginRight="5"
+                    position="relative"
+                  >
+                    <img
+                      className={styles.img}
+                      alt={item?.baseSymbol}
+                      src={item?.baseLogo}
+                    />
+                    <img
+                      className={clsx(styles.img, styles.absImg)}
+                      alt={item?.quoteSymbol}
+                      src={item?.quoteLogo}
+                    />
+                  </Box>
+                  <Text
+                    color="textSecondary"
+                    weight="bold"
+                    attributes={{ marginRight: "5" }}
+                  >
+                    {item?.swapFee}
+                  </Text>
+                  <Box className={styles.routeDivider} />
+                </Fragment>
+              )}
+            </For>
+
             <Box marginLeft="6">
               <img
+                alt={props?.routeDetail?.tokenOut?.symbol}
                 className={styles.img}
-                src="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
+                src={props?.routeDetail?.tokenOut?.logoUrl}
               />
             </Box>
           </Stack>

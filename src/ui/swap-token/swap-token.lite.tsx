@@ -1,6 +1,6 @@
 import { useRef, onMount, useStore, Show, For } from "@builder.io/mitosis";
 import { animate } from "motion";
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from "lodash/cloneDeep";
 import clsx from "clsx";
 import Stack from "../stack";
 import Text from "../text";
@@ -23,8 +23,8 @@ export default function SwapToken(props: SwapTokenProps) {
     swapIcon: IconProps["name"];
     tolerance: number;
     isSetting: boolean;
-    fromItem: SwapItemProps,
-    toItem: SwapItemProps,
+    fromItem: SwapItemProps;
+    toItem: SwapItemProps;
     toggleIcon: (deg: number, icon: IconProps["name"]) => void;
     toggleToteranceStatus: () => void;
     setToterance: (per: number) => void;
@@ -69,22 +69,24 @@ export default function SwapToken(props: SwapTokenProps) {
       const copyTo: SwapItemProps = cloneDeep(state.toItem);
       state.fromItem = copyTo;
       state.toItem = copyFrom;
-    }
+    },
   });
 
   onMount(() => {
     state.fromItem = {
       symbol: "OSMO",
       denom: "Osmosis",
-      imgSrc: "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+      imgSrc:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
       availableAmount: 0.696742,
-    }
+    };
     state.toItem = {
       symbol: "ATMO",
       denom: "Cosmos Hub",
-      imgSrc: "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-      availableAmount: 0.006330,
-    }
+      imgSrc:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+      availableAmount: 0.00633,
+    };
   });
   return (
     <Stack direction="column" className={styles.swapTokenContainer}>
@@ -173,7 +175,15 @@ export default function SwapToken(props: SwapTokenProps) {
           </div>
         </Stack>
       </Stack>
-      <SwapPrice />
+      <SwapPrice
+        price={props?.swapPrice?.price}
+        priceImpact={props?.swapPrice?.priceImpact}
+        swapFee={props?.swapPrice?.swapFee}
+        expectedOutput={props?.swapPrice?.expectedOutput}
+        tokenOutSymbol={props?.swapPrice?.tokenOutSymbol}
+        minimumReceived={props?.swapPrice?.minimumReceived}
+        routeDetail={props?.swapPrice?.routeDetail}
+      />
       <Button intent="tertiary" size="lg">
         Swap
       </Button>
