@@ -1,9 +1,7 @@
 import { For } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
-import Text from "../text";
 import BondingCard from "../bonding-card";
-import * as styles from "./bonding-card-list.css";
 import { BondingCardListProps } from "./bonding-card-list.types";
 import { BondingCardProps } from "../bonding-card/bonding-card.types";
 

@@ -65,8 +65,9 @@ export const range = style([
   {
     outline: "none",
     width: "100%",
-    cursor: 'pointer',
-    "-webkit-appearance": "none",
+    cursor: "pointer",
+    appearance: "none",
+    WebkitAppearance: "none",
     backgroundImage: `linear-gradient(${themeVars.colors.text}, ${themeVars.colors.text})`,
     backgroundRepeat: "no-repeat",
     "::-webkit-slider-thumb": {
@@ -75,13 +76,14 @@ export const range = style([
       border: "0",
       backgroundColor: themeVars.colors.text,
       borderRadius: "50%",
-      "-webkit-appearance": "none",
+      appearance: "none",
+      WebkitAppearance: "none",
     },
     selectors: {
       "&:active::-webkit-slider-thumb": {
         width: "28px",
         height: "28px",
       },
-    }
+    },
   },
 ]);
