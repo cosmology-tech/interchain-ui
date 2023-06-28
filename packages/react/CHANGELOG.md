@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-beta.1](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.0...@cosmology-ui/react@1.1.0-beta.1) (2023-06-28)
+
+### Bug Fixes
+
+- TS errors ([#36](https://github.com/cosmology-tech/ui-kit/issues/36)) ([85d4732](https://github.com/cosmology-tech/ui-kit/commit/85d4732d735620416007084a345bc01ba8f42fd9))
+
 # [1.1.0-beta.0](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.0.1-beta.1...@cosmology-ui/react@1.1.0-beta.0) (2023-06-27)
 
 ### Bug Fixes
