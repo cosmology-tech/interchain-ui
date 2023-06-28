@@ -19,6 +19,7 @@
     "clean": "rimraf packages/{react,vue}/{src,dist,lib,types,node_modules,stats.html}; rimraf ./node_modules",
     "clean:assets": "rimraf packages/{react,vue}/{src,dist,lib,types,stats.html}",
     "lerna": "lerna run",
+    "pub:beta": "lerna publish --no-private --preid beta",
     "lint": "run-p lint:**",
     "lint:scripts": "eslint --fix \"./src/**/*.tsx\"",
     "build": "lerna run compile"
