@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-beta.5](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.4...@cosmology-ui/react@1.1.0-beta.5) (2023-06-30)
+
+### Bug Fixes
+
+- bundle not resolved in next ([703723f](https://github.com/cosmology-tech/ui-kit/commit/703723f5b9c5408399271e364bd90a72baf37471))
+
 # [1.1.0-beta.4](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.3...@cosmology-ui/react@1.1.0-beta.4) (2023-06-30)
 
 **Note:** Version bump only for package @cosmology-ui/react
