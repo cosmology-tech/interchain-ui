@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "module": "es2020",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
