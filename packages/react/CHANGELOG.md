@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-beta.6](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.5...@cosmology-ui/react@1.1.0-beta.6) (2023-06-30)
+
+### Bug Fixes
+
+- temporarily remove layout animation ([f14ad8b](https://github.com/cosmology-tech/ui-kit/commit/f14ad8b4702cb01c41d08988219dfc93f26ab8ae))
+
 # [1.1.0-beta.5](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.4...@cosmology-ui/react@1.1.0-beta.5) (2023-06-30)
 
 ### Bug Fixes
