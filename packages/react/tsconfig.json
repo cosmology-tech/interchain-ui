@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["ES2015", "DOM"],
+    "lib": ["ESNext", "DOM"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "module": "es2020",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
