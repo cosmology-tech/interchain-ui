@@ -50,16 +50,14 @@ export default function NftMint(props: NftMintProps) {
             >
               {props?.name}
             </Text>
-            <Text color="textSecondary">
-              {props?.description}
-            </Text>
+            <Text color="textSecondary">{props?.description}</Text>
             <Stack justify="space-between" attributes={{ my: "9" }}>
               <Stack direction="column">
                 <Text color="textSecondary" weight="semibold">
                   Quantity
                 </Text>
                 <Text size="4xl" weight="semibold">
-                  {store.getState()?.formatNumber?.({value: props?.quantity})}
+                  {store.getState()?.formatNumber?.({ value: props?.quantity })}
                 </Text>
               </Stack>
               <Stack direction="column">
@@ -100,7 +98,9 @@ export default function NftMint(props: NftMintProps) {
                   Available
                 </Text>
                 <Text color="textSecondary" weight="semibold">
-                  {`${store.getState()?.formatNumber?.({value: props?.available})} STARS`}
+                  {`${store
+                    .getState()
+                    ?.formatNumber?.({ value: props?.available })} STARS`}
                 </Text>
               </Stack>
             </Stack>
@@ -119,10 +119,17 @@ export default function NftMint(props: NftMintProps) {
                   Price:
                 </Text>
                 <Text color="textSecondary" weight="semibold">
-                {`${store.getState()?.formatNumber?.({value: props?.price})} STARS`}
+                  {`${store
+                    .getState()
+                    ?.formatNumber?.({ value: props?.price })} STARS`}
                 </Text>
               </Stack>
-              <Text color="textSecondary"> {`Limited to ${store.getState()?.formatNumber?.({value: props?.minted})} tokens`} </Text>
+              <Text color="textSecondary">
+                {" "}
+                {`Limited to ${store
+                  .getState()
+                  ?.formatNumber?.({ value: props?.minted })} tokens`}{" "}
+              </Text>
             </Stack>
             <Button size="lg" intent="tertiary">
               Mint
