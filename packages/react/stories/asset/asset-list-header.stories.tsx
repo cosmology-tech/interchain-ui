@@ -5,7 +5,7 @@ import { AssetListHeader } from "../../src";
 
 const meta: Meta<typeof AssetListHeader> = {
   component: AssetListHeader,
-  title: "Asset/asset-list-header",
+  title: "Asset/AssetListHeader",
   tags: ["autodocs"],
   argTypes: {},
 };

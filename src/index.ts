@@ -1,3 +1,4 @@
+/// <reference types="./global.d.ts" />
 import { setPlatform, Platform } from "./helpers";
 
 export { setDebugLevel, createCustomTheme, DebugLevel } from "./helpers";
@@ -39,6 +40,7 @@ export { default as BondingListItemSm } from "./ui/bonding-list-item-sm";
 export { default as BondingListSm } from "./ui/bonding-list-sm";
 export { default as BondingArea } from "./ui/bonding-area";
 export { default as QRCode } from "./ui/qrcode";
+export { default as IconButton } from "./ui/icon-button";
 export { default as ProgressBar } from "./ui/progress-bar";
 export { default as CircularProgressBar } from "./ui/circular-progress-bar";
 export { default as TokenInput } from "./ui/token-input";
@@ -54,7 +56,6 @@ export { default as OverviewTransfer } from "./ui/overview-transfer";
 export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
-export { default as IconButton } from "./ui/icon-button";
 export { default as SwapPrice } from "./ui/swap-price";
 // End Components
 

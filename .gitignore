@@ -17,3 +17,4 @@ packages/vue/src
 /.yarnrc
 /.npmrc
 .parcel-cache
+parcel-bundle-reports

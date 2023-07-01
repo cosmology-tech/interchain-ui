@@ -2,7 +2,6 @@ import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import Button from "../button";
-import * as styles from "./bonding-list-item-sm.css";
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
@@ -20,7 +19,11 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               marginBottom: "9",
             }}
           >
-            <Text color="textSecondary" weight="semibold" attributes={{ marginRight: "5" }}>
+            <Text
+              color="textSecondary"
+              weight="semibold"
+              attributes={{ marginRight: "5" }}
+            >
               APR
             </Text>
             <Text size="4xl" color="textSecondary" weight="semibold">
@@ -33,7 +36,9 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
         </Stack>
         <Stack direction="column">
           <Stack align="baseline">
-            <Text weight="semibold" attributes={{ marginRight: "1" }}>$</Text>
+            <Text weight="semibold" attributes={{ marginRight: "1" }}>
+              $
+            </Text>
             <Text weight="semibold" size="4xl">
               {props.amount}
             </Text>

@@ -1,9 +1,12 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 
+export const assetListItem = style({
+  minWidth: "720px",
+});
+
 export const imageContainer = sprinkles({
   width: "19",
-  paddingLeft: "5",
 });
 export const lgImg = style([
   sprinkles({

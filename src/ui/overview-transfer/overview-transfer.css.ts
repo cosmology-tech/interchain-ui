@@ -4,8 +4,8 @@ import { sprinkles } from "../../styles/sprinkles.css";
 
 const buttonTextColorVar = createVar();
 
-export const container = style({
-  minWidth: "480px"
+export const overviewTransfer = style({
+  minWidth: "670px"
 })
 
 export const img = sprinkles({

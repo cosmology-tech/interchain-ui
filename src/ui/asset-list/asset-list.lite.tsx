@@ -13,7 +13,7 @@ export default function AssetList(props: AssetListProps) {
     isOtherChains: false,
   });
   return (
-    <Stack direction="column">
+    <Stack className={styles.assetList} direction="column">
       <Stack>
         <Box width="19" />
         <Stack flex={1} attributes={{ marginBottom: "12" }}>

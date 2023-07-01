@@ -29,13 +29,13 @@ export default function SwapPrice(props: SwapPriceProps) {
         animate(
           priceRef,
           { maxHeight: "1000px" },
-          { duration: 0.1, easing: "ease-in-out" }
+          { duration: 0.2, easing: "ease-in-out" }
         );
       } else {
         animate(
           priceRef,
           { maxHeight: "0" },
-          { duration: 0.1, easing: "ease-in-out" }
+          { duration: 0.2, easing: "ease-in-out" }
         );
       }
     },

@@ -11,6 +11,7 @@ import {
   connectingLogoFrame,
   notExistLogoFrame,
   errorDescription,
+  statusLogoImageSvg,
 } from "./connect-modal-status.css";
 import { bottomShadow } from "../shared/shared.css";
 import type { ConnectModalStatusProps } from "./connect-modal-status.types";
@@ -141,15 +142,27 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             })
           )}
         >
-          <div className={statusLogoImage}>
-            <img
-              src={props.connectedInfo.avatarUrl}
-              alt={props.connectedInfo.name}
-              className={s({ width: "full", height: "full" })}
-            />
-          </div>
-        </div>
+          <Show when={typeof props.connectedInfo.avatar === "string"}>
+            <div className={statusLogoImage}>
+              <img
+                src={props.connectedInfo.avatar}
+                alt={props.connectedInfo.name}
+                className={s({ width: "full", height: "full" })}
+              />
+            </div>
+          </Show>
 
+          <Show
+            when={
+              !!props.connectedInfo.avatar &&
+              typeof props.connectedInfo.avatar !== "string"
+            }
+          >
+            <div className={statusLogoImageSvg}>
+              {props.connectedInfo.avatar}
+            </div>
+          </Show>
+        </div>
         <div
           className={s({
             display: "flex",

@@ -25,7 +25,10 @@ export default function ConnectModalQrCodeError(
       <div className={qrcodeBlur} />
 
       <div className={qrcodeReloadButtonContainer}>
-        <button onClick={props.onRefresh} className={qrcodeReloadButton}>
+        <button
+          onClick={() => props.onRefresh?.()}
+          className={qrcodeReloadButton}
+        >
           <span>
             <Icon name="restart" size="lg" />
           </span>

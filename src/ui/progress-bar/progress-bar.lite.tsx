@@ -1,11 +1,4 @@
-import {
-  useMetadata,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
+import { onMount, onUpdate, useRef } from "@builder.io/mitosis";
 import Box from "../box";
 import * as styles from "./progress-bar.css";
 import { ProgressBarProps } from "./progress-bar.types";
@@ -38,9 +31,9 @@ export default function ProgressBar(props: ProgressBarProps) {
         type="range"
         ref={inputRef}
         onChange={(e) => {
-          let min = e.target.min;
-          let max = e.target.max;
-          let val = e.target.value;
+          let min = +e.target.min;
+          let max = +e.target.max;
+          let val = +e.target.value;
           const result = ((val - min) * 100) / (max - min);
           e.target.style.backgroundSize = `${result}% 100%`;
           props.onProgressChange(result);

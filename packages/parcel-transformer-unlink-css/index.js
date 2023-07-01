@@ -12,16 +12,25 @@ module.exports = new Optimizer({
 });
 
 function unlinkStylesheets(code) {
-  const cssImport = getCssImport();
-  return code.replace(cssImport, "").trim();
+  const cssImports = getCssImports();
+  let finalCode = code;
+
+  cssImports.forEach((importStatement) => {
+    finalCode = finalCode.replace(importStatement, "");
+  });
+  return finalCode.trim();
 }
 
-function getCssImport() {
+function getCssImports() {
   const path = process.cwd();
   const re = /packages\/(.*)/gi;
   const matches = path.match(re);
   if (!matches) return "";
 
   const platform = matches[0].replace("packages/", "");
-  return `import "./cosmology-ui-kit-${platform}.cjs.css";`;
+
+  return [
+    `require("./cosmology-ui-kit-${platform}.cjs.css");`,
+    `import "./cosmology-ui-kit-${platform}.cjs.css";`,
+  ];
 }

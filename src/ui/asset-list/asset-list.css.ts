@@ -1,3 +1,5 @@
 import { style } from "@vanilla-extract/css";
 
-export const test = style({});
+export const assetList = style({
+  minWidth: "720px",
+});

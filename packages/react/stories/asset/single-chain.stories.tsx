@@ -4,7 +4,7 @@ import { SingleChain } from "../../src";
 
 const meta: Meta<typeof SingleChain> = {
   component: SingleChain,
-  title: "Asset/single-chain",
+  title: "Asset/SingleChain",
   tags: ["autodocs"],
   argTypes: {},
 };

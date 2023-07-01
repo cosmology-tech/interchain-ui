@@ -1,11 +1,4 @@
-import {
-  For,
-  Show,
-  useDefaultProps,
-  useStore,
-  onMount,
-} from "@builder.io/mitosis";
-import clsx from "clsx";
+import { Show, useDefaultProps, useStore, onUpdate } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -25,11 +18,13 @@ export default function AssetListItem(props: AssetListItemProps) {
   }>({
     size: "xs",
   });
-  onMount(() => {
+
+  onUpdate(() => {
     state.size = props.isOtherChains ? "xs" : "sm";
-  });
+  }, [props.isOtherChains]);
+
   return (
-    <Stack align="center">
+    <Stack className={styles.assetListItem} align="center">
       <Box className={styles.imageContainer}>
         <img
           src={props.imgSrc}

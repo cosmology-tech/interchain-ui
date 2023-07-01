@@ -1,4 +1,4 @@
-import { BaseComponentProps } from "../../models/components.model";
+import { BaseComponentProps } from "../../models/components.model";import type { ClassValue } from "clsx";
 export interface ShowMoreProps {
   initialHeightPercent?:
   | 0.1
@@ -14,4 +14,5 @@ export interface ShowMoreProps {
   showMoreTitle?: string;
   showLessTitle?: string;
   children: BaseComponentProps["children"];
+  className?: ClassValue;
 }

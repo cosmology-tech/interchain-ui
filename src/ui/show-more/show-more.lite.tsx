@@ -87,11 +87,14 @@ export default function ShowMore(props: ShowMoreProps) {
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
-    window.removeEventListener("resize", resizeRef);
+
+    if (window) {
+      window.removeEventListener("resize", resizeRef);
+    }
   });
 
   return (
-    <div ref={elementRef} className={styles.container}>
+    <div ref={elementRef} className={clsx(styles.container, props.className)}>
       {props.children}
       <Show when={!state.isVisible}>
         <Stack

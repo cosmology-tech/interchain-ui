@@ -143,21 +143,21 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
           >
             {props.errorTitle}
           </Text>
+        </Show>
 
-          <Show when={props.status === "Expired"}>
-            <Text
-              as="p"
-              fontWeight="medium"
-              size="md"
-              marginTop="2"
-              color={{
-                light: "orange300",
-                dark: "orange200",
-              }}
-            >
-              {props.errorTitle}
-            </Text>
-          </Show>
+        <Show when={props.status === "Expired"}>
+          <Text
+            as="p"
+            fontWeight="medium"
+            size="md"
+            marginTop="2"
+            color={{
+              light: "orange300",
+              dark: "orange200",
+            }}
+          >
+            {props.errorTitle}
+          </Text>
         </Show>
       </Show>
 
