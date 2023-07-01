@@ -1,23 +1,19 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "ES2015",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["ESNext", "DOM"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
+    "types": ["node"],
     "skipLibCheck": true,
-    "jsx": "react",
-    "module": "ESNext",
-    "downlevelIteration": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "sourceMap": true,
+    "jsx": "react-jsx",
+    "module": "es2020",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"]
+  "exclude": ["node_modules"],
+  "include": ["src", "global.d.ts"]
 }

@@ -3,7 +3,7 @@ import type { Wallet } from "../connect-modal-wallet-list/connect-modal-wallet-l
 
 export interface ConnectedInfo {
   name?: string;
-  avatarUrl: string;
+  avatar?: any;
   address: string;
 }
 

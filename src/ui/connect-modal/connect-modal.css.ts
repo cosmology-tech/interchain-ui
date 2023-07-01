@@ -33,12 +33,12 @@ export const modalContent = style([
 
 export const modalChildren = style([
   {
-    maxWidth: "320px",
+    width: "320px",
   },
   s({
-    paddingLeft: "10",
-    paddingRight: "10",
-    paddingTop: "10",
-    paddingBottom: "14",
+    paddingLeft: "8",
+    paddingRight: "8",
+    paddingTop: "3",
+    paddingBottom: "10",
   }),
 ]);

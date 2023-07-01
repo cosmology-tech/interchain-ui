@@ -88,6 +88,7 @@ const unresponsiveProperties = defineProperties({
       out: "cubic-bezier(0, 0, 0.2, 1)",
       inOut: "cubic-bezier(0.42, 0, 0.58, 1)",
     },
+    overflow: ["auto", "hidden", "scroll", "unset"],
     visibility: ["hidden", "visible"],
     whiteSpace: [
       "normal",
@@ -200,7 +201,11 @@ const responsiveProperties = defineProperties({
     marginLeft: margins,
     marginRight: margins,
     marginTop: margins,
-    maxHeight: space,
+    maxHeight: {
+      ...space,
+      ...extendedSpace,
+      none: "none",
+    },
     maxWidth: {
       ...space,
       ...extendedSpace,
@@ -212,7 +217,6 @@ const responsiveProperties = defineProperties({
     },
     minHeight: space,
     minWidth: space,
-    overflow: ["auto", "hidden", "scroll", "unset"],
     paddingBottom: space,
     paddingLeft: space,
     paddingRight: space,

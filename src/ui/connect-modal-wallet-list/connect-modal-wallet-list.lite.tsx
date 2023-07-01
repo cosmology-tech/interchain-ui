@@ -30,6 +30,11 @@ export default function ConnectModalWalletList(
 
   const state = useStore({
     displayBlur: false,
+    onWalletItemClickAsync: (exec: () => Promise<any>) => {
+      void (async function () {
+        await exec();
+      })();
+    },
   });
 
   onMount(() => {
@@ -107,12 +112,12 @@ export default function ConnectModalWalletList(
                 <WalletButton
                   key={wallet.name}
                   variant="square"
-                  name={wallet.name}
+                  name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
                   isMobile={wallet.isMobile}
-                  onClick={() =>
+                  onClick={state.onWalletItemClickAsync(async () =>
                     props.onWalletItemClick?.(wallet.originalWallet)
-                  }
+                  )}
                 />
               )}
             </For>
@@ -125,10 +130,12 @@ export default function ConnectModalWalletList(
               <WalletButton
                 key={wallet.name}
                 variant="list"
-                name={wallet.name}
+                name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
                 isMobile={wallet.isMobile}
-                onClick={() => props.onWalletItemClick?.(wallet.originalWallet)}
+                onClick={state.onWalletItemClickAsync(async () =>
+                  props.onWalletItemClick?.(wallet.originalWallet)
+                )}
               />
             )}
           </For>

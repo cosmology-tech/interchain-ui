@@ -2,7 +2,7 @@ import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import Button from "../button";
-import * as styles from "./bonding-list-item-sm.css";
+import * as styles from "./bonding-list-item-sm.css"
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {

@@ -12,6 +12,10 @@ export const intents = Object.entries(Intent).map(
 
 export type ThemeVariant = "light" | "dark";
 
+export type ModePreference = ThemeVariant | "system";
+
+export const ModePreferences: ModePreference[] = ["light", "dark", "system"];
+
 export interface NumberFormatProps {
   value: number;
   style?: string;

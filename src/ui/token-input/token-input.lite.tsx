@@ -18,6 +18,9 @@ import * as styles from "./token-input.css";
 import { TokenInputProps } from "./token-input.types";
 
 export default function TokenInput(props: TokenInputProps) {
+  useDefaultProps({
+    hasProgressBar: true,
+  });
   const state = useStore<{
     symbolValue: string;
     disabled: boolean;
@@ -49,7 +52,7 @@ export default function TokenInput(props: TokenInputProps) {
     }
   }, [props.progress]);
   return (
-    <Stack flexWrap="wrap">
+    <Stack flexWrap="wrap" align="center">
       <Stack
         className={clsx({ [styles.disabled]: state.disabled })}
         attributes={{
@@ -58,6 +61,16 @@ export default function TokenInput(props: TokenInputProps) {
         }}
         justify="flex-end"
       >
+        <Show when={!props.hasProgressBar}>
+          <Text
+            className={styles.inputTitle}
+            color="textSecondary"
+            weight="semibold"
+            size="lg"
+          >
+            Select amount
+          </Text>
+        </Show>
         <Text color="textSecondary">Available&nbsp;</Text>
         <Text color="textSecondary" weight="semibold">
           {props.available}&nbsp;
@@ -66,35 +79,37 @@ export default function TokenInput(props: TokenInputProps) {
           {props.symbol}
         </Text>
       </Stack>
-      <Stack align="center" className={styles.progressContainer}>
-        <CicularProgressBar progress={props.progress} />
-        <Stack className={styles.iconBox} align="center">
-          <Stack
-            direction="column"
-            justify="center"
-            attributes={{
-              marginLeft: "8",
-              width: "17",
-            }}
-          >
-            <Text weight="semibold">{props.symbol}</Text>
-            <Text color="textSecondary" size="xs">
-              {props.denom}
-            </Text>
+      <Show when={props.hasProgressBar}>
+        <Stack align="center" className={styles.progressContainer}>
+          <CicularProgressBar progress={props.progress} />
+          <Stack className={styles.iconBox} align="center">
+            <Stack
+              direction="column"
+              justify="center"
+              attributes={{
+                marginLeft: "8",
+                width: "17",
+              }}
+            >
+              <Text weight="semibold">{props.symbol}</Text>
+              <Text color="textSecondary" size="xs">
+                {props.denom}
+              </Text>
+            </Stack>
+            <div
+              className={styles.icon}
+              onClick={(e) => state.handleIconClick(e)}
+            >
+              <Show when={props.progress === 0}>
+                <Icon name="add" color="text" size="3xl" />
+              </Show>
+              <Show when={props.progress === 50}>
+                <Icon name="subtract" color="text" size="3xl" />
+              </Show>
+            </div>
           </Stack>
-          <div
-            className={styles.icon}
-            onClick={(e) => state.handleIconClick(e)}
-          >
-            <Show when={props.progress === 0}>
-              <Icon name="add" color="text" size="3xl" />
-            </Show>
-            <Show when={props.progress === 50}>
-              <Icon name="subtract" color="text" size="3xl" />
-            </Show>
-          </div>
         </Stack>
-      </Stack>
+      </Show>
       <Stack
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
       >

@@ -1,11 +1,4 @@
-import {
-  useMetadata,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
+import { onMount, onUpdate, useRef } from "@builder.io/mitosis";
 import Box from "../box";
 import * as styles from "./progress-bar.css";
 import { ProgressBarProps } from "./progress-bar.types";

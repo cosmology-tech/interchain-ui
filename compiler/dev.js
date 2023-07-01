@@ -4,6 +4,7 @@ const path = require("path");
 const ora = require("ora");
 const watcher = require("@parcel/watcher");
 const { spawn } = require("node:child_process");
+const lodash = require("lodash");
 
 (async () => {
   const execa = (await import("execa")).command;
@@ -43,7 +44,7 @@ const { spawn } = require("node:child_process");
                   }
                 };
 
-                let watch = watcher.subscribe(watchDir, (err, _events) => {
+                const onChange = lodash.debounce((err, _events) => {
                   const spinner = ora(`Watching src/ for changes...`).start();
                   spinner.text = `src/ changed, compiling...`;
 
@@ -62,6 +63,10 @@ const { spawn } = require("node:child_process");
                     spinner.fail();
                     return;
                   }
+                }, 200);
+
+                let watch = watcher.subscribe(watchDir, (err, _events) => {
+                  onChange(err, _events);
                 });
 
                 return watch.then((subscription) => {

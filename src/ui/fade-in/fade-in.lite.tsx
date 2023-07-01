@@ -4,7 +4,8 @@ import type { AnimeInstance } from "animejs";
 import type { FadeInProps } from "./fade-in.types";
 
 export default function FadeIn(props: FadeInProps) {
-  let animationRef = useRef<AnimeInstance | null>(null);
+  let fadeInAnimationRef = useRef<AnimeInstance | null>(null);
+  let fadeOutAnimationRef = useRef<AnimeInstance | null>(null);
   const elementRef = useRef(null);
 
   onUpdate(() => {
@@ -12,8 +13,8 @@ export default function FadeIn(props: FadeInProps) {
     const durationSetting = props.durationMs || 250;
 
     // Animation not init yet
-    if (elementRef && !animationRef) {
-      animationRef = anime({
+    if (elementRef && !fadeInAnimationRef && !fadeOutAnimationRef) {
+      fadeInAnimationRef = anime({
         targets: elementRef,
         opacity: [0, 1],
         delay: delaySetting,
@@ -21,14 +22,25 @@ export default function FadeIn(props: FadeInProps) {
         direction: `alternate`,
         loop: false,
         autoplay: false,
-        easing: `easeInOutSine`,
+        easing: "spring(1, 80, 10, 0)",
+      });
+
+      fadeOutAnimationRef = anime({
+        targets: elementRef,
+        opacity: [1, 0],
+        delay: delaySetting,
+        duration: durationSetting,
+        direction: `alternate`,
+        loop: false,
+        autoplay: false,
+        easing: "spring(1, 80, 10, 0)",
       });
     }
 
     if (props.isVisible) {
-      animationRef?.restart();
+      fadeInAnimationRef?.restart();
     } else {
-      animationRef?.pause();
+      fadeOutAnimationRef?.restart();
     }
   }, [props.delayMs, props.durationMs, props.isVisible]);
 

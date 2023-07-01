@@ -24,27 +24,13 @@ export const modalContainer = style({
   },
 });
 
-const modalBackdropBase = style({
+export const modalBackdrop = style({
   position: `absolute`,
   top: 0,
   left: 0,
   width: `100%`,
   height: `100%`,
-});
-
-export const modalBackdrop = styleVariants({
-  light: [
-    modalBackdropBase,
-    {
-      backgroundColor: `rgba(0, 0, 0, 0.48)`, // blackAlpha600
-    },
-  ],
-  dark: [
-    modalBackdropBase,
-    {
-      backgroundColor: `rgba(0, 0, 0, 0.48)`, // blackAlpha600
-    },
-  ],
+  backgroundColor: `rgba(17, 20, 24, .7)`,
 });
 
 export const modalContent = style({

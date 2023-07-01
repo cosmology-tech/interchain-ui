@@ -12,7 +12,7 @@ export const modalStatusContainer = style([
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "20rem",
+    width: "100%",
   },
   s({
     px: "8",
@@ -64,6 +64,14 @@ export const disconnectedLogoFrame = style({
 export const statusLogoImage = s({
   px: "7",
   py: "7",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
+export const statusLogoImageSvg = s({
+  width: "19",
+  height: "19",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
