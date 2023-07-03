@@ -19,8 +19,20 @@
       "import": "./dist/cosmology-ui-kit-react.esm.js",
       "default": "./dist/cosmology-ui-kit-react.cjs.js"
     },
-    "./styles.css": "./dist/cosmology-ui-kit-react.cjs.css",
+    "./styles": "./dist/cosmology-ui-kit-react.cjs.css",
     "./package.json": "./package.json"
+  },
+  "targets": {
+    "main": {
+      "includeNodeModules": [
+        "@formkit/auto-animate"
+      ]
+    },
+    "module": {
+      "includeNodeModules": [
+        "@formkit/auto-animate"
+      ]
+    }
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
