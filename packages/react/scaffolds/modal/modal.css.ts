@@ -25,17 +25,21 @@ export const modalContainer = style({
 });
 
 export const modalBackdrop = style({
-  position: `absolute`,
+  position: `fixed`,
   top: 0,
   left: 0,
+  bottom: 0,
+  right: 0,
   width: `100%`,
   height: `100%`,
   backgroundColor: `rgba(17, 20, 24, .7)`,
+  userSelect: "none",
 });
 
 export const modalContent = style({
   position: `relative`,
   zIndex: 1,
+  overflow: "hidden",
 });
 
 export const modalHeader = style({

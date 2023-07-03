@@ -20,6 +20,7 @@ export const modalHeader = style([
     display: "flex",
   },
   s({
+    fontFamily: "body",
     px: "8",
     py: "8",
   }),

@@ -15,6 +15,7 @@ export const modalStatusContainer = style([
     width: "100%",
   },
   s({
+    fontFamily: "body",
     px: "8",
     py: "12",
     backgroundColor: {
