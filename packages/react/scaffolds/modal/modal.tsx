@@ -56,23 +56,14 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
   const id = useId();
   const [_internalOpen, _setInternalOpen] = useState(isOpen);
 
-  // Add some transition to the close state to prevent abrupt close
-  // useEffect(() => {
-  //   if (props.isOpen && !_internalOpen) {
-  //     _setInternalOpen(true);
-  //   }
-
-  //   if (!props.isOpen && _internalOpen) {
-  //     setTimeout(() => {
-  //       console.log("1000");
-  //       _setInternalOpen(false);
-  //     }, 300);
-  //   }
-  // }, [props.isOpen, _internalOpen]);
-
   useEffect(() => {
     if (props.isOpen) {
       _setInternalOpen(true);
+    } else {
+      // Add an artificial delay for the close animation to show
+      setTimeout(() => {
+        _setInternalOpen(false);
+      }, 300);
     }
   }, [props.isOpen]);
 
@@ -89,9 +80,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     {
       context: useMemo(
         () => ({
-          open: props.isOpen,
+          open: _internalOpen,
         }),
-        [props.isOpen]
+        [_internalOpen]
       ),
     }
   );
@@ -100,49 +91,47 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
 
   const onCloseButtonClick = (event: any) => {
     _setInternalOpen(false);
-
-    // Add an artificial delay for the close animation to show
-    setTimeout(() => {
-      api.closeTriggerProps.onClick?.(event);
-      onClose?.();
-    }, 300);
+    api.closeTriggerProps.onClick?.(event);
+    onClose?.();
   };
 
   return (
     <>
       {trigger && cloneElement(trigger, api.triggerProps)}
 
-      <Portal>
-        <FadeIn isVisible={_internalOpen}>
+      {api.isOpen && (
+        <Portal>
           <div
             ref={forwardedRef}
             className={clx(themeStore.themeClass, className)}
           >
-            <div {...api.backdropProps} className={styles.modalBackdrop} />
-            <div {...api.containerProps} className={styles.modalContainer}>
-              <div
-                {...api.contentProps}
-                className={clx(styles.modalContent, contentClassName)}
-                data-modal-part="content"
-              >
-                {header &&
-                  cloneElement(header, {
-                    titleProps: api.titleProps,
-                    descriptionProps: api.descriptionProps,
-                    closeButtonProps: {
-                      ...api.closeTriggerProps,
-                      onClick: onCloseButtonClick,
-                    },
-                  })}
+            <FadeIn isVisible={api.isOpen}>
+              <div {...api.backdropProps} className={styles.modalBackdrop} />
+              <div {...api.containerProps} className={styles.modalContainer}>
+                <div
+                  {...api.contentProps}
+                  className={clx(styles.modalContent, contentClassName)}
+                  data-modal-part="content"
+                >
+                  {header &&
+                    cloneElement(header, {
+                      titleProps: api.titleProps,
+                      descriptionProps: api.descriptionProps,
+                      closeButtonProps: {
+                        ...api.closeTriggerProps,
+                        onClick: onCloseButtonClick,
+                      },
+                    })}
 
-                <div className={childrenClassName} data-modal-part="children">
-                  {children}
+                  <div className={childrenClassName} data-modal-part="children">
+                    {children}
+                  </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           </div>
-        </FadeIn>
-      </Portal>
+        </Portal>
+      )}
     </>
   );
 });
