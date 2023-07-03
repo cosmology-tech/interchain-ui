@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-beta.8](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.7...@cosmology-ui/react@1.1.0-beta.8) (2023-07-03)
+
+### Bug Fixes
+
+- include esm only module for nextjs error ([1cc75c9](https://github.com/cosmology-tech/ui-kit/commit/1cc75c9fc37939bf9c635092e6286e7f180188b1))
+
 # [1.1.0-beta.7](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.6...@cosmology-ui/react@1.1.0-beta.7) (2023-07-03)
 
 ### Bug Fixes
