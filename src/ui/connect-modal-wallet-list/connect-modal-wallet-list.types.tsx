@@ -5,7 +5,7 @@ export interface Wallet {
   name: string;
   prettyName?: string;
   logo: string;
-  isMobile: boolean;
+  subLogo?: string;
   mobileDisabled: boolean;
   downloadUrl?: string;
   rejectMessage?: string;

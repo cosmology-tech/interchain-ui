@@ -6,12 +6,33 @@ import {
   containerStyle,
   textStyle,
   iconStyle,
+  truncateEndStyle,
 } from "./clipboard-copy-text.css";
+import { truncateTextMiddle } from "../../helpers/string";
 import type { ClipboardCopyTextProps } from "./clipboard-copy-text.types";
 
 export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
-  const state = useStore<{ idle: boolean }>({
+  const state = useStore<{
+    idle: boolean;
+    transform: (text: string) => string;
+  }>({
     idle: true,
+    transform: (text: string) => {
+      if (props.truncate === "middle") {
+        const truncateLength = {
+          lg: 14,
+          md: 16,
+          sm: 18,
+        };
+
+        return truncateTextMiddle(
+          text,
+          truncateLength[props.midTruncateLimit ?? "md"]
+        );
+      }
+
+      return text;
+    },
   });
 
   return (
@@ -30,7 +51,11 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
         }
       }}
     >
-      <p className={textStyle}>{props.text}</p>
+      <p
+        className={clx(textStyle, props.truncate === "end" && truncateEndStyle)}
+      >
+        {state.transform(props.text)}
+      </p>
 
       <Icon
         name={state.idle ? "copy" : "checkboxCircle"}

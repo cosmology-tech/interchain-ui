@@ -151,7 +151,7 @@ export const buttonTextVariants = recipe({
   },
 });
 
-export const mobileIconStyleSquare = style([
+export const subLogoSquare = style([
   {
     display: "flex",
     position: "absolute",
@@ -175,7 +175,7 @@ export const mobileIconStyleSquare = style([
   }),
 ]);
 
-export const mobileIconStyleList = style([
+export const subLogoList = style([
   {
     display: "flex",
     justifyContent: "center",

@@ -5,8 +5,8 @@ import {
   connectButtonVariants,
   logoVariants,
   buttonTextVariants,
-  mobileIconStyleSquare,
-  mobileIconStyleList,
+  subLogoSquare,
+  subLogoList,
 } from "./connect-modal-wallet-button.css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import Icon from "../icon";
@@ -34,9 +34,23 @@ export default function ConnectModalWalletButton(
         >
           <img alt={props.name} src={props.logo} />
 
-          <Show when={props.isMobile && props.variant === "square"}>
-            <span className={mobileIconStyleSquare}>
-              <Icon name={"mobileWalletCircle"} size={"2xl"} />
+          <Show
+            when={
+              props.variant === "square" && typeof props.subLogo === "string"
+            }
+          >
+            <span className={subLogoSquare}>
+              <Show when={props.subLogo === "walletConnect"}>
+                <Icon name={"mobileWalletCircle"} size={"2xl"} />
+              </Show>
+
+              <Show when={props.subLogo !== "walletConnect"}>
+                <img
+                  src={props.subLogo}
+                  alt={`${props.name} sub logo`}
+                  className={s({ width: "10", height: "10" })}
+                />
+              </Show>
             </span>
           </Show>
         </span>
@@ -46,9 +60,21 @@ export default function ConnectModalWalletButton(
         {props.name}
       </span>
 
-      <Show when={props.isMobile && props.variant === "list"}>
-        <span className={mobileIconStyleList}>
-          <Icon name={"mobileWallet"} size={"xl"} />
+      <Show
+        when={props.variant === "list" && typeof props.subLogo === "string"}
+      >
+        <span className={subLogoList}>
+          <Show when={props.subLogo === "walletConnect"}>
+            <Icon name={"mobileWallet"} size={"xl"} />
+          </Show>
+
+          <Show when={props.subLogo !== "walletConnect"}>
+            <img
+              src={props.subLogo}
+              alt={`${props.name} sub logo`}
+              className={s({ width: "9", height: "9" })}
+            />
+          </Show>
         </span>
       </Show>
     </button>

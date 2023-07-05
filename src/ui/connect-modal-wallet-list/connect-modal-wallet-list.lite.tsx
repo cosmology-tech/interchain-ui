@@ -114,7 +114,7 @@ export default function ConnectModalWalletList(
                   variant="square"
                   name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
-                  isMobile={wallet.isMobile}
+                  subLogo={wallet.subLogo}
                   onClick={state.onWalletItemClickAsync(async () =>
                     props.onWalletItemClick?.(wallet.originalWallet)
                   )}
@@ -132,7 +132,7 @@ export default function ConnectModalWalletList(
                 variant="list"
                 name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
-                isMobile={wallet.isMobile}
+                subLogo={wallet.subLogo}
                 onClick={state.onWalletItemClickAsync(async () =>
                   props.onWalletItemClick?.(wallet.originalWallet)
                 )}

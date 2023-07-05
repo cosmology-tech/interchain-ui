@@ -195,6 +195,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
 
         <ClipboardCopyText
           text={props.connectedInfo.address}
+          truncate="middle"
           className={s({
             marginBottom: "7",
           })}
