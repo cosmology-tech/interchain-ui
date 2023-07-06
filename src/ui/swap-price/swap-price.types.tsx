@@ -24,6 +24,7 @@ export type SwapPriceDetailRouteDetail = {
 };
 
 export interface SwapPriceProps {
+  hasRoute?: boolean;
   price: SwapPriceType;
   priceImpact: string;
   swapFee: {

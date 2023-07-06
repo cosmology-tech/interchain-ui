@@ -111,65 +111,67 @@ export default function SwapPrice(props: SwapPriceProps) {
               {`${props?.minimumReceived} ${props?.tokenOutSymbol}`}
             </Text>
           </Stack>
-          <Text color="textSecondary" attributes={{ py: "10" }}>
-            Route
-          </Text>
-          <Stack
-            justify="space-between"
-            align="center"
-            attributes={{ height: "12" }}
-          >
-            <Box marginRight="6">
-              <img
-                alt={props?.routeDetail?.tokenIn?.symbol}
-                className={styles.img}
-                src={props?.routeDetail?.tokenIn?.logoUrl}
-              />
-            </Box>
-            <Box className={styles.routeDivider} />
-            {/* Mapping routeDetail */}
+          <Show when={props?.hasRoute}>
+            <Text color="textSecondary" attributes={{ py: "10" }}>
+              Route
+            </Text>
+            <Stack
+              justify="space-between"
+              align="center"
+              attributes={{ height: "12" }}
+            >
+              <Box marginRight="6">
+                <img
+                  alt={props?.routeDetail?.tokenIn?.symbol}
+                  className={styles.img}
+                  src={props?.routeDetail?.tokenIn?.logoUrl}
+                />
+              </Box>
+              <Box className={styles.routeDivider} />
+              {/* Mapping routeDetail */}
 
-            <For each={props?.routeDetail?.routes}>
-              {(item: SwapPriceDetailRoute, index: number) => (
-                <Fragment key={item.poolId}>
-                  <Box
-                    width="16"
-                    height="12"
-                    marginLeft="6"
-                    marginRight="5"
-                    position="relative"
-                  >
-                    <img
-                      className={styles.img}
-                      alt={item?.baseSymbol}
-                      src={item?.baseLogo}
-                    />
-                    <img
-                      className={clsx(styles.img, styles.absImg)}
-                      alt={item?.quoteSymbol}
-                      src={item?.quoteLogo}
-                    />
-                  </Box>
-                  <Text
-                    color="textSecondary"
-                    weight="bold"
-                    attributes={{ marginRight: "5" }}
-                  >
-                    {item?.swapFee}
-                  </Text>
-                  <Box className={styles.routeDivider} />
-                </Fragment>
-              )}
-            </For>
+              <For each={props?.routeDetail?.routes}>
+                {(item: SwapPriceDetailRoute, index: number) => (
+                  <Fragment key={item.poolId}>
+                    <Box
+                      width="16"
+                      height="12"
+                      marginLeft="6"
+                      marginRight="5"
+                      position="relative"
+                    >
+                      <img
+                        className={styles.img}
+                        alt={item?.baseSymbol}
+                        src={item?.baseLogo}
+                      />
+                      <img
+                        className={clsx(styles.img, styles.absImg)}
+                        alt={item?.quoteSymbol}
+                        src={item?.quoteLogo}
+                      />
+                    </Box>
+                    <Text
+                      color="textSecondary"
+                      weight="bold"
+                      attributes={{ marginRight: "5" }}
+                    >
+                      {item?.swapFee}
+                    </Text>
+                    <Box className={styles.routeDivider} />
+                  </Fragment>
+                )}
+              </For>
 
-            <Box marginLeft="6">
-              <img
-                alt={props?.routeDetail?.tokenOut?.symbol}
-                className={styles.img}
-                src={props?.routeDetail?.tokenOut?.logoUrl}
-              />
-            </Box>
-          </Stack>
+              <Box marginLeft="6">
+                <img
+                  alt={props?.routeDetail?.tokenOut?.symbol}
+                  className={styles.img}
+                  src={props?.routeDetail?.tokenOut?.logoUrl}
+                />
+              </Box>
+            </Stack>
+          </Show>
         </Stack>
       </div>
     </Stack>
