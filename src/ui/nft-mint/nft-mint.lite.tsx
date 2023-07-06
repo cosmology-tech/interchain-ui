@@ -2,6 +2,7 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
+import { store } from "../../models/store";
 
 import * as styles from "./nft-mint.css";
 import { NftMintProps } from "./nft-mint.types";
@@ -40,18 +41,17 @@ export default function NftMint(props: NftMintProps) {
                 py: "2",
               }}
             >
-              NOW LIVE
+              {props?.tag}
             </Text>
             <Text
               size="4xl"
               weight="semibold"
               attributes={{ marginTop: "6", marginBottom: "3" }}
             >
-              Bipz
+              {props?.name}
             </Text>
             <Text color="textSecondary">
-              Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-              consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus.
+              {props?.description}
             </Text>
             <Stack justify="space-between" attributes={{ my: "9" }}>
               <Stack direction="column">
@@ -59,7 +59,7 @@ export default function NftMint(props: NftMintProps) {
                   Quantity
                 </Text>
                 <Text size="4xl" weight="semibold">
-                  5,000
+                  {store.getState()?.formatNumber?.({value: props?.quantity})}
                 </Text>
               </Stack>
               <Stack direction="column">
@@ -67,7 +67,7 @@ export default function NftMint(props: NftMintProps) {
                   Royalties
                 </Text>
                 <Text size="4xl" weight="semibold">
-                  10%
+                  {props?.royalties}%
                 </Text>
               </Stack>
               <Stack direction="column">
@@ -75,7 +75,7 @@ export default function NftMint(props: NftMintProps) {
                   Minted
                 </Text>
                 <Text size="4xl" weight="semibold">
-                  46%
+                  {props?.minted}%
                 </Text>
               </Stack>
             </Stack>
@@ -100,8 +100,7 @@ export default function NftMint(props: NftMintProps) {
                   Available
                 </Text>
                 <Text color="textSecondary" weight="semibold">
-                  {" "}
-                  2,948 STARS
+                  {`${store.getState()?.formatNumber?.({value: props?.available})} STARS`}
                 </Text>
               </Stack>
             </Stack>
@@ -120,10 +119,10 @@ export default function NftMint(props: NftMintProps) {
                   Price:
                 </Text>
                 <Text color="textSecondary" weight="semibold">
-                  300 STARS
+                {`${store.getState()?.formatNumber?.({value: props?.price})} STARS`}
                 </Text>
               </Stack>
-              <Text color="textSecondary">Limited to 50 tokens</Text>
+              <Text color="textSecondary"> {`Limited to ${store.getState()?.formatNumber?.({value: props?.minted})} tokens`} </Text>
             </Stack>
             <Button size="lg" intent="tertiary">
               Mint
