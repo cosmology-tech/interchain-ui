@@ -54,6 +54,16 @@ export { default as CrossChain } from "./ui/cross-chain";
 export { default as SingleChain } from "./ui/single-chain";
 export { default as OverviewTransfer } from "./ui/overview-transfer";
 export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
+export { default as NftProfileCard } from "./ui/nft-profile-card";
+export { default as NftProfileCardList } from "./ui/nft-profile-card-list";
+export { default as NftProfile } from "./ui/nft-profile";
+export { default as NftDetail } from "./ui/nft-detail";
+export { default as NftTraitListItem } from "./ui/nft-trait-list-item";
+export { default as NftTraitList } from "./ui/nft-trait-list";
+export { default as NftDetailInfo } from "./ui/nft-detail-info";
+export { default as NftDetailTopOffers } from "./ui/nft-detail-top-offers";
+export { default as NftDetailActivityListItem } from "./ui/nft-detail-activity-list-item";
+export { default as NftDetailActivityList } from "./ui/nft-detail-activity-list";
 // End Components
 
 setPlatform(Platform.Default);

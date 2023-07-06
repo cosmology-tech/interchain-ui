@@ -18,7 +18,14 @@ type IconName =
   | "add"
   | "subtract"
   | "arrowRightLine"
-  | "timeLine";
+  | "timeLine"
+  | "jaggedCheck"
+  | "priceTagLine"
+  | "sendLine"
+  | "fireLine"
+  | "uploadLine"
+  | "coinsLine"
+  | "shoppingBagLine";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;
