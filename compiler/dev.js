@@ -3,8 +3,8 @@ const { Listr } = require("listr2");
 const path = require("path");
 const ora = require("ora");
 const watcher = require("@parcel/watcher");
-const { spawn } = require("node:child_process");
 const lodash = require("lodash");
+const { compileReact } = require("./frameworks/react.compile");
 
 (async () => {
   const execa = (await import("execa")).command;
@@ -27,66 +27,48 @@ const lodash = require("lodash");
         }),
     },
     {
-      title: "Launch Watcher",
+      title: "Watching /src ...",
       task: () => {
-        return new Listr(
-          [
-            {
-              title: "Recompile Mitosis",
-              task: async () => {
-                const watchDir = path.resolve(process.cwd(), "src");
+        return new Listr([
+          {
+            title: "Recompile Mitosis",
+            task: async () => {
+              const watchDir = path.resolve(process.cwd(), "src");
 
-                const compileMitosis = async () => {
-                  try {
-                    await execa("node ./compiler/frameworks/react.compile");
-                  } catch (err) {
-                    throw new Error("Error compiling mitosis components");
-                  }
-                };
+              const onChange = lodash.debounce((err, _events) => {
+                const spinner = ora(`Watching src/ for changes...`).start();
+                spinner.text = `src/ changed, compiling...`;
 
-                const onChange = lodash.debounce((err, _events) => {
-                  const spinner = ora(`Watching src/ for changes...`).start();
-                  spinner.text = `src/ changed, compiling...`;
+                console.time("Recompile took");
 
-                  compileMitosis()
-                    .then(() => {
-                      spinner.text = "Compiled successfully.";
-                      spinner.succeed();
-                    })
-                    .catch((e) => {
-                      spinner.text = `Error compiling mitosis ${e.message}.`;
-                      spinner.fail();
-                    });
-
-                  if (err) {
-                    spinner.text = `Error watching src/ for changes ${err?.message}.`;
+                compileReact()
+                  .then(() => {
+                    spinner.text = "Compiled successfully.";
+                    spinner.succeed();
+                    console.timeEnd("Recompile took");
+                  })
+                  .catch((e) => {
+                    spinner.text = `Error compiling mitosis ${e.message}.`;
                     spinner.fail();
-                    return;
-                  }
-                }, 200);
+                  });
 
-                let watch = watcher.subscribe(watchDir, (err, _events) => {
-                  onChange(err, _events);
-                });
+                if (err) {
+                  spinner.text = `Error watching src/ for changes ${err?.message}.`;
+                  spinner.fail();
+                  return;
+                }
+              }, 200);
 
-                return watch.then((subscription) => {
-                  unsub = () => subscription.unsubscribe();
-                });
-              },
+              let watch = watcher.subscribe(watchDir, (err, _events) => {
+                onChange(err, _events);
+              });
+
+              return watch.then((subscription) => {
+                unsub = () => subscription.unsubscribe();
+              });
             },
-            {
-              title: "Parcel watch",
-              task: async () => {
-                return spawn(
-                  "lerna run --stream --scope=@cosmology-ui/react watch",
-                  [],
-                  { shell: true }
-                ).stdout;
-              },
-            },
-          ],
-          { concurrent: true }
-        );
+          },
+        ]);
       },
     },
   ]);
