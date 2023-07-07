@@ -96,7 +96,6 @@
     "@storybook/react-vite": "^7.0.12",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/animejs": "^3.1.7",
-    "@vanilla-extract/esbuild-plugin": "^2.2.2",
     "@vanilla-extract/parcel-transformer": "^1.0.0",
     "@vanilla-extract/vite-plugin": "^3.8.1",
     "parcel": "2.8.3",
