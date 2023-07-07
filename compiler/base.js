@@ -38,19 +38,6 @@ function getScaffoldsDirs(rootPath) {
   };
 }
 
-const fileCache = new Map();
-
-function getFileModifiedTime(filePath) {
-  try {
-    const fileStats = fs.statSync(filePath);
-    return fileStats.mtime;
-  } catch (err) {
-    console.error("Cannot build file cache", err);
-  } finally {
-    return null;
-  }
-}
-
 async function compile(defaultOptions) {
   const options = {
     ...DEFAULT_OPTIONS,
@@ -65,7 +52,7 @@ async function compile(defaultOptions) {
     : options.elements;
   options.isDev = !!cliConfig.dev;
 
-  const spinner = ora().start();
+  const spinner = ora("Compiling").start();
   const files = cliConfig.elements
     ? options.elements
     : glob.sync(options.elements);
@@ -177,44 +164,20 @@ async function compile(defaultOptions) {
     fs.writeFileSync(outFile, result, "utf8");
   }
 
-  const isFirstCompilation = !fs.existsSync(`${outPath}/src`);
-
-  // Build a cache of modified time for every file
-  if (isFirstCompilation) {
-    for (const filename of files) {
-      if (!fileCache.has(filename)) {
-        const mtime = getFileModifiedTime(filename);
-        fileCache.set(filename, mtime);
-      }
-    }
-  }
-
   for (const fileName of files) {
     const file = path.parse(fileName);
+    const isFirstCompilation =
+      !fs.existsSync(`${outPath}/src`) || options.isDev;
     const name = file.name.replace(".lite", "");
+    spinner.text = fileName;
 
     // Copying files
     const { inDir, outDir } = getScaffoldsDirs(outPath);
     const scaffoldsExist = fs.existsSync(inDir);
     copyNonMitosisLiteFiles(scaffoldsExist);
 
-    if (scaffoldsExist && !isFirstCompilation) {
+    if (scaffoldsExist) {
       fs.copySync(inDir, outDir);
-    }
-
-    // Skip work if file unchanged
-    const fileModifiedTime = getFileModifiedTime(fileName);
-    let putCache = false;
-
-    if (!isFirstCompilation) {
-      if (
-        fileCache.has(fileName) &&
-        fileCache.get(fileName) === fileModifiedTime
-      ) {
-        continue;
-      } else {
-        putCache = true;
-      }
     }
 
     // Compile using Mitosis CLI
@@ -228,16 +191,8 @@ async function compile(defaultOptions) {
       outPath,
       isFirstCompilation,
     });
-
-    if (putCache) {
-      const fileModifiedTime = getFileModifiedTime(fileName);
-      fileCache.set(fileName, fileModifiedTime);
-    }
-
-    spinner.succeed(`Compiled ${fileName}`);
+    spinner.stop();
   }
-
-  spinner.stop();
 }
 
 module.exports = {
