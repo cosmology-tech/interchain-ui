@@ -30,7 +30,7 @@ export default function ConnectModalWalletList(
 
   const state = useStore({
     displayBlur: false,
-    onWalletItemClickAsync: (exec: () => Promise<any>) => {
+    onWalletItemClickAsync: (exec) => {
       void (async function () {
         await exec();
       })();
