@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolList } from "@cosmology-ui/react";
+import { PoolList } from "@interchain-ui/react";
 
 const meta: Meta<typeof PoolList> = {
   component: PoolList,

@@ -3,57 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.1.0-beta.10](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.9...@cosmology-ui/react@1.1.0-beta.10) (2023-07-05)
+# [1.1.0-beta.10](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.9...@interchain-ui/react@1.1.0-beta.10) (2023-07-05)
 
-**Note:** Version bump only for package @cosmology-ui/react
+**Note:** Version bump only for package @interchain-ui/react
 
-# [1.1.0-beta.9](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.8...@cosmology-ui/react@1.1.0-beta.9) (2023-07-03)
+# [1.1.0-beta.9](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.8...@interchain-ui/react@1.1.0-beta.9) (2023-07-03)
 
-**Note:** Version bump only for package @cosmology-ui/react
+**Note:** Version bump only for package @interchain-ui/react
 
-# [1.1.0-beta.8](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.7...@cosmology-ui/react@1.1.0-beta.8) (2023-07-03)
+# [1.1.0-beta.8](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.7...@interchain-ui/react@1.1.0-beta.8) (2023-07-03)
 
 ### Bug Fixes
 
 - include esm only module for nextjs error ([1cc75c9](https://github.com/cosmology-tech/ui-kit/commit/1cc75c9fc37939bf9c635092e6286e7f180188b1))
 
-# [1.1.0-beta.7](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.6...@cosmology-ui/react@1.1.0-beta.7) (2023-07-03)
+# [1.1.0-beta.7](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.6...@interchain-ui/react@1.1.0-beta.7) (2023-07-03)
 
 ### Bug Fixes
 
 - layout anim and update deps ([#39](https://github.com/cosmology-tech/ui-kit/issues/39)) ([55f1af7](https://github.com/cosmology-tech/ui-kit/commit/55f1af7fb7428de1095863f8a79287859a629b6f))
 
-# [1.1.0-beta.6](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.5...@cosmology-ui/react@1.1.0-beta.6) (2023-06-30)
+# [1.1.0-beta.6](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.5...@interchain-ui/react@1.1.0-beta.6) (2023-06-30)
 
 ### Bug Fixes
 
 - temporarily remove layout animation ([f14ad8b](https://github.com/cosmology-tech/ui-kit/commit/f14ad8b4702cb01c41d08988219dfc93f26ab8ae))
 
-# [1.1.0-beta.5](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.4...@cosmology-ui/react@1.1.0-beta.5) (2023-06-30)
+# [1.1.0-beta.5](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.4...@interchain-ui/react@1.1.0-beta.5) (2023-06-30)
 
 ### Bug Fixes
 
 - bundle not resolved in next ([703723f](https://github.com/cosmology-tech/ui-kit/commit/703723f5b9c5408399271e364bd90a72baf37471))
 
-# [1.1.0-beta.4](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.3...@cosmology-ui/react@1.1.0-beta.4) (2023-06-30)
+# [1.1.0-beta.4](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.3...@interchain-ui/react@1.1.0-beta.4) (2023-06-30)
 
-**Note:** Version bump only for package @cosmology-ui/react
+**Note:** Version bump only for package @interchain-ui/react
 
-# [1.1.0-beta.3](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.2...@cosmology-ui/react@1.1.0-beta.3) (2023-06-30)
+# [1.1.0-beta.3](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.2...@interchain-ui/react@1.1.0-beta.3) (2023-06-30)
 
-**Note:** Version bump only for package @cosmology-ui/react
+**Note:** Version bump only for package @interchain-ui/react
 
-# [1.1.0-beta.2](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.1...@cosmology-ui/react@1.1.0-beta.2) (2023-06-28)
+# [1.1.0-beta.2](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.1...@interchain-ui/react@1.1.0-beta.2) (2023-06-28)
 
-**Note:** Version bump only for package @cosmology-ui/react
+**Note:** Version bump only for package @interchain-ui/react
 
-# [1.1.0-beta.1](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.1.0-beta.0...@cosmology-ui/react@1.1.0-beta.1) (2023-06-28)
+# [1.1.0-beta.1](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.1.0-beta.0...@interchain-ui/react@1.1.0-beta.1) (2023-06-28)
 
 ### Bug Fixes
 
 - TS errors ([#36](https://github.com/cosmology-tech/ui-kit/issues/36)) ([85d4732](https://github.com/cosmology-tech/ui-kit/commit/85d4732d735620416007084a345bc01ba8f42fd9))
 
-# [1.1.0-beta.0](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.0.1-beta.1...@cosmology-ui/react@1.1.0-beta.0) (2023-06-27)
+# [1.1.0-beta.0](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.0.1-beta.1...@interchain-ui/react@1.1.0-beta.0) (2023-06-27)
 
 ### Bug Fixes
 
@@ -75,9 +75,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - Added remove-liquidity & bonding-more components ([b4ddd7f](https://github.com/cosmology-tech/ui-kit/commit/b4ddd7f127aebdb1f91a4edf309c42244ef391d1))
 - **build:** add unlink css post processing ([#31](https://github.com/cosmology-tech/ui-kit/issues/31)) ([3d40e8a](https://github.com/cosmology-tech/ui-kit/commit/3d40e8ac4f83f362f376d2af0e890f33684a552f))
 
-## [1.0.1-beta.1](https://github.com/cosmology-tech/ui-kit/compare/@cosmology-ui/react@1.0.1-beta.0...@cosmology-ui/react@1.0.1-beta.1) (2023-06-14)
+## [1.0.1-beta.1](https://github.com/cosmology-tech/ui-kit/compare/@interchain-ui/react@1.0.1-beta.0...@interchain-ui/react@1.0.1-beta.1) (2023-06-14)
 
-**Note:** Version bump only for package @cosmology-ui/react
+**Note:** Version bump only for package @interchain-ui/react
 
 ## 1.0.1-beta.0 (2023-06-14)
 

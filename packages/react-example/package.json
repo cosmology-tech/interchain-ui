@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology-ui/react-example",
+  "name": "@interchain-ui/react-example",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cosmology-ui/react": "*",
+    "@interchain-ui/react": "*",
     "clsx": "^1.2.1",
     "immer": "^9.0.19",
     "react": "^18.2.0",

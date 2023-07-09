@@ -11,10 +11,10 @@ the ability to code a component once, and it will compile to all framework targe
 
 ```bash
 # If you use react
-yarn add @cosmology-ui/react
+yarn add @interchain-ui/react
 
 # If you use vue
-yarn add @cosmology-ui/vue
+yarn add @interchain-ui/vue
 ```
 
 ## Setup and scripts for development

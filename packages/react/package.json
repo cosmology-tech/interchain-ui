@@ -1,13 +1,13 @@
 {
-  "name": "@cosmology-ui/react",
+  "name": "@interchain-ui/react",
   "version": "1.1.0-beta.10",
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/react#readme",
   "license": "SEE LICENSE IN LICENSE",
   "source": "src/index.ts",
-  "main": "dist/cosmology-ui-kit-react.cjs.js",
-  "module": "dist/cosmology-ui-kit-react.esm.js",
+  "main": "dist/interchain-ui-kit-react.cjs.js",
+  "module": "dist/interchain-ui-kit-react.esm.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -15,11 +15,11 @@
         "import": "./dist/index.d.ts",
         "default": "./dist/index.d.ts"
       },
-      "module": "./dist/cosmology-ui-kit-react.esm.js",
-      "import": "./dist/cosmology-ui-kit-react.esm.js",
-      "default": "./dist/cosmology-ui-kit-react.cjs.js"
+      "module": "./dist/interchain-ui-kit-react.esm.js",
+      "import": "./dist/interchain-ui-kit-react.esm.js",
+      "default": "./dist/interchain-ui-kit-react.cjs.js"
     },
-    "./styles": "./dist/cosmology-ui-kit-react.cjs.css",
+    "./styles": "./dist/interchain-ui-kit-react.cjs.css",
     "./package.json": "./package.json"
   },
   "targets": {
@@ -68,6 +68,7 @@
     "dist"
   ],
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {

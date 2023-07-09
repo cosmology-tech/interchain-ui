@@ -2384,14 +2384,14 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@cosmology-ui/react@*":
+"@interchain-ui/react@*":
   version "0.1.21"
-  resolved "https://registry.yarnpkg.com/@cosmology-ui/react/-/react-0.1.21.tgz#53a2a42b6805baec4541928d9a98a9cab0caef31"
+  resolved "https://registry.yarnpkg.com/@interchain-ui/react/-/react-0.1.21.tgz#53a2a42b6805baec4541928d9a98a9cab0caef31"
   integrity sha512-eOaYIFhm8XBf1bex49AuZjiv4livhUUXGmq5rJua5m+B4JxKOcyC5w+e38KoYQT9c6yiwsFfBSnIENdTtbRw7g==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@chakra-ui/react" "^2.5.1"
-    "@cosmology-ui/utils" "^0.1.24"
+    "@interchain-ui/utils" "^0.1.24"
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
     bowser "2.11.0"
@@ -2404,14 +2404,14 @@
     react-icons "^4.4.0"
     react-resize-detector "^8.0.3"
 
-"@cosmology-ui/utils@^0.1.24":
+"@interchain-ui/utils@^0.1.24":
   version "0.1.24"
-  resolved "https://registry.yarnpkg.com/@cosmology-ui/utils/-/utils-0.1.24.tgz#5544cebfca6a6a679a4c13a9d3ed6866712619fd"
+  resolved "https://registry.yarnpkg.com/@interchain-ui/utils/-/utils-0.1.24.tgz#5544cebfca6a6a679a4c13a9d3ed6866712619fd"
   integrity sha512-jtJGCMVQMt3SrZFMi3WJ+4+ad1Puux4KQmEZGCnlZLMj+6ebEEdkUuYsmVxTdI/qlAo9RlVVIzVgD4gTelbD7w==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@chakra-ui/react" "^2.5.1"
-    "@cosmology-ui/utils" "^0.1.24"
+    "@interchain-ui/utils" "^0.1.24"
     "@emotion/react" "^11.10.6"
     "@emotion/styled" "^11.10.6"
     bowser "2.11.0"

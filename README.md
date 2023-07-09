@@ -1,20 +1,17 @@
-# Cosmology UI Kit
+# Interchain UI Kit
 
-## 📣 What is this project?
+## 📣 What is Interchain UI?
 
-Cosmology UI Kit is a foundation library for all UI elements used in cosmos-kit and other packages.
-The main features of Cosmology UI Kit is that it's cross-framework, easy to use and extend and allows developers to customize their own custom themes.
-It is based on a project called `mitosis` from BuilderIO to compile from a mutual format (lite JSX) to other frontend framework source code, which gives us
-the ability to code a component once, and it will compile to all framework targets.
+Interchain UI is a foundation library for UI elements used in [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) and other packages. It provides developers with pre-built components and a foundation for creating user interfaces across different frameworks, such as VueJS, React, Angular, Svelte, SolidJS, and Web Components, enabling developers to customize UI elements and themes. This gives us the ability to code a component once, and it will compile to all framework targets.
 
 ## Setup
 
 ```bash
 # If you use react
-yarn add @cosmology-ui/react
+yarn add @interchain-ui/react
 
 # If you use vue
-yarn add @cosmology-ui/vue
+yarn add @interchain-ui/vue
 ```
 
 ## Setup and scripts for development
@@ -52,5 +49,7 @@ Check ![Icon guide](./docs/icons.md) to know how to add more icons
 ⚛️ https://cosmoskit.com/
 
 ## Credits
+
+Checkout `mitosis` from BuilderIO to compile lite JSX. 
 
 🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.tech/validator)

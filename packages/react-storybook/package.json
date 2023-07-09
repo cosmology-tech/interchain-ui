@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology-ui/react-storybook",
+  "name": "@interchain-ui/react-storybook",
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
@@ -16,7 +16,7 @@
     "storybook": "^7.0.12"
   },
   "dependencies": {
-    "@cosmology-ui/react": "*",
+    "@interchain-ui/react": "*",
     "zustand": "^4.3.8",
     "immer": "^9.0.19",
     "clsx": "^1.2.1",
