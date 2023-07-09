@@ -1,11 +1,8 @@
-# Cosmology UI Kit
+# Interchain UI Kit
 
-## 📣 What is this project?
+## 📣 What is Interchain UI?
 
-Cosmology UI Kit is a foundation library for all UI elements used in cosmos-kit and other packages.
-The main features of Cosmology UI Kit is that it's cross-framework, easy to use and extend and allows developers to customize their own custom themes.
-It is based on a project called `mitosis` from BuilderIO to compile from a mutual format (lite JSX) to other frontend framework source code, which gives us
-the ability to code a component once, and it will compile to all framework targets.
+Interchain UI is a foundation library for UI elements used in [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) and other packages. It provides developers with pre-built components and a foundation for creating user interfaces across different frameworks, such as VueJS, React, Angular, Svelte, SolidJS, and Web Components, enabling developers to customize UI elements and themes. This gives us the ability to code a component once, and it will compile to all framework targets.
 
 ## Setup
 
@@ -43,10 +40,30 @@ There are some rules of thumbs and some tips for creating Mitosis components:
 - To quickly test to see the compilation result from one Mitosis to any framework source code, please use
 [mitosis sandbox](https://mitosis.builder.io/). It's similar to TS playground but for Mitosis testing purpose.
 
+## Icon
+
+Check ![Icon guide](./docs/icons.md) to know how to add more icons
+
 ## Our Website
 
 ⚛️ https://cosmoskit.com/
 
+## Related
+
+Checkout these related projects:
+
+* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) for generated CosmWasm contract Typescript classes
+* [@osmonauts/telescope](https://github.com/osmosis-labs/telescope) a "babel for the Cosmos", Telescope is a TypeScript Transpiler for Cosmos Protobufs.
+* [chain-registry](https://github.com/cosmology-tech/chain-registry) an npm module for the official Cosmos chain-registry.
+* [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) A wallet connector for the Cosmos ⚛️
+* [create-cosmos-app](https://github.com/cosmology-tech/create-cosmos-app) set up a modern Cosmos app by running one command.
+* [starship](https://github.com/cosmology-tech/starship) a k8s-based unified development environment for Cosmos Ecosystem
+
 ## Credits
 
+Checkout `mitosis` from BuilderIO to compile lite JSX. 
+
 🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.tech/validator)
+
+
+

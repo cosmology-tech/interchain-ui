@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@interchain-ui/react": "*",
+    "@interchain-ui/react": "^1.1.0-beta.10",
     "clsx": "^1.2.1",
     "immer": "^9.0.19",
     "react": "^18.2.0",
