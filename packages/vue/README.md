@@ -1,6 +1,6 @@
 # Interchain UI Kit
 
-## 📣 What is Interchain UI?
+## 🎨 What is Interchain UI?
 
 Interchain UI is a foundation library for UI elements used in [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) and other packages. It provides developers with pre-built components and a foundation for creating user interfaces across different frameworks, such as VueJS, React, Angular, Svelte, SolidJS, and Web Components, enabling developers to customize UI elements and themes. This gives us the ability to code a component once, and it will compile to all framework targets.
 
