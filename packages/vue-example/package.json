@@ -1,7 +1,7 @@
 {
   "name": "@interchain-ui/vue-example",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@interchain-ui/vue": "^1.0.0",
-    "zustand": "^4.3.8",
+    "@interchain-ui/vue": "^1.1.0",
     "immer": "^9.0.19",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
