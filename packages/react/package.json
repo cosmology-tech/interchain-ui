@@ -1,6 +1,6 @@
 {
   "name": "@interchain-ui/react",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/react#readme",
@@ -107,5 +107,5 @@
     "storybook": "^7.0.12",
     "vite-plugin-replace": "^0.1.1"
   },
-  "gitHead": "1ccc3ce4cdb24911558ad51f452a6aae735bb3d2"
+  "gitHead": "f5cecda81c3aac1a39dd8c6f0f15b3ada15b9dbc"
 }
