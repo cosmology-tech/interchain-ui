@@ -178,19 +178,22 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               height: "8",
             })}
           />
-          <p
-            className={s({
-              fontSize: "md",
-              fontWeight: "semibold",
-              marginLeft: "4",
-              color: {
-                light: "gray700",
-                dark: "white",
-              },
-            })}
-          >
-            {props.connectedInfo.name ?? props.connectedInfo.address}
-          </p>
+
+          <Show when={!!props.connectedInfo?.name}>
+            <p
+              className={s({
+                fontSize: "md",
+                fontWeight: "semibold",
+                marginLeft: "4",
+                color: {
+                  light: "gray700",
+                  dark: "white",
+                },
+              })}
+            >
+              {props.connectedInfo.name}
+            </p>
+          </Show>
         </div>
 
         <ClipboardCopyText
