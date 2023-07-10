@@ -125,7 +125,7 @@ export default function ConnectModalWalletList(
         </Show>
 
         <div className={listWallets}>
-          <For each={props.wallets.slice(2)}>
+          <For each={props.wallets.filter((w) => w.shape === "list")}>
             {(wallet, index) => (
               <WalletButton
                 key={wallet.name}
