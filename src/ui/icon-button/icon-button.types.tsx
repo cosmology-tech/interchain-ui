@@ -3,9 +3,9 @@ import type { IconProps } from "../icon/icon.types";
 
 type OmittedProps = "leftIcon" | "rightIcon";
 
-interface BaseeButtonProps extends Omit<ButtonProps, OmittedProps> {}
+interface BaseButtonProps extends Omit<ButtonProps, OmittedProps> {}
 
-export interface IconButtonProps extends BaseeButtonProps {
+export interface IconButtonProps extends BaseButtonProps {
   isRound?: boolean;
   icon: IconProps["name"];
 }

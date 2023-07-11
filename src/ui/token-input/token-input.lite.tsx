@@ -7,10 +7,12 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import clsx from "clsx";
+import isNil from "lodash/isNil";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Box from "../box";
+import IconButton from "../icon-button";
 import { sprinkles } from "../../styles/sprinkles.css";
 import CicularProgressBar from "../circular-progress-bar";
 import * as styles from "./token-input.css";
@@ -26,12 +28,15 @@ export default function TokenInput(props: TokenInputProps) {
     disabled: boolean;
     handleTokenInput: (Event) => void;
     handleIconClick: (MouseEvent) => void;
+    amount: string;
   }>({
     symbolValue: "",
     disabled: false,
+    amount: "",
     handleTokenInput(e) {
       state.symbolValue = e.target.value;
-      props.onAmountChange(e.target.value);
+      state.amount = e.target.value;
+      props.onAmountChange && props.onAmountChange(e.target.value);
     },
     handleIconClick(e) {
       let newProgress: number = 0;
@@ -61,29 +66,36 @@ export default function TokenInput(props: TokenInputProps) {
         }}
         justify="flex-end"
       >
-        <Show when={!props.hasProgressBar}>
+        <Show when={!!props.title}>
           <Text
             className={styles.inputTitle}
             color="textSecondary"
             weight="semibold"
             size="lg"
           >
-            Select amount
+            {props.title}
           </Text>
         </Show>
-        <Text color="textSecondary">Available&nbsp;</Text>
-        <Text color="textSecondary" weight="semibold">
-          {props.available}&nbsp;
-        </Text>
-        <Text color="textSecondary" weight="semibold">
-          {props.symbol}
-        </Text>
+        <Show when={!isNil(props.available)}>
+          <Text color="textSecondary">Available</Text>
+          <Text
+            color="textSecondary"
+            weight="semibold"
+            attributes={{ mx: "3" }}
+          >
+            {props.available}
+          </Text>
+          <Text color="textSecondary" weight="semibold">
+            {props.symbol}
+          </Text>
+        </Show>
       </Stack>
       <Show when={props.hasProgressBar}>
         <Stack align="center" className={styles.progressContainer}>
           <CicularProgressBar progress={props.progress} />
           <Stack className={styles.iconBox} align="center">
             <Stack
+              className={styles.symbolBox}
               direction="column"
               justify="center"
               attributes={{
@@ -96,7 +108,15 @@ export default function TokenInput(props: TokenInputProps) {
                 {props.denom}
               </Text>
             </Stack>
-            <div
+            <Show when={props.progress !== 100}>
+              <IconButton
+                intent="text"
+                icon={props.progress === 0 ? "add" : "subtract"}
+                onClick={(e) => state.handleIconClick(e)}
+                className={styles.operationIcon}
+              />
+            </Show>
+            {/* <div
               className={styles.icon}
               onClick={(e) => state.handleIconClick(e)}
             >
@@ -106,7 +126,7 @@ export default function TokenInput(props: TokenInputProps) {
               <Show when={props.progress === 50}>
                 <Icon name="subtract" color="text" size="3xl" />
               </Show>
-            </div>
+            </div> */}
           </Stack>
         </Stack>
       </Show>
@@ -117,7 +137,7 @@ export default function TokenInput(props: TokenInputProps) {
           <img className={styles.img} src={props.imgSrc} />
         </Stack>
         <input
-          value={props.amount}
+          value={state.amount}
           disabled={state.disabled}
           className={styles.token}
           onChange={(e) => state.handleTokenInput(e)}

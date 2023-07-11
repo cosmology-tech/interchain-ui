@@ -11,7 +11,6 @@ export const progressContainer = style([
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         width: "100%",
-        justifyContent: "space-between",
         marginBottom: themeVars.space[7],
         marginRight: 0,
       },
@@ -22,10 +21,16 @@ export const progressContainer = style([
 export const iconBox = style([
   {
     "@media": {
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {},
+      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+        flex: 1,
+      },
     },
   },
 ]);
+
+export const symbolBox = style({
+  flex: 1
+})
 
 export const denom = sprinkles({
   fontSize: "xs",
@@ -108,3 +113,7 @@ export const disabled = style({
 export const inputTitle = style({
   flex: 1,
 });
+
+export const operationIcon = sprinkles({
+  fontSize: "3xl"
+})

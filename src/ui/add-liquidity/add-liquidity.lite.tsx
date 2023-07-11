@@ -74,7 +74,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         denom={props.token1.denom}
         available={props.token1.available}
         imgSrc={props.token1.imgSrc}
-        amount={Number(state.amount1)}
         onProgressChange={(v) => state.handleProgress1Change(v)}
         onAmountChange={(value) => state.handleAmoount1Change(value)}
       />
@@ -84,7 +83,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         denom={props.token2.denom}
         available={props.token2.available}
         imgSrc={props.token2.imgSrc}
-        amount={Number(state.amount2)}
         onProgressChange={(v) => state.handleProgress2Change(v)}
         onAmountChange={(value) => state.handleAmoount2Change(value)}
       />

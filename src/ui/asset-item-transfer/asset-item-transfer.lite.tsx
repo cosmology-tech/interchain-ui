@@ -103,12 +103,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         </Stack>
       </Stack>
       <TokenInput
+        title="Select amount"
         hasProgressBar={false}
         progress={50}
         symbol="OMSO"
         denom="Osmosis"
         available={0.71263}
-        amount={10}
         imgSrc="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
       />
 

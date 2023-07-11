@@ -11,7 +11,8 @@ export default function IconButton(props: IconButtonProps) {
         styles.container,
         styles.variants({
           round: props.isRound ? true : undefined,
-        })
+        }),
+        props.className
       )}
       variant={props.variant}
       intent={props.intent}
