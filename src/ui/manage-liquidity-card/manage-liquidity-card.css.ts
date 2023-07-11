@@ -12,7 +12,7 @@ export const container = style([
     paddingLeft: "9"
   }),
   {
-    minWidth: "325px",
+    minWidth: "350px",
     backgroundColor: themeVars.colors.cardBg,
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
@@ -41,7 +41,3 @@ export const tokenContainer = style({
     },
   },
 });
-
-export const mt11 = s({
-  marginTop: "11"
-})

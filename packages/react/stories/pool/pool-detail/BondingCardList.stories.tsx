@@ -5,7 +5,7 @@ import { BondingCardList } from "../../../src";
 
 const meta: Meta<typeof BondingCardList> = {
   component: BondingCardList,
-  title: "Pool/pool-detail/bonding-card-list",
+  title: "Pool/PoolDetail/BondingCardList",
   tags: ["autodocs"],
   argTypes: {
     list: {

@@ -4,7 +4,7 @@ import { BondingArea } from "../../../src";
 
 const meta: Meta<typeof BondingArea> = {
   component: BondingArea,
-  title: "Pool/pool-detail/bonding-area",
+  title: "Pool/PoolDetail/BondingArea",
   tags: ["autodocs"],
   argTypes: {},
 };
