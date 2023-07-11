@@ -25,7 +25,8 @@ type IconName =
   | "fireLine"
   | "uploadLine"
   | "coinsLine"
-  | "shoppingBagLine";
+  | "shoppingBagLine"
+  | "informationLine";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;
