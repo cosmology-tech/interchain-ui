@@ -1,7 +1,7 @@
 {
   "name": "@interchain-ui/react-storybook",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.12",
     "@storybook/addon-interactions": "^7.0.12",
@@ -16,7 +16,7 @@
     "storybook": "^7.0.12"
   },
   "dependencies": {
-    "@interchain-ui/react": "^1.1.2",
+    "@interchain-ui/react": "^1.1.7",
     "clsx": "^1.2.1",
     "immer": "^9.0.19",
     "react": "^18.2.0",

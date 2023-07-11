@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.6...@interchain-ui/react@1.1.7) (2023-07-11)
+
+### Bug Fixes
+
+- modal status button overflow issue ([#47](https://github.com/cosmology-tech/interchain-ui/issues/47)) ([4f97ad9](https://github.com/cosmology-tech/interchain-ui/commit/4f97ad949ab7a4771b065b73d8ffffbe52aeb9de))
+
 ## [1.1.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.5...@interchain-ui/react@1.1.6) (2023-07-10)
 
 **Note:** Version bump only for package @interchain-ui/react
