@@ -13,6 +13,7 @@ import {
   errorDescription,
   statusLogoImageSvg,
 } from "./connect-modal-status.css";
+import { baseTextStyles } from "../text/text.css";
 import { bottomShadow } from "../shared/shared.css";
 import type { ConnectModalStatusProps } from "./connect-modal-status.types";
 
@@ -255,16 +256,19 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </p>
 
         <p
-          className={s({
-            fontSize: "sm",
-            marginBottom: "4",
-            color: {
-              light: "gray700",
-              dark: "whiteAlpha900",
-            },
-            fontWeight: "normal",
-            textAlign: "center",
-          })}
+          className={clx(
+            baseTextStyles,
+            s({
+              fontSize: "sm",
+              marginBottom: "4",
+              color: {
+                light: "gray600",
+                dark: "whiteAlpha900",
+              },
+              fontWeight: "normal",
+              textAlign: "center",
+            })
+          )}
         >
           {props.contentDesc}
         </p>
@@ -290,7 +294,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
                   marginLeft: "4",
                 })}
               >
-                Install {props.wallet.name}
+                Install {props.wallet.prettyName ?? props.wallet.name}
               </span>
             </span>
           </Button>
