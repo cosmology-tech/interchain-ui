@@ -1,6 +1,6 @@
 {
   "name": "@interchain-ui/vue",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "type": "module",
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
@@ -62,5 +62,5 @@
     "dts": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir ./dist --skipLibCheck",
     "minifyCss": "cleancss --batch --batch-suffix '' dist/**/*.css"
   },
-  "gitHead": "c7113f2ca477e302e00c494cd209dda537ce0029"
+  "gitHead": "bdcf939cbdcf307d7c1c97d7b26ef293c2beaf01"
 }
