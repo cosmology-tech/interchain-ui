@@ -1,7 +1,6 @@
 import Stack from "../stack";
-import Box from "../box";
 import Text from "../text";
-import starIcon from "../../assets/stars.png";
+import StarText from "../star-text";
 
 import * as styles from './nft-detail-top-offers.css'
 import { NftDetailTopOfferProps } from "./nft-detail-top-offers.types";
@@ -17,17 +16,7 @@ export default function NftDetailTopOffer(props: NftDetailTopOfferProps) {
           <Text size="xs" color="textSecondary">
             Price
           </Text>
-          <Stack align="center">
-            <Text weight="semibold" attributes={{ marginRight: "3" }}>
-              {`${props?.price} STARS`}
-            </Text>
-            <Box
-              as="img"
-              width="8"
-              height="8"
-              attributes={{ src: starIcon }}
-            ></Box>
-          </Stack>
+          <StarText value={props?.price} />
         </Stack>
         <Stack direction="column">
           <Text size="xs" color="textSecondary">

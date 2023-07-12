@@ -7,7 +7,7 @@ import Button from "../button";
 import IconButton from "../icon-button";
 import NftTraitListItem from "../nft-trait-list-item";
 import NftTraitList from "../nft-trait-list";
-import starIcon from "../../assets/stars.png";
+import StarText from "../star-text";
 import { store } from "../../models/store";
 import NftDetailInfo from "../nft-detail-info";
 import NftDetailTopOffer from "../nft-detail-top-offers";
@@ -60,20 +60,8 @@ export default function NftDetail(props: NftDetailProps) {
             <Text color="textSecondary" attributes={{ marginBottom: "7" }}>
               {props?.collectionDesc}
             </Text>
-            <Stack align="center" attributes={{ marginBottom: "4" }}>
-              <Text color="textSecondary" attributes={{ marginRight: "3" }}>
-                Minted for
-              </Text>
-              <Text>{`${props?.mintPrice} STARS`}</Text>
-              <Box
-                as="img"
-                attributes={{ src: starIcon }}
-                marginLeft="3"
-                width="8"
-                height="8"
-              />
-            </Stack>
-            <Stack align="center" attributes={{ marginBottom: "12" }}>
+            <StarText label="Minted for" value={props?.mintPrice} />
+            <Stack align="center" attributes={{ marginBottom: "12", marginTop: "4" }}>
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Owned by
               </Text>

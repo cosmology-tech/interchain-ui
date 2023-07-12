@@ -18,4 +18,4 @@ packages/vue/src
 /.npmrc
 .parcel-cache
 parcel-bundle-reports
-/**/dist
+/src/**/dist
