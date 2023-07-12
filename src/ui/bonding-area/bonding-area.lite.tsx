@@ -9,7 +9,7 @@ import * as styles from "./bonding-area.css";
 
 export default function BondingArea(props: BondingAreaProps) {
   return (
-    <Box width="full">
+    <Box width="full" className={styles.bondingAreaContainer}>
       <Stack className={styles.onlyDesktop} direction="column">
         <BondingCardList list={props.bondingCardList} />
         <Box height="14" />

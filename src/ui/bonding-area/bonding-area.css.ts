@@ -1,6 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { breakpoints } from "../../styles/tokens/breakpoints";
 
+export const bondingAreaContainer = style({
+  minWidth: "350px",
+});
+
 export const onlyDesktop = style({
   display: "flex",
   "@media": {

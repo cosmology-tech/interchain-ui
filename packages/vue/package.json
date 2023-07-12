@@ -1,11 +1,10 @@
 {
-  "name": "@cosmology-ui/vue",
-  "version": "1.0.0",
+  "name": "@interchain-ui/vue",
+  "version": "1.1.7",
   "type": "module",
-  "private": true,
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
-  "homepage": "https://github.com/cosmology-tech/cosmology-ui/tree/main/packages/vue#readme",
+  "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/vue#readme",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cosmology-mitosis-vue.umd.js",
   "module": "./dist/cosmology-mitosis-vue.es.js",
@@ -18,10 +17,11 @@
   },
   "dependencies": {
     "@fastify/deepmerge": "^1.3.0",
-    "@vanilla-extract/css": "^1.9.5",
+    "@formkit/auto-animate": "1.0.0-beta.6",
+    "@vanilla-extract/css": "^1.12.0",
     "@vanilla-extract/dynamic": "^2.0.3",
-    "@vanilla-extract/recipes": "^0.3.0",
-    "@vanilla-extract/sprinkles": "^1.5.1",
+    "@vanilla-extract/recipes": "^0.4.0",
+    "@vanilla-extract/sprinkles": "^1.6.1",
     "@zag-js/dialog": "^0.2.13",
     "@zag-js/vue": "^0.2.10",
     "animejs": "^3.2.1",
@@ -51,6 +51,7 @@
     "lib"
   ],
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
@@ -60,5 +61,6 @@
     "clean": "rimraf ./dist",
     "dts": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir ./dist --skipLibCheck",
     "minifyCss": "cleancss --batch --batch-suffix '' dist/**/*.css"
-  }
+  },
+  "gitHead": "bdcf939cbdcf307d7c1c97d7b26ef293c2beaf01"
 }

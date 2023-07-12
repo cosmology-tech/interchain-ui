@@ -1,12 +1,9 @@
 import {
-  useMetadata,
   useStore,
   onMount,
   onUpdate,
   useDefaultProps,
-  useRef,
 } from "@builder.io/mitosis";
-import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import * as styles from "./circular-progress-bar.css";
@@ -16,6 +13,7 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
   useDefaultProps({
     width: 80,
   });
+
   const state = useStore({
     strokeWidth: 0,
     radius: 0,
@@ -24,20 +22,23 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
   });
 
   onMount(() => {
-    let strokeWidth = 4;
-    let radius = props.width / 2;
-    let circumference = radius * 2 * Math.PI;
-    let offset = circumference - (props.progress / 100) * circumference;
-    state.strokeWidth = strokeWidth;
-    state.radius = radius;
-    state.circumference = circumference;
-    state.offset = offset;
+    const _strokeWidth = 4;
+    const _radius = props.width / 2;
+    const _circumference = _radius * 2 * Math.PI;
+    const _offset = _circumference - (props.progress / 100) * _circumference;
+
+    state.strokeWidth = _strokeWidth;
+    state.radius = _radius;
+    state.circumference = _circumference;
+    state.offset = _offset;
   });
+
   onUpdate(() => {
-    let updatedOffset =
+    const updatedOffset =
       state.circumference - (props.progress / 100) * state.circumference;
-      state.offset = updatedOffset;
+    state.offset = updatedOffset;
   }, [props.progress, state.circumference]);
+
   return (
     <div
       className={styles.container}
@@ -58,7 +59,7 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
           cx="50"
           cy="50"
           r={state.radius}
-          strokeWidth={state.strokeWidth}
+          stroke-width={state.strokeWidth}
         />
 
         <circle
@@ -67,9 +68,9 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
           cy="50"
           data-testid="progress-bar-bar"
           r={state.radius}
-          strokeDasharray={`${state.circumference} ${state.circumference}`}
-          strokeDashoffset={state.offset}
-          strokeWidth={state.strokeWidth}
+          stroke-dasharray={`${state.circumference} ${state.circumference}`}
+          stroke-dashoffset={state.offset}
+          stroke-width={state.strokeWidth}
         />
       </svg>
       <Stack className={styles.percentText} align="center" justify="center">

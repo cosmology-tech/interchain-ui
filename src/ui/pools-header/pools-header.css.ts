@@ -24,16 +24,15 @@ export const container = style([
 
 const base = style([
   s({
-    paddingTop: "9",
-    paddingRight: "8",
-    paddingBottom: "9",
-    paddingLeft: "8",
+    px: "8",
+    py: "9",
   }),
   {
     display: "flex",
     alignItems: "center",
     borderRadius: "7px",
     minHeight: "92px",
+    boxSizing: "border-box"
   },
 ]);
 export const mb3 = style({

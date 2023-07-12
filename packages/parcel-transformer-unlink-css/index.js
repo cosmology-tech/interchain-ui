@@ -30,7 +30,7 @@ function getCssImports() {
   const platform = matches[0].replace("packages/", "");
 
   return [
-    `require("./cosmology-ui-kit-${platform}.cjs.css");`,
-    `import "./cosmology-ui-kit-${platform}.cjs.css";`,
+    `require("./interchain-ui-kit-${platform}.cjs.css");`,
+    `import "./interchain-ui-kit-${platform}.cjs.css";`,
   ];
 }

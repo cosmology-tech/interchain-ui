@@ -88,7 +88,7 @@ const shouldMinify = process.env.MINIFY === "on";
             ? platforms
             : `{${cliConfig.platforms.join(",")}}`;
 
-        const filters = `--scope=@cosmology-ui/${platformGlob}`;
+        const filters = `--scope=@interchain-ui/${platformGlob}`;
 
         const buildCmd = `lerna run --stream ${filters} build`;
 

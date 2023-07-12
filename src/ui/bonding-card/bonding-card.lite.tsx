@@ -8,8 +8,7 @@ export default function BondingCard(props: BondingCardProps) {
   return (
     <Box
       className={styles.container}
-      px="9"
-      py="9"
+      p="9"
       borderRadius="lg"
       backgroundColor="cardBg"
     >
