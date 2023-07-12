@@ -116,17 +116,6 @@ export default function TokenInput(props: TokenInputProps) {
                 className={styles.operationIcon}
               />
             </Show>
-            {/* <div
-              className={styles.icon}
-              onClick={(e) => state.handleIconClick(e)}
-            >
-              <Show when={props.progress === 0}>
-                <Icon name="add" color="text" size="3xl" />
-              </Show>
-              <Show when={props.progress === 50}>
-                <Icon name="subtract" color="text" size="3xl" />
-              </Show>
-            </div> */}
           </Stack>
         </Stack>
       </Show>
@@ -136,11 +125,16 @@ export default function TokenInput(props: TokenInputProps) {
         <Stack className={styles.imgBox} justify="center" align="center">
           <img className={styles.img} src={props.imgSrc} />
         </Stack>
-        <input
-          value={state.amount}
-          disabled={state.disabled}
+        <Box
           className={styles.token}
-          onChange={(e) => state.handleTokenInput(e)}
+          as="input"
+          paddingLeft="9"
+          fontSize="lg"
+          attributes={{
+            value: state.amount,
+            disabled: state.disabled,
+            onChange: (e) => state.handleTokenInput(e),
+          }}
         />
         <Stack className={styles.caulator} justify="flex-end" align="center">
           <Text weight="semibold">{props.symbol} &nbsp;</Text>
