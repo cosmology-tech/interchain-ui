@@ -12,6 +12,7 @@ import {
   notExistLogoFrame,
   errorDescription,
   statusLogoImageSvg,
+  widthContainer,
 } from "./connect-modal-status.css";
 import { baseTextStyles } from "../text/text.css";
 import { bottomShadow } from "../shared/shared.css";
@@ -53,11 +54,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           Wallet is disconnected
         </p>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onConnect?.()}
@@ -197,19 +194,17 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           </Show>
         </div>
 
-        <ClipboardCopyText
-          text={props.connectedInfo.address}
-          truncate="middle"
-          className={s({
-            marginBottom: "7",
-          })}
-        />
+        <div className={widthContainer}>
+          <ClipboardCopyText
+            text={props.connectedInfo.address}
+            truncate="middle"
+            className={s({
+              marginBottom: "7",
+            })}
+          />
+        </div>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onDisconnect?.()}
@@ -273,7 +268,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           {props.contentDesc}
         </p>
 
-        <div className={s({ width: "full" })}>
+        <div className={widthContainer}>
           <Button
             intent="primary"
             variant="outlined"
@@ -349,11 +344,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           {props.contentDesc}
         </p>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onConnect?.()}
@@ -420,11 +411,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           <div className={bottomShadow} />
         </div>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onChangeWallet?.()}
