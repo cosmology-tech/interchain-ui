@@ -3,7 +3,7 @@ import cls from "clsx";
 
 import { create } from "zustand";
 import shallow from "zustand/shallow";
-import { store, ThemeProvider } from "@cosmology-ui/react";
+import { store, ThemeProvider } from "@interchain-ui/react";
 
 const useStore = create(store);
 

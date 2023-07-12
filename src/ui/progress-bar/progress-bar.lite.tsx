@@ -14,30 +14,17 @@ export default function ProgressBar(props: ProgressBarProps) {
   }, [props.progress]);
   return (
     <Box aria-valuemax={100} aria-valuemin={0}>
-      {/* <Box className={styles.bar}>
-        <div
-          className={styles.filledBar}
-          style={{ width: `${props.progress}%` }}
-        >
-          <div
-            onDrag={(e) => console.log("ondrag", e)}
-            onClick={() => console.log("onclick")}
-            className={styles.dot}
-          />
-        </div>
-      </Box> */}
       <input
         className={styles.range}
         type="range"
         ref={inputRef}
         onChange={(e) => {
-          let min = +e.target.min;
-          let max = +e.target.max;
-          let val = +e.target.value;
+          let min = Number(e.target.min);
+          let max = Number(e.target.max);
+          let val = Number(e.target.value);
           const result = ((val - min) * 100) / (max - min);
           e.target.style.backgroundSize = `${result}% 100%`;
           props.onProgressChange(result);
-          console.log(e.target.value);
         }}
         min="0"
         max="100"

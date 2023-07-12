@@ -5,7 +5,7 @@ import { ModePreference, ThemeVariant, NumberFormatter } from "./system.model";
 import { isPreferDarkMode, isPreferLightMode } from "../helpers/style";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
 
-export const STORAGE_NAME = "cosmology-ui-store";
+export const STORAGE_NAME = "interchain-ui-store";
 
 export interface UIState {
   // This is the value persisted in localstorage

@@ -35,7 +35,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
   });
 
   return (
-    <Box>
+    <Box className={styles.poolInfoHeader}>
       <Stack direction="column">
         <Text size="xl" weight="semibold">
           {props.token1.name} / {props.token2.name}
@@ -43,6 +43,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         <Text
           color="textSecondary"
           attributes={{
+            marginTop: "3",
             marginBottom: "13",
           }}
         >

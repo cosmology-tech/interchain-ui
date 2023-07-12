@@ -5,7 +5,7 @@ import { BondingListItem } from "../../../src";
 
 const meta: Meta<typeof BondingListItem> = {
   component: BondingListItem,
-  title: "Pool/pool-detail/bonding-list-item",
+  title: "Pool/PoolDetail/BondingListItem",
   tags: ["autodocs"],
   argTypes: {},
 };

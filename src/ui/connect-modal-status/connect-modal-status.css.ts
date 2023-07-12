@@ -15,8 +15,10 @@ export const modalStatusContainer = style([
     width: "100%",
   },
   s({
+    fontFamily: "body",
     px: "8",
-    py: "12",
+    paddingTop: "12",
+    paddingBottom: "0",
     backgroundColor: {
       light: "white",
       dark: "gray700",
@@ -156,3 +158,9 @@ export const errorDescription = style([
     maxHeight: "22",
   }),
 ]);
+
+export const widthContainer = s({
+  width: "full",
+  paddingLeft: "8",
+  paddingRight: "8",
+});
