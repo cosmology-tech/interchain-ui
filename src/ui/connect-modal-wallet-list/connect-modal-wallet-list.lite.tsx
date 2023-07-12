@@ -30,7 +30,7 @@ export default function ConnectModalWalletList(
 
   const state = useStore({
     displayBlur: false,
-    onWalletItemClickAsync: (exec: () => Promise<any>) => {
+    onWalletItemClickAsync: (exec) => {
       void (async function () {
         await exec();
       })();
@@ -114,7 +114,7 @@ export default function ConnectModalWalletList(
                   variant="square"
                   name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
-                  isMobile={wallet.isMobile}
+                  subLogo={wallet.subLogo}
                   onClick={state.onWalletItemClickAsync(async () =>
                     props.onWalletItemClick?.(wallet.originalWallet)
                   )}
@@ -125,14 +125,14 @@ export default function ConnectModalWalletList(
         </Show>
 
         <div className={listWallets}>
-          <For each={props.wallets.slice(2)}>
+          <For each={props.wallets.filter((w) => w.shape === "list")}>
             {(wallet, index) => (
               <WalletButton
                 key={wallet.name}
                 variant="list"
                 name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
-                isMobile={wallet.isMobile}
+                subLogo={wallet.subLogo}
                 onClick={state.onWalletItemClickAsync(async () =>
                   props.onWalletItemClick?.(wallet.originalWallet)
                 )}

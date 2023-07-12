@@ -4,7 +4,7 @@ import { ManageLiquidityCard } from "../../../src";
 
 const meta: Meta<typeof ManageLiquidityCard> = {
   component: ManageLiquidityCard,
-  title: "Pool/pool-detail/manage-liquidity-card",
+  title: "Pool/PoolDetail/ManageLiquidityCard",
   tags: ["autodocs"],
   argTypes: {},
 };

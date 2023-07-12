@@ -5,7 +5,7 @@ import { PoolInfoHeader, ManageLiquidityCard, BondingArea } from "../../../src";
 
 const meta: Meta<typeof BondingArea> = {
   component: BondingArea,
-  title: "Pool/pool-detail/pool-detail-modal",
+  title: "Pool/PoolDetail/PoolDetailPage",
   // tags: ["autodocs"],
   argTypes: {},
 };
@@ -69,19 +69,19 @@ export const Primary: Story = {
       bondingList: [
         {
           title: "A day",
-          apr: "2.43%",
+          apr: "2.43",
           amount: 59075,
           per: "24%",
         },
         {
           title: "7 days",
-          apr: "2.43%",
+          apr: "2.43",
           amount: 59075,
           per: "24%",
         },
         {
           title: "14 days",
-          apr: "2.43%",
+          apr: "2.43",
           amount: 59075,
           per: "24%",
         },
@@ -94,19 +94,19 @@ export const Primary: Story = {
             title: "Bonded 1 day",
             amount: 0.33,
             poolShares: 0,
-            apr: "2.46%",
+            apr: "2.46",
           },
           {
             title: "Bonded 7 days",
             amount: 0.33,
             poolShares: 0,
-            apr: "2.46%",
+            apr: "2.46",
           },
           {
             title: "Bonded 14 days",
             amount: 0.33,
             poolShares: 0,
-            apr: "2.46%",
+            apr: "2.46",
           },
         ],
       },
