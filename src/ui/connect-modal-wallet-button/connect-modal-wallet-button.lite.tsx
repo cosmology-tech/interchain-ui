@@ -32,7 +32,11 @@ export default function ConnectModalWalletButton(
             s({ position: "relative", display: "block" })
           )}
         >
-          <img alt={props.name} src={props.logo} />
+          <img
+            alt={props.name}
+            src={props.logo}
+            className={s({ width: "full", height: "full" })}
+          />
 
           <Show
             when={

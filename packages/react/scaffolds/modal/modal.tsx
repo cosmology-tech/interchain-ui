@@ -104,6 +104,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
           <div
             ref={forwardedRef}
             className={clx(themeStore.themeClass, className)}
+            style={{
+              position: "relative",
+              zIndex: 999,
+            }}
           >
             <FadeIn isVisible={api.isOpen}>
               <div {...api.backdropProps} className={styles.modalBackdrop} />
@@ -112,6 +116,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                   {...api.contentProps}
                   className={clx(styles.modalContent, contentClassName)}
                   data-modal-part="content"
+                  style={{
+                    width: "fit-content",
+                    margin: "0 auto",
+                  }}
                 >
                   {header &&
                     cloneElement(header, {
