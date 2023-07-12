@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.8](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.7...@interchain-ui/react@1.1.8) (2023-07-12)
+
+### Bug Fixes
+
+- **connect:** z index issue and thumbnail wallet issue ([#48](https://github.com/cosmology-tech/interchain-ui/issues/48)) ([545b8b8](https://github.com/cosmology-tech/interchain-ui/commit/545b8b8c51f49e2c6c5e54afdcf45da1de6dc80e))
+- Made ux of previous components be aligned with figma ([75d29c6](https://github.com/cosmology-tech/interchain-ui/commit/75d29c6c5c871a31602230f43db102dbc9d2c487))
+
 ## [1.1.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.6...@interchain-ui/react@1.1.7) (2023-07-11)
 
 ### Bug Fixes
