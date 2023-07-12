@@ -65,6 +65,7 @@ export { default as NftDetailTopOffers } from "./ui/nft-detail-top-offers";
 export { default as NftDetailActivityListItem } from "./ui/nft-detail-activity-list-item";
 export { default as NftDetailActivityList } from "./ui/nft-detail-activity-list";
 export { default as Tooltip } from "./ui/tooltip";
+export { default as Tabs } from "./ui/tabs";
 // End Components
 
 setPlatform(Platform.Default);
