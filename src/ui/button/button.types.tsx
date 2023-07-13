@@ -2,6 +2,7 @@ import { BaseComponentProps, BaseState } from "../../models/components.model";
 import type { Variants } from "./button.css";
 import type { BoxProps } from "../box/box.types";
 import type { IconProps } from "../icon/icon.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 export interface ButtonProps extends BaseComponentProps {
   variant?: Variants["variant"];
@@ -15,4 +16,6 @@ export interface ButtonProps extends BaseComponentProps {
   attributes?: BoxProps;
 }
 
-export interface ButtonState extends BaseState {}
+export interface ButtonState extends BaseState {
+  theme: ThemeVariant;
+}

@@ -1,11 +1,11 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const circle = style({
   fill: "transparent",
   stroke: themeVars.colors.cardBg,
 });
+
 export const filledCircle = style({
   fill: "transparent",
   stroke: themeVars.colors.text,

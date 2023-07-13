@@ -1,20 +1,9 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
-import { sprinkles } from "../../styles/sprinkles.css";
+import { For, useStore } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import PoolListItem from "../pool-list-item";
-import { store } from "../../models/store";
 import * as styles from "./pool-list.css";
-import { themeVars } from "../../styles/themes.css";
 import { PoolListProps } from "./pool-list.types";
 
 export default function PoolList(props: PoolListProps) {
@@ -57,7 +46,7 @@ export default function PoolList(props: PoolListProps) {
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem
-            id={item.id}
+              id={item.id}
               key={index}
               token1={item.token1}
               token2={item.token2}

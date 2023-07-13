@@ -1,6 +1,5 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
-import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
 
 export const container = style([
@@ -41,7 +40,7 @@ export const responsiveText = style([
       desktop: "1/5",
       mobile: "1/3",
     },
-  })
+  }),
 ]);
 
 export const nameContainer = style({
@@ -53,8 +52,7 @@ export const nameContainer = style({
       width: "calc(88px + 33.33%)",
     },
   },
-
-})
+});
 
 export const imageBox = style([
   s({
@@ -74,12 +72,14 @@ export const imgBase = style([
   }),
   { position: "absolute" },
 ]);
+
 export const image1 = style([
   imgBase,
   {
     left: 0,
   },
 ]);
+
 export const image2 = style([
   imgBase,
   {
@@ -119,17 +119,24 @@ const baseIcon = style([
   {
     width: "38px",
     height: "38px",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   s({
     borderRadius: "base",
-  })
-])
-export const iconConntainer = styleVariants({
-  light: [baseIcon, {
-    backgroundColor: "#EEF2F8"
-  }],
-  dark: [baseIcon, {
-    backgroundColor: "#1D2024"
-  }],
-})
+  }),
+]);
+
+export const iconContainer = styleVariants({
+  light: [
+    baseIcon,
+    {
+      backgroundColor: "#EEF2F8",
+    },
+  ],
+  dark: [
+    baseIcon,
+    {
+      backgroundColor: "#1D2024",
+    },
+  ],
+});

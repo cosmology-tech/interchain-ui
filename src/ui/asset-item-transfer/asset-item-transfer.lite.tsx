@@ -1,13 +1,33 @@
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Icon from "../icon";
 import TokenInput from "../token-input";
 import * as styles from "./asset-item-transfer.css";
+import { store } from "../../models/store";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { AssetItemTransferProps } from "./asset-item-transfer.types";
 
 export default function AssetItemTransfer(props: AssetItemTransferProps) {
+  const state = useStore({
+    theme: "",
+  });
+
+  let cleanupRef = useRef<() => void>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Stack direction="column" className={styles.container}>
       <Stack>
@@ -150,7 +170,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
       <Button intent="tertiary">
         <Stack align="center">
-          <Text className={styles.btnText} size="lg" weight="semibold">
+          <Text
+            className={styles.btnText[state.theme]}
+            size="lg"
+            weight="semibold"
+          >
             Transfer
           </Text>
 
@@ -164,7 +188,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               })}
             />
 
-            <Text size="xs" className={styles.btnText}>
+            <Text size="xs" className={styles.btnText[state.theme]}>
               ≈ 20 seconds
             </Text>
           </Stack>
