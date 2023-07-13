@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
@@ -21,7 +21,7 @@ export const img = sprinkles({
 
 export const flex1 = style({
   flex: 1,
-})
+});
 
 export const onlyLg = style({
   display: "flex",
@@ -41,16 +41,25 @@ export const onlySm = style({
   },
 });
 
-export const btnText = style({
-  vars: {
-    [buttonTextColorVar]: themeVars.colors.white,
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
+const btnTextBase = style({
+  color: buttonTextColorVar,
+});
+
+export const btnText = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+      },
+    }),
+    btnTextBase,
+  ],
+  dark: [
+    style({
       vars: {
         [buttonTextColorVar]: themeVars.colors.cardBg,
       },
-    },
-  },
-  color: buttonTextColorVar,
+    }),
+    btnTextBase,
+  ],
 });

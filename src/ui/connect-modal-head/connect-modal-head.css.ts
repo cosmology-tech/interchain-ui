@@ -1,17 +1,18 @@
-import { style } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 
-export const modalHeaderText = s({
+const modalHeaderTextBase = s({
   display: "block",
   textAlign: "center",
   fontSize: "md",
   fontWeight: "semibold",
   width: "full",
   height: "full",
-  color: {
-    light: "gray700",
-    dark: "whiteAlpha900",
-  },
+});
+
+export const modalHeaderText = styleVariants({
+  light: [modalHeaderTextBase, s({ color: "gray700" })],
+  dark: [modalHeaderTextBase, s({ color: "whiteAlpha900" })],
 });
 
 export const modalHeader = style([

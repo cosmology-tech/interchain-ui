@@ -1,19 +1,10 @@
-import {
-  Show,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
+import { Show, useStore, onUpdate, useDefaultProps } from "@builder.io/mitosis";
 import clsx from "clsx";
 import isNil from "lodash/isNil";
 import Stack from "../stack";
 import Text from "../text";
-import Icon from "../icon";
 import Box from "../box";
 import IconButton from "../icon-button";
-import { sprinkles } from "../../styles/sprinkles.css";
 import CicularProgressBar from "../circular-progress-bar";
 import * as styles from "./token-input.css";
 
@@ -23,6 +14,7 @@ export default function TokenInput(props: TokenInputProps) {
   useDefaultProps({
     hasProgressBar: true,
   });
+
   const state = useStore<{
     symbolValue: string;
     disabled: boolean;
@@ -48,7 +40,7 @@ export default function TokenInput(props: TokenInputProps) {
       props.onProgressChange(newProgress);
     },
   });
-  onMount(() => {});
+
   onUpdate(() => {
     if (props.progress === 0) {
       state.disabled = true;
@@ -56,6 +48,7 @@ export default function TokenInput(props: TokenInputProps) {
       state.disabled = false;
     }
   }, [props.progress]);
+
   return (
     <Stack flexWrap="wrap" align="center">
       <Stack

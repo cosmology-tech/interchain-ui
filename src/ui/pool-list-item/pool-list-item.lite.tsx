@@ -1,27 +1,19 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import clsx from "clsx";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
-import Icon from "../icon";
 import PoolName from "../pool/components/pool-name";
 import APR from "./components/apr";
 import CellWithTitle from "./components/cell-with-title";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
-import { PoolListItemProps } from "./pool-list-item.types";
+import type { PoolListItemProps } from "./pool-list-item.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 export default function PoolListItem(props: PoolListItemProps) {
-  const state = useStore({
-    theme: "",
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -29,7 +21,7 @@ export default function PoolListItem(props: PoolListItemProps) {
   onMount(() => {
     state.theme = store.getState().theme;
 
-    cleanupRef = store.subscribe((newState, prevState) => {
+    cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
     });
   });
@@ -54,7 +46,7 @@ export default function PoolListItem(props: PoolListItemProps) {
         <APR
           className={styles.onlySm}
           apr={props.apr}
-          innerClassName={styles.iconConntainer[state.theme]}
+          innerClassName={styles.iconContainer[state.theme]}
         />
       </CellWithTitle>
       <Box className={styles.onlySm} width="full" height="9" />
@@ -109,7 +101,7 @@ export default function PoolListItem(props: PoolListItemProps) {
       <APR
         className={clsx(styles.responsiveText, styles.lgAPR)}
         apr={props.apr}
-        innerClassName={styles.iconConntainer[state.theme]}
+        innerClassName={styles.iconContainer[state.theme]}
       />
       <Box className={styles.onlySm} width="full" height="4" />
     </Stack>

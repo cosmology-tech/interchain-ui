@@ -1,25 +1,16 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
-import { themeVars } from "../../styles/themes.css";
-import { PoolsHeaderProps } from "./pools-header.types";
-import {NumberFormatter} from "../../models/system.model"
+import type { PoolsHeaderProps } from "./pools-header.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 export default function PoolsHeader(props: PoolsHeaderProps) {
-  const state = useStore({
-    theme: "",
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -27,7 +18,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
   onMount(() => {
     state.theme = store.getState().theme;
 
-    cleanupRef = store.subscribe((newState, prevState) => {
+    cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
     });
   });
@@ -80,7 +71,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                   $
                 </Text>
                 <Text color="text" size="4xl" weight="semibold">
-                  {store.getState()?.formatNumber?.({value: props.price})}
+                  {store.getState()?.formatNumber?.({ value: props.price })}
                 </Text>
               </Stack>
             </Stack>

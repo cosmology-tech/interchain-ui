@@ -18,11 +18,7 @@ export default function APR(props: {
       >
         {props.apr}%
       </Text>
-      <Stack
-        className={props.innerClassName}
-        justify="center"
-        align="center"
-      >
+      <Stack className={props.innerClassName} justify="center" align="center">
         {/* TODO: Replace with IconButton later */}
         <Icon name="verticalMore" color="text" />
       </Stack>
