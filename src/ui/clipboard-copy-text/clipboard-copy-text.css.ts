@@ -51,7 +51,10 @@ export const truncateEndStyle = style({
   whiteSpace: "nowrap",
 });
 
-export const iconStyle = styleVariants({
-  idle: [style({ color: "inherit" })],
-  copied: [s({ color: { light: "green300", dark: "green400" } })],
-});
+export const iconStyle = {
+  idle: style({ color: "inherit" }),
+  copied: styleVariants({
+    light: [s({ color: "green300" })],
+    dark: [s({ color: "green400" })],
+  }),
+};

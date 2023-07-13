@@ -24,12 +24,14 @@ export const imgBase = style([
   }),
   { position: "absolute" },
 ]);
+
 export const image1 = style([
   imgBase,
   {
     left: 0,
   },
 ]);
+
 export const image2 = style([
   imgBase,
   {

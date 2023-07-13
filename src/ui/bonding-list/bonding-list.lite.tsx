@@ -1,13 +1,4 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
-import { store } from "../../models/store";
+import { For } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import BondingListItem from "../bonding-list-item";

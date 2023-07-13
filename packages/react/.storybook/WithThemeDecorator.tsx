@@ -3,7 +3,7 @@ import cls from "clsx";
 
 import { create } from "zustand";
 import shallow from "zustand/shallow";
-import { store, UIStore, ThemeProvider } from "../src";
+import { store, Box, ThemeProvider } from "../src";
 
 const useStore = create(store);
 
@@ -25,13 +25,20 @@ const WithThemeDecorator = (props) => {
   ]);
 
   return (
-    <div style={{ backgroundColor: theme === "light" ? "#fff" : "#2C3137" }}>
-      <ThemeProvider defaultTheme="light">
-        <div id="app-root1" className={cls("app", themeClass)}>
+    <ThemeProvider>
+      <div id="app-root1" className={cls("app", themeClass)}>
+        <Box
+          backgroundColor={{
+            light: "white",
+            dark: "gray700",
+          }}
+          px="10"
+          py="10"
+        >
           {props.children}
-        </div>
-      </ThemeProvider>
-    </div>
+        </Box>
+      </div>
+    </ThemeProvider>
   );
 };
 

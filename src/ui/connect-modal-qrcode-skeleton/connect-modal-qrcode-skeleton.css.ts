@@ -1,4 +1,9 @@
-import { style, keyframes, createVar } from "@vanilla-extract/css";
+import {
+  style,
+  keyframes,
+  styleVariants,
+  createVar,
+} from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
 const skeletonStartVar = createVar();
@@ -15,19 +20,7 @@ export const pulsingAnim = keyframes({
   },
 });
 
-export const qrcodeSkeleton = style({
-  vars: {
-    [skeletonStartVar]: themeVars.colors.gray100,
-    [skeletonEndVar]: themeVars.colors.gray400,
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
-      vars: {
-        [skeletonStartVar]: themeVars.colors.gray800,
-        [skeletonEndVar]: themeVars.colors.gray600,
-      },
-    },
-  },
+const qrcodeSkeletonBase = style({
   boxShadow: "none",
   userSelect: "none",
   backgroundClip: "padding-box",
@@ -44,4 +37,25 @@ export const qrcodeSkeleton = style({
   animationIterationCount: "infinite",
   animationTimingFunction: "linear",
   animationDirection: "alternate",
+});
+
+export const qrcodeSkeleton = styleVariants({
+  light: [
+    qrcodeSkeletonBase,
+    style({
+      vars: {
+        [skeletonStartVar]: themeVars.colors.gray100,
+        [skeletonEndVar]: themeVars.colors.gray400,
+      },
+    }),
+  ],
+  dark: [
+    qrcodeSkeletonBase,
+    style({
+      vars: {
+        [skeletonStartVar]: themeVars.colors.gray800,
+        [skeletonEndVar]: themeVars.colors.gray600,
+      },
+    }),
+  ],
 });

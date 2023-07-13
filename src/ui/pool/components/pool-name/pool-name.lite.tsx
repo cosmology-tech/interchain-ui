@@ -1,14 +1,3 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
-import { sprinkles } from "../../../../styles/sprinkles.css";
-import clsx from "clsx";
 import Stack from "../../../stack";
 import Box from "../../../box";
 import Text from "../../../text";
