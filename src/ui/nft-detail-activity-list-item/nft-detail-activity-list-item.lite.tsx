@@ -17,7 +17,7 @@ export default function NftDetailActivityListItem(
     >
       <Box flex={1}>
         <Stack align="center">
-          <Icon name="priceTagLine" size="md" />
+          <Icon name="priceTagLine" size="md" color="text" />
           <Text attributes={{ marginLeft: "9", marginRight: "12" }}>
             {props?.event}
           </Text>

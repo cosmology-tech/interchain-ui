@@ -1,18 +1,7 @@
-import {
-  Show,
-  For,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
-import clsx from "clsx";
-import { sprinkles } from "../../styles/sprinkles.css";
+import { For, useStore } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
-import Icon from "../icon";
 import ProgressBar from "../progress-bar";
 
 import * as styles from "./remove-liquidity.css";
@@ -25,6 +14,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
       state.progress = value;
     },
   });
+
   return (
     <Stack direction="column">
       <Stack direction="column">

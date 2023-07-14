@@ -23,7 +23,9 @@ import {
   qrCodeDescContent,
   qrCodeDescShadow,
 } from "./connect-modal-qrcode.css";
+import { store } from "../../models/store";
 import type { AnimeInstance } from "animejs";
+import type { ThemeVariant } from "../../models/system.model";
 
 export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   useDefaultProps({
@@ -35,11 +37,14 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   let animationRef = useRef<AnimeInstance | null>(null);
   let cleanupRef = useRef<() => void>(null);
 
-  const state = useStore({
+  const state = useStore<{ displayBlur: boolean; theme: ThemeVariant }>({
     displayBlur: false,
+    theme: "light",
   });
 
   onMount(() => {
+    state.theme = store.getState().theme;
+
     if (measureRef) {
       if (measureRef.clientHeight >= 64) {
         state.displayBlur = true;
@@ -62,7 +67,12 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
 
       measureRef.addEventListener("scroll", scrollHandler);
 
+      const themeUnsub = store.subscribe((newState) => {
+        state.theme = newState.theme;
+      });
+
       cleanupRef = () => {
+        themeUnsub();
         if (measureRef) {
           measureRef.removeEventListener("scroll", scrollHandler);
         }
@@ -110,7 +120,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Show>
 
       <Show when={props.status === "Done"}>
-        <div className={qrCodeContainer}>
+        <div className={qrCodeContainer[state.theme]}>
           <QRCode
             value={props.link}
             size={props.qrCodeSize}
@@ -136,10 +146,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
             fontWeight="medium"
             size="md"
             marginTop="2"
-            color={{
-              light: "red500",
-              dark: "red400",
-            }}
+            color="textDanger"
           >
             {props.errorTitle}
           </Text>
@@ -151,10 +158,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
             fontWeight="medium"
             size="md"
             marginTop="2"
-            color={{
-              light: "orange300",
-              dark: "orange200",
-            }}
+            color="textWarning"
           >
             {props.errorTitle}
           </Text>
@@ -167,7 +171,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
             <p>{props.errorDesc}</p>
           </div>
 
-          <div ref={shadowRef} className={qrCodeDescShadow}></div>
+          <div ref={shadowRef} className={qrCodeDescShadow[state.theme]}></div>
         </div>
       </Show>
     </Stack>
