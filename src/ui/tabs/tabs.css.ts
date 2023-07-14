@@ -12,12 +12,7 @@ export const tabsBase = style([
     borderRadius: "50px",
     minWidth: "465px",
     zIndex: "1",
-  },
-  sprinkles({
-    p: "0",
-    backgroundColor: "progressBg",
-    position: "relative",
-  }),
+  }
 ]);
 
 export const tabsHorizontal = style([

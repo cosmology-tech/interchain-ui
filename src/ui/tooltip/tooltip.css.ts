@@ -4,7 +4,8 @@ import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export const tooltip = style({
   position: "relative",
-  display: "inline-block",
+  display: "flex",
+  alignItems: "center",
   cursor: "help",
 });
 

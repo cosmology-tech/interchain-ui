@@ -48,6 +48,10 @@ export default function Tabs(props: TabsProps) {
         className={clsx(styles.tabsHorizontal)}
         as="ul"
         position="relative"
+        m="0"
+        p="0"
+        marginBottom="10"
+        backgroundColor="progressBg"
         attributes={{
           role: "tablist",
         }}

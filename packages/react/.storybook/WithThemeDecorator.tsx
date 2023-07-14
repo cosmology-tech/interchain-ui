@@ -27,8 +27,6 @@ const WithThemeDecorator = (props) => {
   return (
     <ThemeProvider>
       <div id="app-root1" className={cls("app", themeClass)}>
-      <h1>{themeClass}</h1>
-      <h1>{theme}</h1>
         <Box
           backgroundColor={{
             light: "white",
