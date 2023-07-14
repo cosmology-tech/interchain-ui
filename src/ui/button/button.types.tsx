@@ -13,6 +13,8 @@ export interface ButtonProps extends BaseComponentProps {
   leftIcon?: IconProps["name"];
   rightIcon?: IconProps["name"];
   onClick?: (event: any) => void;
+  onHoverStart?: (event: any) => void;
+  onHoverEnd?: (event: any) => void;
   attributes?: BoxProps;
 }
 
