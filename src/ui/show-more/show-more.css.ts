@@ -1,5 +1,4 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 
 export const container = style({
   position: "relative",
@@ -30,4 +29,4 @@ export const btnContainer = style({
 
 export const content = style({
   overflow: "hidden",
-})
+});

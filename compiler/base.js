@@ -52,7 +52,6 @@ async function compile(defaultOptions) {
     : options.elements;
   options.isDev = !!cliConfig.dev;
 
-  const spinner = ora("Compiling").start();
   const files = cliConfig.elements
     ? options.elements
     : glob.sync(options.elements);
@@ -164,12 +163,14 @@ async function compile(defaultOptions) {
     fs.writeFileSync(outFile, result, "utf8");
   }
 
+  const spinner = ora("Compiling").start();
+
   for (const fileName of files) {
     const file = path.parse(fileName);
     const isFirstCompilation =
       !fs.existsSync(`${outPath}/src`) || options.isDev;
     const name = file.name.replace(".lite", "");
-    spinner.text = fileName;
+    spinner.info(`Compiling: ${fileName}`);
 
     // Copying files
     const { inDir, outDir } = getScaffoldsDirs(outPath);
@@ -191,8 +192,10 @@ async function compile(defaultOptions) {
       outPath,
       isFirstCompilation,
     });
-    spinner.stop();
   }
+
+  spinner.succeed();
+  spinner.stop();
 }
 
 module.exports = {

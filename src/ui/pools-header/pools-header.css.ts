@@ -1,11 +1,6 @@
-import { style, styleVariants } from "@vanilla-extract/css";
-import { recipe } from "@vanilla-extract/recipes";
-import {
-  sprinkles as s,
-  RequiredResponsiveObject,
-} from "../../styles/sprinkles.css";
+import { style } from "@vanilla-extract/css";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { breakpoints } from "../../styles/tokens";
 
 export const container = style([
@@ -24,18 +19,18 @@ export const container = style([
 
 const base = style([
   s({
-    paddingTop: "9",
-    paddingRight: "8",
-    paddingBottom: "9",
-    paddingLeft: "8",
+    px: "8",
+    py: "9",
   }),
   {
     display: "flex",
     alignItems: "center",
     borderRadius: "7px",
     minHeight: "92px",
+    boxSizing: "border-box",
   },
 ]);
+
 export const mb3 = style({
   marginBottom: "3px",
 });
@@ -66,7 +61,6 @@ export const baseBox = style([
   {
     backgroundColor: themeVars.colors.cardBg,
     width: "234px",
-    // maxWidth: "234px",
     height: "fit-content",
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
@@ -106,6 +100,6 @@ export const flex1 = style([
   }),
   {
     flex: 1,
-    overflow: "hidden"
+    overflow: "hidden",
   },
 ]);

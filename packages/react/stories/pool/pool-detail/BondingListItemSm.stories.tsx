@@ -5,7 +5,7 @@ import { BondingListItemSm } from "../../../src";
 
 const meta: Meta<typeof BondingListItemSm> = {
   component: BondingListItemSm,
-  title: "Pool/pool-detail/bonding-list-item-sm",
+  title: "Pool/PoolDetail/BondingListItemSm",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -20,6 +20,6 @@ export const Primary: Story = {
     title: 'Bonded 1 day',
     amount: 0.33,
     poolShares: 0,
-    apr: "2.46%",
+    apr: "2.46",
   },
 };

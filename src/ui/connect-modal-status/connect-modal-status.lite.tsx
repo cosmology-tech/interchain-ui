@@ -1,4 +1,10 @@
-import { Show } from "@builder.io/mitosis";
+import {
+  Show,
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import Button from "../button";
 import ClipboardCopyText from "../clipboard-copy-text";
@@ -6,19 +12,46 @@ import { sprinkles as s } from "../../styles/sprinkles.css";
 import {
   statusLogo,
   disconnectedLogoFrame,
+  disconnectedDesc,
   statusLogoImage,
   modalStatusContainer,
   connectingLogoFrame,
+  connectingHeader,
   notExistLogoFrame,
+  dangerText,
   errorDescription,
   statusLogoImageSvg,
+  widthContainer,
+  connectedInfo,
+  desc,
 } from "./connect-modal-status.css";
+import { baseTextStyles } from "../text/text.css";
 import { bottomShadow } from "../shared/shared.css";
+import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
 import type { ConnectModalStatusProps } from "./connect-modal-status.types";
 
 export default function ConnectModalStatus(props: ConnectModalStatusProps) {
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<() => void>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
-    <div className={clx(modalStatusContainer, props.className)}>
+    <div className={clx(modalStatusContainer[state.theme], props.className)}>
       {/* Status disconnected */}
       <Show when={props.status === "Disconnected"}>
         <div
@@ -29,7 +62,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             })
           )}
         >
-          <div className={disconnectedLogoFrame} />
+          <div className={disconnectedLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
@@ -39,24 +72,9 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           </div>
         </div>
 
-        <p
-          className={s({
-            fontWeight: "semibold",
-            marginBottom: "7",
-            color: {
-              light: "orange300",
-              dark: "orange500",
-            },
-          })}
-        >
-          Wallet is disconnected
-        </p>
+        <p className={disconnectedDesc[state.theme]}>Wallet is disconnected</p>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onConnect?.()}
@@ -96,7 +114,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             })
           )}
         >
-          <div className={connectingLogoFrame} />
+          <div className={connectingLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
@@ -106,19 +124,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           </div>
         </div>
 
-        <p
-          className={s({
-            marginBottom: "1",
-            fontSize: "md",
-            fontWeight: "semibold",
-            color: {
-              light: "gray700",
-              dark: "white",
-            },
-          })}
-        >
-          {props.contentHeader}
-        </p>
+        <p className={connectingHeader[state.theme]}>{props.contentHeader}</p>
 
         <p
           className={s({
@@ -178,33 +184,25 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               height: "8",
             })}
           />
-          <p
-            className={s({
-              fontSize: "md",
-              fontWeight: "semibold",
-              marginLeft: "4",
-              color: {
-                light: "gray700",
-                dark: "white",
-              },
-            })}
-          >
-            {props.connectedInfo.name ?? props.connectedInfo.address}
-          </p>
+
+          <Show when={!!props.connectedInfo?.name}>
+            <p className={connectedInfo[state.theme]}>
+              {props.connectedInfo.name}
+            </p>
+          </Show>
         </div>
 
-        <ClipboardCopyText
-          text={props.connectedInfo.address}
-          className={s({
-            marginBottom: "7",
-          })}
-        />
+        <div className={widthContainer}>
+          <ClipboardCopyText
+            text={props.connectedInfo.address}
+            truncate="middle"
+            className={s({
+              marginBottom: "7",
+            })}
+          />
+        </div>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onDisconnect?.()}
@@ -227,7 +225,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             })
           )}
         >
-          <div className={notExistLogoFrame} />
+          <div className={notExistLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
@@ -237,35 +235,13 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           </div>
         </div>
 
-        <p
-          className={s({
-            fontWeight: "semibold",
-            marginBottom: "2",
-            color: {
-              light: "red300",
-              dark: "red400",
-            },
-          })}
-        >
-          {props.contentHeader}
-        </p>
+        <p className={dangerText[state.theme]}>{props.contentHeader}</p>
 
-        <p
-          className={s({
-            fontSize: "sm",
-            marginBottom: "4",
-            color: {
-              light: "gray700",
-              dark: "whiteAlpha900",
-            },
-            fontWeight: "normal",
-            textAlign: "center",
-          })}
-        >
+        <p className={clx(baseTextStyles, desc[state.theme])}>
           {props.contentDesc}
         </p>
 
-        <div className={s({ width: "full" })}>
+        <div className={widthContainer}>
           <Button
             intent="primary"
             variant="outlined"
@@ -286,7 +262,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
                   marginLeft: "4",
                 })}
               >
-                Install {props.wallet.name}
+                Install {props.wallet.prettyName ?? props.wallet.name}
               </span>
             </span>
           </Button>
@@ -303,7 +279,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             })
           )}
         >
-          <div className={notExistLogoFrame} />
+          <div className={notExistLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
@@ -313,39 +289,11 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           </div>
         </div>
 
-        <p
-          className={s({
-            fontWeight: "semibold",
-            marginBottom: "2",
-            color: {
-              light: "red300",
-              dark: "red400",
-            },
-          })}
-        >
-          {props.contentHeader}
-        </p>
+        <p className={dangerText[state.theme]}>{props.contentHeader}</p>
 
-        <p
-          className={s({
-            fontSize: "sm",
-            marginBottom: "4",
-            color: {
-              light: "gray700",
-              dark: "whiteAlpha900",
-            },
-            fontWeight: "normal",
-            textAlign: "center",
-          })}
-        >
-          {props.contentDesc}
-        </p>
+        <p className={desc[state.theme]}>{props.contentDesc}</p>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onConnect?.()}
@@ -369,7 +317,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
             })
           )}
         >
-          <div className={notExistLogoFrame} />
+          <div className={notExistLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
@@ -379,44 +327,16 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           </div>
         </div>
 
-        <p
-          className={s({
-            fontWeight: "semibold",
-            marginBottom: "2",
-            color: {
-              light: "red300",
-              dark: "red400",
-            },
-          })}
-        >
-          {props.contentHeader}
-        </p>
+        <p className={dangerText[state.theme]}>{props.contentHeader}</p>
 
         <div className={s({ position: "relative" })}>
           <div className={errorDescription}>
-            <p
-              className={s({
-                fontSize: "sm",
-                marginBottom: "4",
-                color: {
-                  light: "gray700",
-                  dark: "whiteAlpha900",
-                },
-                fontWeight: "normal",
-                textAlign: "center",
-              })}
-            >
-              {props.contentDesc}
-            </p>
+            <p className={desc[state.theme]}>{props.contentDesc}</p>
           </div>
-          <div className={bottomShadow} />
+          <div className={bottomShadow[state.theme]} />
         </div>
 
-        <div
-          className={s({
-            width: "full",
-          })}
-        >
+        <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onChangeWallet?.()}

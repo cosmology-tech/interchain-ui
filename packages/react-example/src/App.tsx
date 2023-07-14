@@ -1,4 +1,4 @@
-import "@cosmology-ui/react/dist/cosmology-ui-kit-react.cjs.css";
+import "@interchain-ui/react/dist/interchain-ui-kit-react.cjs.css";
 import cls from "clsx";
 import {
   Button,
@@ -13,7 +13,7 @@ import {
   ConnectModalQRCode,
   ConnectModalWalletButton,
   ConnectModalHead,
-} from "@cosmology-ui/react";
+} from "@interchain-ui/react";
 
 import { FaAndroid } from "react-icons/fa";
 import { useCosmologyStore } from "./hooks/useCosmologyStore";

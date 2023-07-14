@@ -5,7 +5,7 @@ import { ModePreference, ThemeVariant, NumberFormatter } from "./system.model";
 import { isPreferDarkMode, isPreferLightMode } from "../helpers/style";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
 
-export const STORAGE_NAME = "cosmology-ui-store";
+export const STORAGE_NAME = "interchain-ui-store";
 
 export interface UIState {
   // This is the value persisted in localstorage
@@ -49,25 +49,32 @@ export const store = createStore(
         }),
       setThemeMode: (newThemeMode: ModePreference) =>
         set((state) => {
-          const themeClass = { dark: darkThemeClass, light: lightThemeClass }[
-            newThemeMode
-          ];
+          const resolveSystemMode = (
+            themeMode: ModePreference
+          ): [ThemeVariant, string] => {
+            if (themeMode === "system") {
+              if (isPreferDarkMode()) {
+                return ["dark", darkThemeClass];
+              }
+              if (isPreferLightMode()) {
+                return ["light", lightThemeClass];
+              }
+            } else {
+              const themeClass = {
+                dark: darkThemeClass,
+                light: lightThemeClass,
+              }[newThemeMode];
 
-          const resolveSystemMode = (): [ThemeVariant, string] => {
-            if (isPreferDarkMode()) {
-              return ["dark", darkThemeClass];
-            }
-            if (isPreferLightMode()) {
-              return ["light", lightThemeClass];
+              return [themeMode, themeClass];
             }
           };
 
-          const [resolvedTheme, resolvedClass] = resolveSystemMode();
+          const [resolvedTheme, resolvedClass] =
+            resolveSystemMode(newThemeMode);
 
           state.themeMode = newThemeMode;
           state.theme = resolvedTheme;
-          state.themeClass =
-            newThemeMode === "system" ? resolvedClass : themeClass;
+          state.themeClass = resolvedClass;
         }),
       formatNumber: null,
       setFormatNumberFn: (fn: NumberFormatter) =>

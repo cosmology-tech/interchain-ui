@@ -2,6 +2,9 @@ import { style, styleVariants } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { breakpoints } from "../../styles/tokens";
 
+export const poolInfoHeader = style({
+  minWidth: "350px",
+});
 
 export const imageBox = style([
   s({
@@ -21,12 +24,14 @@ export const imgBase = style([
   }),
   { position: "absolute" },
 ]);
+
 export const image1 = style([
   imgBase,
   {
     left: 0,
   },
 ]);
+
 export const image2 = style([
   imgBase,
   {
@@ -42,14 +47,14 @@ export const longText = style([
         width: "calc(100% - 96px)",
       },
     },
-  })
-])
+  }),
+]);
 
 export const shortText = style([
   s({
     width: "21",
-  })
-])
+  }),
+]);
 
 export const onlysm = style({
   "@media": {
@@ -57,8 +62,7 @@ export const onlysm = style({
       display: "none",
     },
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-      display:"block"
+      display: "block",
     },
   },
-
-})
+});

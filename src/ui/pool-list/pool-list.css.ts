@@ -1,14 +1,10 @@
-import { style, styleVariants } from "@vanilla-extract/css";
-import {
-  sprinkles as s,
-} from "../../styles/sprinkles.css";
+import { style } from "@vanilla-extract/css";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import { breakpoints } from "../../styles/tokens";
-
 
 export const container = style([
   s({
     paddingTop: "10",
-    // paddingLeft: "10",
   }),
   {
     width: "752px",
@@ -23,8 +19,7 @@ export const container = style([
 
 export const titleContainer = style([
   s({
-    marginTop: "9",
-    marginBottom: "9",
+    my: "9",
   }),
   {
     paddingLeft: "88px",
@@ -43,6 +38,5 @@ export const title = style([
 ]);
 
 export const listContainer = s({
-  paddingTop: "6",
-  paddingBottom: "6",
+  py: "6",
 });

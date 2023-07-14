@@ -8,6 +8,16 @@ const DEFAULT_OPTIONS = {
   styles: "style-tag",
 };
 
-(async () => {
+async function compileReact() {
   await compiler.compile({ ...DEFAULT_OPTIONS });
-})();
+}
+module.exports = {
+  compileReact,
+};
+
+if (require.main === module) {
+  // Call directly through CLI
+  (async () => {
+    await compileReact();
+  })();
+}

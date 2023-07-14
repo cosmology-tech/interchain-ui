@@ -1,8 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export const containerStyle = style([
   {
@@ -41,16 +39,22 @@ export const containerStyle = style([
 export const textStyle = style([
   {
     color: "inherit",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
   },
   s({
     marginRight: "4",
   }),
 ]);
 
-export const iconStyle = styleVariants({
-  idle: [style({ color: "inherit" })],
-  copied: [s({ color: { light: "green300", dark: "green400" } })],
+export const truncateEndStyle = style({
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
+
+export const iconStyle = {
+  idle: style({ color: "inherit" }),
+  copied: styleVariants({
+    light: [s({ color: "green300" })],
+    dark: [s({ color: "green400" })],
+  }),
+};

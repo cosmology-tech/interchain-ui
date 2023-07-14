@@ -1,24 +1,16 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Button from "../button";
 import Text from "../text";
 import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./manage-liquidity-card.css";
 import { ManageLiquidityCardProps } from "./manage-liquidity-card.types";
 
 export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
-  const state = useStore({
-    theme: "",
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -26,7 +18,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
   onMount(() => {
     state.theme = store.getState().theme;
 
-    cleanupRef = store.subscribe((newState, prevState) => {
+    cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
     });
   });
@@ -50,7 +42,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         <Text color="textSecondary" weight="semibold">
           Your pool balance
         </Text>
-        <Stack align="baseline">
+        <Stack align="baseline" attributes={{ my: "2" }}>
           <Text weight="semibold" attributes={{ marginRight: "1" }}>
             $
           </Text>
@@ -59,7 +51,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
         </Stack>
         <Text>No pool shares yet</Text>
-        <Button className={styles.mt11} size="sm" intent="tertiary">
+        <Button attributes={{ marginTop: "11" }} intent="tertiary">
           Add Liquidity
         </Button>
       </Stack>
@@ -87,7 +79,11 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
           <Text color="textSecondary">{props.token2.name}</Text>
         </Stack>
-        <Button className={styles.mt11} size="sm" intent="tertiary">
+        <Button
+          attributes={{ marginTop: "11" }}
+          intent="tertiary"
+          variant="outlined"
+        >
           Remove Liquidity
         </Button>
       </Stack>
@@ -105,8 +101,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         </Stack>
         <Text>No pool shares yet</Text>
         <Button
-          className={styles.mt11}
-          size="sm"
+          attributes={{ marginTop: "11" }}
           intent="tertiary"
           variant="outlined"
         >

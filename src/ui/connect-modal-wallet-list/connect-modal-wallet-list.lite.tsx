@@ -18,6 +18,7 @@ import {
   container,
 } from "./connect-modal-wallet-list.css";
 import { bottomShadow } from "../shared/shared.css";
+import { store } from "../../models/store";
 import type { ConnectModalWalletListProps } from "./connect-modal-wallet-list.types";
 
 export default function ConnectModalWalletList(
@@ -30,7 +31,8 @@ export default function ConnectModalWalletList(
 
   const state = useStore({
     displayBlur: false,
-    onWalletItemClickAsync: (exec: () => Promise<any>) => {
+    theme: "light",
+    onWalletItemClickAsync: (exec) => {
       void (async function () {
         await exec();
       })();
@@ -38,6 +40,12 @@ export default function ConnectModalWalletList(
   });
 
   onMount(() => {
+    state.theme = store.getState().theme;
+
+    const unsubTheme = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+
     if (measureRef) {
       if (measureRef.clientHeight >= 320) {
         state.displayBlur = true;
@@ -61,6 +69,7 @@ export default function ConnectModalWalletList(
       measureRef.addEventListener("scroll", scrollHandler);
 
       cleanupRef = () => {
+        unsubTheme();
         if (measureRef) {
           measureRef.removeEventListener("scroll", scrollHandler);
         }
@@ -114,7 +123,7 @@ export default function ConnectModalWalletList(
                   variant="square"
                   name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
-                  isMobile={wallet.isMobile}
+                  subLogo={wallet.subLogo}
                   onClick={state.onWalletItemClickAsync(async () =>
                     props.onWalletItemClick?.(wallet.originalWallet)
                   )}
@@ -125,14 +134,14 @@ export default function ConnectModalWalletList(
         </Show>
 
         <div className={listWallets}>
-          <For each={props.wallets.slice(2)}>
+          <For each={props.wallets.filter((w) => w.shape === "list")}>
             {(wallet, index) => (
               <WalletButton
                 key={wallet.name}
                 variant="list"
                 name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
-                isMobile={wallet.isMobile}
+                subLogo={wallet.subLogo}
                 onClick={state.onWalletItemClickAsync(async () =>
                   props.onWalletItemClick?.(wallet.originalWallet)
                 )}
@@ -142,7 +151,7 @@ export default function ConnectModalWalletList(
         </div>
       </div>
 
-      <div ref={shadowRef} className={bottomShadow} />
+      <div ref={shadowRef} className={bottomShadow[state.theme]} />
     </div>
   );
 }

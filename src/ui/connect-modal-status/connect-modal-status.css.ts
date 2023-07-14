@@ -1,4 +1,9 @@
-import { style, keyframes, createVar } from "@vanilla-extract/css";
+import {
+  style,
+  keyframes,
+  styleVariants,
+  createVar,
+} from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
@@ -6,7 +11,7 @@ const logoFrameColorDisconnectedVar = createVar();
 const logoFrameColorConnectingVar = createVar();
 const logoFrameColorNotExistVar = createVar();
 
-export const modalStatusContainer = style([
+const modalStatusContainerBase = style([
   {
     display: "flex",
     flexDirection: "column",
@@ -15,14 +20,27 @@ export const modalStatusContainer = style([
     width: "100%",
   },
   s({
+    fontFamily: "body",
     px: "8",
-    py: "12",
-    backgroundColor: {
-      light: "white",
-      dark: "gray700",
-    },
+    paddingTop: "12",
+    paddingBottom: "0",
   }),
 ]);
+
+export const modalStatusContainer = styleVariants({
+  light: [
+    modalStatusContainerBase,
+    s({
+      backgroundColor: "white",
+    }),
+  ],
+  dark: [
+    modalStatusContainerBase,
+    s({
+      backgroundColor: "gray700",
+    }),
+  ],
+});
 
 export const statusLogo = style([
   {
@@ -39,17 +57,7 @@ export const statusLogo = style([
   }),
 ]);
 
-export const disconnectedLogoFrame = style({
-  vars: {
-    [logoFrameColorDisconnectedVar]: themeVars.colors.orange300,
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
-      vars: {
-        [logoFrameColorDisconnectedVar]: themeVars.colors.orange400,
-      },
-    },
-  },
+const disconnectedLogoFrameBase = style({
   position: "absolute",
   borderRadius: "50%",
   borderWidth: "2px",
@@ -59,6 +67,45 @@ export const disconnectedLogoFrame = style({
   bottom: `calc(${themeVars.space[4]} * -1)`,
   left: `calc(${themeVars.space[4]} * -1)`,
   right: `calc(${themeVars.space[4]} * -1)`,
+});
+
+export const disconnectedLogoFrame = styleVariants({
+  light: [
+    disconnectedLogoFrameBase,
+    style({
+      vars: {
+        [logoFrameColorDisconnectedVar]: themeVars.colors.orange300,
+      },
+    }),
+  ],
+  dark: [
+    disconnectedLogoFrameBase,
+    style({
+      vars: {
+        [logoFrameColorDisconnectedVar]: themeVars.colors.orange400,
+      },
+    }),
+  ],
+});
+
+const disconnectedDescBase = s({
+  fontWeight: "semibold",
+  marginBottom: "7",
+});
+
+export const disconnectedDesc = styleVariants({
+  light: [
+    disconnectedDescBase,
+    s({
+      color: "orange300",
+    }),
+  ],
+  dark: [
+    disconnectedDescBase,
+    s({
+      color: "orange500",
+    }),
+  ],
 });
 
 export const statusLogoImage = s({
@@ -82,17 +129,7 @@ export const rotateAnim = keyframes({
   "100%": { transform: "rotate(360deg)" },
 });
 
-export const connectingLogoFrame = style({
-  vars: {
-    [logoFrameColorConnectingVar]: themeVars.colors.purple300,
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
-      vars: {
-        [logoFrameColorConnectingVar]: themeVars.colors.purple400,
-      },
-    },
-  },
+const connectingLogoFrameBase = style({
   position: "absolute",
   borderRadius: "50%",
   borderWidth: "2px",
@@ -111,17 +148,47 @@ export const connectingLogoFrame = style({
   animationTimingFunction: "ease-in-out",
 });
 
-export const notExistLogoFrame = style({
-  vars: {
-    [logoFrameColorNotExistVar]: themeVars.colors.red300,
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
+export const connectingLogoFrame = styleVariants({
+  light: [
+    connectingLogoFrameBase,
+    style({
       vars: {
-        [logoFrameColorNotExistVar]: themeVars.colors.red400,
+        [logoFrameColorConnectingVar]: themeVars.colors.purple300,
       },
-    },
-  },
+    }),
+  ],
+  dark: [
+    connectingLogoFrameBase,
+    style({
+      vars: {
+        [logoFrameColorConnectingVar]: themeVars.colors.purple400,
+      },
+    }),
+  ],
+});
+
+const connectingHeaderBase = s({
+  marginBottom: "1",
+  fontSize: "md",
+  fontWeight: "semibold",
+});
+
+export const connectingHeader = styleVariants({
+  light: [
+    connectingHeaderBase,
+    s({
+      color: "gray700",
+    }),
+  ],
+  dark: [
+    connectingHeaderBase,
+    s({
+      color: "white",
+    }),
+  ],
+});
+
+const notExistLogoFrameBase = style({
   position: "absolute",
   borderRadius: "50%",
   borderWidth: "2px",
@@ -131,6 +198,25 @@ export const notExistLogoFrame = style({
   bottom: `calc(${themeVars.space[4]} * -1)`,
   left: `calc(${themeVars.space[4]} * -1)`,
   right: `calc(${themeVars.space[4]} * -1)`,
+});
+
+export const notExistLogoFrame = styleVariants({
+  light: [
+    notExistLogoFrameBase,
+    style({
+      vars: {
+        [logoFrameColorNotExistVar]: themeVars.colors.red300,
+      },
+    }),
+  ],
+  dark: [
+    notExistLogoFrameBase,
+    style({
+      vars: {
+        [logoFrameColorNotExistVar]: themeVars.colors.red400,
+      },
+    }),
+  ],
 });
 
 export const errorDescription = style([
@@ -156,3 +242,47 @@ export const errorDescription = style([
     maxHeight: "22",
   }),
 ]);
+
+export const widthContainer = s({
+  width: "full",
+  paddingLeft: "8",
+  paddingRight: "8",
+});
+
+const connectedInfoBase = s({
+  fontSize: "md",
+  fontWeight: "semibold",
+  marginLeft: "4",
+});
+
+export const connectedInfo = styleVariants({
+  light: [
+    connectedInfoBase,
+    s({
+      color: "gray700",
+    }),
+  ],
+  dark: [
+    connectedInfoBase,
+    s({
+      color: "white",
+    }),
+  ],
+});
+
+export const dangerText = styleVariants({
+  light: [s({ fontWeight: "semibold", marginBottom: "2", color: "red300" })],
+  dark: [s({ fontWeight: "semibold", marginBottom: "2", color: "red400" })],
+});
+
+const descBase = s({
+  fontSize: "sm",
+  marginBottom: "4",
+  fontWeight: "normal",
+  textAlign: "center",
+});
+
+export const desc = styleVariants({
+  light: [descBase, s({ color: "gray600" })],
+  dark: [descBase, s({ color: "whiteAlpha900" })],
+});

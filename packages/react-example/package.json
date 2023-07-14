@@ -1,7 +1,7 @@
 {
-  "name": "@cosmology-ui/react-example",
+  "name": "@interchain-ui/react-example",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cosmology-ui/react": "*",
+    "@interchain-ui/react": "^1.1.11",
     "clsx": "^1.2.1",
     "immer": "^9.0.19",
     "react": "^18.2.0",

@@ -1,23 +1,16 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import { store } from "../../models/store";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import PoolName from "../pool/components/pool-name";
 import * as styles from "./pool-card.css";
-import { PoolCardProps } from "./pool-card.types";
+import type { PoolCardProps } from "./pool-card.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 export default function PoolCard(props: PoolCardProps) {
-  const state = useStore({
-    theme: "",
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -25,7 +18,7 @@ export default function PoolCard(props: PoolCardProps) {
   onMount(() => {
     state.theme = store.getState().theme;
 
-    cleanupRef = store.subscribe((newState, prevState) => {
+    cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
     });
   });
@@ -33,6 +26,7 @@ export default function PoolCard(props: PoolCardProps) {
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
+
   return (
     <Stack
       space="6"

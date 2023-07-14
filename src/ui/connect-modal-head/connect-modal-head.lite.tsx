@@ -1,14 +1,41 @@
-import { Show, useDefaultProps } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  Show,
+  useDefaultProps,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import Button from "../button";
 import { sprinkles as s } from "../../styles/sprinkles.css";
+import { store } from "../../models/store";
 import * as styles from "./connect-modal-head.css";
+import type { ThemeVariant } from "../../models/system.model";
 import type { ConnectModalHeadProps } from "./connect-modal-head.types";
 
 export default function ConnectModalHead(props: ConnectModalHeadProps) {
   useDefaultProps({
     hasBackButton: false,
     hasCloseButton: true,
+  });
+
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<() => void>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
   });
 
   return (
@@ -27,7 +54,7 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
         </div>
       </Show>
 
-      <p className={styles.modalHeaderText} {...props.titleProps}>
+      <p className={styles.modalHeaderText[state.theme]} {...props.titleProps}>
         {props.title}
       </p>
 

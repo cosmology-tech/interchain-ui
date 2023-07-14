@@ -5,7 +5,7 @@ import { BondingMore } from "../../../../src";
 
 const meta: Meta<typeof BondingMore> = {
   component: BondingMore,
-  title: "Pool/pool-detail/manage-liquidity/bonding-more",
+  title: "Pool/PoolDetail/ManageLiquidity/BondingMore",
   tags: ["autodocs"],
   argTypes: {},
 };
