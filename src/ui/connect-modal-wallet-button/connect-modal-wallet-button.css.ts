@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
@@ -26,66 +26,71 @@ const connectButtonShapeVariants = {
   }),
 };
 
-export const connectButtonVariants = recipe({
-  base: style([
-    {
-      fontFamily: themeVars.font.body,
-      fontWeight: themeVars.fontWeight.semibold,
-      borderRadius: themeVars.radii.md,
-      cursor: "pointer",
-      appearance: "none",
-      border: "none",
-      position: "relative",
-      userSelect: "none",
-      whiteSpace: "nowrap",
-      verticalAlign: "middle",
-      lineHeight: 1.2,
-      transitionProperty:
-        "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
-      transitionDuration: "200ms",
-      display: "flex",
+const connectButtonBase = style({
+  fontFamily: themeVars.font.body,
+  fontWeight: themeVars.fontWeight.semibold,
+  borderRadius: themeVars.radii.md,
+  cursor: "pointer",
+  appearance: "none",
+  border: "none",
+  position: "relative",
+  userSelect: "none",
+  whiteSpace: "nowrap",
+  verticalAlign: "middle",
+  lineHeight: 1.2,
+  transitionProperty:
+    "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
+  transitionDuration: "200ms",
+  display: "flex",
+  selectors: {
+    "&:hover": {
+      boxShadow: "0 0 0 1px #6A66FF",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 1px #6A66FF",
+    },
+  },
+});
+
+export const connectButtonStyle = styleVariants({
+  light: [
+    connectButtonBase,
+    style({
       selectors: {
         "&:hover": {
-          boxShadow: "0 0 0 1px #6A66FF",
+          backgroundColor: themeVars.colors.gray50,
         },
         "&:focus": {
-          boxShadow: "0 0 0 1px #6A66FF",
+          backgroundColor: themeVars.colors.gray50,
         },
-      },
-      "@media": {
-        "(prefers-color-scheme: light)": {
-          selectors: {
-            "&:hover": {
-              backgroundColor: themeVars.colors.gray50,
-            },
-            "&:focus": {
-              backgroundColor: themeVars.colors.gray50,
-            },
-          },
-        },
-        "(prefers-color-scheme: dark)": {
-          selectors: {
-            "&:hover": {
-              backgroundColor: themeVars.colors.blackAlpha600,
-            },
-            "&:focus": {
-              backgroundColor: themeVars.colors.blackAlpha600,
-            },
-          },
-        },
-      },
-    },
-    s({
-      color: {
-        light: "blackAlpha800",
-        dark: "whiteAlpha800",
-      },
-      backgroundColor: {
-        light: "gray100",
-        dark: "blackAlpha500",
       },
     }),
-  ]),
+    s({
+      color: "blackAlpha800",
+      backgroundColor: "gray100",
+    }),
+  ],
+  dark: [
+    connectButtonBase,
+    style({
+      selectors: {
+        "&:hover": {
+          backgroundColor: themeVars.colors.blackAlpha600,
+        },
+        "&:focus": {
+          backgroundColor: themeVars.colors.blackAlpha600,
+        },
+      },
+    }),
+    s({
+      color: "whiteAlpha800",
+      backgroundColor: "blackAlpha500",
+    }),
+  ],
+});
+
+export const connectButtonVariants = recipe({
+  base: {},
   variants: {
     variant: connectButtonShapeVariants,
   },
@@ -123,21 +128,34 @@ export const logoVariants = recipe({
   },
 });
 
-export const buttonTextVariants = recipe({
-  base: style([
-    {
-      fontFamily: themeVars.font.body,
-      textAlign: "left",
-    },
+const buttonTextBase = style([
+  {
+    fontFamily: themeVars.font.body,
+    textAlign: "left",
+  },
+  s({
+    fontSize: "sm",
+    fontWeight: "normal",
+  }),
+]);
+
+export const buttonTextStyle = styleVariants({
+  light: [
+    buttonTextBase,
     s({
-      fontSize: "sm",
-      fontWeight: "normal",
-      color: {
-        light: "blackAlpha800",
-        dark: "whiteAlpha900",
-      },
+      color: "blackAlpha800",
     }),
-  ]),
+  ],
+  dark: [
+    buttonTextBase,
+    s({
+      color: "whiteAlpha900",
+    }),
+  ],
+});
+
+export const buttonTextVariants = recipe({
+  base: {},
   variants: {
     variant: {
       square: {},
@@ -151,7 +169,7 @@ export const buttonTextVariants = recipe({
   },
 });
 
-export const subLogoSquare = style([
+const subLogoBase = style([
   {
     display: "flex",
     position: "absolute",
@@ -164,16 +182,25 @@ export const subLogoSquare = style([
   },
   s({
     borderRadius: "full",
-    backgroundColor: {
-      light: "gray100",
-      dark: "gray700",
-    },
-    borderColor: {
-      light: "gray100",
-      dark: "gray700",
-    },
   }),
 ]);
+
+export const subLogoSquare = styleVariants({
+  light: [
+    subLogoBase,
+    s({
+      backgroundColor: "gray100",
+      borderColor: "gray100",
+    }),
+  ],
+  dark: [
+    subLogoBase,
+    s({
+      backgroundColor: "gray700",
+      borderColor: "gray700",
+    }),
+  ],
+});
 
 export const subLogoList = style([
   {

@@ -1,8 +1,16 @@
-import { onMount, Show, useMetadata, useStore } from "@builder.io/mitosis";
+import {
+  onMount,
+  onUnMount,
+  Show,
+  useMetadata,
+  useStore,
+  useRef,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import { variants } from "./button.css";
 import Icon from "../icon";
 import Box from "../box";
+import { store } from "../../models/store";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import type { ButtonProps, ButtonState } from "./button.types";
 
@@ -11,10 +19,22 @@ useMetadata({ isAttachedToShadowDom: true });
 export default function Button(props: ButtonProps) {
   const state = useStore<ButtonState>({
     loaded: false,
+    theme: "light",
   });
+
+  let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
     state.loaded = true;
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState, prevState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
   });
 
   return (

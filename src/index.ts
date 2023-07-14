@@ -57,7 +57,6 @@ export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
 export { default as SwapPrice } from "./ui/swap-price";
-export {default as ListForSale} from './ui/list-for-sale'
 // End Components
 
 setPlatform(Platform.Default);

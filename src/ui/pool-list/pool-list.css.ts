@@ -1,4 +1,4 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { breakpoints } from "../../styles/tokens";
 
@@ -19,7 +19,7 @@ export const container = style([
 
 export const titleContainer = style([
   s({
-    my: "9"
+    my: "9",
   }),
   {
     paddingLeft: "88px",

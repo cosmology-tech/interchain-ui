@@ -1,13 +1,3 @@
-import {
-  For,
-  Show,
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -16,24 +6,6 @@ import * as styles from "./pool-info-header.css";
 import { PoolInfoHeaderProps } from "./pool-info-header.types";
 
 export default function PoolsHeader(props: PoolInfoHeaderProps) {
-  const state = useStore({
-    theme: "",
-  });
-
-  let cleanupRef = useRef<() => void>(null);
-
-  onMount(() => {
-    state.theme = store.getState().theme;
-
-    cleanupRef = store.subscribe((newState, prevState) => {
-      state.theme = newState.theme;
-    });
-  });
-
-  onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
-  });
-
   return (
     <Box className={styles.poolInfoHeader}>
       <Stack direction="column">
