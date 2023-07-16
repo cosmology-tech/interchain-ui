@@ -26,7 +26,11 @@ type IconName =
   | "uploadLine"
   | "coinsLine"
   | "shoppingBagLine"
-  | "informationLine";
+  | "informationLine"
+  | "arrowDownLine"
+  | "arrowUpDownLine"
+  | "arrowLeftRightLine"
+  | "settingFill";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

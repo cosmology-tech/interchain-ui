@@ -19,6 +19,8 @@ export default function IconButton(props: IconButtonProps) {
       size={props.size}
       disabled={props.disabled}
       onClick={(e) => props.onClick?.(e)}
+      onHoverStart={(e) => props.onHoverStart?.(e)}
+      onHoverEnd={(e) => props.onHoverEnd?.(e)}
     >
       <Icon name={props.icon} size={props.iconSize} />
     </Button>
