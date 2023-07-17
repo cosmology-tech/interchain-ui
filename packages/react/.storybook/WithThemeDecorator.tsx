@@ -30,7 +30,7 @@ const WithThemeDecorator = (props) => {
         <Box
           backgroundColor={{
             light: "white",
-            dark: "gray700",
+            dark: "blackPrimary",
           }}
           px="10"
           py="10"

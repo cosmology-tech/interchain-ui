@@ -116,7 +116,13 @@ export default function TokenInput(props: TokenInputProps) {
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
       >
         <Stack className={styles.imgBox} justify="center" align="center">
-          <img className={styles.img} src={props.imgSrc} />
+          <Box
+            as="img"
+            width="14"
+            height="14"
+            borderRadius="full"
+            attributes={{ src: props?.imgSrc }}
+          />
         </Stack>
         <Box
           className={styles.token}

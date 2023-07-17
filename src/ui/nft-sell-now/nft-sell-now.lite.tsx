@@ -1,18 +1,8 @@
-import {
-  Show,
-  For,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
 import starIcon from "../../assets/stars.png";
-import StarText from "../star-text";
 import NftFees from "../nft-fees";
 import { NftSellNowProps } from "./nft-sell-now.types";
 
@@ -29,6 +19,7 @@ export default function NftSellNow(props: NftSellNowProps) {
           width="12"
           height="12"
           marginLeft="6"
+          borderRadius="full"
           attributes={{ src: starIcon }}
         ></Box>
       </Stack>

@@ -21,6 +21,7 @@ export default function StarText(props: StarTextProps) {
       <Box
         as="img"
         attributes={{ src: starIcon }}
+        borderRadius="full"
         width="8"
         height="8"
       />
