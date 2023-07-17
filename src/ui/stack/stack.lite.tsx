@@ -27,7 +27,8 @@ export default function Stack(props: StackProps) {
             ? stackCore.nonRecursiveVertical
             : stackCore.nonRecursiveHoriz,
           stackDir[props.direction],
-          s(props.attributes)
+          props.attributes ? s(props.attributes) : null,
+          props.className
         )}
         style={assignInlineVars({
           [gapVar]: props.space in space ? space[props.space] : props.space,

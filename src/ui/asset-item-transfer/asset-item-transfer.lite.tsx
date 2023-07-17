@@ -44,8 +44,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         attributes={{
           marginTop: "11",
           marginBottom: "13",
-          justifyItems: "center",
-          alignContent: "center",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <img
@@ -68,8 +68,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         attributes={{
           marginTop: "13",
           marginBottom: "10",
-          justifyItems: "center",
-          alignContent: "center",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Stack direction="vertical" className={styles.flex1}>
