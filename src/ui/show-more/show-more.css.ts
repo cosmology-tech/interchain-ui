@@ -6,12 +6,16 @@ export const container = style({
 });
 
 export const shadow = styleVariants({
-  light: {
-    backgroundImage: "linear-gradient(transparent, white)",
-  },
-  dark: {
-    backgroundImage: "linear-gradient(transparent, #2C3137)",
-  },
+  light: [
+    {
+      backgroundImage: "linear-gradient(transparent, white)",
+    },
+  ],
+  dark: [
+    {
+      backgroundImage: "linear-gradient(transparent, #2C3137)",
+    },
+  ],
 });
 
 export const moreBox = style({

@@ -35,7 +35,7 @@ export default function BondingListSm(props: BondingListSmProps) {
         <Text weight="semibold">{props.unbondedShares}</Text>
         <Text>&nbsp; pool shares</Text>
       </Stack>
-      <Stack space="10" direction="column">
+      <Stack space="10" direction="vertical">
         <For each={props.list}>
           {(item: BondingListItemSmProps, index: number) => (
             <BondingListItemSm

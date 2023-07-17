@@ -12,7 +12,12 @@ export default function PoolName(props: PoolNameProps) {
         <img className={styles.image2} src={props.token2.imgSrc} />
       </Box>
       {/* <Stack className={styles.contentContainer} align="center"> */}
-      <Stack direction="column" justify="center">
+      <Stack
+        direction="vertical"
+        attributes={{
+          justifyContent: "center",
+        }}
+      >
         <Text
           color="text"
           weight="semibold"

@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
@@ -27,19 +27,8 @@ export const routeDivider = style([
     px: "7",
   }),
   {
-    vars: {
-      [dividerBgVar]: "#D9D9D9",
-    },
-    "@media": {
-      "(prefers-color-scheme: dark)": {
-        vars: {
-          [dividerBgVar]: themeVars.colors.gray500,
-        },
-      },
-    },
     flex: 1,
-
-    background: `repeating-linear-gradient(90deg, ${dividerBgVar} 0 4px, #0000 0 12px)`,
+    background: `repeating-linear-gradient(90deg, ${themeVars.colors.divider} 0 4px, #0000 0 12px)`,
   },
 ]);
 

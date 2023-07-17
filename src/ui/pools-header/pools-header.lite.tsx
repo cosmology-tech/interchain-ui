@@ -48,12 +48,23 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
       </Text>
       <Stack className={styles.container} space="10">
         <Box className={styles.baseBox}>
-          <Stack className={s({ overflow: "hidden" })} align="center">
+          <Stack
+            attributes={{
+              overflow: "hidden",
+              alignItems: "center",
+            }}
+          >
             <img
               className={styles.image}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
             />
-            <Stack direction="column" justify="center" lineHeight="shorter">
+            <Stack
+              direction="vertical"
+              attributes={{
+                justifyContent: "center",
+                lineHeight: "shorter",
+              }}
+            >
               <Text
                 color="textSecondary"
                 weight="semibold"
@@ -61,7 +72,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 OSMO Price
               </Text>
-              <Stack align="flex-end">
+              <Stack
+                attributes={{
+                  alignItems: "flex-end",
+                }}
+              >
                 <Text
                   className={styles.dollar}
                   color="text"
@@ -78,7 +93,12 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
           </Stack>
         </Box>
         <Box className={styles.baseBox}>
-          <Stack direction="column" justify="center">
+          <Stack
+            direction="vertical"
+            attributes={{
+              justifyContent: "center",
+            }}
+          >
             <Text
               color="textSecondary"
               weight="semibold"
@@ -92,7 +112,12 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
           </Stack>
         </Box>
         <Box className={styles.rewardBox}>
-          <Stack direction="column" justify={"center"}>
+          <Stack
+            direction="vertical"
+            attributes={{
+              justifyContent: "center",
+            }}
+          >
             <Text
               className={styles.mb3}
               color="rewardContent"
@@ -100,7 +125,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             >
               Yesterdays rewards
             </Text>
-            <Stack align={"flex-end"}>
+            <Stack
+              attributes={{
+                alignItems: "flex-end",
+              }}
+            >
               <Text color="rewardContent" size="4xl" weight="semibold">
                 {props.rewards}
               </Text>

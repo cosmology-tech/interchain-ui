@@ -8,7 +8,13 @@ export default function CellWithTitle(props: {
   children?: any;
 }) {
   return (
-    <Stack className={props.className} direction="column" justify="center">
+    <Stack
+      className={props.className}
+      direction="vertical"
+      attributes={{
+        justifyContent: "center",
+      }}
+    >
       <Text
         color="textSecondary"
         className={props.innerClassName}

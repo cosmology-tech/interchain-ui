@@ -17,7 +17,8 @@ export const Primary: Story = {
   args: {
     tag: "NOW LIVE",
     name: "Bipz",
-    description: "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus.",
+    description:
+      "Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus.",
     quantity: 5000,
     royalties: 10,
     minted: 46,

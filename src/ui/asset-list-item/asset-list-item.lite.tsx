@@ -24,15 +24,23 @@ export default function AssetListItem(props: AssetListItemProps) {
   }, [props.isOtherChains]);
 
   return (
-    <Stack className={styles.assetListItem} align="center">
+    <Stack
+      className={styles.assetListItem}
+      attributes={{
+        alignItems: "center",
+      }}
+    >
       <Box className={styles.imageContainer}>
         <img
           src={props.imgSrc}
           className={props.isOtherChains ? styles.smImg : styles.lgImg}
         />
       </Box>
-      <Stack className={sprinkles({ flex: 1 })} align="center">
-        <Stack className={styles.fieldContainer} direction="column">
+      <Stack
+        className={sprinkles({ flex: 1 })}
+        attributes={{ alignItems: "center" }}
+      >
+        <Stack className={styles.fieldContainer} direction="vertical">
           <Text
             size={state.size}
             weight="semibold"
@@ -53,7 +61,7 @@ export default function AssetListItem(props: AssetListItemProps) {
             </Show>
           </Stack>
         </Show>
-        <Stack className={styles.fieldContainer} direction="column">
+        <Stack className={styles.fieldContainer} direction="vertical">
           <Text
             size={state.size}
             weight="semibold"
@@ -68,7 +76,13 @@ export default function AssetListItem(props: AssetListItemProps) {
         <Show when={!props.needChainSpace}>
           <Stack className={styles.fieldContainer}></Stack>
         </Show>
-        <Stack space="5" className={styles.fieldContainer} justify="flex-end">
+        <Stack
+          space="5"
+          className={styles.fieldContainer}
+          attributes={{
+            justifyContent: "flex-end",
+          }}
+        >
           <Show when={props.canDeposit}>
             <Button
               intent="text"

@@ -1,7 +1,7 @@
 export interface NftMintProps {
   tag: string;
   name: string;
-  description:string;
+  description: string;
   quantity: number;
   royalties: number;
   minted: number;

@@ -31,7 +31,12 @@ export default function PoolListItem(props: PoolListItemProps) {
   });
 
   return (
-    <Stack align="center" className={styles.container}>
+    <Stack
+      className={styles.container}
+      attributes={{
+        alignItems: "center",
+      }}
+    >
       <PoolName
         id={props.id}
         className={styles.nameContainer}

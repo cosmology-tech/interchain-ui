@@ -1,11 +1,20 @@
-import { useDefaultProps, Show } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  useDefaultProps,
+  Show,
+} from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Button from "../button";
 
+import { store } from "../../models/store";
 import * as styles from "./transfer-item.css";
 import { TransferItemProps } from "./transfer-item.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 export default function TransferItem(props: TransferItemProps) {
   useDefaultProps({
@@ -14,9 +23,28 @@ export default function TransferItem(props: TransferItemProps) {
     hasAvailable: false,
     title: "",
   });
+
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<() => void>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Stack
-      direction="column"
+      direction="vertical"
       className={styles.container}
       attributes={{
         backgroundColor: "progressBg",
@@ -28,12 +56,19 @@ export default function TransferItem(props: TransferItemProps) {
       }}
     >
       <Stack
-        justify="space-between"
-        align="center"
-        attributes={{ marginBottom: "7", minHeight: "10" }}
+        attributes={{
+          marginBottom: "7",
+          minHeight: "10",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Text color="textSecondary">{props.title}</Text>
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Show when={props.hasAvailable}>
             <Text color="textSecondary" weight="semibold">
               Available
@@ -47,7 +82,7 @@ export default function TransferItem(props: TransferItemProps) {
           </Show>
           <Show when={props.halfBtn}>
             <Button
-              className={styles.textBtn}
+              className={styles.textBtn[state.theme]}
               size="xs"
               attributes={{ marginRight: "5" }}
             >
@@ -55,22 +90,34 @@ export default function TransferItem(props: TransferItemProps) {
             </Button>
           </Show>
           <Show when={props.maxBtn}>
-            <Button className={styles.textBtn} size="xs">
+            <Button className={styles.textBtn[state.theme]} size="xs">
               Max
             </Button>
           </Show>
         </Stack>
       </Stack>
-      <Stack justify="space-between" align="center">
-        <Stack align="center">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Button className={styles.dropdowBtn} variant="unstyled">
             <img className={styles.img} src={props.imgSrc} />
             <Stack
-              direction="column"
-              align="flex-start"
-              attributes={{ marginLeft: "9" }}
+              direction="vertical"
+              attributes={{ marginLeft: "9", alignItems: "flex-start" }}
             >
-              <Stack align="center">
+              <Stack
+                attributes={{
+                  alignItems: "center",
+                }}
+              >
                 <Text
                   size="2xl"
                   weight="semibold"
@@ -84,7 +131,7 @@ export default function TransferItem(props: TransferItemProps) {
             </Stack>
           </Button>
         </Stack>
-        <Stack direction="column">
+        <Stack direction="vertical">
           <input />
           <Text
             color="textSecondary"

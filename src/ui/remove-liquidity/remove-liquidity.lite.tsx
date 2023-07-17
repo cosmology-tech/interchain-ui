@@ -16,12 +16,16 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
   });
 
   return (
-    <Stack direction="column">
-      <Stack direction="column">
+    <Stack direction="vertical">
+      <Stack direction="vertical">
         <Text size="xl" weight="semibold">
           Remove liquidity
         </Text>
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Text color="textSecondary">{props.token1.symbol}</Text>
           <Text color="textSecondary" attributes={{ px: "3" }}>
             /
@@ -30,9 +34,12 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         </Stack>
       </Stack>
       <Stack
-        align="baseline"
-        justify="center"
-        attributes={{ marginTop: "9", marginBottom: "5" }}
+        attributes={{
+          marginTop: "9",
+          marginBottom: "5",
+          alignItems: "baseline",
+          justifyContent: "center",
+        }}
       >
         <Text weight="semibold" attributes={{ marginRight: "1" }}>
           $
@@ -42,15 +49,24 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         </Text>
       </Stack>
       <Stack
-        align="center"
-        justify="center"
-        attributes={{ marginBottom: "10" }}
+        attributes={{
+          marginBottom: "10",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         <Text attributes={{ marginRight: "3" }}>{props.unbondedShares}</Text>
         <Text>pool shares</Text>
       </Stack>
-      <Stack space="13" justify="center" attributes={{ marginBottom: "11" }}>
-        <Stack align="center">
+      <Stack
+        space="13"
+        attributes={{ marginBottom: "11", justifyContent: "center" }}
+      >
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <img className={styles.img} src={props.token1.imgSrc} />
           <Text
             color="textSecondary"
@@ -61,7 +77,11 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
           </Text>
           <Text color="textSecondary">{props.token1.symbol}</Text>
         </Stack>
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <img className={styles.img} src={props.token2.imgSrc} />
           <Text
             color="textSecondary"
@@ -77,7 +97,10 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         progress={state.progress}
         onProgressChange={(v) => state.handeProgressClick(v)}
       />
-      <Stack space="8" justify="center" attributes={{ marginTop: "12" }}>
+      <Stack
+        space="8"
+        attributes={{ marginTop: "12", justifyContent: "center" }}
+      >
         <For each={[25, 50, 75, 100]}>
           {(value: number, index: number) => (
             <Button

@@ -12,7 +12,12 @@ export default function BondingCard(props: BondingCardProps) {
       borderRadius="lg"
       backgroundColor="cardBg"
     >
-      <Stack direction="column" justify="center">
+      <Stack
+        direction="vertical"
+        attributes={{
+          justifyContent: "center",
+        }}
+      >
         <Text size="2xl" weight="semibold" attributes={{ marginBottom: "3" }}>
           {props.title}
         </Text>
