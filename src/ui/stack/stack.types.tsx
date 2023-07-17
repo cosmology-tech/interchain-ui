@@ -1,14 +1,17 @@
-import type { OptionalResponsiveObject } from "../../styles/sprinkles.css";
-import type { BoxProps } from "../box/box.types";
+import type { ClassValue } from "clsx";
+import type { CssVarValue } from "../../styles/rainbow-sprinkles.css";
 
-export interface StackProps extends BoxProps {
-  align?: BoxProps["alignItems"];
+export type StackProps = {
+  as?: any;
+  className?: ClassValue;
   children?: any;
-  flex?: BoxProps["flex"];
-  justify?: BoxProps["justifyContent"];
-  space?: BoxProps["gap"];
-  wrap?: OptionalResponsiveObject<true | false>;
-  direction?: "row" | "column";
-  className?: BoxProps["className"];
-  attributes?: BoxProps;
-}
+  forwardedRef?: any;
+  attributes?: any;
+  recursive?: boolean;
+  direction?: "vertical" | "horizontal";
+  space?: CssVarValue | (string & {});
+};
+
+export const DEFAULT_VALUES = {
+  as: "div",
+};

@@ -55,12 +55,16 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     }
   }, [state.amount1, state.amount2]);
   return (
-    <Stack direction="column" space="10">
-      <Stack direction="column">
+    <Stack direction="vertical" space="$10">
+      <Stack direction="vertical">
         <Text size="xl" weight="semibold">
           Add liquidity
         </Text>
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Text color="textSecondary">{props.token1.symbol}</Text>
           <Text color="textSecondary" attributes={{ px: "3" }}>
             /

@@ -55,7 +55,7 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
 
   return (
     <div
-      className={clx(containerStyle, props.className)}
+      className={clx(containerStyle[state.theme], props.className)}
       onClick={() => {
         const success = copy(props.text);
 

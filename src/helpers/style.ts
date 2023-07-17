@@ -1,4 +1,5 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { globalStyle, GlobalStyleRule } from "@vanilla-extract/css";
 import deepmerge from "@fastify/deepmerge";
 import { themeVars, commonVars } from "../styles/themes.css";
 import { store } from "../models/store";
@@ -53,3 +54,13 @@ export const isPreferLightMode = () =>
 export const isPreferDarkMode = () =>
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+export function childSelectors(
+  styleVariantsSelector: string,
+  selector: string,
+  rule: GlobalStyleRule
+) {
+  const allSelectors = Array.from(new Set(styleVariantsSelector.split(" ")));
+  const targetSelector = allSelectors[allSelectors.length - 1];
+  globalStyle(`${targetSelector} ${selector}`, rule);
+}

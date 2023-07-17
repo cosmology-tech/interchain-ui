@@ -24,10 +24,14 @@ export const container = style([
 ]);
 
 export const divider = styleVariants({
-  light: {
-    backgroundColor: "#D1D6DD",
-  },
-  dark: {
-    backgroundColor: "#434B55",
-  },
+  light: [
+    {
+      backgroundColor: "#D1D6DD",
+    },
+  ],
+  dark: [
+    {
+      backgroundColor: "#434B55",
+    },
+  ],
 });

@@ -2,7 +2,7 @@ import { style, styleVariants } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
-export const containerStyle = style([
+const containerStyleBase = style([
   {
     cursor: "pointer",
     position: "relative",
@@ -35,6 +35,23 @@ export const containerStyle = style([
     },
   }),
 ]);
+
+export const containerStyle = styleVariants({
+  light: [
+    containerStyleBase,
+    s({
+      borderColor: "gray200",
+      color: "gray500",
+    }),
+  ],
+  dark: [
+    containerStyleBase,
+    s({
+      borderColor: "whiteAlpha300",
+      color: "whiteAlpha600",
+    }),
+  ],
+});
 
 export const textStyle = style([
   {
