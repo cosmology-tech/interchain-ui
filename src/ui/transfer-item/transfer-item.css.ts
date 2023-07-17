@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
@@ -17,17 +17,26 @@ export const dropdowBtn = style({
   padding: "0 !important",
 });
 
-export const textBtn = style({
-  vars: {
-    [textButtonBgVar]: "#A2AEBB",
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
+const textBtnBase = style({
+  color: themeVars.colors.white,
+  backgroundColor: textButtonBgVar,
+});
+
+export const textBtn = styleVariants({
+  light: [
+    textBtnBase,
+    style({
+      vars: {
+        [textButtonBgVar]: "#A2AEBB",
+      },
+    }),
+  ],
+  dark: [
+    textBtnBase,
+    style({
       vars: {
         [textButtonBgVar]: "#434B55",
       },
-    },
-  },
-  color: themeVars.colors.white,
-  backgroundColor: textButtonBgVar,
+    }),
+  ],
 });

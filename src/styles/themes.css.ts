@@ -63,6 +63,7 @@ export const themeVars = createThemeContract({
     progressBg: ``,
     progressValue: ``,
     progressCursor: ``,
+    divider: ``,
     ...colors,
   },
   font: {
@@ -247,6 +248,7 @@ export const lightThemeClass = createTheme(themeVars, {
     progressBg: `#EEF2F8`,
     progressValue: `#697584`,
     progressCursor: `2C3137`,
+    divider: `#D9D9D9`,
     ...colors,
   },
 });
@@ -275,6 +277,7 @@ export const darkThemeClass = createTheme(themeVars, {
     progressBg: `#1D2024`,
     progressValue: `#A7B4C2`,
     progressCursor: `#EEF2F8`,
+    divider: colors.gray500,
     ...colors,
   },
 });

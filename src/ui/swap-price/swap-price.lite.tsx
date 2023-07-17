@@ -1,11 +1,4 @@
-import {
-  useRef,
-  onMount,
-  useStore,
-  Show,
-  For,
-  Fragment,
-} from "@builder.io/mitosis";
+import { useRef, useStore, Show, For, Fragment } from "@builder.io/mitosis";
 import clsx from "clsx";
 import { animate } from "motion";
 import Stack from "../stack";
