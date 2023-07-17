@@ -13,7 +13,7 @@ const meta: Meta<typeof ShowMore> = {
       control: { type: "select" },
       table: {
         summary: "PoolListItemProps []",
-      }
+      },
     },
     children: {
       control: false,
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: (
-      <Stack direction="column" space="5">
+      <Stack direction="vertical" space="5">
         {Array.from(Array(10).keys()).map((item, i) => (
           <Text color="text" size="4xl" weight="semibold">
             {" "}

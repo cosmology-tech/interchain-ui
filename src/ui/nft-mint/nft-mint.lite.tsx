@@ -9,7 +9,7 @@ import { NftMintProps } from "./nft-mint.types";
 
 export default function NftMint(props: NftMintProps) {
   return (
-    <Stack className={styles.nftMint} direction="column">
+    <Stack className={styles.nftMint} direction="vertical">
       {/* Title */}
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "12" }}>
         NFT Mint
@@ -28,7 +28,7 @@ export default function NftMint(props: NftMintProps) {
           />
         </Box>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Text
               className={styles.tip}
               color="cardBg"
@@ -50,19 +50,17 @@ export default function NftMint(props: NftMintProps) {
             >
               {props?.name}
             </Text>
-            <Text color="textSecondary">
-              {props?.description}
-            </Text>
-            <Stack justify="space-between" attributes={{ my: "9" }}>
-              <Stack direction="column">
+            <Text color="textSecondary">{props?.description}</Text>
+            <Stack attributes={{ my: "9", justifyContent: "space-between" }}>
+              <Stack direction="vertical">
                 <Text color="textSecondary" weight="semibold">
                   Quantity
                 </Text>
                 <Text size="4xl" weight="semibold">
-                  {store.getState()?.formatNumber?.({value: props?.quantity})}
+                  {store.getState()?.formatNumber?.({ value: props?.quantity })}
                 </Text>
               </Stack>
-              <Stack direction="column">
+              <Stack direction="vertical">
                 <Text color="textSecondary" weight="semibold">
                   Royalties
                 </Text>
@@ -70,7 +68,7 @@ export default function NftMint(props: NftMintProps) {
                   {props?.royalties}%
                 </Text>
               </Stack>
-              <Stack direction="column">
+              <Stack direction="vertical">
                 <Text color="textSecondary" weight="semibold">
                   Minted
                 </Text>
@@ -86,21 +84,29 @@ export default function NftMint(props: NftMintProps) {
       {/* Operation area */}
       <Stack space="10" attributes={{ marginTop: "10" }}>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Stack
-              justify="space-between"
-              align="center"
-              attributes={{ marginBottom: "6" }}
+              attributes={{
+                marginBottom: "6",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
               <Text color="textSecondary" size="lg" weight="semibold">
                 Select amount
               </Text>
-              <Stack align="center">
+              <Stack
+                attributes={{
+                  alignItems: "center",
+                }}
+              >
                 <Text color="textSecondary" attributes={{ marginRight: "2" }}>
                   Available
                 </Text>
                 <Text color="textSecondary" weight="semibold">
-                  {`${store.getState()?.formatNumber?.({value: props?.available})} STARS`}
+                  {`${store
+                    .getState()
+                    ?.formatNumber?.({ value: props?.available })} STARS`}
                 </Text>
               </Stack>
             </Stack>
@@ -108,21 +114,34 @@ export default function NftMint(props: NftMintProps) {
           </Stack>
         </Box>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Stack
-              justify="space-between"
-              align="center"
-              attributes={{ marginBottom: "6" }}
+              attributes={{
+                marginBottom: "6",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
-              <Stack align="center">
+              <Stack
+                attributes={{
+                  alignItems: "center",
+                }}
+              >
                 <Text color="textSecondary" attributes={{ marginRight: "2" }}>
                   Price:
                 </Text>
                 <Text color="textSecondary" weight="semibold">
-                {`${store.getState()?.formatNumber?.({value: props?.price})} STARS`}
+                  {`${store
+                    .getState()
+                    ?.formatNumber?.({ value: props?.price })} STARS`}
                 </Text>
               </Stack>
-              <Text color="textSecondary"> {`Limited to ${store.getState()?.formatNumber?.({value: props?.minted})} tokens`} </Text>
+              <Text color="textSecondary">
+                {" "}
+                {`Limited to ${store
+                  .getState()
+                  ?.formatNumber?.({ value: props?.minted })} tokens`}{" "}
+              </Text>
             </Stack>
             <Button size="lg" intent="tertiary">
               Mint

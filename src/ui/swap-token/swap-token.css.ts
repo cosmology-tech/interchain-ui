@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
@@ -15,17 +15,10 @@ export const switchContainer = style([
   }),
 ]);
 
-export const swapIcon = style([
+const swapIconBase = style([
   {
     vars: {
       [swapBorderColorVar]: themeVars.colors.white,
-    },
-    "@media": {
-      "(prefers-color-scheme: dark)": {
-        vars: {
-          [swapBorderColorVar]: themeVars.colors.gray700,
-        },
-      },
     },
     position: "absolute",
     left: "50%",
@@ -34,6 +27,18 @@ export const swapIcon = style([
     border: `3px solid ${swapBorderColorVar}`,
   },
 ]);
+
+export const swapIcon = styleVariants({
+  ligh: [swapIconBase],
+  dark: [
+    swapIconBase,
+    style({
+      vars: {
+        [swapBorderColorVar]: themeVars.colors.gray700,
+      },
+    }),
+  ],
+});
 
 export const settingContainer = style({
   flex: 1,

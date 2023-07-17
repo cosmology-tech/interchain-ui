@@ -2,7 +2,7 @@ import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import Button from "../button";
-import * as styles from "./bonding-list-item-sm.css"
+import * as styles from "./bonding-list-item-sm.css";
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
@@ -14,14 +14,18 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
       borderRadius="lg"
       className={styles.container}
     >
-      <Stack justify="space-between">
-        <Stack direction="column">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
+        <Stack direction="vertical">
           <Text color="textSecondary" weight="semibold">
             {props.title}
           </Text>
           <Stack
-            align="baseline"
             attributes={{
+              alignItems: "baseline",
               marginTop: "3",
               marginBottom: "9",
             }}
@@ -49,8 +53,12 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
             Unbond
           </Button>
         </Stack>
-        <Stack direction="column">
-          <Stack align="baseline">
+        <Stack direction="vertical">
+          <Stack
+            attributes={{
+              alignItems: "baseline",
+            }}
+          >
             <Text weight="semibold" attributes={{ marginRight: "1" }}>
               $
             </Text>

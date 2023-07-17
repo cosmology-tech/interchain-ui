@@ -1,4 +1,11 @@
-import { useRef, onMount, useStore, Show, For } from "@builder.io/mitosis";
+import {
+  useRef,
+  onMount,
+  onUnMount,
+  useStore,
+  Show,
+  For,
+} from "@builder.io/mitosis";
 import { animate } from "motion";
 import cloneDeep from "lodash/cloneDeep";
 import clsx from "clsx";
@@ -9,8 +16,10 @@ import Box from "../box";
 import Button from "../button";
 import SwapPrice from "../swap-price";
 import { sprinkles } from "../../styles/sprinkles.css";
+import { store } from "../../models/store";
 import TransferItem from "../transfer-item";
 import { IconProps } from "../icon/icon.types";
+import type { ThemeVariant } from "../../models/system.model";
 
 import * as styles from "./swap-token.css";
 import { SwapItemProps, SwapTokenProps } from "./swap-token.types";
@@ -19,7 +28,10 @@ export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
   let animationRef = useRef(null);
   let toteranceRef = useRef(null);
+  let cleanupRef = useRef<() => void>(null);
+
   let state = useStore<{
+    theme: ThemeVariant;
     swapIcon: IconProps["name"];
     tolerance: number;
     isSetting: boolean;
@@ -30,6 +42,7 @@ export default function SwapToken(props: SwapTokenProps) {
     setToterance: (per: number) => void;
     exchange: () => void;
   }>({
+    theme: "light",
     swapIcon: "arrowDownLine",
     tolerance: 1,
     isSetting: false,
@@ -87,9 +100,20 @@ export default function SwapToken(props: SwapTokenProps) {
         "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
       availableAmount: 0.00633,
     };
+
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
   });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
-    <Stack direction="column" className={styles.swapTokenContainer}>
+    <Stack direction="vertical" className={styles.swapTokenContainer}>
       <Text size="lg" weight="semibold" attributes={{ marginBottom: "8" }}>
         Swap
       </Text>
@@ -103,11 +127,16 @@ export default function SwapToken(props: SwapTokenProps) {
         denom={state.fromItem?.denom}
         imgSrc={state.fromItem?.imgSrc}
       />
-      <Stack className={styles.switchContainer} justify="center">
+      <Stack
+        className={styles.switchContainer}
+        attributes={{
+          justifyContent: "center",
+        }}
+      >
         <div className={sprinkles({ position: "relative" })} ref={swapIconRef}>
           <IconButton
             size="lg"
-            className={styles.swapIcon}
+            className={styles.swapIcon[state.theme]}
             icon={state.swapIcon}
             isRound={true}
             intent="text"
@@ -127,19 +156,29 @@ export default function SwapToken(props: SwapTokenProps) {
         imgSrc={state.toItem?.imgSrc}
       />
       <Stack
-        justify="space-between"
-        align="center"
-        attributes={{ my: "9", height: "12" }}
+        attributes={{
+          my: "9",
+          height: "12",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Text color="textSecondary">Slippage tolerance</Text>
         <Stack
           className={styles.settingContainer}
-          justify="flex-end"
-          align="center"
-          attributes={{ position: "relative" }}
+          attributes={{
+            position: "relative",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
         >
           <Show when={!state.isSetting}>
-            <Stack space="7" align="center">
+            <Stack
+              space="7"
+              attributes={{
+                alignItems: "center",
+              }}
+            >
               <Text color="textSecondary" weight="bold">
                 {state.tolerance}%
               </Text>
@@ -152,7 +191,12 @@ export default function SwapToken(props: SwapTokenProps) {
             </Stack>
           </Show>
           <div ref={toteranceRef} className={styles.percentContainer}>
-            <Stack align="center" space="5">
+            <Stack
+              attributes={{
+                alignItems: "center",
+              }}
+              space="5"
+            >
               <For each={[1, 2.5, 3, 5]}>
                 {(per) => (
                   <Button

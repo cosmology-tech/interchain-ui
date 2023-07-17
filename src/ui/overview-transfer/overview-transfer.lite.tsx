@@ -1,11 +1,4 @@
-import {
-  Show,
-  useStore,
-  onMount,
-  onUnMount,
-  useMetadata,
-  useRef,
-} from "@builder.io/mitosis";
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -37,7 +30,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
   });
 
   return (
-    <Stack className={styles.overviewTransfer} direction="column">
+    <Stack className={styles.overviewTransfer} direction="vertical">
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
         {props.type}
       </Text>
@@ -49,9 +42,12 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         imgSrc="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
       />
       <Stack
-        justify="center"
-        align="center"
-        attributes={{ marginTop: "11", marginBottom: "13" }}
+        attributes={{
+          marginTop: "11",
+          marginBottom: "13",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <img
           className={styles.img}
@@ -69,7 +65,11 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         />
       </Stack>
       <Button intent="tertiary">
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Text
             className={styles.btnText[state.theme]}
             size="lg"

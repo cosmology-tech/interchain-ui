@@ -29,7 +29,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
   });
 
   return (
-    <Stack direction="column" className={styles.container}>
+    <Stack direction="vertical" className={styles.container}>
       <Stack>
         <Text size="xl" weight="semibold" attributes={{ marginRight: "3" }}>
           {props.type}
@@ -41,9 +41,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
       <Stack
         className={styles.onlySm}
-        justify="center"
-        align="center"
-        attributes={{ marginTop: "11", marginBottom: "13" }}
+        attributes={{
+          marginTop: "11",
+          marginBottom: "13",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
         <img
           className={styles.img}
@@ -61,12 +64,15 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         />
       </Stack>
       <Stack
-        justify="center"
-        align="flex-end"
         className={styles.onlyLg}
-        attributes={{ marginTop: "13", marginBottom: "10" }}
+        attributes={{
+          marginTop: "13",
+          marginBottom: "10",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <Stack direction="column" className={styles.flex1}>
+        <Stack direction="vertical" className={styles.flex1}>
           <Text
             color="textSecondary"
             weight="semibold"
@@ -75,11 +81,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             From Cosmos Hub
           </Text>
           <Stack
-            align="center"
             attributes={{
               p: "6",
               backgroundColor: "cardBg",
               borderRadius: "lg",
+              alignItems: "center",
             }}
           >
             <img
@@ -98,7 +104,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             marginBottom: "9",
           })}
         />
-        <Stack direction="column" className={styles.flex1}>
+        <Stack direction="vertical" className={styles.flex1}>
           <Text
             color="textSecondary"
             weight="semibold"
@@ -107,11 +113,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             From Cosmos Hub
           </Text>
           <Stack
-            align="center"
             attributes={{
               p: "6",
               backgroundColor: "cardBg",
               borderRadius: "lg",
+              alignItems: "center",
             }}
           >
             <img
@@ -133,9 +139,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       />
 
       <Stack
-        justify="flex-end"
         space="5"
-        attributes={{ marginTop: "5", marginBottom: "11" }}
+        attributes={{
+          marginTop: "5",
+          marginBottom: "11",
+          justifyContent: "flex-end",
+        }}
       >
         <Button intent="text" size="xs">
           Max
@@ -149,11 +158,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       </Stack>
       <Stack
         className={styles.onlyLg}
-        align="center"
         attributes={{
           p: "6",
           borderRadius: "md",
           backgroundColor: "cardBg",
+          alignItems: "center",
           marginBottom: "9",
         }}
       >
@@ -169,7 +178,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       </Stack>
 
       <Button intent="tertiary">
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Text
             className={styles.btnText[state.theme]}
             size="lg"
@@ -178,7 +191,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             Transfer
           </Text>
 
-          <Stack className={styles.onlyLg} align="center">
+          <Stack
+            className={styles.onlyLg}
+            attributes={{
+              alignItems: "center",
+            }}
+          >
             <Icon
               name="timeLine"
               size="xs"

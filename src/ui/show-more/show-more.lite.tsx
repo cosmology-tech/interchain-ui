@@ -98,8 +98,10 @@ export default function ShowMore(props: ShowMoreProps) {
       <Show when={!state.isVisible}>
         <Stack
           className={clsx(styles.moreBox, styles.shadow[state.theme])}
-          justify="center"
-          align="flex-end"
+          attributes={{
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
         >
           <div
             onClick={() => {
@@ -122,7 +124,13 @@ export default function ShowMore(props: ShowMoreProps) {
         </Stack>
       </Show>
       <Show when={!!state.isVisible}>
-        <Stack className={styles.moreBox} justify="center" align="flex-end">
+        <Stack
+          className={styles.moreBox}
+          attributes={{
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
           <div
             onClick={() => {
               state.toggle();
