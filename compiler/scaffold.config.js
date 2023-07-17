@@ -12,4 +12,22 @@ module.exports = {
       path: "../modal",
     },
   },
+  select: {
+    jsxMap: {
+      ScaffoldSelect: "Select",
+    },
+    import: {
+      imports: { Select: "default" },
+      path: "../select",
+    },
+  },
+  item: {
+    jsxMap: {
+      ScaffoldItem: "Item",
+    },
+    import: {
+      imports: { Item: "default" },
+      path: "../item",
+    },
+  },
 };

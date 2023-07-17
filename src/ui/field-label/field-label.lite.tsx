@@ -12,7 +12,7 @@ export default function FieldLabel(props: FieldLabelProps) {
 
   return (
     <Show when={props.label}>
-      <Stack space="$2">
+      <Stack space="2" wrapperAttrs={props.attributes}>
         <Show when={props.label}>
           <Box as="span" display="flex" justifyContent="space-between">
             <Show

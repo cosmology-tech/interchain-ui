@@ -3,6 +3,7 @@ import {
   createTheme,
   globalFontFace,
 } from "@vanilla-extract/css";
+import { lighten, darken } from "polished";
 import {
   colors,
   SYSTEM_FONT_STACK,
@@ -65,6 +66,9 @@ export const themeVars = createThemeContract({
     progressValue: ``,
     progressCursor: ``,
     divider: ``,
+    menuItemBg: ``,
+    menuItemBgHovered: ``,
+    menuItemBgActive: ``,
     ...colors,
   },
   font: {
@@ -261,6 +265,9 @@ export const lightThemeClass = createTheme(themeVars, {
     progressValue: `#697584`,
     progressCursor: `2C3137`,
     divider: `#D9D9D9`,
+    menuItemBg: `#EEF2F8`,
+    menuItemBgHovered: `#DDE4ED`,
+    menuItemBgActive: `#D0D9E3`,
     ...colors,
   },
 });
@@ -290,6 +297,9 @@ export const darkThemeClass = createTheme(themeVars, {
     progressValue: `#A7B4C2`,
     progressCursor: `#EEF2F8`,
     divider: colors.gray500,
+    menuItemBg: `#1D2024`,
+    menuItemBgHovered: `#25292E`,
+    menuItemBgActive: `#2C3137`,
     ...colors,
   },
 });

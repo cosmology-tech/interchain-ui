@@ -9,4 +9,5 @@ export interface FieldLabelProps extends BaseComponentProps {
   description?: BaseComponentProps["children"];
   descriptionId?: string;
   data?: any;
+  attributes?: any;
 }
