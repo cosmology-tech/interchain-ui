@@ -41,15 +41,21 @@ export default function SwapPrice(props: SwapPriceProps) {
     },
   });
   return (
-    <Stack direction="column">
+    <Stack direction="vertical">
       <Stack
         className={styles.swapPriceContainer}
-        justify="space-between"
-        align="center"
-        attributes={{ py: "9" }}
+        attributes={{
+          py: "9",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Text color="text">Price</Text>
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Text weight="semibold">
             {`1 ${props?.tokenOutSymbol} = ${props?.price?.priceRate} ${props?.tokenOutSymbol}`}
           </Text>
@@ -68,11 +74,13 @@ export default function SwapPrice(props: SwapPriceProps) {
         </Stack>
       </Stack>
       <div ref={priceRef} className={styles.priceContainer}>
-        <Stack direction="column" attributes={{ paddingBottom: "14" }}>
+        <Stack direction="vertical" attributes={{ paddingBottom: "14" }}>
           <Stack
-            justify="space-between"
-            align="center"
-            attributes={{ marginBottom: "7" }}
+            attributes={{
+              marginBottom: "7",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text color="textSecondary">Price Impact</Text>
             <Text color="textSecondary" weight="bold">
@@ -80,9 +88,11 @@ export default function SwapPrice(props: SwapPriceProps) {
             </Text>
           </Stack>
           <Stack
-            justify="space-between"
-            align="center"
-            attributes={{ marginBottom: "10" }}
+            attributes={{
+              marginBottom: "10",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text color="textSecondary">
               Swap Fee ({props?.swapFee?.percentage})
@@ -92,9 +102,11 @@ export default function SwapPrice(props: SwapPriceProps) {
             </Text>
           </Stack>
           <Stack
-            justify="space-between"
-            align="center"
-            attributes={{ marginBottom: "7" }}
+            attributes={{
+              marginBottom: "7",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text color="textSecondary">Expected Output</Text>
             <Text color="textSecondary" weight="bold">
@@ -102,9 +114,11 @@ export default function SwapPrice(props: SwapPriceProps) {
             </Text>
           </Stack>
           <Stack
-            justify="space-between"
-            align="center"
-            attributes={{ marginBottom: "10" }}
+            attributes={{
+              marginBottom: "10",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text color="textSecondary">Minimum received after slippage</Text>
             <Text color="textSecondary" weight="bold">
@@ -116,9 +130,11 @@ export default function SwapPrice(props: SwapPriceProps) {
               Route
             </Text>
             <Stack
-              justify="space-between"
-              align="center"
-              attributes={{ height: "12" }}
+              attributes={{
+                height: "12",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
               <Box marginRight="6">
                 <img

@@ -4,6 +4,7 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { space } from "../../styles/tokens";
 import { stackCore, stackDir, gapVar } from "./stack.css";
 import Box from "../box";
+import { sprinkles as s } from "../../styles/sprinkles.css";
 import type { StackProps } from "./stack.types";
 
 export default function Stack(props: StackProps) {
@@ -14,7 +15,7 @@ export default function Stack(props: StackProps) {
   });
 
   return (
-    <Box {...props.attributes} as={props.as}>
+    <Box as={props.as}>
       <div
         data-stack="stack"
         className={clx(
@@ -25,7 +26,8 @@ export default function Stack(props: StackProps) {
             : props.direction === "vertical"
             ? stackCore.nonRecursiveVertical
             : stackCore.nonRecursiveHoriz,
-          stackDir[props.direction]
+          stackDir[props.direction],
+          s(props.attributes)
         )}
         style={assignInlineVars({
           [gapVar]: props.space in space ? space[props.space] : props.space,

@@ -73,7 +73,13 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
           stroke-width={state.strokeWidth}
         />
       </svg>
-      <Stack className={styles.percentText} align="center" justify="center">
+      <Stack
+        className={styles.percentText}
+        attributes={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Text size="lg" weight="semibold">
           {props.progress}%
         </Text>

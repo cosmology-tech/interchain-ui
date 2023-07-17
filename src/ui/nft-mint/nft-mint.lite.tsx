@@ -9,7 +9,7 @@ import { NftMintProps } from "./nft-mint.types";
 
 export default function NftMint(props: NftMintProps) {
   return (
-    <Stack className={styles.nftMint} direction="column">
+    <Stack className={styles.nftMint} direction="vertical">
       {/* Title */}
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "12" }}>
         NFT Mint
@@ -28,7 +28,7 @@ export default function NftMint(props: NftMintProps) {
           />
         </Box>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Text
               className={styles.tip}
               color="cardBg"
@@ -51,8 +51,8 @@ export default function NftMint(props: NftMintProps) {
               {props?.name}
             </Text>
             <Text color="textSecondary">{props?.description}</Text>
-            <Stack justify="space-between" attributes={{ my: "9" }}>
-              <Stack direction="column">
+            <Stack attributes={{ my: "9", justifyContent: "space-between" }}>
+              <Stack direction="vertical">
                 <Text color="textSecondary" weight="semibold">
                   Quantity
                 </Text>
@@ -60,7 +60,7 @@ export default function NftMint(props: NftMintProps) {
                   {store.getState()?.formatNumber?.({ value: props?.quantity })}
                 </Text>
               </Stack>
-              <Stack direction="column">
+              <Stack direction="vertical">
                 <Text color="textSecondary" weight="semibold">
                   Royalties
                 </Text>
@@ -68,7 +68,7 @@ export default function NftMint(props: NftMintProps) {
                   {props?.royalties}%
                 </Text>
               </Stack>
-              <Stack direction="column">
+              <Stack direction="vertical">
                 <Text color="textSecondary" weight="semibold">
                   Minted
                 </Text>
@@ -84,16 +84,22 @@ export default function NftMint(props: NftMintProps) {
       {/* Operation area */}
       <Stack space="10" attributes={{ marginTop: "10" }}>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Stack
-              justify="space-between"
-              align="center"
-              attributes={{ marginBottom: "6" }}
+              attributes={{
+                marginBottom: "6",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
               <Text color="textSecondary" size="lg" weight="semibold">
                 Select amount
               </Text>
-              <Stack align="center">
+              <Stack
+                attributes={{
+                  alignItems: "center",
+                }}
+              >
                 <Text color="textSecondary" attributes={{ marginRight: "2" }}>
                   Available
                 </Text>
@@ -108,13 +114,19 @@ export default function NftMint(props: NftMintProps) {
           </Stack>
         </Box>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Stack
-              justify="space-between"
-              align="center"
-              attributes={{ marginBottom: "6" }}
+              attributes={{
+                marginBottom: "6",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
-              <Stack align="center">
+              <Stack
+                attributes={{
+                  alignItems: "center",
+                }}
+              >
                 <Text color="textSecondary" attributes={{ marginRight: "2" }}>
                   Price:
                 </Text>

@@ -31,11 +31,17 @@ export default function PoolCard(props: PoolCardProps) {
     <Stack
       space="6"
       className={styles.container}
-      direction="column"
-      justify="center"
+      direction="vertical"
+      attributes={{
+        justifyContent: "center",
+      }}
     >
       <PoolName id={props.id} token1={props.token1} token2={props.token2} />
-      <Stack justify="space-between">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="text">APR</Text>
         <Text
           color="text"
@@ -47,7 +53,11 @@ export default function PoolCard(props: PoolCardProps) {
           {props.apr}%
         </Text>
       </Stack>
-      <Stack justify="space-between">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="textSecondary">Liquidity</Text>
         <Text
           color="text"
@@ -58,7 +68,11 @@ export default function PoolCard(props: PoolCardProps) {
           ${props.poolLiquidity.toLocaleString()}
         </Text>
       </Stack>
-      <Stack justify="space-between">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="textSecondary">7D Fees</Text>
         <Text
           color="text"
@@ -70,13 +84,21 @@ export default function PoolCard(props: PoolCardProps) {
         </Text>
       </Stack>
       <Box width="full" height="1" className={styles.divider[state.theme]} />
-      <Stack justify="space-between">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="text">Your Liquidity</Text>
         <Text color="text" weight="semibold">
           ${props.yourLiquidity.toLocaleString()}
         </Text>
       </Stack>
-      <Stack justify="space-between">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="text">Bonded</Text>
         <Text
           color="text"

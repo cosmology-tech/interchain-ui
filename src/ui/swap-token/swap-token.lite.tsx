@@ -113,7 +113,7 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   return (
-    <Stack direction="column" className={styles.swapTokenContainer}>
+    <Stack direction="vertical" className={styles.swapTokenContainer}>
       <Text size="lg" weight="semibold" attributes={{ marginBottom: "8" }}>
         Swap
       </Text>
@@ -127,7 +127,12 @@ export default function SwapToken(props: SwapTokenProps) {
         denom={state.fromItem?.denom}
         imgSrc={state.fromItem?.imgSrc}
       />
-      <Stack className={styles.switchContainer} justify="center">
+      <Stack
+        className={styles.switchContainer}
+        attributes={{
+          justifyContent: "center",
+        }}
+      >
         <div className={sprinkles({ position: "relative" })} ref={swapIconRef}>
           <IconButton
             size="lg"
@@ -151,19 +156,29 @@ export default function SwapToken(props: SwapTokenProps) {
         imgSrc={state.toItem?.imgSrc}
       />
       <Stack
-        justify="space-between"
-        align="center"
-        attributes={{ my: "9", height: "12" }}
+        attributes={{
+          my: "9",
+          height: "12",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Text color="textSecondary">Slippage tolerance</Text>
         <Stack
           className={styles.settingContainer}
-          justify="flex-end"
-          align="center"
-          attributes={{ position: "relative" }}
+          attributes={{
+            position: "relative",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
         >
           <Show when={!state.isSetting}>
-            <Stack space="7" align="center">
+            <Stack
+              space="7"
+              attributes={{
+                alignItems: "center",
+              }}
+            >
               <Text color="textSecondary" weight="bold">
                 {state.tolerance}%
               </Text>
@@ -176,7 +191,12 @@ export default function SwapToken(props: SwapTokenProps) {
             </Stack>
           </Show>
           <div ref={toteranceRef} className={styles.percentContainer}>
-            <Stack align="center" space="5">
+            <Stack
+              attributes={{
+                alignItems: "center",
+              }}
+              space="5"
+            >
               <For each={[1, 2.5, 3, 5]}>
                 {(per) => (
                   <Button

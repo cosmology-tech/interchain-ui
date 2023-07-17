@@ -16,7 +16,7 @@ export default function TransferItem(props: TransferItemProps) {
   });
   return (
     <Stack
-      direction="column"
+      direction="vertical"
       className={styles.container}
       attributes={{
         backgroundColor: "progressBg",
@@ -28,12 +28,19 @@ export default function TransferItem(props: TransferItemProps) {
       }}
     >
       <Stack
-        justify="space-between"
-        align="center"
-        attributes={{ marginBottom: "7", minHeight: "10" }}
+        attributes={{
+          marginBottom: "7",
+          minHeight: "10",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
         <Text color="textSecondary">{props.title}</Text>
-        <Stack align="center">
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Show when={props.hasAvailable}>
             <Text color="textSecondary" weight="semibold">
               Available
@@ -61,16 +68,28 @@ export default function TransferItem(props: TransferItemProps) {
           </Show>
         </Stack>
       </Stack>
-      <Stack justify="space-between" align="center">
-        <Stack align="center">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Stack
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <Button className={styles.dropdowBtn} variant="unstyled">
             <img className={styles.img} src={props.imgSrc} />
             <Stack
-              direction="column"
-              align="flex-start"
-              attributes={{ marginLeft: "9" }}
+              direction="vertical"
+              attributes={{ marginLeft: "9", alignItems: "flex-start" }}
             >
-              <Stack align="center">
+              <Stack
+                attributes={{
+                  alignItems: "center",
+                }}
+              >
                 <Text
                   size="2xl"
                   weight="semibold"
@@ -84,7 +103,7 @@ export default function TransferItem(props: TransferItemProps) {
             </Stack>
           </Button>
         </Stack>
-        <Stack direction="column">
+        <Stack direction="vertical">
           <input />
           <Text
             color="textSecondary"

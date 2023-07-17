@@ -9,7 +9,7 @@ import { SingleChainProps } from "./single-chain.types";
 export default function SingleChain(props: SingleChainProps) {
   return (
     <ShowMore className={styles.container}>
-      <Stack direction="column">
+      <Stack direction="vertical">
         <AssetListHeader
           isSingle={props.header.isSingle}
           total={props.header.total}
