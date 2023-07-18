@@ -14,7 +14,7 @@ export const img = sprinkles({
 });
 
 export const dropdowBtn = style({
-  padding: "0 !important",
+  padding: "0",
 });
 
 const textBtnBase = style({
