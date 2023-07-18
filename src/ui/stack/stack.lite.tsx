@@ -15,7 +15,6 @@ export default function Stack(props: StackProps) {
   });
 
   return (
-    <Box as={props.as}>
       <div
         data-stack="stack"
         className={clx(
@@ -36,6 +35,5 @@ export default function Stack(props: StackProps) {
       >
         {props.children}
       </div>
-    </Box>
   );
 }
