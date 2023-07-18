@@ -1,5 +1,4 @@
 import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -43,10 +42,15 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
 
   return (
     <Box>
-      <Text color="text" size="xl" weight="semibold">
+      <Text
+        color="text"
+        size="xl"
+        weight="semibold"
+        attributes={{ marginBottom: "10" }}
+      >
         Liquidity Pools
       </Text>
-      <Stack className={styles.container} space="10">
+      <Stack className={styles.container} space="0" attributes={{ gap: "10" }}>
         <Box className={styles.baseBox}>
           <Stack
             attributes={{
@@ -58,10 +62,8 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               className={styles.image}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
             />
-            <Stack
-              direction="vertical"
+            <Box
               attributes={{
-                justifyContent: "center",
                 lineHeight: "shorter",
               }}
             >
@@ -73,6 +75,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 OSMO Price
               </Text>
               <Stack
+                space="0"
                 attributes={{
                   alignItems: "flex-end",
                 }}
@@ -89,11 +92,12 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                   {store.getState()?.formatNumber?.({ value: props.price })}
                 </Text>
               </Stack>
-            </Stack>
+            </Box>
           </Stack>
         </Box>
         <Box className={styles.baseBox}>
           <Stack
+            space="0"
             direction="vertical"
             attributes={{
               justifyContent: "center",
@@ -114,6 +118,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
         <Box className={styles.rewardBox}>
           <Stack
             direction="vertical"
+            space="0"
             attributes={{
               justifyContent: "center",
             }}
@@ -126,6 +131,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               Yesterdays rewards
             </Text>
             <Stack
+              space="0"
               attributes={{
                 alignItems: "flex-end",
               }}

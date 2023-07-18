@@ -15,25 +15,27 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
       className={styles.container}
     >
       <Stack
+        space="0"
         attributes={{
           justifyContent: "space-between",
         }}
       >
-        <Stack direction="vertical">
+        <Box>
           <Text color="textSecondary" weight="semibold">
             {props.title}
           </Text>
           <Stack
+            space="0"
             attributes={{
               alignItems: "baseline",
-              marginTop: "3",
-              marginBottom: "9",
+              paddingTop: "3",
+              paddingBottom: "9",
             }}
           >
             <Text
               color="textSecondary"
               weight="semibold"
-              attributes={{ marginRight: "5" }}
+              attributes={{ paddingRight: "5" }}
             >
               APR
             </Text>
@@ -41,7 +43,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               size="4xl"
               color="textSecondary"
               weight="semibold"
-              attributes={{ marginRight: "3" }}
+              attributes={{ paddingRight: "3" }}
             >
               {props.apr}
             </Text>
@@ -52,9 +54,10 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
           <Button size="sm" intent="tertiary" variant="outlined">
             Unbond
           </Button>
-        </Stack>
-        <Stack direction="vertical">
+        </Box>
+        <Stack direction="vertical" space="0">
           <Stack
+            space="0"
             attributes={{
               alignItems: "baseline",
             }}
@@ -67,9 +70,10 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
             </Text>
           </Stack>
           <Stack
+            space="0"
             attributes={{
-              marginTop: "3",
-              marginBottom: "9",
+              paddingTop: "3",
+              paddingBottom: "9",
             }}
           >
             <Text weight="semibold">{props.poolShares}&nbsp;</Text>

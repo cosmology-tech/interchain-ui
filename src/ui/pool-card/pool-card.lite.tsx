@@ -28,18 +28,16 @@ export default function PoolCard(props: PoolCardProps) {
   });
 
   return (
-    <Stack
-      space="6"
-      className={styles.container}
-      direction="vertical"
-      attributes={{
-        justifyContent: "center",
-      }}
-    >
-      <PoolName id={props.id} token1={props.token1} token2={props.token2} />
+    <Box className={styles.container}>
+      <Box marginBottom="13">
+        <PoolName id={props.id} token1={props.token1} token2={props.token2} />
+      </Box>
       <Stack
+        space="0"
         attributes={{
           justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "4",
         }}
       >
         <Text color="text">APR</Text>
@@ -54,13 +52,16 @@ export default function PoolCard(props: PoolCardProps) {
         </Text>
       </Stack>
       <Stack
+        space="0"
         attributes={{
           justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "4",
         }}
       >
         <Text color="textSecondary">Liquidity</Text>
         <Text
-          color="text"
+          color="textSecondary"
           weight="semibold"
           marginLeft="4"
           wordBreak="break-word"
@@ -75,7 +76,7 @@ export default function PoolCard(props: PoolCardProps) {
       >
         <Text color="textSecondary">7D Fees</Text>
         <Text
-          color="text"
+          color="textSecondary"
           weight="semibold"
           marginLeft="4"
           wordBreak="break-word"
@@ -83,10 +84,18 @@ export default function PoolCard(props: PoolCardProps) {
           ${props.fees.toLocaleString()}
         </Text>
       </Stack>
-      <Box width="full" height="1" className={styles.divider[state.theme]} />
+      <Box
+        width="full"
+        height="1"
+        my="6"
+        className={styles.divider[state.theme]}
+      />
       <Stack
+        space="0"
         attributes={{
           justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "6",
         }}
       >
         <Text color="text">Your Liquidity</Text>
@@ -95,8 +104,10 @@ export default function PoolCard(props: PoolCardProps) {
         </Text>
       </Stack>
       <Stack
+        space="0"
         attributes={{
           justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Text color="text">Bonded</Text>
@@ -111,6 +122,6 @@ export default function PoolCard(props: PoolCardProps) {
           ${props.bonded.toLocaleString()}
         </Text>
       </Stack>
-    </Stack>
+    </Box>
   );
 }

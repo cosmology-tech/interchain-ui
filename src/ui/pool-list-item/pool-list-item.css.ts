@@ -88,12 +88,7 @@ export const image2 = style([
 ]);
 
 export const smAPR = style({
-  display: "none",
-  "@media": {
-    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-      display: "flex",
-    },
-  },
+  justifyContent: "space-between",
 });
 
 export const lgAPR = style({
