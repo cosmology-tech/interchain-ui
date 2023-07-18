@@ -14,12 +14,11 @@ import NftDetailTopOffer from "../nft-detail-top-offers";
 import NftDetailActivityList from "../nft-detail-activity-list";
 
 import * as styles from "./nft-detail.css";
-import { NftTraitListItemProps } from "../nft-trait-list-item/nft-trait-list-item.types";
 import { NftDetailProps, DetailType } from "./nft-detail.types";
 
 export default function NftDetail(props: NftDetailProps) {
   return (
-    <Stack className={styles.nftDetail} direction="column">
+    <Box className={styles.nftDetail}>
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "12" }}>
         NFT Detail
       </Text>
@@ -36,7 +35,7 @@ export default function NftDetail(props: NftDetailProps) {
           />
         </Box>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Text
               color="textSecondary"
               weight="semibold"
@@ -51,7 +50,7 @@ export default function NftDetail(props: NftDetailProps) {
             >
               {props?.tokenName}
             </Text>
-            <Stack align="center" attributes={{ marginBottom: "7" }}>
+            <Stack attributes={{ marginBottom: "7", alignItems: "center" }}>
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Created by
               </Text>
@@ -60,7 +59,7 @@ export default function NftDetail(props: NftDetailProps) {
             <Text color="textSecondary" attributes={{ marginBottom: "7" }}>
               {props?.collectionDesc}
             </Text>
-            <Stack align="center" attributes={{ marginBottom: "4" }}>
+            <Stack attributes={{ marginBottom: "4", alignItems: "center" }}>
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Minted for
               </Text>
@@ -73,7 +72,7 @@ export default function NftDetail(props: NftDetailProps) {
                 height="8"
               />
             </Stack>
-            <Stack align="center" attributes={{ marginBottom: "12" }}>
+            <Stack attributes={{ marginBottom: "12", alignItems: "center" }}>
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Owned by
               </Text>
@@ -129,7 +128,9 @@ export default function NftDetail(props: NftDetailProps) {
           </Stack>
         </Box>
       </Stack>
-      <Stack align="center" attributes={{ marginTop: "6", marginBottom: "5" }}>
+      <Stack
+        attributes={{ marginTop: "6", marginBottom: "5", alignItems: "center" }}
+      >
         <Text color="textSecondary">Rank</Text>
         <Text weight="semibold" attributes={{ mx: "2" }}>
           {store.getState()?.formatNumber?.({ value: props?.rarityOrder })}
@@ -146,25 +147,26 @@ export default function NftDetail(props: NftDetailProps) {
       </Stack>
       <NftTraitList list={props?.traits} />
       <Show when={props?.type === DetailType.makeOffer}>
-        <Box height="14" />
-        <NftDetailInfo
-          price={props?.detailInfo?.price}
-          owner={props?.detailInfo?.owner}
-          lastSale={props?.detailInfo?.lastSale}
-          topOffer={props?.detailInfo?.topOffer}
-          floorPrice={props?.detailInfo?.floorPrice}
-          isNameVerified={props?.detailInfo?.isNameVerified}
-        />
-        <Box height="16" />
-        <NftDetailTopOffer
-          price={props?.detailTopOffer?.price}
-          floorPrice={props?.detailTopOffer?.floorPrice}
-          expires={props?.detailTopOffer?.expires}
-          from={props?.detailTopOffer?.from}
-        />
-        <Box height="17" />
+        <Box marginTop="10">
+          <NftDetailInfo
+            price={props?.detailInfo?.price}
+            owner={props?.detailInfo?.owner}
+            lastSale={props?.detailInfo?.lastSale}
+            topOffer={props?.detailInfo?.topOffer}
+            floorPrice={props?.detailInfo?.floorPrice}
+            isNameVerified={props?.detailInfo?.isNameVerified}
+          />
+        </Box>
+        <Box my="14">
+          <NftDetailTopOffer
+            price={props?.detailTopOffer?.price}
+            floorPrice={props?.detailTopOffer?.floorPrice}
+            expires={props?.detailTopOffer?.expires}
+            from={props?.detailTopOffer?.from}
+          />
+        </Box>
         <NftDetailActivityList list={props?.detailActivity?.list} />
       </Show>
-    </Stack>
+    </Box>
   );
 }
