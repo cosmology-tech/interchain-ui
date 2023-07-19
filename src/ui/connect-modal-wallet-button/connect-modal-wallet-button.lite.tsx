@@ -18,8 +18,9 @@ import {
   subLogoList,
 } from "./connect-modal-wallet-button.css";
 import { store } from "../../models/store";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import Box from "../box";
 import Icon from "../icon";
+import { fullWidthHeight } from "../shared/shared.css";
 import type { ThemeVariant } from "../../models/system.model";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -56,19 +57,17 @@ export default function ConnectModalWalletButton(
       onClick={(event: any) => props.onClick(event)}
     >
       <Show when={!!props.logo}>
-        <span
+        <Box
+          as="span"
+          position="relative"
+          display="block"
           className={clx(
             logoVariants({
               variant: props.variant,
-            }),
-            s({ position: "relative", display: "block" })
+            })
           )}
         >
-          <img
-            alt={props.name}
-            src={props.logo}
-            className={s({ width: "full", height: "full" })}
-          />
+          <img alt={props.name} src={props.logo} className={fullWidthHeight} />
 
           <Show
             when={
@@ -81,15 +80,19 @@ export default function ConnectModalWalletButton(
               </Show>
 
               <Show when={props.subLogo !== "walletConnect"}>
-                <img
-                  src={props.subLogo}
-                  alt={`${props.name} sub logo`}
-                  className={s({ width: "10", height: "10" })}
+                <Box
+                  as="img"
+                  attributes={{
+                    src: props.subLogo,
+                    alt: `${props.name} sub logo`,
+                  }}
+                  width="$10"
+                  height="$10"
                 />
               </Show>
             </span>
           </Show>
-        </span>
+        </Box>
       </Show>
 
       <span
@@ -110,10 +113,14 @@ export default function ConnectModalWalletButton(
           </Show>
 
           <Show when={props.subLogo !== "walletConnect"}>
-            <img
-              src={props.subLogo}
-              alt={`${props.name} sub logo`}
-              className={s({ width: "9", height: "9" })}
+            <Box
+              as="img"
+              attributes={{
+                src: props.subLogo,
+                alt: `${props.name} sub logo`,
+              }}
+              width="$9"
+              height="$9"
             />
           </Show>
         </span>

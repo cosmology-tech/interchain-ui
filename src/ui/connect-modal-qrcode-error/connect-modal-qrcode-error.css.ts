@@ -1,6 +1,5 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 
 export const qrcodeErrorContainer = style({
   display: "flex",
@@ -11,19 +10,15 @@ export const qrcodeErrorContainer = style({
 
 const qrcodeBlurBgVar = createVar();
 
-const qrCodeBlurBase = style([
-  style({
-    position: "absolute",
-    background: qrcodeBlurBgVar,
-    filter: "blur(12px)",
-  }),
-  s({
-    width: "full",
-    height: "full",
-    zIndex: "10",
-    borderRadius: "lg",
-  }),
-]);
+const qrCodeBlurBase = style({
+  position: "absolute",
+  background: qrcodeBlurBgVar,
+  filter: "blur(12px)",
+  width: "100%",
+  height: "100%",
+  zIndex: themeVars.zIndex[10],
+  borderRadius: themeVars.radii.lg,
+});
 
 export const qrcodeBlur = styleVariants({
   light: [
@@ -44,48 +39,40 @@ export const qrcodeBlur = styleVariants({
   ],
 });
 
-export const qrcodeReloadButtonContainer = style([
-  {
-    position: "absolute",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-50%, -50%)",
-  },
-  s({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  }),
-]);
+export const qrcodeReloadButtonContainer = style({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+});
 
 const reloadButtonBgVar = createVar();
 const reloadButtonFgVar = createVar();
 const reloadButtonShadowVar = createVar();
 
-const qrCodeReloadButtonBase = style([
-  style({
-    border: "none",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    appearance: "none",
-    position: "relative",
-    outline: "2px solid transparent",
-    verticalAlign: "middle",
-    outlineOffset: "2px",
-    padding: "0",
-    boxShadow: reloadButtonShadowVar,
-    background: reloadButtonBgVar,
-    color: reloadButtonFgVar,
-  }),
-  s({
-    borderRadius: "full",
-    fontWeight: "semibold",
-    fontSize: "lg",
-    width: "15",
-    height: "15",
-  }),
-]);
+const qrCodeReloadButtonBase = style({
+  border: "none",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  appearance: "none",
+  position: "relative",
+  outline: "2px solid transparent",
+  verticalAlign: "middle",
+  outlineOffset: "2px",
+  padding: "0",
+  boxShadow: reloadButtonShadowVar,
+  background: reloadButtonBgVar,
+  color: reloadButtonFgVar,
+  borderRadius: themeVars.radii.full,
+  fontWeight: themeVars.fontWeight.semibold,
+  fontSize: themeVars.fontSize.lg,
+  width: themeVars.space[15],
+  height: themeVars.space[15],
+});
 
 export const qrcodeReloadButton = styleVariants({
   light: [

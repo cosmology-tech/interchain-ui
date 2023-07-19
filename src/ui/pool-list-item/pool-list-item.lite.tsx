@@ -33,7 +33,7 @@ export default function PoolListItem(props: PoolListItemProps) {
   return (
     <Stack
       className={styles.container}
-      space="0"
+      space="$0"
       attributes={{
         alignItems: "center",
       }}
@@ -52,18 +52,20 @@ export default function PoolListItem(props: PoolListItemProps) {
           innerClassName={styles.iconContainer[state.theme]}
         />
       </Box>
-      <Box className={styles.onlySm} width="full" height="9" />
+
+      <Box className={styles.onlySm} width="$full" height="$9" />
+
       <CellWithTitle
         className={styles.responsiveText}
         innerClassName={styles.onlySm}
         title="Liquidity"
       >
         <Text
-          color="text"
-          weight="semibold"
+          color="$text"
+          fontWeight="$semibold"
           wordBreak="break-word"
           attributes={{
-            marginRight: "4",
+            marginRight: "$4",
           }}
         >
           ${props.poolLiquidity.toLocaleString()}
@@ -75,11 +77,11 @@ export default function PoolListItem(props: PoolListItemProps) {
         title="24H Volume"
       >
         <Text
-          color="text"
-          weight="semibold"
+          color="$text"
+          fontWeight="$semibold"
           wordBreak="break-word"
           attributes={{
-            marginRight: "4",
+            marginRight: "$4",
           }}
         >
           ${props.volume.toLocaleString()}
@@ -91,11 +93,11 @@ export default function PoolListItem(props: PoolListItemProps) {
         title="7D Fees"
       >
         <Text
-          color="text"
-          weight="semibold"
+          color="$text"
+          fontWeight="$semibold"
           wordBreak="break-word"
           attributes={{
-            marginRight: "4",
+            marginRight: "$4",
           }}
         >
           ${props.fees.toLocaleString()}
@@ -106,7 +108,7 @@ export default function PoolListItem(props: PoolListItemProps) {
         apr={props.apr}
         innerClassName={styles.iconContainer[state.theme]}
       />
-      <Box className={styles.onlySm} width="full" height="4" />
+      <Box className={styles.onlySm} width="$full" height="$4" />
     </Stack>
   );
 }

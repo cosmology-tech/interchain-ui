@@ -4,59 +4,51 @@ import {
   styleVariants,
   createVar,
 } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 const logoFrameColorDisconnectedVar = createVar();
 const logoFrameColorConnectingVar = createVar();
 const logoFrameColorNotExistVar = createVar();
 
-const modalStatusContainerBase = style([
-  {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    boxSizing: "border-box"
-  },
-  s({
-    fontFamily: "body",
-    px: "8",
-    marginTop: "12",
-    paddingBottom: "0",
-  }),
-]);
+const modalStatusContainerBase = style({
+  boxSizing: "border-box",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  fontFamily: themeVars.font.body,
+  paddingLeft: themeVars.space[8],
+  paddingRight: themeVars.space[8],
+  paddingTop: themeVars.space[12],
+  paddingBottom: 0,
+});
 
 export const modalStatusContainer = styleVariants({
   light: [
     modalStatusContainerBase,
-    s({
-      backgroundColor: "white",
+    style({
+      backgroundColor: themeVars.colors.white,
     }),
   ],
   dark: [
     modalStatusContainerBase,
-    s({
-      backgroundColor: "gray700",
+    style({
+      backgroundColor: themeVars.colors.gray700,
     }),
   ],
 });
 
-export const statusLogo = style([
-  {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginInlineStart: "auto",
-    marginInlineEnd: "auto",
-  },
-  s({
-    width: "19",
-    height: "19",
-  }),
-]);
+export const statusLogo = style({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginInlineStart: "auto",
+  marginInlineEnd: "auto",
+  width: themeVars.space[19],
+  height: themeVars.space[19],
+});
 
 const disconnectedLogoFrameBase = style({
   position: "absolute",
@@ -89,37 +81,36 @@ export const disconnectedLogoFrame = styleVariants({
   ],
 });
 
-const disconnectedDescBase = s({
-  fontWeight: "semibold",
-  marginBottom: "7",
+const disconnectedDescBase = style({
+  fontWeight: themeVars.fontWeight.semibold,
+  marginBottom: themeVars.space[7],
 });
 
 export const disconnectedDesc = styleVariants({
   light: [
     disconnectedDescBase,
-    s({
-      color: "orange300",
+    style({
+      color: themeVars.colors.orange300,
     }),
   ],
   dark: [
     disconnectedDescBase,
-    s({
-      color: "orange500",
+    style({
+      color: themeVars.colors.orange500,
     }),
   ],
 });
 
-export const statusLogoImage = s({
-  px: "7",
-  py: "7",
+export const statusLogoImage = style({
+  padding: themeVars.space[7],
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 });
 
-export const statusLogoImageSvg = s({
-  width: "19",
-  height: "19",
+export const statusLogoImageSvg = style({
+  width: themeVars.space[19],
+  height: themeVars.space[19],
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -168,23 +159,23 @@ export const connectingLogoFrame = styleVariants({
   ],
 });
 
-const connectingHeaderBase = s({
-  marginBottom: "1",
-  fontSize: "md",
-  fontWeight: "semibold",
+const connectingHeaderBase = style({
+  marginBottom: themeVars.space[1],
+  fontSize: themeVars.fontSize.md,
+  fontWeight: themeVars.fontWeight.semibold,
 });
 
 export const connectingHeader = styleVariants({
   light: [
     connectingHeaderBase,
-    s({
-      color: "gray700",
+    style({
+      color: themeVars.colors.gray700,
     }),
   ],
   dark: [
     connectingHeaderBase,
-    s({
-      color: "white",
+    style({
+      color: themeVars.colors.white,
     }),
   ],
 });
@@ -228,6 +219,11 @@ export const errorDescription = style([
     overflowY: "scroll",
     paddingInlineStart: themeVars.space[8],
     paddingInlineEnd: themeVars.space[8],
+    paddingTop: themeVars.space[2],
+    paddingBottom: themeVars.space[2],
+    marginBottom: themeVars.space[8],
+    fontSize: themeVars.fontSize.sm,
+    maxHeight: themeVars.space[22],
     scrollbarWidth: "none",
     selectors: {
       "&::-webkit-scrollbar": {
@@ -235,55 +231,75 @@ export const errorDescription = style([
       },
     },
   },
-  s({
-    paddingTop: "2",
-    paddingBottom: "2",
-    marginBottom: "8",
-    fontSize: "sm",
-    maxHeight: "22",
-  }),
 ]);
 
-export const widthContainer = s({
-  width: "full",
-  paddingLeft: "8",
-  paddingRight: "8",
+export const widthContainer = style({
+  width: "100%",
+  paddingLeft: themeVars.space[8],
+  paddingRight: themeVars.space[8],
 });
 
-const connectedInfoBase = s({
-  fontSize: "md",
-  fontWeight: "semibold",
-  marginLeft: "4",
+const connectedInfoBase = style({
+  fontSize: themeVars.fontSize.md,
+  fontWeight: themeVars.fontWeight.semibold,
+  marginLeft: themeVars.space[4],
 });
 
 export const connectedInfo = styleVariants({
   light: [
     connectedInfoBase,
-    s({
-      color: "gray700",
+    style({
+      color: themeVars.colors.gray700,
     }),
   ],
   dark: [
     connectedInfoBase,
-    s({
-      color: "white",
+    style({
+      color: themeVars.colors.white,
     }),
   ],
 });
 
 export const dangerText = styleVariants({
-  light: [s({ fontWeight: "semibold", marginBottom: "2", color: "red300" })],
-  dark: [s({ fontWeight: "semibold", marginBottom: "2", color: "red400" })],
+  light: [
+    style({
+      fontWeight: themeVars.fontWeight.semibold,
+      marginBottom: themeVars.space[2],
+      color: themeVars.colors.red300,
+    }),
+  ],
+  dark: [
+    style({
+      fontWeight: themeVars.fontWeight.semibold,
+      marginBottom: themeVars.space[2],
+      color: themeVars.colors.red400,
+    }),
+  ],
 });
 
-const descBase = s({
-  fontSize: "sm",
-  marginBottom: "4",
-  fontWeight: "normal",
+const descBase = style({
+  fontSize: themeVars.fontSize.sm,
+  marginBottom: themeVars.space[4],
+  fontWeight: themeVars.fontWeight.normal,
   textAlign: "center",
 });
 
 export const desc = styleVariants({
-  light: [descBase, s({ color: "gray600" })],
-  dark: [descBase, s({ color: "whiteAlpha900" })],
+  light: [descBase, style({ color: themeVars.colors.gray600 })],
+  dark: [descBase, style({ color: themeVars.colors.whiteAlpha900 })],
+});
+
+export const flexImg = style({
+  width: "100%",
+  height: "100%",
+});
+
+export const bottomLink = style({
+  fontSize: themeVars.fontSize.sm,
+  color: themeVars.colors.body,
+  fontWeight: themeVars.fontWeight.normal,
+});
+
+export const copyText = style({
+  marginBottom: themeVars.space[7],
 });

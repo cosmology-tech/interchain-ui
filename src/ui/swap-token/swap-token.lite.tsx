@@ -15,7 +15,6 @@ import IconButton from "../icon-button";
 import Box from "../box";
 import Button from "../button";
 import SwapPrice from "../swap-price";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { store } from "../../models/store";
 import TransferItem from "../transfer-item";
 import { IconProps } from "../icon/icon.types";
@@ -114,7 +113,11 @@ export default function SwapToken(props: SwapTokenProps) {
 
   return (
     <Box className={styles.swapTokenContainer}>
-      <Text size="lg" weight="semibold" attributes={{ marginBottom: "8" }}>
+      <Text
+        fontSize="$lg"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$8" }}
+      >
         Swap
       </Text>
       <TransferItem
@@ -133,7 +136,7 @@ export default function SwapToken(props: SwapTokenProps) {
           justifyContent: "center",
         }}
       >
-        <div className={sprinkles({ position: "relative" })} ref={swapIconRef}>
+        <Box position="relative" boxRef={swapIconRef}>
           <IconButton
             size="lg"
             className={styles.swapIcon[state.theme]}
@@ -144,7 +147,7 @@ export default function SwapToken(props: SwapTokenProps) {
             onHoverStart={(e) => state.toggleIcon(90, "arrowLeftRightLine")}
             onHoverEnd={(e) => state.toggleIcon(0, "arrowDownLine")}
           />
-        </div>
+        </Box>
       </Stack>
       <TransferItem
         halfBtn={false}
@@ -157,13 +160,13 @@ export default function SwapToken(props: SwapTokenProps) {
       />
       <Stack
         attributes={{
-          my: "9",
-          height: "12",
+          my: "$9",
+          height: "$12",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Text color="textSecondary">Slippage tolerance</Text>
+        <Text color="$textSecondary">Slippage tolerance</Text>
         <Stack
           className={styles.settingContainer}
           attributes={{
@@ -174,12 +177,12 @@ export default function SwapToken(props: SwapTokenProps) {
         >
           <Show when={!state.isSetting}>
             <Stack
-              space="7"
+              space="$7"
               attributes={{
                 alignItems: "center",
               }}
             >
-              <Text color="textSecondary" weight="bold">
+              <Text color="$textSecondary" fontWeight="$bold">
                 {state.tolerance}%
               </Text>
               <IconButton
@@ -195,7 +198,7 @@ export default function SwapToken(props: SwapTokenProps) {
               attributes={{
                 alignItems: "center",
               }}
-              space="5"
+              space="$5"
             >
               <For each={[1, 2.5, 3, 5]}>
                 {(per) => (
@@ -228,7 +231,7 @@ export default function SwapToken(props: SwapTokenProps) {
         minimumReceived={props?.swapPrice?.minimumReceived}
         routeDetail={props?.swapPrice?.routeDetail}
       />
-      <Button intent="tertiary" size="lg" attributes={{ width: "full" }}>
+      <Button intent="tertiary" size="lg" attributes={{ width: "$full" }}>
         Swap
       </Button>
     </Box>

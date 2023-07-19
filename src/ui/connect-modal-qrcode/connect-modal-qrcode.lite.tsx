@@ -112,12 +112,12 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   return (
     <Stack
       direction="vertical"
-      space="4"
+      space="$4"
       attributes={{
         alignItems: "center",
       }}
     >
-      <Text fontWeight="medium" size="md" className={descriptionStyle}>
+      <Text fontWeight="$medium" fontSize="$md" className={descriptionStyle}>
         {props.description}
       </Text>
 
@@ -149,10 +149,12 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
         <Show when={props.status === "Error"}>
           <Text
             as="p"
-            fontWeight="medium"
-            size="md"
-            marginTop="2"
-            color="textDanger"
+            fontWeight="$medium"
+            fontSize="$md"
+            color="$textDanger"
+            attributes={{
+              marginTop: "$2",
+            }}
           >
             {props.errorTitle}
           </Text>
@@ -161,10 +163,12 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
         <Show when={props.status === "Expired"}>
           <Text
             as="p"
-            fontWeight="medium"
-            size="md"
-            marginTop="2"
-            color="textWarning"
+            fontWeight="$medium"
+            fontSize="$md"
+            color="$textWarning"
+            attributes={{
+              marginTop: "$2",
+            }}
           >
             {props.errorTitle}
           </Text>

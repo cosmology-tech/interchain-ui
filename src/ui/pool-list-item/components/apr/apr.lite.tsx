@@ -1,4 +1,4 @@
-import { useDefaultProps, Show } from "@builder.io/mitosis";
+import { Show } from "@builder.io/mitosis";
 import Stack from "../../../stack";
 import Text from "../../../text";
 import Box from "../../../box";
@@ -16,21 +16,21 @@ export default function APR(props: {
       attributes={{
         justifyContent: "space-between",
         alignItems: "center",
-        width: "full"
+        width: "$full",
       }}
     >
       <Box>
         <Show when={!!props?.title}>
-          <Text color="textSecondary" attributes={{ marginBottom: "2" }}>
+          <Text color="$textSecondary" attributes={{ marginBottom: "$2" }}>
             {props?.title}
           </Text>
         </Show>
 
         <Text
-          color="text"
-          weight="semibold"
+          color="$text"
+          fontWeight="$semibold"
           attributes={{
-            marginRight: "4",
+            marginRight: "$4",
           }}
         >
           {props.apr}%

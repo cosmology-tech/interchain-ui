@@ -1,6 +1,6 @@
 import { createVar, style, styleVariants } from "@vanilla-extract/css";
 import { baseTextStyles } from "../text/text.css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import { unstyledButton } from "../button/button.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const inputBorderVar = createVar();
@@ -111,24 +111,31 @@ export const inputIntent = styleVariants({
 
 export const inputSizes = styleVariants({
   sm: [
-    s({
-      py: "4",
-      px: "6",
+    style({
+      paddingLeft: themeVars.space[6],
+      paddingRight: themeVars.space[6],
+      paddingTop: themeVars.space[4],
+      paddingBottom: themeVars.space[4],
     }),
   ],
   md: [
-    s({
-      py: "10",
-      px: "8",
+    style({
+      paddingLeft: themeVars.space[8],
+      paddingRight: themeVars.space[8],
+      paddingTop: themeVars.space[10],
+      paddingBottom: themeVars.space[10],
     }),
   ],
 });
 
-export const clearIcon = style([
-  {
-    color: "inherit",
-  },
-  s({
-    fontSize: "lg",
+export const clearIcon = style({
+  color: "inherit",
+  fontSize: themeVars.fontSize.lg,
+});
+
+export const clearButton = style([
+  unstyledButton,
+  style({
+    padding: 0,
   }),
 ]);

@@ -33,37 +33,41 @@ export default function BondingMore(props: BondingMoreProps) {
       }
     },
   });
+
   return (
     <Box>
-      <Stack direction="vertical" space="0">
-        <Text size="xl" weight="semibold">
+      <Stack direction="vertical" space="$0">
+        <Text fontSize="$xl" fontWeight="$semibold">
           Bonding LP Tokens
         </Text>
-        <Stack attributes={{ alignItems: "center", paddingTop: "3" }} space="0">
-          <Text color="textSecondary">{props.symbol1}</Text>
-          <Text color="textSecondary" attributes={{ p: "2" }}>
+        <Stack
+          attributes={{ alignItems: "center", paddingTop: "$3" }}
+          space="$0"
+        >
+          <Text color="$textSecondary">{props.symbol1}</Text>
+          <Text color="$textSecondary" attributes={{ p: "$2" }}>
             /
           </Text>
-          <Text color="textSecondary">{props.symbol2}</Text>
+          <Text color="$textSecondary">{props.symbol2}</Text>
         </Stack>
       </Stack>
       <Stack
         attributes={{
-          paddingTop: "13",
-          paddingBottom: "8",
+          paddingTop: "$13",
+          paddingBottom: "$8",
           justifyContent: "space-between",
         }}
-        space="0"
+        space="$0"
       >
-        <Text color="textSecondary" size="lg" weight="semibold">
+        <Text color="$textSecondary" fontSize="$lg" fontWeight="$semibold">
           Amount to bound
         </Text>
-        <Stack attributes={{ marginBottom: "6", alignItems: "center" }}>
-          <Text color="textSecondary">Available LP Token</Text>
-          <Text color="textSecondary">{props.available}</Text>
+        <Stack attributes={{ marginBottom: "$6", alignItems: "center" }}>
+          <Text color="$textSecondary">Available LP Token</Text>
+          <Text color="$textSecondary">{props.available}</Text>
         </Stack>
       </Stack>
-      <Box className={styles.inputContainer} marginBottom="10" marginTop="5">
+      <Box className={styles.inputContainer} marginBottom="$10" marginTop="$5">
         <input
           className={styles.token}
           onChange={(e) => state.handleInputChange(e)}

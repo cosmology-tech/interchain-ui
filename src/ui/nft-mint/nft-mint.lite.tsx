@@ -11,17 +11,22 @@ export default function NftMint(props: NftMintProps) {
   return (
     <Stack className={styles.nftMint} direction="vertical">
       {/* Title */}
-      <Text size="xl" weight="semibold" attributes={{ marginBottom: "12" }}>
+      <Text
+        fontSize="$xl"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$12" }}
+      >
         NFT Mint
       </Text>
+
       {/* Detail */}
-      <Stack space="10">
-        <Box flex={1}>
+      <Stack space="$10">
+        <Box flex="1">
           <Box
             as="img"
-            width="full"
+            width="$full"
             height="auto"
-            borderRadius="md"
+            borderRadius="$md"
             attributes={{
               src: "https://ipfs-gw.stargaze-apis.com/ipfs/QmYqY6mW6qCCgdVA1BGRhXuvaSjKwwGdkBLZ8gZeMTn3U9/bipz.gif",
             }}
@@ -31,48 +36,48 @@ export default function NftMint(props: NftMintProps) {
           <Stack direction="vertical">
             <Text
               className={styles.tip}
-              color="cardBg"
-              size="xs"
-              weight="semibold"
+              color="$cardBg"
+              fontSize="$xs"
+              fontWeight="$semibold"
               attributes={{
-                width: "fit",
-                backgroundColor: "text",
-                px: "4",
-                py: "2",
+                width: "fit-content",
+                backgroundColor: "$text",
+                px: "$4",
+                py: "$2",
               }}
             >
               {props?.tag}
             </Text>
             <Text
-              size="4xl"
-              weight="semibold"
-              attributes={{ marginTop: "6", marginBottom: "3" }}
+              fontSize="$4xl"
+              fontWeight="$semibold"
+              attributes={{ marginTop: "$6", marginBottom: "$3" }}
             >
               {props?.name}
             </Text>
-            <Text color="textSecondary">{props?.description}</Text>
-            <Stack attributes={{ my: "9", justifyContent: "space-between" }}>
+            <Text color="$textSecondary">{props?.description}</Text>
+            <Stack attributes={{ my: "$9", justifyContent: "space-between" }}>
               <Stack direction="vertical">
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   Quantity
                 </Text>
-                <Text size="4xl" weight="semibold">
+                <Text fontSize="$4xl" fontWeight="$semibold">
                   {store.getState()?.formatNumber?.({ value: props?.quantity })}
                 </Text>
               </Stack>
               <Stack direction="vertical">
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   Royalties
                 </Text>
-                <Text size="4xl" weight="semibold">
+                <Text fontSize="$4xl" fontWeight="$semibold">
                   {props?.royalties}%
                 </Text>
               </Stack>
               <Stack direction="vertical">
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   Minted
                 </Text>
-                <Text size="4xl" weight="semibold">
+                <Text fontSize="$4xl" fontWeight="$semibold">
                   {props?.minted}%
                 </Text>
               </Stack>
@@ -82,17 +87,21 @@ export default function NftMint(props: NftMintProps) {
       </Stack>
 
       {/* Operation area */}
-      <Stack space="10" attributes={{ marginTop: "10" }}>
+      <Stack space="$10" attributes={{ marginTop: "$10" }}>
         <Box flex={1}>
           <Stack direction="vertical">
             <Stack
               attributes={{
-                marginBottom: "6",
+                marginBottom: "$6",
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
             >
-              <Text color="textSecondary" size="lg" weight="semibold">
+              <Text
+                color="$textSecondary"
+                fontSize="$lg"
+                fontWeight="$semibold"
+              >
                 Select amount
               </Text>
               <Stack
@@ -100,10 +109,10 @@ export default function NftMint(props: NftMintProps) {
                   alignItems: "center",
                 }}
               >
-                <Text color="textSecondary" attributes={{ marginRight: "2" }}>
+                <Text color="$textSecondary" attributes={{ marginRight: "$2" }}>
                   Available
                 </Text>
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   {`${store
                     .getState()
                     ?.formatNumber?.({ value: props?.available })} STARS`}
@@ -113,11 +122,11 @@ export default function NftMint(props: NftMintProps) {
             <input />
           </Stack>
         </Box>
-        <Box flex={1}>
+        <Box flex="1">
           <Stack direction="vertical">
             <Stack
               attributes={{
-                marginBottom: "6",
+                marginBottom: "$6",
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
@@ -127,16 +136,16 @@ export default function NftMint(props: NftMintProps) {
                   alignItems: "center",
                 }}
               >
-                <Text color="textSecondary" attributes={{ marginRight: "2" }}>
+                <Text color="$textSecondary" attributes={{ marginRight: "$2" }}>
                   Price:
                 </Text>
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   {`${store
                     .getState()
                     ?.formatNumber?.({ value: props?.price })} STARS`}
                 </Text>
               </Stack>
-              <Text color="textSecondary">
+              <Text color="$textSecondary">
                 {" "}
                 {`Limited to ${store
                   .getState()

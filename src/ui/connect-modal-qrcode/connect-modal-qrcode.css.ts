@@ -1,5 +1,4 @@
 import { style, createVar, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const descriptionStyle = style({
@@ -12,23 +11,18 @@ export const qrCodeFgVar = createVar();
 export const qrCodeBorderColorVar = createVar();
 export const qrCodeBoxShadowVar = createVar();
 
-const qrCodeContainerBase = style([
-  style({
-    border: "1px solid",
-    borderColor: qrCodeBorderColorVar,
-    boxShadow: qrCodeBoxShadowVar,
-  }),
-  s({
-    width: "fit",
-    px: "9",
-    py: "9",
-    borderRadius: "lg",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "2",
-  }),
-]);
+const qrCodeContainerBase = style({
+  border: "1px solid",
+  borderColor: qrCodeBorderColorVar,
+  boxShadow: qrCodeBoxShadowVar,
+  width: "fit-content",
+  padding: themeVars.space[9],
+  borderRadius: themeVars.radii.lg,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: themeVars.space[2],
+});
 
 export const qrCodeContainer = styleVariants({
   light: [
@@ -64,18 +58,14 @@ export const qrCodeDesc = style([
   },
 ]);
 
-export const qrCodeDescContent = style([
-  {
-    overflowX: "hidden",
-    overflowY: "auto",
-    textAlign: "center",
-    opacity: 0.75,
-  },
-  s({
-    fontSize: "sm",
-    fontWeight: "normal",
-  }),
-]);
+export const qrCodeDescContent = style({
+  overflowX: "hidden",
+  overflowY: "auto",
+  textAlign: "center",
+  opacity: 0.75,
+  fontSize: themeVars.fontSize.sm,
+  fontWeight: themeVars.fontWeight.normal,
+});
 
 const qrCodeDescBgVar = createVar();
 

@@ -1,29 +1,23 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { breakpoints } from "../../styles/tokens";
+import { themeVars } from "../../styles/themes.css";
 
 export const poolInfoHeader = style({
   minWidth: "350px",
 });
 
-export const imageBox = style([
-  s({
-    minWidth: "18",
-    height: "14",
-    marginRight: "10",
-  }),
-  {
-    position: "relative",
-  },
-]);
+export const imageBox = style({
+  position: "relative",
+  minWidth: themeVars.space[18],
+  height: themeVars.space[14],
+  marginRight: themeVars.space[10],
+});
 
-export const imgBase = style([
-  s({
-    width: "14",
-    height: "14",
-  }),
-  { position: "absolute" },
-]);
+export const imgBase = style({
+  position: "absolute",
+  width: themeVars.space[14],
+  height: themeVars.space[14],
+});
 
 export const image1 = style([
   imgBase,
@@ -50,11 +44,9 @@ export const longText = style([
   }),
 ]);
 
-export const shortText = style([
-  s({
-    width: "21",
-  }),
-]);
+export const shortText = style({
+  width: themeVars.space[21],
+});
 
 export const onlysm = style({
   "@media": {

@@ -9,21 +9,21 @@ export default function CellWithTitle(props: {
   children?: any;
 }) {
   return (
-    <Box className={props.className} width="full">
+    <Box className={props.className} width="$full">
       <Stack
         direction="vertical"
-        space="2"
+        space="$2"
         attributes={{
           justifyContent: "center",
-          width: "full",
+          width: "$full",
         }}
       >
         <Text
-          color="textSecondary"
+          color="$textSecondary"
           className={props.innerClassName}
           wordBreak="break-word"
           attributes={{
-            marginRight: "4",
+            marginRight: "$4",
           }}
         >
           {props.title}

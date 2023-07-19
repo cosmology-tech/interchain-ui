@@ -7,7 +7,7 @@ export default function Text(props: TextProps) {
   useDefaultProps({
     size: "sm",
     color: "text",
-    wordBreak: "break-word"
+    wordBreak: "break-word",
   });
 
   return (
@@ -20,12 +20,12 @@ export default function Text(props: TextProps) {
         underline: props.underline ? true : undefined,
       })} ${props.className}`}
       color={props.color}
-      fontSize={props.size}
-      fontWeight={props.weight}
+      fontSize={props.fontSize}
+      fontWeight={props.fontWeight}
       letterSpacing={props.letterSpacing}
       lineHeight={props.lineHeight}
-      textAlign={props.align}
-      textTransform={props.transform}
+      textAlign={props.textAlign}
+      textTransform={props.textTransform}
       whiteSpace={props.whiteSpace}
       wordBreak={props.wordBreak}
     >

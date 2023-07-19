@@ -10,13 +10,19 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
   useDefaultProps({
     isSingle: false,
   });
+
   return (
     <Stack className={styles.assetListHeader} direction="vertical">
-      <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
+      <Text
+        fontSize="$xl"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$10" }}
+      >
         Your assets
       </Text>
+
       <Show when={!props.isSingle}>
-        <Stack className={styles.crossContainer} space="10">
+        <Stack className={styles.crossContainer} space="$10">
           <For
             each={[
               { text: "Total on Osmosis", value: props.total },
@@ -31,7 +37,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                   justifyContent: "center",
                 }}
               >
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   {item.text}
                 </Text>
                 <Stack
@@ -39,10 +45,13 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                     alignItems: "baseline",
                   }}
                 >
-                  <Text weight="semibold" attributes={{ marginRight: "1" }}>
+                  <Text
+                    fontWeight="$semibold"
+                    attributes={{ marginRight: "$1" }}
+                  >
                     $
                   </Text>
-                  <Text size="4xl" weight="semibold">
+                  <Text fontSize="$4xl" fontWeight="$semibold">
                     {item.value}
                   </Text>
                 </Stack>
@@ -88,14 +97,14 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                 alignItems: "baseline",
               }}
             >
-              <Text weight="semibold">$</Text>
-              <Text size="4xl" weight="semibold">
+              <Text fontWeight="$semibold">$</Text>
+              <Text fontSize="$4xl" fontWeight="$semibold">
                 {props.total}
               </Text>
             </Stack>
           </Stack>
           <Stack
-            space="12"
+            space="$12"
             attributes={{
               alignItems: "center",
             }}
@@ -104,7 +113,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               <Button
                 intent="tertiary"
                 variant="outlined"
-                attributes={{ width: "25" }}
+                attributes={{ width: "$25" }}
                 onClick={() => console.log("withdraw")}
               >
                 Withdraw
@@ -113,7 +122,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             <Show when={props.canDeposit}>
               <Button
                 intent="tertiary"
-                attributes={{ width: "25" }}
+                attributes={{ width: "$25" }}
                 onClick={() => console.log("deposit")}
               >
                 Deposit

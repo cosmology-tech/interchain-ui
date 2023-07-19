@@ -14,6 +14,7 @@ import {
   borderStyle,
   borderWidth,
   space,
+  zIndex,
 } from "./tokens";
 
 const fontInterName = "Inter";
@@ -207,6 +208,16 @@ export const themeVars = createThemeContract({
     "14xl": ``,
     "15xl": ``,
   },
+  zIndex: {
+    "0": ``,
+    "10": ``,
+    "20": ``,
+    "30": ``,
+    "40": ``,
+    "50": ``,
+    "100": ``,
+    auto: ``,
+  },
 });
 
 export const commonVars = {
@@ -222,6 +233,7 @@ export const commonVars = {
   radii,
   borderWidth,
   borderStyle,
+  zIndex,
 };
 
 export const lightThemeClass = createTheme(themeVars, {

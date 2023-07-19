@@ -1,5 +1,5 @@
 import type { ClassValue } from "clsx";
-import type { Sprinkles } from "../../styles/sprinkles.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BaseComponentProps } from "../../models/components.model";
 import { space } from "../../styles/tokens";
 
@@ -11,7 +11,7 @@ export interface StackProps extends Omit<BaseComponentProps, "className"> {
   attributes?: Sprinkles;
   recursive?: boolean;
   direction?: "vertical" | "horizontal";
-  space?: keyof typeof space | (string & {});
+  space?: `$${keyof typeof space}` | (string & {});
 }
 
 export const DEFAULT_VALUES = {

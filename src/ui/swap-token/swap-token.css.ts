@@ -1,5 +1,4 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 const swapBorderColorVar = createVar();
@@ -8,12 +7,10 @@ export const swapTokenContainer = style({
   minWidth: "468px",
 });
 
-export const switchContainer = style([
-  sprinkles({
-    height: "7",
-    position: "relative",
-  }),
-]);
+export const switchContainer = style({
+  height: themeVars.space[7],
+  position: "relative",
+});
 
 const swapIconBase = style([
   {

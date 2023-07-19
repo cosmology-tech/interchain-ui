@@ -11,7 +11,6 @@ import { variants } from "./button.css";
 import Icon from "../icon";
 import Box from "../box";
 import { store } from "../../models/store";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -47,6 +46,7 @@ export default function Button(props: ButtonProps) {
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
+          ...props.domAttributes,
         }}
         className={clx(
           variants({
@@ -62,9 +62,9 @@ export default function Button(props: ButtonProps) {
           <Icon
             name={props.leftIcon}
             size={props.iconSize}
-            className={s({
-              marginRight: !props.children ? "0" : "2",
-            })}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
           />
         </Show>
 
@@ -74,9 +74,9 @@ export default function Button(props: ButtonProps) {
           <Icon
             name={props.rightIcon}
             size={props.iconSize}
-            className={s({
-              marginLeft: !props.children ? "0" : "2",
-            })}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
           />
         </Show>
       </Box>

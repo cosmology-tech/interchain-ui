@@ -1,6 +1,6 @@
 import { BaseComponentProps, BaseState } from "../../models/components.model";
 import type { Variants } from "./button.css";
-import type { BoxProps } from "../box/box.types";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { IconProps } from "../icon/icon.types";
 import type { ThemeVariant } from "../../models/system.model";
 
@@ -15,7 +15,8 @@ export interface ButtonProps extends BaseComponentProps {
   onClick?: (event: any) => void;
   onHoverStart?: (event: any) => void;
   onHoverEnd?: (event: any) => void;
-  attributes?: BoxProps;
+  attributes?: Sprinkles;
+  domAttributes?: any;
 }
 
 export interface ButtonState extends BaseState {

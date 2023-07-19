@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 // Rewrite prgress-bar with input[type="range"]
@@ -56,34 +55,30 @@ export const dot = style([
 
 */
 
-export const range = style([
-  sprinkles({
-    height: "2",
-    borderRadius: "xl",
-    backgroundColor: "cardBg",
-  }),
-  {
-    outline: "none",
-    width: "100%",
-    cursor: "pointer",
+export const range = style({
+  height: themeVars.space[2],
+  borderRadius: themeVars.radii.xl,
+  backgroundColor: themeVars.colors.cardBg,
+  outline: "none",
+  width: "100%",
+  cursor: "pointer",
+  appearance: "none",
+  WebkitAppearance: "none",
+  backgroundImage: `linear-gradient(${themeVars.colors.text}, ${themeVars.colors.text})`,
+  backgroundRepeat: "no-repeat",
+  "::-webkit-slider-thumb": {
+    width: "24px",
+    height: "24px",
+    border: "0",
+    backgroundColor: themeVars.colors.text,
+    borderRadius: "50%",
     appearance: "none",
     WebkitAppearance: "none",
-    backgroundImage: `linear-gradient(${themeVars.colors.text}, ${themeVars.colors.text})`,
-    backgroundRepeat: "no-repeat",
-    "::-webkit-slider-thumb": {
-      width: "24px",
-      height: "24px",
-      border: "0",
-      backgroundColor: themeVars.colors.text,
-      borderRadius: "50%",
-      appearance: "none",
-      WebkitAppearance: "none",
-    },
-    selectors: {
-      "&:active::-webkit-slider-thumb": {
-        width: "28px",
-        height: "28px",
-      },
+  },
+  selectors: {
+    "&:active::-webkit-slider-thumb": {
+      width: "28px",
+      height: "28px",
     },
   },
-]);
+});

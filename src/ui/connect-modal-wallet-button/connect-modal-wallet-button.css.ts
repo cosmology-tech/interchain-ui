@@ -1,6 +1,5 @@
 import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
 
@@ -59,6 +58,8 @@ export const connectButtonStyle = styleVariants({
   light: [
     connectButtonBase,
     style({
+      color: themeVars.colors.blackAlpha800,
+      backgroundColor: themeVars.colors.gray100,
       selectors: {
         "&:hover": {
           backgroundColor: themeVars.colors.gray50,
@@ -67,15 +68,13 @@ export const connectButtonStyle = styleVariants({
           backgroundColor: themeVars.colors.gray50,
         },
       },
-    }),
-    s({
-      color: "blackAlpha800",
-      backgroundColor: "gray100",
     }),
   ],
   dark: [
     connectButtonBase,
     style({
+      color: themeVars.colors.whiteAlpha800,
+      backgroundColor: themeVars.colors.blackAlpha500,
       selectors: {
         "&:hover": {
           backgroundColor: themeVars.colors.blackAlpha600,
@@ -84,10 +83,6 @@ export const connectButtonStyle = styleVariants({
           backgroundColor: themeVars.colors.blackAlpha600,
         },
       },
-    }),
-    s({
-      color: "whiteAlpha800",
-      backgroundColor: "blackAlpha500",
     }),
   ],
 });
@@ -107,15 +102,15 @@ export type ConnectButtonVariants = RecipeVariants<
 >;
 
 const logoVariant = {
-  square: s({
-    width: "16",
-    height: "16",
-    marginBottom: "5",
+  square: style({
+    width: themeVars.space[16],
+    height: themeVars.space[16],
+    marginBottom: themeVars.space[5],
   }),
-  list: s({
-    width: "12",
-    height: "12",
-    marginRight: "8",
+  list: style({
+    width: themeVars.space[12],
+    height: themeVars.space[12],
+    marginBottom: themeVars.space[8],
   }),
 };
 
@@ -131,28 +126,24 @@ export const logoVariants = recipe({
   },
 });
 
-const buttonTextBase = style([
-  {
-    fontFamily: themeVars.font.body,
-    textAlign: "left",
-  },
-  s({
-    fontSize: "sm",
-    fontWeight: "normal",
-  }),
-]);
+const buttonTextBase = style({
+  fontFamily: themeVars.font.body,
+  textAlign: "left",
+  fontSize: themeVars.fontSize.sm,
+  fontWeight: themeVars.fontWeight.normal,
+});
 
 export const buttonTextStyle = styleVariants({
   light: [
     buttonTextBase,
-    s({
-      color: "blackAlpha800",
+    style({
+      color: themeVars.colors.blackAlpha800,
     }),
   ],
   dark: [
     buttonTextBase,
-    s({
-      color: "whiteAlpha900",
+    style({
+      color: themeVars.colors.whiteAlpha900,
     }),
   ],
 });
@@ -162,7 +153,7 @@ export const buttonTextVariants = recipe({
   variants: {
     variant: {
       square: {},
-      list: s({
+      list: style({
         flex: 1,
       }),
     },
@@ -172,49 +163,41 @@ export const buttonTextVariants = recipe({
   },
 });
 
-const subLogoBase = style([
-  {
-    display: "flex",
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-    border: "2px solid",
-    right: "-8px",
-    bottom: "-8px",
-  },
-  s({
-    borderRadius: "full",
-  }),
-]);
+const subLogoBase = style({
+  display: "flex",
+  position: "absolute",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  border: "2px solid",
+  right: "-8px",
+  bottom: "-8px",
+  borderRadius: themeVars.radii.full,
+});
 
 export const subLogoSquare = styleVariants({
   light: [
     subLogoBase,
-    s({
-      backgroundColor: "gray100",
-      borderColor: "gray100",
+    style({
+      backgroundColor: themeVars.colors.gray100,
+      borderColor: themeVars.colors.gray100,
     }),
   ],
   dark: [
     subLogoBase,
-    s({
-      backgroundColor: "gray700",
-      borderColor: "gray700",
+    style({
+      backgroundColor: themeVars.colors.gray700,
+      borderColor: themeVars.colors.gray700,
     }),
   ],
 });
 
-export const subLogoList = style([
-  {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-  },
-  s({
-    backgroundColor: "transparent",
-    borderRadius: "full",
-    marginRight: "2",
-  }),
-]);
+export const subLogoList = style({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  backgroundColor: "transparent",
+  borderRadius: themeVars.radii.full,
+  marginRight: themeVars.space[2],
+});

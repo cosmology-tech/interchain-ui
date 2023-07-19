@@ -1,6 +1,5 @@
 import { style, createVar, ComplexStyleRule } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
 
@@ -118,29 +117,33 @@ export const disabled = {
 };
 
 export const size = {
-  xs: s({
-    fontSize: "xs",
-    px: "4",
-    height: "10",
-    minWidth: "10",
+  xs: style({
+    fontSize: themeVars.fontSize.xs,
+    paddingRight: themeVars.space[4],
+    paddingLeft: themeVars.space[4],
+    height: themeVars.space[10],
+    minWidth: themeVars.space[10],
   }),
-  sm: s({
-    fontSize: "sm",
-    px: "6",
-    height: "12",
-    minWidth: "12",
+  sm: style({
+    fontSize: themeVars.fontSize.sm,
+    paddingRight: themeVars.space[6],
+    paddingLeft: themeVars.space[6],
+    height: themeVars.space[12],
+    minWidth: themeVars.space[12],
   }),
-  md: s({
-    fontSize: "md",
-    px: "8",
-    height: "14",
-    minWidth: "14",
+  md: style({
+    fontSize: themeVars.fontSize.md,
+    paddingRight: themeVars.space[8],
+    paddingLeft: themeVars.space[8],
+    height: themeVars.space[14],
+    minWidth: themeVars.space[14],
   }),
-  lg: s({
-    fontSize: "lg",
-    px: "10",
-    height: "15",
-    minWidth: "15",
+  lg: style({
+    fontSize: themeVars.fontSize.lg,
+    paddingRight: themeVars.space[10],
+    paddingLeft: themeVars.space[10],
+    height: themeVars.space[15],
+    minWidth: themeVars.space[15],
   }),
 };
 
