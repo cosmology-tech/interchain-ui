@@ -36,10 +36,7 @@ export default function ListForSale(props) {
   });
   return (
     <Stack direction="column" className={styles.container}>
-      <Text size="xl" weight="semibold">
-        List for Sale
-      </Text>
-      <Box marginTop="12">
+      <Box>
       <Tabs tabs={state.tabs} />
       </Box>
     </Stack>

@@ -1,12 +1,13 @@
-import { For, Show } from "@builder.io/mitosis";
+import { For, Show, useStore } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
-import Icon from "../icon";
 import Button from "../button";
 import IconButton from "../icon-button";
-import NftTraitListItem from "../nft-trait-list-item";
 import NftTraitList from "../nft-trait-list";
+import BasicModal from "../basic-modal";
+import ListForSale from "../list-for-sale";
+import NftMakeOffer from "../nft-make-offer";
 import StarText from "../star-text";
 import { store } from "../../models/store";
 import NftDetailInfo from "../nft-detail-info";
@@ -14,15 +15,34 @@ import NftDetailTopOffer from "../nft-detail-top-offers";
 import NftDetailActivityList from "../nft-detail-activity-list";
 
 import * as styles from "./nft-detail.css";
-import { NftTraitListItemProps } from "../nft-trait-list-item/nft-trait-list-item.types";
-import { NftDetailProps, DetailType } from "./nft-detail.types";
+import { NftDetailProps } from "./nft-detail.types";
 
 export default function NftDetail(props: NftDetailProps) {
+  const state = useStore<{
+    showListForSaleModal: boolean;
+    openListForSale: () => void;
+    closeListForSale: () => void;
+    showMakeOfferModal: boolean;
+    openMakeOffer: () => void;
+    closeMakeOffer: () => void;
+  }>({
+    showListForSaleModal: false,
+    showMakeOfferModal: false,
+    openListForSale() {
+      state.showListForSaleModal = true;
+    },
+    closeListForSale() {
+      state.showListForSaleModal = false;
+    },
+    openMakeOffer() {
+      state.showMakeOfferModal = true;
+    },
+    closeMakeOffer() {
+      state.showMakeOfferModal = false;
+    },
+  });
   return (
     <Stack className={styles.nftDetail} direction="column">
-      <Text size="xl" weight="semibold" attributes={{ marginBottom: "12" }}>
-        NFT Detail
-      </Text>
       <Stack space="10">
         <Box flex={1}>
           <Box
@@ -61,18 +81,22 @@ export default function NftDetail(props: NftDetailProps) {
               {props?.collectionDesc}
             </Text>
             <StarText label="Minted for" value={props?.mintPrice} />
-            <Stack align="center" attributes={{ marginBottom: "12", marginTop: "4" }}>
+            <Stack
+              align="center"
+              attributes={{ marginBottom: "12", marginTop: "4" }}
+            >
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Owned by
               </Text>
               <Text weight="semibold">{props?.ownerName}</Text>
             </Stack>
-            <Show when={props.type === DetailType.listForSale}>
+            <Show when={props.type === "listForSale"}>
               <Button
                 size="lg"
                 intent="tertiary"
                 leftIcon="priceTagLine"
                 attributes={{ marginBottom: "8" }}
+                onClick={() => state.openListForSale()}
               >
                 List for Sale
               </Button>
@@ -99,17 +123,27 @@ export default function NftDetail(props: NftDetailProps) {
                 </Box>
               </Stack>
             </Show>
-            <Show when={props?.type === DetailType.makeOffer}>
-              <Button intent="tertiary" size="lg" leftIcon="coinsLine">
+            <Show when={props?.type === "makeOffer"}>
+              <Button
+                intent="tertiary"
+                size="lg"
+                leftIcon="coinsLine"
+                onClick={() => state.openMakeOffer()}
+              >
                 Make Offer
               </Button>
             </Show>
-            <Show when={props?.type === DetailType.buyNow}>
+            <Show when={props?.type === "buyNow"}>
               <Stack space="8">
                 <Button intent="tertiary" size="lg" leftIcon="shoppingBagLine">
                   Buy Now
                 </Button>
-                <Button intent="text" size="lg" leftIcon="coinsLine">
+                <Button
+                  intent="text"
+                  size="lg"
+                  leftIcon="coinsLine"
+                  onClick={() => state.openMakeOffer()}
+                >
                   Make Offer
                 </Button>
               </Stack>
@@ -133,7 +167,7 @@ export default function NftDetail(props: NftDetailProps) {
         <IconButton size="sm" icon="uploadLine" intent="text" />
       </Stack>
       <NftTraitList list={props?.traits} />
-      <Show when={props?.type === DetailType.makeOffer}>
+      <Show when={props?.type === "makeOffer"}>
         <Box height="14" />
         <NftDetailInfo
           price={props?.detailInfo?.price}
@@ -153,6 +187,29 @@ export default function NftDetail(props: NftDetailProps) {
         <Box height="17" />
         <NftDetailActivityList list={props?.detailActivity?.list} />
       </Show>
+
+      {/* List for Sale Modal */}
+      <BasicModal
+        modalContentClassName={styles.listForSaleModal}
+        isOpen={state.showListForSaleModal}
+        title="List for Sale"
+        onClose={() => state.closeListForSale()}
+      >
+        <ListForSale />
+      </BasicModal>
+
+      {/* Make Offer Modal */}
+      <BasicModal
+        modalContentClassName={styles.makeOfferModal}
+        isOpen={state.showMakeOfferModal}
+        title="Make Offer"
+        onClose={() => state.closeMakeOffer()}
+      >
+        <NftMakeOffer
+          imgSrc="https://res.cloudinary.com/stargaze/image/upload/erom1wypzaxaratnm7dg.jpg"
+          tokenName="KUJIRANS #763"
+        />
+      </BasicModal>
     </Stack>
   );
 }

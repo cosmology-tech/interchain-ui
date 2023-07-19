@@ -74,6 +74,7 @@ export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
 export { default as SwapPrice } from "./ui/swap-price";
 export { default as BasicModal } from "./ui/basic-modal";
+export { default as NftMakeOffer } from "./ui/nft-make-offer";
 // End Components
 
 setPlatform(Platform.Default);
