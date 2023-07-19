@@ -3,6 +3,7 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Icon from "../icon";
+import Box from "../box";
 import TokenInput from "../token-input";
 import * as styles from "./asset-item-transfer.css";
 import { store } from "../../models/store";
@@ -29,7 +30,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
   });
 
   return (
-    <Stack direction="vertical" className={styles.container}>
+    <Box className={styles.container}>
       <Stack>
         <Text size="xl" weight="semibold" attributes={{ marginRight: "3" }}>
           {props.type}
@@ -177,7 +178,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Text weight="semibold"> 20 seconds</Text>
       </Stack>
 
-      <Button intent="tertiary">
+      <Button intent="tertiary" attributes={{ width: "full" }}>
         <Stack
           attributes={{
             alignItems: "center",
@@ -212,7 +213,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           </Stack>
         </Stack>
       </Button>
-      <Button variant="unstyled">Cancel</Button>
-    </Stack>
+      <Button variant="unstyled" attributes={{ width: "full" }}>
+        Cancel
+      </Button>
+    </Box>
   );
 }

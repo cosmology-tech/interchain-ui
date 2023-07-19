@@ -122,10 +122,10 @@ export default function TokenInput(props: TokenInputProps) {
                 <Icon name="subtract" color="text" size="3xl" />
               </Show>
             </Box>
+            <Box className={styles.smSpace} />
           </Stack>
         </Stack>
       </Show>
-      <Box className={styles.smSpace} />
 
       <Stack
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
