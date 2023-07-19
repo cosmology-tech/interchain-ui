@@ -5,7 +5,8 @@ import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export const myButtonVar = createVar();
 
-const transactionProperty = "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform";
+const transactionProperty =
+  "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform";
 
 const connectButtonShapeVariants = {
   square: style({
