@@ -58,8 +58,6 @@ export { default as NftMint } from "./ui/nft-mint";
 export { default as SwapPrice } from "./ui/swap-price";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
-export { default as SwapPrice } from "./ui/swap-price";
-export { default as NftMint } from "./ui/nft-mint";
 export { default as FieldLabel } from "./ui/field-label";
 export { default as TextField } from "./ui/text-field";
 export { default as TextFieldAddon } from "./ui/text-field-addon";
