@@ -15,8 +15,8 @@ function unlinkStylesheets(code) {
   const cssImports = getCssImports();
   let finalCode = code;
 
-  cssImports.forEach((importStatement) => {
-    finalCode = finalCode.replace(importStatement, "");
+  cssImports.forEach((importStatementRegex) => {
+    finalCode = finalCode.replace(importStatementRegex, "");
   });
   return finalCode.trim();
 }
@@ -30,7 +30,7 @@ function getCssImports() {
   const platform = matches[0].replace("packages/", "");
 
   return [
-    `require("./interchain-ui-kit-${platform}.cjs.css");`,
-    `import "./interchain-ui-kit-${platform}.cjs.css";`,
+    new RegExp(`require("./interchain-ui-kit-${platform}.cjs.css");`, "g"),
+    new RegExp(`import(\s*)".\/interchain-ui-kit-${platform}.cjs.css";`, "g"),
   ];
 }
