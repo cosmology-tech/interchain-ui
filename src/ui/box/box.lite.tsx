@@ -8,7 +8,6 @@ import {
 import clsx from "clsx";
 import omit from "lodash/omit";
 import { rainbowSprinkles } from "../../styles/rainbow-sprinkles.css";
-import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BoxProps } from "./box.types";
 import { DEFAULT_VALUES } from "./box.types";
 
@@ -20,34 +19,19 @@ export default function Box(props: BoxProps) {
   });
 
   const state = useStore<{
-    atomProps: Record<string, unknown>;
-    nativeProps: Record<string, unknown>;
     style: Record<string, unknown>;
     passThroughProps: Record<string, unknown>;
     className: string;
     calculateStyles: () => void;
+    _passThroughProps: Record<string, unknown>;
   }>({
-    atomProps: {},
-    nativeProps: {},
     className: "",
     style: {},
     passThroughProps: {},
+    get _passThroughProps() {
+      return state.passThroughProps;
+    },
     calculateStyles() {
-      let atoms = {};
-      let natives = {};
-
-      Object.keys(props).forEach((key) => {
-        // @ts-ignore
-        if (sprinkles.properties.has(key as keyof Sprinkles)) {
-          atoms[key] = props[key as keyof typeof props];
-        } else {
-          natives[key] = props[key as keyof typeof props];
-        }
-      });
-
-      state.atomProps = atoms;
-      state.nativeProps = natives;
-
       const sprinklesObj = rainbowSprinkles({
         ...omit(props, ["attributes"]),
         ...props.attributes,
@@ -70,7 +54,7 @@ export default function Box(props: BoxProps) {
     <props.as
       className={state.className}
       style={state.style}
-      {...state.passThroughProps}
+      {...state._passThroughProps}
       ref={props.boxRef}
     >
       {props.children}
