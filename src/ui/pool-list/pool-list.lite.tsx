@@ -33,7 +33,7 @@ export default function PoolList(props: PoolListProps) {
       <Text color="textSecondary" size="xl" weight="semibold">
         {props.title}
       </Text>
-      <Stack className={styles.titleContainer}>
+      <Stack className={styles.titleContainer} space="0">
         <For each={state.titles}>
           {(item, index) => (
             <Text key={index} className={styles.title} color="textSecondary">

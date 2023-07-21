@@ -33,6 +33,7 @@ export default function PoolListItem(props: PoolListItemProps) {
   return (
     <Stack
       className={styles.container}
+      space="0"
       attributes={{
         alignItems: "center",
       }}
@@ -43,17 +44,14 @@ export default function PoolListItem(props: PoolListItemProps) {
         token1={props.token1}
         token2={props.token2}
       />
-      <CellWithTitle
-        className={clsx(styles.responsiveText, styles.onlySm)}
-        innerClassName={styles.onlySm}
-        title="APR"
-      >
+      <Box className={clsx(styles.responsiveText, styles.onlySm)}>
         <APR
+          title="APR"
           className={styles.onlySm}
           apr={props.apr}
           innerClassName={styles.iconContainer[state.theme]}
         />
-      </CellWithTitle>
+      </Box>
       <Box className={styles.onlySm} width="full" height="9" />
       <CellWithTitle
         className={styles.responsiveText}

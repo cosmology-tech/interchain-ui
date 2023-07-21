@@ -113,7 +113,7 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   return (
-    <Stack direction="vertical" className={styles.swapTokenContainer}>
+    <Box className={styles.swapTokenContainer}>
       <Text size="lg" weight="semibold" attributes={{ marginBottom: "8" }}>
         Swap
       </Text>
@@ -228,9 +228,9 @@ export default function SwapToken(props: SwapTokenProps) {
         minimumReceived={props?.swapPrice?.minimumReceived}
         routeDetail={props?.swapPrice?.routeDetail}
       />
-      <Button intent="tertiary" size="lg">
+      <Button intent="tertiary" size="lg" attributes={{ width: "full" }}>
         Swap
       </Button>
-    </Stack>
+    </Box>
   );
 }

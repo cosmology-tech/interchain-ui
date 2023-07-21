@@ -1,0 +1,202 @@
+import React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+
+import { NftDetail } from "../../../src";
+
+const meta: Meta<typeof NftDetail> = {
+  component: NftDetail,
+  title: "nft/nft-detail/NftDetail",
+  tags: ["autodocs"],
+  argTypes: {},
+};
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Primary: Story = {
+  args: {
+    type: "listForSale",
+    collectionName: "Shnubbles Breakfast Drop #2",
+    tokenName: "Breakfast Shnubble #127",
+    creatorName: "stars1ducj...vl342f",
+    collectionDesc:
+      "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
+    mintPrice: "300",
+    rarityOrder: 2864,
+    tokensCount: 10000,
+    ownerName: "shane.stars",
+    traits: [
+      {
+        name: "Accessories",
+        value: "Oval Gadget",
+        rarityPercent: 19.8,
+      },
+      {
+        name: "Head",
+        value: "Snowman Hat",
+        rarityPercent: 16.71,
+      },
+      {
+        name: "Eyes",
+        value: "Teal Predator",
+        rarityPercent: 10.05,
+      },
+      {
+        name: "Mouth",
+        value: "Bashed",
+        rarityPercent: 9.69,
+      },
+      {
+        name: "Background",
+        value: "Navy Blue",
+        rarityPercent: 10.44,
+      },
+      {
+        name: "Skin",
+        value: "Navy Blue",
+        rarityPercent: 10.44,
+      },
+      {
+        name: "Costumes",
+        value: "Vshok",
+        rarityPercent: 6.45,
+      },
+    ],
+  },
+};
+
+export const MakeOffer: Story = {
+  args: {
+    type: "makeOffer",
+    collectionName: "Shnubbles Breakfast Drop #2",
+    tokenName: "Breakfast Shnubble #127",
+    creatorName: "stars1ducj...vl342f",
+    collectionDesc:
+      "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
+    mintPrice: "300",
+    rarityOrder: 2864,
+    tokensCount: 10000,
+    ownerName: "shane.stars",
+    traits: [
+      {
+        name: "Accessories",
+        value: "Oval Gadget",
+        rarityPercent: 19.8,
+      },
+      {
+        name: "Head",
+        value: "Snowman Hat",
+        rarityPercent: 16.71,
+      },
+      {
+        name: "Eyes",
+        value: "Teal Predator",
+        rarityPercent: 10.05,
+      },
+      {
+        name: "Mouth",
+        value: "Bashed",
+        rarityPercent: 9.69,
+      },
+      {
+        name: "Background",
+        value: "Navy Blue",
+        rarityPercent: 10.44,
+      },
+      {
+        name: "Skin",
+        value: "Navy Blue",
+        rarityPercent: 10.44,
+      },
+      {
+        name: "Costumes",
+        value: "Vshok",
+        rarityPercent: 6.45,
+      },
+    ],
+    detailInfo: {
+      price: 200,
+      // lastSale: 1000,
+      owner: "shane.stars",
+      topOffer: 5,
+      floorPrice: 149,
+      isNameVerified: true,
+    },
+    detailTopOffer: {
+      price: 5,
+      floorPrice: "-97% below",
+      expires: "in 3 months",
+      from: "stars15w...mw0j",
+    },
+    detailActivity: {
+      list: [
+        {
+          price: 200,
+          event: "List",
+          from: "shane.stars",
+          date: "12 days ago",
+        },
+        {
+          price: 200,
+          event: "List",
+          from: "shane.stars",
+          to: "shane",
+          date: "12 days ago",
+        },
+      ],
+    },
+  },
+};
+
+export const BuyNow: Story = {
+  args: {
+    type: "buyNow",
+    collectionName: "Shnubbles Breakfast Drop #2",
+    tokenName: "Breakfast Shnubble #127",
+    creatorName: "stars1ducj...vl342f",
+    collectionDesc:
+      "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
+    mintPrice: "300",
+    rarityOrder: 2864,
+    tokensCount: 10000,
+    ownerName: "shane.stars",
+    traits: [
+      {
+        name: "Accessories",
+        value: "Oval Gadget",
+        rarityPercent: 19.8,
+      },
+      {
+        name: "Head",
+        value: "Snowman Hat",
+        rarityPercent: 16.71,
+      },
+      {
+        name: "Eyes",
+        value: "Teal Predator",
+        rarityPercent: 10.05,
+      },
+      {
+        name: "Mouth",
+        value: "Bashed",
+        rarityPercent: 9.69,
+      },
+      {
+        name: "Background",
+        value: "Navy Blue",
+        rarityPercent: 10.44,
+      },
+      {
+        name: "Skin",
+        value: "Navy Blue",
+        rarityPercent: 10.44,
+      },
+      {
+        name: "Costumes",
+        value: "Vshok",
+        rarityPercent: 6.45,
+      },
+    ],
+  },
+};

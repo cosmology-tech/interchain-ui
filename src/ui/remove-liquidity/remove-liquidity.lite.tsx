@@ -2,6 +2,7 @@ import { For, useStore } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
+import Box from "../box";
 import ProgressBar from "../progress-bar";
 
 import * as styles from "./remove-liquidity.css";
@@ -16,7 +17,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
   });
 
   return (
-    <Stack direction="vertical">
+    <Box>
       <Stack direction="vertical">
         <Text size="xl" weight="semibold">
           Remove liquidity
@@ -113,9 +114,13 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
           )}
         </For>
       </Stack>
-      <Button size="lg" intent="tertiary" attributes={{ marginTop: "18" }}>
+      <Button
+        size="lg"
+        intent="tertiary"
+        attributes={{ marginTop: "18", width: "full" }}
+      >
         Remove Liquidity
       </Button>
-    </Stack>
+    </Box>
   );
 }
