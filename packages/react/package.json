@@ -22,22 +22,9 @@
     "./styles": "./dist/interchain-ui-kit-react.cjs.css",
     "./package.json": "./package.json"
   },
-  "targets": {
-    "main": {
-      "includeNodeModules": [
-        "@formkit/auto-animate"
-      ]
-    },
-    "module": {
-      "includeNodeModules": [
-        "@formkit/auto-animate"
-      ]
-    }
-  },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
     "@fastify/deepmerge": "^1.3.0",
-    "@formkit/auto-animate": "1.0.0-beta.6",
     "@types/react-transition-group": "4.4.5",
     "@vanilla-extract/css": "^1.12.0",
     "@vanilla-extract/css-utils": "^0.1.3",

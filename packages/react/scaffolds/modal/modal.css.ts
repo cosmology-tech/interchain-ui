@@ -1,4 +1,6 @@
-import { style } from "@vanilla-extract/css";
+import { keyframes, style, createVar } from "@vanilla-extract/css";
+
+const animationBaseStr = `200ms ease-out 0s 1 normal both running`;
 
 export const modalContainer = style({
   position: `fixed`,
@@ -11,7 +13,6 @@ export const modalContainer = style({
   display: `flex`,
   alignItems: `center`,
   justifyContent: `center`,
-  transition: `opacity 300ms ease-in-out`,
   selectors: {
     '&[data-modal-open="true"]': {
       opacity: 1,
@@ -24,6 +25,21 @@ export const modalContainer = style({
   },
 });
 
+const animateBg = keyframes({
+  "0%": { opacity: 0 },
+  "100%": { opacity: 1 },
+});
+const animateBgReverse= keyframes({
+  "0%": { opacity: 1 },
+  "100%": { opacity: 0 },
+});
+
+export const activeBg = style({
+  animation: `${animationBaseStr} ${animateBg}`,
+});
+export const reverseBg = style({
+  animation: `${animationBaseStr} ${animateBgReverse}`,
+});
 export const modalBackdrop = style({
   position: `fixed`,
   top: 0,
@@ -34,6 +50,21 @@ export const modalBackdrop = style({
   height: `100%`,
   backgroundColor: `rgba(17, 20, 24, .7)`,
   userSelect: "none",
+});
+
+const scaleContent = keyframes({
+  "0%": { opacity: 0, transform: "scale(0.97)" },
+  "100%": { opacity: 1, transform: "scale(1)" },
+});
+const scaleContentReverse = keyframes({
+  "0%": { opacity: 1, transform: "scale(1)" },
+  "100%": { opacity: 0, transform: "scale(0.97)" },
+});
+export const activeContent = style({
+  animation: `${animationBaseStr} ${scaleContent}`,
+});
+export const reverseContent = style({
+  animation: `${animationBaseStr} ${scaleContentReverse}`,
 });
 
 export const modalContent = style({

@@ -18,6 +18,7 @@ const modalStatusContainerBase = style([
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    boxSizing: "border-box",
   },
   s({
     fontFamily: "body",

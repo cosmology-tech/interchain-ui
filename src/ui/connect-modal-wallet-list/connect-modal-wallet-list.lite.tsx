@@ -124,9 +124,10 @@ export default function ConnectModalWalletList(
                   name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
                   subLogo={wallet.subLogo}
-                  onClick={state.onWalletItemClickAsync(async () =>
-                    props.onWalletItemClick?.(wallet.originalWallet)
-                  )}
+                  onClick={state.onWalletItemClickAsync(async () => {
+                    props.onWalletItemClick?.(wallet.originalWallet);
+                    props?.animateNext?.();
+                  })}
                 />
               )}
             </For>
@@ -142,9 +143,10 @@ export default function ConnectModalWalletList(
                 name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
                 subLogo={wallet.subLogo}
-                onClick={state.onWalletItemClickAsync(async () =>
-                  props.onWalletItemClick?.(wallet.originalWallet)
-                )}
+                onClick={state.onWalletItemClickAsync(async () => {
+                  props.onWalletItemClick?.(wallet.originalWallet);
+                  props?.animateNext?.();
+                })}
               />
             )}
           </For>
