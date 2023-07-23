@@ -12,11 +12,10 @@ export default function NftDetailActivityListItem(
   return (
     <Stack
       className={styles.container}
-      justify="space-between"
-      attributes={{ paddingRight: "15" }}
+      attributes={{ justifyContent: "space-between", paddingRight: "15" }}
     >
       <Box flex={1}>
-        <Stack align="center">
+        <Stack attributes={{ alignItems: "center" }}>
           <Icon name="priceTagLine" size="md" />
           <Text attributes={{ marginLeft: "9", marginRight: "12" }}>
             {props?.event}
@@ -25,7 +24,7 @@ export default function NftDetailActivityListItem(
         </Stack>
       </Box>
       <Box flex={1}>
-        <Stack align="center">
+        <Stack attributes={{ alignItems: "center" }}>
           <Text
             size="xs"
             color="textSecondary"
@@ -39,7 +38,7 @@ export default function NftDetailActivityListItem(
         </Stack>
       </Box>
       <Box flex={1}>
-        <Stack align="center">
+        <Stack attributes={{ alignItems: "center" }}>
           <Text
             size="xs"
             color="textSecondary"

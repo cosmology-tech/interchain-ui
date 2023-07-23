@@ -1,5 +1,4 @@
 import { For, useDefaultProps, Show } from "@builder.io/mitosis";
-import clsx from "clsx";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -13,10 +12,10 @@ export default function AssetList(props: AssetListProps) {
     isOtherChains: false,
   });
   return (
-    <Stack className={styles.assetList} direction="column">
+    <Stack className={styles.assetList} direction="vertical">
       <Stack>
         <Box width="19" />
-        <Stack flex={1} attributes={{ marginBottom: "12" }}>
+        <Stack attributes={{ marginBottom: "12", flex: 1 }}>
           <Text attributes={{ width: "1/4" }} color="textSecondary">
             Asset
           </Text>
@@ -32,7 +31,7 @@ export default function AssetList(props: AssetListProps) {
           </Text>
         </Stack>
       </Stack>
-      <Stack space="10" direction="column">
+      <Stack space="10" direction="vertical">
         <For each={props.list}>
           {(item: AssetListItemProps, index: number) => (
             <Box key={index}>

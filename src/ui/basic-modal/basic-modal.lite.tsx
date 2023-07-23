@@ -6,7 +6,7 @@ import {
   onUpdate,
   useRef,
 } from "@builder.io/mitosis";
-import clsx from 'clsx'
+import clsx from "clsx";
 import autoAnimate from "@formkit/auto-animate";
 import { store } from "../../models/store";
 import Stack from "../stack";
@@ -52,7 +52,10 @@ export default function BasicModal(props: BasicModalProps) {
       onClose={() => props.onClose?.()}
       preventScroll={true}
       header={
-        <Stack justify="space-between" align="center" className={modalHeader}>
+        <Stack
+          className={modalHeader}
+          attributes={{ justifyContent: "space-between", alignItems: "center" }}
+        >
           <Text size="xl" weight="semibold">
             {props?.title}
           </Text>
@@ -62,18 +65,19 @@ export default function BasicModal(props: BasicModalProps) {
             variant="unstyled"
             onClick={(e) => {
               e.stopPropagation();
-              props.onClose?.()
+              props.onClose?.();
             }}
           />
         </Stack>
       }
       className={props.modalContainerClassName}
-      contentClassName={clsx(modalContent[state.theme], props?.modalContentClassName)}
+      contentClassName={clsx(
+        modalContent[state.theme],
+        props?.modalContentClassName
+      )}
       childrenClassName={modalChildren}
     >
-      <div ref={parentRef}>
-        {props.children}
-      </div>
+      <div ref={parentRef}>{props.children}</div>
 
       {/* @ts-expect-error */}
     </ScaffoldModal>

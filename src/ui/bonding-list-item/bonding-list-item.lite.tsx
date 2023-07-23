@@ -6,7 +6,11 @@ import { BondingListItemProps } from "./bonding-list-item.types";
 
 export default function BondingListItem(props: BondingListItemProps) {
   return (
-    <Stack align="center">
+    <Stack
+      attributes={{
+        alignItems: "center",
+      }}
+    >
       <Text
         className={styles.item}
         color="textSecondary"

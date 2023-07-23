@@ -1,15 +1,7 @@
-import {
-  Show,
-  For,
-  useStore,
-  onMount,
-  onUpdate,
-  useDefaultProps,
-  useRef,
-} from "@builder.io/mitosis";
+import { For, useStore, onUpdate } from "@builder.io/mitosis";
 import Stack from "../stack";
-import Text from "../text";
 import Button from "../button";
+import Box from "../box";
 import TokenInput from "../token-input";
 import starIcon from "../../assets/stars.png";
 import StarText from "../star-text";
@@ -42,14 +34,14 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
     });
   }, [props?.floorPrice, props?.highestOffer]);
   return (
-    <Stack direction="column">
+    <Box>
       <TokenInput
         title="Minimum Offer"
         hasProgressBar={false}
         symbol="STARS"
         imgSrc={starIcon}
       />
-      <Stack justify="space-between" attributes={{ my: "10" }}>
+      <Stack attributes={{ my: "10", justifyContent: "space-between" }}>
         <For each={state.starList}>
           {(item) => (
             <StarText key={item.label} label={item.label} value={item.value} />
@@ -57,12 +49,16 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
         </For>
       </Stack>
       <NftFees listFee={0.5} royalities={0.5} fairBurn={0.5} proceeds={-0.5} />
-      <Button intent="tertiary" size="lg" attributes={{ marginBottom: "10" }}>
+      <Button
+        intent="tertiary"
+        size="lg"
+        attributes={{ marginBottom: "10", width: "full" }}
+      >
         List
       </Button>
-      <Button variant="unstyled" size="sm">
+      <Button variant="unstyled" size="sm" attributes={{ width: "full" }}>
         Cancel
       </Button>
-    </Stack>
+    </Box>
   );
 }

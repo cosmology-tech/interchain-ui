@@ -30,19 +30,19 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
   return (
     <Stack
       className={styles.container}
-      align="flex-end"
-      flexWrap="wrap"
       attributes={{
+        alignItems: "flex-end",
+        flexWrap: "wrap",
         marginTop: "16",
         marginBottom: "10",
         borderRadius: "lg",
       }}
     >
-      <Stack className={styles.poolBalanceContainer} direction="column">
+      <Stack className={styles.poolBalanceContainer} direction="vertical">
         <Text color="textSecondary" weight="semibold">
           Your pool balance
         </Text>
-        <Stack align="baseline" attributes={{ my: "2" }}>
+        <Stack attributes={{ my: "2", alignItems: "baseline" }}>
           <Text weight="semibold" attributes={{ marginRight: "1" }}>
             $
           </Text>
@@ -55,7 +55,12 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           Add Liquidity
         </Button>
       </Stack>
-      <Stack direction="column" align="flex-end">
+      <Stack
+        direction="vertical"
+        attributes={{
+          alignItems: "flex-end",
+        }}
+      >
         <Stack>
           <img className={styles.image} src={props.token1.imgSrc} />
           <Text
@@ -87,11 +92,15 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           Remove Liquidity
         </Button>
       </Stack>
-      <Stack direction="column" className={styles.tokenContainer}>
+      <Stack direction="vertical" className={styles.tokenContainer}>
         <Text color="textSecondary" weight="semibold">
           Available LP Tokens
         </Text>
-        <Stack align="baseline">
+        <Stack
+          attributes={{
+            alignItems: "baseline",
+          }}
+        >
           <Text weight="semibold" attributes={{ marginRight: "1" }}>
             $
           </Text>

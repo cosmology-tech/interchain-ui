@@ -8,10 +8,13 @@ export default function NftTraitListItem(props: NftTraitListItemProps) {
   return (
     <Stack
       className={styles.nftTraitListItem}
-      justify="space-between"
-      align="center"
+      attributes={{
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingBottom: "8"
+      }}
     >
-      <Stack direction="column">
+      <Stack direction="vertical">
         <Text color="textSecondary" size="xs">
           {props?.name}
         </Text>

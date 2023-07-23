@@ -80,11 +80,6 @@ export const imgBox = style([
   },
 ]);
 
-export const img = sprinkles({
-  width: "14",
-  height: "14",
-});
-
 export const token = style([
   sprinkles({
     width: "full",

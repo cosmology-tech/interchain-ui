@@ -50,14 +50,20 @@ export default function TokenInput(props: TokenInputProps) {
   }, [props.progress]);
 
   return (
-    <Stack flexWrap="wrap" align="center">
+    <Stack
+      attributes={{
+        flexWrap: "wrap",
+        alignItems: "center",
+      }}
+    >
       <Stack
         className={clsx({ [styles.disabled]: state.disabled })}
+        space="0"
         attributes={{
           width: "full",
-          marginBottom: "7",
+          paddingBottom: "7",
+          justifyContent: "flex-end",
         }}
-        justify="flex-end"
       >
         <Show when={!!props.title}>
           <Text
@@ -84,16 +90,28 @@ export default function TokenInput(props: TokenInputProps) {
         </Show>
       </Stack>
       <Show when={props.hasProgressBar}>
-        <Stack align="center" className={styles.progressContainer}>
+        <Stack
+          className={styles.progressContainer}
+          space="0"
+          attributes={{
+            alignItems: "center",
+          }}
+        >
           <CicularProgressBar progress={props.progress} />
-          <Stack className={styles.iconBox} align="center">
+          <Stack
+            className={styles.iconBox}
+            space="0"
+            attributes={{
+              alignItems: "center",
+            }}
+          >
             <Stack
               className={styles.symbolBox}
-              direction="column"
-              justify="center"
+              direction="vertical"
               attributes={{
-                marginLeft: "8",
-                width: "17",
+                justifyContent: "center",
+                width: "20",
+                px: "7",
               }}
             >
               <Text weight="semibold">{props.symbol}</Text>
@@ -112,10 +130,15 @@ export default function TokenInput(props: TokenInputProps) {
           </Stack>
         </Stack>
       </Show>
+
       <Stack
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
+        space="0"
       >
-        <Stack className={styles.imgBox} justify="center" align="center">
+        <Stack
+          className={styles.imgBox}
+          attributes={{ justifyContent: "center", alignItems: "center" }}
+        >
           <Box
             as="img"
             width="14"
@@ -135,7 +158,14 @@ export default function TokenInput(props: TokenInputProps) {
             onChange: (e) => state.handleTokenInput(e),
           }}
         />
-        <Stack className={styles.caulator} justify="flex-end" align="center">
+        <Stack
+          className={styles.caulator}
+          space="0"
+          attributes={{
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
           <Text weight="semibold">{props.symbol} &nbsp;</Text>
           <Text color="textSecondary">≈ ${state.symbolValue}</Text>
         </Stack>

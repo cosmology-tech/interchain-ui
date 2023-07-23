@@ -1,4 +1,4 @@
-import { onMount, Show, useStore, onUpdate } from "@builder.io/mitosis";
+import { onMount, Show, useStore, onUpdate, For } from "@builder.io/mitosis";
 import isNil from "lodash/isNil";
 import cloneDeep from "lodash/cloneDeep";
 import Stack from "../stack";
@@ -56,7 +56,7 @@ export default function NftFees(props: NftFeesProps) {
     state.fees = list;
   }, [props.listFee, props.royalities, props.fairBurn, props.proceeds]);
   return (
-    <Stack direction="column" className={styles.container}>
+    <Box className={styles.container}>
       <Text
         color="textSecondary"
         weight="semibold"
@@ -64,7 +64,7 @@ export default function NftFees(props: NftFeesProps) {
       >
         Fee
       </Text>
-      <Stack align="center" flexWrap="wrap">
+      <Stack space="0" attributes={{ alignItems: "center", flexWrap: "wrap" }}>
         <For each={state.fees}>
           {(item: NftFeeItemProps, index: number) => (
             <Box
@@ -73,10 +73,15 @@ export default function NftFees(props: NftFeesProps) {
               width="1/2"
               paddingRight={index % 2 === 0 ? "4" : "0"}
               paddingLeft={index % 2 === 0 ? "0" : "4"}
-              marginBottom="5"
+              paddingBottom="5"
             >
-              <Stack justify="space-between" align="center">
-                <Stack align="center">
+              <Stack
+                attributes={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Stack space="0" attributes={{ alignItems: "center" }}>
                   <Text
                     color="textSecondary"
                     size="xs"
@@ -101,6 +106,6 @@ export default function NftFees(props: NftFeesProps) {
           )}
         </For>
       </Stack>
-    </Stack>
+    </Box>
   );
 }

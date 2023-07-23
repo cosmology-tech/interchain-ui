@@ -35,10 +35,10 @@ export default function ListForSale(props) {
     ],
   });
   return (
-    <Stack direction="column" className={styles.container}>
+    <Box className={styles.container}>
       <Box>
       <Tabs tabs={state.tabs} />
       </Box>
-    </Stack>
+    </Box>
   );
 }

@@ -11,11 +11,11 @@ export default function NftDetailActivityList(
   props: NftDetailActivityListProps
 ) {
   return (
-    <Stack className={styles.container} direction="column">
+    <Stack className={styles.container} direction="vertical">
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
         Activity
       </Text>
-      <Stack direction="column" space="10">
+      <Stack direction="vertical" space="10">
         <For each={props?.list}>
           {(item: NftDetailActivityListItemProps, index: number) => (
             <NftDetailActivityListItem

@@ -10,11 +10,11 @@ import isNumber from "lodash/isNumber";
 
 export default function NftDetailInfo(props: NftDetailInfoProps) {
   return (
-    <Stack className={styles.nftDetailInfo} direction="column" space="7">
+    <Stack className={styles.nftDetailInfo} direction="vertical" space="7">
       <Text size="xl" weight="semibold">
         Info
       </Text>
-      <Stack justify="space-between">
+      <Stack attributes={{justifyContent: "space-between"}}>
         {/* <For each={["Price", "Last sale", "Owner", "Top offer", "Floor price"]}
       >
         {
@@ -23,13 +23,13 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
           </Stack>
         }
       </For> */}
-        <Stack direction="column">
+        <Stack direction="vertical">
           <Text size="xs" color="textSecondary">
             Price
           </Text>
           <StarText value={props?.price} />
         </Stack>
-        <Stack direction="column">
+        <Stack direction="vertical">
           <Text size="xs" color="textSecondary">
             Last sale
           </Text>
@@ -39,11 +39,11 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
             }`}
           </Text>
         </Stack>
-        <Stack direction="column">
+        <Stack direction="vertical">
           <Text size="xs" color="textSecondary">
             Owner
           </Text>
-          <Stack align="center">
+          <Stack attributes={{alignItems: "center"}}>
             <Text weight="semibold" attributes={{ marginRight: "3" }}>
               {props?.owner}
             </Text>
@@ -55,13 +55,13 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
             />
           </Stack>
         </Stack>
-        <Stack direction="column">
+        <Stack direction="vertical">
           <Text size="xs" color="textSecondary">
             Top offer
           </Text>
           <StarText value={props?.topOffer} />
         </Stack>
-        <Stack direction="column" attributes={{ paddingRight: "12" }}>
+        <Stack direction="vertical" attributes={{ paddingRight: "12" }}>
           <Text size="xs" color="textSecondary">
             Floor price
           </Text>

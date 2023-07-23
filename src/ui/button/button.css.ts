@@ -144,25 +144,35 @@ export const size = {
   }),
 };
 
+export const baseButton = style({
+  fontFamily: themeVars.font.body,
+  fontWeight: themeVars.fontWeight.semibold,
+  cursor: "pointer",
+  appearance: "none",
+  border: "none",
+  position: "relative",
+  userSelect: "none",
+  whiteSpace: "nowrap",
+  verticalAlign: "middle",
+  lineHeight: 1.2,
+  transitionProperty:
+    "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
+  transitionDuration: "200ms",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+export const unstyledButton = style([
+  baseButton,
+  {
+    background: "transparent",
+    color: "inherit",
+  },
+]);
+
 export const variants = recipe({
-  base: style({
-    fontFamily: themeVars.font.body,
-    fontWeight: themeVars.fontWeight.semibold,
-    cursor: "pointer",
-    appearance: "none",
-    border: "none",
-    position: "relative",
-    userSelect: "none",
-    whiteSpace: "nowrap",
-    verticalAlign: "middle",
-    lineHeight: 1.2,
-    transitionProperty:
-      "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
-    transitionDuration: "200ms",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  }),
+  base: baseButton,
   variants: {
     variant,
     intent,

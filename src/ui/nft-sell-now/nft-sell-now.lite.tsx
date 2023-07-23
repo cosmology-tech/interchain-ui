@@ -8,11 +8,11 @@ import { NftSellNowProps } from "./nft-sell-now.types";
 
 export default function NftSellNow(props: NftSellNowProps) {
   return (
-    <Stack direction="column">
+    <Box>
       <Text color="textSecondary" size="lg" weight="semibold">
         Best Offer
       </Text>
-      <Stack align="center" attributes={{ my: "10" }}>
+      <Stack attributes={{ my: "10", alignItems: "center" }}>
         <Text>{`${props.bestOffer} STARS`}</Text>
         <Box
           as="img"
@@ -23,7 +23,7 @@ export default function NftSellNow(props: NftSellNowProps) {
           attributes={{ src: starIcon }}
         ></Box>
       </Stack>
-      <Stack align="center" attributes={{ marginBottom: "14" }}>
+      <Stack attributes={{ marginBottom: "14", alignItems: "center" }}>
         <Text color="textSecondary" size="xs">
           This offer is
         </Text>
@@ -40,12 +40,16 @@ export default function NftSellNow(props: NftSellNowProps) {
         >{`${props?.floorPrice} STARS`}</Text>
       </Stack>
       <NftFees listFee={0.5} royalities={0.5} fairBurn={0.5} />
-      <Button intent="tertiary" size="lg" attributes={{ marginBottom: "10" }}>
+      <Button
+        intent="tertiary"
+        size="lg"
+        attributes={{ marginBottom: "10", width: "full" }}
+      >
         List
       </Button>
-      <Button variant="unstyled" size="sm">
+      <Button variant="unstyled" size="sm" attributes={{ width: "full" }}>
         Cancel
       </Button>
-    </Stack>
+    </Box>
   );
 }

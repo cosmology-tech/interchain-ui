@@ -2,7 +2,7 @@ import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import Button from "../button";
-import * as styles from "./bonding-list-item-sm.css"
+import * as styles from "./bonding-list-item-sm.css";
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
@@ -14,22 +14,28 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
       borderRadius="lg"
       className={styles.container}
     >
-      <Stack justify="space-between">
-        <Stack direction="column">
+      <Stack
+        space="0"
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
+        <Box>
           <Text color="textSecondary" weight="semibold">
             {props.title}
           </Text>
           <Stack
-            align="baseline"
+            space="0"
             attributes={{
-              marginTop: "3",
-              marginBottom: "9",
+              alignItems: "baseline",
+              paddingTop: "3",
+              paddingBottom: "9",
             }}
           >
             <Text
               color="textSecondary"
               weight="semibold"
-              attributes={{ marginRight: "5" }}
+              attributes={{ paddingRight: "5" }}
             >
               APR
             </Text>
@@ -37,7 +43,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               size="4xl"
               color="textSecondary"
               weight="semibold"
-              attributes={{ marginRight: "3" }}
+              attributes={{ paddingRight: "3" }}
             >
               {props.apr}
             </Text>
@@ -48,9 +54,14 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
           <Button size="sm" intent="tertiary" variant="outlined">
             Unbond
           </Button>
-        </Stack>
-        <Stack direction="column">
-          <Stack align="baseline">
+        </Box>
+        <Stack direction="vertical" space="0">
+          <Stack
+            space="0"
+            attributes={{
+              alignItems: "baseline",
+            }}
+          >
             <Text weight="semibold" attributes={{ marginRight: "1" }}>
               $
             </Text>
@@ -59,9 +70,10 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
             </Text>
           </Stack>
           <Stack
+            space="0"
             attributes={{
-              marginTop: "3",
-              marginBottom: "9",
+              paddingTop: "3",
+              paddingBottom: "9",
             }}
           >
             <Text weight="semibold">{props.poolShares}&nbsp;</Text>

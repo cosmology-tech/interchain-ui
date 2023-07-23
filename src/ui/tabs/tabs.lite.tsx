@@ -43,7 +43,7 @@ export default function Tabs(props: TabsProps) {
     state.Panel = panel;
   }, [props?.tabs, state.selected]);
   return (
-    <Stack direction="column">
+    <Box>
       <Box
         className={clsx(styles.tabsHorizontal)}
         as="ul"
@@ -120,6 +120,6 @@ export default function Tabs(props: TabsProps) {
           {state.getPanel()}
         </Box>
       </Box>
-    </Stack>
+    </Box>
   );
 }

@@ -25,7 +25,7 @@ export default function NftProfileCard(props: NftProfileCardProps) {
   });
   return (
     <Box cursor="pointer" attributes={{ onClick: () => state.open() }}>
-      <Stack className={styles.nftProfileCard} direction="column" space="5">
+      <Stack className={styles.nftProfileCard} direction="vertical" space="5">
         <Box width="full">
           <Box
             width="full"

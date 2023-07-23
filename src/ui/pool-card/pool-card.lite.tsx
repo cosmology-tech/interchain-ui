@@ -28,14 +28,18 @@ export default function PoolCard(props: PoolCardProps) {
   });
 
   return (
-    <Stack
-      space="6"
-      className={styles.container}
-      direction="column"
-      justify="center"
-    >
-      <PoolName id={props.id} token1={props.token1} token2={props.token2} />
-      <Stack justify="space-between">
+    <Box className={styles.container}>
+      <Box marginBottom="13">
+        <PoolName id={props.id} token1={props.token1} token2={props.token2} />
+      </Box>
+      <Stack
+        space="0"
+        attributes={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "4",
+        }}
+      >
         <Text color="text">APR</Text>
         <Text
           color="text"
@@ -47,10 +51,17 @@ export default function PoolCard(props: PoolCardProps) {
           {props.apr}%
         </Text>
       </Stack>
-      <Stack justify="space-between">
+      <Stack
+        space="0"
+        attributes={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "4",
+        }}
+      >
         <Text color="textSecondary">Liquidity</Text>
         <Text
-          color="text"
+          color="textSecondary"
           weight="semibold"
           marginLeft="4"
           wordBreak="break-word"
@@ -58,10 +69,14 @@ export default function PoolCard(props: PoolCardProps) {
           ${props.poolLiquidity.toLocaleString()}
         </Text>
       </Stack>
-      <Stack justify="space-between">
+      <Stack
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="textSecondary">7D Fees</Text>
         <Text
-          color="text"
+          color="textSecondary"
           weight="semibold"
           marginLeft="4"
           wordBreak="break-word"
@@ -69,14 +84,32 @@ export default function PoolCard(props: PoolCardProps) {
           ${props.fees.toLocaleString()}
         </Text>
       </Stack>
-      <Box width="full" height="1" className={styles.divider[state.theme]} />
-      <Stack justify="space-between">
+      <Box
+        width="full"
+        height="1"
+        my="6"
+        className={styles.divider[state.theme]}
+      />
+      <Stack
+        space="0"
+        attributes={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "6",
+        }}
+      >
         <Text color="text">Your Liquidity</Text>
         <Text color="text" weight="semibold">
           ${props.yourLiquidity.toLocaleString()}
         </Text>
       </Stack>
-      <Stack justify="space-between">
+      <Stack
+        space="0"
+        attributes={{
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Text color="text">Bonded</Text>
         <Text
           color="text"
@@ -89,6 +122,6 @@ export default function PoolCard(props: PoolCardProps) {
           ${props.bonded.toLocaleString()}
         </Text>
       </Stack>
-    </Stack>
+    </Box>
   );
 }

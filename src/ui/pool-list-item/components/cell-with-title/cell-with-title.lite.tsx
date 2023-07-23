@@ -1,5 +1,6 @@
 import Stack from "../../../stack";
 import Text from "../../../text";
+import Box from "../../../box";
 
 export default function CellWithTitle(props: {
   title: string;
@@ -8,19 +9,27 @@ export default function CellWithTitle(props: {
   children?: any;
 }) {
   return (
-    <Stack className={props.className} direction="column" justify="center">
-      <Text
-        color="textSecondary"
-        className={props.innerClassName}
-        wordBreak="break-word"
+    <Box className={props.className} width="full">
+      <Stack
+        direction="vertical"
+        space="2"
         attributes={{
-          marginRight: "4",
-          marginBottom: "2",
+          justifyContent: "center",
+          width: "full",
         }}
       >
-        {props.title}
-      </Text>
-      {props.children}
-    </Stack>
+        <Text
+          color="textSecondary"
+          className={props.innerClassName}
+          wordBreak="break-word"
+          attributes={{
+            marginRight: "4",
+          }}
+        >
+          {props.title}
+        </Text>
+        {props.children}
+      </Stack>
+    </Box>
   );
 }

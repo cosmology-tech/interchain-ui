@@ -5,6 +5,7 @@ type IconName =
   | "walletFilled"
   | "chevronRight"
   | "closeFilled"
+  | "close"
   | "copy"
   | "checkboxCircle"
   | "chromeBrowser"

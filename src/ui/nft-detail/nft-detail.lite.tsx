@@ -42,7 +42,7 @@ export default function NftDetail(props: NftDetailProps) {
     },
   });
   return (
-    <Stack className={styles.nftDetail} direction="column">
+    <Box className={styles.nftDetail}>
       <Stack space="10">
         <Box flex={1}>
           <Box
@@ -56,7 +56,7 @@ export default function NftDetail(props: NftDetailProps) {
           />
         </Box>
         <Box flex={1}>
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Text
               color="textSecondary"
               weight="semibold"
@@ -71,7 +71,7 @@ export default function NftDetail(props: NftDetailProps) {
             >
               {props?.tokenName}
             </Text>
-            <Stack align="center" attributes={{ marginBottom: "7" }}>
+            <Stack attributes={{ marginBottom: "7", alignItems: "center" }}>
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Created by
               </Text>
@@ -82,8 +82,7 @@ export default function NftDetail(props: NftDetailProps) {
             </Text>
             <StarText label="Minted for" value={props?.mintPrice} />
             <Stack
-              align="center"
-              attributes={{ marginBottom: "12", marginTop: "4" }}
+              attributes={{ alignItems:"center", marginBottom: "12", marginTop: "4" }}
             >
               <Text color="textSecondary" attributes={{ marginRight: "3" }}>
                 Owned by
@@ -151,7 +150,7 @@ export default function NftDetail(props: NftDetailProps) {
           </Stack>
         </Box>
       </Stack>
-      <Stack align="center" attributes={{ marginTop: "6", marginBottom: "5" }}>
+      <Stack  attributes={{ alignItems: "center", marginTop: "6", marginBottom: "5" }}>
         <Text color="textSecondary">Rank</Text>
         <Text weight="semibold" attributes={{ mx: "2" }}>
           {store.getState()?.formatNumber?.({ value: props?.rarityOrder })}
@@ -210,6 +209,6 @@ export default function NftDetail(props: NftDetailProps) {
           tokenName="KUJIRANS #763"
         />
       </BasicModal>
-    </Stack>
+    </Box>
   );
 }

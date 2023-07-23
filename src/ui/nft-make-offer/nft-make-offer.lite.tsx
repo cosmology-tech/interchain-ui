@@ -4,13 +4,13 @@ import Text from "../text";
 import Button from "../button";
 import TokenInput from "../token-input";
 import StarIcon from "../../assets/stars.png";
-import * as styles from './nft-make-offer.css'
+import * as styles from "./nft-make-offer.css";
 import { NftMakeOfferProps } from "./nft-make-offer.types";
 
 export default function NftMakeOffer(props: NftMakeOfferProps) {
   return (
-    <Stack direction="column" className={styles.container}>
-      <Stack align="center">
+    <Box className={styles.container}>
+      <Stack attributes={{ alignItems: "center" }}>
         <Box
           as="img"
           width="13"
@@ -30,12 +30,16 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
           imgSrc={StarIcon}
         />
       </Box>
-      <Button size="lg" intent="tertiary" attributes={{ marginBottom: "9" }}>
+      <Button
+        size="lg"
+        intent="tertiary"
+        attributes={{ marginBottom: "9", width: "full" }}
+      >
         Make Offer
       </Button>
-      <Button variant="unstyled" size="sm">
+      <Button variant="unstyled" size="sm" attributes={{ width: "full" }}>
         Cancel
       </Button>
-    </Stack>
+    </Box>
   );
 }

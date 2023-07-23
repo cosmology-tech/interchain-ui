@@ -110,7 +110,13 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   }, [state.displayBlur, shadowRef]);
 
   return (
-    <Stack direction="column" space="4" align="center">
+    <Stack
+      direction="vertical"
+      space="4"
+      attributes={{
+        alignItems: "center",
+      }}
+    >
       <Text fontWeight="medium" size="md" className={descriptionStyle}>
         {props.description}
       </Text>

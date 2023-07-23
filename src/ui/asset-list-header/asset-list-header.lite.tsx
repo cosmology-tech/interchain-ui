@@ -11,7 +11,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
     isSingle: false,
   });
   return (
-    <Stack className={styles.assetListHeader} direction="column">
+    <Stack className={styles.assetListHeader} direction="vertical">
       <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
         Your assets
       </Text>
@@ -26,13 +26,19 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             {(item, index: number) => (
               <Stack
                 className={styles.card}
-                direction="column"
-                justify="center"
+                direction="vertical"
+                attributes={{
+                  justifyContent: "center",
+                }}
               >
                 <Text color="textSecondary" weight="semibold">
                   {item.text}
                 </Text>
-                <Stack align="baseline">
+                <Stack
+                  attributes={{
+                    alignItems: "baseline",
+                  }}
+                >
                   <Text weight="semibold" attributes={{ marginRight: "1" }}>
                     $
                   </Text>
@@ -44,8 +50,10 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             )}
           </For>
           <Stack
-            direction="column"
-            justify="space-between"
+            direction="vertical"
+            attributes={{
+              justifyContent: "space-between",
+            }}
             className={styles.crossBtn}
           >
             <Show when={props.canWithdraw}>
@@ -68,19 +76,30 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
       <Show when={props.isSingle}>
         <Stack
           className={styles.singleContainer}
-          justify="space-between"
-          align="center"
+          attributes={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          <Stack direction="column">
+          <Stack direction="vertical">
             <Text>Total on Osmosis</Text>
-            <Stack align="baseline">
+            <Stack
+              attributes={{
+                alignItems: "baseline",
+              }}
+            >
               <Text weight="semibold">$</Text>
               <Text size="4xl" weight="semibold">
                 {props.total}
               </Text>
             </Stack>
           </Stack>
-          <Stack space="12" align="center">
+          <Stack
+            space="12"
+            attributes={{
+              alignItems: "center",
+            }}
+          >
             <Show when={props.canWithdraw}>
               <Button
                 intent="tertiary"
