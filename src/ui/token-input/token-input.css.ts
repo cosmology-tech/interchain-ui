@@ -5,14 +5,14 @@ import { breakpoints } from "../../styles/tokens";
 
 export const progressContainer = style([
   sprinkles({
-    marginRight: "10",
+    paddingRight: "10",
   }),
   {
     "@media": {
       [`screen and (max-width: ${breakpoints.tablet}px)`]: {
         width: "100%",
         marginBottom: themeVars.space[7],
-        marginRight: 0,
+        paddingRight: 0,
       },
     },
   },
