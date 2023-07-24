@@ -9,4 +9,5 @@ export interface ConnectModalHeadProps extends BaseComponentProps {
   // zagjs props, will be injected through scaffold modal
   titleProps?: any;
   closeButtonProps?: any;
+  animateBack?: () => void;
 }

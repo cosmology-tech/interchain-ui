@@ -49,7 +49,10 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             size="sm"
             iconSize="xl"
             className={s({ p: "0" })}
-            onClick={(e) => props.onBack?.(e)}
+            onClick={(e) => {
+              props?.animateBack?.()
+              props.onBack?.(e)
+            }}
           />
         </div>
       </Show>
