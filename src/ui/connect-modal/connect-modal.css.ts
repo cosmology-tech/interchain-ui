@@ -14,7 +14,7 @@ const modalContentBase = style([
   style({
     boxShadow: connectModalShadowVar,
     backgroundColor: connectModalBgVar,
-    transition: "height 200ms ease"
+    transition: "height 200ms ease",
   }),
   s({
     display: "flex",
@@ -61,6 +61,15 @@ export const active = style({
 });
 export const activeScaleUp = style({
   animation: `${baseAnimation} ${animateScaleUp}`,
+});
+
+
+export const childrenVisible = style({
+  visibility: "visible",
+});
+
+export const childrenHidden = style({
+  visibility: "hidden",
 });
 
 export const modalChildren = style([

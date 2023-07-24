@@ -17,6 +17,8 @@ import {
   modalChildren,
   activeScaleUp,
   active,
+  childrenVisible,
+  childrenHidden,
 } from "./connect-modal.css";
 
 useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
@@ -24,23 +26,29 @@ useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
 export default function ConnectModal(props: ConnectModalProps) {
   const state = useStore<{
     theme: ThemeVariant;
+    visibile: boolean;
     animateType: string;
     animateBack: () => void;
     animateNext: () => void;
   }>({
     theme: "light",
+    visibile: true,
     animateType: "active",
     animateBack() {
       state.animateType = "";
+      state.visibile = false;
       setTimeout(() => {
         state.animateType = "active";
-      }, 0);
+        state.visibile = true;
+      }, 100);
     },
     animateNext() {
       state.animateType = "";
+      state.visibile = false;
       setTimeout(() => {
         state.animateType = "activeScaleUp";
-      }, 0);
+        state.visibile = true;
+      }, 100);
     },
   });
 
@@ -69,11 +77,11 @@ export default function ConnectModal(props: ConnectModalProps) {
   }, [props.children]);
 
   onUpdate(() => {
-      setTimeout(() => {
-        if (props.isOpen && heightRef) {
+    setTimeout(() => {
+      if (props.isOpen && heightRef) {
         heightRef.style.height = window.getComputedStyle(heightRef)?.height;
       }
-      }, 300);
+    }, 300);
   }, [props.isOpen]);
 
   onUnMount(() => {
@@ -92,12 +100,16 @@ export default function ConnectModal(props: ConnectModalProps) {
       header={props.header}
       className={props.modalContainerClassName}
       contentClassName={modalContent[state.theme]}
-      childrenClassName={clsx(modalChildren, {
-        [active]: state.animateType === "active",
-        [activeScaleUp]: state.animateType === "activeScaleUp",
-      })}
+      childrenClassName={clsx(
+        modalChildren,
+        state.visibile ? childrenVisible : childrenHidden,
+        {
+          [active]: state.animateType === "active",
+          [activeScaleUp]: state.animateType === "activeScaleUp",
+        }
+      )}
     >
-      {props.children}
+        {props.children}
       {/* @ts-expect-error */}
     </ScaffoldModal>
   );
