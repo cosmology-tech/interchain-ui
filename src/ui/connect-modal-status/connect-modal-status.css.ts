@@ -18,8 +18,8 @@ const modalStatusContainerBase = style({
   alignItems: "center",
   width: "100%",
   fontFamily: themeVars.font.body,
-  paddingLeft: themeVars.space[8],
-  paddingRight: themeVars.space[8],
+  paddingLeft: themeVars.space[1],
+  paddingRight: themeVars.space[1],
   paddingTop: themeVars.space[12],
   paddingBottom: 0,
 });
@@ -286,7 +286,7 @@ const descBase = style({
 
 export const desc = styleVariants({
   light: [descBase, style({ color: themeVars.colors.gray600 })],
-  dark: [descBase, style({ color: themeVars.colors.whiteAlpha900 })],
+  dark: [descBase, style({ color: themeVars.colors.whiteAlpha700 })],
 });
 
 export const flexImg = style({

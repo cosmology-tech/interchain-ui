@@ -110,7 +110,7 @@ const logoVariant = {
   list: style({
     width: themeVars.space[12],
     height: themeVars.space[12],
-    marginBottom: themeVars.space[8],
+    marginRight: themeVars.space[8],
   }),
 };
 

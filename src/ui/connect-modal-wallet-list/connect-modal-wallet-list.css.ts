@@ -24,8 +24,8 @@ export const squareWallets = style({
   columnGap: themeVars.space[5],
   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   marginBottom: themeVars.space[5],
-  marginLeft: themeVars.space[1],
-  marginRight: themeVars.space[1],
+  paddingLeft: themeVars.space[1],
+  paddingRight: themeVars.space[1],
 });
 
 export const listWallets = style({
@@ -33,6 +33,6 @@ export const listWallets = style({
   rowGap: themeVars.space[2],
   gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
   paddingBottom: themeVars.space[4],
-  marginLeft: themeVars.space[1],
-  marginRight: themeVars.space[1],
+  paddingLeft: themeVars.space[1],
+  paddingRight: themeVars.space[1],
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import cls from "clsx";
 
 import { create } from "zustand";
@@ -28,12 +28,9 @@ const WithThemeDecorator = (props) => {
     <ThemeProvider>
       <div id="app-root1" className={cls("app", themeClass)}>
         <Box
-          backgroundColor={{
-            light: "white",
-            dark: "gray700",
-          }}
-          px="10"
-          py="10"
+          backgroundColor={theme == "dark" ? "$gray700" : "$white"}
+          px="$10"
+          py="$10"
         >
           {props.children}
         </Box>

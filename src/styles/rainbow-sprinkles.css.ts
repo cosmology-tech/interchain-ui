@@ -75,6 +75,8 @@ const responsiveProperties = defineProperties({
     wordBreak: true,
     fill: true,
     overflow: true,
+    textOverflow: true,
+    textDecoration: true,
   },
   staticProperties: {
     width: allSpace,

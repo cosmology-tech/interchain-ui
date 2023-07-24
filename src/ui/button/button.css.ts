@@ -119,33 +119,27 @@ export const disabled = {
 export const size = {
   xs: style({
     fontSize: themeVars.fontSize.xs,
-    paddingRight: themeVars.space[4],
-    paddingLeft: themeVars.space[4],
     height: themeVars.space[10],
     minWidth: themeVars.space[10],
   }),
   sm: style({
     fontSize: themeVars.fontSize.sm,
-    paddingRight: themeVars.space[6],
-    paddingLeft: themeVars.space[6],
     height: themeVars.space[12],
     minWidth: themeVars.space[12],
   }),
   md: style({
     fontSize: themeVars.fontSize.md,
-    paddingRight: themeVars.space[8],
-    paddingLeft: themeVars.space[8],
     height: themeVars.space[14],
     minWidth: themeVars.space[14],
   }),
   lg: style({
     fontSize: themeVars.fontSize.lg,
-    paddingRight: themeVars.space[10],
-    paddingLeft: themeVars.space[10],
     height: themeVars.space[15],
     minWidth: themeVars.space[15],
   }),
 };
+
+export type Size = keyof typeof size;
 
 export const baseButton = style({
   fontFamily: themeVars.font.body,
@@ -192,6 +186,7 @@ export const variants = recipe({
       style: {
         vars: {
           [buttonBgVar]: "transparent",
+          [buttonTextColorVar]: themeVars.colors.textSecondary,
         },
       },
     },

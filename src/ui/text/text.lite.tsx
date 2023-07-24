@@ -1,24 +1,28 @@
 import { useDefaultProps } from "@builder.io/mitosis";
 import Box from "../box";
-import { variants } from "./text.css";
 import type { TextProps } from "./text.types";
+import { getTextTransformStyles, getVariantStyles } from "./text.helper";
 
 export default function Text(props: TextProps) {
   useDefaultProps({
-    size: "sm",
-    color: "text",
+    size: "$sm",
+    color: "$text",
+    variant: "body",
     wordBreak: "break-word",
+    ellipsis: false,
+    underline: false,
   });
 
   return (
     <Box
       {...props.attributes}
       as={props.as}
-      className={`${variants({
-        variant: props.variant,
-        ellipsis: props.ellipsis ? true : undefined,
-        underline: props.underline ? true : undefined,
-      })} ${props.className}`}
+      {...getVariantStyles(props.variant ?? "body")}
+      {...getTextTransformStyles({
+        ellipsis: props.ellipsis,
+        underline: props.underline,
+      })}
+      className={props.className}
       color={props.color}
       fontSize={props.fontSize}
       fontWeight={props.fontWeight}

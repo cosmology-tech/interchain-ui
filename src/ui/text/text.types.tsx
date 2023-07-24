@@ -1,8 +1,8 @@
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BaseComponentProps } from "../../models/components.model";
-import type { Variants } from "./text.css";
+import type { Variant } from "./text.helper";
 
-export interface TextProps extends Variants, BaseComponentProps {
+export interface TextProps extends BaseComponentProps {
   as?:
     | "code"
     | "div"
@@ -24,5 +24,8 @@ export interface TextProps extends Variants, BaseComponentProps {
   textTransform?: Sprinkles["textTransform"];
   whiteSpace?: Sprinkles["whiteSpace"];
   wordBreak?: Sprinkles["wordBreak"];
+  variant?: Variant;
+  ellipsis?: boolean;
+  underline?: boolean;
   attributes?: Sprinkles;
 }

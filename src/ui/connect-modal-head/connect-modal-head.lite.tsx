@@ -46,8 +46,8 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             intent="secondary"
             variant="ghost"
             size="sm"
-            iconSize="xl"
-            attributes={{ p: "$0" }}
+            iconSize="$2xl"
+            attributes={{ px: "$0" }}
             onClick={(e) => {
               props.onBack?.(e);
             }}
@@ -66,9 +66,9 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             intent="secondary"
             variant="ghost"
             size="sm"
-            iconSize="xl"
+            iconSize="$2xl"
             attributes={{
-              p: "$0",
+              px: "$0",
             }}
             domAttributes={props.closeButtonProps}
             onClick={(e) => props.closeButtonProps?.onClick?.(e)}

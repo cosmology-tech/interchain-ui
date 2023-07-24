@@ -44,8 +44,8 @@ export const modalAnimateContainer = style({
 export const modalChildren = style({
   width: "320px",
   boxSizing: "border-box",
-  paddingLeft: themeVars.space[8],
-  paddingRight: themeVars.space[8],
+  paddingLeft: themeVars.space[7],
+  paddingRight: themeVars.space[7],
   paddingTop: themeVars.space[3],
   paddingBottom: themeVars.space[10],
 });
