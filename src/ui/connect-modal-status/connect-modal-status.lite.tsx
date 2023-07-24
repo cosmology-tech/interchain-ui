@@ -73,16 +73,18 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <p className={disconnectedDesc[state.theme]}>Wallet is disconnected</p>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onConnect?.()}
-            attributes={{
-              width: "$full",
-              marginBottom: "$3",
-            }}
-          >
-            Connect wallet
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onConnect?.()}
+              attributes={{
+                width: "$full",
+                marginBottom: "$3",
+              }}
+            >
+              Connect wallet
+            </Button>
+          </Box>
         </div>
 
         <Show when={!!props.bottomLink}>
@@ -252,16 +254,18 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <p className={desc[state.theme]}>{props.contentDesc}</p>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onConnect?.()}
-            attributes={{
-              width: "$full",
-              marginBottom: "$3",
-            }}
-          >
-            Reconnect
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onConnect?.()}
+              attributes={{
+                width: "$full",
+                marginBottom: "$3",
+              }}
+            >
+              Reconnect
+            </Button>
+          </Box>
         </div>
       </Show>
 
@@ -288,16 +292,18 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </Box>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onChangeWallet?.()}
-            attributes={{
-              width: "$full",
-              marginBottom: "$3",
-            }}
-          >
-            Change wallet
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onChangeWallet?.()}
+              attributes={{
+                width: "$full",
+                marginBottom: "$3",
+              }}
+            >
+              Change wallet
+            </Button>
+          </Box>
         </div>
       </Show>
     </div>
