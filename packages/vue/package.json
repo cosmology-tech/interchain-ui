@@ -2,7 +2,7 @@
   "name": "@interchain-ui/vue",
   "version": "1.1.7",
   "type": "module",
-  "description": "> TODO: description",
+  "description": "UI building blocks for Interchain builders",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/vue#readme",
   "license": "SEE LICENSE IN LICENSE",

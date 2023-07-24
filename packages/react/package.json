@@ -1,7 +1,7 @@
 {
   "name": "@interchain-ui/react",
   "version": "1.1.11",
-  "description": "> TODO: description",
+  "description": "UI building blocks for Interchain builders",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/react#readme",
   "license": "SEE LICENSE IN LICENSE",
