@@ -9,6 +9,7 @@ import clx from "clsx";
 import Box from "../box";
 import Button from "../button";
 import ClipboardCopyText from "../clipboard-copy-text";
+import InstallButton from "../connect-modal-install-button";
 import {
   statusLogo,
   disconnectedLogoFrame,
@@ -24,6 +25,7 @@ import {
   widthContainer,
   connectedInfo,
   desc,
+  descMaxWidth,
   flexImg,
   bottomLink,
   copyText,
@@ -71,16 +73,18 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <p className={disconnectedDesc[state.theme]}>Wallet is disconnected</p>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onConnect?.()}
-            attributes={{
-              width: "$full",
-              marginBottom: "$3",
-            }}
-          >
-            Connect wallet
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onConnect?.()}
+              attributes={{
+                width: "$full",
+                marginBottom: "$3",
+              }}
+            >
+              Connect wallet
+            </Button>
+          </Box>
         </div>
 
         <Show when={!!props.bottomLink}>
@@ -117,6 +121,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           color="$body"
           fontWeight="$normal"
           textAlign="center"
+          className={descMaxWidth}
         >
           {props.contentDesc}
         </Box>
@@ -173,15 +178,17 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </div>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onDisconnect?.()}
-            attributes={{
-              width: "$full",
-            }}
-          >
-            Disconnect
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onDisconnect?.()}
+              attributes={{
+                width: "$full",
+              }}
+            >
+              Disconnect
+            </Button>
+          </Box>
         </div>
       </Show>
 
@@ -205,25 +212,25 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </p>
 
         <div className={widthContainer}>
-          <Button
-            intent="primary"
-            variant="outlined"
-            onClick={() => props.onInstall?.()}
-            disabled={!!props.disableInstall}
-            attributes={{ width: "$full" }}
-          >
-            <Box
-              as="span"
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
+          <Box pt="$7" px="$6">
+            <InstallButton
+              onClick={() => props.onInstall?.()}
+              disabled={!!props.disableInstall}
+              attributes={{ width: "$full" }}
             >
-              <span>{props.installIcon}</span>
-              <Box as="span" marginLeft="$4">
-                Install {props.wallet.prettyName ?? props.wallet.name}
+              <Box
+                as="span"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <span>{props.installIcon}</span>
+                <Box as="span" marginLeft="$4">
+                  Install {props.wallet.prettyName ?? props.wallet.name}
+                </Box>
               </Box>
-            </Box>
-          </Button>
+            </InstallButton>
+          </Box>
         </div>
       </Show>
 
@@ -245,16 +252,18 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <p className={desc[state.theme]}>{props.contentDesc}</p>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onConnect?.()}
-            attributes={{
-              width: "$full",
-              marginBottom: "$3",
-            }}
-          >
-            Reconnect
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onConnect?.()}
+              attributes={{
+                width: "$full",
+                marginBottom: "$3",
+              }}
+            >
+              Reconnect
+            </Button>
+          </Box>
         </div>
       </Show>
 
@@ -281,16 +290,18 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </Box>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onChangeWallet?.()}
-            attributes={{
-              width: "$full",
-              marginBottom: "$3",
-            }}
-          >
-            Change wallet
-          </Button>
+          <Box pt="$7" px="$6">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onChangeWallet?.()}
+              attributes={{
+                width: "$full",
+                marginBottom: "$3",
+              }}
+            >
+              Change wallet
+            </Button>
+          </Box>
         </div>
       </Show>
     </div>

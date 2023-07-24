@@ -16,10 +16,7 @@ const modalStatusContainerBase = style({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  width: "100%",
   fontFamily: themeVars.font.body,
-  paddingLeft: themeVars.space[1],
-  paddingRight: themeVars.space[1],
   paddingTop: themeVars.space[12],
   paddingBottom: 0,
 });
@@ -277,6 +274,10 @@ export const dangerText = styleVariants({
   ],
 });
 
+export const descMaxWidth = style({
+  maxWidth: "224px",
+});
+
 const descBase = style({
   fontSize: themeVars.fontSize.sm,
   marginBottom: themeVars.space[4],
@@ -285,8 +286,12 @@ const descBase = style({
 });
 
 export const desc = styleVariants({
-  light: [descBase, style({ color: themeVars.colors.gray600 })],
-  dark: [descBase, style({ color: themeVars.colors.whiteAlpha700 })],
+  light: [descBase, descMaxWidth, style({ color: themeVars.colors.gray600 })],
+  dark: [
+    descBase,
+    descMaxWidth,
+    style({ color: themeVars.colors.whiteAlpha700 }),
+  ],
 });
 
 export const flexImg = style({
