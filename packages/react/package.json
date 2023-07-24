@@ -24,11 +24,13 @@
   },
   "targets": {
     "main": {
+      "optimize": true,
       "includeNodeModules": [
         "@formkit/auto-animate"
       ]
     },
     "module": {
+      "optimize": false,
       "includeNodeModules": [
         "@formkit/auto-animate"
       ]
@@ -74,6 +76,7 @@
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build",
+    "build:dev": "NODE_ENV=development parcel build",
     "build:analyze": "parcel build --reporter @parcel/reporter-bundle-analyzer",
     "clean": "rimraf ./dist",
     "check": "tsc --noEmit",

@@ -27,10 +27,8 @@ function getCssImports() {
   const matches = path.match(re);
   if (!matches) return "";
 
-  const platform = matches[0].replace("packages/", "");
-
   return [
-    new RegExp(`require("./interchain-ui-kit-${platform}.cjs.css");`, "g"),
-    new RegExp(`import(\s*)".\/interchain-ui-kit-${platform}.cjs.css";`, "g"),
+    /require\(".\/interchain-ui-kit-(.*).cjs.css"\);/g,
+    /import(\s*)".\/interchain-ui-kit-(.*).cjs.css";/g,
   ];
 }
