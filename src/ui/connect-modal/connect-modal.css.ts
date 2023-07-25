@@ -44,6 +44,7 @@ export const modalContent = styleVariants({
 export const modalChildren = style([
   {
     width: "320px",
+    boxSizing: "border-box"
   },
   s({
     paddingLeft: "8",
