@@ -34,12 +34,12 @@ export default function BondingMore(props: BondingMoreProps) {
     },
   });
   return (
-    <Stack direction="vertical">
-      <Stack direction="vertical">
+    <Box>
+      <Stack direction="vertical" space="0">
         <Text size="xl" weight="semibold">
           Bonding LP Tokens
         </Text>
-        <Stack attributes={{ alignItems: "center" }}>
+        <Stack attributes={{ alignItems: "center", paddingTop: "3" }} space="0">
           <Text color="textSecondary">{props.symbol1}</Text>
           <Text color="textSecondary" attributes={{ p: "2" }}>
             /
@@ -47,7 +47,14 @@ export default function BondingMore(props: BondingMoreProps) {
           <Text color="textSecondary">{props.symbol2}</Text>
         </Stack>
       </Stack>
-      <Stack attributes={{ marginTop: "13", justifyContent: "space-between" }}>
+      <Stack
+        attributes={{
+          paddingTop: "13",
+          paddingBottom: "8",
+          justifyContent: "space-between",
+        }}
+        space="0"
+      >
         <Text color="textSecondary" size="lg" weight="semibold">
           Amount to bound
         </Text>
@@ -62,9 +69,14 @@ export default function BondingMore(props: BondingMoreProps) {
           onChange={(e) => state.handleInputChange(e)}
         />
       </Box>
-      <Button intent="tertiary" size="lg" disabled={state.disabled}>
+      <Button
+        intent="tertiary"
+        size="lg"
+        disabled={state.disabled}
+        attributes={{ width: "full" }}
+      >
         {state.btnText}
       </Button>
-    </Stack>
+    </Box>
   );
 }

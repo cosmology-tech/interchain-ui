@@ -6,7 +6,6 @@ import { breakpoints } from "../../styles/tokens";
 export const container = style([
   {
     minWidth: "400px",
-    marginTop: "27px",
     transition: "ease all .5s",
     flexWrap: "nowrap",
     "@media": {

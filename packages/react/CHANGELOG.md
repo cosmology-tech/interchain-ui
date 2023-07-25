@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.11...@interchain-ui/react@1.2.0) (2023-07-24)
+
+### Features
+
+- Added icon-button component ([73f6da5](https://github.com/cosmology-tech/interchain-ui/commit/73f6da5401ad7c2581733feb60d9486429ba1dbb))
+- Added nft-mint component ([ccf050a](https://github.com/cosmology-tech/interchain-ui/commit/ccf050a50406fe163dcbfb0985ad311fb706f2b4))
+- Added nft-mint component ([a314ee1](https://github.com/cosmology-tech/interchain-ui/commit/a314ee16d548012298a9f77624af7ba12042e1a5))
+- Added props for nft-mint ([3bbdce9](https://github.com/cosmology-tech/interchain-ui/commit/3bbdce9ea3dd22c3bfa151083ab41322c687c028))
+- Added swap-token component ([00ff289](https://github.com/cosmology-tech/interchain-ui/commit/00ff289ba54582a0d4db66939f58bcd101760099))
+- Extracted swap-price component ([9fd1646](https://github.com/cosmology-tech/interchain-ui/commit/9fd1646097a0dbca06cd4b3ff01b6db2d528e089))
+- Extracted transfer-item component ([556b1e0](https://github.com/cosmology-tech/interchain-ui/commit/556b1e022780d1b1b4cf6f1d95eead38499b1c25))
+- nft detail ([#51](https://github.com/cosmology-tech/interchain-ui/issues/51)) ([f6593e7](https://github.com/cosmology-tech/interchain-ui/commit/f6593e79a355135fa12a3d9fd891270b8dfbe1e8))
+- replace auto-animate with css transitions for connect modal ([#60](https://github.com/cosmology-tech/interchain-ui/issues/60)) ([514b5ca](https://github.com/cosmology-tech/interchain-ui/commit/514b5ca401be60433b386781cb25186fccd1c24c))
+- text field ([0ee06db](https://github.com/cosmology-tech/interchain-ui/commit/0ee06dba401858cc7294dcecb74ca1b20b2f558f))
+
 ## [1.1.11](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.10...@interchain-ui/react@1.1.11) (2023-07-13)
 
 **Note:** Version bump only for package @interchain-ui/react

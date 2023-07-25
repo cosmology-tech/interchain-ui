@@ -34,7 +34,7 @@ export default function SwapPrice(props: SwapPriceProps) {
     },
   });
   return (
-    <Stack direction="vertical">
+    <Box>
       <Stack
         className={styles.swapPriceContainer}
         attributes={{
@@ -183,6 +183,6 @@ export default function SwapPrice(props: SwapPriceProps) {
           </Show>
         </Stack>
       </div>
-    </Stack>
+    </Box>
   );
 }

@@ -6,16 +6,23 @@ import * as styles from "./pool-name.css";
 
 export default function PoolName(props: PoolNameProps) {
   return (
-    <Stack className={props.className}>
+    <Stack
+      className={props.className}
+      space="0"
+      attributes={{ alignItems: "center" }}
+    >
       <Box className={styles.imageBox}>
         <img className={styles.image1} src={props.token1.imgSrc} />
         <img className={styles.image2} src={props.token2.imgSrc} />
       </Box>
       {/* <Stack className={styles.contentContainer} align="center"> */}
       <Stack
+        className={styles.nameContainer}
         direction="vertical"
+        space="0"
         attributes={{
           justifyContent: "center",
+          paddingLeft: "8",
         }}
       >
         <Text

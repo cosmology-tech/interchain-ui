@@ -31,16 +31,27 @@ export const denom = sprinkles({
   fontSize: "xs",
 });
 
-export const icon = sprinkles({
-  width: "13",
-  height: "13",
-  borderRadius: "base",
-  backgroundColor: "cardBg",
-  marginLeft: "9",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  cursor: "pointer",
+export const icon = style([
+  sprinkles({
+    width: "13",
+    height: "13",
+    borderRadius: "base",
+    backgroundColor: "cardBg",
+    marginLeft: "9",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    cursor: "pointer",
+  }),
+]);
+
+export const smSpace = style({
+  width: "24px",
+  "@media": {
+    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      width: "0",
+    },
+  },
 });
 
 export const inputBox = style([

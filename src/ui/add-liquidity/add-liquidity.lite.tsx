@@ -2,6 +2,7 @@ import { useStore, onUpdate } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
+import Box from "../box";
 import TokenInput from "../token-input";
 import { AddLiquidityProps } from "./add-liquidity.types";
 
@@ -55,8 +56,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     }
   }, [state.amount1, state.amount2]);
   return (
-    <Stack direction="vertical" space="$10">
-      <Stack direction="vertical">
+    <Box>
+      <Stack direction="vertical" attributes={{ paddingBottom: "10" }}>
         <Text size="xl" weight="semibold">
           Add liquidity
         </Text>
@@ -72,29 +73,37 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           <Text color="textSecondary">{props.token2.symbol}</Text>
         </Stack>
       </Stack>
-      <TokenInput
-        progress={state.progress1}
-        symbol={props.token1.symbol}
-        denom={props.token1.denom}
-        available={props.token1.available}
-        imgSrc={props.token1.imgSrc}
-        amount={Number(state.amount1)}
-        onProgressChange={(v) => state.handleProgress1Change(v)}
-        onAmountChange={(value) => state.handleAmoount1Change(value)}
-      />
-      <TokenInput
-        progress={state.progress2}
-        symbol={props.token2.symbol}
-        denom={props.token2.denom}
-        available={props.token2.available}
-        imgSrc={props.token2.imgSrc}
-        amount={Number(state.amount2)}
-        onProgressChange={(v) => state.handleProgress2Change(v)}
-        onAmountChange={(value) => state.handleAmoount2Change(value)}
-      />
-      <Button disabled={state.disabled} intent="tertiary">
+      <Box paddingBottom="14">
+        <TokenInput
+          progress={state.progress1}
+          symbol={props.token1.symbol}
+          denom={props.token1.denom}
+          available={props.token1.available}
+          imgSrc={props.token1.imgSrc}
+          amount={Number(state.amount1)}
+          onProgressChange={(v) => state.handleProgress1Change(v)}
+          onAmountChange={(value) => state.handleAmoount1Change(value)}
+        />
+      </Box>
+      <Box paddingBottom="14">
+        <TokenInput
+          progress={state.progress2}
+          symbol={props.token2.symbol}
+          denom={props.token2.denom}
+          available={props.token2.available}
+          imgSrc={props.token2.imgSrc}
+          amount={Number(state.amount2)}
+          onProgressChange={(v) => state.handleProgress2Change(v)}
+          onAmountChange={(value) => state.handleAmoount2Change(value)}
+        />
+      </Box>
+      <Button
+        disabled={state.disabled}
+        intent="tertiary"
+        attributes={{ width: "full" }}
+      >
         {state.btnText}
       </Button>
-    </Stack>
+    </Box>
   );
 }

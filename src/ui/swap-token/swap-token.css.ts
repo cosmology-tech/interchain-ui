@@ -29,7 +29,7 @@ const swapIconBase = style([
 ]);
 
 export const swapIcon = styleVariants({
-  ligh: [swapIconBase],
+  light: [swapIconBase],
   dark: [
     swapIconBase,
     style({

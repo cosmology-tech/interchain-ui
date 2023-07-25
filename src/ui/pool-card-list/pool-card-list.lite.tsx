@@ -20,9 +20,10 @@ export default function PoolCardList(props: PoolCardListProps) {
         Highlighted Pools
       </Text>
       <Stack
-        space="10"
+        space="0"
         attributes={{
           flexWrap: "wrap",
+          gap: "10"
         }}
       >
         <For each={props.list}>

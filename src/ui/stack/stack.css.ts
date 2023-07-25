@@ -5,7 +5,6 @@ export const gapVar = createVar();
 
 const stackBaseStyle = style({
   display: "flex",
-  justifyContent: "flex-start",
 });
 
 export const stackCore = styleVariants({
