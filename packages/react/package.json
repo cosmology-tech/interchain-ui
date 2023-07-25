@@ -30,7 +30,7 @@
       ]
     },
     "module": {
-      "optimize": false,
+      "optimize": true,
       "includeNodeModules": [
         "@formkit/auto-animate"
       ]
