@@ -38,9 +38,6 @@ const connectButtonBase = style({
   whiteSpace: "nowrap",
   verticalAlign: "middle",
   lineHeight: 1.2,
-  transitionProperty:
-    "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
-  transitionDuration: "200ms",
   display: "flex",
   selectors: {
     "&:hover": {
