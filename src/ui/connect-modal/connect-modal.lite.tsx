@@ -3,15 +3,17 @@ import {
   onMount,
   onUnMount,
   useMetadata,
-  onUpdate,
   useRef,
 } from "@builder.io/mitosis";
-import autoAnimate from "@formkit/auto-animate";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import AnimateLayout from "../animate-layout";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ConnectModalProps } from "./connect-modal.types";
-import { modalContent, modalChildren } from "./connect-modal.css";
+import {
+  modalContent,
+  modalChildren,
+  modalAnimateContainer,
+} from "./connect-modal.css";
 
 useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
 
@@ -21,7 +23,6 @@ export default function ConnectModal(props: ConnectModalProps) {
   });
 
   let cleanupRef = useRef<() => void>(null);
-  const parentRef = useRef<HTMLDivElement>();
 
   onMount(() => {
     state.theme = store.getState().theme;
@@ -35,12 +36,6 @@ export default function ConnectModal(props: ConnectModalProps) {
     if (typeof cleanupRef === "function") cleanupRef();
   });
 
-  onUpdate(() => {
-    if (parentRef) {
-      autoAnimate(parentRef);
-    }
-  }, [parentRef]);
-
   return (
     // @ts-expect-error
     <ScaffoldModal
@@ -52,9 +47,9 @@ export default function ConnectModal(props: ConnectModalProps) {
       contentClassName={modalContent[state.theme]}
       childrenClassName={modalChildren}
     >
-      <div className={s({ minHeight: "30" })} ref={parentRef}>
+      <AnimateLayout className={modalAnimateContainer}>
         {props.children}
-      </div>
+      </AnimateLayout>
       {/* @ts-expect-error */}
     </ScaffoldModal>
   );

@@ -1,5 +1,6 @@
 {
-  "name": "cosmology-mitosis",
+  "name": "interchain-ui",
+  "description": "UI building blocks for Interchain builders",
   "version": "0.1.0",
   "publishConfig": {
     "access": "restricted"

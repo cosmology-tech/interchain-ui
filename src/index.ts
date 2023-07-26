@@ -78,6 +78,7 @@ export { default as NftMakeOffer } from "./ui/nft-make-offer";
 export { default as FieldLabel } from "./ui/field-label";
 export { default as TextField } from "./ui/text-field";
 export { default as TextFieldAddon } from "./ui/text-field-addon";
+export { default as AnimateLayout } from "./ui/animate-layout";
 // End Components
 
 setPlatform(Platform.Default);
