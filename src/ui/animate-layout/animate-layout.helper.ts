@@ -29,6 +29,11 @@ export function animateLayout(element: HTMLElement) {
           opacity: 1,
         },
         {
+          transform: "scale(0.97)",
+          opacity: 0,
+          offset: 0.5,
+        },
+        {
           transform: "scale(0)",
           opacity: 0,
         },
@@ -60,6 +65,7 @@ export function animateLayout(element: HTMLElement) {
 
       if (heightFrom !== heightTo) {
         start.height = `${heightFrom}px`;
+        mid.height = `${heightTo * 0.85}px`;
         end.height = `${heightTo}px`;
       }
 
