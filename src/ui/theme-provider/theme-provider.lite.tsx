@@ -11,6 +11,7 @@ import { store } from "../../models/store";
 import { ThemeVariant } from "../../models/system.model";
 import { resolveThemeMode } from "../../helpers/style";
 import type { ThemeProviderProps } from "./theme-provider.types";
+import "../../styles/global.css";
 
 export default function ThemeProvider(props: ThemeProviderProps) {
   let cleanupRef = useRef<() => void>(null);

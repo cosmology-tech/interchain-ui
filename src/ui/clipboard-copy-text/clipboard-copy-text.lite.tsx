@@ -77,7 +77,7 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
 
       <Icon
         name={state.idle ? "copy" : "checkboxCircle"}
-        size="md"
+        size="$md"
         className={state.idle ? iconStyle.idle : iconStyle.copied[state.theme]}
       />
     </div>

@@ -3,20 +3,20 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
-import { sprinkles } from "../../styles/sprinkles.css";
 import * as styles from "./asset-list-item.css";
-import { AssetListItemProps } from "./asset-list-item.types";
-import { BoxProps } from "../box/box.types";
+import type { AssetListItemProps } from "./asset-list-item.types";
+import type { BoxProps } from "../box/box.types";
 
 export default function AssetListItem(props: AssetListItemProps) {
   useDefaultProps({
     isOtherChains: false,
     needChainSpace: false,
   });
+
   const state = useStore<{
     size: BoxProps["fontSize"];
   }>({
-    size: "xs",
+    size: "$xs",
   });
 
   onUpdate(() => {
@@ -25,37 +25,34 @@ export default function AssetListItem(props: AssetListItemProps) {
 
   return (
     <Stack
-      className={styles.assetListItem}
       attributes={{
+        minWidth: "720px",
         alignItems: "center",
       }}
     >
-      <Box className={styles.imageContainer}>
+      <Box width="$19">
         <img
           src={props.imgSrc}
           className={props.isOtherChains ? styles.smImg : styles.lgImg}
         />
       </Box>
-      <Stack
-        className={sprinkles({ flex: 1 })}
-        attributes={{ alignItems: "center" }}
-      >
-        <Stack className={styles.fieldContainer} direction="vertical">
+      <Stack attributes={{ alignItems: "center", flex: 1 }}>
+        <Stack direction="vertical" className={styles.fieldContainer}>
           <Text
-            size={state.size}
-            weight="semibold"
-            attributes={{ marginBottom: "2" }}
+            fontSize={state.size}
+            fontWeight="$semibold"
+            attributes={{ marginBottom: "$2" }}
           >
             {props.symbol}
           </Text>
-          <Text size={state.size} color="textSecondary">
+          <Text fontSize={state.size} color="$textSecondary">
             {props.denom}
           </Text>
         </Stack>
         <Show when={props.needChainSpace}>
           <Stack className={styles.fieldContainer}>
             <Show when={props.isOtherChains}>
-              <Text size={state.size} color="textSecondary">
+              <Text fontSize={state.size} color="$textSecondary">
                 {props.chainName}
               </Text>
             </Show>
@@ -63,13 +60,13 @@ export default function AssetListItem(props: AssetListItemProps) {
         </Show>
         <Stack className={styles.fieldContainer} direction="vertical">
           <Text
-            size={state.size}
-            weight="semibold"
-            attributes={{ marginBottom: "2" }}
+            fontSize={state.size}
+            fontWeight="$semibold"
+            attributes={{ marginBottom: "$2" }}
           >
             {props.amount}
           </Text>
-          <Text size={state.size} color="textSecondary">
+          <Text fontSize={state.size} color="$textSecondary">
             ${props.dollarAmount}
           </Text>
         </Stack>
@@ -77,7 +74,7 @@ export default function AssetListItem(props: AssetListItemProps) {
           <Stack className={styles.fieldContainer}></Stack>
         </Show>
         <Stack
-          space="5"
+          space="$5"
           className={styles.fieldContainer}
           attributes={{
             justifyContent: "flex-end",

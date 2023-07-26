@@ -29,42 +29,46 @@ export default function PoolCard(props: PoolCardProps) {
 
   return (
     <Box className={styles.container}>
-      <Box marginBottom="13">
+      <Box marginBottom="$13">
         <PoolName id={props.id} token1={props.token1} token2={props.token2} />
       </Box>
       <Stack
-        space="0"
+        space="$0"
         attributes={{
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "4",
+          marginBottom: "$4",
         }}
       >
-        <Text color="text">APR</Text>
+        <Text color="$text">APR</Text>
         <Text
-          color="text"
-          size="2xl"
-          weight="semibold"
-          marginLeft="4"
+          color="$text"
+          fontSize="$2xl"
+          fontWeight="$semibold"
           wordBreak="break-word"
+          attributes={{
+            marginLeft: "$4",
+          }}
         >
           {props.apr}%
         </Text>
       </Stack>
       <Stack
-        space="0"
+        space="$0"
         attributes={{
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "4",
+          marginBottom: "$4",
         }}
       >
-        <Text color="textSecondary">Liquidity</Text>
+        <Text color="$textSecondary">Liquidity</Text>
         <Text
-          color="textSecondary"
-          weight="semibold"
-          marginLeft="4"
+          color="$textSecondary"
+          fontWeight="$semibold"
           wordBreak="break-word"
+          attributes={{
+            marginLeft: "$4",
+          }}
         >
           ${props.poolLiquidity.toLocaleString()}
         </Text>
@@ -74,49 +78,51 @@ export default function PoolCard(props: PoolCardProps) {
           justifyContent: "space-between",
         }}
       >
-        <Text color="textSecondary">7D Fees</Text>
+        <Text color="$textSecondary">7D Fees</Text>
         <Text
-          color="textSecondary"
-          weight="semibold"
-          marginLeft="4"
+          color="$textSecondary"
+          fontWeight="$semibold"
           wordBreak="break-word"
+          attributes={{
+            marginLeft: "$4",
+          }}
         >
           ${props.fees.toLocaleString()}
         </Text>
       </Stack>
       <Box
-        width="full"
-        height="1"
-        my="6"
+        width="$full"
+        height="$1"
+        my="$6"
         className={styles.divider[state.theme]}
       />
       <Stack
-        space="0"
+        space="$0"
         attributes={{
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "6",
+          marginBottom: "$6",
         }}
       >
-        <Text color="text">Your Liquidity</Text>
-        <Text color="text" weight="semibold">
+        <Text color="$text">Your Liquidity</Text>
+        <Text color="$text" fontWeight="$semibold">
           ${props.yourLiquidity.toLocaleString()}
         </Text>
       </Stack>
       <Stack
-        space="0"
+        space="$0"
         attributes={{
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Text color="text">Bonded</Text>
+        <Text color="$text">Bonded</Text>
         <Text
-          color="text"
-          weight="semibold"
+          color="$text"
+          fontWeight="$semibold"
           wordBreak="break-word"
           attributes={{
-            marginLeft: "4",
+            marginLeft: "$4",
           }}
         >
           ${props.bonded.toLocaleString()}

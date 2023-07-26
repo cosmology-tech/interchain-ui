@@ -5,7 +5,6 @@ import Button from "../button";
 import Icon from "../icon";
 import TransferItem from "../transfer-item";
 import * as styles from "./overview-transfer.css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { store } from "../../models/store";
 import type { OverviewTransferProps } from "./overview-transfer.types";
 import type { ThemeVariant } from "../../models/system.model";
@@ -31,7 +30,11 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
 
   return (
     <Stack className={styles.overviewTransfer} direction="vertical">
-      <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
+      <Text
+        fontSize="$xl"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$10" }}
+      >
         {props.type}
       </Text>
       <TransferItem
@@ -43,8 +46,8 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
       />
       <Stack
         attributes={{
-          marginTop: "11",
-          marginBottom: "13",
+          marginTop: "$11",
+          marginBottom: "$13",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -55,9 +58,11 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         />
         <Icon
           name="arrowRightLine"
-          color="textSecondary"
-          size="xl"
-          className={sprinkles({ mx: "9" })}
+          color="$textSecondary"
+          size="$xl"
+          attributes={{
+            mx: "$9",
+          }}
         />
         <img
           className={styles.img}
@@ -72,20 +77,20 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         >
           <Text
             className={styles.btnText[state.theme]}
-            size="lg"
-            weight="semibold"
+            fontSize="$lg"
+            fontWeight="$semibold"
           >
             Transfer
           </Text>
           <Icon
             name="timeLine"
-            size="xs"
-            className={sprinkles({
-              marginLeft: "8",
-              marginRight: "4",
-            })}
+            size="$xs"
+            attributes={{
+              marginLeft: "$8",
+              marginRight: "$4",
+            }}
           />
-          <Text className={styles.btnText[state.theme]} size="xs">
+          <Text className={styles.btnText[state.theme]} fontSize="$xs">
             ≈ 20 seconds
           </Text>
         </Stack>

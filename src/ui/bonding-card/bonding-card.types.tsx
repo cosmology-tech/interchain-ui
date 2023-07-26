@@ -1,4 +1,4 @@
 export interface BondingCardProps {
-  title: string,
-  value: string,
+  title: string;
+  value: string;
 }

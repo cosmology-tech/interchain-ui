@@ -1,5 +1,5 @@
 import type { ClassValue } from "clsx";
-import type { Sprinkles } from "../../styles/sprinkles.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
 export type BoxProps = Sprinkles & {
   as?: any;
@@ -7,6 +7,8 @@ export type BoxProps = Sprinkles & {
   children?: any;
   forwardedRef?: any;
   attributes?: any;
+  style?: any;
+  boxRef?: any;
 };
 
 export const DEFAULT_VALUES = {

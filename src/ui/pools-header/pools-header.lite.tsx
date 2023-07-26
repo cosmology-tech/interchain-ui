@@ -31,9 +31,9 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
       <Text
         className={styles.semocolon}
         as="span"
-        color="textSecondary"
-        weight="semibold"
-        size="4xl"
+        color="$textSecondary"
+        fontWeight="$semibold"
+        fontSize="$4xl"
       >
         :
       </Text>
@@ -43,14 +43,18 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
   return (
     <Box>
       <Text
-        color="text"
-        size="xl"
-        weight="semibold"
-        attributes={{ marginBottom: "10" }}
+        color="$text"
+        fontSize="$xl"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$10" }}
       >
         Liquidity Pools
       </Text>
-      <Stack className={styles.container} space="0" attributes={{ gap: "10" }}>
+      <Stack
+        className={styles.container}
+        space="$0"
+        attributes={{ gap: "$10" }}
+      >
         <Box className={styles.baseBox}>
           <Stack
             attributes={{
@@ -62,33 +66,29 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               className={styles.image}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
             />
-            <Box
-              attributes={{
-                lineHeight: "shorter",
-              }}
-            >
+            <Box lineHeight="$shorter">
               <Text
-                color="textSecondary"
-                weight="semibold"
+                color="$textSecondary"
+                fontWeight="$semibold"
                 className={styles.mb3}
               >
                 OSMO Price
               </Text>
               <Stack
-                space="0"
+                space="$0"
                 attributes={{
                   alignItems: "flex-end",
                 }}
               >
                 <Text
                   className={styles.dollar}
-                  color="text"
-                  weight="semibold"
-                  lineHeight="shorter"
+                  color="$text"
+                  fontWeight="$semibold"
+                  lineHeight="$shorter"
                 >
                   $
                 </Text>
-                <Text color="text" size="4xl" weight="semibold">
+                <Text color="$text" fontSize="$4xl" fontWeight="$semibold">
                   {store.getState()?.formatNumber?.({ value: props.price })}
                 </Text>
               </Stack>
@@ -97,20 +97,20 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
         </Box>
         <Box className={styles.baseBox}>
           <Stack
-            space="0"
+            space="$0"
             direction="vertical"
             attributes={{
               justifyContent: "center",
             }}
           >
             <Text
-              color="textSecondary"
-              weight="semibold"
+              color="$textSecondary"
+              fontWeight="$semibold"
               className={styles.mb3}
             >
               Reward distribution in
             </Text>
-            <Text color="text" weight="semibold" size="4xl">
+            <Text color="$text" fontWeight="$semibold" fontSize="$4xl">
               12 <Semocolon /> 19 <Semocolon /> 48
             </Text>
           </Stack>
@@ -118,35 +118,39 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
         <Box className={styles.rewardBox}>
           <Stack
             direction="vertical"
-            space="0"
+            space="$0"
             attributes={{
               justifyContent: "center",
             }}
           >
             <Text
               className={styles.mb3}
-              color="rewardContent"
-              weight="semibold"
+              color="$rewardContent"
+              fontWeight="$semibold"
             >
               Yesterdays rewards
             </Text>
             <Stack
-              space="0"
+              space="$0"
               attributes={{
                 alignItems: "flex-end",
               }}
             >
-              <Text color="rewardContent" size="4xl" weight="semibold">
+              <Text
+                color="$rewardContent"
+                fontSize="$4xl"
+                fontWeight="$semibold"
+              >
                 {props.rewards}
               </Text>
               <Text
                 className={styles.osom}
-                color="rewardContent"
-                weight="semibold"
+                color="$rewardContent"
+                fontWeight="$semibold"
               >
                 OSMO
               </Text>
-              <Text className={styles.mb3} color="rewardContent">
+              <Text className={styles.mb3} color="$rewardContent">
                 {props.$rewards}
               </Text>
             </Stack>

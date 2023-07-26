@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
+import { themeVars } from "../../styles/themes.css";
 
 export const assetListHeader = style({
   minWidth: "720px",
@@ -12,26 +12,22 @@ export const crossContainer = style([
   },
 ]);
 
-export const card = sprinkles({
-  p: "10",
-  backgroundColor: "cardBg",
-  width: "1/3",
-  borderRadius: "lg",
+export const card = style({
+  padding: themeVars.space[10],
+  backgroundColor: themeVars.colors.cardBg,
+  width: "calc(100% / 3)",
+  borderRadius: themeVars.radii.lg,
 });
 
-export const crossBtn = sprinkles({
-  width: "1/3",
+export const crossBtn = style({
+  width: "calc(100% / 3)",
 });
 
-export const singleContainer = style([
-  sprinkles({
-    width: "full",
-    minHeight: "21",
-    p: "10",
-    backgroundColor: "cardBg",
-    borderRadius: "lg",
-  }),
-  {
-    boxSizing: "border-box",
-  },
-]);
+export const singleContainer = style({
+  boxSizing: "border-box",
+  width: "100%",
+  minHeight: themeVars.space[21],
+  padding: themeVars.space[10],
+  backgroundColor: themeVars.colors.cardBg,
+  borderRadius: themeVars.radii.lg,
+});

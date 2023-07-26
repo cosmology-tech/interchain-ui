@@ -15,7 +15,6 @@ export default function PoolName(props: PoolNameProps) {
         <img className={styles.image1} src={props.token1.imgSrc} />
         <img className={styles.image2} src={props.token2.imgSrc} />
       </Box>
-      {/* <Stack className={styles.contentContainer} align="center"> */}
       <Stack
         className={styles.nameContainer}
         direction="vertical"
@@ -26,15 +25,15 @@ export default function PoolName(props: PoolNameProps) {
         }}
       >
         <Text
-          color="text"
-          weight="semibold"
+          color="$text"
+          fontWeight="$semibold"
           attributes={{
-            marginBottom: "2",
+            marginBottom: "$2",
           }}
         >
           {props.token1.name}/{props.token2.name}
         </Text>
-        <Text color="textSecondary">Pool #{props.id}</Text>
+        <Text color="$textSecondary">Pool #{props.id}</Text>
       </Stack>
     </Stack>
   );

@@ -8,34 +8,34 @@ import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-ite
 
 export default function BondingListSm(props: BondingListSmProps) {
   return (
-    <Box width="full">
-      <Text size="xl" weight="semibold">
+    <Box width="$full">
+      <Text fontSize="$xl" fontWeight="$semibold">
         Bond your liquidity
       </Text>
-      <Text attributes={{ marginTop: "2" }}>
+      <Text attributes={{ marginTop: "$2" }}>
         Bond your tokens to earn additional OSMO rewards to the swap fees.
       </Text>
       <Text
-        color="textSecondary"
-        weight="semibold"
+        color="$textSecondary"
+        fontWeight="$semibold"
         attributes={{
-          marginTop: "10",
+          marginTop: "$10",
         }}
       >
         Unbonded
       </Text>
-      <Text size="4xl" weight="semibold" attributes={{ my: "2" }}>
+      <Text fontSize="$4xl" fontWeight="$semibold" attributes={{ my: "$2" }}>
         {props.unbondedAmt}
       </Text>
       <Stack
         attributes={{
-          marginBottom: "9",
+          marginBottom: "$9",
         }}
       >
-        <Text weight="semibold">{props.unbondedShares}</Text>
+        <Text fontWeight="$semibold">{props.unbondedShares}</Text>
         <Text>&nbsp; pool shares</Text>
       </Stack>
-      <Stack space="10" direction="vertical">
+      <Stack space="$10" direction="vertical">
         <For each={props.list}>
           {(item: BondingListItemSmProps, index: number) => (
             <BondingListItemSm

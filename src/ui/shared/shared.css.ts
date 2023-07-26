@@ -31,3 +31,8 @@ export const bottomShadow = styleVariants({
     bottomShadowBase,
   ],
 });
+
+export const fullWidthHeight = style({
+  width: "100%",
+  height: "100%",
+});

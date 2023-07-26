@@ -54,28 +54,28 @@ export default function TokenInput(props: TokenInputProps) {
     >
       <Stack
         className={clsx({ [styles.disabled]: state.disabled })}
-        space="0"
+        space="$0"
         attributes={{
-          width: "full",
-          paddingBottom: "7",
+          width: "$full",
+          paddingBottom: "$7",
           justifyContent: "flex-end",
         }}
       >
         <Show when={!props.hasProgressBar}>
           <Text
             className={styles.inputTitle}
-            color="textSecondary"
-            weight="semibold"
-            size="lg"
+            color="$textSecondary"
+            fontWeight="$semibold"
+            fontSize="$lg"
           >
             Select amount
           </Text>
         </Show>
-        <Text color="textSecondary">Available&nbsp;</Text>
-        <Text color="textSecondary" weight="semibold">
+        <Text color="$textSecondary">Available&nbsp;</Text>
+        <Text color="$textSecondary" fontWeight="$semibold">
           {props.available}&nbsp;
         </Text>
-        <Text color="textSecondary" weight="semibold">
+        <Text color="$textSecondary" fontWeight="$semibold">
           {props.symbol}
         </Text>
       </Stack>
@@ -100,12 +100,12 @@ export default function TokenInput(props: TokenInputProps) {
               space="0"
               attributes={{
                 justifyContent: "center",
-                width: "20",
-                px: "7",
+                width: "$20",
+                px: "$7",
               }}
             >
-              <Text weight="semibold">{props.symbol}</Text>
-              <Text color="textSecondary" size="xs">
+              <Text fontWeight="$semibold">{props.symbol}</Text>
+              <Text color="$textSecondary" fontSize="$xs">
                 {props.denom}
               </Text>
             </Stack>
@@ -116,10 +116,10 @@ export default function TokenInput(props: TokenInputProps) {
               }}
             >
               <Show when={props.progress === 0}>
-                <Icon name="add" color="text" size="3xl" />
+                <Icon name="add" color="$text" size="$3xl" />
               </Show>
               <Show when={props.progress === 50}>
-                <Icon name="subtract" color="text" size="3xl" />
+                <Icon name="subtract" color="$text" size="$3xl" />
               </Show>
             </Box>
             <Box className={styles.smSpace} />
@@ -129,11 +129,11 @@ export default function TokenInput(props: TokenInputProps) {
 
       <Stack
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
-        space="0"
+        space="$0"
       >
         <Stack
           className={styles.imgBox}
-          space="0"
+          space="$0"
           attributes={{
             justifyContent: "center",
             alignItems: "center",
@@ -149,14 +149,14 @@ export default function TokenInput(props: TokenInputProps) {
         />
         <Stack
           className={styles.caulator}
-          space="0"
+          space="$0"
           attributes={{
             justifyContent: "flex-end",
             alignItems: "center",
           }}
         >
-          <Text weight="semibold">{props.symbol} &nbsp;</Text>
-          <Text color="textSecondary">≈ ${state.symbolValue}</Text>
+          <Text fontWeight="$semibold">{props.symbol} &nbsp;</Text>
+          <Text color="$textSecondary">≈ ${state.symbolValue}</Text>
         </Stack>
       </Stack>
     </Stack>

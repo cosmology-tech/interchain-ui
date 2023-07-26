@@ -80,7 +80,7 @@ export default function CicularProgressBar(props: CircularProgressBarProps) {
           justifyContent: "center",
         }}
       >
-        <Text size="lg" weight="semibold">
+        <Text fontSize="$lg" fontWeight="$semibold">
           {props.progress}%
         </Text>
       </Stack>

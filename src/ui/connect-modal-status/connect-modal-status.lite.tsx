@@ -6,9 +6,10 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import clx from "clsx";
+import Box from "../box";
 import Button from "../button";
 import ClipboardCopyText from "../clipboard-copy-text";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import InstallButton from "../connect-modal-install-button";
 import {
   statusLogo,
   disconnectedLogoFrame,
@@ -24,6 +25,10 @@ import {
   widthContainer,
   connectedInfo,
   desc,
+  descMaxWidth,
+  flexImg,
+  bottomLink,
+  copyText,
 } from "./connect-modal-status.css";
 import { baseTextStyles } from "../text/text.css";
 import { bottomShadow } from "../shared/shared.css";
@@ -54,23 +59,16 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
     <div className={clx(modalStatusContainer[state.theme], props.className)}>
       {/* Status disconnected */}
       <Show when={props.status === "Disconnected"}>
-        <div
-          className={clx(
-            statusLogo,
-            s({
-              marginBottom: "5",
-            })
-          )}
-        >
+        <Box marginBottom="$5" className={statusLogo}>
           <div className={disconnectedLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
               alt={props.wallet.name}
-              className={s({ width: "full", height: "full" })}
+              className={flexImg}
             />
           </div>
-        </div>
+        </Box>
 
         <p className={disconnectedDesc[state.theme]}>Wallet is disconnected</p>
 
@@ -78,10 +76,10 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onConnect?.()}
-            className={s({
-              width: "full",
-              marginBottom: "3",
-            })}
+            attributes={{
+              width: "$full",
+              marginBottom: "$3",
+            }}
           >
             Connect wallet
           </Button>
@@ -93,11 +91,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               href={props.bottomLink}
               target="_blank"
               rel="noreferrer"
-              className={s({
-                fontSize: "sm",
-                color: "body",
-                fontWeight: "normal",
-              })}
+              className={bottomLink}
             >
               Don't have a wallet?
             </a>
@@ -106,54 +100,40 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       </Show>
       {/* Status connecting */}
       <Show when={props.status === "Connecting"}>
-        <div
-          className={clx(
-            statusLogo,
-            s({
-              marginBottom: "8",
-            })
-          )}
-        >
+        <Box marginBottom="$8" className={statusLogo}>
           <div className={connectingLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
               alt={props.wallet.name}
-              className={s({ width: "full", height: "full" })}
+              className={flexImg}
             />
           </div>
-        </div>
+        </Box>
 
         <p className={connectingHeader[state.theme]}>{props.contentHeader}</p>
 
-        <p
-          className={s({
-            fontSize: "sm",
-            color: "body",
-            fontWeight: "normal",
-            textAlign: "center",
-          })}
+        <Box
+          as="p"
+          fontSize="$sm"
+          color="$body"
+          fontWeight="$normal"
+          textAlign="center"
+          className={descMaxWidth}
         >
           {props.contentDesc}
-        </p>
+        </Box>
       </Show>
 
       {/* Status connected */}
       <Show when={props.status === "Connected"}>
-        <div
-          className={clx(
-            statusLogo,
-            s({
-              marginBottom: "8",
-            })
-          )}
-        >
+        <Box marginBottom="$8" className={statusLogo}>
           <Show when={typeof props.connectedInfo.avatar === "string"}>
             <div className={statusLogoImage}>
               <img
                 src={props.connectedInfo.avatar}
                 alt={props.connectedInfo.name}
-                className={s({ width: "full", height: "full" })}
+                className={flexImg}
               />
             </div>
           </Show>
@@ -168,21 +148,16 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               {props.connectedInfo.avatar}
             </div>
           </Show>
-        </div>
-        <div
-          className={s({
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "5",
-          })}
-        >
-          <img
-            src={props.wallet.logo}
-            alt={props.wallet.name}
-            className={s({
-              width: "8",
-              height: "8",
-            })}
+        </Box>
+        <Box display="flex" alignItems="center" marginBottom="$5">
+          <Box
+            as="img"
+            attributes={{
+              src: props.wallet.logo,
+              alt: props.wallet.name,
+            }}
+            width="$8"
+            height="$8"
           />
 
           <Show when={!!props.connectedInfo?.name}>
@@ -190,50 +165,45 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               {props.connectedInfo.name}
             </p>
           </Show>
+        </Box>
+
+        <div className={widthContainer}>
+          <Box maxWidth="$29" mx="auto">
+            <ClipboardCopyText
+              text={props.connectedInfo.address}
+              truncate="middle"
+              className={copyText}
+            />
+          </Box>
         </div>
 
         <div className={widthContainer}>
-          <ClipboardCopyText
-            text={props.connectedInfo.address}
-            truncate="middle"
-            className={s({
-              marginBottom: "7",
-            })}
-          />
-        </div>
-
-        <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onDisconnect?.()}
-            className={s({
-              width: "full",
-            })}
-          >
-            Disconnect
-          </Button>
+          <Box maxWidth="$29" mx="auto">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onDisconnect?.()}
+              attributes={{
+                width: "$full",
+              }}
+            >
+              Disconnect
+            </Button>
+          </Box>
         </div>
       </Show>
 
       {/* Status notExist */}
       <Show when={props.status === "NotExist"}>
-        <div
-          className={clx(
-            statusLogo,
-            s({
-              marginBottom: "7",
-            })
-          )}
-        >
+        <Box marginBottom="$7" className={statusLogo}>
           <div className={notExistLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
               alt={props.wallet.name}
-              className={s({ width: "full", height: "full" })}
+              className={flexImg}
             />
           </div>
-        </div>
+        </Box>
 
         <p className={dangerText[state.theme]}>{props.contentHeader}</p>
 
@@ -242,52 +212,40 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </p>
 
         <div className={widthContainer}>
-          <Button
-            intent="primary"
-            variant="outlined"
-            onClick={() => props.onInstall?.()}
-            className={s({ width: "full" })}
-            disabled={!!props.disableInstall}
-          >
-            <span
-              className={s({
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              })}
+          <Box mt="$7">
+            <InstallButton
+              onClick={() => props.onInstall?.()}
+              disabled={!!props.disableInstall}
+              attributes={{ width: "$full" }}
             >
-              <span>{props.installIcon}</span>
-              <span
-                className={s({
-                  marginLeft: "4",
-                })}
+              <Box
+                as="span"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
               >
-                Install {props.wallet.prettyName ?? props.wallet.name}
-              </span>
-            </span>
-          </Button>
+                <span>{props.installIcon}</span>
+                <Box as="span" marginLeft="$4">
+                  Install {props.wallet.prettyName ?? props.wallet.name}
+                </Box>
+              </Box>
+            </InstallButton>
+          </Box>
         </div>
       </Show>
 
       {/* Status rejected */}
       <Show when={props.status === "Rejected"}>
-        <div
-          className={clx(
-            statusLogo,
-            s({
-              marginBottom: "7",
-            })
-          )}
-        >
+        <Box marginBottom="$7" className={statusLogo}>
           <div className={notExistLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
               alt={props.wallet.name}
-              className={s({ width: "full", height: "full" })}
+              className={flexImg}
             />
           </div>
-        </div>
+        </Box>
 
         <p className={dangerText[state.theme]}>{props.contentHeader}</p>
 
@@ -297,10 +255,10 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onConnect?.()}
-            className={s({
-              width: "full",
-              marginBottom: "3",
-            })}
+            attributes={{
+              width: "$full",
+              marginBottom: "$3",
+            }}
           >
             Reconnect
           </Button>
@@ -309,41 +267,34 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
 
       {/* Status error */}
       <Show when={props.status === "Error"}>
-        <div
-          className={clx(
-            statusLogo,
-            s({
-              marginBottom: "7",
-            })
-          )}
-        >
+        <Box marginBottom="$7" className={statusLogo}>
           <div className={notExistLogoFrame[state.theme]} />
           <div className={statusLogoImage}>
             <img
               src={props.wallet.logo}
               alt={props.wallet.name}
-              className={s({ width: "full", height: "full" })}
+              className={flexImg}
             />
           </div>
-        </div>
+        </Box>
 
         <p className={dangerText[state.theme]}>{props.contentHeader}</p>
 
-        <div className={s({ position: "relative" })}>
+        <Box position="relative">
           <div className={errorDescription}>
             <p className={desc[state.theme]}>{props.contentDesc}</p>
           </div>
           <div className={bottomShadow[state.theme]} />
-        </div>
+        </Box>
 
         <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
             onClick={() => props.onChangeWallet?.()}
-            className={s({
-              width: "full",
-              marginBottom: "3",
-            })}
+            attributes={{
+              width: "$full",
+              marginBottom: "$3",
+            }}
           >
             Change wallet
           </Button>

@@ -1,4 +1,5 @@
 import {
+  useDefaultProps,
   onMount,
   onUnMount,
   Show,
@@ -11,12 +12,16 @@ import { variants } from "./button.css";
 import Icon from "../icon";
 import Box from "../box";
 import { store } from "../../models/store";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import { getPaddings } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
 
 export default function Button(props: ButtonProps) {
+  useDefaultProps({
+    size: "md",
+  });
+
   const state = useStore<ButtonState>({
     loaded: false,
     theme: "light",
@@ -41,13 +46,8 @@ export default function Button(props: ButtonProps) {
     <Show when={state.loaded}>
       <Box
         as="button"
+        {...getPaddings(props.size)}
         {...props.attributes}
-        attributes={{
-          onClick: (event) => props.onClick?.(event),
-          onMouseEnter: (event) => props.onHoverStart?.(event),
-          onMouseLeave: (event) => props.onHoverEnd?.(event),
-          disabled: props.disabled,
-        }}
         className={clx(
           variants({
             variant: props.variant,
@@ -57,14 +57,21 @@ export default function Button(props: ButtonProps) {
           }),
           props.className
         )}
+        attributes={{
+          onClick: (event) => props.onClick?.(event),
+          onMouseEnter: (event) => props.onHoverStart?.(event),
+          onMouseLeave: (event) => props.onHoverEnd?.(event),
+          disabled: props.disabled,
+          ...props.domAttributes,
+        }}
       >
         <Show when={!!props.leftIcon}>
           <Icon
             name={props.leftIcon}
             size={props.iconSize}
-            className={s({
-              marginRight: !props.children ? "0" : "2",
-            })}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
           />
         </Show>
 
@@ -74,9 +81,9 @@ export default function Button(props: ButtonProps) {
           <Icon
             name={props.rightIcon}
             size={props.iconSize}
-            className={s({
-              marginLeft: !props.children ? "0" : "2",
-            })}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
           />
         </Show>
       </Box>

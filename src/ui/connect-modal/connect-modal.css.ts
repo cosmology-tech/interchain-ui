@@ -1,22 +1,17 @@
 import { style, createVar, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const connectModalShadowVar = createVar();
 export const connectModalBgVar = createVar();
 
-const modalContentBase = style([
-  style({
-    boxShadow: connectModalShadowVar,
-    backgroundColor: connectModalBgVar,
-  }),
-  s({
-    display: "flex",
-    flexDirection: "column",
-    height: "auto",
-    borderRadius: "xl",
-  }),
-]);
+const modalContentBase = style({
+  boxShadow: connectModalShadowVar,
+  backgroundColor: connectModalBgVar,
+  display: "flex",
+  height: "auto",
+  flexDirection: "column",
+  borderRadius: themeVars.radii.xl,
+});
 
 export const modalContent = styleVariants({
   light: [
@@ -41,19 +36,15 @@ export const modalContent = styleVariants({
   ],
 });
 
-export const modalChildren = style([
-  {
-    width: "320px",
-    boxSizing: "border-box",
-  },
-  s({
-    paddingLeft: "8",
-    paddingRight: "8",
-    paddingTop: "3",
-    paddingBottom: "10",
-  }),
-]);
-
 export const modalAnimateContainer = style({
   minHeight: themeVars.space[30],
+});
+
+export const modalChildren = style({
+  width: "320px",
+  boxSizing: "border-box",
+  paddingLeft: themeVars.space[7],
+  paddingRight: themeVars.space[7],
+  paddingTop: themeVars.space[3],
+  paddingBottom: themeVars.space[10],
 });

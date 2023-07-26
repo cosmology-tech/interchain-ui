@@ -8,7 +8,6 @@ import {
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import Button from "../button";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { store } from "../../models/store";
 import * as styles from "./connect-modal-head.css";
 import type { ThemeVariant } from "../../models/system.model";
@@ -47,9 +46,11 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             intent="secondary"
             variant="ghost"
             size="sm"
-            iconSize="xl"
-            className={s({ p: "0" })}
-            onClick={(e) => props.onBack?.(e)}
+            iconSize="$2xl"
+            attributes={{ px: "$0" }}
+            onClick={(e) => {
+              props.onBack?.(e);
+            }}
           />
         </div>
       </Show>
@@ -65,10 +66,12 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             intent="secondary"
             variant="ghost"
             size="sm"
-            iconSize="xl"
-            className={s({ p: "0" })}
+            iconSize="$2xl"
+            attributes={{
+              px: "$0",
+            }}
+            domAttributes={props.closeButtonProps}
             onClick={(e) => props.closeButtonProps?.onClick?.(e)}
-            attributes={props.closeButtonProps}
           />
         </div>
       </Show>

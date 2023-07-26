@@ -33,28 +33,29 @@ export default function SwapPrice(props: SwapPriceProps) {
       }
     },
   });
+
   return (
     <Box>
       <Stack
         className={styles.swapPriceContainer}
         attributes={{
-          py: "9",
+          py: "$9",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Text color="text">Price</Text>
+        <Text color="$text">Price</Text>
         <Stack
           attributes={{
             alignItems: "center",
           }}
         >
-          <Text weight="semibold">
+          <Text fontWeight="$semibold">
             {`1 ${props?.tokenOutSymbol} = ${props?.price?.priceRate} ${props?.tokenOutSymbol}`}
           </Text>
           <Text
-            color="textSecondary"
-            attributes={{ marginLeft: "9", marginRight: "13" }}
+            color="$textSecondary"
+            attributes={{ marginLeft: "$9", marginRight: "$13" }}
           >
             {`~ $${props?.price?.dollarValue}`}
           </Text>
@@ -67,69 +68,69 @@ export default function SwapPrice(props: SwapPriceProps) {
         </Stack>
       </Stack>
       <div ref={priceRef} className={styles.priceContainer}>
-        <Stack direction="vertical" attributes={{ paddingBottom: "14" }}>
+        <Stack direction="vertical" attributes={{ paddingBottom: "$14" }}>
           <Stack
             attributes={{
-              marginBottom: "7",
+              marginBottom: "$7",
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Text color="textSecondary">Price Impact</Text>
-            <Text color="textSecondary" weight="bold">
+            <Text color="$textSecondary">Price Impact</Text>
+            <Text color="$textSecondary" fontWeight="$bold">
               {props.priceImpact}
             </Text>
           </Stack>
           <Stack
             attributes={{
-              marginBottom: "10",
+              marginBottom: "$10",
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Text color="textSecondary">
+            <Text color="$textSecondary">
               Swap Fee ({props?.swapFee?.percentage})
             </Text>
-            <Text color="textSecondary" weight="bold">
+            <Text color="$textSecondary" fontWeight="$bold">
               {`~ ${props?.swapFee?.value}`}
             </Text>
           </Stack>
           <Stack
             attributes={{
-              marginBottom: "7",
+              marginBottom: "$7",
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Text color="textSecondary">Expected Output</Text>
-            <Text color="textSecondary" weight="bold">
+            <Text color="$textSecondary">Expected Output</Text>
+            <Text color="$textSecondary" fontWeight="$bold">
               {`~ ${props?.expectedOutput} ${props?.tokenOutSymbol}`}
             </Text>
           </Stack>
           <Stack
             attributes={{
-              marginBottom: "10",
+              marginBottom: "$10",
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Text color="textSecondary">Minimum received after slippage</Text>
-            <Text color="textSecondary" weight="bold">
+            <Text color="$textSecondary">Minimum received after slippage</Text>
+            <Text color="$textSecondary" fontWeight="$bold">
               {`${props?.minimumReceived} ${props?.tokenOutSymbol}`}
             </Text>
           </Stack>
           <Show when={props?.hasRoute}>
-            <Text color="textSecondary" attributes={{ py: "10" }}>
+            <Text color="$textSecondary" attributes={{ py: "$10" }}>
               Route
             </Text>
             <Stack
               attributes={{
-                height: "12",
+                height: "$12",
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
             >
-              <Box marginRight="6">
+              <Box marginRight="$6">
                 <img
                   alt={props?.routeDetail?.tokenIn?.symbol}
                   className={styles.img}
@@ -143,10 +144,10 @@ export default function SwapPrice(props: SwapPriceProps) {
                 {(item: SwapPriceDetailRoute, index: number) => (
                   <Fragment key={item.poolId}>
                     <Box
-                      width="16"
-                      height="12"
-                      marginLeft="6"
-                      marginRight="5"
+                      width="$16"
+                      height="$12"
+                      marginLeft="$6"
+                      marginRight="$5"
                       position="relative"
                     >
                       <img
@@ -161,9 +162,9 @@ export default function SwapPrice(props: SwapPriceProps) {
                       />
                     </Box>
                     <Text
-                      color="textSecondary"
-                      weight="bold"
-                      attributes={{ marginRight: "5" }}
+                      color="$textSecondary"
+                      fontWeight="$bold"
+                      attributes={{ marginRight: "$5" }}
                     >
                       {item?.swapFee}
                     </Text>
@@ -172,7 +173,7 @@ export default function SwapPrice(props: SwapPriceProps) {
                 )}
               </For>
 
-              <Box marginLeft="6">
+              <Box marginLeft="$6">
                 <img
                   alt={props?.routeDetail?.tokenOut?.symbol}
                   className={styles.img}

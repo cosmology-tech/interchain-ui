@@ -8,7 +8,7 @@ import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.typ
 export default function BondingList(props: BondingListProps) {
   return (
     <Box>
-      <Stack direction="vertical" space="10">
+      <Stack direction="vertical" space="$10">
         <For each={props.list}>
           {(item: BondingListItemProps, index: number) => (
             <BondingListItem

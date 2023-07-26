@@ -13,21 +13,25 @@ export default function BondingListItem(props: BondingListItemProps) {
     >
       <Text
         className={styles.item}
-        color="textSecondary"
-        weight="semibold"
-        size="xs"
+        color="$textSecondary"
+        fontWeight="$semibold"
+        fontSize="$xs"
       >
         {props.title}
       </Text>
-      <Text className={styles.item} color="textSecondary" size="xs">
+
+      <Text className={styles.item} color="$textSecondary" fontSize="$xs">
         {props.apr}
       </Text>
-      <Text className={styles.item} color="textSecondary" size="xs">
+
+      <Text className={styles.item} color="$textSecondary" fontSize="$xs">
         {props.amount}
       </Text>
-      <Text className={styles.item} color="textSecondary" size="xs">
+
+      <Text className={styles.item} color="$textSecondary" fontSize="$xs">
         {props.per}
       </Text>
+
       <Button size="xs" variant="unstyled" onClick={(e) => props.onUnbond(e)}>
         Unbond All
       </Button>

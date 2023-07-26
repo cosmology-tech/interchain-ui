@@ -1,7 +1,8 @@
-import { sprinkles } from "../../styles/sprinkles.css";
+import { style } from "@vanilla-extract/css";
+import { themeVars } from "../../styles/themes.css";
 
-export const img = sprinkles({
-  width: "8",
-  height: "8",
-  borderRadius: "lg",
+export const img = style({
+  width: themeVars.space[8],
+  height: themeVars.space[8],
+  borderRadius: themeVars.radii.lg,
 });

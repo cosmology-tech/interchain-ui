@@ -1,26 +1,16 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
+import { themeVars } from "../../styles/themes.css";
 
-export const assetListItem = style({
-  minWidth: "720px",
+export const lgImg = style({
+  width: themeVars.space[14],
+  height: themeVars.space[14],
 });
 
-export const imageContainer = sprinkles({
-  width: "19",
+export const smImg = style({
+  width: themeVars.space[10],
+  height: themeVars.space[10],
 });
-export const lgImg = style([
-  sprinkles({
-    width: "14",
-    height: "14",
-  }),
-]);
-export const smImg = style([
-  sprinkles({
-    width: "10",
-    height: "10",
-  }),
-]);
 
-export const fieldContainer = sprinkles({
-  width: "1/4",
+export const fieldContainer = style({
+  width: "25%",
 });

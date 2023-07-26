@@ -47,35 +47,35 @@ export default function TransferItem(props: TransferItemProps) {
       direction="vertical"
       className={styles.container}
       attributes={{
-        backgroundColor: "progressBg",
-        borderRadius: "lg",
-        paddingTop: "7",
-        paddingLeft: "9",
-        paddingRight: "5",
-        paddingBottom: "9",
+        backgroundColor: "$progressBg",
+        borderRadius: "$lg",
+        paddingTop: "$7",
+        paddingLeft: "$9",
+        paddingRight: "$5",
+        paddingBottom: "$9",
       }}
     >
       <Stack
         attributes={{
-          marginBottom: "7",
-          minHeight: "10",
+          marginBottom: "$7",
+          minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Text color="textSecondary">{props.title}</Text>
+        <Text color="$textSecondary">{props.title}</Text>
         <Stack
           attributes={{
             alignItems: "center",
           }}
         >
           <Show when={props.hasAvailable}>
-            <Text color="textSecondary" weight="semibold">
+            <Text color="$textSecondary" fontWeight="$semibold">
               Available
             </Text>
             <Text
-              weight="semibold"
-              attributes={{ marginLeft: "4", marginRight: "9" }}
+              fontWeight="$semibold"
+              attributes={{ marginLeft: "$4", marginRight: "$9" }}
             >
               {props.availableAmount}
             </Text>
@@ -84,7 +84,7 @@ export default function TransferItem(props: TransferItemProps) {
             <Button
               className={styles.textBtn[state.theme]}
               size="xs"
-              attributes={{ marginRight: "5" }}
+              attributes={{ marginRight: "$5" }}
             >
               Half
             </Button>
@@ -111,7 +111,7 @@ export default function TransferItem(props: TransferItemProps) {
             <img className={styles.img} src={props.imgSrc} />
             <Stack
               direction="vertical"
-              attributes={{ marginLeft: "9", alignItems: "flex-start" }}
+              attributes={{ marginLeft: "$9", alignItems: "flex-start" }}
             >
               <Stack
                 attributes={{
@@ -119,25 +119,25 @@ export default function TransferItem(props: TransferItemProps) {
                 }}
               >
                 <Text
-                  size="2xl"
-                  weight="semibold"
-                  attributes={{ marginRight: "5" }}
+                  fontSize="$2xl"
+                  fontWeight="$semibold"
+                  attributes={{ marginRight: "$5" }}
                 >
                   {props.symbol}
                 </Text>
-                <Icon name="arrowDownS" color="textSecondary" />
+                <Icon name="arrowDownS" color="$textSecondary" />
               </Stack>
-              <Text color="textSecondary">{props.denom}</Text>
+              <Text color="$textSecondary">{props.denom}</Text>
             </Stack>
           </Button>
         </Stack>
         <Stack direction="vertical">
           <input />
           <Text
-            color="textSecondary"
-            size="xs"
-            align="right"
-            attributes={{ marginTop: "2" }}
+            color="$textSecondary"
+            fontSize="$xs"
+            textAlign="right"
+            attributes={{ marginTop: "$2" }}
           >
             ~ $98.23
           </Text>

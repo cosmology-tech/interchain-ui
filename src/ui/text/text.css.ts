@@ -1,23 +1,23 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import { themeVars } from "../../styles/themes.css";
 
 const variant = {
-  body: s({
-    fontSize: "sm",
-    fontWeight: "normal",
-    lineHeight: "normal",
+  body: style({
+    fontSize: themeVars.fontSize.sm,
+    fontWeight: themeVars.fontWeight.normal,
+    lineHeight: themeVars.lineHeight.normal,
   }),
-  heading: s({
-    fontSize: "md",
-    fontWeight: "semibold",
-    lineHeight: "tall",
+  heading: style({
+    fontSize: themeVars.fontSize.md,
+    fontWeight: themeVars.fontWeight.semibold,
+    lineHeight: themeVars.lineHeight.tall,
   }),
 };
 
-export const baseTextStyles = s({
-  fontFamily: "body",
+export const baseTextStyles = style({
+  fontFamily: themeVars.font.body,
 });
 
 export const textTransformStyle = styleVariants({

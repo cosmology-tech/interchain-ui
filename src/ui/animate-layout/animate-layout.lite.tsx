@@ -22,7 +22,7 @@ export default function AnimateLayout(props: AnimateLayoutProps) {
       ref={parentRef}
       className={props.className}
       style={{
-        "backface-visibility": "hidden",
+        backfaceVisibility: "hidden",
       }}
     >
       {props.children}
