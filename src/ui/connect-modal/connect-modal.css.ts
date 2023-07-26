@@ -1,9 +1,4 @@
-import {
-  style,
-  createVar,
-  styleVariants,
-  keyframes,
-} from "@vanilla-extract/css";
+import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
@@ -14,11 +9,11 @@ const modalContentBase = style([
   style({
     boxShadow: connectModalShadowVar,
     backgroundColor: connectModalBgVar,
-    transition: "height 200ms ease"
   }),
   s({
     display: "flex",
     flexDirection: "column",
+    height: "auto",
     borderRadius: "xl",
   }),
 ]);
@@ -46,27 +41,9 @@ export const modalContent = styleVariants({
   ],
 });
 
-const animateScaleDown = keyframes({
-  "0%": { opacity: 0, transform: "scale(1.1)" },
-  "100%": { opacity: 1, transform: "scale(1)" },
-});
-const animateScaleUp = keyframes({
-  "0%": { opacity: 0, transform: "scale(0.85)" },
-  "100%": { opacity: 1, transform: "scale(1)" },
-});
-
-const baseAnimation = `200ms ease 0s 1 normal both running`;
-export const active = style({
-  animation: `${baseAnimation} ${animateScaleDown}`,
-});
-export const activeScaleUp = style({
-  animation: `${baseAnimation} ${animateScaleUp}`,
-});
-
 export const modalChildren = style([
   {
     width: "320px",
-    boxSizing: "border-box",
   },
   s({
     paddingLeft: "8",

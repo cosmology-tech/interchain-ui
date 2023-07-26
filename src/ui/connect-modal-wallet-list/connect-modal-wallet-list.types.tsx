@@ -17,5 +17,4 @@ export interface ConnectModalWalletListProps extends BaseComponentProps {
   wallets: Wallet[];
   onWalletItemClick?: (wallet: any) => void;
   className?: string;
-  animateNext?: () => void;
 }
