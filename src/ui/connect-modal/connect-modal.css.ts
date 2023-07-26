@@ -7,7 +7,6 @@ export const connectModalBgVar = createVar();
 const modalContentBase = style({
   boxShadow: connectModalShadowVar,
   backgroundColor: connectModalBgVar,
-  transition: "height 200ms ease",
   display: "flex",
   height: "auto",
   flexDirection: "column",
