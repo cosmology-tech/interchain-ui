@@ -54,6 +54,7 @@ export { default as CrossChain } from "./ui/cross-chain";
 export { default as SingleChain } from "./ui/single-chain";
 export { default as OverviewTransfer } from "./ui/overview-transfer";
 export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
+export { default as NftMint } from "./ui/nft-mint";
 export { default as NftProfileCard } from "./ui/nft-profile-card";
 export { default as NftProfileCardList } from "./ui/nft-profile-card-list";
 export { default as NftProfile } from "./ui/nft-profile";
@@ -66,6 +67,7 @@ export { default as NftDetailActivityListItem } from "./ui/nft-detail-activity-l
 export { default as NftDetailActivityList } from "./ui/nft-detail-activity-list";
 export { default as TransferItem } from "./ui/transfer-item";
 export { default as SwapToken } from "./ui/swap-token";
+export { default as SwapPrice } from "./ui/swap-price";
 export { default as FieldLabel } from "./ui/field-label";
 export { default as TextField } from "./ui/text-field";
 export { default as TextFieldAddon } from "./ui/text-field-addon";
