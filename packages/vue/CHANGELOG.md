@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.9](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.1.8...@interchain-ui/vue@1.1.9) (2023-07-26)
+
+### Bug Fixes
+
+- remove sprinkles ([#59](https://github.com/cosmology-tech/interchain-ui/issues/59)) ([c408a2b](https://github.com/cosmology-tech/interchain-ui/commit/c408a2bb16e1b62440e825de938bf526e8397749))
+
 ## [1.1.8](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.1.7...@interchain-ui/vue@1.1.8) (2023-07-24)
 
 **Note:** Version bump only for package @interchain-ui/vue
