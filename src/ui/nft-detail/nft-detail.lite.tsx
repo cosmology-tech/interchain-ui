@@ -51,12 +51,11 @@ export default function NftDetail(props: NftDetailProps) {
             height="auto"
             borderRadius="md"
             attributes={{
-              src: "https://res.cloudinary.com/stargaze/image/upload/w_512/e0445qpobuya6okuk1uw.jpg",
+              src: props.imgSrc,
             }}
           />
         </Box>
         <Box flex={1}>
-          <Stack direction="vertical">
             <Text
               color="textSecondary"
               weight="semibold"
@@ -94,7 +93,7 @@ export default function NftDetail(props: NftDetailProps) {
                 size="lg"
                 intent="tertiary"
                 leftIcon="priceTagLine"
-                attributes={{ marginBottom: "8" }}
+                attributes={{ marginBottom: "8", width: "full"}}
                 onClick={() => state.openListForSale()}
               >
                 List for Sale
@@ -128,6 +127,7 @@ export default function NftDetail(props: NftDetailProps) {
                 size="lg"
                 leftIcon="coinsLine"
                 onClick={() => state.openMakeOffer()}
+                attributes={{width: "full"}}
               >
                 Make Offer
               </Button>
@@ -147,7 +147,6 @@ export default function NftDetail(props: NftDetailProps) {
                 </Button>
               </Stack>
             </Show>
-          </Stack>
         </Box>
       </Stack>
       <Stack  attributes={{ alignItems: "center", marginTop: "6", marginBottom: "5" }}>

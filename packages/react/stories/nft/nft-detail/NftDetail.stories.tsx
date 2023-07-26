@@ -17,8 +17,10 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     type: "listForSale",
+    imgSrc:
+      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
     collectionName: "Shnubbles Breakfast Drop #2",
-    tokenName: "Breakfast Shnubble #127",
+    tokenName: "Bad Kid #9509",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",

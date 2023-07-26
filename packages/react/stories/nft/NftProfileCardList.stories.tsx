@@ -20,43 +20,43 @@ export const Primary: Story = {
     list: [
       {
         imgSrc:
-          "https://res.cloudinary.com/stargaze/image/upload/w_700/ghyneomrx2kjtmgz2mpq.jpg",
-        name: "CAA - COSMOS APES #3590",
+          "https://res.cloudinary.com/stargaze/image/upload/w_700/m4sxagqpu98z76lcggyj.jpg",
+        name: "Bad Kid #9501",
         highestOffer: "450",
         listPrice: "373",
       },
       {
         imgSrc:
-          "https://res.cloudinary.com/stargaze/image/upload/w_512/chtruiywubdbw0w6xsxs.jpg",
-        name: "CAA - COSMOS APES #789",
+          "https://res.cloudinary.com/stargaze/image/upload/w_700/wnfkydgxvp2vf0fqq277.jpg",
+        name: "Bad Kid #9502",
         highestOffer: "450",
         listPrice: "373",
       },
       {
         imgSrc:
-          "https://res.cloudinary.com/stargaze/image/upload/w_512/e0445qpobuya6okuk1uw.jpg",
-        name: "CAA - COSMOS APES #3457",
+          "https://res.cloudinary.com/stargaze/image/upload/w_700/zkmiu7m7jelttu6ewrvu.jpg",
+        name: "Bad Kid #9505",
         highestOffer: "450",
         listPrice: "373",
       },
       {
         imgSrc:
-          "https://res.cloudinary.com/stargaze/image/upload/w_512/ia6pmsymxosxqfxcdiwu.jpg",
-        name: "CAA - COSMOS APES #2257",
+          "https://res.cloudinary.com/stargaze/image/upload/w_700/yisqceq5imrkgrzml02b.jpg",
+        name: "Bad Kid #9506",
         highestOffer: "450",
         listPrice: "373",
       },
       {
         imgSrc:
-          "https://res.cloudinary.com/stargaze/image/upload/w_512/rdrhiqx22lay0gq5rvsq.jpg",
-        name: "CAA - COSMOS APES #145",
+          "https://res.cloudinary.com/stargaze/image/upload/w_700/benc6jvttlv9nbemyxch.jpg",
+          name: "Bad Kid #9508",
         highestOffer: "450",
         listPrice: "373",
       },
       {
         imgSrc:
-          "https://res.cloudinary.com/stargaze/image/upload/w_512/obfshfx0hrqqjc78cdgm.jpg",
-        name: "CAA - COSMOS APES #576",
+          "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
+          name: "Bad Kid #9509",
         highestOffer: "450",
         listPrice: "373",
       },

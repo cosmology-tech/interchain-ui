@@ -24,8 +24,12 @@ export default function NftProfileCard(props: NftProfileCardProps) {
     },
   });
   return (
-    <Box cursor="pointer" attributes={{ onClick: () => state.open() }}>
-      <Stack className={styles.nftProfileCard} direction="vertical" space="5">
+    <Box
+      className={styles.nftProfileCard}
+      cursor="pointer"
+      attributes={{ onClick: () => state.open() }}
+    >
+      <Stack direction="vertical" space="4">
         <Box width="full">
           <Box
             width="full"
@@ -46,9 +50,10 @@ export default function NftProfileCard(props: NftProfileCardProps) {
         modalContentClassName={styles.nftDetailModal}
       >
         <NftDetail
-          type="listForSale"
+          type="makeOffer"
+          imgSrc={props.imgSrc}
           collectionName="Shnubbles Breakfast Drop #2"
-          tokenName="Breakfast Shnubble #127"
+          tokenName={props.name}
           creatorName="stars1ducj...vl342f"
           collectionDesc="The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend."
           mintPrice="300"

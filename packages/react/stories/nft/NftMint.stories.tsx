@@ -25,5 +25,6 @@ export const Primary: Story = {
     available: 2948,
     price: 300,
     limited: 50,
+    imgSrc: "https://res.cloudinary.com/stargaze/image/upload/f_auto,w_700/ighabxq1rjqr5xblblue",
   },
 };

@@ -13,6 +13,7 @@ interface BaseNftDetailProps {
   rarityOrder: number;
   tokensCount: number;
   ownerName: string;
+  imgSrc: string;
 }
 
 export type NftDetailProps = (

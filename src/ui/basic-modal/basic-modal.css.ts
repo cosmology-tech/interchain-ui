@@ -9,8 +9,11 @@ const modalContentBase = style([
   style({
     boxShadow: connectModalShadowVar,
     backgroundColor: connectModalBgVar,
-    maxHeight: "98vh",
-    overflowY: "auto"
+    maxHeight: "100%",
+    overflowY: "auto",
+    '::-webkit-scrollbar': {
+      display: "none"
+    }
   }),
   s({
     display: "flex",

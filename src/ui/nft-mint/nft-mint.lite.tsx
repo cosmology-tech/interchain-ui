@@ -23,7 +23,7 @@ export default function NftMint(props: NftMintProps) {
             height="auto"
             borderRadius="md"
             attributes={{
-              src: "https://ipfs-gw.stargaze-apis.com/ipfs/QmYqY6mW6qCCgdVA1BGRhXuvaSjKwwGdkBLZ8gZeMTn3U9/bipz.gif",
+              src: props.imgSrc,
             }}
           />
         </Box>

@@ -18,8 +18,8 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/w_700/ghyneomrx2kjtmgz2mpq.jpg",
-    name: "CAA - COSMOS APES #3590",
+      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
+      name: "Bad Kid #9509",
     highestOffer: "450",
     listPrice: "373",
   },
