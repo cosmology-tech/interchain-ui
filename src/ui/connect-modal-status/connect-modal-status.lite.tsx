@@ -168,23 +168,27 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </Box>
 
         <div className={widthContainer}>
-          <ClipboardCopyText
-            text={props.connectedInfo.address}
-            truncate="middle"
-            className={copyText}
-          />
+          <Box maxWidth="$29" mx="auto">
+            <ClipboardCopyText
+              text={props.connectedInfo.address}
+              truncate="middle"
+              className={copyText}
+            />
+          </Box>
         </div>
 
         <div className={widthContainer}>
-          <Button
-            leftIcon="walletFilled"
-            onClick={() => props.onDisconnect?.()}
-            attributes={{
-              width: "$full",
-            }}
-          >
-            Disconnect
-          </Button>
+          <Box maxWidth="$29" mx="auto">
+            <Button
+              leftIcon="walletFilled"
+              onClick={() => props.onDisconnect?.()}
+              attributes={{
+                width: "$full",
+              }}
+            >
+              Disconnect
+            </Button>
+          </Box>
         </div>
       </Show>
 

@@ -22,6 +22,10 @@ const qrCodeContainerBase = style({
   justifyContent: "center",
   alignItems: "center",
   marginTop: themeVars.space[2],
+  marginLeft: "auto",
+  marginRight: "auto",
+  maxWidth: "272px",
+  maxHeight: "272px",
 });
 
 export const qrCodeContainer = styleVariants({

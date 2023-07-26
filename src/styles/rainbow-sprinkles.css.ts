@@ -51,6 +51,8 @@ const responsiveProperties = defineProperties({
     height: true,
     minWidth: true,
     minHeight: true,
+    maxWidth: true,
+    maxHeight: true,
     borderRadius: themeVars.radii,
     fontFamily: themeVars.font,
     fontSize: themeVars.fontSize,
@@ -83,6 +85,8 @@ const responsiveProperties = defineProperties({
     height: allSpace,
     minWidth: allSpace,
     minHeight: allSpace,
+    maxWidth: allSpace,
+    maxHeight: allSpace,
   },
   shorthands: {
     p: ["padding"],

@@ -41,7 +41,7 @@ export function animateLayout(element: HTMLElement) {
 
       return new KeyframeEffect(el, keyframes, {
         duration: 150,
-        easing: "ease-out",
+        easing: easing,
       });
     }
 
@@ -65,7 +65,6 @@ export function animateLayout(element: HTMLElement) {
 
       if (heightFrom !== heightTo) {
         start.height = `${heightFrom}px`;
-        mid.height = `${heightTo * 0.85}px`;
         end.height = `${heightTo}px`;
       }
 
@@ -75,7 +74,7 @@ export function animateLayout(element: HTMLElement) {
       end.opacity = 1;
 
       return new KeyframeEffect(el, [start, mid, end], {
-        duration: 250,
+        duration: 350,
         easing: easing,
       });
     }
