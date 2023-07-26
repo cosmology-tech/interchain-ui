@@ -65,6 +65,7 @@ export function animateLayout(element: HTMLElement) {
 
       if (heightFrom !== heightTo) {
         start.height = `${heightFrom}px`;
+        mid.height = `${heightTo * 0.85}px`;
         end.height = `${heightTo}px`;
       }
 
