@@ -8,7 +8,6 @@ const modalHeaderTextBase = s({
   fontWeight: "semibold",
   width: "full",
   height: "full",
-  m: "0"
 });
 
 export const modalHeaderText = styleVariants({
