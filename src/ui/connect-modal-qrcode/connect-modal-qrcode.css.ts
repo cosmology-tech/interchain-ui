@@ -15,7 +15,7 @@ const qrCodeContainerBase = style({
   border: "1px solid",
   borderColor: qrCodeBorderColorVar,
   boxShadow: qrCodeBoxShadowVar,
-  width: "fit-content",
+  width: "100%",
   padding: themeVars.space[9],
   borderRadius: themeVars.radii.lg,
   display: "flex",
