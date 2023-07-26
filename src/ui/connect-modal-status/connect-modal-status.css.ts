@@ -11,7 +11,6 @@ const logoFrameColorConnectingVar = createVar();
 const logoFrameColorNotExistVar = createVar();
 
 const modalStatusContainerBase = style({
-  boxSizing: "border-box",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -295,6 +294,7 @@ export const desc = styleVariants({
 });
 
 export const flexImg = style({
+  maxHeight: "96px",
   width: "100%",
   height: "100%",
 });

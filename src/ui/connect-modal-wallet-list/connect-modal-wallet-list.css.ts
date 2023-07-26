@@ -7,6 +7,7 @@ export const container = style({
 
 export const walletList = style({
   maxHeight: "320px",
+  height: "auto",
   width: "100%",
   overflow: "auto",
   scrollbarWidth: "none",

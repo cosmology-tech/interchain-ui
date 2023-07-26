@@ -73,7 +73,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <p className={disconnectedDesc[state.theme]}>Wallet is disconnected</p>
 
         <div className={widthContainer}>
-          <Box pt="$7" px="$6">
+          <Box mt="$7">
             <Button
               leftIcon="walletFilled"
               onClick={() => props.onConnect?.()}
@@ -178,7 +178,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </div>
 
         <div className={widthContainer}>
-          <Box pt="$7" px="$6">
+          <Box mt="$7">
             <Button
               leftIcon="walletFilled"
               onClick={() => props.onDisconnect?.()}
@@ -212,7 +212,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </p>
 
         <div className={widthContainer}>
-          <Box pt="$7" px="$6">
+          <Box mt="$7">
             <InstallButton
               onClick={() => props.onInstall?.()}
               disabled={!!props.disableInstall}
@@ -252,7 +252,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <p className={desc[state.theme]}>{props.contentDesc}</p>
 
         <div className={widthContainer}>
-          <Box pt="$7" px="$6">
+          <Box mt="$7">
             <Button
               leftIcon="walletFilled"
               onClick={() => props.onConnect?.()}
@@ -290,7 +290,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </Box>
 
         <div className={widthContainer}>
-          <Box pt="$7" px="$6">
+          <Box mt="$7">
             <Button
               leftIcon="walletFilled"
               onClick={() => props.onChangeWallet?.()}
