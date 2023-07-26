@@ -1,4 +1,4 @@
-# Interchain UI Kit
+# Interchain UI
 
 ## 🎨 What is Interchain UI?
 
