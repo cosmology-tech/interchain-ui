@@ -44,6 +44,7 @@ export const modalContent = styleVariants({
 export const modalChildren = style([
   {
     width: "320px",
+    boxSizing: "border-box",
   },
   s({
     paddingLeft: "8",
@@ -52,3 +53,7 @@ export const modalChildren = style([
     paddingBottom: "10",
   }),
 ]);
+
+export const modalAnimateContainer = style({
+  minHeight: themeVars.space[30],
+});
