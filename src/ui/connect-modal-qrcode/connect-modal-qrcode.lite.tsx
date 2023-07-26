@@ -112,7 +112,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   return (
     <Stack
       direction="vertical"
-      space="$4"
+      space="$0"
       attributes={{
         alignItems: "center",
       }}
@@ -122,10 +122,12 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Text>
 
       <Show when={props.status === "Pending"}>
+        <div style={{ height: "8px" }} />
         <QRCodeSkeleton />
       </Show>
 
       <Show when={props.status === "Done"}>
+        <div style={{ height: "8px" }} />
         <div className={qrCodeContainer[state.theme]}>
           <QRCode
             value={props.link}
@@ -139,6 +141,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Show>
 
       <Show when={props.status === "Error" || props.status === "Expired"}>
+        <div style={{ height: "8px" }} />
         <QRCodeError
           onRefresh={() => props.onRefresh?.()}
           qrCodeSize={props.qrCodeSize}
@@ -147,6 +150,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
 
       <Show when={!!props.errorTitle}>
         <Show when={props.status === "Error"}>
+        <div style={{ height: "8px" }} />
           <Text
             as="p"
             fontWeight="$medium"
@@ -161,6 +165,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
         </Show>
 
         <Show when={props.status === "Expired"}>
+          <div style={{ height: "8px" }} />
           <Text
             as="p"
             fontWeight="$medium"
@@ -176,6 +181,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Show>
 
       <Show when={!!props.errorDesc}>
+        <div style={{ height: "8px" }} />
         <div className={qrCodeDesc}>
           <div ref={measureRef} className={qrCodeDescContent}>
             <p>{props.errorDesc}</p>
