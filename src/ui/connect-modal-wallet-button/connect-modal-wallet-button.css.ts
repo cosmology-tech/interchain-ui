@@ -6,6 +6,8 @@ import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export const myButtonVar = createVar();
 
+const transactionProperty = "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform";
+
 const connectButtonShapeVariants = {
   square: style({
     flexDirection: "column",
@@ -41,9 +43,13 @@ const connectButtonBase = style({
   display: "flex",
   selectors: {
     "&:hover": {
+      transitionProperty: transactionProperty,
+      transitionDuration: "200ms",
       boxShadow: "0 0 0 1px #6A66FF",
     },
     "&:focus": {
+      transitionProperty: transactionProperty,
+      transitionDuration: "200ms",
       boxShadow: "0 0 0 1px #6A66FF",
     },
   },
