@@ -18,12 +18,12 @@ const modalStatusContainerBase = style([
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    boxSizing: "border-box",
+    boxSizing: "border-box"
   },
   s({
     fontFamily: "body",
     px: "8",
-    paddingTop: "12",
+    marginTop: "12",
     paddingBottom: "0",
   }),
 ]);

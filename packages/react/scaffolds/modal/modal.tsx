@@ -6,21 +6,18 @@ import React, {
   forwardRef,
   cloneElement,
 } from "react";
-import clsx from "clsx";
 import * as dialog from "@zag-js/dialog";
 import clx from "clsx";
 import { create } from "zustand";
 import { useMachine, normalizeProps, Portal } from "@zag-js/react";
 import { store } from "../../models/store";
-import Box from "../box";
+import FadeIn from "../fade-in";
 import * as styles from "./modal.css";
 
 export interface ModalProps {
   isOpen: boolean;
   onOpen?: () => void;
   onClose?: () => void;
-  animateBack?: () => void;
-  animateNext?: () => void;
   initialFocusRef?: React.MutableRefObject<any>;
   trigger?: React.ReactElement;
   header: React.ReactElement;
@@ -55,23 +52,18 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     className,
     contentClassName,
     childrenClassName,
-    animateBack,
-    animateNext,
   } = props;
   const id = useId();
   const [_internalOpen, _setInternalOpen] = useState(isOpen);
-  const [animateOpen, setAnimateOpen] = useState(isOpen);
 
   useEffect(() => {
     if (props.isOpen) {
       _setInternalOpen(true);
-      setAnimateOpen(true);
     } else {
       // Add an artificial delay for the close animation to show
-        setAnimateOpen(false);
       setTimeout(() => {
         _setInternalOpen(false);
-      }, 200);
+      }, 300);
     }
   }, [props.isOpen]);
 
@@ -98,12 +90,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
   const api = dialog.connect(state, send, normalizeProps);
 
   const onCloseButtonClick = (event: any) => {
-    setAnimateOpen(false);
-    setTimeout(() => {
-      _setInternalOpen(false);
-      api.closeTriggerProps.onClick?.(event);
-      onClose?.();
-    }, 200);
+    _setInternalOpen(false);
+    api.closeTriggerProps.onClick?.(event);
+    onClose?.();
   };
 
   return (
@@ -113,60 +102,41 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
       {api.isOpen && (
         <Portal>
           <div
+            ref={forwardedRef}
             className={clx(themeStore.themeClass, className)}
             style={{
               position: "relative",
               zIndex: 999,
             }}
           >
-            <Box isVisible={api.isOpen}>
-              <div
-                {...api.backdropProps}
-                className={clsx(
-                  styles.modalBackdrop,
-                  animateOpen ? styles.activeBg : styles.reverseBg
-                )}
-              />
+            <FadeIn isVisible={api.isOpen}>
+              <div {...api.backdropProps} className={styles.modalBackdrop} />
               <div {...api.containerProps} className={styles.modalContainer}>
                 <div
-                  ref={forwardedRef}
                   {...api.contentProps}
-                  className={clx(
-                    styles.modalContent,
-                    contentClassName,
-                    animateOpen ? styles.activeContent : styles.reverseContent
-                  )}
+                  className={clx(styles.modalContent, contentClassName)}
                   data-modal-part="content"
                   style={{
                     width: "fit-content",
                     margin: "0 auto",
                   }}
                 >
-                  <div>
-                    {header &&
-                      cloneElement(header, {
-                        titleProps: api.titleProps,
-                        descriptionProps: api.descriptionProps,
-                        closeButtonProps: {
-                          ...api.closeTriggerProps,
-                          onClick: onCloseButtonClick,
-                        },
-                        animateBack,
-                      })}
+                  {header &&
+                    cloneElement(header, {
+                      titleProps: api.titleProps,
+                      descriptionProps: api.descriptionProps,
+                      closeButtonProps: {
+                        ...api.closeTriggerProps,
+                        onClick: onCloseButtonClick,
+                      },
+                    })}
 
-                    <div
-                      className={childrenClassName}
-                      data-modal-part="children"
-                    >
-                      {children &&
-                        cloneElement(children, {
-                          animateNext,
-                        })}
-                    </div>
+                  <div className={childrenClassName} data-modal-part="children">
+                    {children}
                   </div>
                 </div>
               </div>
-            </Box>
+            </FadeIn>
           </div>
         </Portal>
       )}

@@ -3,57 +3,26 @@ import {
   onMount,
   onUnMount,
   useMetadata,
-  onUpdate,
   useRef,
-  Show,
 } from "@builder.io/mitosis";
-import clsx from "clsx";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import AnimateLayout from "../animate-layout";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ConnectModalProps } from "./connect-modal.types";
 import {
   modalContent,
   modalChildren,
-  activeScaleUp,
-  active,
-  childrenVisible,
-  childrenHidden,
+  modalAnimateContainer,
 } from "./connect-modal.css";
 
 useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
 
 export default function ConnectModal(props: ConnectModalProps) {
-  const state = useStore<{
-    theme: ThemeVariant;
-    visibile: boolean;
-    animateType: string;
-    animateBack: () => void;
-    animateNext: () => void;
-  }>({
+  const state = useStore<{ theme: ThemeVariant }>({
     theme: "light",
-    visibile: true,
-    animateType: "active",
-    animateBack() {
-      state.animateType = "";
-      state.visibile = false;
-      setTimeout(() => {
-        state.animateType = "active";
-        state.visibile = true;
-      }, 100);
-    },
-    animateNext() {
-      state.animateType = "";
-      state.visibile = false;
-      setTimeout(() => {
-        state.animateType = "activeScaleUp";
-        state.visibile = true;
-      }, 100);
-    },
   });
 
   let cleanupRef = useRef<() => void>(null);
-  const heightRef = useRef<HTMLDivElement>();
 
   onMount(() => {
     state.theme = store.getState().theme;
@@ -63,27 +32,6 @@ export default function ConnectModal(props: ConnectModalProps) {
     });
   });
 
-  onUpdate(() => {
-    if (!heightRef) return;
-    setTimeout(() => {
-      const height = window.getComputedStyle(heightRef).height;
-      heightRef.style.height = "auto";
-      const targetheight = window.getComputedStyle(heightRef).height;
-      heightRef.style.height = height;
-      setTimeout(() => {
-        heightRef.style.height = targetheight;
-      }, 100);
-    }, 0);
-  }, [props.children]);
-
-  onUpdate(() => {
-    setTimeout(() => {
-      if (props.isOpen && heightRef) {
-        heightRef.style.height = window.getComputedStyle(heightRef)?.height;
-      }
-    }, 300);
-  }, [props.isOpen]);
-
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
@@ -91,25 +39,17 @@ export default function ConnectModal(props: ConnectModalProps) {
   return (
     // @ts-expect-error
     <ScaffoldModal
-      ref={heightRef}
       isOpen={props.isOpen}
       onOpen={() => props.onOpen?.()}
       onClose={() => props.onClose?.()}
-      animateBack={state.animateBack}
-      animateNext={state.animateNext}
       header={props.header}
       className={props.modalContainerClassName}
       contentClassName={modalContent[state.theme]}
-      childrenClassName={clsx(
-        modalChildren,
-        state.visibile ? childrenVisible : childrenHidden,
-        {
-          [active]: state.animateType === "active",
-          [activeScaleUp]: state.animateType === "activeScaleUp",
-        }
-      )}
+      childrenClassName={modalChildren}
     >
+      <AnimateLayout className={modalAnimateContainer}>
         {props.children}
+      </AnimateLayout>
       {/* @ts-expect-error */}
     </ScaffoldModal>
   );
