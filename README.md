@@ -1,5 +1,23 @@
 # Interchain UI
 
+<p align="center" width="100%">
+   <a href="https://www.npmjs.com/package/interchain-ui"><img height="20" src="https://img.shields.io/npm/dt/interchain-ui"></a>
+   <a href="https://www.npmjs.com/package/interchain-ui"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/interchain-ui?filename=packages%2Freact%2Fpackage.json"/></a>
+</p>
+
+## Table of contents
+
+- [Interchain UI 🔭](#interchain-ui)
+  - [Table of contents](#table-of-contents)
+  - [What is Interchain UI?](#🎨-what-is-interchain-ui)
+  - [Usage](#usage)
+    - [React](#react)
+  - [Developing](#developing)
+  - [Overview and Structure](#overview-and-structure)
+  - [Icons](#icons)
+  - [Related](#related)
+  - [Credits](#credits)
+
 ## 🎨 What is Interchain UI?
 
 Interchain UI is a foundation library for UI elements used in [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) and other packages. It provides developers with pre-built components and a foundation for creating user interfaces across different frameworks, such as VueJS, React, Angular, Svelte, SolidJS, and Web Components, enabling developers to customize UI elements and themes. This gives us the ability to code a component once, and it will compile to all framework targets.
@@ -14,13 +32,13 @@ yarn add @interchain-ui/react
 yarn add @interchain-ui/vue
 ```
 
-### Usage with React
+### React
 
 To see how to use with react, see our react documentation
 
 [Using React](./docs/react.md)
 
-## Setup and scripts for development
+## Developing
 
 - `yarn && yarn bootstrap` to bootstrap the repo
 - `yarn dev` to watch the repo for changes and then recompile
@@ -46,13 +64,9 @@ There are some rules of thumbs and some tips for creating Mitosis components:
 - To quickly test to see the compilation result from one Mitosis to any framework source code, please use
 [mitosis sandbox](https://mitosis.builder.io/). It's similar to TS playground but for Mitosis testing purpose.
 
-## Icon
+## Icons
 
 Check ![Icon guide](./docs/icons.md) to know how to add more icons
-
-## Our Website
-
-⚛️ https://cosmoskit.com/
 
 ## Related
 
@@ -67,7 +81,7 @@ Checkout these related projects:
 
 ## Credits
 
-Checkout `mitosis` from BuilderIO to compile lite JSX. 
+Checkout [`mitosis`](https://github.com/BuilderIO/mitosis) from BuilderIO to compile lite JSX. 
 
 🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.tech/validator)
 
