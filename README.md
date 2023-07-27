@@ -7,13 +7,14 @@
 
 ## Table of contents
 
-- [Interchain UI 🔭](#interchain-ui)
+- [Interchain UI](#interchain-ui)
   - [Table of contents](#table-of-contents)
-  - [What is Interchain UI?](#🎨-what-is-interchain-ui)
+  - [🎨 What is Interchain UI?](#-what-is-interchain-ui)
   - [Usage](#usage)
     - [React](#react)
   - [Developing](#developing)
-  - [Overview and Structure](#overview-and-structure)
+  - [Overview and structure](#overview-and-structure)
+  - [Compiler](#compiler)
   - [Icons](#icons)
   - [Related](#related)
   - [Credits](#credits)
@@ -49,20 +50,11 @@ To see how to use with react, see our react documentation
 ## Overview and structure
 
 ![Overview](./docs/overview-ui-kit.png)
-We create components inside a single source of truth folder `<root>/src` with Mitosis lite JSX format, then through our compiler, it's going to compile our components and build it in sub packages' `src` and `dist`.
+We create components inside a single source of truth folder `<root>/src` with Lite JSX format (`.lite.tsx`), then through our compiler, it's going to compile our components and build it in sub packages' `src` and `dist`.
 
-When we publish packages, we are actually publishing the sub packages generated from `<root>/src`, which are `packages/react` and `packages/vue`, not the `<root>/src` itself.
+## Compiler
 
-The compiler is a wrapper over `@builder.io/mitosis` CLI with some extra source code handling logic and some nice CLI add-ons like arguments handling...etc.
-
-There are some rules of thumbs and some tips for creating Mitosis components:
-
-- File names must end with `*.lite.tsx`
-- Style sheets must be in `*.css.ts` files, this is because we use a styling solution called `vanilla-extract` to have a CSS-in-JS API across all frameworks.
-- For a component, you must use default export, not named export. This is a limitation of Mitosis
-- There are more rules and limitations, please read more about Mitosis [here](https://github.com/BuilderIO/mitosis/tree/main/docs)
-- To quickly test to see the compilation result from one Mitosis to any framework source code, please use
-[mitosis sandbox](https://mitosis.builder.io/). It's similar to TS playground but for Mitosis testing purpose.
+To know more about the inner workings of our compiler, check ![Compiler](./docs/compiler.md) to explore.
 
 ## Icons
 
