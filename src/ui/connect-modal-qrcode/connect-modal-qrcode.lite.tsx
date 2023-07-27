@@ -11,6 +11,7 @@ import anime from "animejs";
 import type { ConnectModalQRCodeProps } from "./connect-modal-qrcode.types";
 import QRCodeSkeleton from "../connect-modal-qrcode-skeleton";
 import Stack from "../stack";
+import Box from "../box";
 import Text from "../text";
 import QRCode from "../qrcode";
 import QRCodeError from "../connect-modal-qrcode-error";
@@ -112,7 +113,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   return (
     <Stack
       direction="vertical"
-      space="$4"
+      space="$0"
       attributes={{
         alignItems: "center",
       }}
@@ -122,10 +123,12 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Text>
 
       <Show when={props.status === "Pending"}>
+        <Box height="$4" />
         <QRCodeSkeleton />
       </Show>
 
       <Show when={props.status === "Done"}>
+        <Box height="$4" />
         <div className={qrCodeContainer[state.theme]}>
           <QRCode
             value={props.link}
@@ -139,6 +142,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Show>
 
       <Show when={props.status === "Error" || props.status === "Expired"}>
+        <Box height="$4" />
         <QRCodeError
           onRefresh={() => props.onRefresh?.()}
           qrCodeSize={props.qrCodeSize}
@@ -147,6 +151,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
 
       <Show when={!!props.errorTitle}>
         <Show when={props.status === "Error"}>
+          <Box height="$4" />
           <Text
             as="p"
             fontWeight="$medium"
@@ -161,6 +166,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
         </Show>
 
         <Show when={props.status === "Expired"}>
+          <Box height="$4" />
           <Text
             as="p"
             fontWeight="$medium"
@@ -176,6 +182,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       </Show>
 
       <Show when={!!props.errorDesc}>
+        <Box height="$4" />
         <div className={qrCodeDesc}>
           <div ref={measureRef} className={qrCodeDescContent}>
             <p>{props.errorDesc}</p>
