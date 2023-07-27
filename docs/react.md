@@ -1,4 +1,4 @@
-# How to use `@interchain-ui/react`` in your react app
+# How to use `@interchain-ui/react` in your react app
 
 Follow these steps to use @interchain-ui/react:
 
