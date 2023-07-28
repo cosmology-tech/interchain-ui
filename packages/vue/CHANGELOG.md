@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.1.10...@interchain-ui/vue@1.1.11) (2023-07-28)
+
+### Bug Fixes
+
+- remove unused dependencies ([3351008](https://github.com/cosmology-tech/interchain-ui/commit/3351008f19901b6b5ef8c236f9ef5567e239a98f))
+
 ## [1.1.10](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.1.9...@interchain-ui/vue@1.1.10) (2023-07-28)
 
 **Note:** Version bump only for package @interchain-ui/vue
