@@ -19,7 +19,7 @@ const WithThemeDecorator = (props) => {
         <Box
           backgroundColor={theme == "dark" ? "$gray700" : "$white"}
           px="$10"
-          py="$10"
+          py="$14"
           position="relative"
         >
           {props.children}
@@ -36,9 +36,9 @@ const WithThemeDecorator = (props) => {
               }}
             >
               {theme === "dark" ? (
-                <Icon name="moonLine" />
-              ) : (
                 <Icon name="sunLine" />
+              ) : (
+                <Icon name="moonLine" />
               )}
             </Button>
           </Box>
