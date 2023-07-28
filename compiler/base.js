@@ -1,5 +1,6 @@
 // @ts-check
 const glob = require("glob");
+const fsPromise = require("fs/promises");
 const fs = require("fs-extra");
 const path = require("path");
 const filesystemTools = require("gluegun/filesystem");
@@ -8,8 +9,10 @@ const printTools = require("gluegun/print");
 const commandLineArgs = require("command-line-args");
 const ora = require("ora");
 const compileCommand = require("@builder.io/mitosis-cli/dist/commands/compile");
-const _ = require("lodash");
+const camelCase = require("lodash/camelCase");
+const startCase = require("lodash/startCase");
 const scaffoldConfig = require("./scaffold.config.js");
+const { cwd } = require("process");
 
 const DEFAULT_OPTIONS = {
   elements: "src/**/*.lite.tsx",
@@ -28,7 +31,7 @@ const optionDefinitions = [
 ];
 
 function pascalName(str) {
-  return _.startCase(str).replace(/\s/g, "");
+  return startCase(str).replace(/\s/g, "");
 }
 
 function getScaffoldsDirs(rootPath) {
@@ -154,6 +157,40 @@ async function compile(defaultOptions) {
     };
   }
 
+  async function addHooksExports() {
+    const targetRootPath = path.resolve(
+      cwd(),
+      `packages/${options.target}/src`
+    );
+    const indexPath = path.resolve(targetRootPath, "index.ts");
+    const hooksPath = path.resolve(targetRootPath, "ui", "hooks");
+
+    return fsPromise
+      .readdir(hooksPath)
+      .then((hookFolders) => {
+        const hookNamesByFolder = hookFolders.reduce((arr, folder) => {
+          // @ts-ignore
+          arr.push({ folder, hookName: camelCase(folder) });
+          return arr;
+        }, []);
+
+        const indexData = fs.readFileSync(indexPath, "utf8");
+        const hooksExports = hookNamesByFolder
+          .map(
+            (item) =>
+              `export { default as ${item.hookName} } from './ui/hooks/${item.folder}';`
+          )
+          .join("\n");
+
+        let indexResult = `${indexData}\n${hooksExports}`;
+        fs.writeFileSync(indexPath, indexResult, "utf8");
+        console.log(indexResult);
+      })
+      .catch((err) => {
+        console.log("Failed to add hooks exports", err);
+      });
+  }
+
   function replacePropertiesFromCompiledFiles(outFile) {
     const data = fs.readFileSync(outFile, "utf8");
     let result = data
@@ -163,7 +200,7 @@ async function compile(defaultOptions) {
     fs.writeFileSync(outFile, result, "utf8");
   }
 
-  const spinner = ora("Compiling").start();
+  const spinner = ora(`Compiling target ${options.target}`).start();
 
   for (const fileName of files) {
     const file = path.parse(fileName);
@@ -192,6 +229,10 @@ async function compile(defaultOptions) {
       outPath,
       isFirstCompilation,
     });
+  }
+
+  if (options.target === "react") {
+    addHooksExports();
   }
 
   spinner.succeed();
