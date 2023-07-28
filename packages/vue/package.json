@@ -27,7 +27,6 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "motion": "^10.16.2",
-    "polished": "^4.2.2",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
