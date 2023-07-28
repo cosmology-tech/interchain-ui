@@ -1,8 +1,8 @@
-import type { BoxProps } from "../box/box.types";
-import type { Variants } from "./text.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+import type { BaseComponentProps } from "../../models/components.model";
+import type { Variant } from "./text.helper";
 
-export interface TextProps extends BoxProps, Variants {
-  align?: BoxProps["textAlign"];
+export interface TextProps extends BaseComponentProps {
   as?:
     | "code"
     | "div"
@@ -15,16 +15,17 @@ export interface TextProps extends BoxProps, Variants {
     | "label"
     | "p"
     | "span";
-  children?: any;
-  color?: BoxProps["color"];
-  letterSpacing?: BoxProps["letterSpacing"];
-  lineHeight?: BoxProps["lineHeight"];
-  size?: BoxProps["fontSize"];
-  transform?: BoxProps["textTransform"];
-  weight?: BoxProps["fontWeight"];
-  whiteSpace?: BoxProps["whiteSpace"];
-  wordBreak?: BoxProps["wordBreak"];
+  color?: Sprinkles["color"];
+  fontSize?: Sprinkles["fontSize"];
+  fontWeight?: Sprinkles["fontWeight"];
+  letterSpacing?: Sprinkles["letterSpacing"];
+  lineHeight?: Sprinkles["lineHeight"];
+  textAlign?: Sprinkles["textAlign"];
+  textTransform?: Sprinkles["textTransform"];
+  whiteSpace?: Sprinkles["whiteSpace"];
+  wordBreak?: Sprinkles["wordBreak"];
+  variant?: Variant;
+  ellipsis?: boolean;
   underline?: boolean;
-  className?: BoxProps["className"];
-  attributes?: BoxProps;
+  attributes?: Sprinkles;
 }

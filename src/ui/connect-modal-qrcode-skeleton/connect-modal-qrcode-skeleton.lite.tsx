@@ -1,6 +1,5 @@
 import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
-import clx from "clsx";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import Box from "../box";
 import { qrcodeSkeleton } from "./connect-modal-qrcode-skeleton.css";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
@@ -25,20 +24,16 @@ export default function ConnectModalQrCodeSkeleton(props) {
   });
 
   return (
-    <div
-      className={clx(
-        s({
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          width: "full",
-          px: "6",
-        }),
-        props.className
-      )}
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      textAlign="center"
+      width="$full"
+      px="$6"
+      className={props.className}
     >
       <div className={qrcodeSkeleton[state.theme]} />
-    </div>
+    </Box>
   );
 }

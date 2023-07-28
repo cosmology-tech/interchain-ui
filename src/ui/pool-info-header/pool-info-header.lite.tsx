@@ -9,14 +9,14 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
   return (
     <Box className={styles.poolInfoHeader}>
       <Stack direction="vertical">
-        <Text size="xl" weight="semibold">
+        <Text fontSize="$xl" fontWeight="$semibold">
           {props.token1.name} / {props.token2.name}
         </Text>
         <Text
-          color="textSecondary"
+          color="$textSecondary"
           attributes={{
-            marginTop: "3",
-            marginBottom: "13",
+            marginTop: "$3",
+            marginBottom: "$13",
           }}
         >
           Pool #{props.id}
@@ -33,41 +33,44 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
           <img className={styles.image2} src={props.token2.imgSrc} />
         </Box>
         <Stack className={styles.longText} direction="vertical">
-          <Text color="textSecondary">Pool liquidity</Text>
+          <Text color="$textSecondary">Pool liquidity</Text>
           <Stack
             attributes={{
               alignItems: "baseline",
             }}
           >
-            <Text attributes={{ marginRight: "1" }}>$</Text>
-            <Text size="4xl" weight="semibold">
+            <Text attributes={{ marginRight: "$1" }}>$</Text>
+            <Text fontSize="$4xl" fontWeight="$semibold">
               {store.getState()?.formatNumber?.({ value: props.poolLiquidity })}
             </Text>
           </Stack>
         </Stack>
-        <Box className={styles.onlysm} width="full" height="8" />
+
+        <Box className={styles.onlysm} width="$full" height="$8" />
+
         <Stack className={styles.shortText} direction="vertical">
-          <Text color="textSecondary">Swap fee</Text>
+          <Text color="$textSecondary">Swap fee</Text>
           <Stack
             attributes={{
               alignItems: "baseline",
             }}
           >
-            <Text size="4xl" weight="semibold">
+            <Text fontSize="$4xl" fontWeight="$semibold">
               {props.swapFee}
             </Text>
             <Text>%</Text>
           </Stack>
         </Stack>
+
         <Stack className={styles.longText} direction="vertical">
-          <Text color="textSecondary">24h trading volume</Text>
+          <Text color="$textSecondary">24h trading volume</Text>
           <Stack
             attributes={{
               alignItems: "baseline",
             }}
           >
-            <Text attributes={{ marginRight: "1" }}>$</Text>
-            <Text size="4xl" weight="semibold">
+            <Text attributes={{ marginRight: "$1" }}>$</Text>
+            <Text fontSize="$4xl" fontWeight="$semibold">
               {store.getState()?.formatNumber?.({ value: props.volume24H })}
             </Text>
           </Stack>

@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { inputBorderVar } from "../text-field/text-field.css";
+import { themeVars } from "../../styles/themes.css";
 
 export const textFieldAddon = style({
   color: "inherit",
@@ -28,15 +28,19 @@ export const textFieldAddonPositions = styleVariants({
 
 export const textFieldAddonSizes = styleVariants({
   sm: [
-    s({
-      py: "4",
-      px: "6",
+    style({
+      paddingLeft: themeVars.space[6],
+      paddingRight: themeVars.space[6],
+      paddingTop: themeVars.space[4],
+      paddingBottom: themeVars.space[4],
     }),
   ],
   md: [
-    s({
-      py: "10",
-      px: "8",
+    style({
+      paddingLeft: themeVars.space[8],
+      paddingRight: themeVars.space[8],
+      paddingTop: themeVars.space[10],
+      paddingBottom: themeVars.space[10],
     }),
   ],
 });

@@ -1,6 +1,5 @@
 import Stack from "../stack";
 import Box from "../box";
-import Text from "../text";
 import BondingList from "../bonding-list";
 import BondingCardList from "../bonding-card-list";
 import BondingListSm from "../bonding-list-sm";
@@ -9,10 +8,10 @@ import * as styles from "./bonding-area.css";
 
 export default function BondingArea(props: BondingAreaProps) {
   return (
-    <Box width="full" className={styles.bondingAreaContainer}>
+    <Box width="$full" className={styles.bondingAreaContainer}>
       <Stack className={styles.onlyDesktop} direction="vertical">
         <BondingCardList list={props.bondingCardList} />
-        <Box height="14" />
+        <Box height="$14" />
         <BondingList list={props.bondingList} />
       </Stack>
       <Box className={styles.onlySm}>

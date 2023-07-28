@@ -1,26 +1,22 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { breakpoints } from "../../styles/tokens";
+import { themeVars } from "../../styles/themes.css";
 
-export const container = style([
-  s({
-    marginBottom: "10",
-    marginRight: "9",
-  }),
-  {
-    width: "752px",
-    flexWrap: "nowrap",
-    justifyContent: "flex-start",
-    "@media": {
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-        width: "100%",
-        minWidth: "400px",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-      },
+export const container = style({
+  marginBottom: themeVars.space[10],
+  marginRight: themeVars.space[9],
+  width: "752px",
+  flexWrap: "nowrap",
+  justifyContent: "flex-start",
+  "@media": {
+    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      width: "100%",
+      minWidth: "400px",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
     },
   },
-]);
+});
 
 export const contentContainer = style({
   width: "712px",
@@ -34,14 +30,14 @@ export const rank = style({
   },
 });
 
-export const responsiveText = style([
-  s({
-    width: {
-      desktop: "1/5",
-      mobile: "1/3",
+export const responsiveText = style({
+  width: "calc(100% / 3)",
+  "@media": {
+    [`screen and (min-width: ${breakpoints.desktop}px)`]: {
+      width: "calc(100% / 5)",
     },
-  }),
-]);
+  },
+});
 
 export const nameContainer = style({
   "@media": {
@@ -54,24 +50,18 @@ export const nameContainer = style({
   },
 });
 
-export const imageBox = style([
-  s({
-    minWidth: "18",
-    height: "14",
-    marginRight: "8",
-  }),
-  {
-    position: "relative",
-  },
-]);
+export const imageBox = style({
+  position: "relative",
+  minWidth: themeVars.space[18],
+  height: themeVars.space[14],
+  marginRight: themeVars.space[8],
+});
 
-export const imgBase = style([
-  s({
-    width: "14",
-    height: "14",
-  }),
-  { position: "absolute" },
-]);
+export const imgBase = style({
+  position: "absolute",
+  width: themeVars.space[14],
+  height: themeVars.space[14],
+});
 
 export const image1 = style([
   imgBase,
@@ -110,16 +100,12 @@ export const onlySm = style({
   },
 });
 
-const baseIcon = style([
-  {
-    width: "38px",
-    height: "38px",
-    cursor: "pointer",
-  },
-  s({
-    borderRadius: "base",
-  }),
-]);
+const baseIcon = style({
+  width: "38px",
+  height: "38px",
+  cursor: "pointer",
+  borderRadius: themeVars.radii.base,
+});
 
 export const iconContainer = styleVariants({
   light: [

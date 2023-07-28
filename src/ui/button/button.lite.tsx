@@ -1,4 +1,5 @@
 import {
+  useDefaultProps,
   onMount,
   onUnMount,
   Show,
@@ -7,16 +8,21 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import clx from "clsx";
-import { variants } from "./button.css";
 import Icon from "../icon";
 import Box from "../box";
 import { store } from "../../models/store";
-import { sprinkles as s } from "../../styles/sprinkles.css";
+import { getSize, recipe } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
 
 export default function Button(props: ButtonProps) {
+  useDefaultProps({
+    size: "md",
+    intent: "primary",
+    variant: "solid",
+  });
+
   const state = useStore<ButtonState>({
     loaded: false,
     theme: "light",
@@ -41,30 +47,32 @@ export default function Button(props: ButtonProps) {
     <Show when={state.loaded}>
       <Box
         as="button"
+        {...getSize(props.size)}
         {...props.attributes}
+        className={clx(
+          recipe({
+            variant: props.variant,
+            intent: props.intent,
+            isDisabled: props.disabled,
+            theme: state.theme,
+          }),
+          props.className
+        )}
         attributes={{
           onClick: (event) => props.onClick?.(event),
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
+          ...props.domAttributes,
         }}
-        className={clx(
-          variants({
-            variant: props.variant,
-            size: props.size,
-            intent: props.intent,
-            disabled: props.disabled ? true : undefined,
-          }),
-          props.className
-        )}
       >
         <Show when={!!props.leftIcon}>
           <Icon
             name={props.leftIcon}
             size={props.iconSize}
-            className={s({
-              marginRight: !props.children ? "0" : "2",
-            })}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
           />
         </Show>
 
@@ -74,9 +82,9 @@ export default function Button(props: ButtonProps) {
           <Icon
             name={props.rightIcon}
             size={props.iconSize}
-            className={s({
-              marginLeft: !props.children ? "0" : "2",
-            })}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
           />
         </Show>
       </Box>

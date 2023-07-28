@@ -1,5 +1,5 @@
 import { BaseComponentProps } from "../../models/components.model";
-import { Sprinkles } from "../../styles/sprinkles.css";
+import { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
 type IconName =
   | "walletFilled"
@@ -31,11 +31,14 @@ type IconName =
   | "arrowDownLine"
   | "arrowUpDownLine"
   | "arrowLeftRightLine"
-  | "settingFill";
+  | "settingFill"
+  | "moonLine"
+  | "sunLine";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;
   title?: string;
   size?: Sprinkles["fontSize"];
   color?: Sprinkles["color"];
+  attributes?: Sprinkles;
 }

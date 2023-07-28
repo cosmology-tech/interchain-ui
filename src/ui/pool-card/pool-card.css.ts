@@ -1,27 +1,23 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { breakpoints } from "../../styles/tokens";
+import { themeVars } from "../../styles/themes.css";
 
-export const container = style([
-  sprinkles({
-    backgroundColor: "cardBg",
-    p: "10",
-    borderRadius: "lg",
-  }),
-  {
-    boxSizing: "border-box",
-    height: "fit-content",
-    "@media": {
-      [`screen and (min-width: ${breakpoints.tablet}px)`]: {
-        width: "236px",
-      },
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-        width: "100%",
-        minWidth: "236px",
-      },
+export const container = style({
+  backgroundColor: "cardBg",
+  padding: themeVars.space[10],
+  borderRadius: themeVars.radii.lg,
+  boxSizing: "border-box",
+  height: "fit-content",
+  "@media": {
+    [`screen and (min-width: ${breakpoints.tablet}px)`]: {
+      width: "236px",
+    },
+    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      width: "100%",
+      minWidth: "236px",
     },
   },
-]);
+});
 
 export const divider = styleVariants({
   light: [

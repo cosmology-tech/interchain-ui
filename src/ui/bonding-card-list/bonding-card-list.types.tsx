@@ -1,4 +1,5 @@
-import { BondingCardProps } from "../bonding-card/bonding-card.types"
+import { BondingCardProps } from "../bonding-card/bonding-card.types";
+
 export interface BondingCardListProps {
-  list: BondingCardProps[],
+  list: BondingCardProps[];
 }

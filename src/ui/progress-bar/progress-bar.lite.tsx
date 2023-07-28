@@ -1,5 +1,4 @@
 import { onMount, onUpdate, useRef } from "@builder.io/mitosis";
-import Box from "../box";
 import * as styles from "./progress-bar.css";
 import { ProgressBarProps } from "./progress-bar.types";
 
@@ -12,8 +11,9 @@ export default function ProgressBar(props: ProgressBarProps) {
   onUpdate(() => {
     inputRef.style.backgroundSize = `${props.progress}% 100%`;
   }, [props.progress]);
+
   return (
-    <Box aria-valuemax={100} aria-valuemin={0}>
+    <div aria-valuemax={100} aria-valuemin={0}>
       <input
         className={styles.range}
         type="range"
@@ -30,6 +30,6 @@ export default function ProgressBar(props: ProgressBarProps) {
         max="100"
         value={props.progress}
       />
-    </Box>
+    </div>
   );
 }

@@ -1,30 +1,30 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { baseTextStyles } from "../text/text.css";
+import { themeVars } from "../../styles/themes.css";
 
 export const fieldlabelStyle = style([
   baseTextStyles,
-  style({ lineHeight: "normal" }),
-  s({
-    fontWeight: "semibold",
-    color: "textSecondary",
+  style({
+    lineHeight: "normal",
+    fontWeight: themeVars.fontWeight.semibold,
+    color: themeVars.colors.textSecondary,
   }),
 ]);
 
 export const fieldLabelSizes = styleVariants({
   sm: [
-    s({
-      fontSize: "sm",
+    style({
+      fontSize: themeVars.fontSize.sm,
     }),
   ],
   md: [
-    s({
-      fontSize: "md",
+    style({
+      fontSize: themeVars.fontSize.md,
     }),
   ],
   lg: [
-    s({
-      fontSize: "xl",
+    style({
+      fontSize: themeVars.fontSize.xl,
     }),
   ],
 });

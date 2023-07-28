@@ -18,10 +18,10 @@ export default function SingleChain(props: SingleChainProps) {
           canDeposit={props.header.canDeposit}
         />
         <Text
-          color="textSecondary"
-          size="lg"
-          weight="semibold"
-          attributes={{ marginTop: "10", marginBottom: "9" }}
+          color="$textSecondary"
+          fontSize="$lg"
+          fontWeight="$semibold"
+          attributes={{ marginTop: "$10", marginBottom: "9" }}
         >
           On Osmosis
         </Text>

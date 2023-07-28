@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
-import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
+import { themeVars } from "../../styles/themes.css";
 
 export const container = style([
   {
@@ -16,19 +15,17 @@ export const container = style([
   },
 ]);
 
-const base = style([
-  s({
-    px: "8",
-    py: "9",
-  }),
-  {
-    display: "flex",
-    alignItems: "center",
-    borderRadius: "7px",
-    minHeight: "92px",
-    boxSizing: "border-box",
-  },
-]);
+const base = style({
+  paddingLeft: themeVars.space[8],
+  paddingRight: themeVars.space[8],
+  paddingTop: themeVars.space[9],
+  paddingBottom: themeVars.space[9],
+  display: "flex",
+  alignItems: "center",
+  borderRadius: "7px",
+  minHeight: "92px",
+  boxSizing: "border-box",
+});
 
 export const mb3 = style({
   marginBottom: "3px",
@@ -93,12 +90,8 @@ export const osom = style({
   margin: "0 14px 3px 2px",
 });
 
-export const flex1 = style([
-  s({
-    paddingRight: "5",
-  }),
-  {
-    flex: 1,
-    overflow: "hidden",
-  },
-]);
+export const flex1 = style({
+  paddingRight: themeVars.space[5],
+  flex: 1,
+  overflow: "hidden",
+});

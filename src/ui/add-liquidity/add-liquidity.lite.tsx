@@ -57,8 +57,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
   }, [state.amount1, state.amount2]);
   return (
     <Box>
-      <Stack direction="vertical" attributes={{ paddingBottom: "10" }}>
-        <Text size="xl" weight="semibold">
+      <Stack direction="vertical" attributes={{ paddingBottom: "$10" }}>
+        <Text fontSize="$xl" fontWeight="$semibold">
           Add liquidity
         </Text>
         <Stack
@@ -66,14 +66,14 @@ export default function AddLiquidity(props: AddLiquidityProps) {
             alignItems: "center",
           }}
         >
-          <Text color="textSecondary">{props.token1.symbol}</Text>
-          <Text color="textSecondary" attributes={{ px: "3" }}>
+          <Text color="$textSecondary">{props.token1.symbol}</Text>
+          <Text color="$textSecondary" attributes={{ px: "$3" }}>
             /
           </Text>
-          <Text color="textSecondary">{props.token2.symbol}</Text>
+          <Text color="$textSecondary">{props.token2.symbol}</Text>
         </Stack>
       </Stack>
-      <Box paddingBottom="14">
+      <Box paddingBottom="$14">
         <TokenInput
           progress={state.progress1}
           symbol={props.token1.symbol}
@@ -84,7 +84,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           onAmountChange={(value) => state.handleAmoount1Change(value)}
         />
       </Box>
-      <Box paddingBottom="14">
+      <Box paddingBottom="$14">
         <TokenInput
           progress={state.progress2}
           symbol={props.token2.symbol}
@@ -98,7 +98,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       <Button
         disabled={state.disabled}
         intent="tertiary"
-        attributes={{ width: "full" }}
+        attributes={{ width: "$full" }}
       >
         {state.btnText}
       </Button>

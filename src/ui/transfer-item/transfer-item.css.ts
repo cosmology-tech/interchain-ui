@@ -1,5 +1,4 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 const textButtonBgVar = createVar();
@@ -8,9 +7,9 @@ export const container = style({
   minWidth: "468px",
 });
 
-export const img = sprinkles({
-  width: "15",
-  height: "15",
+export const img = style({
+  width: themeVars.space[15],
+  height: themeVars.space[15],
 });
 
 export const dropdowBtn = style({

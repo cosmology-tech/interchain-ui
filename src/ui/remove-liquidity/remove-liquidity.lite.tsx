@@ -19,49 +19,50 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
   return (
     <Box>
       <Stack direction="vertical">
-        <Text size="xl" weight="semibold">
+        <Text fontSize="$xl" fontWeight="$semibold">
           Remove liquidity
         </Text>
+
         <Stack
           attributes={{
             alignItems: "center",
           }}
         >
-          <Text color="textSecondary">{props.token1.symbol}</Text>
-          <Text color="textSecondary" attributes={{ px: "3" }}>
+          <Text color="$textSecondary">{props.token1.symbol}</Text>
+          <Text color="$textSecondary" attributes={{ px: "$3" }}>
             /
           </Text>
-          <Text color="textSecondary">{props.token2.symbol}</Text>
+          <Text color="$textSecondary">{props.token2.symbol}</Text>
         </Stack>
       </Stack>
       <Stack
         attributes={{
-          marginTop: "9",
-          marginBottom: "5",
+          marginTop: "$9",
+          marginBottom: "$5",
           alignItems: "baseline",
           justifyContent: "center",
         }}
       >
-        <Text weight="semibold" attributes={{ marginRight: "1" }}>
+        <Text fontWeight="$semibold" attributes={{ marginRight: "$1" }}>
           $
         </Text>
-        <Text size="7xl" weight="semibold">
+        <Text fontSize="$7xl" fontWeight="$semibold">
           {props.myLiquidity}
         </Text>
       </Stack>
       <Stack
         attributes={{
-          marginBottom: "10",
+          marginBottom: "$10",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
-        <Text attributes={{ marginRight: "3" }}>{props.unbondedShares}</Text>
+        <Text attributes={{ marginRight: "$3" }}>{props.unbondedShares}</Text>
         <Text>pool shares</Text>
       </Stack>
       <Stack
-        space="13"
-        attributes={{ marginBottom: "11", justifyContent: "center" }}
+        space="$13"
+        attributes={{ marginBottom: "$11", justifyContent: "center" }}
       >
         <Stack
           attributes={{
@@ -70,13 +71,13 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         >
           <img className={styles.img} src={props.token1.imgSrc} />
           <Text
-            color="textSecondary"
-            weight="semibold"
-            attributes={{ mx: "4" }}
+            color="$textSecondary"
+            fontWeight="$semibold"
+            attributes={{ mx: "$4" }}
           >
             {props.token1.amount}
           </Text>
-          <Text color="textSecondary">{props.token1.symbol}</Text>
+          <Text color="$textSecondary">{props.token1.symbol}</Text>
         </Stack>
         <Stack
           attributes={{
@@ -85,13 +86,13 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         >
           <img className={styles.img} src={props.token2.imgSrc} />
           <Text
-            color="textSecondary"
-            weight="semibold"
-            attributes={{ mx: "4" }}
+            color="$textSecondary"
+            fontWeight="$semibold"
+            attributes={{ mx: "$4" }}
           >
             {props.token2.amount}
           </Text>
-          <Text color="textSecondary">{props.token2.symbol}</Text>
+          <Text color="$textSecondary">{props.token2.symbol}</Text>
         </Stack>
       </Stack>
       <ProgressBar
@@ -99,8 +100,8 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         onProgressChange={(v) => state.handeProgressClick(v)}
       />
       <Stack
-        space="8"
-        attributes={{ marginTop: "12", justifyContent: "center" }}
+        space="$8"
+        attributes={{ marginTop: "$12", justifyContent: "center" }}
       >
         <For each={[25, 50, 75, 100]}>
           {(value: number, index: number) => (
@@ -117,7 +118,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
       <Button
         size="lg"
         intent="tertiary"
-        attributes={{ marginTop: "18", width: "full" }}
+        attributes={{ marginTop: "$18", width: "$full" }}
       >
         Remove Liquidity
       </Button>

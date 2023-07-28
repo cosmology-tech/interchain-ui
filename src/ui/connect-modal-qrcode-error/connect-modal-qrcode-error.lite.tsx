@@ -37,6 +37,7 @@ export default function ConnectModalQrCodeError(
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
+
   return (
     <div
       className={clx(qrcodeErrorContainer, qrCodeContainer, props.className)}
@@ -49,7 +50,7 @@ export default function ConnectModalQrCodeError(
           className={qrcodeReloadButton[state.theme]}
         >
           <span>
-            <Icon name="restart" size="lg" />
+            <Icon name="restart" size="$lg" />
           </span>
         </button>
       </div>

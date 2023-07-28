@@ -7,7 +7,6 @@ import Box from "../box";
 import TokenInput from "../token-input";
 import * as styles from "./asset-item-transfer.css";
 import { store } from "../../models/store";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { AssetItemTransferProps } from "./asset-item-transfer.types";
 
 export default function AssetItemTransfer(props: AssetItemTransferProps) {
@@ -32,10 +31,16 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
   return (
     <Box className={styles.container}>
       <Stack>
-        <Text size="xl" weight="semibold" attributes={{ marginRight: "3" }}>
+        <Text
+          fontSize="$xl"
+          fontWeight="$semibold"
+          attributes={{
+            marginRight: "$3",
+          }}
+        >
           {props.type}
         </Text>
-        <Text size="xl" weight="semibold">
+        <Text fontSize="$xl" fontWeight="$semibold">
           ATOM
         </Text>
       </Stack>
@@ -43,8 +48,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       <Stack
         className={styles.onlySm}
         attributes={{
-          marginTop: "11",
-          marginBottom: "13",
+          marginTop: "$11",
+          marginBottom: "$13",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -57,7 +62,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           name="arrowRightLine"
           color="textSecondary"
           size="xl"
-          className={sprinkles({ mx: "9" })}
+          attributes={{
+            mx: "$9",
+          }}
         />
         <img
           className={styles.img}
@@ -75,17 +82,19 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       >
         <Stack direction="vertical" className={styles.flex1}>
           <Text
-            color="textSecondary"
-            weight="semibold"
-            attributes={{ marginBottom: "6" }}
+            color="$textSecondary"
+            fontWeight="$semibold"
+            attributes={{
+              marginBottom: "$6",
+            }}
           >
             From Cosmos Hub
           </Text>
           <Stack
             attributes={{
-              p: "6",
-              backgroundColor: "cardBg",
-              borderRadius: "lg",
+              p: "$6",
+              backgroundColor: "$cardBg",
+              borderRadius: "$lg",
               alignItems: "center",
             }}
           >
@@ -93,39 +102,41 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               className={styles.smImg}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
             />
-            <Text color="textSecondary">atom1xy5y...m6wwz9a</Text>
+            <Text color="$textSecondary">atom1xy5y...m6wwz9a</Text>
           </Stack>
         </Stack>
         <Icon
           name="arrowRightLine"
-          color="textSecondary"
-          size="md"
-          className={sprinkles({
-            mx: "4",
-            marginBottom: "9",
-          })}
+          color="$textSecondary"
+          size="$md"
+          attributes={{
+            mx: "$4",
+            marginBottom: "$9",
+          }}
         />
         <Stack direction="vertical" className={styles.flex1}>
           <Text
-            color="textSecondary"
-            weight="semibold"
-            attributes={{ marginBottom: "6" }}
+            color="$textSecondary"
+            fontWeight="$semibold"
+            attributes={{
+              marginBottom: "$6",
+            }}
           >
             From Cosmos Hub
           </Text>
           <Stack
             attributes={{
-              p: "6",
-              backgroundColor: "cardBg",
-              borderRadius: "lg",
-              alignItems: "center",
+              p: "$6",
+              backgroundColor: "$cardBg",
+              borderRadius: "$lg",
+              alignItems: "$center",
             }}
           >
             <img
               className={styles.smImg}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
             />
-            <Text color="textSecondary">atom1xy5y...m6wwz9a</Text>
+            <Text color="$textSecondary">atom1xy5y...m6wwz9a</Text>
           </Stack>
         </Stack>
       </Stack>
@@ -140,10 +151,10 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       />
 
       <Stack
-        space="5"
+        space="$5"
         attributes={{
-          marginTop: "5",
-          marginBottom: "11",
+          marginTop: "$5",
+          marginBottom: "$11",
           justifyContent: "flex-end",
         }}
       >
@@ -160,22 +171,22 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       <Stack
         className={styles.onlyLg}
         attributes={{
-          p: "6",
-          borderRadius: "md",
-          backgroundColor: "cardBg",
+          p: "$6",
+          marginBottom: "$9",
+          borderRadius: "$md",
+          backgroundColor: "$cardBg",
           alignItems: "center",
-          marginBottom: "9",
         }}
       >
         <Icon
           name="timeLine"
           size="md"
-          className={sprinkles({
-            marginRight: "7",
-          })}
+          attributes={{
+            marginRight: "$7",
+          }}
         />
         <Text>Estimated time:</Text>
-        <Text weight="semibold"> 20 seconds</Text>
+        <Text fontWeight="$semibold"> 20 seconds</Text>
       </Stack>
 
       <Button intent="tertiary" attributes={{ width: "full" }}>
@@ -186,8 +197,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         >
           <Text
             className={styles.btnText[state.theme]}
-            size="lg"
-            weight="semibold"
+            fontSize="$lg"
+            fontWeight="$semibold"
           >
             Transfer
           </Text>
@@ -200,14 +211,14 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           >
             <Icon
               name="timeLine"
-              size="xs"
-              className={sprinkles({
-                marginLeft: "8",
-                marginRight: "4",
-              })}
+              size="$xs"
+              attributes={{
+                marginLeft: "$8",
+                marginRight: "$4",
+              }}
             />
 
-            <Text size="xs" className={styles.btnText[state.theme]}>
+            <Text fontSize="$xs" className={styles.btnText[state.theme]}>
               ≈ 20 seconds
             </Text>
           </Stack>

@@ -11,7 +11,7 @@ import {
   ConnectModalStatus,
   Button,
 } from "../src";
-import { wallets, modalStatusProps } from "./stub/connectWalletData";
+import { wallets, modalStatusProps, qrCodeProps } from "./stub/connectWalletData";
 
 const meta: Meta<typeof ConnectModal> = {
   component: ConnectModal,
@@ -71,12 +71,14 @@ export const Primary: Story = {
           }
         >
           {hasBack ? (
-            <ConnectModalStatus {...modalStatusProps} />
+            <ConnectModalQRCode {...qrCodeProps} />
+            // <ConnectModalStatus {...modalStatusProps} />
           ) : (
             <ConnectModalWalletList
               wallets={wallets}
               onWalletItemClick={onNext}
             />
+
           )}
         </ConnectModal>
       </Box>

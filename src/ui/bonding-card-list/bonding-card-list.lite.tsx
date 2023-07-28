@@ -9,14 +9,14 @@ export default function PoolCardList(props: BondingCardListProps) {
   return (
     <Box>
       <Stack
-        space="10"
+        space="$10"
         attributes={{
           flexWrap: "nowrap",
         }}
       >
         <For each={props.list}>
           {(item: BondingCardProps, index: number) => (
-            <Box width="1/3" key={item.title}>
+            <Box width="$1/3" key={item.title}>
               <BondingCard title={item.title} value={item.value} />
             </Box>
           )}

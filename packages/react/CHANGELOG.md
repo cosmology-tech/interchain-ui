@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.3.1...@interchain-ui/react@1.3.2) (2023-07-28)
+
+**Note:** Version bump only for package @interchain-ui/react
+
+## [1.3.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.3.0...@interchain-ui/react@1.3.1) (2023-07-28)
+
+### Bug Fixes
+
+- animation height bounce ([#65](https://github.com/cosmology-tech/interchain-ui/issues/65)) ([4d596d2](https://github.com/cosmology-tech/interchain-ui/commit/4d596d29be1d7d558f81970963175b7485808f23))
+- export hooks for react target ([3f6e5aa](https://github.com/cosmology-tech/interchain-ui/commit/3f6e5aaac5594be4e2989b6aeeb2511c2453b3d0))
+
+# [1.3.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.2.0...@interchain-ui/react@1.3.0) (2023-07-26)
+
+### Bug Fixes
+
+- layout animation in connect modal ([#63](https://github.com/cosmology-tech/interchain-ui/issues/63)) ([872108a](https://github.com/cosmology-tech/interchain-ui/commit/872108a237ebfd95e4e46e75644565ee01a49f34))
+- remove sprinkles ([#59](https://github.com/cosmology-tech/interchain-ui/issues/59)) ([c408a2b](https://github.com/cosmology-tech/interchain-ui/commit/c408a2bb16e1b62440e825de938bf526e8397749))
+
+### Features
+
+- remove formkit ([#62](https://github.com/cosmology-tech/interchain-ui/issues/62)) ([d1bf7b2](https://github.com/cosmology-tech/interchain-ui/commit/d1bf7b28d074653fb15c63fc76d24036224e5eb8))
+
 # [1.2.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.1.11...@interchain-ui/react@1.2.0) (2023-07-24)
 
 ### Features

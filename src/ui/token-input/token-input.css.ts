@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
 
@@ -16,7 +15,7 @@ export const progressContainer = style([
       },
     },
   },
-]);
+});
 
 export const iconBox = style([
   {
@@ -103,15 +102,34 @@ export const inputClassName = style([
     border: 0,
     outline: 0,
   },
-]);
+});
 
-export const caulator = style([
-  sprinkles({
-    position: "absolute",
-    height: "full",
-    right: "9",
-  }),
-]);
+export const imgBox = style({
+  width: themeVars.space[18],
+  height: "100%",
+  borderColor: themeVars.colors.inputBorder,
+  borderRightWidth: "1px",
+  borderRightStyle: "solid",
+});
+
+export const img = style({
+  width: themeVars.space[14],
+  height: themeVars.space[14],
+});
+
+export const token = style({
+  width: "100%",
+  backgroundColor: themeVars.colors.cardBg,
+  borderRadius: themeVars.radii.lg,
+  border: 0,
+  outline: 0,
+});
+
+export const caulator = style({
+  position: "absolute",
+  height: "100%",
+  right: themeVars.space[9],
+});
 
 export const disabled = style({
   opacity: 0.6,

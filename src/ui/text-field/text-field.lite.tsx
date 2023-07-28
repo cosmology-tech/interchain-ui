@@ -11,7 +11,7 @@ import Stack from "../stack";
 import FieldLabel from "../field-label";
 import TextFieldAddon from "../text-field-addon";
 import Icon from "../icon";
-import { unstyledButton } from "../button/button.css";
+import Box from "../box";
 import { store } from "../../models/store";
 import {
   inputStyles,
@@ -21,11 +21,11 @@ import {
   clearIcon,
   rootInput,
   rootInputFocused,
+  clearButton,
 } from "./text-field.css";
 import { validTypes, defaultInputModesForType } from "./text-field.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { TextFieldProps } from "./text-field.types";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 
 export default function TextField(props: TextFieldProps) {
   useDefaultProps({
@@ -68,7 +68,7 @@ export default function TextField(props: TextFieldProps) {
   return (
     <Stack
       direction="vertical"
-      space="4"
+      space="$4"
       attributes={props.attributes}
       className={props.className}
     >
@@ -129,7 +129,8 @@ export default function TextField(props: TextFieldProps) {
             size={props.size}
           >
             <button
-              className={clx(unstyledButton, s({ px: "0", py: "0" }))}
+              type="button"
+              className={clearButton}
               onClick={() => props.onClear?.()}
             >
               <Icon name="close" className={clearIcon} />

@@ -60,19 +60,19 @@ export default function TokenInput(props: TokenInputProps) {
     >
       <Stack
         className={clsx({ [styles.disabled]: state.disabled })}
-        space="0"
+        space="$0"
         attributes={{
-          width: "full",
-          paddingBottom: "7",
+          width: "$full",
+          paddingBottom: "$7",
           justifyContent: "flex-end",
         }}
       >
         <Show when={!!props.title}>
           <Text
             className={styles.inputTitle}
-            color="textSecondary"
-            weight="semibold"
-            size="lg"
+            color="$textSecondary"
+            fontWeight="$semibold"
+            fontSize="$lg"
           >
             {props.title}
           </Text>
@@ -112,12 +112,12 @@ export default function TokenInput(props: TokenInputProps) {
               direction="vertical"
               attributes={{
                 justifyContent: "center",
-                width: "20",
-                px: "7",
+                width: "$20",
+                px: "$7",
               }}
             >
-              <Text weight="semibold">{props.symbol}</Text>
-              <Text color="textSecondary" size="xs">
+              <Text fontWeight="$semibold">{props.symbol}</Text>
+              <Text color="$textSecondary" fontSize="$xs">
                 {props.denom}
               </Text>
             </Stack>
@@ -135,7 +135,7 @@ export default function TokenInput(props: TokenInputProps) {
 
       <Stack
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
-        space="0"
+        space="$0"
       >
         <Stack
           className={styles.imgBox}
@@ -160,14 +160,14 @@ export default function TokenInput(props: TokenInputProps) {
         />
         <Stack
           className={styles.caulator}
-          space="0"
+          space="$0"
           attributes={{
             justifyContent: "flex-end",
             alignItems: "center",
           }}
         >
-          <Text weight="semibold">{props.symbol} &nbsp;</Text>
-          <Text color="textSecondary">≈ ${state.symbolValue}</Text>
+          <Text fontWeight="$semibold">{props.symbol} &nbsp;</Text>
+          <Text color="$textSecondary">≈ ${state.symbolValue}</Text>
         </Stack>
       </Stack>
     </Stack>

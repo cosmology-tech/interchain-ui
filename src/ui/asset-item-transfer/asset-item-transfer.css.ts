@@ -1,5 +1,4 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
-import { sprinkles } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 const buttonTextColorVar = createVar();
@@ -8,15 +7,15 @@ export const container = style({
   minWidth: "380px",
 });
 
-export const smImg = sprinkles({
-  width: "11",
-  height: "11",
-  marginRight: "5",
+export const smImg = style({
+  width: themeVars.space[11],
+  height: themeVars.space[11],
+  marginRight: themeVars.space[5],
 });
 
-export const img = sprinkles({
-  width: "15",
-  height: "15",
+export const img = style({
+  width: themeVars.space[15],
+  height: themeVars.space[15],
 });
 
 export const flex1 = style({

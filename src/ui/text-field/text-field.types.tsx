@@ -3,7 +3,7 @@ import type {
   BaseComponentProps,
 } from "../../models/components.model";
 import type { FieldLabelProps } from "../field-label/field-label.types";
-import type { Sprinkles } from "../../styles/sprinkles.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
 export type FieldLabelVariant =
   | {

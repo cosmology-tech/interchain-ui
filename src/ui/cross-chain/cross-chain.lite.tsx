@@ -18,10 +18,10 @@ export default function CrossChain(props: CrossChainProps) {
           canDeposit={props.header.canDeposit}
         />
         <Text
-          color="textSecondary"
-          size="lg"
-          weight="semibold"
-          attributes={{ my: "9" }}
+          color="$textSecondary"
+          fontSize="$lg"
+          fontWeight="$semibold"
+          attributes={{ my: "$9" }}
         >
           On Osmosis
         </Text>
@@ -31,10 +31,10 @@ export default function CrossChain(props: CrossChainProps) {
           list={props.list}
         />
         <Text
-          color="textSecondary"
-          size="lg"
-          weight="semibold"
-          attributes={{ marginTop: "15", marginBottom: "9" }}
+          color="$textSecondary"
+          fontSize="$lg"
+          fontWeight="$semibold"
+          attributes={{ marginTop: "$15", marginBottom: "$9" }}
         >
           On other chains
         </Text>

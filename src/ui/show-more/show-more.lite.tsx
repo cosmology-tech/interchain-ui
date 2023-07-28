@@ -111,15 +111,15 @@ export default function ShowMore(props: ShowMoreProps) {
             className={styles.btnContainer}
           >
             <Text
-              color="textSecondary"
-              weight="semibold"
+              color="$textSecondary"
+              fontWeight="$semibold"
               attributes={{
-                marginRight: "5",
+                marginRight: "$5",
               }}
             >
               {props.showMoreTitle}
             </Text>
-            <Icon name="arrowDownS" color="textSecondary" />
+            <Icon name="arrowDownS" color="$textSecondary" />
           </div>
         </Stack>
       </Show>
@@ -140,15 +140,15 @@ export default function ShowMore(props: ShowMoreProps) {
             className={styles.btnContainer}
           >
             <Text
-              color="textSecondary"
-              weight="semibold"
+              color="$textSecondary"
+              fontWeight="$semibold"
               attributes={{
-                marginRight: "5",
+                marginRight: "$5",
               }}
             >
               {props.showLessTitle}
             </Text>
-            <Icon name="arrowUpS" color="textSecondary" />
+            <Icon name="arrowUpS" color="$textSecondary" />
           </div>
         </Stack>
       </Show>
