@@ -8,11 +8,10 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import clx from "clsx";
-import { variants } from "./button.css";
 import Icon from "../icon";
 import Box from "../box";
 import { store } from "../../models/store";
-import { getPaddings } from "./button.helper";
+import { getSize, recipe } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -20,6 +19,8 @@ useMetadata({ isAttachedToShadowDom: true });
 export default function Button(props: ButtonProps) {
   useDefaultProps({
     size: "md",
+    intent: "primary",
+    variant: "solid",
   });
 
   const state = useStore<ButtonState>({
@@ -46,14 +47,14 @@ export default function Button(props: ButtonProps) {
     <Show when={state.loaded}>
       <Box
         as="button"
-        {...getPaddings(props.size)}
+        {...getSize(props.size)}
         {...props.attributes}
         className={clx(
-          variants({
+          recipe({
             variant: props.variant,
-            size: props.size,
             intent: props.intent,
-            disabled: props.disabled ? true : undefined,
+            isDisabled: props.disabled,
+            theme: state.theme,
           }),
           props.className
         )}
