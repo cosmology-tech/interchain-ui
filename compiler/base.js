@@ -184,7 +184,6 @@ async function compile(defaultOptions) {
 
         let indexResult = `${indexData}\n${hooksExports}`;
         fs.writeFileSync(indexPath, indexResult, "utf8");
-        console.log(indexResult);
       })
       .catch((err) => {
         console.log("Failed to add hooks exports", err);
