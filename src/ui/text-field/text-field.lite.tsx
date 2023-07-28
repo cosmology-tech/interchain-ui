@@ -86,16 +86,19 @@ export default function TextField(props: TextFieldProps) {
           state.isFocused ? rootInputFocused : null,
           props.disabled
             ? inputRootIntent.disabled
-            : inputRootIntent[props.intent]
+            : inputRootIntent[props.intent],
+          props.inputContainer
         )}
       >
         <Show when={props.startAddon}>{props.startAddon}</Show>
 
         <input
+          id={props.id}
           className={clx(
             inputStyles[state.theme],
             inputSizes[props.size],
-            props.disabled ? inputIntent.disabled : inputIntent[props.intent]
+            props.disabled ? inputIntent.disabled : inputIntent[props.intent],
+            props.inputClassName
           )}
           autocomplete={props.autoComplete}
           autofocus={props.autoFocus}
@@ -113,6 +116,8 @@ export default function TextField(props: TextFieldProps) {
           }}
           placeholder={!props.disabled ? props.placeholder : undefined}
           inputMode={props.inputMode || defaultInputModesForType[props.type]}
+          maxlength={props.maxlength}
+          pattern={props.pattern}
         />
 
         <Show when={state.isClearable}>

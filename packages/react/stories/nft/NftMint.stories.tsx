@@ -23,8 +23,9 @@ export const Primary: Story = {
     royalties: 10,
     minted: 46,
     available: 2948,
-    price: 300,
+    priceDisplayAmount: 64,
     limited: 50,
     imgSrc: "https://res.cloudinary.com/stargaze/image/upload/f_auto,w_700/ighabxq1rjqr5xblblue",
+    starsPrice: 0.01063943,
   },
 };

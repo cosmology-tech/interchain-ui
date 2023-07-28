@@ -29,8 +29,8 @@ export const iconBox = style([
 ]);
 
 export const symbolBox = style({
-  flex: 1
-})
+  flex: 1,
+});
 
 export const denom = sprinkles({
   fontSize: "xs",
@@ -87,6 +87,19 @@ export const token = style([
     borderRadius: "lg",
   }),
   {
+    marginLeft: "0",
+  },
+]);
+
+export const inputContainer = style({
+  height: "100%",
+});
+
+export const inputClassName = style([
+  sprinkles({
+    fontSize: "lg",
+  }),
+  {
     border: 0,
     outline: 0,
   },
@@ -110,5 +123,5 @@ export const inputTitle = style({
 });
 
 export const operationIcon = sprinkles({
-  fontSize: "3xl"
-})
+  fontSize: "3xl",
+});

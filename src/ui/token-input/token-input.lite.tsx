@@ -1,11 +1,13 @@
 import { Show, useStore, onUpdate, useDefaultProps } from "@builder.io/mitosis";
 import clsx from "clsx";
 import isNil from "lodash/isNil";
+import uniqueId from "lodash/uniqueId"
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
 import IconButton from "../icon-button";
 import CicularProgressBar from "../circular-progress-bar";
+import TextField from "../text-field";
 import * as styles from "./token-input.css";
 
 import { TokenInputProps } from "./token-input.types";
@@ -147,16 +149,14 @@ export default function TokenInput(props: TokenInputProps) {
             attributes={{ src: props?.imgSrc }}
           />
         </Stack>
-        <Box
+        <TextField
+          id={uniqueId("token-input-")}
+          value={state.amount}
+          disabled={state.disabled}
+          onChange={(e) => state.handleTokenInput(e)}
           className={styles.token}
-          as="input"
-          paddingLeft="9"
-          fontSize="lg"
-          attributes={{
-            value: state.amount,
-            disabled: state.disabled,
-            onChange: (e) => state.handleTokenInput(e),
-          }}
+          inputContainer={styles.inputContainer}
+          inputClassName={styles.inputClassName}
         />
         <Stack
           className={styles.caulator}
