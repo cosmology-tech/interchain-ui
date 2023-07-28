@@ -1,5 +1,4 @@
 import { style, createVar, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const connectModalShadowVar = createVar();
@@ -13,13 +12,11 @@ const modalContentBase = style([
     overflowY: "auto",
     '::-webkit-scrollbar': {
       display: "none"
-    }
-  }),
-  s({
+    },
     display: "flex",
     flexDirection: "column",
     height: "auto",
-    borderRadius: "xl",
+    borderRadius: themeVars.radii["xl"],
   }),
 ]);
 
@@ -49,17 +46,15 @@ export const modalContent = styleVariants({
 export const modalChildren = style([
   {
     minWidth: "320px",
-  },
-  s({
-    paddingLeft: "9",
-    paddingRight: "9",
-    paddingBottom: "9",
-  }),
+    paddingLeft: themeVars.space["9"],
+    paddingRight: themeVars.space["9"],
+    paddingBottom: themeVars.space["9"],
+  }
 ]);
 
-export const modalHeader = s({
-  paddingTop: "4",
-  paddingLeft: "9",
-  paddingRight: "4",
-  paddingBottom: "8"
+export const modalHeader = style({
+  paddingTop: themeVars.space["4"],
+  paddingLeft: themeVars.space["9"],
+  paddingRight: themeVars.space["4"],
+  paddingBottom: themeVars.space["8"]
 })
