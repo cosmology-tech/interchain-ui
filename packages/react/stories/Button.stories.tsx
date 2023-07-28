@@ -20,10 +20,34 @@ export const Primary: Story = {
     children: "Button",
   },
 };
+
 export const Secondary: Story = {
   args: {
     children: "Button",
     intent: "secondary",
+  },
+};
+
+export const Tertiary: Story = {
+  args: {
+    children: "Button",
+    intent: "tertiary",
+  },
+};
+
+export const SecondaryGhost: Story = {
+  args: {
+    children: "Button",
+    intent: "secondary",
+    variant: "ghost",
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    children: "Button",
+    intent: "secondary",
+    variant: "outlined",
   },
 };
 

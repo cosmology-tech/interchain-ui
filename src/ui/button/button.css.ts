@@ -1,145 +1,10 @@
-import { style, createVar, ComplexStyleRule } from "@vanilla-extract/css";
-import { recipe } from "@vanilla-extract/recipes";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 const buttonBgVar = createVar();
 const buttonHoverBgVar = createVar();
 const buttonTextColorVar = createVar();
 const buttonHoverTextColorVar = createVar();
-
-const outlinedBaseStyle: ComplexStyleRule = {
-  borderRadius: themeVars.radii.md,
-  outlineWidth: "2px",
-  outlineStyle: "solid",
-  outlineColor: buttonTextColorVar,
-  outlineOffset: "-2px",
-  backgroundColor: buttonBgVar,
-  selectors: {
-    "&:hover": {
-      opacity: 0.8,
-    },
-  },
-};
-
-const variant = {
-  solid: style({
-    borderRadius: themeVars.radii.md,
-    fontWeight: themeVars.fontWeight.semibold,
-  }),
-  outlined: style(outlinedBaseStyle),
-  link: style({}),
-  ghost: style({
-    borderRadius: themeVars.radii.md,
-    fontWeight: themeVars.fontWeight.semibold,
-    backgroundColor: "transparent",
-    selectors: {
-      "&:hover": {
-        backgroundColor: buttonBgVar,
-      },
-    },
-  }),
-  unstyled: style({}),
-};
-
-const intent = {
-  primary: style({
-    vars: {
-      [buttonTextColorVar]: themeVars.colors.white,
-      [buttonBgVar]: themeVars.colors.primary500,
-      [buttonHoverBgVar]: themeVars.colors.primary400,
-    },
-    color: buttonTextColorVar,
-    backgroundColor: buttonBgVar,
-    selectors: {
-      "&:hover": {
-        opacity: 0.8,
-      },
-    },
-  }),
-  secondary: style({
-    vars: {
-      [buttonTextColorVar]: themeVars.colors.gray600,
-      [buttonBgVar]: themeVars.colors.gray100,
-      [buttonHoverBgVar]: themeVars.colors.gray200,
-      [buttonHoverTextColorVar]: themeVars.colors.gray500,
-    },
-    color: buttonTextColorVar,
-    backgroundColor: buttonBgVar,
-    selectors: {
-      "&:hover": {
-        color: buttonHoverTextColorVar,
-        backgroundColor: buttonHoverBgVar,
-      },
-    },
-  }),
-  tertiary: style({
-    vars: {
-      [buttonTextColorVar]: themeVars.colors.white,
-      [buttonBgVar]: themeVars.colors.text,
-    },
-    "@media": {
-      "(prefers-color-scheme: dark)": {
-        vars: {
-          [buttonTextColorVar]: themeVars.colors.cardBg,
-        },
-      },
-    },
-    color: buttonTextColorVar,
-    backgroundColor: buttonBgVar,
-    selectors: {
-      "&:hover": {
-        opacity: 0.8,
-      },
-    },
-  }),
-  text: style({
-    vars: {
-      [buttonTextColorVar]: themeVars.colors.textSecondary,
-      [buttonBgVar]: themeVars.colors.cardBg,
-    },
-    color: buttonTextColorVar,
-    backgroundColor: buttonBgVar,
-    selectors: {
-      "&:hover": {
-        opacity: 0.8,
-      },
-    },
-  }),
-};
-
-export const disabled = {
-  true: style({
-    cursor: "not-allowed !important",
-    opacity: 0.6,
-    pointerEvents: "none",
-  }),
-};
-
-export const size = {
-  xs: style({
-    fontSize: themeVars.fontSize.xs,
-    height: themeVars.space[10],
-    minWidth: themeVars.space[10],
-  }),
-  sm: style({
-    fontSize: themeVars.fontSize.sm,
-    height: themeVars.space[12],
-    minWidth: themeVars.space[12],
-  }),
-  md: style({
-    fontSize: themeVars.fontSize.md,
-    height: themeVars.space[14],
-    minWidth: themeVars.space[14],
-  }),
-  lg: style({
-    fontSize: themeVars.fontSize.lg,
-    height: themeVars.space[15],
-    minWidth: themeVars.space[15],
-  }),
-};
-
-export type Size = keyof typeof size;
 
 export const baseButton = style({
   fontFamily: themeVars.font.body,
@@ -168,101 +33,190 @@ export const unstyledButton = style([
   },
 ]);
 
-export const variants = recipe({
-  base: baseButton,
-  variants: {
-    variant,
-    intent,
-    disabled,
-    size,
-  },
-  // Applied when multiple variants are set at once
-  compoundVariants: [
+export const variants = styleVariants({
+  solid: [
     {
-      variants: {
-        variant: "ghost",
-        intent: "secondary",
-      },
-      style: {
-        vars: {
-          [buttonBgVar]: "transparent",
-          [buttonTextColorVar]: themeVars.colors.textSecondary,
-        },
-      },
+      borderRadius: themeVars.radii.md,
+      fontWeight: themeVars.fontWeight.semibold,
     },
+  ],
+  outlined: [
     {
-      variants: {
-        variant: "outlined",
-        intent: "primary",
-      },
-      style: {
-        vars: {
-          [buttonBgVar]: "rgba(37, 57, 201, 0.1)",
-          [buttonHoverBgVar]: "rgba(37, 57, 201, 0.1)",
-          [buttonTextColorVar]: themeVars.colors.primary500,
-          [buttonHoverTextColorVar]: themeVars.colors.primary400,
+      borderRadius: themeVars.radii.md,
+      outlineWidth: "2px",
+      outlineStyle: "solid",
+      outlineColor: buttonTextColorVar,
+      outlineOffset: "-2px",
+      background: "none !important",
+      color: `${buttonTextColorVar} !important`,
+      selectors: {
+        "&:hover": {
+          opacity: 0.8,
         },
-        ...outlinedBaseStyle,
-      },
-    },
-    {
-      variants: {
-        variant: "outlined",
-        intent: "tertiary",
-      },
-      style: {
-        vars: {
-          [buttonBgVar]: "transparent",
-          [buttonTextColorVar]: themeVars.colors.text,
-        },
-        ...outlinedBaseStyle,
-      },
-    },
-    {
-      variants: {
-        variant: "outlined",
-        intent: "tertiary",
-      },
-      style: {
-        vars: {
-          [buttonBgVar]: "transparent",
-          [buttonTextColorVar]: themeVars.colors.text,
-        },
-
-        "@media": {
-          "(prefers-color-scheme: dark)": {
-            vars: {
-              [buttonTextColorVar]: themeVars.colors.text,
-            },
-          },
-        },
-        ...outlinedBaseStyle,
-        selectors: {
-          "&:hover": {
-            opacity: 0.8,
-          },
-        },
-      },
-    },
-    {
-      variants: {
-        variant: "unstyled",
-        intent: "primary",
-      },
-      style: {
-        vars: {
-          [buttonTextColorVar]: themeVars.colors.text,
-        },
-        backgroundColor: "transparent",
-        color: buttonTextColorVar,
       },
     },
   ],
-  defaultVariants: {
-    variant: "solid",
-    intent: "primary",
-    size: "md",
+  link: [],
+  ghost: [
+    {
+      borderRadius: themeVars.radii.md,
+      fontWeight: themeVars.fontWeight.semibold,
+      backgroundColor: "transparent !important",
+      selectors: {
+        "&:hover": {
+          backgroundColor: `${buttonHoverBgVar} !important`,
+        },
+      },
+    },
+  ],
+  unstyled: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.text,
+      },
+      backgroundColor: "transparent !important",
+      color: buttonTextColorVar,
+    }),
+  ],
+});
+
+// ==== Intents
+const intentPrimaryBase = style({
+  color: buttonTextColorVar,
+  backgroundColor: buttonBgVar,
+  selectors: {
+    "&:hover": {
+      opacity: 0.8,
+    },
   },
 });
 
-export type Variants = RecipeVariants<typeof variants>;
+export const intentPrimary = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonBgVar]: themeVars.colors.primary500,
+        [buttonHoverBgVar]: themeVars.colors.primary400,
+      },
+    }),
+    intentPrimaryBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonBgVar]: themeVars.colors.primary500,
+        [buttonHoverBgVar]: themeVars.colors.primary400,
+      },
+    }),
+    intentPrimaryBase,
+  ],
+});
+
+// ====
+const intentSecondaryBase = style({
+  color: buttonTextColorVar,
+  backgroundColor: buttonBgVar,
+  selectors: {
+    "&:hover": {
+      color: buttonHoverTextColorVar,
+      backgroundColor: buttonHoverBgVar,
+    },
+  },
+});
+
+export const intentSecondary = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.gray600,
+        [buttonBgVar]: themeVars.colors.gray100,
+        [buttonHoverBgVar]: themeVars.colors.gray200,
+        [buttonHoverTextColorVar]: themeVars.colors.gray700,
+      },
+    }),
+    intentSecondaryBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.text,
+        [buttonBgVar]: themeVars.colors.blackAlpha400,
+        [buttonHoverBgVar]: "rgba(143,153,168, .15)",
+        [buttonHoverTextColorVar]: themeVars.colors.text,
+      },
+    }),
+    intentSecondaryBase,
+  ],
+});
+
+// ====
+const intentTertiaryBase = style({
+  color: buttonTextColorVar,
+  backgroundColor: buttonBgVar,
+  selectors: {
+    "&:hover": {
+      opacity: 0.8,
+    },
+  },
+});
+
+export const intentTertiary = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonBgVar]: themeVars.colors.text,
+      },
+    }),
+    intentTertiaryBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.cardBg,
+        [buttonBgVar]: themeVars.colors.textSecondary,
+      },
+    }),
+    intentTertiaryBase,
+  ],
+});
+
+// ====
+const intentTextBase = style({
+  color: buttonTextColorVar,
+  backgroundColor: buttonBgVar,
+  selectors: {
+    "&:hover": {
+      opacity: 0.8,
+    },
+  },
+});
+
+export const intentText = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.textSecondary,
+        [buttonBgVar]: themeVars.colors.cardBg,
+      },
+    }),
+    intentTextBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.textSecondary,
+        [buttonBgVar]: themeVars.colors.cardBg,
+      },
+    }),
+    intentTextBase,
+  ],
+});
+
+export const disabled = style({
+  cursor: "not-allowed !important",
+  opacity: 0.6,
+  pointerEvents: "none",
+});

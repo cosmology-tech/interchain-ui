@@ -2,26 +2,15 @@ import React from "react";
 import cls from "clsx";
 
 import { create } from "zustand";
-import shallow from "zustand/shallow";
-import { store, Box, ThemeProvider } from "../src";
+import { store, Box, Button, Icon, ThemeProvider } from "../src";
 
 const useStore = create(store);
 
-const useCosmologyStore = () => {
-  return useStore(
-    (state) => ({
-      theme: state.theme,
-      themeClass: state.themeClass,
-      setTheme: state.setTheme,
-    }),
-    shallow
-  );
-};
-
 const WithThemeDecorator = (props) => {
-  const [theme, themeClass] = useStore((state) => [
+  const [theme, themeClass, setTheme] = useStore((state) => [
     state.theme,
     state.themeClass,
+    state.setThemeMode,
   ]);
 
   return (
@@ -30,9 +19,29 @@ const WithThemeDecorator = (props) => {
         <Box
           backgroundColor={theme == "dark" ? "$gray700" : "$white"}
           px="$10"
-          py="$10"
+          py="$14"
+          position="relative"
         >
           {props.children}
+          <Box position="absolute" top="$4" right="$4">
+            <Button
+              variant="ghost"
+              intent="secondary"
+              size="sm"
+              onClick={() => {
+                if (theme === "light") {
+                  return setTheme("dark");
+                }
+                return setTheme("light");
+              }}
+            >
+              {theme === "dark" ? (
+                <Icon name="sunLine" />
+              ) : (
+                <Icon name="moonLine" />
+              )}
+            </Button>
+          </Box>
         </Box>
       </div>
     </ThemeProvider>
