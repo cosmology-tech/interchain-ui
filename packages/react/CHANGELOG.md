@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.3.0...@interchain-ui/react@1.3.1) (2023-07-28)
+
+### Bug Fixes
+
+- animation height bounce ([#65](https://github.com/cosmology-tech/interchain-ui/issues/65)) ([4d596d2](https://github.com/cosmology-tech/interchain-ui/commit/4d596d29be1d7d558f81970963175b7485808f23))
+- export hooks for react target ([3f6e5aa](https://github.com/cosmology-tech/interchain-ui/commit/3f6e5aaac5594be4e2989b6aeeb2511c2453b3d0))
+
 # [1.3.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.2.0...@interchain-ui/react@1.3.0) (2023-07-26)
 
 ### Bug Fixes
