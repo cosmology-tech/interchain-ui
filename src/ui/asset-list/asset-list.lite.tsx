@@ -19,19 +19,19 @@ export default function AssetList(props: AssetListProps) {
       }}
     >
       <Stack>
-        <Box width="19" />
-        <Stack attributes={{ marginBottom: "$12", flex: 1 }}>
-          <Text attributes={{ width: "$1/4" }} color="$textSecondary">
+        <Box width="$19" />
+        <Stack space="$0" attributes={{ marginBottom: "$12", flex: 1 }}>
+          <Text attributes={{ width: "25%" }} color="$textSecondary">
             Asset
           </Text>
           <Show when={props.needChainSpace}>
-            <Box width="$1/4">
+            <Box width="25%">
               <Show when={props.isOtherChains}>
                 <Text color="$textSecondary">Chain</Text>
               </Show>
             </Box>
           </Show>
-          <Text attributes={{ width: "$1/4" }} color="$textSecondary">
+          <Text attributes={{ width: "25%" }} color="$textSecondary">
             Balance
           </Text>
         </Stack>

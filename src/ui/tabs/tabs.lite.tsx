@@ -5,6 +5,7 @@ import {
   useStore,
   onUpdate,
   useRef,
+  onMount,
 } from "@builder.io/mitosis";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clsx from "clsx";
@@ -12,16 +13,20 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
+import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./tabs.css";
 import { TabProps, TabsProps } from "./tabs.types";
 
 export default function Tabs(props: TabsProps) {
   const state = useStore<{
+    theme: ThemeVariant;
     selected: number;
     selectTab: (index: number) => void;
     Panel: TabProps;
     getPanel: () => any;
   }>({
+    theme: "light",
     selected: 0,
     Panel: null,
     selectTab(index) {
@@ -36,6 +41,15 @@ export default function Tabs(props: TabsProps) {
       }
     },
   });
+  let cleanupRef = useRef<() => void>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
 
   onUpdate(() => {
     const panel: boolean | TabProps =
@@ -48,10 +62,10 @@ export default function Tabs(props: TabsProps) {
         className={clsx(styles.tabsHorizontal)}
         as="ul"
         position="relative"
-        m="0"
-        p="0"
-        marginBottom="10"
-        backgroundColor="progressBg"
+        m="$0"
+        p="$0"
+        marginBottom="$10"
+        backgroundColor="$progressBg"
         attributes={{
           role: "tablist",
         }}
@@ -78,15 +92,17 @@ export default function Tabs(props: TabsProps) {
                 }}
               >
                 <Text
-                  color="textSecondary"
-                  weight="semibold"
+                  fontSize="$sm"
+                  color="$textSecondary"
+                  fontWeight="$semibold"
                   className={clsx(styles.baseText, {
-                    [styles.selectedText]: state.selected === index,
+                    [styles.selectedText[state.theme]]:
+                      state.selected === index,
                     [styles.selected]: state.selected === index,
                   })}
                   attributes={{
-                    px: "14",
-                    py: "7",
+                    px: "$14",
+                    py: "$7",
                   }}
                 >
                   {tab.label}
@@ -97,9 +113,7 @@ export default function Tabs(props: TabsProps) {
         </For>
         <Box
           className={styles.selectedBg}
-          position="absolute"
-          height="full"
-          backgroundColor="text"
+          height="$full"
           attributes={{
             style: assignInlineVars({
               [styles.selectedWidth]: `calc(100% / ${props?.tabs.length})`,

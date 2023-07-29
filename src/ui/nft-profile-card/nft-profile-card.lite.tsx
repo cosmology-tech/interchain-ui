@@ -26,20 +26,19 @@ export default function NftProfileCard(props: NftProfileCardProps) {
   return (
     <Box
       className={styles.nftProfileCard}
-      cursor="pointer"
       attributes={{ onClick: () => state.open() }}
     >
-      <Stack direction="vertical" space="4">
-        <Box width="full">
+      <Stack direction="vertical" space="$4">
+        <Box width="$full">
           <Box
-            width="full"
+            width="$full"
             height="auto"
             as="img"
-            borderRadius="md"
+            borderRadius="$md"
             attributes={{ src: props?.imgSrc }}
           ></Box>
         </Box>
-        <Text weight="semibold">{props?.name}</Text>
+        <Text fontWeight="$semibold">{props?.name}</Text>
         <StarText label="Highest offer" value={props?.highestOffer} />
         <StarText label="List price" value={props?.listPrice} />
       </Stack>

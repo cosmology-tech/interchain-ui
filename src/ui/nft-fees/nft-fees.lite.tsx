@@ -58,22 +58,22 @@ export default function NftFees(props: NftFeesProps) {
   return (
     <Box className={styles.container}>
       <Text
-        color="textSecondary"
-        weight="semibold"
-        attributes={{ marginBottom: "8" }}
+        color="$textSecondary"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$8" }}
       >
         Fee
       </Text>
-      <Stack space="0" attributes={{ alignItems: "center", flexWrap: "wrap" }}>
+      <Stack space="$0" attributes={{ alignItems: "center", flexWrap: "wrap" }}>
         <For each={state.fees}>
           {(item: NftFeeItemProps, index: number) => (
             <Box
               key={item.feeName}
               className={styles.feeItem}
-              width="1/2"
-              paddingRight={index % 2 === 0 ? "4" : "0"}
-              paddingLeft={index % 2 === 0 ? "0" : "4"}
-              paddingBottom="5"
+              width="50%"
+              paddingRight={index % 2 === 0 ? "$4" : "$0"}
+              paddingLeft={index % 2 === 0 ? "$0" : "$4"}
+              paddingBottom="$5"
             >
               <Stack
                 attributes={{
@@ -81,25 +81,25 @@ export default function NftFees(props: NftFeesProps) {
                   alignItems: "center",
                 }}
               >
-                <Stack space="0" attributes={{ alignItems: "center" }}>
+                <Stack space="$0" attributes={{ alignItems: "center" }}>
                   <Text
-                    color="textSecondary"
-                    size="xs"
-                    attributes={{ marginRight: "3" }}
+                    color="$textSecondary"
+                    fontSize="$xs"
+                    attributes={{ marginRight: "$3" }}
                   >
                     {item.feeName}
                   </Text>
                   <Tooltip title={item?.feeName}>
                     <Icon
                       name="informationLine"
-                      size="md"
-                      color="textSecondary"
+                      size="$md"
+                      color="$textSecondary"
                     />
                   </Tooltip>
                 </Stack>
                 <Text
-                  size="xs"
-                  weight={index === 3 ? "semibold" : "normal"}
+                  fontSize="$xs"
+                  fontWeight={index === 3 ? "$semibold" : "$normal"}
                 >{`${item?.amount} STARS`}</Text>
               </Stack>
             </Box>

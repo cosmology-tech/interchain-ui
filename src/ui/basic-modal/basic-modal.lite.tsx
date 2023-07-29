@@ -54,14 +54,14 @@ export default function BasicModal(props: BasicModalProps) {
       header={
         <Stack
           className={modalHeader}
-          attributes={{ justifyContent: "space-between", alignItems: "center" }}
+          attributes={{ justifyContent: "space-between", alignItems:"center" }}
         >
-          <Text size="xl" weight="semibold">
+          <Text fontSize="$xl" fontWeight="$semibold">
             {props?.title}
           </Text>
           <IconButton
             icon="closeFilled"
-            iconSize="4xl"
+            iconSize="$4xl"
             variant="unstyled"
             onClick={(e) => {
               e.stopPropagation();

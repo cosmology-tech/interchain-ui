@@ -1,7 +1,7 @@
 import { Show, useStore, onUpdate, useDefaultProps } from "@builder.io/mitosis";
 import clsx from "clsx";
 import isNil from "lodash/isNil";
-import uniqueId from "lodash/uniqueId"
+import uniqueId from "lodash/uniqueId";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
@@ -53,6 +53,7 @@ export default function TokenInput(props: TokenInputProps) {
 
   return (
     <Stack
+      space="$0"
       attributes={{
         flexWrap: "wrap",
         alignItems: "center",
@@ -78,23 +79,24 @@ export default function TokenInput(props: TokenInputProps) {
           </Text>
         </Show>
         <Show when={!isNil(props.available)}>
-          <Text color="textSecondary">Available</Text>
-          <Text
-            color="textSecondary"
-            weight="semibold"
-            attributes={{ mx: "3" }}
-          >
-            {props.available}
-          </Text>
-          <Text color="textSecondary" weight="semibold">
-            {props.symbol}
-          </Text>
+          <Stack space="$3" attributes={{ alignItems: "center" }}>
+            <Text color="$textSecondary">Available</Text>
+            <Text
+              color="$textSecondary"
+              fontWeight="$semibold"
+            >
+              {props.available}
+            </Text>
+            <Text color="$textSecondary" fontWeight="$semibold">
+              {props.symbol}
+            </Text>
+          </Stack>
         </Show>
       </Stack>
       <Show when={props.hasProgressBar}>
         <Stack
           className={styles.progressContainer}
-          space="0"
+          space="$0"
           attributes={{
             alignItems: "center",
           }}
@@ -102,7 +104,7 @@ export default function TokenInput(props: TokenInputProps) {
           <CicularProgressBar progress={props.progress} />
           <Stack
             className={styles.iconBox}
-            space="0"
+            space="$0"
             attributes={{
               alignItems: "center",
             }}
@@ -143,9 +145,9 @@ export default function TokenInput(props: TokenInputProps) {
         >
           <Box
             as="img"
-            width="14"
-            height="14"
-            borderRadius="full"
+            width="$14"
+            height="$14"
+            borderRadius="$full"
             attributes={{ src: props?.imgSrc }}
           />
         </Stack>

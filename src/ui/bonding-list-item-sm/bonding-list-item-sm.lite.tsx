@@ -50,7 +50,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               %
             </Text>
           </Stack>
-          <Button size="sm" intent="tertiary" variant="outlined">
+          <Button size="sm" intent="tertiary">
             Unbond
           </Button>
         </Box>

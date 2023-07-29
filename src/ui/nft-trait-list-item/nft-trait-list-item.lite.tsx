@@ -11,16 +11,17 @@ export default function NftTraitListItem(props: NftTraitListItemProps) {
       attributes={{
         justifyContent: "space-between",
         alignItems: "center",
-        paddingBottom: "8"
+        paddingBottom: "$8",
       }}
+      space="$0"
     >
-      <Stack direction="vertical">
-        <Text color="textSecondary" size="xs">
+      <Stack direction="vertical" space="$0">
+        <Text color="$textSecondary" fontSize="$xs">
           {props?.name}
         </Text>
-        <Text weight="semibold">{props?.value}</Text>
+        <Text fontWeight="$semibold">{props?.value}</Text>
       </Stack>
-      <Text size="xl" weight="semibold">
+      <Text fontSize="$xl" fontWeight="$semibold">
         {props?.rarityPercent}%
       </Text>
     </Stack>

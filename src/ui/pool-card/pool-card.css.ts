@@ -3,7 +3,7 @@ import { breakpoints } from "../../styles/tokens";
 import { themeVars } from "../../styles/themes.css";
 
 export const container = style({
-  backgroundColor: "cardBg",
+  backgroundColor: themeVars.colors.cardBg,
   padding: themeVars.space[10],
   borderRadius: themeVars.radii.lg,
   boxSizing: "border-box",

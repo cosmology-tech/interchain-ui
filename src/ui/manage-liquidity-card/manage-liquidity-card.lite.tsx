@@ -29,6 +29,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
 
   return (
     <Stack
+      space="$0"
       className={styles.container}
       attributes={{
         alignItems: "flex-end",
@@ -38,11 +39,15 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         borderRadius: "$lg",
       }}
     >
-      <Stack className={styles.poolBalanceContainer} direction="vertical">
+      <Stack
+        className={styles.poolBalanceContainer}
+        direction="vertical"
+        space="$0"
+      >
         <Text color="$textSecondary" fontWeight="$semibold">
           Your pool balance
         </Text>
-        <Stack attributes={{ my: "$2", alignItems: "baseline" }}>
+        <Stack attributes={{ my: "$2", alignItems: "baseline" }} space="$0">
           <Text fontWeight="$semibold" attributes={{ marginRight: "$1" }}>
             $
           </Text>
@@ -60,8 +65,9 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         attributes={{
           alignItems: "flex-end",
         }}
+        space="$0"
       >
-        <Stack>
+        <Stack space="$0">
           <img className={styles.image} src={props.token1.imgSrc} />
           <Text
             color="$textSecondary"
@@ -73,7 +79,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           <Text color="$textSecondary">{props.token1.name}</Text>
         </Stack>
         <Box height="$5" />
-        <Stack>
+        <Stack space="$0">
           <img className={styles.image} src={props.token2.imgSrc} />
           <Text
             attributes={{ px: "$4" }}
@@ -84,15 +90,11 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
           <Text color="$textSecondary">{props.token2.name}</Text>
         </Stack>
-        <Button
-          attributes={{ marginTop: "$11" }}
-          intent="tertiary"
-          variant="outlined"
-        >
+        <Button attributes={{ marginTop: "$11" }} intent="tertiary">
           Remove Liquidity
         </Button>
       </Stack>
-      <Stack direction="vertical" className={styles.tokenContainer}>
+      <Stack direction="vertical" className={styles.tokenContainer} space="$0">
         <Text color="$textSecondary" fontWeight="$semibold">
           Available LP Tokens
         </Text>
@@ -100,6 +102,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           attributes={{
             alignItems: "baseline",
           }}
+          space="$0"
         >
           <Text fontWeight="$semibold" attributes={{ marginRight: "$1" }}>
             $
@@ -109,11 +112,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Text>
         </Stack>
         <Text>No pool shares yet</Text>
-        <Button
-          attributes={{ marginTop: "$11" }}
-          intent="tertiary"
-          variant="outlined"
-        >
+        <Button attributes={{ marginTop: "$11" }} intent="tertiary">
           Start earning
         </Button>
       </Stack>

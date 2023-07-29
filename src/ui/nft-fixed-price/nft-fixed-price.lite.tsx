@@ -41,7 +41,10 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
         symbol="STARS"
         imgSrc={starIcon}
       />
-      <Stack attributes={{ my: "10", justifyContent: "space-between" }}>
+      <Stack
+        space="$0"
+        attributes={{ my: "$10", justifyContent: "space-between" }}
+      >
         <For each={state.starList}>
           {(item) => (
             <StarText key={item.label} label={item.label} value={item.value} />
@@ -52,11 +55,11 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
       <Button
         intent="tertiary"
         size="lg"
-        attributes={{ marginBottom: "10", width: "full" }}
+        attributes={{ marginBottom: "$10", width: "$full" }}
       >
         List
       </Button>
-      <Button variant="unstyled" size="sm" attributes={{ width: "full" }}>
+      <Button variant="unstyled" size="sm" attributes={{ width: "$full" }}>
         Cancel
       </Button>
     </Box>

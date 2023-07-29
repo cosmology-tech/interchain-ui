@@ -11,29 +11,12 @@ export default function PoolList(props: PoolListProps) {
     titles: ["Pool", "Liquidity", "24H Volume", "7D Fees", "APR"],
   });
 
-  const item = {
-    token1: {
-      name: "ATOM",
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
-    },
-    token2: {
-      name: "OSOM",
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-    },
-    liquidity: 168767639,
-    volume: 3288612,
-    fees: 59075,
-    apr: 24,
-  };
-
   return (
     <Box className={styles.container}>
       <Text color="$textSecondary" fontSize="$xl" fontWeight="$semibold">
         {props.title}
       </Text>
-      <Stack className={styles.titleContainer} space="0">
+      <Stack className={styles.titleContainer} space="$0">
         <For each={state.titles}>
           {(item, index) => (
             <Text key={index} className={styles.title} color="$textSecondary">

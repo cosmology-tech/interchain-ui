@@ -50,11 +50,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
       >
         Liquidity Pools
       </Text>
-      <Stack
-        className={styles.container}
-        space="$0"
-        attributes={{ gap: "$10" }}
-      >
+      <Stack className={styles.container} space="$10">
         <Box className={styles.baseBox}>
           <Stack
             attributes={{
@@ -70,6 +66,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               <Text
                 color="$textSecondary"
                 fontWeight="$semibold"
+                fontSize="$sm"
                 className={styles.mb3}
               >
                 OSMO Price
@@ -106,12 +103,39 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             <Text
               color="$textSecondary"
               fontWeight="$semibold"
+              lineHeight="$normal"
+              fontSize="$sm"
               className={styles.mb3}
             >
               Reward distribution in
             </Text>
-            <Text color="$text" fontWeight="$semibold" fontSize="$4xl">
-              12 <Semocolon /> 19 <Semocolon /> 48
+            <Text
+              color="$text"
+              fontWeight="$semibold"
+              fontSize="$4xl"
+              lineHeight="$normal"
+            >
+              12
+              <Text
+                className={styles.semocolon}
+                as="span"
+                color="$textSecondary"
+                fontWeight="$semibold"
+                fontSize="$4xl"
+              >
+                :
+              </Text>
+              19
+              <Text
+                className={styles.semocolon}
+                as="span"
+                color="$textSecondary"
+                fontWeight="$semibold"
+                fontSize="$4xl"
+              >
+                :
+              </Text>
+              48
             </Text>
           </Stack>
         </Box>
@@ -124,9 +148,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             }}
           >
             <Text
-              className={styles.mb3}
               color="$rewardContent"
               fontWeight="$semibold"
+              lineHeight="$normal"
+              fontSize="$sm"
+              className={styles.mb3}
             >
               Yesterdays rewards
             </Text>
@@ -150,7 +176,10 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 OSMO
               </Text>
-              <Text className={styles.mb3} color="$rewardContent">
+              <Text
+                color="$rewardContent"
+                className={styles.mb3}
+              >
                 {props.$rewards}
               </Text>
             </Stack>

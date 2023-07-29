@@ -27,9 +27,11 @@ export default function Tooltip(props: TooltipProps) {
     >
       {props?.children}
       <Stack
-        justify="center"
-        align="center"
-        attributes={{ width: "full" }}
+        attributes={{
+          width: "$full",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
         className={clsx(
           styles.tooltiptext,
           variants({
@@ -40,8 +42,8 @@ export default function Tooltip(props: TooltipProps) {
           }
         )}
       >
-        <Box p="3" backgroundColor="text" borderRadius="md">
-          <Text color="progressBg">{props.title}</Text>
+        <Box p="$3" backgroundColor="$text" borderRadius="$md">
+          <Text color="$progressBg">{props.title}</Text>
         </Box>
       </Stack>
     </Box>

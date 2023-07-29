@@ -4,11 +4,11 @@ import { themeVars } from "../../styles/themes.css";
 
 export const container = style([
   {
-    minWidth: "400px",
+    minWidth: "450px",
     transition: "ease all .5s",
     flexWrap: "nowrap",
     "@media": {
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      [`screen and (max-width: 900px)`]: {
         flexWrap: "wrap",
       },
     },
@@ -18,12 +18,10 @@ export const container = style([
 const base = style({
   paddingLeft: themeVars.space[8],
   paddingRight: themeVars.space[8],
-  paddingTop: themeVars.space[9],
-  paddingBottom: themeVars.space[9],
   display: "flex",
   alignItems: "center",
   borderRadius: "7px",
-  minHeight: "92px",
+  height: "92px",
   boxSizing: "border-box",
 });
 
@@ -36,7 +34,7 @@ export const image = style({
   height: "53px",
   marginRight: "21px",
   "@media": {
-    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+    [`screen and (max-width: 900px)`]: {
       width: "40px",
       height: "40px",
       marginRight: "13px",
@@ -57,9 +55,8 @@ export const baseBox = style([
   {
     backgroundColor: themeVars.colors.cardBg,
     width: "234px",
-    height: "fit-content",
     "@media": {
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      [`screen and (max-width: 900px)`]: {
         width: "calc(50% - 12px)",
         maxWidth: "calc(50% - 12px)",
         minWidth: "179px",
@@ -75,9 +72,8 @@ export const rewardBox = style([
     color: themeVars.colors.rewardContent,
     width: "234px",
     maxWidth: "234px",
-    height: "fit-content",
     "@media": {
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      [`screen and (max-width: 900px)`]: {
         width: "100%",
         maxWidth: "100%",
         minWidth: "382px",

@@ -43,7 +43,7 @@ export default function NftMint(props: NftMintProps) {
           .multipliedBy(props.starsPrice)
           .decimalPlaces(2)
           .toString();
-          state.isAffordable =starsCount.lt(props.available);
+        state.isAffordable = starsCount.lt(props.available);
       }
     },
   });
@@ -137,7 +137,11 @@ export default function NftMint(props: NftMintProps) {
               }}
             >
               <Box as="label" attributes={{ htmlFor: "nft-mint-amount" }}>
-                <Text color="textSecondary" size="lg" weight="semibold">
+                <Text
+                  color="$textSecondary"
+                  fontSize="$lg"
+                  fontWeight="$semibold"
+                >
                   Select amount
                 </Text>
               </Box>
@@ -195,13 +199,13 @@ export default function NftMint(props: NftMintProps) {
                 <Text color="$textSecondary" attributes={{ marginRight: "$2" }}>
                   Price:
                 </Text>
-                <Text color="textSecondary" weight="semibold">
+                <Text color="$textSecondary" fontWeight="$semibold">
                   {`${store.getState()?.formatNumber?.({
                     value: props?.priceDisplayAmount,
                   })} STARS`}
                 </Text>
               </Stack>
-              <Text color="textSecondary">
+              <Text color="$textSecondary">
                 {`Limited to ${store
                   .getState()
                   ?.formatNumber?.({ value: props?.limited })} tokens`}

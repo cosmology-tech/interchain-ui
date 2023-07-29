@@ -71,11 +71,8 @@ export const variants = styleVariants({
   ],
   unstyled: [
     style({
-      vars: {
-        [buttonTextColorVar]: themeVars.colors.text,
-      },
       backgroundColor: "transparent !important",
-      color: buttonTextColorVar,
+      color: `${themeVars.colors.text} !important`,
     }),
   ],
 });

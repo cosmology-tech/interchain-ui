@@ -8,22 +8,22 @@ import { StarTextProps } from "./star-text.types";
 
 export default function StarText(props: StarTextProps) {
   return (
-    <Stack align="center">
+    <Stack attributes={{ alignItems: "center" }}>
       <Show when={!!props.label}>
-        <Text color="textSecondary" attributes={{ marginRight: "3" }}>
+        <Text color="$textSecondary" attributes={{ marginRight: "$3" }}>
           {props.label}
         </Text>
       </Show>
       <Text
-        weight="semibold"
-        attributes={{ marginRight: "3" }}
+        fontWeight="$semibold"
+        attributes={{ marginRight: "$3" }}
       >{`${props?.value} STARS`}</Text>
       <Box
         as="img"
         attributes={{ src: starIcon }}
-        borderRadius="full"
-        width="8"
-        height="8"
+        borderRadius="$full"
+        width="$8"
+        height="$8"
       />
     </Stack>
   );

@@ -16,7 +16,7 @@ export default function PoolCardList(props: BondingCardListProps) {
       >
         <For each={props.list}>
           {(item: BondingCardProps, index: number) => (
-            <Box width="$1/3" key={item.title}>
+            <Box width="33.33%" key={item.title}>
               <BondingCard title={item.title} value={item.value} />
             </Box>
           )}

@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
 const selectedTextColor = createVar();
@@ -11,7 +11,7 @@ export const tabsBase = style([
     borderRadius: "50px",
     minWidth: "465px",
     zIndex: "1",
-  }
+  },
 ]);
 
 export const tabsHorizontal = style([
@@ -48,24 +48,31 @@ export const baseText = style({
   transition: "background-color 0.2s ease-in",
 });
 
-export const selectedText = style({
-  vars: {
-    [selectedTextColor]: themeVars.colors.white,
-  },
-  "@media": {
-    "(prefers-color-scheme: dark)": {
+export const selectedText = styleVariants({
+  light: [
+    style({
+      vars: {
+        [selectedTextColor]: themeVars.colors.white,
+      },
+      color: selectedTextColor,
+    }),
+  ],
+  dark: [
+    style({
       vars: {
         [selectedTextColor]: themeVars.colors.cardBg,
       },
-    },
-  },
-  color: selectedTextColor,
+      color: selectedTextColor,
+    }),
+  ],
 });
 
 export const selectedBg = style({
+  position: "absolute",
   zIndex: "-1",
   borderRadius: "50px",
   transition: "left 0.1s ease-out",
   width: selectedWidth,
   left: selectedLeft,
+  backgroundColor: themeVars.colors.text,
 });

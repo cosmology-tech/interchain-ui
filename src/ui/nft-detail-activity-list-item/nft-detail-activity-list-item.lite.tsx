@@ -12,27 +12,30 @@ export default function NftDetailActivityListItem(
   return (
     <Stack
       className={styles.container}
-      attributes={{ justifyContent: "space-between", paddingRight: "15" }}
+      attributes={{ justifyContent: "space-between", paddingRight: "$15" }}
     >
       <Box flex={1}>
         <Stack attributes={{ alignItems: "center" }}>
-          <Icon name="priceTagLine" size="md" />
-          <Text attributes={{ marginLeft: "9", marginRight: "12" }}>
+          <Icon name="priceTagLine" size="$md" color="$text" />
+          <Text attributes={{ marginLeft: "$9", marginRight: "$12" }}>
             {props?.event}
           </Text>
-          <Text size="xs" color="textSecondary">{`${props?.price} STAR`}</Text>
+          <Text
+            fontSize="$xs"
+            color="$textSecondary"
+          >{`${props?.price} STAR`}</Text>
         </Stack>
       </Box>
       <Box flex={1}>
         <Stack attributes={{ alignItems: "center" }}>
           <Text
-            size="xs"
-            color="textSecondary"
-            attributes={{ marginRight: "2" }}
+            fontSize="$xs"
+            color="$textSecondary"
+            attributes={{ marginRight: "$2" }}
           >
             from
           </Text>
-          <Text size="xs" weight="semibold">
+          <Text fontSize="$xs" fontWeight="$semibold">
             {props?.from}
           </Text>
         </Stack>
@@ -40,19 +43,19 @@ export default function NftDetailActivityListItem(
       <Box flex={1}>
         <Stack attributes={{ alignItems: "center" }}>
           <Text
-            size="xs"
-            color="textSecondary"
-            attributes={{ marginRight: "2" }}
+            fontSize="$xs"
+            color="$textSecondary"
+            attributes={{ marginRight: "$2" }}
           >
             to
           </Text>
-          <Text size="xs" weight="semibold">
+          <Text fontSize="$xs" fontWeight="$semibold">
             {props?.to ?? "---"}
           </Text>
         </Stack>
       </Box>
       <Box flex={1}>
-        <Text size="xs" color="textSecondary">
+        <Text fontSize="$xs" color="$textSecondary">
           {props?.date}
         </Text>
       </Box>

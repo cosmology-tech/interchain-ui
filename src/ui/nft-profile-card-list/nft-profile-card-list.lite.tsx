@@ -11,8 +11,8 @@ export default function NftProfileCardList(props: NftProfileCardListProps) {
   return (
     <Stack
       className={styles.container}
-      space="0"
-      attributes={{ flexWrap: "wrap", gap: "10" }}
+      space="$10"
+      attributes={{ flexWrap: "wrap"}}
     >
       <For each={props?.list}>
         {(item: NftProfileCardProps, index: number) => (

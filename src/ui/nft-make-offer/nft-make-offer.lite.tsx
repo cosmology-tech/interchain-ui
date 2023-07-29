@@ -10,19 +10,19 @@ import { NftMakeOfferProps } from "./nft-make-offer.types";
 export default function NftMakeOffer(props: NftMakeOfferProps) {
   return (
     <Box className={styles.container}>
-      <Stack attributes={{ alignItems: "center" }}>
+      <Stack attributes={{ alignItems: "center" }} space="$0">
         <Box
           as="img"
-          width="13"
-          height="13"
-          borderRadius="md"
-          marginRight="5"
+          width="$13"
+          height="$13"
+          borderRadius="$md"
+          marginRight="$5"
           attributes={{ src: props?.imgSrc }}
         />
-        <Text attributes={{ marginRight: "2" }}>for</Text>
-        <Text weight="semibold">{props.tokenName}</Text>
+        <Text attributes={{ marginRight: "$2" }}>for</Text>
+        <Text fontWeight="$semibold">{props.tokenName}</Text>
       </Stack>
-      <Box my="12">
+      <Box my="$12">
         <TokenInput
           title="Price"
           hasProgressBar={false}
@@ -33,11 +33,11 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
       <Button
         size="lg"
         intent="tertiary"
-        attributes={{ marginBottom: "9", width: "full" }}
+        attributes={{ marginBottom: "$9", width: "$full" }}
       >
         Make Offer
       </Button>
-      <Button variant="unstyled" size="sm" attributes={{ width: "full" }}>
+      <Button variant="unstyled" size="sm" attributes={{ width: "$full" }}>
         Cancel
       </Button>
     </Box>

@@ -15,8 +15,8 @@ export const container = style({
 
 export const titleContainer = style({
   paddingLeft: "88px",
-  marginRight: themeVars.space[9],
-  marginLeft: themeVars.space[9],
+  marginTop: themeVars.space[9],
+  marginBottom: themeVars.space[9],
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       display: "none !important",
@@ -29,6 +29,6 @@ export const title = style({
 });
 
 export const listContainer = style({
-  paddingLeft: themeVars.space[6],
-  paddingRight: themeVars.space[6],
+  paddingTop: themeVars.space[6],
+  paddingBottom: themeVars.space[6],
 });

@@ -20,7 +20,7 @@ export default function AssetListItem(props: AssetListItemProps) {
   });
 
   onUpdate(() => {
-    state.size = props.isOtherChains ? "xs" : "sm";
+    state.size = props.isOtherChains ? "$xs" : "$sm";
   }, [props.isOtherChains]);
 
   return (
@@ -37,7 +37,11 @@ export default function AssetListItem(props: AssetListItemProps) {
         />
       </Box>
       <Stack attributes={{ alignItems: "center", flex: 1 }}>
-        <Stack direction="vertical" className={styles.fieldContainer}>
+        <Stack
+          space="$0"
+          direction="vertical"
+          className={styles.fieldContainer}
+        >
           <Text
             fontSize={state.size}
             fontWeight="$semibold"
@@ -58,7 +62,11 @@ export default function AssetListItem(props: AssetListItemProps) {
             </Show>
           </Stack>
         </Show>
-        <Stack className={styles.fieldContainer} direction="vertical">
+        <Stack
+          space="$0"
+          className={styles.fieldContainer}
+          direction="vertical"
+        >
           <Text
             fontSize={state.size}
             fontWeight="$semibold"
