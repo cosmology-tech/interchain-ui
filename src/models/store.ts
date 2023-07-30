@@ -1,8 +1,18 @@
 import { createStore } from "zustand/vanilla";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { ModePreference, ThemeVariant, NumberFormatter } from "./system.model";
+import BigNumber from "bignumber.js";
+import {
+  ModePreference,
+  ThemeVariant,
+  NumberFormatter,
+  NumberFormatProps,
+} from "./system.model";
 import { isPreferDarkMode, isPreferLightMode } from "../helpers/style";
+import {
+  getCurrencyFormatter,
+  safelyFormatNumberWithFallback,
+} from "../helpers/number";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
 
 export const STORAGE_NAME = "interchain-ui-store";
@@ -76,7 +86,16 @@ export const store = createStore(
           state.theme = resolvedTheme;
           state.themeClass = resolvedClass;
         }),
-      formatNumber: null,
+      formatNumber: (props: NumberFormatProps): string => {
+        const formatter = getCurrencyFormatter("en-US", {
+          currency: "USD",
+          style: props.style,
+        });
+        return safelyFormatNumberWithFallback(
+          formatter,
+          new BigNumber(props.value)
+        );
+      },
       setFormatNumberFn: (fn: NumberFormatter) =>
         set((state) => {
           state.formatNumber = fn;
