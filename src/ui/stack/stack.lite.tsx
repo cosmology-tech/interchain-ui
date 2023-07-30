@@ -17,7 +17,6 @@ export default function Stack(props: StackProps) {
       flex={props.flex}
       flexDirection={props.direction === "horizontal" ? "row" : "column"}
       flexWrap={props.flexWrap}
-      alignItems={props.align}
       gap={props.space}
       className={props.className}
     >
