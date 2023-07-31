@@ -17,7 +17,7 @@ export type ModePreference = ThemeVariant | "system";
 export const ModePreferences: ModePreference[] = ["light", "dark", "system"];
 
 export interface NumberFormatProps {
-  value: number;
+  value: number | string;
   style?: string;
 }
 export type NumberFormatter = (props: NumberFormatProps) => string;

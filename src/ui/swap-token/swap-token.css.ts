@@ -49,3 +49,7 @@ export const percentContainer = style({
   transform: "translate(0, -50%)",
   right: "-300px",
 });
+
+export const rel = style({
+  position: "relative"
+})

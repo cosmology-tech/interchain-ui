@@ -18,11 +18,16 @@ export const Primary: Story = {
   args: {
     title: "From",
     maxBtn: true,
-    halfBtn: true,
-    availableAmount: 713.32,
-    symbol: "UMEE",
-    denom: "Umee",
-    imgSrc:
-      "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
+    hasAvailable: true,
+    dropDownList: [
+      {
+        available: 713.32,
+        symbol: "UMEE",
+        denom: "Umee",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
+        priceDisplayAmount: 0.5,
+      },
+    ],
   },
 };

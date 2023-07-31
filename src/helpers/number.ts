@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js";
+import { store } from "../models/store";
 function getNoOpFormatter(
   // locale: string = "default",
   locale: string,
@@ -35,4 +36,20 @@ export function safelyFormatNumberWithFallback(
 
   // As a fallback, simply return the ugly string value
   return value.toString();
+}
+
+export function getValueByAvailable(
+  inputValue: string | number,
+  available: string | number
+): string {
+  if (inputValue === "") {
+    return "";
+  }
+  if (new BigNumber(inputValue).gt(available)) {
+    return new BigNumber(available).toString();
+  }
+  if (new BigNumber(inputValue).lt(0)) {
+    return new BigNumber(0).toString();
+  }
+  return inputValue.toString();
 }

@@ -21,5 +21,15 @@ export const Primary: Story = {
     totalOnAll: "732.16",
     canDeposit: true,
     canWithdraw: true,
+    dropDownList: [
+      {
+        available: "713.32",
+        symbol: "UMEE",
+        denom: "Umee",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
+        priceDisplayAmount: 0.5,
+      },
+    ],
   },
 };

@@ -1,4 +1,11 @@
-import { Show, useStore, onUpdate, useDefaultProps } from "@builder.io/mitosis";
+import {
+  Show,
+  useStore,
+  onUpdate,
+  useDefaultProps,
+  useRef,
+} from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import isNil from "lodash/isNil";
 import uniqueId from "lodash/uniqueId";
@@ -11,11 +18,14 @@ import TextField from "../text-field";
 import * as styles from "./token-input.css";
 
 import { TokenInputProps } from "./token-input.types";
+import { getValueByAvailable } from "../../helpers";
+import { store } from "../../models/store";
 
 export default function TokenInput(props: TokenInputProps) {
   useDefaultProps({
     hasProgressBar: true,
   });
+  const inputIdRef = useRef(uniqueId("token-input-"));
 
   const state = useStore<{
     symbolValue: string;
@@ -28,9 +38,13 @@ export default function TokenInput(props: TokenInputProps) {
     disabled: false,
     amount: "",
     handleTokenInput(e) {
-      state.symbolValue = e.target.value;
-      state.amount = e.target.value;
-      props.onAmountChange && props.onAmountChange(e.target.value);
+      let value = getValueByAvailable(e.target.value, props.available);
+      state.amount = value;
+      state.symbolValue = new BigNumber(value)
+        .multipliedBy(props.priceDisplayAmount)
+        .decimalPlaces(2)
+        .toString();
+      props.onAmountChange && props.onAmountChange(value);
     },
     handleIconClick(e) {
       let newProgress: number = 0;
@@ -49,7 +63,9 @@ export default function TokenInput(props: TokenInputProps) {
     } else {
       state.disabled = false;
     }
-  }, [props.progress]);
+
+    state.handleTokenInput({ target: { value: props.amount ?? "" } });
+  }, [props.progress, props.amount]);
 
   return (
     <Stack
@@ -69,22 +85,24 @@ export default function TokenInput(props: TokenInputProps) {
         }}
       >
         <Show when={!!props.title}>
-          <Text
+          <Box
+            as="label"
             className={styles.inputTitle}
             color="$textSecondary"
             fontWeight="$semibold"
             fontSize="$lg"
+            fontFamily="$body"
+            attributes={{
+              htmlFor: inputIdRef,
+            }}
           >
             {props.title}
-          </Text>
+          </Box>
         </Show>
         <Show when={!isNil(props.available)}>
           <Stack space="$3" attributes={{ alignItems: "center" }}>
             <Text color="$textSecondary">Available</Text>
-            <Text
-              color="$textSecondary"
-              fontWeight="$semibold"
-            >
+            <Text color="$textSecondary" fontWeight="$semibold">
               {props.available}
             </Text>
             <Text color="$textSecondary" fontWeight="$semibold">
@@ -139,22 +157,25 @@ export default function TokenInput(props: TokenInputProps) {
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
         space="$0"
       >
-        <Stack
-          className={styles.imgBox}
-          attributes={{ justifyContent: "center", alignItems: "center" }}
-        >
-          <Box
-            as="img"
-            width="$14"
-            height="$14"
-            borderRadius="$full"
-            attributes={{ src: props?.imgSrc }}
-          />
-        </Stack>
         <TextField
-          id={uniqueId("token-input-")}
+          id={inputIdRef}
+          type="number"
           value={state.amount}
           disabled={state.disabled}
+          startAddon={
+            <Stack
+              className={styles.imgBox}
+              attributes={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Box
+                as="img"
+                width="$14"
+                height="$14"
+                borderRadius="$full"
+                attributes={{ src: props?.imgSrc }}
+              />
+            </Stack>
+          }
           onChange={(e) => state.handleTokenInput(e)}
           className={styles.token}
           inputContainer={styles.inputContainer}
@@ -169,7 +190,11 @@ export default function TokenInput(props: TokenInputProps) {
           }}
         >
           <Text fontWeight="$semibold">{props.symbol} &nbsp;</Text>
-          <Text color="$textSecondary">≈ ${state.symbolValue}</Text>
+          <Show when={!!state.amount && !new BigNumber(state.amount).eq(0)}>
+            <Text color="$textSecondary" attributes={{ ml: "$2" }}>
+              ≈ ${store.getState().formatNumber({ value: state.symbolValue })}
+            </Text>
+          </Show>
         </Stack>
       </Stack>
     </Stack>

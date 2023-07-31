@@ -1,5 +1,20 @@
-import { TrasferType } from "../overview-transfer/overview-transfer.types";
+import { TransferType } from "../overview-transfer/overview-transfer.types";
 
 export interface AssetItemTransferProps {
-  type: TrasferType;
+  /**
+   * Transfer type
+   */
+  type: TransferType;
+  fromSymbol: string;
+  fromDenom: string;
+  fromAddress: string;
+  fromImgSrc: string;
+  toDenom: string;
+  toAddress: string;
+  toImgSrc: string;
+  avaliable: string | number;
+  priceDisplayAmount: number;
+  amount?: string;
+  onTransfer?: (amountValue: string) => void;
+  onCancel?: () => void;
 }

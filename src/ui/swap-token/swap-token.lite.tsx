@@ -136,7 +136,7 @@ export default function SwapToken(props: SwapTokenProps) {
           justifyContent: "center",
         }}
       >
-        <Box position="relative" boxRef={swapIconRef}>
+        <div className={styles.rel} ref={swapIconRef}>
           <IconButton
             size="lg"
             className={styles.swapIcon[state.theme]}
@@ -147,7 +147,7 @@ export default function SwapToken(props: SwapTokenProps) {
             onHoverStart={(e) => state.toggleIcon(90, "arrowLeftRightLine")}
             onHoverEnd={(e) => state.toggleIcon(0, "arrowDownLine")}
           />
-        </Box>
+        </div>
       </Stack>
       <TransferItem
         halfBtn={false}

@@ -1,4 +1,5 @@
 import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -8,10 +9,25 @@ import TokenInput from "../token-input";
 import * as styles from "./asset-item-transfer.css";
 import { store } from "../../models/store";
 import { AssetItemTransferProps } from "./asset-item-transfer.types";
+import { ThemeVariant } from "../../models/system.model";
 
 export default function AssetItemTransfer(props: AssetItemTransferProps) {
-  const state = useStore({
-    theme: "",
+  const state = useStore<{
+    theme: ThemeVariant;
+    inputAmount: string;
+    handleAmountChange: (percent: number) => void;
+    onAmountChange: (value: string) => void;
+  }>({
+    theme: "light",
+    inputAmount: "",
+    handleAmountChange(percent) {
+      state.inputAmount = new BigNumber(props.avaliable)
+        .multipliedBy(percent)
+        .toString();
+    },
+    onAmountChange(value) {
+      state.inputAmount = value;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -38,10 +54,10 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             marginRight: "$3",
           }}
         >
-          {props.type}
+          {`${props.type === "withdraw" ? "Withdraw" : "Deposit"}`}
         </Text>
         <Text fontSize="$xl" fontWeight="$semibold">
-          ATOM
+          {props.fromSymbol}
         </Text>
       </Stack>
 
@@ -54,10 +70,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           alignItems: "center",
         }}
       >
-        <img
-          className={styles.img}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
-        />
+        <img className={styles.img} src={props.fromImgSrc} />
         <Icon
           name="arrowRightLine"
           color="$textSecondary"
@@ -66,10 +79,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             mx: "$9",
           }}
         />
-        <img
-          className={styles.img}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
-        />
+        <img className={styles.img} src={props.toImgSrc} />
       </Stack>
       <Stack
         className={styles.onlyLg}
@@ -88,7 +98,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               marginBottom: "$6",
             }}
           >
-            From Cosmos Hub
+            {`From ${props.fromDenom}`}
           </Text>
           <Stack
             attributes={{
@@ -102,7 +112,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               className={styles.smImg}
               src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
             />
-            <Text color="$textSecondary">atom1xy5y...m6wwz9a</Text>
+            <Text color="$textSecondary">{props.fromAddress}</Text>
           </Stack>
         </Stack>
         <Icon
@@ -122,7 +132,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               marginBottom: "$6",
             }}
           >
-            From Cosmos Hub
+            {`From ${props.toDenom}`}
           </Text>
           <Stack
             attributes={{
@@ -132,22 +142,21 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               alignItems: "$center",
             }}
           >
-            <img
-              className={styles.smImg}
-              src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
-            />
-            <Text color="$textSecondary">atom1xy5y...m6wwz9a</Text>
+            <img className={styles.smImg} src={props.toImgSrc} />
+            <Text color="$textSecondary">{props.toAddress}</Text>
           </Stack>
         </Stack>
       </Stack>
       <TokenInput
         title="Select amount"
         hasProgressBar={false}
-        progress={50}
-        symbol="OMSO"
-        denom="Osmosis"
-        available={0.71263}
-        imgSrc="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
+        amount={state.inputAmount}
+        priceDisplayAmount={props.priceDisplayAmount}
+        symbol={props.fromSymbol}
+        denom={props.fromDenom}
+        available={props.avaliable}
+        imgSrc={props.fromImgSrc}
+        onAmountChange={(value) => state.onAmountChange(value)}
       />
 
       <Stack
@@ -158,13 +167,25 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           justifyContent: "flex-end",
         }}
       >
-        <Button intent="text" size="xs">
+        <Button
+          intent="text"
+          size="xs"
+          onClick={() => state.handleAmountChange(1)}
+        >
           Max
         </Button>
-        <Button intent="text" size="xs">
+        <Button
+          intent="text"
+          size="xs"
+          onClick={() => state.handleAmountChange(1 / 2)}
+        >
           1/2
         </Button>
-        <Button intent="text" size="xs">
+        <Button
+          intent="text"
+          size="xs"
+          onClick={() => state.handleAmountChange(1 / 3)}
+        >
           1/3
         </Button>
       </Stack>
@@ -189,7 +210,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Text fontWeight="$semibold"> 20 seconds</Text>
       </Stack>
 
-      <Button intent="tertiary" attributes={{ width: "$full" }}>
+      <Button
+        intent="tertiary"
+        attributes={{ width: "$full" }}
+        onClick={() => props?.onTransfer?.(state.inputAmount)}
+      >
         <Stack
           attributes={{
             alignItems: "center",
@@ -224,7 +249,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           </Stack>
         </Stack>
       </Button>
-      <Button variant="unstyled" attributes={{ width: "$full", marginTop: "$5" }}>
+      <Button
+        variant="unstyled"
+        attributes={{ width: "$full", marginTop: "$5" }}
+        onClick={() => props?.onCancel?.()}
+      >
         Cancel
       </Button>
     </Box>
