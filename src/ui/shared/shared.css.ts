@@ -1,4 +1,5 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
+import { themeVars } from "../../styles/themes.css";
 
 const listBottomShadowBgVar = createVar();
 
@@ -35,4 +36,43 @@ export const bottomShadow = styleVariants({
 export const fullWidthHeight = style({
   width: "100%",
   height: "100%",
+});
+
+export const scrollBarThumbBgVar = createVar();
+
+const scrollBarBase = style({
+  // Firefox
+  scrollbarWidth: "thin" /* "auto" or "thin" */,
+  scrollbarColor: `${scrollBarThumbBgVar} transparent` /* scroll thumb and track */,
+  selectors: {
+    "&::-webkit-scrollbar": {
+      width: themeVars.space[3],
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "transparent",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: scrollBarThumbBgVar,
+      borderRadius: themeVars.space[2],
+    },
+  },
+});
+
+export const scrollBar = styleVariants({
+  light: [
+    style({
+      vars: {
+        [scrollBarThumbBgVar]: "#A2AEBB",
+      },
+    }),
+    scrollBarBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [scrollBarThumbBgVar]: "#697584",
+      },
+    }),
+    scrollBarBase,
+  ],
 });

@@ -18,7 +18,8 @@ const optionDefinitions = [
   { name: "no-lint", type: Boolean },
 ];
 
-const shouldMinify = process.env.MINIFY === "on";
+const shouldMinify = process.env.MINIFY === "true";
+const shouldSkipBundling = process.env.NO_BUILD === "true";
 
 (async () => {
   const cliConfig = commandLineArgs(optionDefinitions);
@@ -79,6 +80,8 @@ const shouldMinify = process.env.MINIFY === "on";
     {
       title: `Bundle Packages: ${cliConfig.platforms?.join(", ") || ""}`,
       task: async () => {
+        if (shouldSkipBundling) return true;
+
         const platforms = Array.isArray(cliConfig.platforms)
           ? cliConfig.platforms
           : [cliConfig.platforms];
@@ -110,7 +113,3 @@ const shouldMinify = process.env.MINIFY === "on";
     console.error(err);
   });
 })();
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}

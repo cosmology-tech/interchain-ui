@@ -11,7 +11,7 @@ export const listItemBase = style([
       "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
     transitionDuration: "200ms",
     color: themeVars.colors.text,
-    borderRadius: themeVars.radii.md,
+    borderRadius: themeVars.radii.base,
   },
 ]);
 
@@ -41,6 +41,15 @@ export const listItemActive = styleVariants({
 });
 
 export const listItemSizes = styleVariants({
+  md: [
+    style({
+      height: themeVars.space[17],
+      paddingTop: themeVars.space[4],
+      paddingBottom: themeVars.space[4],
+      paddingLeft: themeVars.space[6],
+      paddingRight: themeVars.space[6],
+    }),
+  ],
   sm: [
     style({
       height: themeVars.space[14],
@@ -48,15 +57,6 @@ export const listItemSizes = styleVariants({
       paddingBottom: themeVars.space[4],
       paddingLeft: themeVars.space[6],
       paddingRight: themeVars.space[6],
-    }),
-  ],
-  md: [
-    style({
-      height: themeVars.space[17],
-      paddingTop: themeVars.space[10],
-      paddingBottom: themeVars.space[10],
-      paddingLeft: themeVars.space[8],
-      paddingRight: themeVars.space[8],
     }),
   ],
 });

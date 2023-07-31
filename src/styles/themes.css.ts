@@ -3,7 +3,6 @@ import {
   createTheme,
   globalFontFace,
 } from "@vanilla-extract/css";
-import { lighten, darken } from "polished";
 import {
   colors,
   SYSTEM_FONT_STACK,
@@ -53,6 +52,7 @@ export const themeVars = createThemeContract({
     textSecondary: ``,
     textDanger: ``,
     textWarning: ``,
+    textPlaceholder: ``,
     rewardBg: ``,
     rewardContent: ``,
     cardBg: ``,
@@ -69,6 +69,7 @@ export const themeVars = createThemeContract({
     menuItemBg: ``,
     menuItemBgHovered: ``,
     menuItemBgActive: ``,
+    skeletonBg: ``,
     ...colors,
   },
   font: {
@@ -252,6 +253,7 @@ export const lightThemeClass = createTheme(themeVars, {
     textSecondary: "#697584",
     textDanger: colors.red500,
     textWarning: colors.orange300,
+    textPlaceholder: `#A2AEBB`,
     rewardBg: "#E5FFE4",
     rewardContent: "#36BB35",
     cardBg: "#F5F7FB",
@@ -268,6 +270,7 @@ export const lightThemeClass = createTheme(themeVars, {
     menuItemBg: `#EEF2F8`,
     menuItemBgHovered: `#DDE4ED`,
     menuItemBgActive: `#D0D9E3`,
+    skeletonBg: `#DDE4ED`,
     ...colors,
   },
 });
@@ -284,6 +287,7 @@ export const darkThemeClass = createTheme(themeVars, {
     textSecondary: "#A7B4C2",
     textDanger: colors.red400,
     textWarning: colors.orange200,
+    textPlaceholder: `#A2AEBB`,
     rewardBg: "#2F4139",
     rewardContent: "#AEFFAB",
     cardBg: "#1D2024",
@@ -300,6 +304,7 @@ export const darkThemeClass = createTheme(themeVars, {
     menuItemBg: `#1D2024`,
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
+    skeletonBg: `#3B434D`,
     ...colors,
   },
 });

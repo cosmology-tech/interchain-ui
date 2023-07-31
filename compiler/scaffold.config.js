@@ -21,13 +21,22 @@ module.exports = {
       path: "../select",
     },
   },
-  item: {
+  "select-option": {
     jsxMap: {
-      ScaffoldItem: "Item",
+      ScaffoldSelectOption: "SelectOption",
     },
     import: {
-      imports: { Item: "default" },
-      path: "../item",
+      imports: { SelectOption: "default" },
+      path: "../select-option",
+    },
+  },
+  "chain-swap-combobox": {
+    jsxMap: {
+      ScaffoldChainSwapCombobox: "ChainSwapCombobox",
+    },
+    import: {
+      imports: { ChainSwapCombobox: "default" },
+      path: "../chain-swap-combobox",
     },
   },
 };

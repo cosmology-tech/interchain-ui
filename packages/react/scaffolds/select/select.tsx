@@ -1,95 +1,155 @@
 import React from "react";
 import clx from "clsx";
-import type { AriaSelectProps } from "@react-types/select";
-import { useSelectState } from "react-stately";
 import {
-  useSelect,
-  HiddenSelect,
-  useButton,
-  mergeProps,
-  useFocusRing,
-} from "react-aria";
+  autoUpdate,
+  flip,
+  offset,
+  useFloating,
+  useInteractions,
+  useListNavigation,
+  useTypeahead,
+  useClick,
+  useDismiss,
+  useRole,
+  useTransitionStyles,
+  FloatingFocusManager,
+  FloatingList,
+} from "@floating-ui/react";
 import { create } from "zustand";
 import { store } from "../../models/store";
 
-import { ListBox } from "./list-box";
-import { Popover } from "./popover";
-
 import FieldLabel from "../field-label";
 import SelectButton from "../select-button";
-import { selectRoot, selectButton } from "./select.css";
+import { selectRoot, selectButton, listboxStyle } from "./select.css";
 
-interface SelectOption {
-  label: string;
-  value: string;
+interface SelectContextValue {
+  activeIndex: number | null;
+  selectedIndex: number | null;
+  getItemProps: ReturnType<typeof useInteractions>["getItemProps"];
+  handleSelect: (index: number | null) => void;
 }
+
+export const SelectContext = React.createContext<SelectContextValue>(
+  {} as SelectContextValue
+);
 
 const useStore = create(store);
 
-export interface SelectProps<T> extends AriaSelectProps<T> {
+export interface SelectProps {
   id?: string | undefined;
   size?: "sm" | "md" | "lg";
-  options?: SelectOption[];
+  label: React.ReactNode;
+  onSelectItem?: (index: number | null) => void;
+  children?: React.ReactNode;
   className?: string;
 }
 
-export default function Select<T extends object>(props: SelectProps<T>) {
+export default function Select(props: SelectProps) {
   const themeStore = useStore((state) => ({
     theme: state.theme,
     themeClass: state.themeClass,
   }));
 
-  // Create state based on the incoming props
-  const state = useSelectState(props);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
+  const [selectedLabel, setSelectedLabel] = React.useState<string | null>(null);
 
-  // Get props for child elements from useSelect
-  const ref = React.useRef(null);
-  const { labelProps, triggerProps, valueProps, menuProps } = useSelect(
-    props,
-    state,
-    ref
+  const { refs, floatingStyles, context } = useFloating({
+    placement: "bottom-start",
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    whileElementsMounted: autoUpdate,
+    middleware: [flip(), offset(8)],
+  });
+  const { isMounted, styles: transitionStyles } = useTransitionStyles(context);
+
+  const elementsRef = React.useRef<Array<HTMLElement | null>>([]);
+  const labelsRef = React.useRef<Array<string | null>>([]);
+
+  const handleSelect = React.useCallback((index: number | null) => {
+    setSelectedIndex(index);
+    setIsOpen(false);
+    if (index !== null) {
+      if (typeof props.onSelectItem === "function") {
+        props.onSelectItem(index);
+      }
+      setSelectedLabel(labelsRef.current[index]);
+    }
+  }, []);
+
+  function handleTypeaheadMatch(index: number | null) {
+    if (isOpen) {
+      setActiveIndex(index);
+    } else {
+      handleSelect(index);
+    }
+  }
+
+  const listNav = useListNavigation(context, {
+    listRef: elementsRef,
+    activeIndex,
+    selectedIndex,
+    onNavigate: setActiveIndex,
+  });
+  const typeahead = useTypeahead(context, {
+    listRef: labelsRef,
+    activeIndex,
+    selectedIndex,
+    onMatch: handleTypeaheadMatch,
+  });
+  const click = useClick(context);
+  const dismiss = useDismiss(context);
+  const role = useRole(context, { role: "listbox" });
+
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
+    [listNav, typeahead, click, dismiss, role]
   );
 
-  // Get props for the button based on the trigger props from useSelect
-  const { buttonProps } = useButton(triggerProps, ref);
-
-  const { focusProps, isFocusVisible } = useFocusRing();
+  const selectContext = React.useMemo(
+    () => ({
+      activeIndex,
+      selectedIndex,
+      getItemProps,
+      handleSelect,
+    }),
+    [activeIndex, selectedIndex, getItemProps, handleSelect]
+  );
 
   return (
     <div className={clx(selectRoot, props.className)}>
-      <FieldLabel
-        attributes={labelProps}
-        label={props.label}
-        htmlFor={props.id}
-        size={props.size}
-      />
+      <FieldLabel htmlFor={props.id} label={props.label} size={props.size} />
 
-      <HiddenSelect
-        state={state}
-        triggerRef={ref}
-        label={props.label}
-        name={props.name}
-      />
+      <div ref={refs.setReference}>
+        <SelectButton
+          placeholder={selectedLabel ?? "Select an option"}
+          buttonAttributes={{
+            tabIndex: 0,
+            ...getReferenceProps(),
+          }}
+          className={selectButton}
+        />
+      </div>
 
-      <SelectButton
-        placeholder={
-          state.selectedItem ? state.selectedItem.rendered : "Select an option"
-        }
-        buttonRef={ref}
-        buttonAttributes={mergeProps(buttonProps, focusProps)}
-        className={selectButton}
-      />
-
-      {state.isOpen && (
-        <Popover
-          state={state}
-          triggerRef={ref}
-          placement="bottom end"
-          className={clx(themeStore.themeClass)}
-        >
-          <ListBox {...menuProps} state={state} />
-        </Popover>
-      )}
+      <SelectContext.Provider value={selectContext}>
+        {isOpen && (
+          <FloatingFocusManager context={context} modal={false}>
+            <div
+              ref={refs.setFloating}
+              style={{
+                ...floatingStyles,
+                ...(isMounted ? transitionStyles : {}),
+              }}
+              className={listboxStyle[themeStore.theme]}
+              {...getFloatingProps()}
+            >
+              <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
+                {props.children}
+              </FloatingList>
+            </div>
+          </FloatingFocusManager>
+        )}
+      </SelectContext.Provider>
     </div>
   );
 }
