@@ -3,6 +3,7 @@ import { inputBorderVar } from "../text-field/text-field.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const textFieldAddon = style({
+  display: "flex",
   color: "inherit",
   fontSize: "inherit",
   position: "absolute",
@@ -16,12 +17,14 @@ export const textFieldAddonPositions = styleVariants({
     style({
       right: 0,
       top: 0,
+      bottom: 0,
     }),
   ],
   start: [
     style({
       left: 0,
       top: 0,
+      bottom: 0,
     }),
   ],
 });

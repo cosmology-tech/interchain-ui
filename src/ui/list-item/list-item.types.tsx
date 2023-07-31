@@ -1,5 +1,5 @@
 import { BaseComponentProps } from "../../models/components.model";
-import { Sprinkles } from "../../styles/sprinkles.css";
+import { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
 export interface ListItemProps extends BaseComponentProps {
   isActive?: boolean;

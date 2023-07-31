@@ -1,29 +1,24 @@
 import { style } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 
 export const popoverUnderlay = style({
   position: "fixed",
   inset: 0,
 });
 
-export const popoverContainer = style([
-  {
-    zIndex: 10,
-    boxShadow:
-      "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
-    borderWidth: "1px",
-    borderStyle: "solid",
-    borderColor: "rgb(209 213 219)",
-    overflow: "hidden",
-  },
-  s({
-    width: "28",
-    marginTop: "4",
-    borderRadius: "md",
-    backgroundColor: "cardBg",
-  }),
-]);
+export const popoverContainer = style({
+  zIndex: 10,
+  boxShadow:
+    "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+  borderWidth: "1px",
+  borderStyle: "solid",
+  borderColor: "rgb(209 213 219)",
+  overflow: "hidden",
+  width: themeVars.space[28],
+  marginTop: themeVars.space[4],
+  borderRadius: themeVars.radii.md,
+  backgroundColor: themeVars.colors.cardBg,
+});
 
 const scrollBarStyle = style({
   selectors: {

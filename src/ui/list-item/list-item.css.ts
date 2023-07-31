@@ -1,5 +1,4 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { themeVars } from "../../styles/themes.css";
 import { baseTextStyles } from "../text/text.css";
 
@@ -11,11 +10,9 @@ export const listItemBase = style([
     transitionProperty:
       "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
     transitionDuration: "200ms",
+    color: themeVars.colors.text,
+    borderRadius: themeVars.radii.md,
   },
-  s({
-    color: "text",
-    borderRadius: "md",
-  }),
 ]);
 
 export const listItemActive = styleVariants({
@@ -45,17 +42,21 @@ export const listItemActive = styleVariants({
 
 export const listItemSizes = styleVariants({
   sm: [
-    s({
-      height: "14",
-      py: "4",
-      px: "6",
+    style({
+      height: themeVars.space[14],
+      paddingTop: themeVars.space[4],
+      paddingBottom: themeVars.space[4],
+      paddingLeft: themeVars.space[6],
+      paddingRight: themeVars.space[6],
     }),
   ],
   md: [
-    s({
-      height: "17",
-      py: "10",
-      px: "8",
+    style({
+      height: themeVars.space[17],
+      paddingTop: themeVars.space[10],
+      paddingBottom: themeVars.space[10],
+      paddingLeft: themeVars.space[8],
+      paddingRight: themeVars.space[8],
     }),
   ],
 });

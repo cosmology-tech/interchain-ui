@@ -11,7 +11,6 @@ import Stack from "../stack";
 import FieldLabel from "../field-label";
 import TextFieldAddon from "../text-field-addon";
 import Icon from "../icon";
-import Box from "../box";
 import { store } from "../../models/store";
 import {
   inputStyles,

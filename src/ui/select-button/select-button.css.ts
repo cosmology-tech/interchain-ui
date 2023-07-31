@@ -1,5 +1,4 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { sprinkles as s } from "../../styles/sprinkles.css";
 import { unstyledButton } from "../button/button.css";
 import {
   inputSizes,
@@ -17,7 +16,11 @@ const hideShadow = style({
   },
 });
 
-const buttonBase = style([unstyledButton, hideShadow, s({ fontSize: "sm" })]);
+const buttonBase = style([
+  unstyledButton,
+  hideShadow,
+  style({ fontSize: themeVars.fontSize.sm }),
+]);
 
 export const buttonStyles = styleVariants({
   light: [inputStyles.light, buttonBase],
@@ -35,7 +38,7 @@ export const arrowDropDown = style({
   color: "inherit",
 });
 
-export const buttonContent = s({
+export const buttonContent = style({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
