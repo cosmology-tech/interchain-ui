@@ -6,7 +6,7 @@ export default function Stack(props: StackProps) {
   useDefaultProps({
     as: "div",
     direction: "horizontal",
-    space: "$4",
+    space: "$0",
   });
 
   return (
