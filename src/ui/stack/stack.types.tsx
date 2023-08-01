@@ -7,6 +7,7 @@ export interface StackProps extends Omit<BaseComponentProps, "className"> {
   className?: ClassValue;
   children?: any;
   forwardedRef?: any;
+  wrapperAttrs?: any;
   attributes?: Sprinkles;
   direction?: "vertical" | "horizontal";
   space?: Sprinkles["gap"];

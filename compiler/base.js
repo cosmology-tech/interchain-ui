@@ -60,7 +60,7 @@ async function compile(defaultOptions) {
     : glob.sync(options.elements);
   const outPath = `${options.dest}/${options.target}`;
 
-  function copyNonMitosisLiteFiles(scaffoldsExist = false) {
+  function copyNonMitosisLiteFiles(scaffoldsExist = false, inDir) {
     // Move src to all the package folder
     fs.copySync("src", `${outPath}/src`);
 
@@ -206,12 +206,11 @@ async function compile(defaultOptions) {
     const isFirstCompilation =
       !fs.existsSync(`${outPath}/src`) || options.isDev;
     const name = file.name.replace(".lite", "");
-    spinner.info(`Compiling: ${fileName}`);
 
     // Copying files
     const { inDir, outDir } = getScaffoldsDirs(outPath);
     const scaffoldsExist = fs.existsSync(inDir);
-    copyNonMitosisLiteFiles(scaffoldsExist);
+    copyNonMitosisLiteFiles(scaffoldsExist, inDir);
 
     if (scaffoldsExist) {
       fs.copySync(inDir, outDir);

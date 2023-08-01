@@ -20,6 +20,7 @@ const WithThemeDecorator = (props) => {
           backgroundColor={theme == "dark" ? "$gray700" : "$white"}
           px="$10"
           py="$14"
+          minHeight="700px"
           position="relative"
         >
           {props.children}

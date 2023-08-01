@@ -23,6 +23,11 @@ export const baseButton = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  selectors: {
+    "&:focus": {
+      outline: "none",
+    },
+  },
 });
 
 export const unstyledButton = style([

@@ -12,4 +12,31 @@ module.exports = {
       path: "../modal",
     },
   },
+  select: {
+    jsxMap: {
+      ScaffoldSelect: "Select",
+    },
+    import: {
+      imports: { Select: "default" },
+      path: "../select",
+    },
+  },
+  "select-option": {
+    jsxMap: {
+      ScaffoldSelectOption: "SelectOption",
+    },
+    import: {
+      imports: { SelectOption: "default" },
+      path: "../select-option",
+    },
+  },
+  "chain-swap-combobox": {
+    jsxMap: {
+      ScaffoldChainSwapCombobox: "ChainSwapCombobox",
+    },
+    import: {
+      imports: { ChainSwapCombobox: "default" },
+      path: "../chain-swap-combobox",
+    },
+  },
 };
