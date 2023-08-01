@@ -25,7 +25,6 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
     isOpen: false,
     transferType: null,
     withdraw() {
-      console.log("========wiwiwi");
       state.transferType = "withdraw";
       state.isOpen = true;
     },
@@ -37,7 +36,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
       if (state.transferType === "deposit") {
         props?.onDeposit(detail);
       } else {
-        props?.onWithDraw(detail);
+        props?.onWithdraw(detail);
       }
     },
   });
@@ -97,12 +96,12 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               }}
               className={styles.crossBtn}
             >
-              <Show when={props.canWithdraw}>
+              <Show when={!!props.onWithdraw}>
                 <Button intent="tertiary" onClick={() => state.withdraw()}>
                   Withdraw
                 </Button>
               </Show>
-              <Show when={props.canDeposit}>
+              <Show when={!!props.onDeposit}>
                 <Button intent="tertiary" onClick={() => state.deposit()}>
                   Deposite
                 </Button>
@@ -137,7 +136,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                 alignItems: "center",
               }}
             >
-              <Show when={props.canWithdraw}>
+              <Show when={!!props.onWithdraw}>
                 <Button
                   intent="tertiary"
                   attributes={{ width: "$25" }}
@@ -146,7 +145,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                   Withdraw
                 </Button>
               </Show>
-              <Show when={props.canDeposit}>
+              <Show when={!!props.onDeposit}>
                 <Button
                   intent="tertiary"
                   attributes={{ width: "$25" }}

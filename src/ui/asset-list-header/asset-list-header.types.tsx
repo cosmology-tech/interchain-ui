@@ -1,11 +1,4 @@
-type AvailableItem = {
-  imgSrc: string;
-  symbol: string;
-  denom: string;
-  available: string;
-}
-
-type TransferDetail = AvailableItem & {value: string}
+import { AvailableItem, TransferDetail } from "../transfer-item/transfer-item.types";
 
 export interface AssetListHeaderProps {
   /**
@@ -20,30 +13,19 @@ export interface AssetListHeaderProps {
    * Total across all chains
    */
   totalOnAll?: string;
-  /**
-   * Has withdraw button
-   */
-  canWithdraw?: boolean;
-  /**
-   * Has deposit button
-   */
-  canDeposit?: boolean;
-  /**
-   * Drop down list of available items
-   */
-  dropDownList: AvailableItem[];
+  dropDownList?: AvailableItem[];
   /**
    * Callback of deposit
    * @param transferDetail
    * @returns
    */
   onDeposit?: (transferDetail: TransferDetail) => void;
-  onDepositCancel: () => void;
+  onDepositCancel?: () => void;
   /**
    * Callback of withdraw
    * @param transferDetail
    * @returns
    */
-  onWithDraw?: (transferDetail: TransferDetail) => void;
-  onWithdrawCancel: () => void;
+  onWithdraw?: (transferDetail: TransferDetail) => void;
+  onWithdrawCancel?: () => void;
 }

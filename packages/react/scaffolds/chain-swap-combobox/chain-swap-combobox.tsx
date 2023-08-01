@@ -72,6 +72,7 @@ export interface ChainSwapComboboxProps {
   options: Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
+  defaultOpen: boolean;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -80,7 +81,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     themeClass: state.themeClass,
   }));
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [inputValue, setInputValue] = React.useState(
     props.defaultSelected?.tokenName ?? ""
   );
@@ -133,7 +134,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       setOpen(true);
       setActiveIndex(0);
     } else {
-      setOpen(false);
+      setOpen(!!props.defaultOpen);
     }
   }
 

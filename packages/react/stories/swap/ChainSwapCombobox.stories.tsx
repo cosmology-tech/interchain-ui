@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     size: "md",
+    defaultOpen: true,
     options: [
       {
         iconUrl:

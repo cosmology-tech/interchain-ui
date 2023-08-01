@@ -43,7 +43,10 @@ export default function TransferItem(props: TransferItemProps) {
     currentItem: null,
     amountPrice: "",
     handleAmountInput(e) {
-      let value = getValueByAvailable(e.target.value, state.currentItem?.available);
+      let value = getValueByAvailable(
+        e.target.value,
+        state.currentItem?.available
+      );
 
       if (value === "") {
         state.amountPrice = "";
@@ -80,10 +83,10 @@ export default function TransferItem(props: TransferItemProps) {
   });
 
   onUpdate(() => {
-    if(state.currentItem) {
+    if (state.currentItem) {
       state.handleAmountInput({ target: { value: state.swapAmount } });
     }
-  }, [state.currentItem ])
+  }, [state.currentItem]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
@@ -156,6 +159,7 @@ export default function TransferItem(props: TransferItemProps) {
         attributes={{
           justifyContent: "space-between",
           alignItems: "center",
+          position: "relative",
         }}
       >
         <Stack
@@ -211,6 +215,78 @@ export default function TransferItem(props: TransferItemProps) {
             </Text>
           </Show>
         </Stack>
+        {/* @ts-expect-error */}
+        {/* <ScaffoldChainSwapCombobox
+          size="md"
+          defaultOpen={true}
+          options={[
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Cosmos",
+              tokenName: "ATOM",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Zil",
+              tokenName: "ZIL",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Bitcoin",
+              tokenName: "BTC",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Ethereum",
+              tokenName: "ETH",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Litecoin",
+              tokenName: "LTC",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "RArar",
+              tokenName: "RAR",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Areo",
+              tokenName: "AR",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+            {
+              iconUrl:
+                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+              name: "Bozo",
+              tokenName: "BOZ",
+              amount: "0.79824",
+              notionalValue: "$0.69",
+            },
+          ]}
+        >
+          </ScaffoldChainSwapCombobox> */}
       </Stack>
     </Stack>
   );

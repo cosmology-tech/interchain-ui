@@ -46,7 +46,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
   return (
     <Box className={styles.container}>
-      <Stack>
+      {/* <Stack>
         <Text
           fontSize="$xl"
           fontWeight="$semibold"
@@ -59,7 +59,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Text fontSize="$xl" fontWeight="$semibold">
           {props.fromSymbol}
         </Text>
-      </Stack>
+      </Stack> */}
 
       <Stack
         className={styles.onlySm}
@@ -79,7 +79,13 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             mx: "$9",
           }}
         />
-        <img className={styles.img} src={props.toImgSrc} />
+        <img
+          className={styles.img}
+          src={
+            props.toImgSrc ??
+            "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+          }
+        />
       </Stack>
       <Stack
         className={styles.onlyLg}
@@ -132,7 +138,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               marginBottom: "$6",
             }}
           >
-            {`From ${props.toDenom}`}
+            {`From ${props.toDenom ?? "Osmosis"}`}
           </Text>
           <Stack
             attributes={{
@@ -143,7 +149,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             }}
           >
             <img className={styles.smImg} src={props.toImgSrc} />
-            <Text color="$textSecondary">{props.toAddress}</Text>
+            <Text color="$textSecondary">
+              {props.toAddress ?? "osmo1lqsq...pv48trj5k"}
+            </Text>
           </Stack>
         </Stack>
       </Stack>

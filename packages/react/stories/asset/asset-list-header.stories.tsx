@@ -19,8 +19,6 @@ export const Primary: Story = {
     isSingle: false,
     total: "144.23",
     totalOnAll: "732.16",
-    canDeposit: true,
-    canWithdraw: true,
     dropDownList: [
       {
         available: "713.32",
@@ -31,5 +29,11 @@ export const Primary: Story = {
         priceDisplayAmount: 0.5,
       },
     ],
+    onDeposit: (detail) => {
+      console.log("onDeposit", detail)
+    },
+    onWithdraw: (detail) => {
+      console.log("onWithdraw", detail)
+    }
   },
 };
