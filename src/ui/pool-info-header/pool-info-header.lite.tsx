@@ -8,7 +8,7 @@ import { PoolInfoHeaderProps } from "./pool-info-header.types";
 export default function PoolsHeader(props: PoolInfoHeaderProps) {
   return (
     <Box className={styles.poolInfoHeader}>
-      <Stack direction="vertical">
+      <Stack direction="vertical" space="$0">
         <Text fontSize="$xl" fontWeight="$semibold">
           {props.token1.name} / {props.token2.name}
         </Text>
@@ -23,6 +23,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         </Text>
       </Stack>
       <Stack
+        space="$0"
         attributes={{
           flexWrap: "wrap",
           alignItems: "center",
@@ -48,7 +49,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
 
         <Box className={styles.onlysm} width="$full" height="$8" />
 
-        <Stack className={styles.shortText} direction="vertical">
+        <Stack className={styles.shortText} direction="vertical" space="$0">
           <Text color="$textSecondary">Swap fee</Text>
           <Stack
             attributes={{
@@ -62,7 +63,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
           </Stack>
         </Stack>
 
-        <Stack className={styles.longText} direction="vertical">
+        <Stack className={styles.longText} direction="vertical" space="$0">
           <Text color="$textSecondary">24h trading volume</Text>
           <Stack
             attributes={{

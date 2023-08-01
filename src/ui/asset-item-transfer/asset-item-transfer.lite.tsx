@@ -60,8 +60,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         />
         <Icon
           name="arrowRightLine"
-          color="textSecondary"
-          size="xl"
+          color="$textSecondary"
+          size="$xl"
           attributes={{
             mx: "$9",
           }}
@@ -74,10 +74,10 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       <Stack
         className={styles.onlyLg}
         attributes={{
-          marginTop: "13",
-          marginBottom: "10",
+          marginTop: "$13",
+          marginBottom: "$10",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "flex-end",
         }}
       >
         <Stack direction="vertical" className={styles.flex1}>
@@ -141,12 +141,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         </Stack>
       </Stack>
       <TokenInput
+        title="Select amount"
         hasProgressBar={false}
         progress={50}
         symbol="OMSO"
         denom="Osmosis"
         available={0.71263}
-        amount={10}
         imgSrc="https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png"
       />
 
@@ -189,7 +189,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Text fontWeight="$semibold"> 20 seconds</Text>
       </Stack>
 
-      <Button intent="tertiary" attributes={{ width: "full" }}>
+      <Button intent="tertiary" attributes={{ width: "$full" }}>
         <Stack
           attributes={{
             alignItems: "center",
@@ -224,7 +224,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           </Stack>
         </Stack>
       </Button>
-      <Button variant="unstyled" attributes={{ width: "full" }}>
+      <Button variant="unstyled" attributes={{ width: "$full", marginTop: "$5" }}>
         Cancel
       </Button>
     </Box>

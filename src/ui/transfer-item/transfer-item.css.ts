@@ -39,3 +39,10 @@ export const textBtn = styleVariants({
     }),
   ],
 });
+
+export const transferInput = style({
+  border: "0",
+  outline: "0",
+  fontSize: themeVars.fontSize["2xl"],
+  textAlign: "right"
+});

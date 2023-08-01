@@ -6,7 +6,7 @@ export default function Stack(props: StackProps) {
   useDefaultProps({
     as: "div",
     direction: "horizontal",
-    space: "$4",
+    space: "$0",
   });
 
   return (
@@ -14,9 +14,7 @@ export default function Stack(props: StackProps) {
       as={props.as}
       {...props.attributes}
       display="flex"
-      flex={props.flex}
       flexDirection={props.direction === "horizontal" ? "row" : "column"}
-      flexWrap={props.flexWrap}
       gap={props.space}
       className={props.className}
     >

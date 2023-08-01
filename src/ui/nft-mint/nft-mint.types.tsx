@@ -6,6 +6,8 @@ export interface NftMintProps {
   royalties: number;
   minted: number;
   available: number;
-  price: number;
+  priceDisplayAmount: number;
   limited: number;
+  imgSrc: string;
+  starsPrice: number;
 }

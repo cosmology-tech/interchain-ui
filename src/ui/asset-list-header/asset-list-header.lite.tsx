@@ -73,7 +73,6 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             <Show when={props.canDeposit}>
               <Button
                 intent="tertiary"
-                variant="outlined"
                 onClick={() => console.log("deposit")}
               >
                 Deposite
@@ -112,7 +111,6 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             <Show when={props.canWithdraw}>
               <Button
                 intent="tertiary"
-                variant="outlined"
                 attributes={{ width: "$25" }}
                 onClick={() => console.log("withdraw")}
               >

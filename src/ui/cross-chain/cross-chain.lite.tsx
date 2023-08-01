@@ -1,6 +1,6 @@
 import AssetListHeader from "../asset-list-header";
 import AssetList from "../asset-list";
-import Stack from "../stack";
+import Box from "../box";
 import Text from "../text";
 import ShowMore from "../show-more";
 import * as styles from "./cross-chain.css";
@@ -9,7 +9,7 @@ import { CrossChainProps } from "./cross-chain.types";
 export default function CrossChain(props: CrossChainProps) {
   return (
     <ShowMore className={styles.container}>
-      <Stack direction="vertical">
+      <Box>
         <AssetListHeader
           isSingle={props.header.isSingle}
           total={props.header.total}
@@ -43,7 +43,7 @@ export default function CrossChain(props: CrossChainProps) {
           isOtherChains={true}
           list={props.otherList}
         />
-      </Stack>
+      </Box>
     </ShowMore>
   );
 }

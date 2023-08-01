@@ -1,6 +1,5 @@
 import { For } from "@builder.io/mitosis";
 import Stack from "../stack";
-import Box from '../box'
 import Text from "../text";
 import { NftDetailActivityListItemProps } from "../nft-detail-activity-list-item/nft-detail-activity-list-item.types";
 import NftDetailActivityListItem from "../nft-detail-activity-list-item";
@@ -12,11 +11,11 @@ export default function NftDetailActivityList(
   props: NftDetailActivityListProps
 ) {
   return (
-    <Box className={styles.container}>
-      <Text size="xl" weight="semibold" attributes={{ marginBottom: "10" }}>
+    <Stack className={styles.container} direction="vertical" space="0">
+      <Text fontSize="$xl" fontWeight="$semibold" attributes={{ marginBottom: "$10" }}>
         Activity
       </Text>
-      <Stack direction="vertical" space="10">
+      <Stack direction="vertical" space="$10">
         <For each={props?.list}>
           {(item: NftDetailActivityListItemProps, index: number) => (
             <NftDetailActivityListItem
@@ -30,6 +29,6 @@ export default function NftDetailActivityList(
           )}
         </For>
       </Stack>
-    </Box>
+    </Stack>
   );
 }

@@ -1,64 +1,103 @@
+import { useStore } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
-import starIcon from "../../assets/stars.png";
+import StarText from "../star-text";
+import BasicModal from "../basic-modal";
+import NftDetail from "../nft-detail";
 
 import * as styles from "./nft-profile-card.css";
 import { NftProfileCardProps } from "./nft-profile-card.types";
 
 export default function NftProfileCard(props: NftProfileCardProps) {
+  const state = useStore<{
+    ifShowDetail: boolean;
+    open: () => void;
+    close: () => void;
+  }>({
+    ifShowDetail: false,
+    open() {
+      state.ifShowDetail = true;
+    },
+    close() {
+      state.ifShowDetail = false;
+    },
+  });
   return (
-    <Box cursor="pointer" attributes={{onClick: () => console.log('NftProfileCard onClick')}}>
-      <Stack className={styles.nftProfileCard} direction="column" space="5">
-        <Box width="full">
+    <Box
+      className={styles.nftProfileCard}
+      attributes={{ onClick: () => state.open() }}
+    >
+      <Stack direction="vertical" space="$4">
+        <Box width="$full">
           <Box
-            width="full"
+            width="$full"
             height="auto"
             as="img"
-            borderRadius="md"
+            borderRadius="$md"
             attributes={{ src: props?.imgSrc }}
           ></Box>
         </Box>
-        <Text weight="semibold">{props?.name}</Text>
-        <Stack align="center">
-          <Text
-            color="textSecondary"
-            size="xs"
-            attributes={{ marginRight: "2" }}
-          >
-            Highest offer
-          </Text>
-          <Text size="xs" weight="semibold">
-            {` ${props?.highestOffer} `} STARS
-          </Text>
-          <Box
-            as="img"
-            attributes={{ src: starIcon }}
-            marginLeft="3"
-            width="8"
-            height="8"
-          />
-        </Stack>
-        <Stack align="center">
-          <Text
-            color="textSecondary"
-            size="xs"
-            attributes={{ marginRight: "2" }}
-          >
-            List price
-          </Text>
-          <Text size="xs" weight="semibold">
-            {` ${props?.listPrice} `} STARS
-          </Text>
-          <Box
-            as="img"
-            attributes={{ src: starIcon }}
-            marginLeft="3"
-            width="8"
-            height="8"
-          />
-        </Stack>
+        <Text fontWeight="$semibold">{props?.name}</Text>
+        <StarText label="Highest offer" value={props?.highestOffer} />
+        <StarText label="List price" value={props?.listPrice} />
       </Stack>
+      <BasicModal
+        isOpen={state.ifShowDetail}
+        title="NFT Detail"
+        onClose={() => state.close()}
+        modalContentClassName={styles.nftDetailModal}
+      >
+        <NftDetail
+          type="makeOffer"
+          imgSrc={props.imgSrc}
+          collectionName="Shnubbles Breakfast Drop #2"
+          tokenName={props.name}
+          creatorName="stars1ducj...vl342f"
+          collectionDesc="The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend."
+          mintPrice="300"
+          rarityOrder={2864}
+          tokensCount={10000}
+          ownerName="shane.stars"
+          traits={[
+            {
+              name: "Accessories",
+              value: "Oval Gadget",
+              rarityPercent: 19.8,
+            },
+            {
+              name: "Head",
+              value: "Snowman Hat",
+              rarityPercent: 16.71,
+            },
+            {
+              name: "Eyes",
+              value: "Teal Predator",
+              rarityPercent: 10.05,
+            },
+            {
+              name: "Mouth",
+              value: "Bashed",
+              rarityPercent: 9.69,
+            },
+            {
+              name: "Background",
+              value: "Navy Blue",
+              rarityPercent: 10.44,
+            },
+            {
+              name: "Skin",
+              value: "Navy Blue",
+              rarityPercent: 10.44,
+            },
+            {
+              name: "Costumes",
+              value: "Vshok",
+              rarityPercent: 6.45,
+            },
+          ]}
+        />
+      </BasicModal>
     </Box>
   );
 }

@@ -1,51 +1,48 @@
 import Stack from "../stack";
-import Box from "../box";
 import Text from "../text";
-import starIcon from "../../assets/stars.png";
+import StarText from "../star-text";
 
-import * as styles from './nft-detail-top-offers.css'
+import * as styles from "./nft-detail-top-offers.css";
 import { NftDetailTopOfferProps } from "./nft-detail-top-offers.types";
 
 export default function NftDetailTopOffer(props: NftDetailTopOfferProps) {
   return (
-    <Stack className={styles.container} direction="vertical" space="7">
-      <Text size="xl" weight="semibold">
+    <Stack className={styles.container} direction="vertical" space="$0">
+      <Text
+        fontSize="$xl"
+        fontWeight="$semibold"
+        attributes={{ marginBottom: "$6" }}
+      >
         Top offers
       </Text>
-      <Stack attributes={{justifyContent: "space-between"}}>
-        <Stack direction="vertical">
-          <Text size="xs" color="textSecondary">
+      <Stack attributes={{ justifyContent: "space-between" }}>
+        <Stack direction="vertical" space="$0">
+          <Text fontSize="$xs" color="$textSecondary">
             Price
           </Text>
-          <Stack attributes={{alignItems: "center"}}>
-            <Text weight="semibold" attributes={{ marginRight: "3" }}>
-              {`${props?.price} STARS`}
-            </Text>
-            <Box
-              as="img"
-              width="8"
-              height="8"
-              attributes={{ src: starIcon }}
-            ></Box>
-          </Stack>
+          <StarText value={props?.price} />
         </Stack>
-        <Stack direction="vertical">
-          <Text size="xs" color="textSecondary">
+        <Stack direction="vertical" space="$0">
+          <Text fontSize="$xs" color="$textSecondary">
             Floor price (%Δ)
           </Text>
-          <Text weight="semibold">{props?.floorPrice}</Text>
+          <Text fontWeight="$semibold">{props?.floorPrice}</Text>
         </Stack>
-        <Stack direction="vertical">
-          <Text size="xs" color="textSecondary">
+        <Stack direction="vertical" space="$0">
+          <Text fontSize="$xs" color="$textSecondary">
             Expires
           </Text>
-          <Text weight="semibold">{props?.expires}</Text>
+          <Text fontWeight="$semibold">{props?.expires}</Text>
         </Stack>
-        <Stack direction="vertical" attributes={{ paddingRight: "8" }}>
-          <Text size="xs" color="textSecondary">
+        <Stack
+          direction="vertical"
+          attributes={{ paddingRight: "$8" }}
+          space="$0"
+        >
+          <Text fontSize="$xs" color="$textSecondary">
             From
           </Text>
-          <Text weight="semibold">{props?.from}</Text>
+          <Text fontWeight="$semibold">{props?.from}</Text>
         </Stack>
       </Stack>
     </Stack>

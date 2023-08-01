@@ -3,13 +3,8 @@ import { NftDetailInfoProps } from "../nft-detail-info/nft-detail-info.type";
 import { NftDetailTopOfferProps } from "../nft-detail-top-offers/nft-detail-top-offers.types";
 import { NftDetailActivityListProps } from "../nft-detail-activity-list/nft-detail-activity-list.types";
 
-export enum DetailType {
-  listForSale = "listForSale",
-  makeOffer = "makeOffer",
-  buyNow = "buyNow",
-}
-export interface NftDetailProps {
-  type: DetailType;
+export type DetailType = "listForSale" | "makeOffer" | "buyNow";
+interface BaseNftDetailProps {
   collectionName: string;
   tokenName: string;
   creatorName: string;
@@ -17,9 +12,25 @@ export interface NftDetailProps {
   mintPrice: string;
   rarityOrder: number;
   tokensCount: number;
-  ownerName: PerformanceServerTiming;
-  traits: NftTraitListItemProps[];
-  detailInfo?: NftDetailInfoProps;
-  detailTopOffer?: NftDetailTopOfferProps;
-  detailActivity?: NftDetailActivityListProps;
+  ownerName: string;
+  imgSrc: string;
 }
+
+export type NftDetailProps = (
+  | {
+      type: "listForSale";
+      traits: NftTraitListItemProps[];
+    }
+  | {
+      type: "makeOffer";
+      traits: NftTraitListItemProps[];
+    }
+  | {
+      type: "buyNow";
+      traits: NftTraitListItemProps[];
+      detailInfo?: NftDetailInfoProps;
+      detailTopOffer?: NftDetailTopOfferProps;
+      detailActivity?: NftDetailActivityListProps;
+    }
+) &
+  BaseNftDetailProps;

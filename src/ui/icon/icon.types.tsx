@@ -27,6 +27,7 @@ type IconName =
   | "uploadLine"
   | "coinsLine"
   | "shoppingBagLine"
+  | "informationLine"
   | "arrowDownLine"
   | "arrowUpDownLine"
   | "arrowLeftRightLine"

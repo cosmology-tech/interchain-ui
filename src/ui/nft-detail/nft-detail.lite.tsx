@@ -1,172 +1,223 @@
-import { For, Show } from "@builder.io/mitosis";
+import { For, Show, useStore } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
-import Icon from "../icon";
 import Button from "../button";
 import IconButton from "../icon-button";
-import NftTraitListItem from "../nft-trait-list-item";
 import NftTraitList from "../nft-trait-list";
-import starIcon from "../../assets/stars.png";
+import BasicModal from "../basic-modal";
+import ListForSale from "../list-for-sale";
+import NftMakeOffer from "../nft-make-offer";
+import StarText from "../star-text";
 import { store } from "../../models/store";
 import NftDetailInfo from "../nft-detail-info";
 import NftDetailTopOffer from "../nft-detail-top-offers";
 import NftDetailActivityList from "../nft-detail-activity-list";
 
 import * as styles from "./nft-detail.css";
-import { NftDetailProps, DetailType } from "./nft-detail.types";
+import { NftDetailProps } from "./nft-detail.types";
 
 export default function NftDetail(props: NftDetailProps) {
+  const state = useStore<{
+    showListForSaleModal: boolean;
+    openListForSale: () => void;
+    closeListForSale: () => void;
+    showMakeOfferModal: boolean;
+    openMakeOffer: () => void;
+    closeMakeOffer: () => void;
+  }>({
+    showListForSaleModal: false,
+    showMakeOfferModal: false,
+    openListForSale() {
+      state.showListForSaleModal = true;
+    },
+    closeListForSale() {
+      state.showListForSaleModal = false;
+    },
+    openMakeOffer() {
+      state.showMakeOfferModal = true;
+    },
+    closeMakeOffer() {
+      state.showMakeOfferModal = false;
+    },
+  });
   return (
     <Box className={styles.nftDetail}>
-      <Text size="xl" weight="semibold" attributes={{ marginBottom: "12" }}>
-        NFT Detail
-      </Text>
-      <Stack space="10">
+      <Stack space="$10">
         <Box flex={1}>
           <Box
             as="img"
-            width="full"
-            height="auto"
-            borderRadius="md"
+            width="$full"
+            height="$auto"
+            borderRadius="$md"
             attributes={{
-              src: "https://res.cloudinary.com/stargaze/image/upload/w_512/e0445qpobuya6okuk1uw.jpg",
+              src: props.imgSrc,
             }}
           />
         </Box>
         <Box flex={1}>
-          <Stack direction="vertical">
-            <Text
-              color="textSecondary"
-              weight="semibold"
-              attributes={{ marginBottom: "5" }}
+          <Text
+            color="$textSecondary"
+            fontWeight="$semibold"
+            attributes={{ marginBottom: "$5" }}
+          >
+            {props?.collectionName}
+          </Text>
+          <Text
+            size="4xl"
+            weight="semibold"
+            attributes={{ marginBottom: "$7" }}
+          >
+            {props?.tokenName}
+          </Text>
+          <Stack attributes={{ marginBottom: "$7", alignItems: "center" }}>
+            <Text color="$textSecondary" attributes={{ marginRight: "$3" }}>
+              Created by
+            </Text>
+            <Text fontWeight="$semibold">{props?.creatorName}</Text>
+          </Stack>
+          <Text color="$textSecondary" attributes={{ marginBottom: "7" }}>
+            {props?.collectionDesc}
+          </Text>
+          <StarText label="Minted for" value={props?.mintPrice} />
+          <Stack
+            attributes={{
+              alignItems: "center",
+              marginBottom: "$12",
+              marginTop: "$4",
+            }}
+          >
+            <Text color="$textSecondary" attributes={{ marginRight: "$3" }}>
+              Owned by
+            </Text>
+            <Text fontWeight="$semibold">{props?.ownerName}</Text>
+          </Stack>
+          <Show when={props.type === "listForSale"}>
+            <Button
+              size="lg"
+              intent="tertiary"
+              leftIcon="priceTagLine"
+              attributes={{ marginBottom: "$8", width: "$full" }}
+              onClick={() => state.openListForSale()}
             >
-              {props?.collectionName}
-            </Text>
-            <Text
-              size="4xl"
-              weight="semibold"
-              attributes={{ marginBottom: "7" }}
+              List for Sale
+            </Button>
+            <Stack space="$8">
+              <Box flex={1}>
+                <Button
+                  size="sm"
+                  intent="text"
+                  leftIcon="sendLine"
+                  attributes={{ width: "$full" }}
+                >
+                  Transfer
+                </Button>
+              </Box>
+              <Box flex={1}>
+                <Button
+                  size="sm"
+                  intent="text"
+                  leftIcon="fireLine"
+                  attributes={{ width: "$full" }}
+                >
+                  Burn
+                </Button>
+              </Box>
+            </Stack>
+          </Show>
+          <Show when={props?.type === "makeOffer"}>
+            <Button
+              intent="tertiary"
+              size="lg"
+              leftIcon="coinsLine"
+              onClick={() => state.openMakeOffer()}
+              attributes={{ width: "$full" }}
             >
-              {props?.tokenName}
-            </Text>
-            <Stack attributes={{ marginBottom: "7", alignItems: "center" }}>
-              <Text color="textSecondary" attributes={{ marginRight: "3" }}>
-                Created by
-              </Text>
-              <Text weight="semibold">{props?.creatorName}</Text>
-            </Stack>
-            <Text color="textSecondary" attributes={{ marginBottom: "7" }}>
-              {props?.collectionDesc}
-            </Text>
-            <Stack attributes={{ marginBottom: "4", alignItems: "center" }}>
-              <Text color="textSecondary" attributes={{ marginRight: "3" }}>
-                Minted for
-              </Text>
-              <Text>{`${props?.mintPrice} STARS`}</Text>
-              <Box
-                as="img"
-                attributes={{ src: starIcon }}
-                marginLeft="3"
-                width="8"
-                height="8"
-              />
-            </Stack>
-            <Stack attributes={{ marginBottom: "12", alignItems: "center" }}>
-              <Text color="textSecondary" attributes={{ marginRight: "3" }}>
-                Owned by
-              </Text>
-              <Text weight="semibold">{props?.ownerName}</Text>
-            </Stack>
-            <Show when={props.type === DetailType.listForSale}>
-              <Button
-                size="lg"
-                intent="tertiary"
-                leftIcon="priceTagLine"
-                attributes={{ marginBottom: "8" }}
-              >
-                List for Sale
+              Make Offer
+            </Button>
+          </Show>
+          <Show when={props?.type === "buyNow"}>
+            <Stack space="$8">
+              <Button intent="tertiary" size="lg" leftIcon="shoppingBagLine">
+                Buy Now
               </Button>
-              <Stack space="8">
-                <Box flex={1}>
-                  <Button
-                    size="sm"
-                    intent="text"
-                    leftIcon="sendLine"
-                    attributes={{ width: "full" }}
-                  >
-                    Transfer
-                  </Button>
-                </Box>
-                <Box flex={1}>
-                  <Button
-                    size="sm"
-                    intent="text"
-                    leftIcon="fireLine"
-                    attributes={{ width: "full" }}
-                  >
-                    Burn
-                  </Button>
-                </Box>
-              </Stack>
-            </Show>
-            <Show when={props?.type === DetailType.makeOffer}>
-              <Button intent="tertiary" size="lg" leftIcon="coinsLine">
+              <Button
+                intent="text"
+                size="lg"
+                leftIcon="coinsLine"
+                onClick={() => state.openMakeOffer()}
+              >
                 Make Offer
               </Button>
-            </Show>
-            <Show when={props?.type === DetailType.buyNow}>
-              <Stack space="8">
-                <Button intent="tertiary" size="lg" leftIcon="shoppingBagLine">
-                  Buy Now
-                </Button>
-                <Button intent="text" size="lg" leftIcon="coinsLine">
-                  Make Offer
-                </Button>
-              </Stack>
-            </Show>
-          </Stack>
+            </Stack>
+          </Show>
         </Box>
       </Stack>
       <Stack
-        attributes={{ marginTop: "6", marginBottom: "5", alignItems: "center" }}
+        attributes={{
+          alignItems: "center",
+          marginTop: "$6",
+          marginBottom: "$5",
+        }}
       >
-        <Text color="textSecondary">Rank</Text>
-        <Text weight="semibold" attributes={{ mx: "2" }}>
+        <Text color="$textSecondary">Rank</Text>
+        <Text fontWeight="$semibold" attributes={{ mx: "$2" }}>
           {store.getState()?.formatNumber?.({ value: props?.rarityOrder })}
         </Text>
-        <Text color="textSecondary">{`of ${store
+        <Text color="$textSecondary">{`of ${store
           .getState()
           ?.formatNumber?.({ value: props?.tokensCount })}`}</Text>
       </Stack>
-      <Stack space="8" attributes={{ marginBottom: "11" }}>
+      <Stack space="$8" attributes={{ marginBottom: "$11" }}>
         <Button size="sm" intent="text">
           Download
         </Button>
         <IconButton size="sm" icon="uploadLine" intent="text" />
       </Stack>
       <NftTraitList list={props?.traits} />
-      <Show when={props?.type === DetailType.makeOffer}>
-        <Box marginTop="10">
-          <NftDetailInfo
-            price={props?.detailInfo?.price}
-            owner={props?.detailInfo?.owner}
-            lastSale={props?.detailInfo?.lastSale}
-            topOffer={props?.detailInfo?.topOffer}
-            floorPrice={props?.detailInfo?.floorPrice}
-            isNameVerified={props?.detailInfo?.isNameVerified}
-          />
-        </Box>
-        <Box my="14">
-          <NftDetailTopOffer
-            price={props?.detailTopOffer?.price}
-            floorPrice={props?.detailTopOffer?.floorPrice}
-            expires={props?.detailTopOffer?.expires}
-            from={props?.detailTopOffer?.from}
-          />
-        </Box>
+      <Show when={props?.type === "makeOffer"}>
+        <Box height="$14" />
+        <NftDetailInfo
+          price={props?.detailInfo?.price}
+          owner={props?.detailInfo?.owner}
+          lastSale={props?.detailInfo?.lastSale}
+          topOffer={props?.detailInfo?.topOffer}
+          floorPrice={props?.detailInfo?.floorPrice}
+          isNameVerified={props?.detailInfo?.isNameVerified}
+        />
+        <Box height="$16" />
+        <NftDetailTopOffer
+          price={props?.detailTopOffer?.price}
+          floorPrice={props?.detailTopOffer?.floorPrice}
+          expires={props?.detailTopOffer?.expires}
+          from={props?.detailTopOffer?.from}
+        />
+        <Box height="$17" />
         <NftDetailActivityList list={props?.detailActivity?.list} />
       </Show>
+
+      {/* List for Sale Modal */}
+      <BasicModal
+        modalContentClassName={styles.listForSaleModal}
+        isOpen={state.showListForSaleModal}
+        title="List for Sale"
+        onClose={() => state.closeListForSale()}
+      >
+        <ListForSale />
+      </BasicModal>
+
+      {/* Make Offer Modal */}
+      <BasicModal
+        modalContentClassName={styles.makeOfferModal}
+        isOpen={state.showMakeOfferModal}
+        title="Make Offer"
+        onClose={() => state.closeMakeOffer()}
+      >
+        <NftMakeOffer
+          imgSrc="https://res.cloudinary.com/stargaze/image/upload/erom1wypzaxaratnm7dg.jpg"
+          tokenName="KUJIRANS #763"
+        />
+      </BasicModal>
     </Box>
   );
 }

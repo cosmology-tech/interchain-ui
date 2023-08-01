@@ -1,13 +1,52 @@
+import { useStore, Show } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
+import TextField from "../text-field";
+import StarText from "../star-text";
 import { store } from "../../models/store";
 
 import * as styles from "./nft-mint.css";
 import { NftMintProps } from "./nft-mint.types";
 
 export default function NftMint(props: NftMintProps) {
+  const state = useStore<{
+    amount: string;
+    starsAmount: string;
+    starsAmountPrice: string;
+    isAffordable: boolean;
+    handleAmountChange: (Event) => void;
+  }>({
+    amount: "",
+    starsAmount: "",
+    starsAmountPrice: "",
+    isAffordable: true,
+    handleAmountChange(e) {
+      e.target.value = e.target.value.replace(/[^0-9]*/g, "");
+      let value = e.target.value;
+      if (value > props.limited) {
+        value = props.limited;
+      }
+      let starsCount: BigNumber = new BigNumber(value).multipliedBy(
+        props.priceDisplayAmount
+      );
+      state.amount = value;
+      if (value === "") {
+        state.starsAmount = "";
+        state.starsAmountPrice = "";
+        state.isAffordable = true;
+      } else {
+        state.starsAmount = starsCount.decimalPlaces(2).toString();
+        state.starsAmountPrice = starsCount
+          .multipliedBy(props.starsPrice)
+          .decimalPlaces(2)
+          .toString();
+        state.isAffordable = starsCount.lt(props.available);
+      }
+    },
+  });
   return (
     <Stack className={styles.nftMint} direction="vertical">
       {/* Title */}
@@ -28,7 +67,7 @@ export default function NftMint(props: NftMintProps) {
             height="auto"
             borderRadius="$md"
             attributes={{
-              src: "https://ipfs-gw.stargaze-apis.com/ipfs/QmYqY6mW6qCCgdVA1BGRhXuvaSjKwwGdkBLZ8gZeMTn3U9/bipz.gif",
+              src: props.imgSrc,
             }}
           />
         </Box>
@@ -97,13 +136,15 @@ export default function NftMint(props: NftMintProps) {
                 alignItems: "center",
               }}
             >
-              <Text
-                color="$textSecondary"
-                fontSize="$lg"
-                fontWeight="$semibold"
-              >
-                Select amount
-              </Text>
+              <Box as="label" attributes={{ htmlFor: "nft-mint-amount" }}>
+                <Text
+                  color="$textSecondary"
+                  fontSize="$lg"
+                  fontWeight="$semibold"
+                >
+                  Select amount
+                </Text>
+              </Box>
               <Stack
                 attributes={{
                   alignItems: "center",
@@ -119,7 +160,25 @@ export default function NftMint(props: NftMintProps) {
                 </Text>
               </Stack>
             </Stack>
-            <input />
+            <Box position="relative">
+              <TextField
+                id="nft-mint-amount"
+                type="number"
+                value={state.amount}
+                onChange={(e) => state.handleAmountChange(e)}
+                inputClassName={styles.baseInput}
+              />
+
+              <Stack
+                className={styles.starContainer}
+                attributes={{ position: "absolute" }}
+              >
+                <StarText label="" value={state.starsAmount} />
+                <Show when={!!state.starsAmountPrice}>
+                  <Text color="textSecondary">{`≈ ${state.starsAmountPrice}`}</Text>
+                </Show>
+              </Stack>
+            </Box>
           </Stack>
         </Box>
         <Box flex="1">
@@ -134,26 +193,30 @@ export default function NftMint(props: NftMintProps) {
               <Stack
                 attributes={{
                   alignItems: "center",
+                  paddingBottom: "2",
                 }}
               >
                 <Text color="$textSecondary" attributes={{ marginRight: "$2" }}>
                   Price:
                 </Text>
                 <Text color="$textSecondary" fontWeight="$semibold">
-                  {`${store
-                    .getState()
-                    ?.formatNumber?.({ value: props?.price })} STARS`}
+                  {`${store.getState()?.formatNumber?.({
+                    value: props?.priceDisplayAmount,
+                  })} STARS`}
                 </Text>
               </Stack>
               <Text color="$textSecondary">
-                {" "}
                 {`Limited to ${store
                   .getState()
-                  ?.formatNumber?.({ value: props?.minted })} tokens`}{" "}
+                  ?.formatNumber?.({ value: props?.limited })} tokens`}
               </Text>
             </Stack>
-            <Button size="lg" intent="tertiary">
-              Mint
+            <Button
+              size="lg"
+              intent="tertiary"
+              disabled={!state.amount || !state.isAffordable}
+            >
+              {`${state.isAffordable ? "Mint" : "Insufficient Balance"}`}
             </Button>
           </Stack>
         </Box>

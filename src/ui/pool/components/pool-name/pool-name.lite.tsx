@@ -8,7 +8,7 @@ export default function PoolName(props: PoolNameProps) {
   return (
     <Stack
       className={props.className}
-      space="0"
+      space="$0"
       attributes={{ alignItems: "center" }}
     >
       <Box className={styles.imageBox}>
@@ -18,10 +18,10 @@ export default function PoolName(props: PoolNameProps) {
       <Stack
         className={styles.nameContainer}
         direction="vertical"
-        space="0"
+        space="$0"
         attributes={{
           justifyContent: "center",
-          paddingLeft: "8",
+          paddingLeft: "$8",
         }}
       >
         <Text

@@ -5,7 +5,7 @@ import { getTextTransformStyles, getVariantStyles } from "./text.helper";
 
 export default function Text(props: TextProps) {
   useDefaultProps({
-    size: "$sm",
+    fontSize: "$sm",
     color: "$text",
     variant: "body",
     wordBreak: "break-word",

@@ -96,4 +96,8 @@ export interface TextFieldProps extends BaseComponentProps, FieldBaseProps {
   attributes?: any;
   startAddon?: Children | undefined;
   endAddon?: Children | undefined;
+  inputContainer?: string;
+  inputClassName?: string;
+  maxlength?: number;
+  pattern?: string;
 }

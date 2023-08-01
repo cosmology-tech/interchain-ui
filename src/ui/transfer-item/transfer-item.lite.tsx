@@ -6,10 +6,12 @@ import {
   useDefaultProps,
   Show,
 } from "@builder.io/mitosis";
+import uniqueId from "lodash/uniqueId";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Button from "../button";
+import TextField from "../text-field";
 
 import { store } from "../../models/store";
 import * as styles from "./transfer-item.css";
@@ -24,8 +26,16 @@ export default function TransferItem(props: TransferItemProps) {
     title: "",
   });
 
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{
+    theme: ThemeVariant;
+    swapAmount: string;
+    handleAmountInput: (Event) => void;
+  }>({
     theme: "light",
+    swapAmount: "0",
+    handleAmountInput(e) {
+      state.swapAmount = e.target.value;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -132,7 +142,13 @@ export default function TransferItem(props: TransferItemProps) {
           </Button>
         </Stack>
         <Stack direction="vertical">
-          <input />
+          <TextField
+            id={uniqueId("transfer-item-")}
+            type="number"
+            value={state.swapAmount}
+            onChange={(e) => state.handleAmountInput(e)}
+            inputClassName={styles.transferInput}
+          />
           <Text
             color="$textSecondary"
             fontSize="$xs"

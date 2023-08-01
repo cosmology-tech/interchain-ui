@@ -10,19 +10,12 @@ export default function NftTraitList(props: NftTraitListProps) {
   return (
     <Stack
       className={styles.container}
-      space="0"
-      attributes={{
-        flexWrap: "wrap",
-      }}
+      space="$0"
+      attributes={{ flexWrap: "wrap" }}
     >
       <For each={props?.list}>
         {(item: NftTraitListItemProps, index: number) => (
-          <Box
-            key={index}
-            className={styles.traitItemBox}
-            paddingRight="14"
-            paddingBottom="8"
-          >
+          <Box key={index} className={styles.traitItemBox} paddingRight="$14">
             <NftTraitListItem
               key={item?.name}
               name={item?.name}

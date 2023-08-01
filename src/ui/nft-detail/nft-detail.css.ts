@@ -1,11 +1,17 @@
 import { style } from "@vanilla-extract/css";
-import { breakpoints } from "../../styles/tokens";
 
 export const nftDetail = style({
-  minWidth: `${breakpoints.tablet}px`,
+  width: `776px`,
 });
 
 export const traitItemBox = style({
   width: `calc(50% - 12px)`,
   boxSizing: "border-box",
+});
+
+export const listForSaleModal = style({
+  minWidth: "512px",
+});
+export const makeOfferModal = style({
+  minWidth: "340px",
 });

@@ -25,7 +25,7 @@ export const flex1 = style({
 export const onlyLg = style({
   display: "flex",
   "@media": {
-    [`screen and (max-width: 500px)`]: {
+    [`screen and (max-width: 700px)`]: {
       display: "none",
     },
   },
@@ -34,7 +34,7 @@ export const onlyLg = style({
 export const onlySm = style({
   display: "none",
   "@media": {
-    [`screen and (max-width: 500px)`]: {
+    [`screen and (max-width: 700px)`]: {
       display: "flex",
     },
   },

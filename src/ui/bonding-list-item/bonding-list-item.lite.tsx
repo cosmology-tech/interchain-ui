@@ -15,7 +15,6 @@ export default function BondingListItem(props: BondingListItemProps) {
         className={styles.item}
         color="$textSecondary"
         fontWeight="$semibold"
-        fontSize="$xs"
       >
         {props.title}
       </Text>

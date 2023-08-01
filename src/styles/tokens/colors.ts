@@ -1,5 +1,6 @@
 export const colors = {
   black: "#000",
+  blackPrimary: "#2C3137",
   white: "#fff",
   transparent: "transparent",
   current: "currentColor",
