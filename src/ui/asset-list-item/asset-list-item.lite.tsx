@@ -9,6 +9,7 @@ import * as styles from "./asset-list-item.css";
 import type { AssetListItemProps } from "./asset-list-item.types";
 import { AssetItemTransferProps } from "../asset-item-transfer/asset-item-transfer.types";
 import type { BoxProps } from "../box/box.types";
+import { TransferType } from "../overview-transfer/overview-transfer.types";
 
 export default function AssetListItem(props: AssetListItemProps) {
   useDefaultProps({
@@ -30,6 +31,7 @@ export default function AssetListItem(props: AssetListItemProps) {
     isOpen: false,
     handleDposit: () => {
       void (async function () {
+        console.log("deposit in list item")
         state.isOpen = true;
         state.transferType = "Deposit";
         state.modalDetail = await props?.onDeposit();
@@ -139,7 +141,7 @@ export default function AssetListItem(props: AssetListItemProps) {
         onClose={() => (state.isOpen = false)}
       >
         <AssetItemTransfer
-          type={state.modalDetail?.type}
+          type={state.transferType?.toLowerCase() as TransferType}
           fromSymbol={state.modalDetail?.fromSymbol}
           fromAddress={state.modalDetail?.fromAddress}
           fromImgSrc={state.modalDetail?.fromImgSrc}
@@ -151,7 +153,10 @@ export default function AssetListItem(props: AssetListItemProps) {
           priceDisplayAmount={state.modalDetail?.priceDisplayAmount}
           amount={state.modalDetail?.amount}
           onTransfer={(value) => state?.modalDetail?.onTransfer(value)}
-          onCancel={() => state.modalDetail?.onCancel}
+          onCancel={() => {
+            state.modalDetail?.onCancel?.();
+            state.isOpen = false;
+          }}
         />
       </BasicModal>
     </Stack>

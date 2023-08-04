@@ -38,6 +38,12 @@ export function safelyFormatNumberWithFallback(
   return value.toString();
 }
 
+/**
+ * Make sure value not greater than avaliable
+ * @param inputValue
+ * @param available
+ * @returns
+ */
 export function getValueByAvailable(
   inputValue: string | number,
   available: string | number

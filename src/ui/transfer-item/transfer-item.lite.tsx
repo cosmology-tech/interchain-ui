@@ -6,6 +6,7 @@ import {
   useRef,
   useDefaultProps,
   Show,
+  useMetadata,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import uniqueId from "lodash/uniqueId";
@@ -14,12 +15,22 @@ import Text from "../text";
 import Icon from "../icon";
 import Button from "../button";
 import TextField from "../text-field";
+import Box from "../box";
 
 import { store } from "../../models/store";
 import * as styles from "./transfer-item.css";
-import { TransferItemProps, AvailableItem } from "./transfer-item.types";
+import {
+  TransferItemProps,
+  AvailableItem,
+  ComboboxListType,
+} from "./transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 import { getValueByAvailable } from "../../helpers";
+
+useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["chain-swap-combobox"],
+});
 
 export default function TransferItem(props: TransferItemProps) {
   useDefaultProps({
@@ -34,14 +45,18 @@ export default function TransferItem(props: TransferItemProps) {
     swapAmount: string;
     currentItem: AvailableItem;
     amountPrice: string;
+    comboboxList: ComboboxListType;
     handleAmountInput: (Event) => void;
     handleHalf: () => void;
     handleMax: () => void;
+    mapToComboboxList: (list: AvailableItem[]) => void;
+    itemSelected: (selectedItem: any) => void;
   }>({
     theme: "light",
     swapAmount: "0",
     currentItem: null,
     amountPrice: "",
+    comboboxList: [],
     handleAmountInput(e) {
       let value = getValueByAvailable(
         e.target.value,
@@ -69,6 +84,33 @@ export default function TransferItem(props: TransferItemProps) {
       let value = new BigNumber(state.currentItem.available).toString();
       state.handleAmountInput({ target: { value: value } });
     },
+    mapToComboboxList(list: AvailableItem[]) {
+      let res = list.map((item: AvailableItem) => {
+        let dollarAmount = new BigNumber(item.available)
+          .multipliedBy(item.priceDisplayAmount)
+          .decimalPlaces(2)
+          .toString();
+        dollarAmount = store.getState().formatNumber({
+          value: dollarAmount,
+          style: "currency",
+        });
+        return {
+          iconUrl: item.imgSrc,
+          name: item.denom,
+          tokenName: item.symbol,
+          amount: item.available,
+          notionalValue: dollarAmount,
+        };
+      });
+      console.log("mapToComboboxList", res)
+      state.comboboxList = res;
+    },
+    itemSelected(selectedItem) {
+      state.currentItem = props.dropDownList.find(
+        (item) => item.symbol === selectedItem.tokenName
+      );
+      props?.onItemSelected?.(selectedItem)
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -83,10 +125,15 @@ export default function TransferItem(props: TransferItemProps) {
   });
 
   onUpdate(() => {
+    // Trigger props.onChange when state.currentItem changed
     if (state.currentItem) {
-      state.handleAmountInput({ target: { value: state.swapAmount } });
+      state.handleAmountInput({ target: { value: "0" } });
     }
   }, [state.currentItem]);
+
+  onUpdate(() => {
+    state.mapToComboboxList(props.dropDownList);
+  }, [props.dropDownList]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
@@ -100,10 +147,9 @@ export default function TransferItem(props: TransferItemProps) {
       attributes={{
         backgroundColor: "$progressBg",
         borderRadius: "$lg",
+        position: "relative",
         paddingTop: "$7",
-        paddingLeft: "$9",
-        paddingRight: "$5",
-        paddingBottom: "$9",
+        paddingBottom: "$7",
       }}
     >
       <Stack
@@ -113,6 +159,8 @@ export default function TransferItem(props: TransferItemProps) {
           minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
+          paddingLeft: "$9",
+          paddingRight: "$5",
         }}
       >
         <Text color="$textSecondary">{props.title}</Text>
@@ -154,7 +202,8 @@ export default function TransferItem(props: TransferItemProps) {
           </Show>
         </Stack>
       </Stack>
-      <Stack
+
+      {/* <Stack
         space="$0"
         attributes={{
           justifyContent: "space-between",
@@ -215,79 +264,60 @@ export default function TransferItem(props: TransferItemProps) {
             </Text>
           </Show>
         </Stack>
-        {/* @ts-expect-error */}
-        {/* <ScaffoldChainSwapCombobox
-          size="md"
-          defaultOpen={true}
-          options={[
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Cosmos",
-              tokenName: "ATOM",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Zil",
-              tokenName: "ZIL",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Bitcoin",
-              tokenName: "BTC",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Ethereum",
-              tokenName: "ETH",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Litecoin",
-              tokenName: "LTC",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "RArar",
-              tokenName: "RAR",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Areo",
-              tokenName: "AR",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Bozo",
-              tokenName: "BOZ",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-          ]}
+      </Stack> */}
+
+      <Show when={state.comboboxList.length > 0}>
+        <Box
+          attributes={{
+            borderRadius: "$lg",
+          }}
         >
-          </ScaffoldChainSwapCombobox> */}
-      </Stack>
+          {/* @ts-expect-error */}
+          <ScaffoldChainSwapCombobox
+            size="md"
+            defaultSelected={state.comboboxList[0]}
+            options={state.comboboxList}
+            onItemSelected={(item) => state.itemSelected(item)}
+            endAddon={() => (
+              <Stack direction="vertical" space="$0">
+                {props.disabled ? (
+                  <Text fontSize="$2xl">{state.swapAmount}</Text>
+                ) : (
+                  <TextField
+                    disabled={!!props.disabled}
+                    id={uniqueId("transfer-item-")}
+                    type="number"
+                    value={state.swapAmount}
+                    onChange={(e) => state.handleAmountInput(e)}
+                    inputClassName={styles.transferInput}
+                  />
+                )}
+                <div
+                  style={{
+                    visibility:
+                      !!state.swapAmount && state.swapAmount !== "0"
+                        ? "visible"
+                        : "hidden",
+                  }}
+                >
+                  <Text
+                    color="$textSecondary"
+                    fontSize="$xs"
+                    textAlign="right"
+                    attributes={{ marginTop: "$4" }}
+                  >
+                    {`≈ $${store
+                      .getState()
+                      ?.formatNumber({ value: state.amountPrice })}`}
+                  </Text>
+                </div>
+              </Stack>
+            )}
+          >
+            {/* @ts-expect-error */}
+          </ScaffoldChainSwapCombobox>
+        </Box>
+      </Show>
     </Stack>
   );
 }

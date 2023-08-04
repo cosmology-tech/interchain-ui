@@ -1,3 +1,13 @@
+export type ComboboxListItemType = {
+  iconUrl: string;
+  name: string;
+  tokenName: string;
+  amount: string;
+  notionalValue: string;
+}
+
+export type  ComboboxListType = Array<ComboboxListItemType>
+
 export type AvailableItem = {
   imgSrc: string;
   symbol: string;
@@ -36,4 +46,9 @@ export interface TransferItemProps {
    */
   title?: string;
   onChange?: (transferDetail: TransferDetail) => void;
+  /**
+   * Disabled status of input
+   */
+  disabled?: boolean;
+  onItemSelected?: (selectItem: ComboboxListItemType) =>  void;
 }

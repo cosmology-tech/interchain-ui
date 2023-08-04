@@ -114,10 +114,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               alignItems: "center",
             }}
           >
-            <img
-              className={styles.smImg}
-              src="https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png"
-            />
+            <img className={styles.smImg} src={props.fromImgSrc} />
             <Text color="$textSecondary">{props.fromAddress}</Text>
           </Stack>
         </Stack>
@@ -221,7 +218,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       <Button
         intent="tertiary"
         attributes={{ width: "$full" }}
-        onClick={() => props?.onTransfer?.(state.inputAmount)}
+        onClick={() =>
+          props?.onTransfer?.({ value: state.inputAmount, type: props.type })
+        }
       >
         <Stack
           attributes={{

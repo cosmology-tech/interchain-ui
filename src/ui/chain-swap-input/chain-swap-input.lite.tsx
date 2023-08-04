@@ -37,6 +37,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
 
   onMount(() => {
     state.theme = store.getState().theme;
+    console.log("props", props)
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
@@ -159,7 +160,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             </Stack>
           </Show>
 
-          <Show when={props.value && props.notionalValue && props.amount}>
+          <Show when={props.value && props.notionalValue && props.amount && !props.endAddon}>
             <Stack direction="vertical" space="$0">
               <Text
                 color="$text"
@@ -178,6 +179,10 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 {props.notionalValue}
               </Text>
             </Stack>
+          </Show>
+
+          <Show when={props.endAddon && !!props.value}>
+            {props.endAddon}
           </Show>
         </Show>
       </Box>

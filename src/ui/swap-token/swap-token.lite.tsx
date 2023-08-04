@@ -1,5 +1,6 @@
 import {
   useRef,
+  onUpdate,
   onMount,
   onUnMount,
   useStore,
@@ -22,6 +23,10 @@ import type { ThemeVariant } from "../../models/system.model";
 
 import * as styles from "./swap-token.css";
 import { SwapItemProps, SwapTokenProps } from "./swap-token.types";
+import {
+  AvailableItem,
+  ComboboxListItemType,
+} from "../transfer-item/transfer-item.types";
 
 export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
@@ -34,12 +39,16 @@ export default function SwapToken(props: SwapTokenProps) {
     swapIcon: IconProps["name"];
     tolerance: number;
     isSetting: boolean;
-    fromItem: SwapItemProps;
-    toItem: SwapItemProps;
+    fromItem: ComboboxListItemType;
+    toItem: ComboboxListItemType;
+    fromList: Array<AvailableItem>;
+    toList: Array<AvailableItem>;
     toggleIcon: (deg: number, icon: IconProps["name"]) => void;
     toggleToteranceStatus: () => void;
     setToterance: (per: number) => void;
     exchange: () => void;
+    handleFromListItemSelected: (selectedItem: ComboboxListItemType) => void;
+    handleToListItemSelected: (selectedItem: ComboboxListItemType) => void;
   }>({
     theme: "light",
     swapIcon: "arrowDownLine",
@@ -47,6 +56,8 @@ export default function SwapToken(props: SwapTokenProps) {
     isSetting: false,
     fromItem: null,
     toItem: null,
+    fromList: [],
+    toList: [],
     toggleIcon(deg, icon) {
       animate(
         swapIconRef,
@@ -82,6 +93,18 @@ export default function SwapToken(props: SwapTokenProps) {
       state.fromItem = copyTo;
       state.toItem = copyFrom;
     },
+    handleFromListItemSelected(selectedItem) {
+      state.toList = props.dropDownList.filter(
+        (item) => item.symbol !== selectedItem.tokenName
+      );
+      state.fromItem = selectedItem;
+    },
+    handleToListItemSelected(selectedItem) {
+      state.fromList = props.dropDownList.filter(
+        (item) => item.symbol !== selectedItem.tokenName
+      );
+      state.toItem = selectedItem;
+    },
   });
 
   onMount(() => {
@@ -107,6 +130,15 @@ export default function SwapToken(props: SwapTokenProps) {
     });
   });
 
+  onUpdate(() => {
+    let initialFromList = cloneDeep(props.dropDownList);
+    initialFromList.splice(1, 1);
+    let initialToList = cloneDeep(props.dropDownList);
+    initialToList.splice(0, 1);
+    state.fromList = initialFromList;
+    state.toList = initialToList;
+  }, [props.dropDownList]);
+
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
   });
@@ -121,14 +153,14 @@ export default function SwapToken(props: SwapTokenProps) {
         Swap
       </Text>
       <TransferItem
-        halfBtn={true}
-        maxBtn={true}
-        hasAvailable={true}
+        halfBtn
+        maxBtn
+        hasAvailable
         title="From"
-        availableAmount={state.fromItem?.availableAmount}
-        symbol={state.fromItem?.symbol}
-        denom={state.fromItem?.denom}
-        imgSrc={state.fromItem?.imgSrc}
+        dropDownList={state.fromList}
+        onItemSelected={(selectedItem) =>
+          state.handleFromListItemSelected(selectedItem)
+        }
       />
       <Stack
         className={styles.switchContainer}
@@ -152,11 +184,12 @@ export default function SwapToken(props: SwapTokenProps) {
       <TransferItem
         halfBtn={false}
         maxBtn={false}
+        disabled
         title="To"
-        availableAmount={state.toItem?.availableAmount}
-        symbol={state.toItem?.symbol}
-        denom={state.toItem?.denom}
-        imgSrc={state.toItem?.imgSrc}
+        dropDownList={state.toList}
+        onItemSelected={(selectedItem) =>
+          state.handleToListItemSelected(selectedItem)
+        }
       />
       <Stack
         attributes={{

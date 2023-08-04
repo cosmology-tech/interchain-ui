@@ -64,5 +64,50 @@ export const Primary: Story = {
         ],
       },
     },
+    dropDownList: [
+      {
+        available: 713.32,
+        symbol: "UMEE",
+        denom: "Umee",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
+        priceDisplayAmount: 0.5,
+      },
+      {
+        available: 89.66,
+        symbol: "USTC",
+        denom: "Terra Classic",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
+        priceDisplayAmount: 10,
+      },
+      {
+        available: 102.61,
+        symbol: "TORI",
+        denom: "Teritori",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
+        priceDisplayAmount: 5,
+      },
+      {
+        available: 57.61,
+        symbol: "OSMO",
+        denom: "Osmosis",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+        priceDisplayAmount: 0.4671,
+      },
+      {
+        available: 15.9576,
+        symbol: "ATOM",
+        denom: "Cosmos Hub",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+        priceDisplayAmount: 8.6744,
+      },
+    ],
+    onSwap: () => {
+      console.log("onSwap")
+    }
   },
 };

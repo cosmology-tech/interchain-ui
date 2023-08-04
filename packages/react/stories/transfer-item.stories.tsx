@@ -28,6 +28,22 @@ export const Primary: Story = {
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
         priceDisplayAmount: 0.5,
       },
+      {
+        available: 89.66,
+        symbol: "USTC",
+        denom: "Terra Classic",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
+        priceDisplayAmount: 10,
+      },
+      {
+        available: 102.61,
+        symbol: "TORI",
+        denom: "Teritori",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
+        priceDisplayAmount: 5,
+      },
     ],
   },
 };

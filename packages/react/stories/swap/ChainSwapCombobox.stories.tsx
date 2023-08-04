@@ -17,7 +17,14 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     size: "md",
-    defaultOpen: true,
+    defaultSelected: {
+      iconUrl:
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+      name: "Cosmos",
+      tokenName: "ATOM",
+      amount: "0.79824",
+      notionalValue: "$0.69",
+    },
     options: [
       {
         iconUrl:

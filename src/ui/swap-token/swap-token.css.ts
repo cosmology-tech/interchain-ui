@@ -1,5 +1,6 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
+import { zIndex } from "~/styles/tokens";
 
 const swapBorderColorVar = createVar();
 
@@ -51,5 +52,6 @@ export const percentContainer = style({
 });
 
 export const rel = style({
-  position: "relative"
-})
+  position: "relative",
+  zIndex: 1,
+});

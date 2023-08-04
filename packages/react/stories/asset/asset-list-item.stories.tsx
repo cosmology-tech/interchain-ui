@@ -21,14 +21,11 @@ export const Primary: Story = {
       "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
     symbol: "OSMO",
     denom: "Osmosis",
-    tokenAmount: "102.614224",
+    tokenAmount: "102.61",
     tokenAmountPrice: "101.02",
-    canDeposit: true,
-    canWithdraw: true,
     chainName: "Juno",
     onDeposit: () => {
       return {
-        type: "withdraw",
         fromSymbol: "UMEE",
         fromDenom: "Umee",
         fromAddress: "umee1lqsq...pv4axdaxk",
@@ -41,14 +38,13 @@ export const Primary: Story = {
         avaliable: "25.89",
         amount: "",
         priceDisplayAmount: 0.5,
-        onTransfer: (amount) => {
-          console.log("onTransfer", amount);
+        onTransfer: (detail) => {
+          console.log("onTransfer", detail);
         },
       };
     },
     onWithdraw: () => {
       return {
-        type: "withdraw",
         fromSymbol: "UMEE",
         fromDenom: "Umee",
         fromAddress: "umee1lqsq...pv4axdaxk",
@@ -61,8 +57,8 @@ export const Primary: Story = {
         avaliable: "25.89",
         amount: "",
         priceDisplayAmount: 0.5,
-        onTransfer: (amount) => {
-          console.log("onTransfer", amount);
+        onTransfer: (detail) => {
+          console.log("onTransfer", detail);
         },
       };
     },

@@ -13,7 +13,7 @@ export interface AssetListHeaderProps {
    * Total across all chains
    */
   totalOnAll?: string;
-  dropDownList?: AvailableItem[];
+  dropDownList?: Array<AvailableItem>;
   /**
    * Callback of deposit
    * @param transferDetail

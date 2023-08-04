@@ -1,4 +1,4 @@
-import type { BaseComponentProps } from "../../models/components.model";
+import type { BaseComponentProps, Children } from "../../models/components.model";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
 export interface ChainSwapInputProps extends BaseComponentProps {
@@ -15,4 +15,5 @@ export interface ChainSwapInputProps extends BaseComponentProps {
   amount?: string;
   notionalValue?: string;
   onDropdownArrowClicked: () => void;
+  endAddon?: Children | undefined;
 }

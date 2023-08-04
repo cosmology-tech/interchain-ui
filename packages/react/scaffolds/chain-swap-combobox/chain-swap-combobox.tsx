@@ -73,6 +73,7 @@ export interface ChainSwapComboboxProps {
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
   defaultOpen: boolean;
+  endAddon?: React.ReactNode | undefined;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -151,6 +152,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           onDropdownArrowClicked={() => {
             setOpen((isPrevOpen) => !isPrevOpen);
           }}
+          endAddon={props.endAddon}
           {...selectedItem}
           label={selectedItem?.name ?? null}
           inputAttributes={getReferenceProps({
