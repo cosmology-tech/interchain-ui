@@ -17,78 +17,15 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     swapPrice: {
-      price: {
-        priceRate: 1.6432,
-        dollarValue: "1,013",
-      },
+      hasRoute: true,
       priceImpact: "< 0.001%",
       swapFee: {
         percentage: "0.2%",
         value: "< $0.01",
       },
-      expectedOutput: "0.018795",
-      tokenOutSymbol: "ATOM",
       minimumReceived: "0.018607",
-      routeDetail: {
-        tokenIn: {
-          logoUrl:
-            "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
-          symbol: "USDC",
-        },
-        tokenOut: {
-          logoUrl:
-            "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-          symbol: "ATOM",
-        },
-        routes: [
-          {
-            poolId: "1",
-            swapFee: "0.1%",
-            baseLogo:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
-            baseSymbol: "USDC",
-            quoteLogo:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-            quoteSymbol: "OSMO",
-          },
-          {
-            poolId: "2",
-            swapFee: "0.1%",
-            baseLogo:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-            baseSymbol: "OSMO",
-            quoteLogo:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-            quoteSymbol: "ATOM",
-          },
-        ],
-      },
     },
     dropDownList: [
-      {
-        available: 713.32,
-        symbol: "UMEE",
-        denom: "Umee",
-        imgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
-        priceDisplayAmount: 0.5,
-      },
-      {
-        available: 89.66,
-        symbol: "USTC",
-        denom: "Terra Classic",
-        imgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
-        priceDisplayAmount: 10,
-      },
-      {
-        available: 102.61,
-        symbol: "TORI",
-        denom: "Teritori",
-        imgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
-        priceDisplayAmount: 5,
-      },
       {
         available: 57.61,
         symbol: "OSMO",
@@ -103,11 +40,35 @@ export const Primary: Story = {
         denom: "Cosmos Hub",
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        priceDisplayAmount: 8.6744,
+        priceDisplayAmount: 8.3502,
+      },
+      {
+        available: 713.32,
+        symbol: "USDC",
+        denom: "Axelar",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
+        priceDisplayAmount: 1,
+      },
+      {
+        available: 89.66,
+        symbol: "USTC",
+        denom: "Terra Classic",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
+        priceDisplayAmount: 0.0144,
+      },
+      {
+        available: 102.61,
+        symbol: "TORI",
+        denom: "Teritori",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
+        priceDisplayAmount: 0.0104,
       },
     ],
-    onSwap: () => {
-      console.log("onSwap")
+    onSwap: (detail) => {
+      console.log("onSwap", detail)
     }
   },
 };

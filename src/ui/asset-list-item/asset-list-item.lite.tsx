@@ -31,7 +31,6 @@ export default function AssetListItem(props: AssetListItemProps) {
     isOpen: false,
     handleDposit: () => {
       void (async function () {
-        console.log("deposit in list item")
         state.isOpen = true;
         state.transferType = "Deposit";
         state.modalDetail = await props?.onDeposit();

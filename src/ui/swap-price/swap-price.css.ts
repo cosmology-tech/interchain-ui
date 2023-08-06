@@ -14,11 +14,12 @@ export const img = style({
 
 export const absImg = style({
   position: "absolute",
+  top: "0",
   right: "0",
 });
 
 export const routeDivider = style({
-  height: "1",
+  height: "1px",
   paddingLeft: themeVars.space[7],
   paddingRight: themeVars.space[7],
   flex: 1,

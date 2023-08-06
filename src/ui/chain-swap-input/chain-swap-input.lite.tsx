@@ -37,7 +37,6 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
 
   onMount(() => {
     state.theme = store.getState().theme;
-    console.log("props", props)
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;

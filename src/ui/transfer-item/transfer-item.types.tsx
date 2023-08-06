@@ -4,9 +4,9 @@ export type ComboboxListItemType = {
   tokenName: string;
   amount: string;
   notionalValue: string;
-}
+};
 
-export type  ComboboxListType = Array<ComboboxListItemType>
+export type ComboboxListType = Array<ComboboxListItemType>;
 
 export type AvailableItem = {
   imgSrc: string;
@@ -22,7 +22,6 @@ export type AvailableItem = {
   priceDisplayAmount: number;
 };
 
-export type TransferDetail = AvailableItem & { value: string };
 
 export interface TransferItemProps {
   /**
@@ -45,10 +44,18 @@ export interface TransferItemProps {
    * Title of the transfer-item
    */
   title?: string;
-  onChange?: (transferDetail: TransferDetail) => void;
+  onChange?: (item: AvailableItem, value: string) => void;
   /**
    * Disabled status of input
    */
   disabled?: boolean;
-  onItemSelected?: (selectItem: ComboboxListItemType) =>  void;
+  /**
+   * Callback when value changed of dropdown
+   * @param selectItem
+   * @returns
+   */
+  onItemSelected?: (selectItem: AvailableItem) => void;
+  selectedItem: AvailableItem;
+  amount?: string;
+  defaultAmountPrice?: string;
 }

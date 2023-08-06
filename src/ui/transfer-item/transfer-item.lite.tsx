@@ -23,6 +23,7 @@ import {
   TransferItemProps,
   AvailableItem,
   ComboboxListType,
+  ComboboxListItemType,
 } from "./transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 import { getValueByAvailable } from "../../helpers";
@@ -42,37 +43,37 @@ export default function TransferItem(props: TransferItemProps) {
 
   const state = useStore<{
     theme: ThemeVariant;
-    swapAmount: string;
     currentItem: AvailableItem;
     amountPrice: string;
     comboboxList: ComboboxListType;
     handleAmountInput: (Event) => void;
     handleHalf: () => void;
     handleMax: () => void;
+    getComboboxItem: (item: AvailableItem) => ComboboxListItemType;
     mapToComboboxList: (list: AvailableItem[]) => void;
-    itemSelected: (selectedItem: any) => void;
+    getSelectedItem: (selectedItem: ComboboxListItemType) => AvailableItem;
+    itemSelected: (selectedItem: ComboboxListItemType) => void;
   }>({
     theme: "light",
-    swapAmount: "0",
     currentItem: null,
-    amountPrice: "",
     comboboxList: [],
+    get amountPrice() {
+      if (props.amount === "") {
+        return "";
+      } else {
+        return new BigNumber(state.currentItem?.priceDisplayAmount)
+          .multipliedBy(props.amount)
+          .decimalPlaces(6)
+          .toString();
+      }
+    },
     handleAmountInput(e) {
       let value = getValueByAvailable(
         e.target.value,
         state.currentItem?.available
       );
 
-      if (value === "") {
-        state.amountPrice = "";
-      } else {
-        state.amountPrice = new BigNumber(state.currentItem?.priceDisplayAmount)
-          .multipliedBy(value)
-          .decimalPlaces(2)
-          .toString();
-      }
-      state.swapAmount = value;
-      props?.onChange?.(Object.assign(state.currentItem, { value: value }));
+      props?.onChange?.(state.currentItem, value);
     },
     handleHalf() {
       let value = new BigNumber(state.currentItem.available)
@@ -84,32 +85,39 @@ export default function TransferItem(props: TransferItemProps) {
       let value = new BigNumber(state.currentItem.available).toString();
       state.handleAmountInput({ target: { value: value } });
     },
+    getComboboxItem(item: AvailableItem) {
+      let dollarAmount = new BigNumber(item.available)
+        .multipliedBy(item.priceDisplayAmount)
+        .decimalPlaces(2)
+        .toString();
+      dollarAmount = store.getState().formatNumber({
+        value: dollarAmount,
+        style: "currency",
+      });
+      return {
+        iconUrl: item.imgSrc,
+        name: item.denom,
+        tokenName: item.symbol,
+        amount: item.available,
+        notionalValue: dollarAmount,
+      };
+    },
     mapToComboboxList(list: AvailableItem[]) {
       let res = list.map((item: AvailableItem) => {
-        let dollarAmount = new BigNumber(item.available)
-          .multipliedBy(item.priceDisplayAmount)
-          .decimalPlaces(2)
-          .toString();
-        dollarAmount = store.getState().formatNumber({
-          value: dollarAmount,
-          style: "currency",
-        });
-        return {
-          iconUrl: item.imgSrc,
-          name: item.denom,
-          tokenName: item.symbol,
-          amount: item.available,
-          notionalValue: dollarAmount,
-        };
+        return state.getComboboxItem(item);
       });
-      console.log("mapToComboboxList", res)
       state.comboboxList = res;
     },
-    itemSelected(selectedItem) {
+    getSelectedItem(selectedItem: ComboboxListItemType) {
+      return props.dropDownList.find(
+        (item: AvailableItem) => item.symbol === selectedItem.tokenName
+      );
+    },
+    itemSelected(selectedItem: ComboboxListItemType) {
       state.currentItem = props.dropDownList.find(
         (item) => item.symbol === selectedItem.tokenName
       );
-      props?.onItemSelected?.(selectedItem)
+      props?.onItemSelected?.(state.getSelectedItem(selectedItem));
     },
   });
 
@@ -117,7 +125,6 @@ export default function TransferItem(props: TransferItemProps) {
 
   onMount(() => {
     state.theme = store.getState().theme;
-    state.currentItem = props.dropDownList[0];
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
@@ -125,11 +132,15 @@ export default function TransferItem(props: TransferItemProps) {
   });
 
   onUpdate(() => {
-    // Trigger props.onChange when state.currentItem changed
-    if (state.currentItem) {
-      state.handleAmountInput({ target: { value: "0" } });
-    }
-  }, [state.currentItem]);
+    state.currentItem = props.selectedItem;
+  }, [props.selectedItem]);
+
+  // onUpdate(() => {
+  //   // Trigger props.onChange when state.currentItem changed
+  //   if (state.currentItem) {
+  //     state.handleAmountInput({ target: { value: "0" } });
+  //   }
+  // }, [state.currentItem]);
 
   onUpdate(() => {
     state.mapToComboboxList(props.dropDownList);
@@ -247,11 +258,11 @@ export default function TransferItem(props: TransferItemProps) {
           <TextField
             id={uniqueId("transfer-item-")}
             type="number"
-            value={state.swapAmount}
+            value={props.amount}
             onChange={(e) => state.handleAmountInput(e)}
             inputClassName={styles.transferInput}
           />
-          <Show when={!!state.swapAmount && state.swapAmount !== "0"}>
+          <Show when={!!props.amount && props.amount !== "0"}>
             <Text
               color="$textSecondary"
               fontSize="$xs"
@@ -278,16 +289,17 @@ export default function TransferItem(props: TransferItemProps) {
             defaultSelected={state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => state.itemSelected(item)}
+            valueItem={state.getComboboxItem(state.currentItem)}
             endAddon={() => (
               <Stack direction="vertical" space="$0">
                 {props.disabled ? (
-                  <Text fontSize="$2xl">{state.swapAmount}</Text>
+                  <Text fontSize="$2xl">{props.amount}</Text>
                 ) : (
                   <TextField
                     disabled={!!props.disabled}
                     id={uniqueId("transfer-item-")}
                     type="number"
-                    value={state.swapAmount}
+                    value={props.amount}
                     onChange={(e) => state.handleAmountInput(e)}
                     inputClassName={styles.transferInput}
                   />
@@ -295,7 +307,7 @@ export default function TransferItem(props: TransferItemProps) {
                 <div
                   style={{
                     visibility:
-                      !!state.swapAmount && state.swapAmount !== "0"
+                      !!props.amount && props.amount !== "0"
                         ? "visible"
                         : "hidden",
                   }}

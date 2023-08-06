@@ -74,6 +74,7 @@ export interface ChainSwapComboboxProps {
   onItemSelected?: (selected: ComboboxOption) => void;
   defaultOpen: boolean;
   endAddon?: React.ReactNode | undefined;
+  valueItem: ComboboxOption;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -142,6 +143,11 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   const items = props.options.filter((item) =>
     item.tokenName.toLowerCase().startsWith(inputValue.toLowerCase())
   );
+
+  React.useEffect(() => {
+    setSelectedItem(props.valueItem);
+    setInputValue(props.valueItem.tokenName);
+  }, [props.valueItem]);
 
   return (
     <Box px="$9" py="$7" backgroundColor="$menuItemBg">
