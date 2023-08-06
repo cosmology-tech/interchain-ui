@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  onUpdate,
+} from "@builder.io/mitosis";
 import BigNUmber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -8,25 +14,28 @@ import TransferItem from "../transfer-item";
 import * as styles from "./overview-transfer.css";
 import { store } from "../../models/store";
 import type { OverviewTransferProps } from "./overview-transfer.types";
-import { TransferDetail } from "../transfer-item/transfer-item.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 
 export default function OverviewTransfer(props: OverviewTransferProps) {
   const state = useStore<{
     theme: ThemeVariant;
     transferDisabled: boolean;
-    curTransferDetail: TransferDetail;
-    handleTransferChange: (data: TransferDetail) => void;
+    curSelectedItem: AvailableItem;
+    amount: string;
+    handleTransferChange: (item: AvailableItem, value: string) => void;
   }>({
     theme: "light",
     transferDisabled: true,
-    curTransferDetail: null,
-    handleTransferChange(data: TransferDetail) {
-      state.curTransferDetail = data;
+    curSelectedItem: null,
+    amount: "0",
+    handleTransferChange(item: AvailableItem, value: string) {
+      state.curSelectedItem = item;
+      state.amount = value;
       state.transferDisabled =
-        new BigNUmber(data.value).isGreaterThan(data.available) ||
-        new BigNUmber(data.value).isLessThanOrEqualTo(0) ||
-        data.value === "";
+        new BigNUmber(value).isGreaterThan(item?.available) ||
+        new BigNUmber(value).isLessThanOrEqualTo(0) ||
+        value === "";
     },
   });
 
@@ -44,6 +53,10 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
     if (typeof cleanupRef === "function") cleanupRef();
   });
 
+  onUpdate(() => {
+    state.curSelectedItem = props.dropDownList[0];
+  }, [props.dropDownList]);
+
   return (
     <Stack className={styles.overviewTransfer} direction="vertical">
       {/* <Text
@@ -57,9 +70,15 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         maxBtn
         hasAvailable
         dropDownList={props.dropDownList}
-        onChange={(detail: TransferDetail) =>
-          state.handleTransferChange(detail)
+        selectedItem={state.curSelectedItem}
+        amount={state.amount}
+        onChange={(item: AvailableItem, value: string) =>
+          state.handleTransferChange(item, value)
         }
+        onItemSelected={(selectedItem: AvailableItem) => {
+          state.curSelectedItem = selectedItem;
+          state.amount = "0";
+        }}
       />
       <Stack
         attributes={{
@@ -69,7 +88,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
           alignItems: "center",
         }}
       >
-        <img className={styles.img} src={state?.curTransferDetail?.imgSrc} />
+        <img className={styles.img} src={state?.curSelectedItem?.imgSrc} />
         <Icon
           name="arrowRightLine"
           color="$textSecondary"
@@ -86,7 +105,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
       <Button
         intent="tertiary"
         disabled={state.transferDisabled}
-        onClick={() => props?.onTransfer(state.curTransferDetail)}
+        onClick={() => props?.onTransfer(state.curSelectedItem, state.amount)}
       >
         <Stack
           attributes={{
@@ -113,7 +132,9 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
           </Text>
         </Stack>
       </Button>
-      <Button variant="unstyled" onClick={() => props?.onCancel()}>Cancel</Button>
+      <Button variant="unstyled" onClick={() => props?.onCancel()}>
+        Cancel
+      </Button>
     </Stack>
   );
 }

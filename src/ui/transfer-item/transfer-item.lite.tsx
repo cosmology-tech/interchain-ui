@@ -86,8 +86,8 @@ export default function TransferItem(props: TransferItemProps) {
       state.handleAmountInput({ target: { value: value } });
     },
     getComboboxItem(item: AvailableItem) {
-      let dollarAmount = new BigNumber(item.available)
-        .multipliedBy(item.priceDisplayAmount)
+      let dollarAmount = new BigNumber(item?.available)
+        .multipliedBy(item?.priceDisplayAmount)
         .decimalPlaces(2)
         .toString();
       dollarAmount = store.getState().formatNumber({
@@ -95,10 +95,10 @@ export default function TransferItem(props: TransferItemProps) {
         style: "currency",
       });
       return {
-        iconUrl: item.imgSrc,
-        name: item.denom,
-        tokenName: item.symbol,
-        amount: item.available,
+        iconUrl: item?.imgSrc,
+        name: item?.denom,
+        tokenName: item?.symbol,
+        amount: item?.available,
         notionalValue: dollarAmount,
       };
     },

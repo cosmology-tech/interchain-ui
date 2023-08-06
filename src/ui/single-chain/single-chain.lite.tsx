@@ -5,7 +5,9 @@ import Text from "../text";
 import ShowMore from "../show-more";
 import * as styles from "./single-chain.css";
 import { SingleChainProps } from "./single-chain.types";
-import { TransferDetail } from "../transfer-item/transfer-item.types";
+import {
+  AvailableItem,
+} from "../transfer-item/transfer-item.types";
 
 export default function SingleChain(props: SingleChainProps) {
   return (
@@ -16,11 +18,14 @@ export default function SingleChain(props: SingleChainProps) {
           total={props.header.total}
           // totalOnAll={props.header.totalOnAll}
           dropDownList={props.header.dropDownList}
-          onDeposit={(detail: TransferDetail) => props?.header?.onDeposit?.(detail)}
+          onDeposit={(item: AvailableItem, value: string) =>
+            props?.header?.onDeposit?.(item, value)
+          }
           onDepositCancel={() => props?.header?.onDepositCancel?.()}
-          onWithdraw={(detail: TransferDetail) => props?.header?.onWithdraw?.(detail)}
+          onWithdraw={(item: AvailableItem, value: string) =>
+            props?.header?.onWithdraw?.(item, value)
+          }
           onWithdrawCancel={() => props?.header?.onWithdrawCancel?.()}
-
         />
         <Text
           color="$textSecondary"

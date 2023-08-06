@@ -1,4 +1,4 @@
-import { AvailableItem, TransferDetail } from "../transfer-item/transfer-item.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export interface AssetListHeaderProps {
   /**
@@ -19,13 +19,13 @@ export interface AssetListHeaderProps {
    * @param transferDetail
    * @returns
    */
-  onDeposit?: (transferDetail: TransferDetail) => void;
+  onDeposit?: (transferItem: AvailableItem, value: string) => void;
   onDepositCancel?: () => void;
   /**
    * Callback of withdraw
    * @param transferDetail
    * @returns
    */
-  onWithdraw?: (transferDetail: TransferDetail) => void;
+  onWithdraw?: (transferItem: AvailableItem, value: string) => void;
   onWithdrawCancel?: () => void;
 }

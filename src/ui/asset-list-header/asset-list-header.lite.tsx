@@ -8,7 +8,7 @@ import OverviewTransfer from "../overview-transfer";
 import * as styles from "./asset-list-header.css";
 import { AssetListHeaderProps } from "./asset-list-header.types";
 import { TransferType } from "../overview-transfer/overview-transfer.types";
-import { TransferDetail } from "../transfer-item/transfer-item.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export default function AssetListHeader(props: AssetListHeaderProps) {
   useDefaultProps({
@@ -20,7 +20,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
     transferType: TransferType;
     withdraw: () => void;
     deposit: () => void;
-    handleTransfer: (detail: TransferDetail) => void;
+    handleTransfer: (item: AvailableItem, value: string) => void;
   }>({
     isOpen: false,
     transferType: null,
@@ -32,11 +32,11 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
       state.transferType = "deposit";
       state.isOpen = true;
     },
-    handleTransfer(detail: TransferDetail) {
+    handleTransfer(item: AvailableItem, value: string) {
       if (state.transferType === "deposit") {
-        props?.onDeposit(detail);
+        props?.onDeposit(item, value);
       } else {
-        props?.onWithdraw(detail);
+        props?.onWithdraw(item, value);
       }
     },
   });
@@ -166,7 +166,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
         <OverviewTransfer
           type={state.transferType}
           dropDownList={props.dropDownList}
-          onTransfer={(detail) => state.handleTransfer(detail)}
+          onTransfer={(item: AvailableItem, value: string) => state.handleTransfer(item, value)}
           onCancel={() => {
             state.isOpen = false;
             if (state.transferType === "deposit") {

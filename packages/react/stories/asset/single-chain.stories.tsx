@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { SingleChain, ShowMore } from "../../src";
 import { SingleChainListItemProps } from "../../src/ui/single-chain/single-chain.types";
+import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
 
 const meta: Meta<typeof SingleChain> = {
   component: SingleChain,
@@ -45,11 +46,11 @@ export const Primary: Story = {
           priceDisplayAmount: 5,
         },
       ],
-      onDeposit: (detail) => {
-        console.log("onDeposit", detail);
+      onDeposit: (item: AvailableItem, value: string) => {
+        console.log("onDeposit item", item, "value", value);
       },
-      onWithdraw: (detail) => {
-        console.log("onWithdraw", detail);
+      onWithdraw: (item: AvailableItem, value: string) => {
+        console.log("onWithdraw item", item, "value", value);
       },
     },
   },

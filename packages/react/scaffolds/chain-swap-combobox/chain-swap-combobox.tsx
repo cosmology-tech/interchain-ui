@@ -141,7 +141,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }
 
   const items = props.options.filter((item) =>
-    item.tokenName.toLowerCase().startsWith(inputValue.toLowerCase())
+    item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
   );
 
   React.useEffect(() => {

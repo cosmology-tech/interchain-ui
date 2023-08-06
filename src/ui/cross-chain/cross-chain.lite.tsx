@@ -5,7 +5,7 @@ import Text from "../text";
 import ShowMore from "../show-more";
 import * as styles from "./cross-chain.css";
 import { CrossChainProps } from "./cross-chain.types";
-import { TransferDetail } from "../transfer-item/transfer-item.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export default function CrossChain(props: CrossChainProps) {
   return (
@@ -15,12 +15,12 @@ export default function CrossChain(props: CrossChainProps) {
         total={props.header.total}
         totalOnAll={props.header.totalOnAll}
         dropDownList={props.header.dropDownList}
-        onDeposit={(detail: TransferDetail) =>
-          props?.header?.onDeposit?.(detail)
+        onDeposit={(item: AvailableItem, value: string) =>
+          props?.header?.onDeposit?.(item, value)
         }
         onDepositCancel={() => props?.header?.onDepositCancel?.()}
-        onWithdraw={(detail: TransferDetail) =>
-          props?.header?.onWithdraw?.(detail)
+        onWithdraw={(item: AvailableItem, value: string) =>
+          props?.header?.onWithdraw?.(item, value)
         }
         onWithdrawCancel={() => props?.header?.onWithdrawCancel?.()}
       />

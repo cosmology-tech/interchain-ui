@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { CrossChain, ShowMore } from "../../src";
 import { CrossChainListItemProps } from "../../src/ui/cross-chain/cross-chain.types";
+import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
 
 const meta: Meta<typeof CrossChain> = {
   component: CrossChain,
@@ -45,11 +46,11 @@ export const Primary: Story = {
           priceDisplayAmount: 5,
         },
       ],
-      onDeposit: (detail) => {
-        console.log("onDeposit", detail);
+      onDeposit: (item: AvailableItem, value: string) => {
+        console.log("onDeposit item", item, "value", value);
       },
-      onWithdraw: (detail) => {
-        console.log("onWithdraw", detail);
+      onWithdraw: (item: AvailableItem, value: string) => {
+        console.log("onWithdraw item", item, "value", value);
       },
     },
   },

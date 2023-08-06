@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { OverviewTransfer } from "../../src";
-import { TransferDetail } from "../../src/ui/transfer-item/transfer-item.types";
+import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
 
 const meta: Meta<typeof OverviewTransfer> = {
   component: OverviewTransfer,
@@ -19,7 +19,7 @@ export const Primary: Story = {
     type: "withdraw",
     dropDownList: [
       {
-        available: 713.32,
+        available: "713.32",
         symbol: "UMEE",
         denom: "Umee",
         imgSrc:
@@ -27,7 +27,7 @@ export const Primary: Story = {
         priceDisplayAmount: 0.5,
       },
       {
-        available: 89.66,
+        available: "89.66",
         symbol: "USTC",
         denom: "Terra Classic",
         imgSrc:
@@ -35,7 +35,7 @@ export const Primary: Story = {
         priceDisplayAmount: 10,
       },
       {
-        available: 102.61,
+        available: "102.61",
         symbol: "TORI",
         denom: "Teritori",
         imgSrc:
@@ -43,8 +43,8 @@ export const Primary: Story = {
         priceDisplayAmount: 5,
       },
     ],
-    onTransfer(transferDetail: TransferDetail) {
-      console.log("transferDetail===", transferDetail);
+    onTransfer(item: AvailableItem, amount: string) {
+      console.log("item", item, "value", amount);
     },
   },
 };

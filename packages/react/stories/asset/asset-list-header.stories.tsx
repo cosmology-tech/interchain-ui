@@ -2,6 +2,7 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { AssetListHeader } from "../../src";
+import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
 
 const meta: Meta<typeof AssetListHeader> = {
   component: AssetListHeader,
@@ -45,11 +46,11 @@ export const Primary: Story = {
         priceDisplayAmount: 5,
       },
     ],
-    onDeposit: (detail) => {
-      console.log("onDeposit", detail)
+    onDeposit: (item: AvailableItem, value: string) => {
+      console.log("onDeposit item", item, "value", value)
     },
-    onWithdraw: (detail) => {
-      console.log("onWithdraw", detail)
+    onWithdraw: (item: AvailableItem, value: string) => {
+      console.log("onWithdraw item", item, "value", value)
     }
   },
 };
