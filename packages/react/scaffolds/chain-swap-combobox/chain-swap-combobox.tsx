@@ -145,8 +145,8 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   );
 
   React.useEffect(() => {
-    setSelectedItem(props.valueItem);
-    setInputValue(props.valueItem.tokenName);
+    setSelectedItem(props?.valueItem);
+    setInputValue(props?.valueItem?.tokenName);
   }, [props.valueItem]);
 
   return (
