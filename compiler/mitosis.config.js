@@ -11,6 +11,7 @@ module.exports = {
     },
     vue: {
       typescript: true,
+      api: "options",
     },
   },
 };

@@ -63,7 +63,11 @@ async function compile(defaultOptions) {
     : glob.sync(options.elements);
   const outPath = `${options.dest}/${options.target}`;
 
-  function copyNonMitosisLiteFiles(scaffoldsExist = false) {
+  function copyNonMitosisLiteFiles(isFirstRun = false, scaffoldsExist = false) {
+    if (!isFirstRun) {
+      return;
+    }
+
     // Move src to all the package folder
     fs.copySync("src", `${outPath}/src`);
 
@@ -136,13 +140,18 @@ async function compile(defaultOptions) {
       options.extension
     }`;
 
+    let to =
+      options.target === "webcomponents" ? "webcomponent" : options.target;
+    to = to === "vue" ? "vue3" : to;
+
     await compileCommand.run({
       parameters: {
         options: {
           from: "mitosis",
-          to: options.target,
+          to: to,
           out: outFile,
           force: true,
+          api: options.api,
           state: options.state,
           styles: options.styles,
           config: "./compiler/mitosis.config.js",
@@ -212,7 +221,8 @@ async function compile(defaultOptions) {
     // Copying files
     const { inDir, outDir } = getScaffoldsDirs(outPath);
     const scaffoldsExist = fs.existsSync(inDir);
-    copyNonMitosisLiteFiles(scaffoldsExist);
+
+    copyNonMitosisLiteFiles(isFirstCompilation, scaffoldsExist);
 
     if (scaffoldsExist) {
       fs.copySync(inDir, outDir);
@@ -241,7 +251,6 @@ async function compile(defaultOptions) {
 
   if (!cache.isPopulated) {
     await cache.build(files);
-    // console.log(`[cache build]`);
   }
 
   if (options.target === "react") {
