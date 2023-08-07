@@ -22,29 +22,42 @@ const { compileReact } = require("./frameworks/react.compile");
     {
       title: "Compile React Components",
       task: () =>
-        execa("node ./compiler/frameworks/react.compile").catch((error) => {
-          throw new Error("Error compiling mitosis components" + error);
+        compileReact().catch((error) => {
+          throw new Error("[Dev] Error task compile react components " + error);
         }),
     },
     {
       title: "Watching /src ...",
       task: () => {
+        const compileWithCancelToken = (token) => {
+          return new Promise(function (resolve, reject) {
+            compileReact().then(resolve).catch(reject);
+
+            token.cancel = function () {
+              reject(new Error("Cancelled"));
+            };
+          });
+        };
+
+        const compile = last(compileWithCancelToken);
+
         return new Listr([
           {
             title: "Recompile Mitosis",
             task: async () => {
               const watchDir = path.resolve(process.cwd(), "src");
 
-              const onChange = lodash.debounce((err, _events) => {
+              const onChange = lodash.debounce((t, err, _events) => {
+                console.log("Change", _events);
                 const spinner = ora(`Watching src/ for changes...`).start();
                 spinner.text = `src/ changed, compiling...`;
 
-                console.time("Recompile took");
+                console.time(`[t:${t}] Recompile took`);
 
-                compileReact()
+                compile()
                   .then(() => {
                     spinner.succeed("Compiled successfully.");
-                    console.timeEnd("Recompile took");
+                    console.time(`[t:${t}] Recompile took`);
                   })
                   .catch((e) => {
                     spinner.fail(`Error compiling mitosis ${e.message}.`);
@@ -56,10 +69,11 @@ const { compileReact } = require("./frameworks/react.compile");
                   );
                   return;
                 }
-              }, 200);
+              }, 500);
 
               let watch = watcher.subscribe(watchDir, (err, _events) => {
-                onChange(err, _events);
+                const t = +new Date();
+                onChange(t, err, _events);
               });
 
               return watch.then((subscription) => {
@@ -80,3 +94,14 @@ const { compileReact } = require("./frameworks/react.compile");
     console.error(err);
   });
 })();
+
+function last(fn) {
+  const lastToken = { cancel: function () {} }; // start with no op
+
+  return function executor() {
+    lastToken.cancel();
+    const args = Array.prototype.slice.call(arguments);
+    args.push(lastToken);
+    return fn.apply(this, args);
+  };
+}

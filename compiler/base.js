@@ -13,6 +13,9 @@ const camelCase = require("lodash/camelCase");
 const startCase = require("lodash/startCase");
 const scaffoldConfig = require("./scaffold.config.js");
 const { cwd } = require("process");
+const { Cache } = require("./cache.js");
+
+const cache = new Cache();
 
 const DEFAULT_OPTIONS = {
   elements: "src/**/*.lite.tsx",
@@ -60,7 +63,7 @@ async function compile(defaultOptions) {
     : glob.sync(options.elements);
   const outPath = `${options.dest}/${options.target}`;
 
-  function copyNonMitosisLiteFiles(scaffoldsExist = false, inDir) {
+  function copyNonMitosisLiteFiles(scaffoldsExist = false) {
     // Move src to all the package folder
     fs.copySync("src", `${outPath}/src`);
 
@@ -68,7 +71,6 @@ async function compile(defaultOptions) {
     const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.lite.tsx`);
     unnecessaryFiles.forEach((element) => fs.removeSync(element));
 
-    // Fix aliases
     const distFiles = glob.sync(`${outPath}/src/**/*.{ts,css}`);
     distFiles.forEach((element) => {
       const data = fs.readFileSync(element, "utf8");
@@ -199,21 +201,27 @@ async function compile(defaultOptions) {
     fs.writeFileSync(outFile, result, "utf8");
   }
 
-  const spinner = ora(`Compiling target ${options.target}`).start();
+  const spinner = ora(`>> Compiling [${options.target}]`).start();
 
   for (const fileName of files) {
-    const file = path.parse(fileName);
     const isFirstCompilation =
       !fs.existsSync(`${outPath}/src`) || options.isDev;
+    const file = path.parse(fileName);
     const name = file.name.replace(".lite", "");
 
     // Copying files
     const { inDir, outDir } = getScaffoldsDirs(outPath);
     const scaffoldsExist = fs.existsSync(inDir);
-    copyNonMitosisLiteFiles(scaffoldsExist, inDir);
+    copyNonMitosisLiteFiles(scaffoldsExist);
 
     if (scaffoldsExist) {
       fs.copySync(inDir, outDir);
+    }
+
+    const changed = await cache.isChanged(fileName);
+
+    if (!changed) {
+      continue;
     }
 
     // Compile using Mitosis CLI
@@ -227,6 +235,13 @@ async function compile(defaultOptions) {
       outPath,
       isFirstCompilation,
     });
+
+    spinner.text = `[Done] ${fileName}`;
+  }
+
+  if (!cache.isPopulated) {
+    await cache.build(files);
+    // console.log(`[cache build]`);
   }
 
   if (options.target === "react") {
