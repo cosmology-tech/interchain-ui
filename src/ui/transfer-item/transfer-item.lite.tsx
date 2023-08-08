@@ -30,7 +30,7 @@ import { getValueByAvailable } from "../../helpers";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["chain-swap-combobox"],
+  scaffolds: ["chain-swap-combobox", "number-input"],
 });
 
 export default function TransferItem(props: TransferItemProps) {
@@ -46,7 +46,7 @@ export default function TransferItem(props: TransferItemProps) {
     currentItem: AvailableItem;
     amountPrice: string;
     comboboxList: ComboboxListType;
-    handleAmountInput: (Event) => void;
+    handleAmountInput: (string) => void;
     handleHalf: () => void;
     handleMax: () => void;
     getComboboxItem: (item: AvailableItem) => ComboboxListItemType;
@@ -67,11 +67,8 @@ export default function TransferItem(props: TransferItemProps) {
           .toString();
       }
     },
-    handleAmountInput(e) {
-      let value = getValueByAvailable(
-        e.target.value,
-        state.currentItem?.available
-      );
+    handleAmountInput(val: string) {
+      let value = getValueByAvailable(val, state.currentItem?.available);
 
       props?.onChange?.(state.currentItem, value);
     },
@@ -79,11 +76,11 @@ export default function TransferItem(props: TransferItemProps) {
       let value = new BigNumber(state.currentItem.available)
         .dividedBy(2)
         .toString();
-      state.handleAmountInput({ target: { value: value } });
+      state.handleAmountInput(value);
     },
     handleMax() {
       let value = new BigNumber(state.currentItem.available).toString();
-      state.handleAmountInput({ target: { value: value } });
+      state.handleAmountInput(value);
     },
     getComboboxItem(item: AvailableItem) {
       let dollarAmount = new BigNumber(item?.available)
@@ -213,70 +210,6 @@ export default function TransferItem(props: TransferItemProps) {
           </Show>
         </Stack>
       </Stack>
-
-      {/* <Stack
-        space="$0"
-        attributes={{
-          justifyContent: "space-between",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        <Stack
-          space="$0"
-          attributes={{
-            alignItems: "center",
-          }}
-        >
-          <Button className={styles.dropdowBtn} variant="unstyled">
-            <img className={styles.img} src={state.currentItem?.imgSrc} />
-            <Stack
-              space="$0"
-              direction="vertical"
-              attributes={{ marginLeft: "$9", alignItems: "flex-start" }}
-            >
-              <Stack
-                space="$0"
-                attributes={{
-                  alignItems: "center",
-                }}
-              >
-                <Text
-                  fontSize="$2xl"
-                  fontWeight="$semibold"
-                  attributes={{ marginRight: "$5" }}
-                >
-                  {state.currentItem?.symbol}
-                </Text>
-                <Icon name="arrowDownS" color="$textSecondary" />
-              </Stack>
-              <Text color="$textSecondary">{state.currentItem?.denom}</Text>
-            </Stack>
-          </Button>
-        </Stack>
-        <Stack direction="vertical" space="$0">
-          <TextField
-            id={uniqueId("transfer-item-")}
-            type="number"
-            value={props.amount}
-            onChange={(e) => state.handleAmountInput(e)}
-            inputClassName={styles.transferInput}
-          />
-          <Show when={!!props.amount && props.amount !== "0"}>
-            <Text
-              color="$textSecondary"
-              fontSize="$xs"
-              textAlign="right"
-              attributes={{ marginTop: "$4" }}
-            >
-              {`≈ $${store
-                .getState()
-                ?.formatNumber({ value: state.amountPrice })}`}
-            </Text>
-          </Show>
-        </Stack>
-      </Stack> */}
-
       <Show when={state.comboboxList.length > 0}>
         <Box
           attributes={{
@@ -295,14 +228,17 @@ export default function TransferItem(props: TransferItemProps) {
                 {props.disabled ? (
                   <Text fontSize="$2xl">{props.amount}</Text>
                 ) : (
-                  <TextField
-                    disabled={!!props.disabled}
-                    id={uniqueId("transfer-item-")}
-                    type="number"
-                    value={props.amount}
-                    onChange={(e) => state.handleAmountInput(e)}
-                    inputClassName={styles.transferInput}
-                  />
+                  <Box>
+                  {/* @ts-expect-error */}
+                  <NumberInput
+                  borderless
+                  disabled={!!props.disabled}
+                  value={props.amount}
+                  onChange={(e) => state.handleAmountInput(e.value)}
+                  inputClassName={styles.transferInput}
+                  min={0}
+                  max={state.currentItem?.available}  />
+                  </Box>
                 )}
                 <div
                   style={{
@@ -316,7 +252,6 @@ export default function TransferItem(props: TransferItemProps) {
                     color="$textSecondary"
                     fontSize="$xs"
                     textAlign="right"
-                    attributes={{ marginTop: "$4" }}
                   >
                     {`≈ $${store
                       .getState()

@@ -31,6 +31,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
     amount: "0",
     handleTransferChange(item: AvailableItem, value: string) {
       state.curSelectedItem = item;
+      console.log("state.amount = value;", value)
       state.amount = value;
       state.transferDisabled =
         new BigNUmber(value).isGreaterThan(item?.available) ||

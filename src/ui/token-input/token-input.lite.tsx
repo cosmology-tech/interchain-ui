@@ -4,6 +4,7 @@ import {
   onUpdate,
   useDefaultProps,
   useRef,
+  useMetadata,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
@@ -14,12 +15,16 @@ import Text from "../text";
 import Box from "../box";
 import IconButton from "../icon-button";
 import CicularProgressBar from "../circular-progress-bar";
-import TextField from "../text-field";
 import * as styles from "./token-input.css";
 
 import { TokenInputProps } from "./token-input.types";
 import { getValueByAvailable } from "../../helpers";
 import { store } from "../../models/store";
+
+useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["number-input"],
+});
 
 export default function TokenInput(props: TokenInputProps) {
   useDefaultProps({
@@ -30,15 +35,15 @@ export default function TokenInput(props: TokenInputProps) {
   const state = useStore<{
     symbolValue: string;
     disabled: boolean;
-    handleTokenInput: (Event) => void;
+    handleTokenInput: (string) => void;
     handleIconClick: (MouseEvent) => void;
     amount: string;
   }>({
     symbolValue: "",
     disabled: false,
     amount: "",
-    handleTokenInput(e) {
-      let value = getValueByAvailable(e.target.value, props.available);
+    handleTokenInput(val: string) {
+      let value = getValueByAvailable(val, props.available);
       state.amount = value;
       state.symbolValue = new BigNumber(value)
         .multipliedBy(props.priceDisplayAmount)
@@ -64,7 +69,7 @@ export default function TokenInput(props: TokenInputProps) {
       state.disabled = false;
     }
 
-    state.handleTokenInput({ target: { value: props.amount ?? "" } });
+    state.handleTokenInput(props.amount ?? "");
   }, [props.progress, props.amount]);
 
   return (
@@ -157,30 +162,35 @@ export default function TokenInput(props: TokenInputProps) {
         className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
         space="$0"
       >
-        <TextField
-          id={inputIdRef}
-          type="number"
-          value={state.amount}
-          disabled={state.disabled}
-          startAddon={
-            <Stack
-              className={styles.imgBox}
-              attributes={{ justifyContent: "center", alignItems: "center" }}
-            >
-              <Box
-                as="img"
-                width="$14"
-                height="$14"
-                borderRadius="$full"
-                attributes={{ src: props?.imgSrc }}
-              />
-            </Stack>
-          }
-          onChange={(e) => state.handleTokenInput(e)}
-          className={styles.token}
-          inputContainer={styles.inputContainer}
-          inputClassName={styles.inputClassName}
-        />
+        <Box width="$full">
+          {/* @ts-expect-error */}
+          <NumberInput
+            id={inputIdRef}
+            min={0}
+            max={props.available}
+            value={state.amount}
+            borderless
+            disabled={state.disabled}
+            startAddon={
+              <Stack
+                className={styles.imgBox}
+                attributes={{ justifyContent: "center", alignItems: "center" }}
+              >
+                <Box
+                  as="img"
+                  width="$14"
+                  height="$14"
+                  borderRadius="$full"
+                  attributes={{ src: props?.imgSrc }}
+                />
+              </Stack>
+            }
+            onChange={(e) => state.handleTokenInput(e.value)}
+            className={styles.token}
+            inputContainer={styles.inputContainer}
+            inputClassName={styles.inputClassName}
+          />
+        </Box>
         <Stack
           className={styles.caulator}
           space="$0"

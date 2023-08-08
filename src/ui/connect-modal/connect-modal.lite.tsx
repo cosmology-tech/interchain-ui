@@ -15,7 +15,10 @@ import {
   modalAnimateContainer,
 } from "./connect-modal.css";
 
-useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
+useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["modal", "chain-swap-combobox", "number-input"],
+});
 
 export default function ConnectModal(props: ConnectModalProps) {
   const state = useStore<{ theme: ThemeVariant }>({
@@ -49,6 +52,10 @@ export default function ConnectModal(props: ConnectModalProps) {
     >
       <AnimateLayout className={modalAnimateContainer}>
         {props.children}
+        {/* @ts-expect-error */}
+        <ChainSwapCombobox options={[]} size="md" />
+        {/* @ts-expect-error */}
+        <NumberInput  />
       </AnimateLayout>
       {/* @ts-expect-error */}
     </ScaffoldModal>
