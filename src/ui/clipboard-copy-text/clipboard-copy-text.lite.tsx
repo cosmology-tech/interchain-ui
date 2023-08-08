@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  Show,
+  useRef,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import copy from "copy-to-clipboard";
 import Icon from "../icon";
@@ -18,6 +24,8 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
     idle: boolean;
     theme: ThemeVariant;
     transform: (text: string) => string;
+    handleOnClick: () => void;
+    getTruncateClass: () => string;
   }>({
     idle: true,
     theme: "light",
@@ -36,6 +44,21 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
       }
 
       return text;
+    },
+    handleOnClick: () => {
+      const success = copy(props.text);
+
+      if (success) {
+        props.onCopied?.();
+        state.idle = false;
+
+        setTimeout(() => {
+          state.idle = true;
+        }, 1000);
+      }
+    },
+    getTruncateClass: () => {
+      return clx(textStyle, props.truncate === "end" && truncateEndStyle);
     },
   });
 
@@ -56,30 +79,22 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   return (
     <div
       className={clx(containerStyle[state.theme], props.className)}
-      onClick={() => {
-        const success = copy(props.text);
-
-        if (success) {
-          props.onCopied?.();
-          state.idle = false;
-
-          setTimeout(() => {
-            state.idle = true;
-          }, 1000);
-        }
-      }}
+      onClick={() => state.handleOnClick()}
     >
-      <p
-        className={clx(textStyle, props.truncate === "end" && truncateEndStyle)}
-      >
-        {state.transform(props.text)}
-      </p>
+      <p className={state.getTruncateClass()}>{state.transform(props.text)}</p>
 
-      <Icon
-        name={state.idle ? "copy" : "checkboxCircle"}
-        size="$md"
-        className={state.idle ? iconStyle.idle : iconStyle.copied[state.theme]}
-      />
+      <Show
+        when={state.idle}
+        else={
+          <Icon
+            name={"checkboxCircle"}
+            size="$md"
+            className={iconStyle.copied[state.theme]}
+          />
+        }
+      >
+        <Icon name={"copy"} size="$md" className={iconStyle.idle} />
+      </Show>
     </div>
   );
 }
