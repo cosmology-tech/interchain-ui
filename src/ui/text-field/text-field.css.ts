@@ -62,6 +62,14 @@ const baseInputStyles = style([
          ${themeVars.colors.text} 0px 0px 0px 4px,
          rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
       },
+      "&::-webkit-outer-spin-button": {
+        WebkitAppearance: "none",
+        margin: "0",
+      },
+      "&::-webkit-inner-spin-button": {
+        WebkitAppearance: "none",
+        margin: "0",
+      },
     },
   }),
 ]);

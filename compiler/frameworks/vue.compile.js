@@ -11,124 +11,6 @@ const DEFAULT_OPTIONS = {
 };
 
 (async () => {
-  function getAllTheInterfacesFromPropsInComponent(result, pascalName) {
-    const regex1 = /interface\s+([^{]+){([^}]+)}/g;
-    const interfacesWithProps = {};
-    let match;
-
-    while ((match = regex1.exec(result)) !== null) {
-      const [interfaceDef] = match;
-      const interfaceName = interfaceDef
-        .split("{")[0]
-        .replace(/\n\s*/g, "")
-        .replace(/\{/g, "")
-        .replace(/interface/g, "")
-        .replace(/(extends)/g, " $1")
-        .replace(/(\r\n|\n|\r)/g, " ")
-        .trim();
-
-      if (interfaceName.includes("Props")) {
-        interfacesWithProps[interfaceName] = match[2].trim();
-      }
-    }
-
-    return interfacesWithProps;
-  }
-
-  function searchComponentPropsInterface(
-    result,
-    interfacesWithProps,
-    pascalName
-  ) {
-    const res = Object.entries(interfacesWithProps).find(([interfaceName]) =>
-      interfaceName.includes(pascalName)
-    );
-
-    if (!res) return result;
-
-    const [currentInterfacePropsName, currentInterfacePropsContent] = res;
-
-    const extensions = currentInterfacePropsName
-      .replace(/.*extends/, "")
-      .trim()
-      .split(",")
-      .map((e) => e.trim());
-
-    const interfacesContent = [
-      "// Original props \n",
-      currentInterfacePropsContent,
-    ];
-
-    extensions.forEach((extension) => {
-      let extensionName = extension;
-      let replacers = null;
-
-      // If the extension has generics
-      if (extension.includes("<")) {
-        extensionName = extension.replace(/<.*>/g, "<T>");
-        const generics = extension.match(/<.*>/g);
-        replacers = generics && generics[0].replace(/</g, "").replace(/>/g, "");
-      }
-
-      let content = interfacesWithProps[extensionName];
-
-      if (replacers) {
-        content = content.replace(/T/g, replacers);
-      }
-
-      interfacesContent.push(`// Props from ${extensionName}\n`);
-      interfacesContent.push(content);
-    });
-
-    return interfacesContent;
-  }
-
-  function addNewPropsInterfacesForComponent(
-    result,
-    interfacesContent,
-    pascalName
-  ) {
-    // Create the new props interface
-    const newPropsInterface = ` ${pascalName}Props {${interfacesContent.concat(
-      "\n"
-    )}}`;
-
-    // Deprecate the old props interface
-    return (
-      result
-        // Deprecate the old props interface
-        .replace(
-          `export interface ${pascalName}Props`,
-          `interface __${pascalName}Props__`
-        )
-        // Add the new props interface
-        .replace(
-          `interface __${pascalName}Props__`,
-          `// This interface is auto generated to join the interfaces \nexport interface ${newPropsInterface}\n\ninterface __${pascalName}Props__`
-        )
-    );
-  }
-
-  function mergeAllPropsInterfaceIntoNewInterface(result, pascalName) {
-    const interfacesWithProps = getAllTheInterfacesFromPropsInComponent(
-      result,
-      pascalName
-    );
-    const interfacesContent = searchComponentPropsInterface(
-      result,
-      interfacesWithProps,
-      pascalName
-    );
-
-    if (!interfacesContent) return result;
-
-    return addNewPropsInterfacesForComponent(
-      result,
-      interfacesContent,
-      pascalName
-    );
-  }
-
   function customReplace(props) {
     const { name, pascalName, outFile, outPath, isFirstCompilation } = props;
 
@@ -152,9 +34,14 @@ const DEFAULT_OPTIONS = {
 
       // Add .vue extension to all the indexes in src folder
       glob.sync(`${outPath}/src/ui/**/index.ts`).map((src) => {
-        const data = fs.readFileSync(src, "utf8");
+        const data = fs
+          .readFileSync(src, "utf8")
+          // add vue to index
+          .replace(/(export { default } from)(.*)(';)/g, "$1$2.vue$3")
+          // but remove from hooks
+          .replace(/\.hook\.vue/g, ".hook");
 
-        fs.writeFileSync(src, data.replace(`";`, `.vue";`), "utf8");
+        fs.writeFileSync(src, data, "utf8");
       });
     }
 
@@ -233,8 +120,6 @@ const DEFAULT_OPTIONS = {
       .replace(/script setup/g, 'script setup lang="ts"')
       // TODO: Temporal meanwhile we find another why but this is stable
       .replace(/getData\(\);/g, "getData.bind(this)();");
-
-    result = mergeAllPropsInterfaceIntoNewInterface(result, pascalName);
 
     fs.writeFileSync(outFile, result, "utf8");
   }

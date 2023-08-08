@@ -70,6 +70,7 @@ export interface ChainSwapComboboxProps {
   size: ChainListItemProps["size"];
   maxHeight: number;
   options: Array<ComboboxOption>;
+  filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
   defaultOpen: boolean;
@@ -140,9 +141,16 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     }
   }
 
-  const items = props.options.filter((item) =>
-    item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
-  );
+  function defaultFilterOptions(options: Array<ComboboxOption>) {
+    return options.filter((item) =>
+      item.tokenName.toLowerCase().startsWith(inputValue.toLowerCase())
+    );
+  }
+
+  const items =
+    typeof props.filterFn === "function"
+      ? props.filterFn(props.options)
+      : defaultFilterOptions(props.options);
 
   React.useEffect(() => {
     setSelectedItem(props?.valueItem);
