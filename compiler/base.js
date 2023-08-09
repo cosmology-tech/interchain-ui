@@ -11,6 +11,7 @@ const ora = require("ora");
 const compileCommand = require("@builder.io/mitosis-cli/dist/commands/compile");
 const camelCase = require("lodash/camelCase");
 const startCase = require("lodash/startCase");
+const uniq = require("lodash/uniq");
 const scaffoldConfig = require("./scaffold.config.js");
 const { cwd } = require("process");
 const { Cache } = require("./cache.js");
@@ -186,14 +187,25 @@ async function compile(defaultOptions) {
         }, []);
 
         const indexData = fs.readFileSync(indexPath, "utf8");
+
         const hooksExports = hookNamesByFolder
           .map(
             (item) =>
               `export { default as ${item.hookName} } from './ui/hooks/${item.folder}';`
           )
+          .filter((exportLine) => {
+            // Don't include exports if it's already there
+            return indexData.indexOf(exportLine) === -1;
+          })
           .join("\n");
 
-        let indexResult = `${indexData}\n${hooksExports}`;
+        const indexResult = `${indexData}\n${hooksExports}`;
+
+        // Skip if hooks exports are the same
+        if (indexResult === indexData) {
+          return;
+        }
+
         fs.writeFileSync(indexPath, indexResult, "utf8");
       })
       .catch((err) => {
