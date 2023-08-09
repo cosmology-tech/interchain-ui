@@ -29,9 +29,9 @@ const { compileReact } = require("./frameworks/react.compile");
     {
       title: "Watching /src ...",
       task: () => {
-        const compileWithCancelToken = (token) => {
+        const compileWithCancelToken = (watcherEvent, token) => {
           return new Promise(function (resolve, reject) {
-            compileReact().then(resolve).catch(reject);
+            compileReact(watcherEvent).then(resolve).catch(reject);
 
             token.cancel = function () {
               reject(new Error("Cancelled"));
@@ -48,13 +48,12 @@ const { compileReact } = require("./frameworks/react.compile");
               const watchDir = path.resolve(process.cwd(), "src");
 
               const onChange = lodash.debounce((t, err, _events) => {
-                console.log("Change", _events);
                 const spinner = ora(`Watching src/ for changes...`).start();
                 spinner.text = `src/ changed, compiling...`;
 
                 console.time(`[t:${t}] Recompile took`);
 
-                compile()
+                compile(_events)
                   .then(() => {
                     spinner.succeed("Compiled successfully.");
                     console.time(`[t:${t}] Recompile took`);

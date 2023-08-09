@@ -45,7 +45,9 @@ function getScaffoldsDirs(rootPath) {
   };
 }
 
-async function compile(defaultOptions) {
+async function compile(rawOptions) {
+  const { watcherEvents, ...defaultOptions } = rawOptions;
+
   const options = {
     ...DEFAULT_OPTIONS,
     ...defaultOptions,
@@ -133,6 +135,49 @@ async function compile(defaultOptions) {
     }
 
     fs.writeFileSync(`${outPath}/src/index.ts`, indexResult, "utf8");
+  }
+
+  async function handleWatcherEvents(watcherEvents) {
+    // Watcher event has shape Array<{ path: <string>, type: 'update' | 'create' | 'delete' }>
+    const event = watcherEvents[0];
+
+    // example parsed path
+    // {
+    //   root: '/',
+    //   dir: '/Users/fatg/workspace/cosmology/interchain-ui/src/ui/asset-item-transfer',
+    //   base: 'asset-item-transfer.css.ts',
+    //   ext: '.ts',
+    //   name: 'asset-item-transfer.css'
+    // }
+    const parsedPath = path.parse(event.path);
+
+    const isLiteJSXComponent =
+      parsedPath.ext === ".tsx" && parsedPath.name.includes(".lite");
+
+    const targetPath = path.join(
+      outPath,
+      parsedPath.dir.slice(parsedPath.dir.indexOf("src")),
+      parsedPath.base
+    );
+
+    if (event.type === "create" || event.type === "update") {
+      // Only process non lite jsx files in this handler
+      if (isLiteJSXComponent) return;
+
+      try {
+        await fsPromise.copyFile(event.path, targetPath);
+      } catch (err) {
+        console.log(`handleWatcherEvents() [${event.type}] event error `, err);
+      }
+    }
+
+    if (event.type === "delete") {
+      try {
+        await fsPromise.unlink(targetPath);
+      } catch (err) {
+        console.log("handleWatcherEvents() [delete] event error ", err);
+      }
+    }
   }
 
   async function compileMitosisComponent(filepath) {
@@ -259,6 +304,10 @@ async function compile(defaultOptions) {
     });
 
     spinner.text = `[Done] ${fileName}`;
+  }
+
+  if (watcherEvents) {
+    await handleWatcherEvents(watcherEvents);
   }
 
   if (!cache.isPopulated) {

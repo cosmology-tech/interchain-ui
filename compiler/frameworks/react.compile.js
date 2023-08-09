@@ -8,8 +8,8 @@ const DEFAULT_OPTIONS = {
   styles: "style-tag",
 };
 
-async function compileReact() {
-  await compiler.compile({ ...DEFAULT_OPTIONS });
+async function compileReact(watcherEvents) {
+  await compiler.compile({ ...DEFAULT_OPTIONS, watcherEvents });
 }
 module.exports = {
   compileReact,
