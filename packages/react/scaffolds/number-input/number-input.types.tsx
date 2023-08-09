@@ -57,4 +57,8 @@ export interface NumberInputProps {
   borderless?: boolean;
   startAddon?: ReactElement | undefined;
   endAddon?: ReactElement | undefined;
+  name?: string;
+  precision?: number;
+  canDecrese?: boolean;
+  canIncrease?: boolean;
 }

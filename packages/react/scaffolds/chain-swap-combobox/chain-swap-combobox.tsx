@@ -143,7 +143,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
 
   function defaultFilterOptions(options: Array<ComboboxOption>) {
     return options.filter((item) =>
-      item.tokenName.toLowerCase().startsWith(inputValue.toLowerCase())
+      item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
     );
   }
 

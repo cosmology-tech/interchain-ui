@@ -18,7 +18,6 @@ import CicularProgressBar from "../circular-progress-bar";
 import * as styles from "./token-input.css";
 
 import { TokenInputProps } from "./token-input.types";
-import { getValueByAvailable } from "../../helpers";
 import { store } from "../../models/store";
 
 useMetadata({
@@ -42,8 +41,7 @@ export default function TokenInput(props: TokenInputProps) {
     symbolValue: "",
     disabled: false,
     amount: "",
-    handleTokenInput(val: string) {
-      let value = getValueByAvailable(val, props.available);
+    handleTokenInput(value: string) {
       state.amount = value;
       state.symbolValue = new BigNumber(value)
         .multipliedBy(props.priceDisplayAmount)

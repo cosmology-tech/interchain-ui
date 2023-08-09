@@ -26,7 +26,6 @@ import {
   ComboboxListItemType,
 } from "./transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
-import { getValueByAvailable } from "../../helpers";
 
 useMetadata({
   isAttachedToShadowDom: true,
@@ -68,9 +67,8 @@ export default function TransferItem(props: TransferItemProps) {
       }
     },
     handleAmountInput(val: string) {
-      let value = getValueByAvailable(val, state.currentItem?.available);
 
-      props?.onChange?.(state.currentItem, value);
+      props?.onChange?.(state.currentItem, val);
     },
     handleHalf() {
       let value = new BigNumber(state.currentItem.available)

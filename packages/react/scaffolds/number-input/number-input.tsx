@@ -16,10 +16,10 @@ import {
   rootInputFocused,
   clearButton,
 } from "../text-field/text-field.css";
-import {
-  fieldLabelSizes,
-  fieldlabelStyle,
-} from "../field-label/field-label.css";
+// import {
+//   fieldLabelSizes,
+//   fieldlabelStyle,
+// } from "../field-label/field-label.css";
 import * as styles from "./number-input.css";
 
 const useStore = create(store);
@@ -43,6 +43,8 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
       onBlur,
       size = "sm",
       intent = "default",
+      name,
+      precision,
     } = props;
     const [state, send] = useMachine(
       numberInput.machine({
@@ -53,12 +55,9 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
         min,
         max,
         step,
+        name,
+        precision,
         onChange: (details) => {
-          if (new BigNumber(details.value).gt(max)) {
-            api.setToMax();
-          } else if (new BigNumber(details.value).lt(min)) {
-            api.setToMin();
-          }
           onChange?.(details);
         },
         onFocus: (details) => {
@@ -73,19 +72,23 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
     const api = numberInput.connect(state, send, normalizeProps);
 
     useEffect(() => {
-      const isLastDecimal = value?.substring(value?.length - 1) === ".";
-      if (new BigNumber(value).gt(max)) {
-        api.setToMax();
-      } else if (new BigNumber(value).lt(min)) {
-        api.setToMin();
-      } else if (!isLastDecimal && typeof value !== "undefined") {
+      // const isLastDecimal = value?.substring(value?.length - 1) === ".";
+      // if (new BigNumber(value).gt(max)) {
+      //   api.setToMax();
+      // } else if (new BigNumber(value).lt(min)) {
+      //   api.setToMin();
+      // } else if (!isLastDecimal && typeof value !== "undefined") {
+      //   api.setValue(value);
+      // }
+      // api.setValue(value);
+      if(!api.isFocused) {
         api.setValue(value);
       }
     }, [value]);
 
     return (
       <div {...api.rootProps} className={props?.className}>
-        {props.label && (
+        {/* {props.label && (
           <label
             {...api.labelProps}
             className={clx(fieldlabelStyle, fieldLabelSizes[props.size])}
@@ -93,7 +96,7 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
           >
             {props.label}
           </label>
-        )}
+        )} */}
 
         <div
           className={clx(
@@ -105,8 +108,9 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
             props.inputContainer
           )}
         >
-          {/* <button {...api.decrementTriggerProps}>DEC</button> */}
-          {props?.startAddon}
+            {props?.canDecrese && props.startAddon
+              ? React.cloneElement(props.startAddon, api.decrementTriggerProps)
+              : props?.startAddon}
           <input
             {...api.inputProps}
             className={clx(
@@ -117,8 +121,9 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
               props.borderless && styles.borderless
             )}
           />
-          {/* <button {...api.incrementTriggerProps}>INC</button> */}
-          {props?.endAddon}
+          {props?.canIncrease && props.endAddon
+            ? React.cloneElement(props.endAddon, api.decrementTriggerProps)
+            : props?.endAddon}
         </div>
       </div>
     );

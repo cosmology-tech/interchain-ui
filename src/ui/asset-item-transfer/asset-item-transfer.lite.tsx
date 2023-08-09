@@ -17,6 +17,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     inputAmount: string;
     handleAmountChange: (percent: number) => void;
     onAmountChange: (value: string) => void;
+    transferDisabled: boolean;
   }>({
     theme: "light",
     inputAmount: "",
@@ -27,6 +28,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     },
     onAmountChange(value) {
       state.inputAmount = value;
+    },
+    get transferDisabled() {
+      return (
+        new BigNumber(state.inputAmount).gt(props.avaliable) ||
+        state.inputAmount === ""
+      );
     },
   });
 
@@ -221,6 +228,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         onClick={() =>
           props?.onTransfer?.({ value: state.inputAmount, type: props.type })
         }
+        disabled={state.transferDisabled}
       >
         <Stack
           attributes={{

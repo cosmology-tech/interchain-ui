@@ -39,23 +39,25 @@ export function safelyFormatNumberWithFallback(
 }
 
 /**
- * Make sure value not greater than avaliable
- * @param inputValue
- * @param available
+ * Function for lamp value
+ * @param min
+ * @param max
+ * @param value
  * @returns
  */
-export function getValueByAvailable(
-  inputValue: string | number,
-  available: string | number
+export function clampBigNumber(
+  min: string | number,
+  max: string | number,
+  value: string,
 ): string {
-  if (inputValue === "") {
+  if (value === "") {
     return "";
   }
-  if (new BigNumber(inputValue).gt(available)) {
-    return new BigNumber(available).toString();
+  if (new BigNumber(value).gt(max)) {
+    return new BigNumber(max).toString();
   }
-  if (new BigNumber(inputValue).lt(0)) {
-    return new BigNumber(0).toString();
+  if (new BigNumber(value).lt(min)) {
+    return new BigNumber(min).toString();
   }
-  return inputValue.toString();
+  return value?.toString();
 }
