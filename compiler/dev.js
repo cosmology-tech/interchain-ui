@@ -47,16 +47,18 @@ const { compileReact } = require("./frameworks/react.compile");
             task: async () => {
               const watchDir = path.resolve(process.cwd(), "src");
 
-              const onChange = lodash.debounce((t, err, _events) => {
+              const onChange = lodash.debounce((err, _events) => {
                 const spinner = ora(`Watching src/ for changes...`).start();
                 spinner.text = `src/ changed, compiling...`;
 
-                console.time(`[t:${t}] Recompile took`);
+                const t = +Date.now();
+                const timingLabel = `[t:${t}] Recompile took`;
+                console.time(timingLabel);
 
                 compile(_events)
                   .then(() => {
                     spinner.succeed("Compiled successfully.");
-                    console.time(`[t:${t}] Recompile took`);
+                    console.timeEnd(timingLabel);
                   })
                   .catch((e) => {
                     spinner.fail(`Error compiling mitosis ${e.message}.`);
@@ -71,8 +73,7 @@ const { compileReact } = require("./frameworks/react.compile");
               }, 500);
 
               let watch = watcher.subscribe(watchDir, (err, _events) => {
-                const t = +new Date();
-                onChange(t, err, _events);
+                onChange(err, _events);
               });
 
               return watch.then((subscription) => {
