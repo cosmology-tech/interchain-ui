@@ -115,8 +115,6 @@ export default function TextField(props: TextFieldProps) {
           }}
           placeholder={!props.disabled ? props.placeholder : undefined}
           inputMode={props.inputMode || defaultInputModesForType[props.type]}
-          maxlength={props.maxlength}
-          pattern={props.pattern}
         />
 
         <Show when={state.isClearable}>

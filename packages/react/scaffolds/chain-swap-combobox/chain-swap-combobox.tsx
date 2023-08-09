@@ -73,6 +73,9 @@ export interface ChainSwapComboboxProps {
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
+  defaultOpen: boolean;
+  endAddon?: React.ReactNode | undefined;
+  valueItem: ComboboxOption;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -81,7 +84,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     themeClass: state.themeClass,
   }));
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [inputValue, setInputValue] = React.useState(
     props.defaultSelected?.tokenName ?? ""
   );
@@ -134,13 +137,13 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       setOpen(true);
       setActiveIndex(0);
     } else {
-      setOpen(false);
+      setOpen(!!props.defaultOpen);
     }
   }
 
   function defaultFilterOptions(options: Array<ComboboxOption>) {
     return options.filter((item) =>
-      item.tokenName.toLowerCase().startsWith(inputValue.toLowerCase())
+      item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
     );
   }
 
@@ -148,6 +151,11 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     typeof props.filterFn === "function"
       ? props.filterFn(props.options)
       : defaultFilterOptions(props.options);
+
+  React.useEffect(() => {
+    setSelectedItem(props?.valueItem);
+    setInputValue(props?.valueItem?.tokenName);
+  }, [props.valueItem]);
 
   return (
     <Box px="$9" py="$7" backgroundColor="$menuItemBg">
@@ -158,6 +166,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           onDropdownArrowClicked={() => {
             setOpen((isPrevOpen) => !isPrevOpen);
           }}
+          endAddon={props.endAddon}
           {...selectedItem}
           label={selectedItem?.name ?? null}
           inputAttributes={getReferenceProps({

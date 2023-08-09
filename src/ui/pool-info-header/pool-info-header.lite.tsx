@@ -33,9 +33,10 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
           <img className={styles.image1} src={props.token1.imgSrc} />
           <img className={styles.image2} src={props.token2.imgSrc} />
         </Box>
-        <Stack className={styles.longText} direction="vertical">
+        <Stack space="$0" className={styles.longText} direction="vertical">
           <Text color="$textSecondary">Pool liquidity</Text>
           <Stack
+            space="$0"
             attributes={{
               alignItems: "baseline",
             }}
@@ -66,6 +67,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         <Stack className={styles.longText} direction="vertical" space="$0">
           <Text color="$textSecondary">24h trading volume</Text>
           <Stack
+            space="$0"
             attributes={{
               alignItems: "baseline",
             }}

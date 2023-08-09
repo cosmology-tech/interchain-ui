@@ -173,7 +173,7 @@ export const Primary: Story = {
     ];
     return (
       <div style={{ padding: 20, maxWidth: 800, boxSizing: "border-box" }}>
-        <ShowMore initialHeightPercent={0.6}>
+        <ShowMore>
           <PoolsHeader price={0.98} rewards={12.87} $rewards={12.87} />
           <PoolList title="Your Pools" list={list} />
           <PoolCardList list={cardList} />

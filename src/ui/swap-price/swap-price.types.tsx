@@ -1,3 +1,5 @@
+import { AvailableItem } from "../transfer-item/transfer-item.types";
+
 export interface SwapPriceType {
   priceRate: string;
   dollarValue: string;
@@ -25,14 +27,17 @@ export type SwapPriceDetailRouteDetail = {
 
 export interface SwapPriceProps {
   hasRoute?: boolean;
-  price: SwapPriceType;
+  // price: SwapPriceType;
   priceImpact: string;
   swapFee: {
     percentage: string;
     value: string;
   };
-  expectedOutput: string;
-  tokenOutSymbol: string;
   minimumReceived: string | undefined;
-  routeDetail: SwapPriceDetailRouteDetail;
+  // internal props
+  fromItem: AvailableItem;
+  toItem: AvailableItem;
+  disabled?: boolean;
+  fromAmount: string;
+  toAmount: string;
 }

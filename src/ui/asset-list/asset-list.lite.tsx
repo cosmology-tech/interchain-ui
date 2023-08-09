@@ -46,11 +46,11 @@ export default function AssetList(props: AssetListProps) {
                 imgSrc={item.imgSrc}
                 symbol={item.symbol}
                 denom={item.denom}
-                amount={item.amount}
-                dollarAmount={item.dollarAmount}
-                canDeposit={item.canDeposit}
-                canWithdraw={item.canWithdraw}
+                tokenAmount={item.tokenAmount}
+                tokenAmountPrice={item.tokenAmountPrice}
                 chainName={item?.chainName}
+                onDeposit={() => item?.onDeposit()}
+                onWithdraw={() => item?.onWithdraw()}
               />
             </Box>
           )}

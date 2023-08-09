@@ -43,42 +43,40 @@ export const icon = style({
   cursor: "pointer",
 });
 
-export const inputBox = style(
-  {
-    borderColor: themeVars.colors["inputBorder"],
-    borderRadius: themeVars.radii["md"],
-    backgroundColor: themeVars.colors["cardBg"],
-    position: "relative",
-    borderWidth: "1px",
-    borderStyle: "solid",
-    height: "68px",
-    flex: 1,
-    "@media": {
-      [`screen and (max-width: ${breakpoints.tablet}px)`]: {
-        width: "100%",
-      },
+export const inputBox = style({
+  borderColor: themeVars.colors["inputBorder"],
+  borderRadius: themeVars.radii["md"],
+  backgroundColor: themeVars.colors["cardBg"],
+  position: "relative",
+  borderWidth: "1px",
+  borderStyle: "solid",
+  height: "68px",
+  flex: 1,
+  "@media": {
+    [`screen and (max-width: ${breakpoints.tablet}px)`]: {
+      width: "100%",
     },
   },
-);
+});
 
-export const token = style(
-  {
-    width: "100%",
-    backgroundColor: themeVars.colors.cardBg,
-    borderRadius: themeVars.radii.lg,
-    marginLeft: "0",
-  },
-);
+export const token = style({
+  width: "100%",
+  height: "100%",
+  backgroundColor: themeVars.colors.cardBg,
+  borderRadius: themeVars.radii.lg,
+  marginLeft: "0",
+});
 
 export const inputContainer = style({
   height: "100%",
 });
 
 export const inputClassName = style({
-    border: 0,
-    outline: 0,
-    fontSize: themeVars.fontSize.lg
-  },);
+  border: 0,
+  outline: 0,
+  fontSize: themeVars.fontSize.lg,
+  paddingLeft: `${themeVars.space["6"]} !important`,
+});
 
 export const imgBox = style({
   width: themeVars.space[18],
@@ -109,5 +107,5 @@ export const inputTitle = style({
 });
 
 export const operationIcon = style({
-  fontSize: themeVars.fontSize["3xl"]
+  fontSize: themeVars.fontSize["3xl"],
 });

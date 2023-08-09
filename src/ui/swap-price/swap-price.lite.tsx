@@ -1,4 +1,5 @@
 import { useRef, useStore, Show, For, Fragment } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import { animate } from "motion";
 import Stack from "../stack";
@@ -7,12 +8,14 @@ import Text from "../text";
 import IconButton from "../icon-button";
 import * as styles from "./swap-price.css";
 import { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
+import { store } from "../../models/store";
 
 export default function SwapPrice(props: SwapPriceProps) {
   const priceRef = useRef(null);
   const state = useStore<{
     isExpanded: boolean;
     toggleExpand: () => void;
+    routesPath: any;
   }>({
     isExpanded: false,
     toggleExpand() {
@@ -31,6 +34,43 @@ export default function SwapPrice(props: SwapPriceProps) {
           { duration: 0.2, easing: "ease-in-out" }
         );
       }
+    },
+    get routesPath() {
+      let hasOsmo: boolean =
+        props?.fromItem?.symbol === "OSMO" || props?.toItem?.symbol === "OSMO";
+      const osmoImgSrc =
+        "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png";
+      const osmo = "OSMO";
+      let path = [];
+      if (hasOsmo) {
+        path = [
+          {
+            swapFee: props?.swapFee?.percentage,
+            baseLogo: props?.fromItem?.imgSrc,
+            baseSymbol: props?.fromItem?.symbol,
+            quoteLogo: props?.toItem?.imgSrc,
+            quoteSymbol: props?.toItem?.symbol,
+          },
+        ];
+      } else {
+        path = [
+          {
+            swapFee: props?.swapFee?.percentage,
+            baseLogo: props?.fromItem?.imgSrc,
+            baseSymbol: props?.fromItem?.symbol,
+            quoteLogo: osmoImgSrc,
+            quoteSymbol: osmo,
+          },
+          {
+            swapFee: props.swapFee.percentage,
+            baseLogo: osmoImgSrc,
+            baseSymbol: osmo,
+            quoteLogo: props?.toItem?.imgSrc,
+            quoteSymbol: props?.toItem?.symbol,
+          },
+        ];
+      }
+      return path;
     },
   });
 
@@ -51,15 +91,21 @@ export default function SwapPrice(props: SwapPriceProps) {
           }}
         >
           <Text fontWeight="$semibold">
-            {`1 ${props?.tokenOutSymbol} = ${props?.price?.priceRate} ${props?.tokenOutSymbol}`}
+            {`1 ${props?.fromItem?.symbol} = ${new BigNumber(
+              props?.fromItem?.priceDisplayAmount
+            )
+              .dividedBy(props?.toItem?.priceDisplayAmount)
+              .decimalPlaces(6)
+              .toString()} ${props?.toItem?.symbol}`}
           </Text>
           <Text
             color="$textSecondary"
             attributes={{ marginLeft: "$9", marginRight: "$13" }}
           >
-            {`~ $${props?.price?.dollarValue}`}
+            {`~ $${props?.fromItem?.priceDisplayAmount}`}
           </Text>
           <IconButton
+            disabled={props.disabled}
             intent={state.isExpanded ? "tertiary" : "text"}
             size="sm"
             icon="arrowDownS"
@@ -104,7 +150,9 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Text color="$textSecondary">Expected Output</Text>
             <Text color="$textSecondary" fontWeight="$bold">
-              {`~ ${props?.expectedOutput} ${props?.tokenOutSymbol}`}
+              {`~ ${store.getState().formatNumber({ value: props.toAmount })} ${
+                props?.toItem?.symbol
+              }`}
             </Text>
           </Stack>
           <Stack
@@ -116,7 +164,7 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Text color="$textSecondary">Minimum received after slippage</Text>
             <Text color="$textSecondary" fontWeight="$bold">
-              {`${props?.minimumReceived} ${props?.tokenOutSymbol}`}
+              {`${props?.minimumReceived} ${props?.toItem?.symbol}`}
             </Text>
           </Stack>
           <Show when={props?.hasRoute}>
@@ -132,15 +180,15 @@ export default function SwapPrice(props: SwapPriceProps) {
             >
               <Box marginRight="$6">
                 <img
-                  alt={props?.routeDetail?.tokenIn?.symbol}
+                  alt={props?.fromItem?.symbol}
                   className={styles.img}
-                  src={props?.routeDetail?.tokenIn?.logoUrl}
+                  src={props?.fromItem?.imgSrc}
                 />
               </Box>
               <Box className={styles.routeDivider} />
               {/* Mapping routeDetail */}
 
-              <For each={props?.routeDetail?.routes}>
+              <For each={state.routesPath}>
                 {(item: SwapPriceDetailRoute, index: number) => (
                   <Fragment key={item.poolId}>
                     <Box
@@ -175,9 +223,9 @@ export default function SwapPrice(props: SwapPriceProps) {
 
               <Box marginLeft="$6">
                 <img
-                  alt={props?.routeDetail?.tokenOut?.symbol}
+                  alt={props?.toItem?.symbol}
                   className={styles.img}
-                  src={props?.routeDetail?.tokenOut?.logoUrl}
+                  src={props?.toItem?.imgSrc}
                 />
               </Box>
             </Stack>

@@ -4,6 +4,7 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
+import TextField from "../text-field";
 
 import * as styles from "./bonding-more.css";
 import { BondingMoreProps } from "./bonding-more.types";
@@ -12,12 +13,15 @@ export default function BondingMore(props: BondingMoreProps) {
   const state = useStore<{
     btnText: string;
     disabled: boolean;
+    bondingValue: string;
     handleInputChange: (Event) => void;
   }>({
     btnText: "Amount is empty",
     disabled: true,
+    bondingValue: "",
     handleInputChange(e) {
       const value: string = e.target.value;
+      state.bondingValue = value;
       if (value === "") {
         state.disabled = true;
         state.btnText = "Amount is empty";
@@ -54,7 +58,6 @@ export default function BondingMore(props: BondingMoreProps) {
       <Stack
         attributes={{
           paddingTop: "$13",
-          paddingBottom: "$8",
           justifyContent: "space-between",
         }}
         space="$0"
@@ -62,14 +65,22 @@ export default function BondingMore(props: BondingMoreProps) {
         <Text color="$textSecondary" fontSize="$lg" fontWeight="$semibold">
           Amount to bound
         </Text>
-        <Stack attributes={{ marginBottom: "$6", alignItems: "center" }}>
+        <Stack
+          space="$0"
+          attributes={{ marginBottom: "$6", alignItems: "center" }}
+        >
           <Text color="$textSecondary">Available LP Token</Text>
           <Text color="$textSecondary">{props.available}</Text>
         </Stack>
       </Stack>
-      <Box className={styles.inputContainer} marginBottom="$10" marginTop="$5">
-        <input
+      <Box marginBottom="$10" marginTop="$5">
+        {/* <input
           className={styles.token}
+          onChange={(e) => state.handleInputChange(e)}
+        /> */}
+        <TextField
+          id="bonding-input"
+          value={state.bondingValue}
           onChange={(e) => state.handleInputChange(e)}
         />
       </Box>
@@ -77,7 +88,7 @@ export default function BondingMore(props: BondingMoreProps) {
         intent="tertiary"
         size="lg"
         disabled={state.disabled}
-        attributes={{ width: "full" }}
+        attributes={{ width: "$full" }}
       >
         {state.btnText}
       </Button>

@@ -8,6 +8,7 @@ const spacings = style({
   paddingLeft: themeVars.space[9],
   paddingRight: themeVars.space[9],
   maxHeight: "304px",
+  zIndex: 5,
   selectors: {
     "& + &": {
       marginTop: themeVars.space[2],

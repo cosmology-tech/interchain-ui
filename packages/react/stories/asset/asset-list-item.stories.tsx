@@ -21,10 +21,46 @@ export const Primary: Story = {
       "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
     symbol: "OSMO",
     denom: "Osmosis",
-    amount: "102.614224",
-    dollarAmount: "101.02",
-    canDeposit: true,
-    canWithdraw: true,
+    tokenAmount: "102.61",
+    tokenAmountPrice: "101.02",
     chainName: "Juno",
+    onDeposit: () => {
+      return {
+        fromSymbol: "UMEE",
+        fromDenom: "Umee",
+        fromAddress: "umee1lqsq...pv4axdaxk",
+        fromImgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
+        toDenom: "Osmosis",
+        toAddress: "osmo1lqsq...pv48trj5k",
+        toImgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
+        avaliable: "25.89",
+        amount: "",
+        priceDisplayAmount: 0.5,
+        onTransfer: (detail) => {
+          console.log("onTransfer", detail);
+        },
+      };
+    },
+    onWithdraw: () => {
+      return {
+        fromSymbol: "UMEE",
+        fromDenom: "Umee",
+        fromAddress: "umee1lqsq...pv4axdaxk",
+        fromImgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
+        toDenom: "Osmosis",
+        toAddress: "osmo1lqsq...pv48trj5k",
+        toImgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
+        avaliable: "25.89",
+        amount: "",
+        priceDisplayAmount: 0.5,
+        onTransfer: (detail) => {
+          console.log("onTransfer", detail);
+        },
+      };
+    },
   },
 };

@@ -17,20 +17,27 @@ import Icon from "../icon";
 import { store } from "../../models/store";
 import type { ShowMoreProps } from "./show-more.types";
 import * as styles from "./show-more.css";
+import { ThemeVariant } from "../../models/system.model";
 
 export default function ShowMore(props: ShowMoreProps) {
   useDefaultProps({
-    initialHeightPercent: 0.5,
+    heightToShowMore: 500,
     showMoreTitle: "Show more",
     showLessTitle: "Show less",
   });
   let eleHeight = useRef<number | null>(null);
-  let initHeightRef = useRef<number | null>(0);
   let isVisibleRef = useRef<boolean>(false);
   let animationRef = useRef<AnimeInstance | null>(null);
   const elementRef = useRef(null);
-  const state = useStore({
+  const state = useStore<{
+    isVisible: boolean;
+    showToggle: boolean;
+    toggle: () => void;
+    updateAnimationRef: () => void;
+    theme: ThemeVariant;
+  }>({
     isVisible: false,
+    showToggle: false,
     toggle() {
       isVisibleRef = !state.isVisible;
       state.isVisible = !state.isVisible;
@@ -38,7 +45,7 @@ export default function ShowMore(props: ShowMoreProps) {
     updateAnimationRef() {
       animationRef = anime({
         targets: elementRef,
-        height: [eleHeight * initHeightRef, eleHeight],
+        height: [props.heightToShowMore, eleHeight],
         duration: 250,
         direction: `alternate`,
         loop: false,
@@ -47,7 +54,7 @@ export default function ShowMore(props: ShowMoreProps) {
       });
       state.isVisible = false;
     },
-    theme: "",
+    theme: "light",
   });
   let cleanupRef = useRef<() => void>(null);
   let resizeRef = useRef<() => void>(null);
@@ -58,31 +65,40 @@ export default function ShowMore(props: ShowMoreProps) {
       state.theme = newState.theme;
     });
 
-    // Listen the resize event to get container height
-    resizeRef = debounce(() => {
-      elementRef.style.height = "auto";
-      eleHeight = elementRef.offsetHeight + 50;
-      elementRef.style.height = isVisibleRef
-        ? `${eleHeight}px`
-        : `${eleHeight * initHeightRef}px`;
-      state.updateAnimationRef();
-    }, 300);
-    window.addEventListener("resize", resizeRef);
-
-    // Simulate useLayoutEffect
     setTimeout(() => {
-      if (!eleHeight) {
-        eleHeight = elementRef.offsetHeight + 50;
-      }
+    if (elementRef.offsetHeight > props.heightToShowMore) {
+      state.showToggle = true;
 
-      state.updateAnimationRef();
-    }, 500);
+      // Listen the resize event to get container height
+      resizeRef = debounce(() => {
+        elementRef.style.height = "auto";
+        eleHeight = elementRef.offsetHeight + 50;
+        elementRef.style.height = isVisibleRef
+          ? `${eleHeight}px`
+          : `${props.heightToShowMore}px`;
+        state.updateAnimationRef();
+      }, 100);
+      window.addEventListener("resize", resizeRef);
+
+      // Simulate useLayoutEffect
+      setTimeout(() => {
+        if (!eleHeight) {
+          eleHeight = elementRef.offsetHeight + 50;
+        }
+
+        state.updateAnimationRef();
+      }, 0);
+    } else {
+      state.showToggle = false;
+    }
+    }, 100);
   });
 
-  onUpdate(() => {
-    initHeightRef = props.initialHeightPercent;
-    state.updateAnimationRef();
-  }, [props.initialHeightPercent]);
+  // onUpdate(() => {
+  //   if (state.showToggle) {
+  //     state.updateAnimationRef();
+  //   }
+  // }, [state.showToggle, props.heightToShowMore]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
@@ -95,12 +111,13 @@ export default function ShowMore(props: ShowMoreProps) {
   return (
     <div ref={elementRef} className={clsx(styles.container, props.className)}>
       {props.children}
-      <Show when={!state.isVisible}>
+      <Show when={!state.isVisible && state.showToggle}>
         <Stack
           className={clsx(styles.moreBox, styles.shadow[state.theme])}
           attributes={{
             justifyContent: "center",
             alignItems: "flex-end",
+            height: "$22",
           }}
         >
           <div
@@ -123,12 +140,13 @@ export default function ShowMore(props: ShowMoreProps) {
           </div>
         </Stack>
       </Show>
-      <Show when={!!state.isVisible}>
+      <Show when={!!state.isVisible && state.showToggle}>
         <Stack
           className={styles.moreBox}
           attributes={{
             justifyContent: "center",
             alignItems: "flex-end",
+            height: "fit-content",
           }}
         >
           <div

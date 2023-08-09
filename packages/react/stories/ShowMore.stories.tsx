@@ -7,18 +7,7 @@ const meta: Meta<typeof ShowMore> = {
   component: ShowMore,
   title: "ShowMore",
   tags: ["autodocs"],
-  argTypes: {
-    initialHeightPercent: {
-      options: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-      control: { type: "select" },
-      table: {
-        summary: "PoolListItemProps []",
-      },
-    },
-    children: {
-      control: false,
-    },
-  },
+  argTypes: {},
 };
 
 export default meta;
@@ -39,13 +28,6 @@ export const Primary: Story = {
     ),
     showMoreTitle: "Show more",
     showLessTitle: "Show less",
-    initialHeightPercent: 0.5,
+    heightToShowMore: 100
   },
-  // render: () => {
-  //   return (
-  //     <ShowMore initialHeightPercent={0.5} >
-
-  //     </ShowMore>
-  //   );
-  // },
 };
