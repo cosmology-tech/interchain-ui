@@ -36,19 +36,13 @@ module.exports = function reactCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        const result = codeStr
-          // Fix generic type for forwardRef not supported yet
-          // .replace(/,\s*forwardedRef\s*\)/g, "forwardedRef: any)")
-          // fix contenteditable
-          .replace(
-            /contentEditable\=(.*)/g,
-            "contentEditable=$1\nsuppressContentEditableWarning={true}"
-          );
-        return result;
+        return fixReactTypeIssues(codeStr);
       },
     },
   };
 };
+
+module.exports.fixReactTypeIssues = fixReactTypeIssues;
 
 function changeJsxTag(component, scaffoldName) {
   const scaffoldMeta = scaffoldConfig[scaffoldName];
@@ -87,4 +81,20 @@ function isScaffoldJSXTag(componentName) {
 
 function componentHasChildren(component) {
   return component.children && Array.isArray(component.children);
+}
+
+function fixReactTypeIssues(codeStr) {
+  return (
+    codeStr
+      // Fix typescript types for children prop
+      .replace(/children\?:\sany/g, "children?: React.ReactNode")
+      .replace(/Children\s=\sany/g, "Children = React.ReactNode")
+      // Fix content editable
+      .replace(
+        /contentEditable\=(.*)/g,
+        "contentEditable=$1\nsuppressContentEditableWarning={true}"
+      )
+      // Fix shape rendering not correctly compiled by mitosis
+      .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)
+  );
 }

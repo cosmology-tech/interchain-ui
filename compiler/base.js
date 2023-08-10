@@ -11,10 +11,10 @@ const ora = require("ora");
 const compileCommand = require("@builder.io/mitosis-cli/dist/commands/compile");
 const camelCase = require("lodash/camelCase");
 const startCase = require("lodash/startCase");
-const uniq = require("lodash/uniq");
 const scaffoldConfig = require("./scaffold.config.js");
 const { cwd } = require("process");
 const { Cache } = require("./cache.js");
+const { fixReactTypeIssues } = require("./plugins/react.plugin");
 
 const cache = new Cache();
 
@@ -78,14 +78,20 @@ async function compile(rawOptions) {
     const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.lite.tsx`);
     unnecessaryFiles.forEach((element) => fs.removeSync(element));
 
-    const distFiles = glob.sync(`${outPath}/src/**/*.{ts,css}`);
+    const distFiles = glob.sync(`${outPath}/src/**/*.{ts,tsx}`);
+
     distFiles.forEach((element) => {
       const data = fs.readFileSync(element, "utf8");
-      const result = data
+
+      let result = data
         // Fix alias
         .replace(/\~\//g, "../../")
         // Remove .lite
         .replace(/\.lite/g, "");
+
+      if (options.target === "react") {
+        result = fixReactTypeIssues(result);
+      }
 
       fs.writeFileSync(element, result, "utf8");
     });
