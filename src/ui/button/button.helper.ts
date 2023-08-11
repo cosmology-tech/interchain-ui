@@ -9,7 +9,12 @@ import {
   intentText,
   disabled,
   baseButton,
+  buttonBgVar,
+  buttonHoverBgVar,
+  buttonTextColorVar,
+  buttonHoverTextColorVar,
 } from "./button.css";
+import { ComponentOverrideSchema } from "../../styles/override/override.types";
 
 export type ButtonSize = "xs" | "sm" | "md" | "lg";
 export type ButtonVariant =
@@ -76,3 +81,13 @@ export function recipe({
     isDisabled ? disabled : null,
   ]);
 }
+
+export const buttonOverrides: ComponentOverrideSchema = {
+  name: "button",
+  overrides: [
+    [buttonBgVar, "bg"],
+    [buttonHoverBgVar, "hoverBg"],
+    [buttonTextColorVar, "color"],
+    [buttonHoverTextColorVar, "hoverColor"],
+  ],
+};
