@@ -1,10 +1,10 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
-const buttonBgVar = createVar();
-const buttonHoverBgVar = createVar();
-const buttonTextColorVar = createVar();
-const buttonHoverTextColorVar = createVar();
+export const buttonBgVar = createVar();
+export const buttonHoverBgVar = createVar();
+export const buttonTextColorVar = createVar();
+export const buttonHoverTextColorVar = createVar();
 
 export const baseButton = style({
   fontFamily: themeVars.font.body,

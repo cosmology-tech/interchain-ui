@@ -25,6 +25,7 @@ export default function Button(props: ButtonProps) {
 
   const state = useStore<ButtonState>({
     loaded: false,
+    overrideManager: null,
     theme: "light",
   });
 
@@ -33,6 +34,7 @@ export default function Button(props: ButtonProps) {
   onMount(() => {
     state.loaded = true;
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState, prevState) => {
       state.theme = newState.theme;
@@ -63,6 +65,7 @@ export default function Button(props: ButtonProps) {
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
+          style: state.overrideManager.applyOverrides("button"),
           ...props.domAttributes,
         }}
       >

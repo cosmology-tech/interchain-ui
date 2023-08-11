@@ -14,7 +14,17 @@ const WithThemeDecorator = (props) => {
   ]);
 
   return (
-    <ThemeProvider>
+    <ThemeProvider
+    // Try out custom themes
+    // overrides={{
+    //   button: {
+    //     bg: {
+    //       light: "red",
+    //       dark: "blue",
+    //     },
+    //   },
+    // }}
+    >
       <div id="app-root1" className={cls("app", themeClass)}>
         <Box
           backgroundColor={theme == "dark" ? "$gray700" : "$white"}

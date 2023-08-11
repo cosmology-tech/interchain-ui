@@ -53,6 +53,11 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     }
   }, [state.preferredMode, store.getState().theme, state.isMounted]);
 
+  onUpdate(() => {
+    const overrideStyleManager = store.getState().overrideStyleManager;
+    overrideStyleManager.update(props.overrides, null);
+  }, [props.overrides]);
+
   onMount(() => {
     resolveThemeMode(props.defaultTheme);
     state.isMounted = true;
