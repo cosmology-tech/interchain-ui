@@ -10,7 +10,9 @@ import clx from "clsx";
 import Button from "../button";
 import { store } from "../../models/store";
 import * as styles from "./connect-modal-head.css";
+import { connectModalHeadTitleOverrides } from "./connect-modal-head.helper";
 import type { ThemeVariant } from "../../models/system.model";
+import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ConnectModalHeadProps } from "./connect-modal-head.types";
 
 export default function ConnectModalHead(props: ConnectModalHeadProps) {
@@ -19,17 +21,23 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
     hasCloseButton: true,
   });
 
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{
+    theme: ThemeVariant;
+    overrideManager: OverrideStyleManager | null;
+  }>({
     theme: "light",
+    overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -40,7 +48,7 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
   return (
     <div className={clx(styles.modalHeader, props.className)}>
       <Show when={props.hasBackButton}>
-        <div className={clx(styles.modalBackButton)}>
+        <div className={styles.modalBackButton}>
           <Button
             rightIcon="arrowLeftSLine"
             intent="secondary"
@@ -55,12 +63,18 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
         </div>
       </Show>
 
-      <p className={styles.modalHeaderText[state.theme]} {...props.titleProps}>
+      <p
+        className={styles.modalHeaderText[state.theme]}
+        style={state.overrideManager.applyOverrides(
+          connectModalHeadTitleOverrides.name
+        )}
+        {...props.titleProps}
+      >
         {props.title}
       </p>
 
       <Show when={props.hasCloseButton}>
-        <div className={clx(styles.modalCloseButton)}>
+        <div className={styles.modalCloseButton}>
           <Button
             rightIcon="closeFilled"
             intent="secondary"

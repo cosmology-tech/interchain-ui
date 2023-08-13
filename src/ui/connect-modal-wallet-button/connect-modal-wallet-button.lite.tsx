@@ -21,6 +21,12 @@ import { store } from "../../models/store";
 import Box from "../box";
 import Icon from "../icon";
 import { fullWidthHeight } from "../shared/shared.css";
+import {
+  buttonOverrides,
+  buttonLabelOverrides,
+  buttonSublogoOverrides,
+} from "./connect-modal-wallet-button.helper";
+import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -28,17 +34,23 @@ useMetadata({ isAttachedToShadowDom: true });
 export default function ConnectModalWalletButton(
   props: ConnectModalWalletButtonProps
 ) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{
+    theme: ThemeVariant;
+    overrideManager: OverrideStyleManager | null;
+  }>({
     theme: "light",
+    overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -54,6 +66,7 @@ export default function ConnectModalWalletButton(
           variant: props.variant,
         })
       )}
+      style={state.overrideManager.applyOverrides(buttonOverrides.name)}
       onClick={(event: any) => props.onClick(event)}
     >
       <Show when={!!props.logo}>
@@ -74,7 +87,12 @@ export default function ConnectModalWalletButton(
               props.variant === "square" && typeof props.subLogo === "string"
             }
           >
-            <span className={subLogoSquare[state.theme]}>
+            <span
+              className={subLogoSquare[state.theme]}
+              style={state.overrideManager.applyOverrides(
+                buttonSublogoOverrides.name
+              )}
+            >
               <Show when={props.subLogo === "walletConnect"}>
                 <Icon name={"mobileWalletCircle"} size={"2xl"} />
               </Show>
@@ -100,6 +118,7 @@ export default function ConnectModalWalletButton(
           buttonTextStyle[state.theme],
           buttonTextVariants({ variant: props.variant })
         )}
+        style={state.overrideManager.applyOverrides(buttonLabelOverrides.name)}
       >
         {props.name}
       </span>

@@ -15,20 +15,24 @@ import {
   truncateEndStyle,
 } from "./clipboard-copy-text.css";
 import { store } from "../../models/store";
-import type { ThemeVariant } from "../../models/system.model";
 import { truncateTextMiddle } from "../../helpers/string";
+import { clipboardCopyTextOverrides } from "./clipboard-copy-text.helper";
+import type { OverrideStyleManager } from "../../styles/override/override";
+import type { ThemeVariant } from "../../models/system.model";
 import type { ClipboardCopyTextProps } from "./clipboard-copy-text.types";
 
 export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   const state = useStore<{
     idle: boolean;
     theme: ThemeVariant;
+    overrideManager: OverrideStyleManager | null;
     transform: (text: string) => string;
     handleOnClick: () => void;
     getTruncateClass: () => string;
   }>({
     idle: true,
     theme: "light",
+    overrideManager: null,
     transform: (text: string) => {
       if (props.truncate === "middle") {
         const truncateLength = {
@@ -66,9 +70,11 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
 
   onMount(() => {
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -80,6 +86,9 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
     <div
       className={clx(containerStyle[state.theme], props.className)}
       onClick={() => state.handleOnClick()}
+      style={state.overrideManager.applyOverrides(
+        clipboardCopyTextOverrides.name
+      )}
     >
       <p className={state.getTruncateClass()}>{state.transform(props.text)}</p>
 

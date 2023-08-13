@@ -53,9 +53,6 @@ export const qrCodeContainer = styleVariants({
   ],
 });
 
-export const qrCodeErrorFgVar = createVar();
-export const qrCodeExpiredFgVar = createVar();
-
 export const qrCodeDesc = style([
   {
     position: "relative",
@@ -71,7 +68,7 @@ export const qrCodeDescContent = style({
   fontWeight: themeVars.fontWeight.normal,
 });
 
-const qrCodeDescBgVar = createVar();
+export const qrCodeDescBgVar = createVar();
 
 const qrCodeDescShadowBase = style({
   height: "0px",

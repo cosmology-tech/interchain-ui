@@ -6,8 +6,8 @@ import {
 } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
-const skeletonStartVar = createVar();
-const skeletonEndVar = createVar();
+export const skeletonStartVar = createVar();
+export const skeletonEndVar = createVar();
 
 export const pulsingAnim = keyframes({
   "0%": {
