@@ -148,7 +148,7 @@ export default function AssetListItem(props: AssetListItemProps) {
           toDenom={state.modalDetail?.toDenom}
           toAddress={state.modalDetail?.toAddress}
           toImgSrc={state.modalDetail?.toImgSrc}
-          avaliable={state.modalDetail?.avaliable}
+          available={state.modalDetail?.available}
           priceDisplayAmount={state.modalDetail?.priceDisplayAmount}
           amount={state.modalDetail?.amount}
           onTransfer={(value) => state?.modalDetail?.onTransfer(value)}

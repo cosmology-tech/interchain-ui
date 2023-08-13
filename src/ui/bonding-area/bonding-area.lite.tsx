@@ -5,6 +5,7 @@ import BondingCardList from "../bonding-card-list";
 import BondingListSm from "../bonding-list-sm";
 import { BondingAreaProps } from "./bonding-area.types";
 import * as styles from "./bonding-area.css";
+import { OnBondDetail, OnUnBondDetail } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function BondingArea(props: BondingAreaProps) {
   return (
@@ -12,12 +13,15 @@ export default function BondingArea(props: BondingAreaProps) {
       <Stack className={styles.onlyDesktop} direction="vertical">
         <BondingCardList list={props.bondingCardList} />
         <Box height="$14" />
-        <BondingList list={props.bondingList} />
+        <BondingList list={props.bondingList.list} onUnbond={(detail: OnUnBondDetail) => props.bondingList?.onUnbond?.(detail)} />
       </Stack>
       <Box className={styles.onlySm}>
         <BondingListSm
+        onBond={(detail: OnBondDetail) => props.bondingListSm?.onBond?.(detail)}
+        onUnbond={(detail: OnUnBondDetail) => props.bondingListSm?.onUnbond?.(detail)}
+          bondingName={props.bondingListSm.bondingName}
           list={props.bondingListSm.list}
-          unbondedAmt={props.bondingListSm.unbondedAmt}
+          unbondedBalance={props.bondingListSm.unbondedBalance}
           unbondedShares={props.bondingListSm.unbondedShares}
         />
       </Box>

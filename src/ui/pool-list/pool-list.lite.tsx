@@ -5,6 +5,7 @@ import Text from "../text";
 import PoolListItem from "../pool-list-item";
 import * as styles from "./pool-list.css";
 import { PoolListProps } from "./pool-list.types";
+import { OnBondDetail, OnUnBondDetail } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function PoolList(props: PoolListProps) {
   const state = useStore({
@@ -29,14 +30,29 @@ export default function PoolList(props: PoolListProps) {
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem
-              id={item.id}
-              key={index}
-              token1={item.token1}
-              token2={item.token2}
-              poolLiquidity={item.poolLiquidity}
-              volume={item.volume}
-              fees={item.fees}
-              apr={item.apr}
+            key={item.id}
+            id={item?.id}
+            poolAssets={item.poolAssets}
+            swapFee={item?.swapFee}
+            liquidity={item.liquidity}
+            myLiquidity={item.myLiquidity}
+            bonded={item.bonded}
+            apr={item.apr}
+            fees7D={item.fees7D}
+            volume24H={item.volume24H}
+            totalBalance={item.totalBalance}
+            totalShares={item.totalShares}
+            lpTokenBalance={item.lpTokenBalance}
+            lpTokenShares={item.lpTokenShares}
+            totalBalanceCoins={item.totalBalanceCoins}
+            unbondedBalance={item.unbondedBalance}
+            unbondedShares={item.unbondedShares}
+            myLiquidityCoins={item.myLiquidityCoins}
+            onAddLiquidity={(assets) => item?.onAddLiquidity?.(assets)}
+            onRemoveLiquidity={(percent) => item?.onRemoveLiquidity?.(percent)}
+            onUnbond={(detail: OnUnBondDetail) => item?.onUnbond?.(detail)}
+            onBond={(detail: OnBondDetail) => item?.onBond?.(detail)}
+            onStartEarning={() => item?.onStartEarning?.()}
             />
           )}
         </For>

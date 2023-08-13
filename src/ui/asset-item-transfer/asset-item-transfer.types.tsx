@@ -1,19 +1,20 @@
 import { TransferType } from "../overview-transfer/overview-transfer.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 type AssetItemTransferDetail = {
   value: string;
   type: TransferType;
 };
 export interface AssetItemTransferProps {
   type?: TransferType;
-  fromSymbol: string;
-  fromDenom: string;
+  fromSymbol: AvailableItem["symbol"];
+  fromDenom: AvailableItem["denom"];
   fromAddress: string;
-  fromImgSrc: string;
-  toDenom: string;
+  fromImgSrc: AvailableItem["imgSrc"];
+  toDenom: AvailableItem["denom"];
   toAddress: string;
-  toImgSrc: string;
-  avaliable: string | number;
-  priceDisplayAmount: number;
+  toImgSrc: AvailableItem["imgSrc"];
+  available: AvailableItem["available"];
+  priceDisplayAmount: AvailableItem["priceDisplayAmount"];
   amount?: string;
   onTransfer?: (detail: AssetItemTransferDetail) => void;
   onCancel?: () => void;

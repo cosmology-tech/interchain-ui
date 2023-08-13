@@ -28,6 +28,7 @@ useMetadata({
 export default function TokenInput(props: TokenInputProps) {
   useDefaultProps({
     hasProgressBar: true,
+    availableAsMax: true,
   });
   const inputIdRef = useRef(uniqueId("token-input-"));
 
@@ -144,14 +145,18 @@ export default function TokenInput(props: TokenInputProps) {
                 {props.denom}
               </Text>
             </Stack>
-            <Show when={props.progress !== 100}>
+            <div
+              style={{
+                visibility: props.progress !== 100 ? "visible" : "hidden",
+              }}
+            >
               <IconButton
                 intent="text"
                 icon={props.progress === 0 ? "add" : "subtract"}
                 onClick={(e) => state.handleIconClick(e)}
                 className={styles.operationIcon}
               />
-            </Show>
+            </div>
           </Stack>
         </Stack>
       </Show>
@@ -165,7 +170,7 @@ export default function TokenInput(props: TokenInputProps) {
           <NumberInput
             id={inputIdRef}
             min={0}
-            max={props.available}
+            max={props.availableAsMax ? props.available : undefined}
             value={state.amount}
             borderless
             disabled={state.disabled}

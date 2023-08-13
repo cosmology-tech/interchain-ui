@@ -4,6 +4,7 @@ import Box from "../box";
 import BondingListItem from "../bonding-list-item";
 import { BondingListProps } from "./bonding-list.types";
 import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.types";
+import { OnUnBondDetail } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function BondingList(props: BondingListProps) {
   return (
@@ -13,11 +14,12 @@ export default function BondingList(props: BondingListProps) {
           {(item: BondingListItemProps, index: number) => (
             <BondingListItem
               key={item.title}
+              type={item.type}
               title={item.title}
-              apr={item.apr}
+              totalApr={item.totalApr}
               amount={item.amount}
-              per={item.per}
-              onUnbond={(e) => item.onUnbond?.(e)}
+              superfluidApr={item.superfluidApr}
+              onUnbond={(detail: OnUnBondDetail) => props?.onUnbond?.(detail)}
             />
           )}
         </For>

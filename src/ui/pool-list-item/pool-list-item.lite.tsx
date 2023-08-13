@@ -1,4 +1,5 @@
 import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import Box from "../box";
 import Stack from "../stack";
@@ -6,14 +7,22 @@ import Text from "../text";
 import PoolName from "../pool/components/pool-name";
 import APR from "./components/apr";
 import CellWithTitle from "./components/cell-with-title";
+import PoolDetailModal from "../pool-detail-modal";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
 import type { PoolListItemProps } from "./pool-list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
+import { OnBondDetail, OnUnBondDetail } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function PoolListItem(props: PoolListItemProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{ theme: ThemeVariant; isOpen: boolean; apr14 }>({
     theme: "light",
+    isOpen: false,
+    get apr14() {
+      return new BigNumber(props?.apr["14"].totalApr || 0)
+        .decimalPlaces(2)
+        .toString();
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -31,24 +40,23 @@ export default function PoolListItem(props: PoolListItemProps) {
   });
 
   return (
-    <Stack
+    <Box
       className={styles.container}
-      space="$0"
       attributes={{
         alignItems: "center",
+        onClick: () => (state.isOpen = true),
       }}
     >
       <PoolName
         id={props.id}
         className={styles.nameContainer}
-        token1={props.token1}
-        token2={props.token2}
+        coins={props.totalBalanceCoins}
       />
       <Box className={clsx(styles.responsiveText, styles.onlySm)}>
         <APR
           title="APR"
           className={styles.onlySm}
-          apr={props.apr}
+          apr={state.apr14}
           innerClassName={styles.iconContainer[state.theme]}
         />
       </Box>
@@ -68,7 +76,9 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "$4",
           }}
         >
-          ${props.poolLiquidity.toLocaleString()}
+          {store
+            .getState()
+            .formatNumber({ value: props?.liquidity, style: "currency" })}
         </Text>
       </CellWithTitle>
       <CellWithTitle
@@ -84,7 +94,9 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "$4",
           }}
         >
-          ${props.volume.toLocaleString()}
+        {store
+          .getState()
+          .formatNumber({ value: props?.volume24H, style: "currency" })}
         </Text>
       </CellWithTitle>
       <CellWithTitle
@@ -100,15 +112,44 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "$4",
           }}
         >
-          ${props.fees.toLocaleString()}
+        {store
+          .getState()
+          .formatNumber({ value: props?.fees7D, style: "currency" })}
         </Text>
       </CellWithTitle>
+      {/* 14 day totalApr */}
       <APR
         className={clsx(styles.responsiveText, styles.lgAPR)}
-        apr={props.apr}
+        apr={state.apr14}
         innerClassName={styles.iconContainer[state.theme]}
       />
       <Box className={styles.onlySm} width="$full" height="$4" />
-    </Stack>
+      <PoolDetailModal
+        isOpen={state.isOpen}
+        onClose={() => (state.isOpen = false)}
+        id={props?.id}
+        poolAssets={props.poolAssets}
+        swapFee={props?.swapFee}
+        liquidity={props.liquidity}
+        myLiquidity={props.myLiquidity}
+        bonded={props.bonded}
+        apr={props.apr}
+        fees7D={props.fees7D}
+        volume24H={props.volume24H}
+        totalBalance={props.totalBalance}
+        totalShares={props.totalShares}
+        lpTokenBalance={props.lpTokenBalance}
+        lpTokenShares={props.lpTokenShares}
+        totalBalanceCoins={props.totalBalanceCoins}
+        unbondedBalance={props.unbondedBalance}
+        unbondedShares={props.unbondedShares}
+        myLiquidityCoins={props.myLiquidityCoins}
+        onAddLiquidity={(assets) => props?.onAddLiquidity?.(assets)}
+        onRemoveLiquidity={(percent) => props?.onRemoveLiquidity?.(percent)}
+        onUnbond={(detail: OnUnBondDetail) => props?.onUnbond?.(detail)}
+        onBond={(detail: OnBondDetail) => props?.onBond?.(detail)}
+        onStartEarning={() => props?.onStartEarning?.()}
+      />
+    </Box>
   );
 }

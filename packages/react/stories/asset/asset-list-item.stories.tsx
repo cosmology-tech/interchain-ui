@@ -35,7 +35,7 @@ export const Primary: Story = {
         toAddress: "osmo1lqsq...pv48trj5k",
         toImgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-        avaliable: "25.89",
+        available: "25.89",
         amount: "",
         priceDisplayAmount: 0.5,
         onTransfer: (detail) => {
@@ -54,7 +54,7 @@ export const Primary: Story = {
         toAddress: "osmo1lqsq...pv48trj5k",
         toImgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-        avaliable: "25.89",
+        available: "25.89",
         amount: "",
         priceDisplayAmount: 0.5,
         onTransfer: (detail) => {

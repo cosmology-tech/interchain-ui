@@ -16,21 +16,23 @@ type Story = StoryObj<typeof meta>;
 /* This is primary button */
 export const Primary: Story = {
   args: {
-    token1: {
-      name: "ATOM",
-      asset: 0,
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
-    },
-    token2: {
-      name: "OSOM",
-      asset: 0,
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-    },
-    pollBalance: 0,
-    poolShares: 0,
-    lpTokens: 0,
-    tokenShares: 0,
+    totalBalanceCoins: [
+      {
+        symbol: "ATOM",
+        displayAmount: "0.02052506381023874581",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+      },
+      {
+        symbol: "OSMO",
+        displayAmount: "0.3824102514677405108",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+      },
+    ],
+    totalBalance: "1228.02",
+    totalShares: "212.0432",
+    lpTokenBalance: "22.51",
+    lpTokenShares: "12.02",
   },
 };

@@ -58,6 +58,9 @@ export const variants = styleVariants({
         "&:hover": {
           opacity: 0.8,
         },
+        "&:focus": {
+          outline: `2px solid ${buttonTextColorVar}`,
+        },
       },
     },
   ],

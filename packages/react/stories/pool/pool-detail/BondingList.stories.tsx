@@ -8,21 +8,6 @@ const meta: Meta<typeof BondingList> = {
   title: "Pool/PoolDetail/BondingList",
   tags: ["autodocs"],
   argTypes: {
-    list: {
-      description: "List of bonding item",
-      table: {
-        type: {
-          summary: "BondingListItem []",
-          detail: `{
-    title: string;
-    apr: string;
-    amount: number;
-    per: string;
-}
-`,
-        },
-      },
-    },
   },
 };
 
@@ -36,23 +21,23 @@ export const Primary: Story = {
     list: [
       {
         title: "A day",
-        apr: "2.43%",
+        totalApr: "2.43",
         amount: 59075,
-        per: "24%",
+        superfluidApr: "24",
         onUnbond: () => console.log("unbond - a day")
       },
       {
         title: "7 days",
-        apr: "2.43%",
+        totalApr: "2.43",
         amount: 59075,
-        per: "24%",
+        superfluidApr: "24",
         onUnbond: () => console.log("unbond - 7 days")
       },
       {
         title: "14 days",
-        apr: "2.43%",
+        totalApr: "2.43",
         amount: 59075,
-        per: "24%",
+        superfluidApr: "24",
         onUnbond: () => console.log("unbond - 14 days")
       },
     ],

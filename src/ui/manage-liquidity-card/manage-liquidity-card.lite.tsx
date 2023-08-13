@@ -1,16 +1,57 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  Show,
+} from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
+
 import Box from "../box";
 import Stack from "../stack";
 import Button from "../button";
 import Text from "../text";
+import BasicModal from "../basic-modal";
+import AddLiquidity from "../add-liquidity";
+import RemoveLiquidity from "../remove-liquidity";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./manage-liquidity-card.css";
 import { ManageLiquidityCardProps } from "./manage-liquidity-card.types";
+import { ResponseInfo } from "../add-liquidity/add-liquidity.types";
 
 export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{
+    theme: ThemeVariant;
+    hasTotalShares: boolean;
+    hasLPTokenShares: boolean;
+    isAddOpen: boolean;
+    isRemoveOpen: boolean;
+    isEarningLoading: boolean;
+    startEarningHandler: () => void;
+  }>({
     theme: "light",
+    isAddOpen: false,
+    isRemoveOpen: false,
+    isEarningLoading: false,
+    get hasTotalShares() {
+      return new BigNumber(props.totalShares || 0).gt(0);
+    },
+    get hasLPTokenShares() {
+      return new BigNumber(props.lpTokenShares || 0).gt(0);
+    },
+    startEarningHandler() {
+      void (async function () {
+        state.isEarningLoading = true;
+        try {
+          const res: ResponseInfo = await await props?.onStartEarning();
+        } catch (error) {
+          throw new Error(error);
+        } finally {
+          state.isEarningLoading = false;
+        }
+      })();
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -52,11 +93,27 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
             $
           </Text>
           <Text fontSize="$4xl" fontWeight="$semibold">
-            {props.pollBalance}
+            {store.getState().formatNumber({ value: props.totalBalance || 0 })}
           </Text>
         </Stack>
-        <Text>No pool shares yet</Text>
-        <Button attributes={{ marginTop: "$11" }} intent="tertiary">
+        <Show when={state.hasTotalShares}>
+          <Text>
+            {" "}
+            {`${new BigNumber(props.totalShares)
+              .decimalPlaces(6)
+              .toString()} pool shares`}
+          </Text>
+        </Show>
+        <Show when={!state.hasTotalShares}>
+          <Text>No pool shares yet</Text>
+        </Show>
+        <Button
+          attributes={{ marginTop: "$11" }}
+          intent="tertiary"
+          onClick={() => {
+            state.isAddOpen = true;
+          }}
+        >
           Add Liquidity
         </Button>
       </Stack>
@@ -68,29 +125,49 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         space="$0"
       >
         <Stack space="$0">
-          <img className={styles.image} src={props.token1.imgSrc} />
+          <img
+            className={styles.image}
+            src={props.totalBalanceCoins[0]?.imgSrc}
+          />
           <Text
             color="$textSecondary"
             fontWeight="$semibold"
             attributes={{ px: "$4" }}
           >
-            {props.token1.asset}
+            {new BigNumber(props.totalBalanceCoins[0]?.displayAmount || 0)
+              .decimalPlaces(4)
+              .toString()}
           </Text>
-          <Text color="$textSecondary">{props.token1.name}</Text>
+          <Text color="$textSecondary">
+            {props.totalBalanceCoins[0]?.symbol}
+          </Text>
         </Stack>
         <Box height="$5" />
         <Stack space="$0">
-          <img className={styles.image} src={props.token2.imgSrc} />
+          <img
+            className={styles.image}
+            src={props.totalBalanceCoins[1]?.imgSrc}
+          />
           <Text
             attributes={{ px: "$4" }}
             color="$textSecondary"
             fontWeight="$semibold"
           >
-            {props.token2.asset}
+            {new BigNumber(props.totalBalanceCoins[1]?.displayAmount || 0)
+              .decimalPlaces(4)
+              .toString()}
           </Text>
-          <Text color="$textSecondary">{props.token2.name}</Text>
+          <Text color="$textSecondary">
+            {props.totalBalanceCoins[1]?.symbol}
+          </Text>
         </Stack>
-        <Button attributes={{ marginTop: "$11" }} intent="tertiary">
+        <Button
+          attributes={{ marginTop: "$11" }}
+          intent="tertiary"
+          onClick={() => {
+            state.isRemoveOpen = true;
+          }}
+        >
           Remove Liquidity
         </Button>
       </Stack>
@@ -108,14 +185,53 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
             $
           </Text>
           <Text fontSize="$4xl" fontWeight="$semibold">
-            {props.lpTokens}
+            {store
+              .getState()
+              .formatNumber({ value: props.lpTokenBalance || 0 })}
           </Text>
         </Stack>
-        <Text>No pool shares yet</Text>
-        <Button attributes={{ marginTop: "$11" }} intent="tertiary">
+        <Show when={state.hasLPTokenShares}>
+          <Text>{`${new BigNumber(props.lpTokenShares)
+            .decimalPlaces(6)
+            .toString()} pool shares`}</Text>
+        </Show>
+        <Show when={!state.hasLPTokenShares}>
+          <Text>No pool shares yet</Text>
+        </Show>
+        <Button
+          attributes={{ marginTop: "$11" }}
+          intent="secondary"
+          variant="outlined"
+          onClick={() => state.startEarningHandler()}
+          isLoading={state.isEarningLoading}
+        >
           Start earning
         </Button>
       </Stack>
+      <BasicModal
+        isOpen={state.isAddOpen}
+        title={`Add liquidity`}
+        onClose={() => (state.isAddOpen = false)}
+      >
+        <AddLiquidity
+          poolAssets={props.poolAssets}
+          onAddLiquidity={(assets) => props?.onAddLiquidity(assets)}
+          onClose={() => (state.isAddOpen = false)}
+        />
+      </BasicModal>
+      <BasicModal
+        isOpen={state.isRemoveOpen}
+        title={`Remove liquidity`}
+        onClose={() => (state.isRemoveOpen = false)}
+      >
+        <RemoveLiquidity
+          unbondedBalance={props.unbondedBalance}
+          unbondedShares={props.unbondedShares}
+          myLiquidityCoins={props.myLiquidityCoins}
+          onRemoveLiquidity={(percent) => props?.onRemoveLiquidity(percent)}
+          onClose={() => (state.isRemoveOpen = false)}
+        />
+      </BasicModal>
     </Stack>
   );
 }

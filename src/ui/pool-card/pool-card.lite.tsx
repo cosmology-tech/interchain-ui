@@ -1,4 +1,5 @@
 import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import { store } from "../../models/store";
 import Stack from "../stack";
 import Box from "../box";
@@ -7,10 +8,16 @@ import PoolName from "../pool/components/pool-name";
 import * as styles from "./pool-card.css";
 import type { PoolCardProps } from "./pool-card.types";
 import type { ThemeVariant } from "../../models/system.model";
+import PoolDetailModal from "../pool-detail-modal";
+import {
+  OnBondDetail,
+  OnUnBondDetail,
+} from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function PoolCard(props: PoolCardProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{ theme: ThemeVariant; isOpen: boolean }>({
     theme: "light",
+    isOpen: false,
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -28,9 +35,14 @@ export default function PoolCard(props: PoolCardProps) {
   });
 
   return (
-    <Box className={styles.container}>
+    <Box
+      className={styles.container}
+      attributes={{
+        onClick: () => (state.isOpen = true),
+      }}
+    >
       <Box marginBottom="$13">
-        <PoolName id={props.id} token1={props.token1} token2={props.token2} />
+        <PoolName id={props.id} coins={props.totalBalanceCoins} />
       </Box>
       <Stack
         space="$0"
@@ -50,7 +62,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          {props.apr}%
+          {new BigNumber(props.apr[14].totalApr).decimalPlaces(2).toString()}%
         </Text>
       </Stack>
       <Stack
@@ -70,7 +82,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          ${props.poolLiquidity.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.liquidity })}
         </Text>
       </Stack>
       <Stack
@@ -87,7 +99,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          ${props.fees.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.fees7D })}
         </Text>
       </Stack>
       <Box
@@ -106,7 +118,7 @@ export default function PoolCard(props: PoolCardProps) {
       >
         <Text color="$text">Your Liquidity</Text>
         <Text color="$text" fontWeight="$semibold">
-          ${props.yourLiquidity.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.myLiquidity })}
         </Text>
       </Stack>
       <Stack
@@ -125,9 +137,35 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          ${props.bonded.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.unbondedBalance })}
         </Text>
       </Stack>
+      <PoolDetailModal
+        isOpen={state.isOpen}
+        onClose={() => (state.isOpen = false)}
+        id={props?.id}
+        poolAssets={props.poolAssets}
+        swapFee={props?.swapFee}
+        liquidity={props.liquidity}
+        myLiquidity={props.myLiquidity}
+        bonded={props.bonded}
+        apr={props.apr}
+        fees7D={props.fees7D}
+        volume24H={props.volume24H}
+        totalBalance={props.totalBalance}
+        totalShares={props.totalShares}
+        lpTokenBalance={props.lpTokenBalance}
+        lpTokenShares={props.lpTokenShares}
+        totalBalanceCoins={props.totalBalanceCoins}
+        unbondedBalance={props.unbondedBalance}
+        unbondedShares={props.unbondedShares}
+        myLiquidityCoins={props.myLiquidityCoins}
+        onAddLiquidity={(assets) => props?.onAddLiquidity?.(assets)}
+        onRemoveLiquidity={(percent) => props?.onRemoveLiquidity?.(percent)}
+        onUnbond={(detail: OnUnBondDetail) => props?.onUnbond?.(detail)}
+        onBond={(detail: OnBondDetail) => props?.onBond?.(detail)}
+        onStartEarning={() => props?.onStartEarning?.()}
+      />
     </Box>
   );
 }

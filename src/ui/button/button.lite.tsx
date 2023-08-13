@@ -10,6 +10,7 @@ import {
 import clx from "clsx";
 import Icon from "../icon";
 import Box from "../box";
+import Spinner from "../spinner";
 import { store } from "../../models/store";
 import { getSize, recipe } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
@@ -21,6 +22,7 @@ export default function Button(props: ButtonProps) {
     size: "md",
     intent: "primary",
     variant: "solid",
+    spinnerPlacement: "start",
   });
 
   const state = useStore<ButtonState>({
@@ -53,7 +55,7 @@ export default function Button(props: ButtonProps) {
           recipe({
             variant: props.variant,
             intent: props.intent,
-            isDisabled: props.disabled,
+            isDisabled: props.disabled || props.isLoading,
             theme: state.theme,
           }),
           props.className
@@ -66,6 +68,16 @@ export default function Button(props: ButtonProps) {
           ...props.domAttributes,
         }}
       >
+        <Show when={props.isLoading && props.spinnerPlacement === "start"}>
+          <Spinner
+            name={"loaderLine"}
+            size={props.iconSize}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
+          />
+
+        </Show>
         <Show when={!!props.leftIcon}>
           <Icon
             name={props.leftIcon}
@@ -87,6 +99,15 @@ export default function Button(props: ButtonProps) {
             }}
           />
         </Show>
+        <Show when={props.isLoading && props.spinnerPlacement === "end"}>
+          <Spinner
+            name={"loaderLine"}
+            size={props.iconSize}
+            attributes={{
+              marginRight: !props.children ? "$0" : "$2",
+            }}
+          />
+          </Show>
       </Box>
     </Show>
   );

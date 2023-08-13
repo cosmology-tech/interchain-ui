@@ -1,5 +1,6 @@
 export interface BondingMoreProps {
-  symbol1: string;
-  symbol2: string;
-  available: number;
+  bondingName: string;
+  available: number | string;
+  onBond: (value: string) => void;
+  isLoading?: boolean;
 }

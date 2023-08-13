@@ -8,21 +8,6 @@ const meta: Meta<typeof BondingListSm> = {
   title: "Pool/PoolDetail/BondingListSm",
   tags: ["autodocs"],
   argTypes: {
-    list: {
-      description: "List of sm bonding item",
-      table: {
-        type: {
-          summary: "BondingListSmItem []",
-          detail: `{
-      title: string;
-      amount: number;
-      poolShares: number;
-      apr: string;
-}
-`,
-        },
-      },
-    },
   },
 };
 
@@ -33,26 +18,26 @@ type Story = StoryObj<typeof meta>;
 /* This is primary button */
 export const Primary: Story = {
   args: {
-    unbondedAmt: 0.4,
-    unbondedShares: 2.1792,
+    unbondedBalance: "0.4",
+    unbondedShares: "2.1792",
     list: [
       {
         title: "Bonded 1 day",
-        amount: 0.33,
-        poolShares: 0,
-        apr: "2.46",
+        bondedValue: 0,
+        bondedShares: 1.57,
+        totalApr: "2.46",
       },
       {
         title: "Bonded 7 days",
-        amount: 0.33,
-        poolShares: 0,
-        apr: "2.46",
+        bondedValue: 2.68,
+        bondedShares: 3.89,
+        totalApr: "8.46",
       },
       {
         title: "Bonded 14 days",
-        amount: 0.33,
-        poolShares: 0,
-        apr: "2.46",
+        bondedValue: 5.33,
+        bondedShares: 9.76,
+        totalApr: "7.46",
       },
     ],
   },
@@ -60,7 +45,7 @@ export const Primary: Story = {
     <div style={{ maxWidth: 382 }}>
       <BondingListSm
         list={props.list}
-        unbondedAmt={props.unbondedAmt}
+        unbondedBalance={props.unbondedBalance}
         unbondedShares={props.unbondedShares}
       />
     </div>

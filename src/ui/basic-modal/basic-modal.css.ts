@@ -9,9 +9,9 @@ const modalContentBase = style([
     boxShadow: connectModalShadowVar,
     backgroundColor: connectModalBgVar,
     maxHeight: "100%",
-    overflowY: "auto",
-    '::-webkit-scrollbar': {
-      display: "none"
+    overflow: "auto !important",
+    "::-webkit-scrollbar": {
+      display: "none",
     },
     display: "flex",
     flexDirection: "column",
@@ -49,12 +49,12 @@ export const modalChildren = style([
     paddingLeft: themeVars.space["9"],
     paddingRight: themeVars.space["9"],
     paddingBottom: themeVars.space["9"],
-  }
+  },
 ]);
 
 export const modalHeader = style({
   paddingTop: themeVars.space["4"],
   paddingLeft: themeVars.space["9"],
   paddingRight: themeVars.space["4"],
-  paddingBottom: themeVars.space["8"]
-})
+  paddingBottom: "0",
+});

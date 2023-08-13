@@ -22,7 +22,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     theme: "light",
     inputAmount: "",
     handleAmountChange(percent) {
-      state.inputAmount = new BigNumber(props.avaliable)
+      state.inputAmount = new BigNumber(props.available)
         .multipliedBy(percent)
         .toString();
     },
@@ -31,7 +31,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     },
     get transferDisabled() {
       return (
-        new BigNumber(state.inputAmount).gt(props.avaliable) ||
+        new BigNumber(state.inputAmount).gt(props.available) ||
         state.inputAmount === ""
       );
     },
@@ -166,7 +166,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         priceDisplayAmount={props.priceDisplayAmount}
         symbol={props.fromSymbol}
         denom={props.fromDenom}
-        available={props.avaliable}
+        available={props.available}
         imgSrc={props.fromImgSrc}
         onAmountChange={(value) => state.onAmountChange(value)}
       />

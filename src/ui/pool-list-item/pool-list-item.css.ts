@@ -5,9 +5,17 @@ import { themeVars } from "../../styles/themes.css";
 export const container = style({
   marginBottom: themeVars.space[10],
   marginRight: themeVars.space[9],
+  display: "flex",
   width: "752px",
   flexWrap: "nowrap",
   justifyContent: "flex-start",
+  alignItems: "center",
+  cursor: "pointer",
+  selectors: {
+    "&:hover": {
+      backgroundColor: themeVars.colors.cardBg
+    }
+  },
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       width: "100%",

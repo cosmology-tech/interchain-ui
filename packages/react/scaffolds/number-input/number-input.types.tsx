@@ -61,4 +61,6 @@ export interface NumberInputProps {
   precision?: number;
   canDecrese?: boolean;
   canIncrease?: boolean;
+  minFractionDigits?: number;
+  maxFractionDigits?: number;
 }

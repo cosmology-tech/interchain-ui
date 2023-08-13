@@ -17,18 +17,22 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     id: "1",
-    token1: {
-      name: "ATOM",
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
-    },
-    token2: {
-      name: "OSOM",
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-    },
-    poolLiquidity: 70055692,
+    coins: [
+      {
+        symbol: "ATOM",
+        displayAmount: "0.02052506381023874581",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+      },
+      {
+        symbol: "OSMO",
+        displayAmount: "0.3824102514677405108",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+      },
+    ],
+    liquidity: "29422809",
     swapFee: 0.2,
-    volume24H: 70055692,
+    volume24H: 3288612,
   },
 };

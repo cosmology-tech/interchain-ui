@@ -8,6 +8,7 @@ export const container = style({
   borderRadius: themeVars.radii.lg,
   boxSizing: "border-box",
   height: "fit-content",
+  cursor: "pointer",
   "@media": {
     [`screen and (min-width: ${breakpoints.tablet}px)`]: {
       width: "236px",

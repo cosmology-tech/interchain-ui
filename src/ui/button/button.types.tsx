@@ -17,6 +17,8 @@ export interface ButtonProps extends BaseComponentProps {
   onHoverEnd?: (event: any) => void;
   attributes?: Sprinkles;
   domAttributes?: any;
+  isLoading?: boolean;
+  spinnerPlacement?: "start" | "end";
 }
 
 export interface ButtonState extends BaseState {
