@@ -15,6 +15,17 @@ const WithThemeDecorator = (props) => {
 
   return (
     <ThemeProvider
+    // themeDefs={[
+    //   {
+    //     name: "custom",
+    //     vars: {
+    //       colors: {
+    //         primary500: "#4A5568",
+    //       },
+    //     },
+    //   },
+    // ]}
+    // customTheme="custom"
     // Try out custom themes
     // overrides={{
     //   button: {

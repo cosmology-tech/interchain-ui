@@ -1,6 +1,7 @@
 import { createStore } from "zustand/vanilla";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { current } from "immer";
 import BigNumber from "bignumber.js";
 import {
   ModePreference,
@@ -14,7 +15,11 @@ import {
   safelyFormatNumberWithFallback,
 } from "../helpers/number";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
-import { OverrideStyleManager } from "../styles/override/override";
+import {
+  OverrideStyleManager,
+  assignThemeVars,
+} from "../styles/override/override";
+import type { ThemeDef } from "../styles/override/override.types";
 
 export const STORAGE_NAME = "interchain-ui-store";
 
@@ -25,6 +30,8 @@ export interface UIState {
   // which is derived from themeMode
   theme: ThemeVariant;
   themeClass: string;
+  customTheme: string | null;
+  themeDefs: Array<ThemeDef>;
   overrideStyleManager: OverrideStyleManager;
   // Useful for use in SSR frameworks to check if the store has hydrated
   // and merged state with localstorage yet
@@ -34,6 +41,8 @@ export interface UIState {
 export interface UIAction {
   setThemeMode: (mode: ModePreference) => void;
   setTheme: (theme: ThemeVariant, themeClass: string) => void;
+  setThemeDefs: (defs: Array<ThemeDef>, defaultTheme?: string) => void;
+  setCustomTheme: (customTheme: string) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
 }
 
@@ -53,6 +62,9 @@ export const store = createStore(
       themeMode: null,
       theme: null,
       themeClass: "",
+      // Custom theme contract
+      themeDefs: [],
+      customTheme: null,
       overrideStyleManager: new OverrideStyleManager("light"),
       _hasHydrated: false,
       setTheme: (newTheme: ThemeVariant, themeClass: string) =>
@@ -89,6 +101,26 @@ export const store = createStore(
           state.themeMode = newThemeMode;
           state.theme = resolvedTheme;
           state.themeClass = resolvedClass;
+        }),
+      setThemeDefs: (defs: Array<ThemeDef>) => {
+        set((state) => {
+          state.themeDefs = defs;
+        });
+      },
+      setCustomTheme: (customTheme: string) =>
+        set((state) => {
+          state.customTheme = customTheme;
+          const currentState = current(state);
+
+          if (customTheme !== null) {
+            const customThemeObj = currentState.themeDefs.find(
+              (item) => item.name === customTheme
+            );
+
+            if (customThemeObj) {
+              assignThemeVars(customThemeObj.vars, state.theme);
+            }
+          }
         }),
       formatNumber: (props: NumberFormatProps): string => {
         const formatter = getCurrencyFormatter("en-US", {
