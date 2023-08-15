@@ -1,18 +1,10 @@
-import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { globalStyle, GlobalStyleRule } from "@vanilla-extract/css";
-import deepmerge from "@fastify/deepmerge";
-import { themeVars, commonVars } from "../styles/themes.css";
 import { store } from "../models/store";
 import { ModePreference, ModePreferences } from "../models/system.model";
 import { isSSR } from "./platform";
 
-const merge = deepmerge({ all: true });
-
 export const mediaQueryColorScheme = (mode: string) =>
   `(prefers-color-scheme: ${mode})`;
-
-export const createCustomTheme = (customTheme: typeof themeVars) =>
-  assignInlineVars(themeVars, merge(commonVars, customTheme));
 
 const isValidThemeMode = (mode: ModePreference) => {
   return ModePreferences.includes(mode);

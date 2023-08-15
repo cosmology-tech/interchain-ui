@@ -14,6 +14,7 @@ import {
   safelyFormatNumberWithFallback,
 } from "../helpers/number";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
+import { OverrideStyleManager } from "../styles/override/override";
 
 export const STORAGE_NAME = "interchain-ui-store";
 
@@ -24,6 +25,7 @@ export interface UIState {
   // which is derived from themeMode
   theme: ThemeVariant;
   themeClass: string;
+  overrideStyleManager: OverrideStyleManager;
   // Useful for use in SSR frameworks to check if the store has hydrated
   // and merged state with localstorage yet
   _hasHydrated: boolean;
@@ -51,6 +53,7 @@ export const store = createStore(
       themeMode: null,
       theme: null,
       themeClass: "",
+      overrideStyleManager: new OverrideStyleManager("light"),
       _hasHydrated: false,
       setTheme: (newTheme: ThemeVariant, themeClass: string) =>
         set((state) => {
@@ -82,6 +85,7 @@ export const store = createStore(
           const [resolvedTheme, resolvedClass] =
             resolveSystemMode(newThemeMode);
 
+          state.overrideStyleManager.update(null, resolvedTheme);
           state.themeMode = newThemeMode;
           state.theme = resolvedTheme;
           state.themeClass = resolvedClass;

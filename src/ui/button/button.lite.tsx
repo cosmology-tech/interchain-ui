@@ -12,7 +12,7 @@ import Icon from "../icon";
 import Box from "../box";
 import Spinner from "../spinner";
 import { store } from "../../models/store";
-import { getSize, recipe } from "./button.helper";
+import { getSize, recipe, buttonOverrides } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -27,6 +27,7 @@ export default function Button(props: ButtonProps) {
 
   const state = useStore<ButtonState>({
     loaded: false,
+    overrideManager: null,
     theme: "light",
   });
 
@@ -35,9 +36,11 @@ export default function Button(props: ButtonProps) {
   onMount(() => {
     state.loaded = true;
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState, prevState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -65,6 +68,7 @@ export default function Button(props: ButtonProps) {
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
+          style: state.overrideManager.applyOverrides(buttonOverrides.name),
           ...props.domAttributes,
         }}
       >

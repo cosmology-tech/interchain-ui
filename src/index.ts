@@ -1,7 +1,7 @@
 /// <reference types="./global.d.ts" />
 import { setPlatform, Platform } from "./helpers";
 
-export { setDebugLevel, createCustomTheme, DebugLevel } from "./helpers";
+export { setDebugLevel, DebugLevel } from "./helpers";
 export { store } from "./models/store";
 
 export type { UIStore, UIState, UIAction } from "./models/store";

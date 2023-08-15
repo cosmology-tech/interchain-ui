@@ -3,6 +3,7 @@ import clx from "clsx";
 import Box from "../box";
 import { store } from "../../models/store";
 import { installButtonStyles } from "./connect-modal-install-button.css";
+import { installButtonOverrides } from "./connect-modal-install-button.helper";
 import type { ConnectModalInstallButtonProps } from "./connect-modal-install-button.types";
 
 export default function ConnectModalInstallButton(
@@ -10,15 +11,18 @@ export default function ConnectModalInstallButton(
 ) {
   const state = useStore({
     theme: "light",
+    overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -36,6 +40,9 @@ export default function ConnectModalInstallButton(
         onMouseEnter: (event) => props.onHoverStart?.(event),
         onMouseLeave: (event) => props.onHoverEnd?.(event),
         disabled: props.disabled,
+        style: state.overrideManager.applyOverrides(
+          installButtonOverrides.name
+        ),
         ...props.domAttributes,
       }}
     >

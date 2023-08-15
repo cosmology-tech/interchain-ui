@@ -1,5 +1,8 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
+
+export const titleColorVar = createVar();
+export const buttonColorVar = createVar();
 
 const modalHeaderTextBase = style({
   display: "block",
@@ -11,11 +14,26 @@ const modalHeaderTextBase = style({
   margin: "0",
   marginBlockEnd: 0,
   marginBlockStart: 0,
+  color: titleColorVar,
 });
 
 export const modalHeaderText = styleVariants({
-  light: [modalHeaderTextBase, style({ color: themeVars.colors.gray700 })],
-  dark: [modalHeaderTextBase, style({ color: themeVars.colors.whiteAlpha900 })],
+  light: [
+    style({
+      vars: {
+        [titleColorVar]: themeVars.colors.gray700,
+      },
+    }),
+    modalHeaderTextBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [titleColorVar]: themeVars.colors.whiteAlpha900,
+      },
+    }),
+    modalHeaderTextBase,
+  ],
 });
 
 export const modalHeader = style({

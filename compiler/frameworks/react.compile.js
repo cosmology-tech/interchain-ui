@@ -11,6 +11,7 @@ const DEFAULT_OPTIONS = {
 async function compileReact(watcherEvents) {
   await compiler.compile({ ...DEFAULT_OPTIONS, watcherEvents });
 }
+
 module.exports = {
   compileReact,
 };
