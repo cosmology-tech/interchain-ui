@@ -33,7 +33,7 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
     "@builder.io/eslint-plugin-mitosis": "^0.0.14",
-    "@builder.io/mitosis-cli": "0.0.75",
+    "@builder.io/mitosis-cli": "0.0.77",
     "@builder.io/qwik": "^0.100.0",
     "@custom-elements-manifest/analyzer": "^0.8.0",
     "@fastify/deepmerge": "^1.3.0",
