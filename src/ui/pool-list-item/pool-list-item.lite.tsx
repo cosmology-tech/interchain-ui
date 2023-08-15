@@ -5,7 +5,7 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import PoolName from "../pool/components/pool-name";
-import APR from "../apr";
+import APR from "./components/apr"
 import CellWithTitle from "./components/cell-with-title";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
