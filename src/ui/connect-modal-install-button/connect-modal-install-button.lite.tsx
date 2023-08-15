@@ -40,7 +40,7 @@ export default function ConnectModalInstallButton(
         onMouseEnter: (event) => props.onHoverStart?.(event),
         onMouseLeave: (event) => props.onHoverEnd?.(event),
         disabled: props.disabled,
-        style: state.overrideManager.applyOverrides(
+        style: state.overrideManager?.applyOverrides(
           installButtonOverrides.name
         ),
         ...props.domAttributes,

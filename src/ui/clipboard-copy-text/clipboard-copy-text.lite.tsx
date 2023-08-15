@@ -86,7 +86,7 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
     <div
       className={clx(containerStyle[state.theme], props.className)}
       onClick={() => state.handleOnClick()}
-      style={state.overrideManager.applyOverrides(
+      style={state.overrideManager?.applyOverrides(
         clipboardCopyTextOverrides.name
       )}
     >

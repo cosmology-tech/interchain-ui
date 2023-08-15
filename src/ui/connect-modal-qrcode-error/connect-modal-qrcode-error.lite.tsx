@@ -55,7 +55,7 @@ export default function ConnectModalQrCodeError(
     >
       <div
         className={qrcodeBlur[state.theme]}
-        style={state.overrideManager.applyOverrides(
+        style={state.overrideManager?.applyOverrides(
           connectModalQRCodeErrorOverrides.name
         )}
       />
@@ -64,7 +64,7 @@ export default function ConnectModalQrCodeError(
         <button
           onClick={() => props.onRefresh?.()}
           className={qrcodeReloadButton[state.theme]}
-          style={state.overrideManager.applyOverrides(
+          style={state.overrideManager?.applyOverrides(
             connectModalQRCodeErrorButtonOverrides.name
           )}
         >

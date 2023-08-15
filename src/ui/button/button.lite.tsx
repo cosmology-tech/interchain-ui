@@ -66,7 +66,7 @@ export default function Button(props: ButtonProps) {
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
-          style: state.overrideManager.applyOverrides(buttonOverrides.name),
+          style: state.overrideManager?.applyOverrides(buttonOverrides.name),
           ...props.domAttributes,
         }}
       >
