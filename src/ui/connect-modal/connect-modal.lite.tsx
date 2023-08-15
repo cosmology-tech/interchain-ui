@@ -14,21 +14,29 @@ import {
   modalChildren,
   modalAnimateContainer,
 } from "./connect-modal.css";
+import { connectModalOverrides } from "./connect-modal.helper";
+import type { OverrideStyleManager } from "../../styles/override/override";
 
 useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
 
 export default function ConnectModal(props: ConnectModalProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{
+    theme: ThemeVariant;
+    overrideManager: OverrideStyleManager | null;
+  }>({
     theme: "light",
+    overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
+    state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -45,6 +53,9 @@ export default function ConnectModal(props: ConnectModalProps) {
       header={props.header}
       className={props.modalContainerClassName}
       contentClassName={modalContent[state.theme]}
+      contentStyles={state.overrideManager.applyOverrides(
+        connectModalOverrides.name
+      )}
       childrenClassName={modalChildren}
     >
       <AnimateLayout className={modalAnimateContainer}>

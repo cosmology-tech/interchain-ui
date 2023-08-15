@@ -3,9 +3,14 @@ import { recipe } from "@vanilla-extract/recipes";
 import { themeVars } from "../../styles/themes.css";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
 
-export const myButtonVar = createVar();
+export const buttonHoverShadowVar = createVar();
+export const buttonFocusShadowVar = createVar();
+export const buttonTextColorVar = createVar();
+export const buttonBgVar = createVar();
+export const buttonHoverBgVar = createVar();
+export const buttonFocusBgVar = createVar();
 
-const transactionProperty =
+const transitionProperty =
   "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform";
 
 const connectButtonShapeVariants = {
@@ -41,16 +46,20 @@ const connectButtonBase = style({
   verticalAlign: "middle",
   lineHeight: 1.2,
   display: "flex",
+  vars: {
+    [buttonHoverShadowVar]: "0 0 0 1px #6A66FF",
+    [buttonFocusShadowVar]: "0 0 0 1px #6A66FF",
+  },
   selectors: {
     "&:hover": {
-      transitionProperty: transactionProperty,
+      transitionProperty: transitionProperty,
       transitionDuration: "200ms",
-      boxShadow: "0 0 0 1px #6A66FF",
+      boxShadow: buttonHoverShadowVar,
     },
     "&:focus": {
-      transitionProperty: transactionProperty,
+      transitionProperty: transitionProperty,
       transitionDuration: "200ms",
-      boxShadow: "0 0 0 1px #6A66FF",
+      boxShadow: buttonFocusShadowVar,
     },
   },
 });
@@ -59,14 +68,20 @@ export const connectButtonStyle = styleVariants({
   light: [
     connectButtonBase,
     style({
-      color: themeVars.colors.blackAlpha800,
-      backgroundColor: themeVars.colors.gray100,
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.blackAlpha800,
+        [buttonBgVar]: themeVars.colors.gray100,
+        [buttonHoverBgVar]: themeVars.colors.gray50,
+        [buttonFocusBgVar]: themeVars.colors.gray50,
+      },
+      color: buttonTextColorVar,
+      backgroundColor: buttonBgVar,
       selectors: {
         "&:hover": {
-          backgroundColor: themeVars.colors.gray50,
+          backgroundColor: buttonHoverBgVar,
         },
         "&:focus": {
-          backgroundColor: themeVars.colors.gray50,
+          backgroundColor: buttonFocusBgVar,
         },
       },
     }),
@@ -74,14 +89,20 @@ export const connectButtonStyle = styleVariants({
   dark: [
     connectButtonBase,
     style({
-      color: themeVars.colors.whiteAlpha800,
-      backgroundColor: themeVars.colors.blackAlpha500,
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.whiteAlpha800,
+        [buttonBgVar]: themeVars.colors.blackAlpha500,
+        [buttonHoverBgVar]: themeVars.colors.blackAlpha600,
+        [buttonFocusBgVar]: themeVars.colors.blackAlpha600,
+      },
+      color: buttonTextColorVar,
+      backgroundColor: buttonBgVar,
       selectors: {
         "&:hover": {
-          backgroundColor: themeVars.colors.blackAlpha600,
+          backgroundColor: buttonHoverBgVar,
         },
         "&:focus": {
-          backgroundColor: themeVars.colors.blackAlpha600,
+          backgroundColor: buttonFocusBgVar,
         },
       },
     }),
@@ -127,25 +148,33 @@ export const logoVariants = recipe({
   },
 });
 
+// ==== Button label
+export const buttonLabelColorVar = createVar();
+
 const buttonTextBase = style({
   fontFamily: themeVars.font.body,
   textAlign: "left",
   fontSize: themeVars.fontSize.sm,
   fontWeight: themeVars.fontWeight.normal,
+  color: buttonLabelColorVar,
 });
 
 export const buttonTextStyle = styleVariants({
   light: [
-    buttonTextBase,
     style({
-      color: themeVars.colors.blackAlpha800,
+      vars: {
+        [buttonLabelColorVar]: themeVars.colors.blackAlpha800,
+      },
     }),
+    buttonTextBase,
   ],
   dark: [
-    buttonTextBase,
     style({
-      color: themeVars.colors.whiteAlpha900,
+      vars: {
+        [buttonLabelColorVar]: themeVars.colors.whiteAlpha900,
+      },
     }),
+    buttonTextBase,
   ],
 });
 
@@ -164,6 +193,10 @@ export const buttonTextVariants = recipe({
   },
 });
 
+export const buttonSublogoBgVar = createVar();
+export const buttonSublogoBorderVar = createVar();
+
+// ==== Button sub logo
 const subLogoBase = style({
   display: "flex",
   position: "absolute",
@@ -174,22 +207,28 @@ const subLogoBase = style({
   right: "-8px",
   bottom: "-8px",
   borderRadius: themeVars.radii.full,
+  backgroundColor: buttonSublogoBgVar,
+  borderColor: buttonSublogoBorderVar,
 });
 
 export const subLogoSquare = styleVariants({
   light: [
-    subLogoBase,
     style({
-      backgroundColor: themeVars.colors.gray100,
-      borderColor: themeVars.colors.gray100,
+      vars: {
+        [buttonSublogoBgVar]: themeVars.colors.gray100,
+        [buttonSublogoBorderVar]: themeVars.colors.gray100,
+      },
     }),
+    subLogoBase,
   ],
   dark: [
-    subLogoBase,
     style({
-      backgroundColor: themeVars.colors.gray700,
-      borderColor: themeVars.colors.gray700,
+      vars: {
+        [buttonSublogoBgVar]: themeVars.colors.gray700,
+        [buttonSublogoBorderVar]: themeVars.colors.gray700,
+      },
     }),
+    subLogoBase,
   ],
 });
 

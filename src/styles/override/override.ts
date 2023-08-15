@@ -1,5 +1,4 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import { buttonOverrides } from "../../ui/button/button.helper";
 import type {
   OverridableProp,
   OverrideValue,
@@ -8,12 +7,44 @@ import type {
   OverridableComponents,
 } from "./override.types";
 import type { ThemeVariant } from "../../models/system.model";
+import { buttonOverrides } from "../../ui/button/button.helper";
+import { clipboardCopyTextOverrides } from "../../ui/clipboard-copy-text/clipboard-copy-text.helper";
+import { connectModalOverrides } from "../../ui/connect-modal/connect-modal.helper";
+import { connectModalHeadTitleOverrides } from "../../ui/connect-modal-head/connect-modal-head.helper";
+import { installButtonOverrides } from "../../ui/connect-modal-install-button/connect-modal-install-button.helper";
+import {
+  connectQRCodeOverrides,
+  connectQRCodeShadowOverrides,
+} from "../../ui/connect-modal-qrcode/connect-modal-qrcode.helper";
+import {
+  connectModalQRCodeErrorOverrides,
+  connectModalQRCodeErrorButtonOverrides,
+} from "../../ui/connect-modal-qrcode-error/connect-modal-qrcode-error.helper";
+import { connectModalQRCodeSkeletonOverrides } from "../../ui/connect-modal-qrcode-skeleton/connect-modal-qrcode-skeleton.helper";
+import {
+  buttonOverrides as walletButtonOverrides,
+  buttonLabelOverrides as walletButtonLabelOverrides,
+  buttonSublogoOverrides as walletButtonSubLogoOverrides,
+} from "../../ui/connect-modal-wallet-button/connect-modal-wallet-button.helper";
 
 // Must manually add the overrides schema to this object for every component that you want users
 // to be able to override styles
 const overrideSchemas: Record<OverridableComponents, ComponentOverrideSchema> =
   {
     button: buttonOverrides,
+    "clipboard-copy-text": clipboardCopyTextOverrides,
+    "connect-modal": connectModalOverrides,
+    "connect-modal-head-title": connectModalHeadTitleOverrides,
+    "connect-modal-install-button": installButtonOverrides,
+    "connect-modal-qr-code": connectQRCodeOverrides,
+    "connect-modal-qr-code-shadow": connectQRCodeShadowOverrides,
+    "connect-modal-qr-code-error": connectModalQRCodeErrorOverrides,
+    "connect-modal-qr-code-error-button":
+      connectModalQRCodeErrorButtonOverrides,
+    "connect-modal-qr-code-loading": connectModalQRCodeSkeletonOverrides,
+    "connect-modal-wallet-button": walletButtonOverrides,
+    "connect-modal-wallet-button-label": walletButtonLabelOverrides,
+    "connect-modal-wallet-button-sublogo": walletButtonSubLogoOverrides,
   };
 
 export class OverrideStyleManager {

@@ -8,7 +8,7 @@ export const qrcodeErrorContainer = style({
   position: "relative",
 });
 
-const qrcodeBlurBgVar = createVar();
+export const qrcodeBlurBgVar = createVar();
 
 const qrCodeBlurBase = style({
   position: "absolute",
@@ -49,9 +49,9 @@ export const qrcodeReloadButtonContainer = style({
   transform: "translate(-50%, -50%)",
 });
 
-const reloadButtonBgVar = createVar();
-const reloadButtonFgVar = createVar();
-const reloadButtonShadowVar = createVar();
+export const reloadButtonBgVar = createVar();
+export const reloadButtonFgVar = createVar();
+export const reloadButtonShadowVar = createVar();
 
 const qrCodeReloadButtonBase = style({
   border: "none",

@@ -14,3 +14,8 @@ export type Primitive =
 export type LiteralUnion<LiteralType, BaseType extends Primitive> =
   | LiteralType
   | (BaseType & Record<never, never>);
+
+// Help "resolve" to the final type value of a type
+export type Resolve<T> = {
+  [Key in keyof T]: T[Key];
+} & {};

@@ -1,5 +1,8 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
+
+export const borderColorVar = createVar();
+export const colorVar = createVar();
 
 const containerStyleBase = style({
   cursor: "pointer",
@@ -21,21 +24,27 @@ const containerStyleBase = style({
   fontSize: themeVars.fontSize.sm,
   fontWeight: themeVars.fontWeight.normal,
   lineHeight: themeVars.lineHeight.normal,
+  borderColor: borderColorVar,
+  color: colorVar,
 });
 
 export const containerStyle = styleVariants({
   light: [
-    containerStyleBase,
     style({
-      borderColor: themeVars.colors.gray200,
-      color: themeVars.colors.gray500,
+      vars: {
+        [borderColorVar]: themeVars.colors.gray200,
+        [colorVar]: themeVars.colors.gray500,
+      },
     }),
+    containerStyleBase,
   ],
   dark: [
     containerStyleBase,
     style({
-      borderColor: themeVars.colors.whiteAlpha300,
-      color: themeVars.colors.whiteAlpha600,
+      vars: {
+        [borderColorVar]: themeVars.colors.whiteAlpha300,
+        [colorVar]: themeVars.colors.whiteAlpha600,
+      },
     }),
   ],
 });

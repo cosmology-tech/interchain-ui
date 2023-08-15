@@ -26,6 +26,7 @@ export interface ModalProps {
   preventScroll?: boolean;
   role?: "dialog" | "alertdialog";
   className?: string;
+  contentStyles?: React.CSSProperties;
   contentClassName?: string;
   childrenClassName?: string;
 }
@@ -51,6 +52,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     role = `dialog`,
     className,
     contentClassName,
+    contentStyles,
     childrenClassName,
   } = props;
   const id = useId();
@@ -119,6 +121,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                   style={{
                     width: "fit-content",
                     margin: "0 auto",
+                    ...contentStyles,
                   }}
                 >
                   {header &&

@@ -11,7 +11,7 @@ import clx from "clsx";
 import Icon from "../icon";
 import Box from "../box";
 import { store } from "../../models/store";
-import { getSize, recipe } from "./button.helper";
+import { getSize, recipe, buttonOverrides } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -38,6 +38,7 @@ export default function Button(props: ButtonProps) {
 
     cleanupRef = store.subscribe((newState, prevState) => {
       state.theme = newState.theme;
+      state.overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -65,7 +66,7 @@ export default function Button(props: ButtonProps) {
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
-          style: state.overrideManager.applyOverrides("button"),
+          style: state.overrideManager.applyOverrides(buttonOverrides.name),
           ...props.domAttributes,
         }}
       >

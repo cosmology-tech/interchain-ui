@@ -2,10 +2,10 @@ import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { baseButton } from "../button/button.css";
 import { themeVars } from "../../styles/themes.css";
 
-const borderColorVar = createVar();
-const bgVar = createVar();
-const colorVar = createVar();
-const shadowVar = createVar();
+export const borderColorVar = createVar();
+export const bgVar = createVar();
+export const colorVar = createVar();
+export const shadowVar = createVar();
 
 const spacings = style({
   paddingTop: themeVars.space[6],
