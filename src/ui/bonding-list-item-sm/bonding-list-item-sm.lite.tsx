@@ -48,7 +48,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
       void (async function () {
         state.isUnbondLoading = true;
         try {
-          const res: ResponseInfo = await props.onUnbond({ type: props.type });
+          const res: ResponseInfo = await props.onUnbond();
         } catch (error) {
           throw new Error(error);
         } finally {

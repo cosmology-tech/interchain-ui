@@ -6,6 +6,5 @@ export interface BondingListItemProps {
   superfluidApr: string;
   amount: number | string;
   totalApr: string;
-  type: keyof AprType;
   onUnbond: BondingListItemSmProps["onUnbond"]
 }

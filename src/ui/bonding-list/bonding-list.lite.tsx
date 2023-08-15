@@ -14,12 +14,11 @@ export default function BondingList(props: BondingListProps) {
           {(item: BondingListItemProps, index: number) => (
             <BondingListItem
               key={item.title}
-              type={item.type}
               title={item.title}
               totalApr={item.totalApr}
               amount={item.amount}
               superfluidApr={item.superfluidApr}
-              onUnbond={(detail: OnUnBondDetail) => props?.onUnbond?.(detail)}
+              onUnbond={() => item?.onUnbond?.()}
             />
           )}
         </For>

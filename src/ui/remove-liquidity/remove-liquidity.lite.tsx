@@ -25,6 +25,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
     progress: 50,
     handeProgressClick(value: number) {
       state.progress = value;
+      props?.onChange(value)
     },
     isRemoveLoading: false,
     get removedBalance() {
@@ -59,12 +60,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
       void (async function () {
         state.isRemoveLoading = true;
         try {
-          const res: ResponseInfo = await props?.onRemoveLiquidity?.(
-            state.progress / 100
-          );
-          if (res.type === "success") {
-            props?.onClose?.();
-          }
+          const res: ResponseInfo = await props?.onRemoveLiquidity?.();
         } catch (error) {
           throw new Error(error);
         } finally {

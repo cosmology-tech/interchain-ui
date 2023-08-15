@@ -13,8 +13,13 @@ export interface ResponseInfo {
   message?: string;
 }
 
+export type AddItem = {
+  progress: number;
+  value: string;
+}
+
 export interface AddLiquidityProps {
   poolAssets: PoolListItemProps["poolAssets"];
-  onAddLiquidity: (assets: onAddLiquidityItem[]) => ResponseInfo;
-  onClose?: () => void
+  onAddLiquidity: () => ResponseInfo;
+  onChange: (values: AddItem[]) => void
 }

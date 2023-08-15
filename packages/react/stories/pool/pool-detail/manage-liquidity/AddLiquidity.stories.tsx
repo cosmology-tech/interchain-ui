@@ -19,11 +19,12 @@ export const Primary: Story = {
   args: {
     poolAssets: [
       {
-        imgSrc: "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
         symbol: "ATOM",
         denom: "Cosmos Hub",
         priceDisplayAmount: 8.35,
-        available: "15.868"
+        available: "15.868",
       },
       {
         available: "57.61",
@@ -32,7 +33,21 @@ export const Primary: Story = {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
         priceDisplayAmount: 0.4671,
-      }
+      },
     ],
+    onAddLiquidity: () => {
+      console.log("onAddLiquidity======");
+      return new Promise(function (resolve) {
+        setTimeout(() => {
+          resolve({
+            type: "success",
+            title: "add liquidity succsss",
+          });
+        }, 2000);
+      });
+    },
+    onChange: (values) => {
+      console.log("values", values);
+    },
   },
 };

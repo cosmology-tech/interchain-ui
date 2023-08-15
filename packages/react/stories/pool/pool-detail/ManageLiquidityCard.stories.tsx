@@ -34,5 +34,11 @@ export const Primary: Story = {
     totalShares: "212.0432",
     lpTokenBalance: "22.51",
     lpTokenShares: "12.02",
+    onAdd: () => {
+      console.log("onAdd");
+    },
+    onRemove: () => {
+      console.log("onRemove");
+    },
   },
 };

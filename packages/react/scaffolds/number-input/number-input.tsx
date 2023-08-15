@@ -119,6 +119,7 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
             {...api.inputProps}
             disabled={disabled}
             id={id}
+            value={value}
             className={clx(
               inputStyles[themeStore.theme],
               inputSizes[size],

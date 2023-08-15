@@ -21,6 +21,16 @@ export const Primary: Story = {
     apr: "2.43%",
     amount: 59075,
     per: "24%",
-    onUnbond: () => console.log("unbond"),
+    onUnbond() {
+      console.log("onUnbond======");
+      return new Promise(function (resolve) {
+        setTimeout(() => {
+          resolve({
+            type: "success",
+            title: "bond success",
+          });
+        }, 2000);
+      });
+    },
   },
 };

@@ -23,21 +23,90 @@ export const Primary: Story = {
     list: [
       {
         title: "Bonded 1 day",
-        bondedValue: 0,
-        bondedShares: 1.57,
+        bondedValue: 0.33,
+        bondedShares: 0.58,
         totalApr: "2.46",
+        bondingName: "ATOM / OSMO",
+        onBond() {
+          console.log("onBond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
+        onUnbond() {
+          console.log("onUnbond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
       },
       {
         title: "Bonded 7 days",
-        bondedValue: 2.68,
-        bondedShares: 3.89,
-        totalApr: "8.46",
+        bondedValue: 1.33,
+        bondedShares: 1.58,
+        totalApr: "1.46",
+        bondingName: "ATOM / OSMO",
+        onBond() {
+          console.log("onBond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
+        onUnbond() {
+          console.log("onUnbond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
       },
       {
         title: "Bonded 14 days",
-        bondedValue: 5.33,
-        bondedShares: 9.76,
-        totalApr: "7.46",
+        bondedValue: 3.33,
+        bondedShares: 3.58,
+        totalApr: "3.46",
+        bondingName: "ATOM / OSMO",
+        onBond() {
+          console.log("onBond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
+        onUnbond() {
+          console.log("onUnbond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
       },
     ],
   },

@@ -33,12 +33,15 @@ export const Primary: Story = {
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
       },
     ],
-    onRemoveLiquidity(percent) {
-      console.log("onRemoveLiquidity====", percent);
+    onRemoveLiquidity() {
+      console.log("onRemoveLiquidity====");
       return {
         type: "success",
-        title: "Remove liquidity success"
-      }
-    }
+        title: "Remove liquidity success",
+      };
+    },
+    onChange(progress) {
+      console.log("onChange", progress);
+    },
   },
 };

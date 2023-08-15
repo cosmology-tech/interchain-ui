@@ -15,11 +15,11 @@ export type AvailableItem = {
   /**
    * Available amount
    */
-  available: string | number;
+  available?: string | number;
   /**
    * Dollar price for per token
    */
-  priceDisplayAmount: number | string;
+  priceDisplayAmount?: number | string;
 };
 
 export interface TransferItemProps {

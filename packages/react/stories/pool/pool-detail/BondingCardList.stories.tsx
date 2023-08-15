@@ -14,10 +14,10 @@ const meta: Meta<typeof BondingCardList> = {
         type: {
           summary: "BondingCardProps []",
           detail: `{
-    title: string;
-    value: string;
-}
-`,
+              title: string;
+              value: string;
+          }
+          `,
         },
       },
     },
@@ -34,20 +34,20 @@ export const Primary: Story = {
     list: [
       {
         title: "a day bonding",
-        value: "20.24%",
+        value: "20.24",
       },
       {
         title: "7 days",
-        value: "32.39%",
+        value: "32.39",
       },
       {
         title: "14 days",
-        value: "40.49%",
+        value: "40.49",
       },
     ],
   },
   render: (props) => (
-    <div style={{minWidth: 720}}>
+    <div style={{ minWidth: 720 }}>
       <BondingCardList list={props.list} />
     </div>
   ),

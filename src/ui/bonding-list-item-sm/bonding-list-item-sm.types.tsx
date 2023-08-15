@@ -16,6 +16,6 @@ export interface BondingListItemSmProps {
 
   bondingName?: string;
   type: keyof AprType;
-  onBond?: (detail: OnBondDetail) => ResponseInfo;
-  onUnbond?: (detail: OnUnBondDetail) => ResponseInfo;
+  onBond?: () => ResponseInfo;
+  onUnbond?: () => ResponseInfo;
 }

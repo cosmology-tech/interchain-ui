@@ -3,5 +3,4 @@ import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.typ
 
 export interface BondingListProps {
   list: BondingListItemProps[];
-  onUnbond: BondingListItemSmProps["onUnbond"]
 }

@@ -34,13 +34,16 @@ export interface PoolListItemProps {
   id: string;
   poolAssets: AvailableItem[];
   liquidity: number | string;
-  myLiquidity: string; // Remove liquidity should be disabled when myLiquidty < 0
+  apr: string;
+  fees7D?: number;
+  volume24H?: number | string;
+  onClick?: () => void;
+}
+
+export interface PoolDetailProps {
   bonded: number | string;
-  apr: AprType;
-  fees7D: number;
-  // detail data
+  myLiquidity: string; // Remove liquidity should be disabled when myLiquidty < 0
   swapFee: number | string;
-  volume24H: number | string;
   totalBalance: string; // Your pool balance
   totalShares: string;
   lpTokenBalance: string;

@@ -24,21 +24,51 @@ export const Primary: Story = {
         totalApr: "2.43",
         amount: 59075,
         superfluidApr: "24",
-        onUnbond: () => console.log("unbond - a day")
+        onUnbond() {
+          console.log("onUnbond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
       },
       {
         title: "7 days",
         totalApr: "2.43",
         amount: 59075,
         superfluidApr: "24",
-        onUnbond: () => console.log("unbond - 7 days")
+        onUnbond() {
+          console.log("onUnbond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
       },
       {
         title: "14 days",
         totalApr: "2.43",
         amount: 59075,
         superfluidApr: "24",
-        onUnbond: () => console.log("unbond - 14 days")
+        onUnbond() {
+          console.log("onUnbond======");
+          return new Promise(function (resolve) {
+            setTimeout(() => {
+              resolve({
+                type: "success",
+                title: "bond success",
+              });
+            }, 2000);
+          });
+        },
       },
     ],
   },

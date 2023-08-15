@@ -49,9 +49,9 @@ export default function BondingListSm(props: BondingListSmProps) {
         <For each={props.list}>
           {(item: BondingListItemSmProps, index: number) => (
             <BondingListItemSm
-              onBond={(detail: OnBondDetail) => props?.onBond?.(detail)}
-              onUnbond={(detail: OnUnBondDetail) => props?.onUnbond?.(detail)}
-              bondingName={props.bondingName}
+              onBond={() => item?.onBond?.()}
+              onUnbond={() => item?.onUnbond?.()}
+              bondingName={item?.bondingName}
               type={item.type}
               key={item.title}
               title={item.title}

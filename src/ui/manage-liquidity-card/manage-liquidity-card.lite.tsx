@@ -11,9 +11,6 @@ import Box from "../box";
 import Stack from "../stack";
 import Button from "../button";
 import Text from "../text";
-import BasicModal from "../basic-modal";
-import AddLiquidity from "../add-liquidity";
-import RemoveLiquidity from "../remove-liquidity";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./manage-liquidity-card.css";
@@ -111,7 +108,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           attributes={{ marginTop: "$11" }}
           intent="tertiary"
           onClick={() => {
-            state.isAddOpen = true;
+            props?.onAdd?.()
           }}
         >
           Add Liquidity
@@ -165,7 +162,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           attributes={{ marginTop: "$11" }}
           intent="tertiary"
           onClick={() => {
-            state.isRemoveOpen = true;
+            props?.onRemove?.()
           }}
         >
           Remove Liquidity
@@ -208,30 +205,6 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           Start earning
         </Button>
       </Stack>
-      <BasicModal
-        isOpen={state.isAddOpen}
-        title={`Add liquidity`}
-        onClose={() => (state.isAddOpen = false)}
-      >
-        <AddLiquidity
-          poolAssets={props.poolAssets}
-          onAddLiquidity={(assets) => props?.onAddLiquidity(assets)}
-          onClose={() => (state.isAddOpen = false)}
-        />
-      </BasicModal>
-      <BasicModal
-        isOpen={state.isRemoveOpen}
-        title={`Remove liquidity`}
-        onClose={() => (state.isRemoveOpen = false)}
-      >
-        <RemoveLiquidity
-          unbondedBalance={props.unbondedBalance}
-          unbondedShares={props.unbondedShares}
-          myLiquidityCoins={props.myLiquidityCoins}
-          onRemoveLiquidity={(percent) => props?.onRemoveLiquidity(percent)}
-          onClose={() => (state.isRemoveOpen = false)}
-        />
-      </BasicModal>
     </Stack>
   );
 }

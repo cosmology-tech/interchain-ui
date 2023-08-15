@@ -1,17 +1,22 @@
-import { useStore, onUpdate } from "@builder.io/mitosis";
+import { useStore, onUpdate, useRef } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
+import isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
 import TokenInput from "../token-input";
 import {
+  AddItem,
   AddLiquidityProps,
   ResponseInfo,
   onAddLiquidityItem,
 } from "./add-liquidity.types";
 
 export default function AddLiquidity(props: AddLiquidityProps) {
+  let amountChangeType = useRef<"1" | "2">("1");
+  let lastValuesRef = useRef<AddItem[]>([]);
   const state = useStore<{
     progress1: number;
     progress2: number;
@@ -26,9 +31,10 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     isUnAvailable: boolean;
     handleProgress1Change: (progress: number) => void;
     handleProgress2Change: (progress: number) => void;
-    handleAmoount1Change: (value: string) => void;
-    handleAmoount2Change: (value: string) => void;
+    handleAmount1Change: (value: string) => void;
+    handleAmount2Change: (value: string) => void;
     addLiquidityHandler: () => void;
+    onChangeHandler: (value: AddItem[]) => void;
   }>({
     progress1: 50,
     progress2: 50,
@@ -37,6 +43,11 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     btnText: "Add liquidity",
     isAddLoading: false,
     disabled: true,
+    onChangeHandler(values) {
+      if (isEqual(values, lastValuesRef)) return;
+      props?.onChange(values);
+      lastValuesRef = cloneDeep(values);
+    },
     get addLiquidityItem1() {
       return Object.assign(props?.poolAssets[0], {
         addAmount: state.progress2 === 100 ? "0" : state.amount1,
@@ -77,42 +88,84 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     handleProgress1Change(progress) {
       state.progress1 = progress;
       state.progress2 = 100 - progress;
+      state.onChangeHandler([
+        {
+          progress: progress,
+          value: state.amount1,
+        },
+        {
+          progress: 100 - progress,
+          value: state.amount2,
+        },
+      ]);
     },
     handleProgress2Change(progress) {
       state.progress2 = progress;
       state.progress1 = 100 - progress;
+      state.onChangeHandler([
+        {
+          progress: progress,
+          value: state.amount1,
+        },
+        {
+          progress: 100 - progress,
+          value: state.amount2,
+        },
+      ]);
     },
-    handleAmoount1Change(value) {
-      state.amount1 = value;
+    handleAmount1Change(value) {
+      if (amountChangeType !== "1") return;
+      let value1 = value;
+      let value2 = state.amount2;
       if (state.progress1 === 50) {
-        state.amount2 = new BigNumber(value)
+        value2 = new BigNumber(value)
           .multipliedBy(props?.poolAssets[0]?.priceDisplayAmount || 0)
           .dividedBy(props?.poolAssets[1]?.priceDisplayAmount)
           .toString();
       }
+      state.onChangeHandler([
+        {
+          progress: state.progress1,
+          value: value1,
+        },
+        {
+          progress: state.progress2,
+          value: value2,
+        },
+      ]);
+      state.amount1 = value1;
+      state.amount2 = value2;
     },
-    handleAmoount2Change(value) {
-      state.amount2 = value;
+    handleAmount2Change(value) {
+      if (amountChangeType !== "2") return;
+      let value2 = value;
+      let value1 = state.amount1;
       if (state.progress2 === 50) {
-        state.amount1 = new BigNumber(value)
+        value1 = new BigNumber(value)
           .multipliedBy(props?.poolAssets[1]?.priceDisplayAmount || 0)
           .dividedBy(props?.poolAssets[0]?.priceDisplayAmount)
           .toString();
       }
+      state.onChangeHandler([
+        {
+          progress: state.progress1,
+          value: value1,
+        },
+        {
+          progress: state.progress2,
+          value: value2,
+        },
+      ]);
+      state.amount1 = value1;
+      state.amount2 = value2;
     },
     addLiquidityHandler() {
       void (async function () {
         state.isAddLoading = true;
         try {
-          const res: ResponseInfo = await props?.onAddLiquidity([
-            state.addLiquidityItem1,
-            state.addLiquidityItem2,
-          ]);
-          if(res.type === "success") {
-            props?.onClose?.()
-          }
+          const res: ResponseInfo = await props?.onAddLiquidity();
         } catch (error) {
-          throw new Error(error)
+          throw new Error(error);
         } finally {
           state.isAddLoading = false;
         }
@@ -120,17 +173,15 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     },
   });
   onUpdate(() => {
-    console.log("state.amount1 && state.amount2", !!state.amount1 && state.amount2)
     if (state.isInsufficient) {
       state.btnText = "Insufficient Balance";
       state.disabled = true;
-    } else if(state.isUnAvailable) {
+    } else if (state.isUnAvailable) {
       state.btnText = "Add liquidity";
       state.disabled = true;
     } else {
       state.btnText = "Add liquidity";
       state.disabled = false;
-
     }
   }, [state.amount1, state.amount2, state.progress1, state.progress2]);
   return (
@@ -159,7 +210,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           imgSrc={props?.poolAssets[0]?.imgSrc}
           priceDisplayAmount={props?.poolAssets[0]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress1Change(v)}
-          onAmountChange={(value) => state.handleAmoount1Change(value)}
+          onAmountChange={(value) => state.handleAmount1Change(value)}
+          onFocus={() => (amountChangeType = "1")}
         />
       </Box>
       <Box paddingBottom="$14">
@@ -173,7 +225,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           imgSrc={props?.poolAssets[1]?.imgSrc}
           priceDisplayAmount={props?.poolAssets[1]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress2Change(v)}
-          onAmountChange={(value) => state.handleAmoount2Change(value)}
+          onAmountChange={(value) => state.handleAmount2Change(value)}
+          onFocus={() => (amountChangeType = "2")}
         />
       </Box>
       <Button

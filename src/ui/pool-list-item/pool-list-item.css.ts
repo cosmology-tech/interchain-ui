@@ -10,12 +10,6 @@ export const container = style({
   flexWrap: "nowrap",
   justifyContent: "flex-start",
   alignItems: "center",
-  cursor: "pointer",
-  selectors: {
-    "&:hover": {
-      backgroundColor: themeVars.colors.cardBg
-    }
-  },
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       width: "100%",
@@ -25,6 +19,15 @@ export const container = style({
     },
   },
 });
+
+export const hoverStyle = style({
+  cursor: "pointer",
+  selectors: {
+    "&:hover": {
+      backgroundColor: themeVars.colors.cardBg
+    }
+  },
+})
 
 export const contentContainer = style({
   width: "712px",
