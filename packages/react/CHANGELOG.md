@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.3.3...@interchain-ui/react@1.4.0) (2023-08-15)
+
+### Bug Fixes
+
+- broken build ([811525c](https://github.com/cosmology-tech/interchain-ui/commit/811525c5b6284d9d2132f391ea9e7c346fec6973))
+- **combobox:** allow custom filter function ([#73](https://github.com/cosmology-tech/interchain-ui/issues/73)) ([8008894](https://github.com/cosmology-tech/interchain-ui/commit/8008894f0de7581422e3165e3cfb587799767854))
+- conflicts ([daac145](https://github.com/cosmology-tech/interchain-ui/commit/daac1455d6a98887f67a282cf93e413275d1480f))
+- customizatin for connect modal components ([ff56ef3](https://github.com/cosmology-tech/interchain-ui/commit/ff56ef33afb50b7e59f9431e9097bc7e6ef4753a))
+- style conflicts from sprinkles refactor ([#70](https://github.com/cosmology-tech/interchain-ui/issues/70)) ([5dc961a](https://github.com/cosmology-tech/interchain-ui/commit/5dc961abe004173dda5d06f23d721ab37f89c12d))
+
+### Features
+
+- add custom theme api ([b52b265](https://github.com/cosmology-tech/interchain-ui/commit/b52b2657044aeef13510b8d72c6cf0a2e45b8536))
+- custom theme vars and docs ([#80](https://github.com/cosmology-tech/interchain-ui/issues/80)) ([ac1a0ba](https://github.com/cosmology-tech/interchain-ui/commit/ac1a0ba57082fe3d6647c18e8107ab56047ef6e2))
+- dropdown with floating ui ([8b4d004](https://github.com/cosmology-tech/interchain-ui/commit/8b4d004734b1556ac872e7db734e6ef6e8ac6991))
+- select dropdown ([91e970e](https://github.com/cosmology-tech/interchain-ui/commit/91e970ed890dc08fafcbb021ccc06fce65fa780e))
+- Update interaction of asset-list and swap-token ([#72](https://github.com/cosmology-tech/interchain-ui/issues/72)) ([b37efb2](https://github.com/cosmology-tech/interchain-ui/commit/b37efb2e330e962fe120f6407d075057dce36d4d))
+
 ## [1.3.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.3.2...@interchain-ui/react@1.3.3) (2023-07-28)
 
 ### Bug Fixes
