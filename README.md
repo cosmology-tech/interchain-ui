@@ -16,6 +16,7 @@
   - [Overview and structure](#overview-and-structure)
   - [Compiler](#compiler)
   - [Icons](#icons)
+  - [Customizing theme](#customizing-theme)
   - [Related](#related)
   - [Credits](#credits)
 
@@ -59,6 +60,10 @@ To know more about the inner workings of our compiler, check ![Compiler](./docs/
 ## Icons
 
 Check ![Icon guide](./docs/icons.md) to know how to add more icons
+
+## Customizing theme
+
+Check ![Customizing guide](./docs/custom-theme.md) to know how to customize the default theme.
 
 ## Related
 

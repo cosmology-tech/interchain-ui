@@ -40,8 +40,7 @@ export const boxShadow = {
   "dark-lg": `rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px`,
 };
 
-// Enforce a theme contract so that light/dark/xxx themes will have the same properties
-export const themeVars = createThemeContract({
+export const themeContractTemplate = {
   colors: {
     primary: ``,
     body: ``,
@@ -223,7 +222,12 @@ export const themeVars = createThemeContract({
     "100": ``,
     auto: ``,
   },
-});
+} as const;
+
+export type ThemeContractValues = typeof themeContractTemplate;
+
+// Enforce a theme contract so that light/dark/xxx themes will have the same properties
+export const themeVars = createThemeContract(themeContractTemplate);
 
 export const commonVars = {
   font: {

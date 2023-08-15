@@ -5,6 +5,7 @@ import {
   onUnMount,
   useRef,
 } from "@builder.io/mitosis";
+import isEqual from "lodash/isEqual";
 import { mediaQueryColorScheme } from "../../helpers/style";
 import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
@@ -52,6 +53,25 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       return store.getState().setThemeMode(themeMode);
     }
   }, [state.preferredMode, store.getState().theme, state.isMounted]);
+
+  // Handle custom themes
+  onUpdate(() => {
+    const themeDefs = props.themeDefs ?? [];
+    const isValidThemeDefs =
+      Array.isArray(props.themeDefs) && themeDefs.length > 0;
+    if (!isValidThemeDefs) return;
+
+    if (!isEqual(store.getState().themeDefs, themeDefs)) {
+      store.getState().setThemeDefs(themeDefs);
+    }
+  }, [props.themeDefs]);
+
+  // Handle select customTheme
+  onUpdate(() => {
+    if (!props.customTheme) return;
+
+    store.getState().setCustomTheme(props.customTheme);
+  }, [props.customTheme]);
 
   onUpdate(() => {
     const overrideStyleManager = store.getState().overrideStyleManager;

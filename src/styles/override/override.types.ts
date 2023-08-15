@@ -1,5 +1,7 @@
 import { createVar } from "@vanilla-extract/css";
 import { LiteralUnion } from "../../helpers/types";
+import { themeContractTemplate } from "../../styles/themes.css";
+import type { PartialDeep } from "type-fest";
 
 export type CssVar = ReturnType<typeof createVar>;
 
@@ -51,3 +53,21 @@ export type ComponentOverrideSchema = {
   name: OverridableComponents;
   overrides: Array<[CssVar, OverridableProp]>;
 };
+
+export type CustomThemeVars = PartialDeep<typeof themeContractTemplate>;
+
+// Theme contract customization
+export type SingleThemeDef = {
+  name: string;
+  vars: CustomThemeVars;
+};
+
+export type DualThemeDef = {
+  name: string;
+  vars: {
+    light: CustomThemeVars;
+    dark: CustomThemeVars;
+  };
+};
+
+export type ThemeDef = SingleThemeDef;
