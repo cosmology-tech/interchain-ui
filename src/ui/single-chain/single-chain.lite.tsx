@@ -17,15 +17,12 @@ export default function SingleChain(props: SingleChainProps) {
           isSingle={true}
           total={props.header.total}
           // totalOnAll={props.header.totalOnAll}
-          dropDownList={props.header.dropDownList}
-          onDeposit={(item: AvailableItem, value: string) =>
-            props?.header?.onDeposit?.(item, value)
+          onDeposit={() =>
+            props?.header?.onDeposit?.()
           }
-          onDepositCancel={() => props?.header?.onDepositCancel?.()}
-          onWithdraw={(item: AvailableItem, value: string) =>
-            props?.header?.onWithdraw?.(item, value)
+          onWithdraw={() =>
+            props?.header?.onWithdraw?.()
           }
-          onWithdrawCancel={() => props?.header?.onWithdrawCancel?.()}
         />
         <Text
           color="$textSecondary"

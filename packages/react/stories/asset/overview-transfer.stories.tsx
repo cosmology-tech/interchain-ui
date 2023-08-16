@@ -43,8 +43,14 @@ export const Primary: Story = {
         priceDisplayAmount: 5,
       },
     ],
-    onTransfer(item: AvailableItem, amount: string) {
-      console.log("item", item, "value", amount);
+    onTransfer() {
+      console.log("onTransfer");
+    },
+    onCancel() {
+      console.log("onCancel");
+    },
+    onChange(selectedItem, value) {
+      console.log("onChange", selectedItem, value);
     },
   },
 };

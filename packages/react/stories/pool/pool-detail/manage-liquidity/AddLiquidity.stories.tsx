@@ -17,6 +17,7 @@ type Story = StoryObj<typeof meta>;
 /* This is primary AddLiquidity */
 export const Primary: Story = {
   args: {
+    // isLoading: true,
     poolAssets: [
       {
         imgSrc:
@@ -36,15 +37,7 @@ export const Primary: Story = {
       },
     ],
     onAddLiquidity: () => {
-      console.log("onAddLiquidity======");
-      return new Promise(function (resolve) {
-        setTimeout(() => {
-          resolve({
-            type: "success",
-            title: "add liquidity succsss",
-          });
-        }, 2000);
-      });
+      console.log("onAddLiquidity");
     },
     onChange: (values) => {
       console.log("values", values);

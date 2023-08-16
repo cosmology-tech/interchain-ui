@@ -11,7 +11,7 @@ useMetadata({
 });
 export default function APR(props: {
   className?: string;
-  apr: number;
+  apr: string;
   innerClassName: string;
   title?: string;
 }) {

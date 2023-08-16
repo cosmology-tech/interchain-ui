@@ -10,7 +10,6 @@ import TokenInput from "../token-input";
 import {
   AddItem,
   AddLiquidityProps,
-  ResponseInfo,
   onAddLiquidityItem,
 } from "./add-liquidity.types";
 
@@ -27,13 +26,11 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     isInsufficient: boolean;
     addLiquidityItem1: onAddLiquidityItem;
     addLiquidityItem2: onAddLiquidityItem;
-    isAddLoading: boolean;
     isUnAvailable: boolean;
     handleProgress1Change: (progress: number) => void;
     handleProgress2Change: (progress: number) => void;
     handleAmount1Change: (value: string) => void;
     handleAmount2Change: (value: string) => void;
-    addLiquidityHandler: () => void;
     onChangeHandler: (value: AddItem[]) => void;
   }>({
     progress1: 50,
@@ -41,7 +38,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     amount1: "",
     amount2: "",
     btnText: "Add liquidity",
-    isAddLoading: false,
     disabled: true,
     onChangeHandler(values) {
       if (isEqual(values, lastValuesRef)) return;
@@ -59,10 +55,10 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       });
     },
     get isInsufficient() {
-      const amount1Invalid = new BigNumber(state.amount1).gt(
+      const amount1Invalid = new BigNumber(state.amount1 || 0).gt(
         props?.poolAssets[0]?.available
       );
-      const amount2Invalid = new BigNumber(state.amount2).gt(
+      const amount2Invalid = new BigNumber(state.amount2 || 0).gt(
         props?.poolAssets[1]?.available
       );
       if (state.progress1 === 100) {
@@ -104,11 +100,11 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       state.progress1 = 100 - progress;
       state.onChangeHandler([
         {
-          progress: progress,
+          progress: 100 - progress,
           value: state.amount1,
         },
         {
-          progress: 100 - progress,
+          progress: progress,
           value: state.amount2,
         },
       ]);
@@ -118,7 +114,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       let value1 = value;
       let value2 = state.amount2;
       if (state.progress1 === 50) {
-        value2 = new BigNumber(value)
+        value2 = new BigNumber(value || 0)
           .multipliedBy(props?.poolAssets[0]?.priceDisplayAmount || 0)
           .dividedBy(props?.poolAssets[1]?.priceDisplayAmount)
           .toString();
@@ -141,7 +137,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       let value2 = value;
       let value1 = state.amount1;
       if (state.progress2 === 50) {
-        value1 = new BigNumber(value)
+        value1 = new BigNumber(value || 0)
           .multipliedBy(props?.poolAssets[1]?.priceDisplayAmount || 0)
           .dividedBy(props?.poolAssets[0]?.priceDisplayAmount)
           .toString();
@@ -158,18 +154,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       ]);
       state.amount1 = value1;
       state.amount2 = value2;
-    },
-    addLiquidityHandler() {
-      void (async function () {
-        state.isAddLoading = true;
-        try {
-          const res: ResponseInfo = await props?.onAddLiquidity();
-        } catch (error) {
-          throw new Error(error);
-        } finally {
-          state.isAddLoading = false;
-        }
-      })();
     },
   });
   onUpdate(() => {
@@ -233,8 +217,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         disabled={state.disabled}
         intent="tertiary"
         attributes={{ width: "$full" }}
-        onClick={() => state.addLiquidityHandler()}
-        isLoading={state.isAddLoading}
+        onClick={() => props.onAddLiquidity()}
+        isLoading={props.isLoading}
       >
         {state.btnText}
       </Button>

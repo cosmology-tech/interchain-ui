@@ -57,4 +57,5 @@ export interface TransferItemProps {
   selectedItem: AvailableItem;
   amount?: string;
   defaultAmountPrice?: string;
+  availableAsMax?: boolean;
 }

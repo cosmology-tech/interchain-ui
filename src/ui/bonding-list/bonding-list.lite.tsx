@@ -4,7 +4,6 @@ import Box from "../box";
 import BondingListItem from "../bonding-list-item";
 import { BondingListProps } from "./bonding-list.types";
 import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.types";
-import { OnUnBondDetail } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function BondingList(props: BondingListProps) {
   return (

@@ -1,9 +1,5 @@
 import { TransferType } from "../overview-transfer/overview-transfer.types";
 import { AvailableItem } from "../transfer-item/transfer-item.types";
-type AssetItemTransferDetail = {
-  value: string;
-  type: TransferType;
-};
 export interface AssetItemTransferProps {
   type?: TransferType;
   fromSymbol: AvailableItem["symbol"];
@@ -16,6 +12,7 @@ export interface AssetItemTransferProps {
   available: AvailableItem["available"];
   priceDisplayAmount: AvailableItem["priceDisplayAmount"];
   amount?: string;
-  onTransfer?: (detail: AssetItemTransferDetail) => void;
+  onChange?:(value: string) => void;
+  onTransfer?: () => void;
   onCancel?: () => void;
 }

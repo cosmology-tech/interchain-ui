@@ -1,15 +1,12 @@
 import {
   useStore,
   useMetadata,
-  useContext,
-  setContext,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
-import TextField from "../text-field";
 
 import * as styles from "./bonding-more.css";
 import { BondingMoreProps } from "./bonding-more.types";
@@ -44,6 +41,7 @@ export default function BondingMore(props: BondingMoreProps) {
         state.disabled = false;
         state.btnText = "Bond";
       }
+      props?.onChange(value);
     },
   });
 
@@ -89,7 +87,7 @@ export default function BondingMore(props: BondingMoreProps) {
         size="lg"
         disabled={state.disabled}
         attributes={{ width: "$full" }}
-        onClick={() => props?.onBond?.(state.bondingValue)}
+        onClick={() => props?.onBond?.()}
         isLoading={props.isLoading}
       >
         {state.btnText}

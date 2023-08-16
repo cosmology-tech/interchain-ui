@@ -25,15 +25,7 @@ export const Primary: Story = {
         amount: 59075,
         superfluidApr: "24",
         onUnbond() {
-          console.log("onUnbond======");
-          return new Promise(function (resolve) {
-            setTimeout(() => {
-              resolve({
-                type: "success",
-                title: "bond success",
-              });
-            }, 2000);
-          });
+          console.log("onUnbond");
         },
       },
       {
@@ -42,15 +34,7 @@ export const Primary: Story = {
         amount: 59075,
         superfluidApr: "24",
         onUnbond() {
-          console.log("onUnbond======");
-          return new Promise(function (resolve) {
-            setTimeout(() => {
-              resolve({
-                type: "success",
-                title: "bond success",
-              });
-            }, 2000);
-          });
+          console.log("onUnbond");
         },
       },
       {
@@ -59,15 +43,7 @@ export const Primary: Story = {
         amount: 59075,
         superfluidApr: "24",
         onUnbond() {
-          console.log("onUnbond======");
-          return new Promise(function (resolve) {
-            setTimeout(() => {
-              resolve({
-                type: "success",
-                title: "bond success",
-              });
-            }, 2000);
-          });
+          console.log("onUnbond");
         },
       },
     ],

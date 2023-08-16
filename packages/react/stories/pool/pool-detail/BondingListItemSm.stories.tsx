@@ -21,28 +21,11 @@ export const Primary: Story = {
     bondedValue: 0.33,
     bondedShares: 0.58,
     totalApr: "2.46",
-    bondingName: "ATOM / OSMO",
     onBond() {
-      console.log("onBond======");
-      return new Promise(function (resolve) {
-        setTimeout(() => {
-          resolve({
-            type: "success",
-            title: "bond success",
-          });
-        }, 2000);
-      });
+      console.log("onBond");;
     },
     onUnbond() {
-      console.log("onUnbond======");
-      return new Promise(function (resolve) {
-        setTimeout(() => {
-          resolve({
-            type: "success",
-            title: "bond success",
-          });
-        }, 2000);
-      });
+      console.log("onUnbond");
     },
   },
 };

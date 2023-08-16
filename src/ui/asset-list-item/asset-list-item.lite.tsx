@@ -3,13 +3,9 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
-import AssetItemTransfer from "../asset-item-transfer";
-import BasicModal from "../basic-modal";
 import * as styles from "./asset-list-item.css";
 import type { AssetListItemProps } from "./asset-list-item.types";
-import { AssetItemTransferProps } from "../asset-item-transfer/asset-item-transfer.types";
 import type { BoxProps } from "../box/box.types";
-import { TransferType } from "../overview-transfer/overview-transfer.types";
 
 export default function AssetListItem(props: AssetListItemProps) {
   useDefaultProps({
@@ -19,30 +15,8 @@ export default function AssetListItem(props: AssetListItemProps) {
 
   const state = useStore<{
     size: BoxProps["fontSize"];
-    modalDetail: AssetItemTransferProps;
-    isOpen: boolean;
-    transferType: string;
-    handleDposit: () => void;
-    handleWithdraw: () => void;
   }>({
     size: "$xs",
-    modalDetail: null,
-    transferType: "",
-    isOpen: false,
-    handleDposit: () => {
-      void (async function () {
-        state.isOpen = true;
-        state.transferType = "Deposit";
-        state.modalDetail = await props?.onDeposit();
-      })();
-    },
-    handleWithdraw: () => {
-      void (async function () {
-        state.isOpen = true;
-        state.transferType = "Withdraw";
-        state.modalDetail = await props?.onWithdraw();
-      })();
-    },
   });
 
   onUpdate(() => {
@@ -118,7 +92,7 @@ export default function AssetListItem(props: AssetListItemProps) {
             <Button
               intent="text"
               size="sm"
-              onClick={() => state.handleDposit()}
+              onClick={() => props.onDeposit()}
             >
               Deposit
             </Button>
@@ -127,37 +101,13 @@ export default function AssetListItem(props: AssetListItemProps) {
             <Button
               intent="text"
               size="sm"
-              onClick={() => state.handleWithdraw()}
+              onClick={() => props.onWithdraw()}
             >
               Withdraw
             </Button>
           </Show>
         </Stack>
       </Stack>
-      <BasicModal
-        isOpen={state.isOpen}
-        title={`${state.transferType} ${state.modalDetail?.fromSymbol}`}
-        onClose={() => (state.isOpen = false)}
-      >
-        <AssetItemTransfer
-          type={state.transferType?.toLowerCase() as TransferType}
-          fromSymbol={state.modalDetail?.fromSymbol}
-          fromAddress={state.modalDetail?.fromAddress}
-          fromImgSrc={state.modalDetail?.fromImgSrc}
-          fromDenom={state.modalDetail?.fromDenom}
-          toDenom={state.modalDetail?.toDenom}
-          toAddress={state.modalDetail?.toAddress}
-          toImgSrc={state.modalDetail?.toImgSrc}
-          available={state.modalDetail?.available}
-          priceDisplayAmount={state.modalDetail?.priceDisplayAmount}
-          amount={state.modalDetail?.amount}
-          onTransfer={(value) => state?.modalDetail?.onTransfer(value)}
-          onCancel={() => {
-            state.modalDetail?.onCancel?.();
-            state.isOpen = false;
-          }}
-        />
-      </BasicModal>
     </Stack>
   );
 }

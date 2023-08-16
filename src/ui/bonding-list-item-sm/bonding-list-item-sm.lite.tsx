@@ -4,57 +4,15 @@ import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import Button from "../button";
-import BasicModal from "../basic-modal";
-import BondingMore from "../bonding-more";
 import { store } from "../../models/store";
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
-import { ResponseInfo } from "../add-liquidity/add-liquidity.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
   const state = useStore<{
     unbondDisabled: boolean;
-    isBondMoreOpen: boolean;
-    isUnbondLoading: boolean;
-    isBondLoading: boolean;
-    bondingHandler: (string) => void;
-    unbondHandler: () => void;
   }>({
     get unbondDisabled() {
       return new BigNumber(props.bondedValue || 0).lte(0);
-    },
-    isBondMoreOpen: false,
-    isUnbondLoading: false,
-    isBondLoading: false,
-    bondingHandler(value: string) {
-      void (async function () {
-        state.isBondLoading = true;
-        try {
-          const res: ResponseInfo = await props?.onBond({
-            type: props.type,
-            value: value,
-          });
-          console.log("res====", res);
-          if (res.type === "success") {
-            state.isBondMoreOpen = false;
-          }
-        } catch (error) {
-          throw new Error(error);
-        } finally {
-          state.isBondLoading = false;
-        }
-      })();
-    },
-    unbondHandler() {
-      void (async function () {
-        state.isUnbondLoading = true;
-        try {
-          const res: ResponseInfo = await props.onUnbond();
-        } catch (error) {
-          throw new Error(error);
-        } finally {
-          state.isUnbondLoading = false;
-        }
-      })();
     },
   });
   return (
@@ -107,8 +65,8 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
             intent="secondary"
             variant="outlined"
             disabled={state.unbondDisabled}
-            onClick={() => state.unbondHandler()}
-            isLoading={state.isUnbondLoading}
+            onClick={() => props?.onUnbond()}
+            isLoading={props.isUnbondLoading}
           >
             Unbond
           </Button>
@@ -140,24 +98,13 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
           <Button
             size="sm"
             intent="tertiary"
-            onClick={() => (state.isBondMoreOpen = true)}
+            onClick={() => props.onBond()}
+            isLoading={props.isBondLoading}
           >
             Bond more
           </Button>
         </Stack>
       </Stack>
-      <BasicModal
-        title="Bonding LP Tokens"
-        isOpen={state.isBondMoreOpen}
-        onClose={() => (state.isBondMoreOpen = false)}
-      >
-        <BondingMore
-          bondingName={props.bondingName}
-          available={props.bondedShares}
-          onBond={(bondingValue) => state.bondingHandler(bondingValue)}
-          isLoading={state.isBondLoading}
-        />
-      </BasicModal>
     </Box>
   );
 }

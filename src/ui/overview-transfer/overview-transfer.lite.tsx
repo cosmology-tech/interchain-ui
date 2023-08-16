@@ -5,7 +5,7 @@ import {
   useRef,
   onUpdate,
 } from "@builder.io/mitosis";
-import BigNUmber from "bignumber.js";
+import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -31,12 +31,12 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
     amount: "0",
     handleTransferChange(item: AvailableItem, value: string) {
       state.curSelectedItem = item;
-      console.log("state.amount = value;", value)
       state.amount = value;
       state.transferDisabled =
-        new BigNUmber(value).isGreaterThan(item?.available) ||
-        new BigNUmber(value).isLessThanOrEqualTo(0) ||
+        new BigNumber(value).isGreaterThan(item?.available) ||
+        new BigNumber(value).isLessThanOrEqualTo(0) ||
         value === "";
+        props?.onChange?.(item, value)
     },
   });
 
@@ -78,7 +78,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         }
         onItemSelected={(selectedItem: AvailableItem) => {
           state.curSelectedItem = selectedItem;
-          state.amount = "0";
+          props?.onChange?.(selectedItem, state.amount)
         }}
       />
       <Stack
@@ -106,7 +106,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
       <Button
         intent="tertiary"
         disabled={state.transferDisabled}
-        onClick={() => props?.onTransfer(state.curSelectedItem, state.amount)}
+        onClick={() => props?.onTransfer()}
       >
         <Stack
           attributes={{

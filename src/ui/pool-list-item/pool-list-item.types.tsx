@@ -1,7 +1,5 @@
 import {
   AddLiquidityProps,
-  ResponseInfo,
-  onAddLiquidityItem,
 } from "../add-liquidity/add-liquidity.types";
 import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 import { ManageLiquidityCardProps } from "../manage-liquidity-card/manage-liquidity-card.types";
@@ -19,11 +17,6 @@ export type APR = {
   superfluidApr?: string;
   amount?: string;
 };
-export interface AprType {
-  "1": APR;
-  "7": APR;
-  "14": APR;
-}
 
 export interface Coin {
   symbol: string;

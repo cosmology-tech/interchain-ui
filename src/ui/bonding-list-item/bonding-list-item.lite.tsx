@@ -1,30 +1,12 @@
-import { useStore } from "@builder.io/mitosis";
 import Stack from "../stack";
 import BigNumber from "bignumber.js";
 import Button from "../button";
 import Text from "../text";
-import Box from "../box";
 import { store } from "../../models/store";
 import * as styles from "./bonding-list-item.css";
 import { BondingListItemProps } from "./bonding-list-item.types";
-import { ResponseInfo } from "../add-liquidity/add-liquidity.types";
 
 export default function BondingListItem(props: BondingListItemProps) {
-  const state = useStore({
-    isLoading: false,
-    unbondAllHandler() {
-      void (async function () {
-        state.isLoading = true;
-        try {
-          const res: ResponseInfo = await props.onUnbond();
-        } catch (error) {
-          throw new Error(error);
-        } finally {
-          state.isLoading = false;
-        }
-      })();
-    },
-  });
   return (
     <Stack
       attributes={{
@@ -52,15 +34,15 @@ export default function BondingListItem(props: BondingListItemProps) {
       </Text>
       <Stack
         attributes={{
-          width: "$21",
+          width: "$25",
           justifyContent: "flex-end",
         }}
       >
-        <Button
+      <Button
           size="xs"
           variant="unstyled"
-          onClick={() => state.unbondAllHandler()}
-          isLoading={state.isLoading}
+          onClick={() => props.onUnbond()}
+          isLoading={props.isLoading}
         >
           Unbond All
         </Button>

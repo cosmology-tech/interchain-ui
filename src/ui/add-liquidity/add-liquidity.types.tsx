@@ -5,14 +5,6 @@ export interface onAddLiquidityItem extends AvailableItem {
   addAmount: string;
 }
 
-export type ResponseType = "success" | "failed";
-
-export interface ResponseInfo {
-  type: ResponseType;
-  title: string;
-  message?: string;
-}
-
 export type AddItem = {
   progress: number;
   value: string;
@@ -20,6 +12,7 @@ export type AddItem = {
 
 export interface AddLiquidityProps {
   poolAssets: PoolListItemProps["poolAssets"];
-  onAddLiquidity: () => ResponseInfo;
-  onChange: (values: AddItem[]) => void
+  onAddLiquidity: () => void;
+  onChange: (values: AddItem[]) => void;
+  isLoading?: boolean;
 }

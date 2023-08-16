@@ -25,42 +25,10 @@ export const Primary: Story = {
     tokenAmountPrice: "101.02",
     chainName: "Juno",
     onDeposit: () => {
-      return {
-        fromSymbol: "UMEE",
-        fromDenom: "Umee",
-        fromAddress: "umee1lqsq...pv4axdaxk",
-        fromImgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
-        toDenom: "Osmosis",
-        toAddress: "osmo1lqsq...pv48trj5k",
-        toImgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-        available: "25.89",
-        amount: "",
-        priceDisplayAmount: 0.5,
-        onTransfer: (detail) => {
-          console.log("onTransfer", detail);
-        },
-      };
+      console.log("onDeposit")
     },
     onWithdraw: () => {
-      return {
-        fromSymbol: "UMEE",
-        fromDenom: "Umee",
-        fromAddress: "umee1lqsq...pv4axdaxk",
-        fromImgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
-        toDenom: "Osmosis",
-        toAddress: "osmo1lqsq...pv48trj5k",
-        toImgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-        available: "25.89",
-        amount: "",
-        priceDisplayAmount: 0.5,
-        onTransfer: (detail) => {
-          console.log("onTransfer", detail);
-        },
-      };
+      console.log("onWithdraw")
     },
   },
 };

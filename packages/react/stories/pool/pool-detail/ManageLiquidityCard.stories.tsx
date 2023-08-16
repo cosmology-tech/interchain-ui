@@ -40,5 +40,8 @@ export const Primary: Story = {
     onRemove: () => {
       console.log("onRemove");
     },
+    onStartEarning: () => {
+      console.log("onStartEarning");
+    },
   },
 };

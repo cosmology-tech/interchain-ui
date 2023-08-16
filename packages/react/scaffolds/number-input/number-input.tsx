@@ -85,7 +85,7 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
       //   api.setValue(value);
       // }
       // api.setValue(value);
-      if(!api.isFocused) {
+      if(!api.isFocused && value) {
         api.setValue(value);
       }
     }, [value]);

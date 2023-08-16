@@ -8,13 +8,12 @@ import {
   Show,
   useMetadata,
 } from "@builder.io/mitosis";
+import cloneDeep from "lodash/cloneDeep";
+import isEqual from "lodash/isEqual";
 import BigNumber from "bignumber.js";
-import uniqueId from "lodash/uniqueId";
 import Stack from "../stack";
 import Text from "../text";
-import Icon from "../icon";
 import Button from "../button";
-import TextField from "../text-field";
 import Box from "../box";
 
 import { store } from "../../models/store";
@@ -40,6 +39,8 @@ export default function TransferItem(props: TransferItemProps) {
     title: "",
   });
 
+  let lastItemRef = useRef<AvailableItem>(null);
+  let lastValueRef = useRef<string>("");
   const state = useStore<{
     theme: ThemeVariant;
     currentItem: AvailableItem;
@@ -67,7 +68,11 @@ export default function TransferItem(props: TransferItemProps) {
       }
     },
     handleAmountInput(val: string) {
-
+      if (new BigNumber(val || 0).eq(lastValueRef || 0)) {
+        return;
+      }
+      lastItemRef = cloneDeep(state.currentItem);
+      lastValueRef = val;
       props?.onChange?.(state.currentItem, val);
     },
     handleHalf() {
@@ -191,12 +196,12 @@ export default function TransferItem(props: TransferItemProps) {
             <Button
               className={styles.textBtn[state.theme]}
               size="xs"
-              attributes={{ marginRight: "$5" }}
               onClick={() => state.handleHalf()}
             >
               Half
             </Button>
           </Show>
+          <Box width="$5" />
           <Show when={props.maxBtn}>
             <Button
               className={styles.textBtn[state.theme]}
@@ -227,15 +232,22 @@ export default function TransferItem(props: TransferItemProps) {
                   <Text fontSize="$2xl">{props.amount}</Text>
                 ) : (
                   <Box>
-                  {/* @ts-expect-error */}
-                  <NumberInput
-                  borderless
-                  disabled={!!props.disabled}
-                  value={props.amount}
-                  onChange={(e) => state.handleAmountInput(e.value)}
-                  inputClassName={styles.transferInput}
-                  min={0}
-                  max={state.currentItem?.available}  />
+                    {/* @ts-expect-error */}
+                    <NumberInput
+                      borderless
+                      disabled={!!props.disabled}
+                      value={props.amount}
+                      onChange={(e) => {
+                        state.handleAmountInput(e.value);
+                      }}
+                      inputClassName={styles.transferInput}
+                      min={0}
+                      max={
+                        props.availableAsMax
+                          ? state.currentItem?.available
+                          : undefined
+                      }
+                    />
                   </Box>
                 )}
                 <div
@@ -246,11 +258,7 @@ export default function TransferItem(props: TransferItemProps) {
                         : "hidden",
                   }}
                 >
-                  <Text
-                    color="$textSecondary"
-                    fontSize="$xs"
-                    textAlign="right"
-                  >
+                  <Text color="$textSecondary" fontSize="$xs" textAlign="right">
                     {`≈ $${store
                       .getState()
                       ?.formatNumber({ value: state.amountPrice })}`}

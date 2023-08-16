@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { CrossChain, ShowMore } from "../../src";
 import { CrossChainListItemProps } from "../../src/ui/cross-chain/cross-chain.types";
-import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
 
 const meta: Meta<typeof CrossChain> = {
   component: CrossChain,
@@ -20,42 +19,14 @@ export const Primary: Story = {
     header: {
       total: "144.23",
       totalOnAll: "732.16",
-      dropDownList: [
-        {
-          available: "713.32",
-          symbol: "UMEE",
-          denom: "Umee",
-          imgSrc:
-            "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
-          priceDisplayAmount: 0.5,
-        },
-        {
-          available: "89.66",
-          symbol: "USTC",
-          denom: "Terra Classic",
-          imgSrc:
-            "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
-          priceDisplayAmount: 10,
-        },
-        {
-          available: "102.61",
-          symbol: "TORI",
-          denom: "Teritori",
-          imgSrc:
-            "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
-          priceDisplayAmount: 5,
-        },
-      ],
-      onDeposit: (item: AvailableItem, value: string) => {
-        console.log("onDeposit item", item, "value", value);
+      onDeposit: () => {
+        console.log("onDeposit");
       },
-      onWithdraw: (item: AvailableItem, value: string) => {
-        console.log("onWithdraw item", item, "value", value);
+      onWithdraw: () => {
+        console.log("onWithdraw");
       },
     },
-  },
-  render: (props) => {
-    const defaultList: CrossChainListItemProps[] = [
+    list: [
       {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
@@ -64,6 +35,12 @@ export const Primary: Story = {
         tokenAmount: "89.66",
         tokenAmountPrice: "10",
         chainName: "Juno",
+        onDeposit: () => {
+          console.log("onDeposit");
+        },
+        onWithdraw: () => {
+          console.log("onWithdraw");
+        },
       },
       {
         imgSrc:
@@ -73,59 +50,45 @@ export const Primary: Story = {
         tokenAmount: "102.61",
         tokenAmountPrice: "101.02",
         chainName: "Juno",
-      },
-    ];
-    let assetList: CrossChainListItemProps[] = defaultList.map((item) => {
-      return {
-        ...item,
         onDeposit: () => {
-          console.log("on deposit");
-          return {
-            fromSymbol: item.symbol,
-            fromDenom: item.denom,
-            fromImgSrc: item.imgSrc,
-            toDenom: "Osmosis",
-            fromAddress: "umee1lqsq...pv4axdaxk",
-            toAddress: "osmo1lqsq...pv48trj5k",
-            toImgSrc:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-            available: "25.89",
-            amount: "",
-            priceDisplayAmount: 0.5,
-
-            onTransfer: (amount) => {
-              console.log("onTransfer", amount);
-            },
-          };
+          console.log("onDeposit");
         },
         onWithdraw: () => {
-          return {
-            fromSymbol: item.symbol,
-            fromDenom: item.denom,
-            fromImgSrc: item.imgSrc,
-            fromAddress: "umee1lqsq...pv4axdaxk",
-            toDenom: "Osmosis",
-            toAddress: "osmo1lqsq...pv48trj5k",
-            toImgSrc:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-            available: "25.89",
-            amount: "",
-            priceDisplayAmount: 0.5,
-            onTransfer: (amount) => {
-              console.log("onTransfer", amount);
-            },
-          };
+          console.log("onWithdraw");
         },
-      };
-    });
-    return (
-      <ShowMore heightToShowMore={800}>
-        <CrossChain
-          header={props.header}
-          list={assetList}
-          otherList={assetList}
-        />
-      </ShowMore>
-    );
+      },
+    ],
+    otherList: [
+      {
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
+        symbol: "USTC",
+        denom: "Terra Classic",
+        tokenAmount: "89.66",
+        tokenAmountPrice: "10",
+        chainName: "Juno",
+        onDeposit: () => {
+          console.log("onDeposit");
+        },
+        onWithdraw: () => {
+          console.log("onWithdraw");
+        },
+      },
+      {
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
+        symbol: "TORI",
+        denom: "Teritori",
+        tokenAmount: "102.61",
+        tokenAmountPrice: "101.02",
+        chainName: "Juno",
+        onDeposit: () => {
+          console.log("onDeposit");
+        },
+        onWithdraw: () => {
+          console.log("onWithdraw");
+        },
+      },
+    ],
   },
 };

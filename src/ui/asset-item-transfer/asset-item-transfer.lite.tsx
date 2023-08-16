@@ -28,13 +28,14 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     },
     onAmountChange(value) {
       state.inputAmount = value;
+      props?.onChange?.(value);
     },
     get transferDisabled() {
       return (
         new BigNumber(state.inputAmount).gt(props.available) ||
         state.inputAmount === ""
       );
-    },
+    }
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -225,9 +226,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       <Button
         intent="tertiary"
         attributes={{ width: "$full" }}
-        onClick={() =>
-          props?.onTransfer?.({ value: state.inputAmount, type: props.type })
-        }
+        onClick={() => props?.onTransfer?.()}
         disabled={state.transferDisabled}
       >
         <Stack

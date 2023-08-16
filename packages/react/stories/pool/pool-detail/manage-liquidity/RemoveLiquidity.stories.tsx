@@ -34,11 +34,7 @@ export const Primary: Story = {
       },
     ],
     onRemoveLiquidity() {
-      console.log("onRemoveLiquidity====");
-      return {
-        type: "success",
-        title: "Remove liquidity success",
-      };
+      console.log("onRemoveLiquidity");
     },
     onChange(progress) {
       console.log("onChange", progress);

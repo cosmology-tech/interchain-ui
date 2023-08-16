@@ -9,7 +9,6 @@ import { store } from "../../models/store";
 
 import * as styles from "./remove-liquidity.css";
 import { RemoveLiquidityProps } from "./remove-liquidity.types";
-import { ResponseInfo } from "../add-liquidity/add-liquidity.types";
 
 export default function RemoveLiquidity(props: RemoveLiquidityProps) {
   const state = useStore<{
@@ -19,15 +18,12 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
     removedShares: string;
     removedAmount0: string;
     removedAmount1: string;
-    isRemoveLoading: boolean;
-    removeLiquidityHandler: () => void;
   }>({
     progress: 50,
     handeProgressClick(value: number) {
       state.progress = value;
       props?.onChange(value)
     },
-    isRemoveLoading: false,
     get removedBalance() {
       return new BigNumber(state.progress)
         .dividedBy(100)
@@ -55,18 +51,6 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         .multipliedBy(props.myLiquidityCoins[1]?.displayAmount || 0)
         .decimalPlaces(6)
         .toString();
-    },
-    removeLiquidityHandler() {
-      void (async function () {
-        state.isRemoveLoading = true;
-        try {
-          const res: ResponseInfo = await props?.onRemoveLiquidity?.();
-        } catch (error) {
-          throw new Error(error);
-        } finally {
-          state.isRemoveLoading = false;
-        }
-      })();
     },
   });
 
@@ -183,8 +167,8 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         size="lg"
         intent="tertiary"
         attributes={{ marginTop: "$18", width: "$full" }}
-        onClick={() => state.removeLiquidityHandler()}
-        isLoading={state.isRemoveLoading}
+        onClick={() => props.onRemoveLiquidity()}
+        isLoading={props.isLoading}
       >
         Remove Liquidity
       </Button>

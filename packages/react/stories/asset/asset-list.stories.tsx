@@ -18,9 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     isOtherChains: false,
-  },
-  render: (props) => {
-    const defaultList: AssetListItemProps[] = [
+    list: [
       {
         isOtherChains: false,
         imgSrc:
@@ -30,6 +28,12 @@ export const Primary: Story = {
         tokenAmount: "89.66",
         tokenAmountPrice: "10",
         chainName: "Juno",
+        onDeposit: () => {
+          console.log("onDeposit")
+        },
+        onWithdraw: () => {
+          console.log("onWithdraw")
+        },
       },
       {
         isOtherChains: false,
@@ -40,50 +44,13 @@ export const Primary: Story = {
         tokenAmount: "102.61",
         tokenAmountPrice: "101.02",
         chainName: "Juno",
-      },
-    ];
-    let assetList: AssetListItemProps[] = defaultList.map((item) => {
-      return {
-        ...item,
         onDeposit: () => {
-          return {
-            fromSymbol: item.symbol,
-            fromDenom: item.denom,
-            fromImgSrc: item.imgSrc,
-            toDenom: "Osmosis",
-            fromAddress: "umee1lqsq...pv4axdaxk",
-            toAddress: "osmo1lqsq...pv48trj5k",
-            toImgSrc:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-            available: "25.89",
-            amount: "",
-            priceDisplayAmount: 0.5,
-
-            onTransfer: (amount) => {
-              console.log("onTransfer", amount);
-            },
-          };
+          console.log("onDeposit")
         },
         onWithdraw: () => {
-          return {
-            fromSymbol: item.symbol,
-            fromDenom: item.denom,
-            fromImgSrc: item.imgSrc,
-            fromAddress: "umee1lqsq...pv4axdaxk",
-            toDenom: "Osmosis",
-            toAddress: "osmo1lqsq...pv48trj5k",
-            toImgSrc:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-            available: "25.89",
-            amount: "",
-            priceDisplayAmount: 0.5,
-            onTransfer: (amount) => {
-              console.log("onTransfer", amount);
-            },
-          };
+          console.log("onWithdraw")
         },
-      };
-    });
-    return <AssetList {...props} list={assetList} />;
+      },
+    ]
   },
 };

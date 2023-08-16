@@ -7,8 +7,6 @@ import BondingListItemSm from "../bonding-list-item-sm";
 import { BondingListSmProps } from "./bonding-list-sm.types";
 import {
   BondingListItemSmProps,
-  OnBondDetail,
-  OnUnBondDetail,
 } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 import { store } from "../../models/store";
 
@@ -51,8 +49,6 @@ export default function BondingListSm(props: BondingListSmProps) {
             <BondingListItemSm
               onBond={() => item?.onBond?.()}
               onUnbond={() => item?.onUnbond?.()}
-              bondingName={item?.bondingName}
-              type={item.type}
               key={item.title}
               title={item.title}
               bondedValue={item.bondedValue}

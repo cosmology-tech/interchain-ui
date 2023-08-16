@@ -9,9 +9,11 @@ export const container = style({
   paddingRight: themeVars.space[10],
   paddingBottom: themeVars.space[10],
   paddingLeft: themeVars.space[9],
+  flexWrap: "nowrap",
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       padding: themeVars.space[9],
+      flexWrap: "wrap",
     },
   },
 });

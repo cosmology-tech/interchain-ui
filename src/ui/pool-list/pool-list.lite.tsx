@@ -5,7 +5,6 @@ import Text from "../text";
 import PoolListItem from "../pool-list-item";
 import * as styles from "./pool-list.css";
 import { PoolListProps } from "./pool-list.types";
-import { OnBondDetail, OnUnBondDetail } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 
 export default function PoolList(props: PoolListProps) {
   const state = useStore({

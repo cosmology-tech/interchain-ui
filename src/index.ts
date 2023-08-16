@@ -84,7 +84,6 @@ export { default as ChainListItem } from "./ui/chain-list-item";
 export { default as ChainSwapInput } from "./ui/chain-swap-input";
 export { default as SelectButton } from "./ui/select-button";
 export { default as TokenNumberField } from "./ui/token-number-field";
-export { default as PoolDetailModal } from "./ui/pool-detail-modal";
 export { default as Spinner } from "./ui/spinner";
 // End Components
 

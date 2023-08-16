@@ -2,10 +2,8 @@ import AssetListHeader from "../asset-list-header";
 import AssetList from "../asset-list";
 import Box from "../box";
 import Text from "../text";
-import ShowMore from "../show-more";
 import * as styles from "./cross-chain.css";
 import { CrossChainProps } from "./cross-chain.types";
-import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export default function CrossChain(props: CrossChainProps) {
   return (
@@ -14,15 +12,8 @@ export default function CrossChain(props: CrossChainProps) {
         isSingle={false}
         total={props.header.total}
         totalOnAll={props.header.totalOnAll}
-        dropDownList={props.header.dropDownList}
-        onDeposit={(item: AvailableItem, value: string) =>
-          props?.header?.onDeposit?.(item, value)
-        }
-        onDepositCancel={() => props?.header?.onDepositCancel?.()}
-        onWithdraw={(item: AvailableItem, value: string) =>
-          props?.header?.onWithdraw?.(item, value)
-        }
-        onWithdrawCancel={() => props?.header?.onWithdrawCancel?.()}
+        onDeposit={() => props?.header?.onDeposit?.()}
+        onWithdraw={() => props?.header?.onWithdraw?.()}
       />
       <Text
         color="$textSecondary"

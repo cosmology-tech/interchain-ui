@@ -24,18 +24,15 @@ import type { ThemeVariant } from "../../models/system.model";
 
 import * as styles from "./swap-token.css";
 import {
-  SwapInfoType,
-  SwapItemProps,
   SwapTokenProps,
 } from "./swap-token.types";
 import {
   AvailableItem,
-  ComboboxListItemType,
 } from "../transfer-item/transfer-item.types";
 
 export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
-  let animationRef = useRef(null);
+  let isSwitchingRef = useRef(false);
   let toteranceRef = useRef(null);
   let cleanupRef = useRef<() => void>(null);
 
@@ -117,6 +114,7 @@ export default function SwapToken(props: SwapTokenProps) {
       state.toggleToteranceStatus();
     },
     exchange() {
+      isSwitchingRef = true;
       const copyFrom: AvailableItem = cloneDeep(state.fromItem);
       const copyTo: AvailableItem = cloneDeep(state.toItem);
       const copyFromList: AvailableItem[] = cloneDeep(state.fromList);
@@ -130,39 +128,75 @@ export default function SwapToken(props: SwapTokenProps) {
       state.toList = copyFromList;
       state.fromAmount = copyToAmount;
       state.toAmount = copyFromAmount;
+      props?.onChange?.({
+        fromItem: copyTo,
+        toItem: copyFrom,
+        fromAmount: copyToAmount,
+        toAmount: copyFromAmount,
+      });
     },
     handleFromListItemSelected(selectedItem) {
       state.toList = props.dropDownList.filter(
         (item) => item.symbol !== selectedItem.symbol
       );
       state.fromItem = selectedItem;
-      state.toAmount = new BigNumber(state.fromAmount)
+      let newTo = new BigNumber(state.fromAmount)
         .multipliedBy(selectedItem.priceDisplayAmount)
         .dividedBy(state.toItem.priceDisplayAmount)
         .decimalPlaces(6)
         .toString();
+      state.toAmount = newTo;
+      props?.onChange?.({
+        fromItem: selectedItem,
+        toItem: state.toItem,
+        fromAmount: state.fromAmount,
+        toAmount: newTo,
+      });
     },
     handleToListItemSelected(selectedItem) {
       state.fromList = props.dropDownList.filter(
         (item) => item.symbol !== selectedItem.symbol
       );
       state.toItem = selectedItem;
-      state.toAmount = state.fromDollarValue
+      let newTo = state.fromDollarValue
         .dividedBy(selectedItem.priceDisplayAmount)
         .decimalPlaces(6)
         .toString();
+      state.toAmount = newTo
+        props?.onChange?.({
+          fromItem: state.fromItem,
+          toItem: selectedItem,
+          fromAmount: state.fromAmount,
+          toAmount: newTo,
+        });
     },
     handleFromAmountChange(item: AvailableItem, value: string) {
+      if (isSwitchingRef) {
+        isSwitchingRef = false;
+        return;
+      }
       state.fromAmount = value;
-      let newToAmount = new BigNumber(value)
+      let newToAmount = new BigNumber(value || 0)
         .multipliedBy(item.priceDisplayAmount)
         .dividedBy(state.toItem.priceDisplayAmount)
         .decimalPlaces(6)
         .toString();
       state.toAmount = newToAmount;
+      props?.onChange?.({
+        fromItem: item,
+        toItem: state.toItem,
+        fromAmount: value,
+        toAmount: newToAmount,
+      });
     },
     handleToAmountChange(item: AvailableItem, value: string) {
       state.toAmount = value;
+      props?.onChange?.({
+        fromItem: state.fromItem,
+        toItem: item,
+        fromAmount: state.fromAmount,
+        toAmount: value,
+      });
     },
   });
 
@@ -292,7 +326,10 @@ export default function SwapToken(props: SwapTokenProps) {
               <For each={[1, 2.5, 3, 5]}>
                 {(per) => (
                   <Button
-                    onClick={(e) => state.setToterance(per)}
+                    onClick={(e) => {
+                      state.setToterance(per);
+                      props?.onToteranceChange?.(per)
+                    }}
                     key={per}
                     size="sm"
                     intent={state.tolerance === per ? "tertiary" : "text"}
@@ -324,13 +361,7 @@ export default function SwapToken(props: SwapTokenProps) {
       />
       <Button
         onClick={() =>
-          props?.onSwap?.({
-            fromItem: state.fromItem,
-            toItem: state.toItem,
-            fromAmount: state.fromAmount,
-            toAmount: state.toAmount,
-            minimumReceived: state.minimumReceived,
-          })
+          props?.onSwap?.()
         }
         disabled={state.swapDisabled || new BigNumber(state.fromAmount).eq(0)}
         intent="tertiary"
