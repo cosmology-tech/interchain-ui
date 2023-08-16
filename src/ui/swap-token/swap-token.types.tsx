@@ -6,12 +6,12 @@ import { SwapPriceProps } from "../swap-price/swap-price.types";
 
 export interface SwapItemProps extends TransferItemProps {}
 
-export type SwapInfoType = {
+export type SwapInfo = {
   fromItem: AvailableItem;
   toItem: AvailableItem;
   fromAmount: string;
   toAmount: string;
-  minimumReceived: string;
+  // minimumReceived: string;
 };
 
 export interface SwapTokenProps {
@@ -24,5 +24,7 @@ export interface SwapTokenProps {
    * Drop down list of available items
    */
   dropDownList: Array<AvailableItem>;
-  onSwap: (swapInfo: SwapInfoType) => void;
+  onChange: (detail: SwapInfo) => void
+  onSwap: () => void;
+  onToteranceChange: (toterancePercent: number) => void
 }

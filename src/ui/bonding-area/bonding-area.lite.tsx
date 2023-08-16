@@ -12,12 +12,15 @@ export default function BondingArea(props: BondingAreaProps) {
       <Stack className={styles.onlyDesktop} direction="vertical">
         <BondingCardList list={props.bondingCardList} />
         <Box height="$14" />
-        <BondingList list={props.bondingList} />
+        <BondingList list={props.bondingList.list} onUnbond={(detail) => props.bondingList?.onUnbond?.(detail)} />
       </Stack>
       <Box className={styles.onlySm}>
         <BondingListSm
+        onBond={(detail) => props.bondingListSm?.onBond?.(detail)}
+        onUnbond={(detail) => props.bondingListSm?.onUnbond?.(detail)}
+          bondingName={props.bondingListSm.bondingName}
           list={props.bondingListSm.list}
-          unbondedAmt={props.bondingListSm.unbondedAmt}
+          unbondedBalance={props.bondingListSm.unbondedBalance}
           unbondedShares={props.bondingListSm.unbondedShares}
         />
       </Box>

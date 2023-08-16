@@ -1,4 +1,5 @@
 import { For } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Box from "../box";
 import BondingCard from "../bonding-card";
@@ -17,7 +18,16 @@ export default function PoolCardList(props: BondingCardListProps) {
         <For each={props.list}>
           {(item: BondingCardProps, index: number) => (
             <Box width="33.33%" key={item.title}>
-              <BondingCard title={item.title} value={item.value} />
+              <BondingCard
+                title={item.title}
+                value={
+                  item.value
+                    ? `${new BigNumber(item.value)
+                        .decimalPlaces(2)
+                        .toString()}%`
+                    : "0%"
+                }
+              />
             </Box>
           )}
         </For>

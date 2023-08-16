@@ -3,15 +3,17 @@ import { breakpoints } from "../../styles/tokens";
 import { themeVars } from "../../styles/themes.css";
 
 export const container = style({
-  minWidth: "350px",
+  minWidth: "370px",
   backgroundColor: themeVars.colors.cardBg,
   paddingTop: themeVars.space[9],
   paddingRight: themeVars.space[10],
   paddingBottom: themeVars.space[10],
   paddingLeft: themeVars.space[9],
+  flexWrap: "nowrap",
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       padding: themeVars.space[9],
+      flexWrap: "wrap",
     },
   },
 });

@@ -1,4 +1,12 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  Show,
+} from "@builder.io/mitosis";
+import clsx from "clsx";
+import BigNumber from "bignumber.js";
 import { store } from "../../models/store";
 import Stack from "../stack";
 import Box from "../box";
@@ -28,9 +36,16 @@ export default function PoolCard(props: PoolCardProps) {
   });
 
   return (
-    <Box className={styles.container}>
+    <Box
+      className={clsx(styles.container, {
+        [styles.hoverStyle]: !!props.onClick,
+      })}
+      attributes={{
+        onClick: () => props?.onClick?.(),
+      }}
+    >
       <Box marginBottom="$13">
-        <PoolName id={props.id} token1={props.token1} token2={props.token2} />
+        <PoolName id={props.id} coins={props.poolAssets} />
       </Box>
       <Stack
         space="$0"
@@ -50,7 +65,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          {props.apr}%
+          {new BigNumber(props.apr).decimalPlaces(2).toString()}%
         </Text>
       </Stack>
       <Stack
@@ -70,7 +85,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          ${props.poolLiquidity.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.liquidity })}
         </Text>
       </Stack>
       <Stack
@@ -87,7 +102,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          ${props.fees.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.fees7D })}
         </Text>
       </Stack>
       <Box
@@ -96,19 +111,21 @@ export default function PoolCard(props: PoolCardProps) {
         my="$6"
         className={styles.divider[state.theme]}
       />
-      <Stack
-        space="$0"
-        attributes={{
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "$6",
-        }}
-      >
-        <Text color="$text">Your Liquidity</Text>
-        <Text color="$text" fontWeight="$semibold">
-          ${props.yourLiquidity.toLocaleString()}
-        </Text>
-      </Stack>
+      <Show when={!!props.myLiquidity}>
+        <Stack
+          space="$0"
+          attributes={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "$6",
+          }}
+        >
+          <Text color="$text">Your Liquidity</Text>
+          <Text color="$text" fontWeight="$semibold">
+            ${store.getState().formatNumber({ value: props.myLiquidity })}
+          </Text>
+        </Stack>
+      </Show>
       <Stack
         space="$0"
         attributes={{
@@ -125,7 +142,7 @@ export default function PoolCard(props: PoolCardProps) {
             marginLeft: "$4",
           }}
         >
-          ${props.bonded.toLocaleString()}
+          ${store.getState().formatNumber({ value: props.unbondedBalance })}
         </Text>
       </Stack>
     </Box>

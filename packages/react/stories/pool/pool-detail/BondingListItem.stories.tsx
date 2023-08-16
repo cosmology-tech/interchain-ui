@@ -17,10 +17,13 @@ type Story = StoryObj<typeof meta>;
 /* This is primary button */
 export const Primary: Story = {
   args: {
+    // isLoading: true,
     title: "A day",
-    apr: "2.43%",
+    totalApr: "2.43",
     amount: 59075,
-    per: "24%",
-    onUnbond: () => console.log("unbond"),
+    superfluidApr: "24",
+    onUnbond() {
+      console.log("onUnbond");
+    },
   },
 };

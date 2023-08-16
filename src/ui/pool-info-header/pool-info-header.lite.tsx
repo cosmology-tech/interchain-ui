@@ -9,9 +9,9 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
   return (
     <Box className={styles.poolInfoHeader}>
       <Stack direction="vertical" space="$0">
-        <Text fontSize="$xl" fontWeight="$semibold">
-          {props.token1.name} / {props.token2.name}
-        </Text>
+        {/* <Text fontSize="$xl" fontWeight="$semibold">
+          {`${props.coins[0]?.symbol} / ${props.coins[1]?.symbol}`}
+        </Text> */}
         <Text
           color="$textSecondary"
           attributes={{
@@ -30,8 +30,8 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
         }}
       >
         <Box className={styles.imageBox}>
-          <img className={styles.image1} src={props.token1.imgSrc} />
-          <img className={styles.image2} src={props.token2.imgSrc} />
+          <img className={styles.image1} src={props.coins[0]?.imgSrc} />
+          <img className={styles.image2} src={props.coins[1]?.imgSrc} />
         </Box>
         <Stack space="$0" className={styles.longText} direction="vertical">
           <Text color="$textSecondary">Pool liquidity</Text>
@@ -43,7 +43,7 @@ export default function PoolsHeader(props: PoolInfoHeaderProps) {
           >
             <Text attributes={{ marginRight: "$1" }}>$</Text>
             <Text fontSize="$4xl" fontWeight="$semibold">
-              {store.getState()?.formatNumber?.({ value: props.poolLiquidity })}
+              {store.getState()?.formatNumber?.({ value: props.liquidity })}
             </Text>
           </Stack>
         </Stack>

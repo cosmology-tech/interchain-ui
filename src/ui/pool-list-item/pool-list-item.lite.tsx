@@ -1,19 +1,22 @@
 import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import PoolName from "../pool/components/pool-name";
-import APR from "./components/apr";
+import APR from "./components/apr"
 import CellWithTitle from "./components/cell-with-title";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
 import type { PoolListItemProps } from "./pool-list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
-
 export default function PoolListItem(props: PoolListItemProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore<{ theme: ThemeVariant; apr: string }>({
     theme: "light",
+    get apr() {
+      return new BigNumber(props?.apr || 0).decimalPlaces(2).toString();
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -31,24 +34,25 @@ export default function PoolListItem(props: PoolListItemProps) {
   });
 
   return (
-    <Stack
-      className={styles.container}
-      space="$0"
+    <Box
+      className={clsx(styles.container, {
+        [styles.hoverStyle]: !!props.onClick
+      })}
       attributes={{
         alignItems: "center",
+        onClick: () => props?.onClick?.(),
       }}
     >
       <PoolName
         id={props.id}
         className={styles.nameContainer}
-        token1={props.token1}
-        token2={props.token2}
+        coins={props.poolAssets}
       />
       <Box className={clsx(styles.responsiveText, styles.onlySm)}>
         <APR
           title="APR"
           className={styles.onlySm}
-          apr={props.apr}
+          apr={state.apr}
           innerClassName={styles.iconContainer[state.theme]}
         />
       </Box>
@@ -68,7 +72,9 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "$4",
           }}
         >
-          ${props.poolLiquidity.toLocaleString()}
+          {store
+            .getState()
+            .formatNumber({ value: props?.liquidity, style: "currency" })}
         </Text>
       </CellWithTitle>
       <CellWithTitle
@@ -84,7 +90,9 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "$4",
           }}
         >
-          ${props.volume.toLocaleString()}
+          {store
+            .getState()
+            .formatNumber({ value: props?.volume24H, style: "currency" })}
         </Text>
       </CellWithTitle>
       <CellWithTitle
@@ -100,15 +108,18 @@ export default function PoolListItem(props: PoolListItemProps) {
             marginRight: "$4",
           }}
         >
-          ${props.fees.toLocaleString()}
+          {store
+            .getState()
+            .formatNumber({ value: props?.fees7D, style: "currency" })}
         </Text>
       </CellWithTitle>
+      {/* 14 day totalApr */}
       <APR
         className={clsx(styles.responsiveText, styles.lgAPR)}
-        apr={props.apr}
+        apr={state.apr}
         innerClassName={styles.iconContainer[state.theme]}
       />
       <Box className={styles.onlySm} width="$full" height="$4" />
-    </Stack>
+    </Box>
   );
 }

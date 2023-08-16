@@ -1,6 +1,8 @@
-import { PoolNameProps } from "../pool/components/pool-name/pool-name.types";
-export interface PoolInfoHeaderProps extends PoolNameProps {
-  poolLiquidity: number;
-  swapFee: number;
-  volume24H: number;
+import { Coin } from "../pool-list-item/pool-list-item.types";
+export interface PoolInfoHeaderProps {
+  id: string;
+  liquidity: number | string;
+  swapFee: number | string;
+  volume24H: number | string;
+  coins: Coin[]
 }

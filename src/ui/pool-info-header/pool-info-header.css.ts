@@ -15,8 +15,8 @@ export const imageBox = style({
 
 export const imgBase = style({
   position: "absolute",
-  width: themeVars.space[14],
-  height: themeVars.space[14],
+  width: themeVars.space[15],
+  height: themeVars.space[15],
 });
 
 export const image1 = style([

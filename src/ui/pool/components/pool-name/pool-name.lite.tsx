@@ -1,3 +1,4 @@
+import { useStore} from "@builder.io/mitosis";
 import Stack from "../../../stack";
 import Box from "../../../box";
 import Text from "../../../text";
@@ -12,8 +13,8 @@ export default function PoolName(props: PoolNameProps) {
       attributes={{ alignItems: "center" }}
     >
       <Box className={styles.imageBox}>
-        <img className={styles.image1} src={props.token1.imgSrc} />
-        <img className={styles.image2} src={props.token2.imgSrc} />
+        <img className={styles.image1} src={props?.coins[0]?.imgSrc} />
+        <img className={styles.image2} src={props?.coins[1]?.imgSrc} />
       </Box>
       <Stack
         className={styles.nameContainer}
@@ -31,7 +32,7 @@ export default function PoolName(props: PoolNameProps) {
             marginBottom: "$2",
           }}
         >
-          {props.token1.name}/{props.token2.name}
+          {`${props.coins[0]?.symbol} / ${props.coins[1].symbol}`}
         </Text>
         <Text color="$textSecondary">Pool #{props.id}</Text>
       </Stack>

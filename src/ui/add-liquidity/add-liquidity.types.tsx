@@ -1,10 +1,18 @@
-type Token = {
-  denom: string;
-  symbol: string;
-  available: number;
-  imgSrc: string;
+import { PoolListItemProps } from "../pool-list-item/pool-list-item.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
+
+export interface onAddLiquidityItem extends AvailableItem {
+  addAmount: string;
 }
+
+export type AddItem = {
+  progress: number;
+  value: string;
+}
+
 export interface AddLiquidityProps {
-  token1: Token;
-  token2: Token;
+  poolAssets: PoolListItemProps["poolAssets"];
+  onAddLiquidity: () => void;
+  onChange: (values: AddItem[]) => void;
+  isLoading?: boolean;
 }

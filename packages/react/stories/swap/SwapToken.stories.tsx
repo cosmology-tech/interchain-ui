@@ -68,7 +68,13 @@ export const Primary: Story = {
       },
     ],
     onSwap: (detail) => {
-      console.log("onSwap", detail)
-    }
+      console.log("onSwap", detail);
+    },
+    onChange: (detail) => {
+      console.log("onChange", detail);
+    },
+    onToteranceChange: (percent) => {
+      console.log("onToteranceChange", percent);
+    },
   },
 };

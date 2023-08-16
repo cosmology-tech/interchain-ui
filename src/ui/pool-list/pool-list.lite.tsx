@@ -29,19 +29,17 @@ export default function PoolList(props: PoolListProps) {
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem
-              id={item.id}
-              key={index}
-              token1={item.token1}
-              token2={item.token2}
-              poolLiquidity={item.poolLiquidity}
-              volume={item.volume}
-              fees={item.fees}
-              apr={item.apr}
+            key={item.id}
+            id={item?.id}
+            poolAssets={item.poolAssets}
+            liquidity={item.liquidity}
+            apr={item.apr}
+            fees7D={item.fees7D}
+            volume24H={item.volume24H}
+            onClick={() => item.onClick()}
             />
           )}
         </For>
-
-        {/* <PoolListItem {...item} /> */}
       </Box>
     </Box>
   );

@@ -14,10 +14,10 @@ export default function BondingList(props: BondingListProps) {
             <BondingListItem
               key={item.title}
               title={item.title}
-              apr={item.apr}
+              totalApr={item.totalApr}
               amount={item.amount}
-              per={item.per}
-              onUnbond={(e) => item.onUnbond?.(e)}
+              superfluidApr={item.superfluidApr}
+              onUnbond={() => item?.onUnbond?.()}
             />
           )}
         </For>
