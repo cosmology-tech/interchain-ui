@@ -14,7 +14,9 @@ import {
 } from "./add-liquidity.types";
 
 export default function AddLiquidity(props: AddLiquidityProps) {
-  let amountChangeType = useRef<"1" | "2">("1");
+  // amountChangeTypeRef is represented for which amount is changing now, and it's not for UI rendering
+  // e.g. Amount2 need to be updated when amount1 is changing, but we don't want to trigger handleAmount2Change function
+  let amountChangeTypeRef = useRef<"1" | "2">("1");
   let lastValuesRef = useRef<AddItem[]>([]);
   const state = useStore<{
     progress1: number;
@@ -110,7 +112,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       ]);
     },
     handleAmount1Change(value) {
-      if (amountChangeType !== "1") return;
+      if (amountChangeTypeRef !== "1") return;
       let value1 = value;
       let value2 = state.amount2;
       if (state.progress1 === 50) {
@@ -133,7 +135,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       state.amount2 = value2;
     },
     handleAmount2Change(value) {
-      if (amountChangeType !== "2") return;
+      if (amountChangeTypeRef !== "2") return;
       let value2 = value;
       let value1 = state.amount1;
       if (state.progress2 === 50) {
@@ -195,7 +197,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           priceDisplayAmount={props?.poolAssets[0]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress1Change(v)}
           onAmountChange={(value) => state.handleAmount1Change(value)}
-          onFocus={() => (amountChangeType = "1")}
+          onFocus={() => (amountChangeTypeRef = "1")}
         />
       </Box>
       <Box paddingBottom="$14">
@@ -210,7 +212,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           priceDisplayAmount={props?.poolAssets[1]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress2Change(v)}
           onAmountChange={(value) => state.handleAmount2Change(value)}
-          onFocus={() => (amountChangeType = "2")}
+          onFocus={() => (amountChangeTypeRef = "2")}
         />
       </Box>
       <Button
