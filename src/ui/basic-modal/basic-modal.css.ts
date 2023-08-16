@@ -10,13 +10,15 @@ const modalContentBase = style([
     backgroundColor: connectModalBgVar,
     maxHeight: "100%",
     overflow: "auto !important",
-    "::-webkit-scrollbar": {
-      display: "none",
-    },
     display: "flex",
     flexDirection: "column",
     height: "auto",
     borderRadius: themeVars.radii["xl"],
+    selectors: {
+      "::-webkit-scrollbar": {
+        display: "none",
+      },
+    },
   }),
 ]);
 
