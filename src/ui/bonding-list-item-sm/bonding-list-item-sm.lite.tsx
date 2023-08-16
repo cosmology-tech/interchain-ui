@@ -65,7 +65,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
             intent="secondary"
             variant="outlined"
             disabled={state.unbondDisabled}
-            onClick={() => props?.onUnbond()}
+            onClick={() => props?.onUnbond?.()}
             isLoading={props.isUnbondLoading}
           >
             Unbond
@@ -98,7 +98,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
           <Button
             size="sm"
             intent="tertiary"
-            onClick={() => props.onBond()}
+            onClick={() => props.onBond?.()}
             isLoading={props.isBondLoading}
           >
             Bond more

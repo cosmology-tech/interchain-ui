@@ -5,8 +5,6 @@ import Text from "../text";
 import Button from "../button";
 import * as styles from "./asset-list-header.css";
 import { AssetListHeaderProps } from "./asset-list-header.types";
-import { TransferType } from "../overview-transfer/overview-transfer.types";
-import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export default function AssetListHeader(props: AssetListHeaderProps) {
   useDefaultProps({
@@ -69,12 +67,12 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               className={styles.crossBtn}
             >
               <Show when={!!props.onWithdraw}>
-                <Button intent="tertiary" onClick={() => props.onWithdraw()}>
+                <Button intent="tertiary" onClick={() => props.onWithdraw?.()}>
                   Withdraw
                 </Button>
               </Show>
               <Show when={!!props.onDeposit}>
-                <Button intent="tertiary" onClick={() => props.onDeposit()}>
+                <Button intent="tertiary" onClick={() => props.onDeposit?.()}>
                   Deposite
                 </Button>
               </Show>
@@ -112,7 +110,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                 <Button
                   intent="tertiary"
                   attributes={{ width: "$25" }}
-                  onClick={() => props.onWithdraw()}
+                  onClick={() => props.onWithdraw?.()}
                 >
                   Withdraw
                 </Button>
@@ -121,7 +119,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                 <Button
                   intent="tertiary"
                   attributes={{ width: "$25" }}
-                  onClick={() => props.onDeposit()}
+                  onClick={() => props.onDeposit?.()}
                 >
                   Deposit
                 </Button>

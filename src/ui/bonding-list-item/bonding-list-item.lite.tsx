@@ -41,7 +41,7 @@ export default function BondingListItem(props: BondingListItemProps) {
       <Button
           size="xs"
           variant="unstyled"
-          onClick={() => props.onUnbond()}
+          onClick={() => props.onUnbond?.()}
           isLoading={props.isLoading}
         >
           Unbond All
