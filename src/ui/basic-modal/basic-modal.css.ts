@@ -15,7 +15,7 @@ const modalContentBase = style([
     height: "auto",
     borderRadius: themeVars.radii["xl"],
     selectors: {
-      "::-webkit-scrollbar": {
+      "&::-webkit-scrollbar": {
         display: "none",
       },
     },
