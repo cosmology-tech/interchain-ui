@@ -143,7 +143,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
         <Box height="$4" />
         <div
           className={qrCodeContainer[state.theme]}
-          style={state.overrideManager.applyOverrides(
+          style={state.overrideManager?.applyOverrides(
             connectQRCodeOverrides.name
           )}
         >
@@ -208,7 +208,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
           <div
             ref={shadowRef}
             className={qrCodeDescShadow[state.theme]}
-            style={state.overrideManager.applyOverrides(
+            style={state.overrideManager?.applyOverrides(
               connectQRCodeShadowOverrides.name
             )}
           ></div>

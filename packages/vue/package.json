@@ -1,6 +1,6 @@
 {
   "name": "@interchain-ui/vue",
-  "version": "1.1.11",
+  "version": "1.2.1",
   "type": "module",
   "description": "UI building blocks for Interchain builders",
   "author": "yyyyaaa <phatghaa@gmail.com>",
@@ -27,6 +27,7 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "motion": "^10.16.2",
+    "type-fest": "^4.2.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {

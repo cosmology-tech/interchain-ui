@@ -53,7 +53,7 @@ export default function ConnectModal(props: ConnectModalProps) {
       header={props.header}
       className={props.modalContainerClassName}
       contentClassName={modalContent[state.theme]}
-      contentStyles={state.overrideManager.applyOverrides(
+      contentStyles={state.overrideManager?.applyOverrides(
         connectModalOverrides.name
       )}
       childrenClassName={modalChildren}

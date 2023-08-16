@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.0...@interchain-ui/vue@1.2.1) (2023-08-15)
+
+**Note:** Version bump only for package @interchain-ui/vue
+
+# [1.2.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.1.11...@interchain-ui/vue@1.2.0) (2023-08-15)
+
+### Features
+
+- custom theme vars and docs ([#80](https://github.com/cosmology-tech/interchain-ui/issues/80)) ([ac1a0ba](https://github.com/cosmology-tech/interchain-ui/commit/ac1a0ba57082fe3d6647c18e8107ab56047ef6e2))
+
 ## [1.1.11](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.1.10...@interchain-ui/vue@1.1.11) (2023-07-28)
 
 ### Bug Fixes

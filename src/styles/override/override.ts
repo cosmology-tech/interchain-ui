@@ -1,12 +1,23 @@
-import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { assignInlineVars, setElementVars } from "@vanilla-extract/dynamic";
+import deepmerge from "@fastify/deepmerge";
 import type {
   OverridableProp,
   OverrideValue,
   ComponentOverrideMap,
   ComponentOverrideSchema,
   OverridableComponents,
+  CustomThemeVars,
 } from "./override.types";
 import type { ThemeVariant } from "../../models/system.model";
+import {
+  themeVars,
+  commonVars,
+  darkThemeClass,
+  lightThemeClass,
+} from "../../styles/themes.css";
+import type { ThemeContractValues } from "../../styles/themes.css";
+
+// ====
 import { buttonOverrides } from "../../ui/button/button.helper";
 import { clipboardCopyTextOverrides } from "../../ui/clipboard-copy-text/clipboard-copy-text.helper";
 import { connectModalOverrides } from "../../ui/connect-modal/connect-modal.helper";
@@ -123,4 +134,22 @@ function groupByTheme(config: OverrideValue) {
   }
 
   return result;
+}
+
+const merge = deepmerge({ all: true });
+
+export function assignThemeVars(
+  customTheme: CustomThemeVars,
+  scheme: ThemeVariant
+) {
+  const schemeClass = scheme === "light" ? lightThemeClass : darkThemeClass;
+  const elements = document.getElementsByClassName(schemeClass);
+
+  for (let el of elements) {
+    setElementVars(
+      el as HTMLElement,
+      themeVars,
+      merge(commonVars, customTheme as ThemeContractValues)
+    );
+  }
 }

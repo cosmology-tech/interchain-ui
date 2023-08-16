@@ -66,7 +66,7 @@ export default function ConnectModalWalletButton(
           variant: props.variant,
         })
       )}
-      style={state.overrideManager.applyOverrides(buttonOverrides.name)}
+      style={state.overrideManager?.applyOverrides(buttonOverrides.name)}
       onClick={(event: any) => props.onClick(event)}
     >
       <Show when={!!props.logo}>
@@ -89,7 +89,7 @@ export default function ConnectModalWalletButton(
           >
             <span
               className={subLogoSquare[state.theme]}
-              style={state.overrideManager.applyOverrides(
+              style={state.overrideManager?.applyOverrides(
                 buttonSublogoOverrides.name
               )}
             >
@@ -118,7 +118,7 @@ export default function ConnectModalWalletButton(
           buttonTextStyle[state.theme],
           buttonTextVariants({ variant: props.variant })
         )}
-        style={state.overrideManager.applyOverrides(buttonLabelOverrides.name)}
+        style={state.overrideManager?.applyOverrides(buttonLabelOverrides.name)}
       >
         {props.name}
       </span>

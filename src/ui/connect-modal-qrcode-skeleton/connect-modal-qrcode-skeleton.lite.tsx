@@ -43,7 +43,7 @@ export default function ConnectModalQrCodeSkeleton(props) {
     >
       <div
         className={qrcodeSkeleton[state.theme]}
-        style={state.overrideManager.applyOverrides(
+        style={state.overrideManager?.applyOverrides(
           connectModalQRCodeSkeletonOverrides.name
         )}
       />
