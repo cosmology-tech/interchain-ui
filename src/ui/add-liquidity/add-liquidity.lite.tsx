@@ -197,7 +197,9 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           priceDisplayAmount={props?.poolAssets[0]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress1Change(v)}
           onAmountChange={(value) => state.handleAmount1Change(value)}
-          onFocus={() => (amountChangeTypeRef = "1")}
+          onFocus={() => {
+            amountChangeTypeRef = "1";
+          }}
         />
       </Box>
       <Box paddingBottom="$14">
@@ -212,7 +214,9 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           priceDisplayAmount={props?.poolAssets[1]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress2Change(v)}
           onAmountChange={(value) => state.handleAmount2Change(value)}
-          onFocus={() => (amountChangeTypeRef = "2")}
+          onFocus={() => {
+            amountChangeTypeRef = "2";
+          }}
         />
       </Box>
       <Button
