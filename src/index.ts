@@ -84,6 +84,7 @@ export { default as ChainListItem } from "./ui/chain-list-item";
 export { default as ChainSwapInput } from "./ui/chain-swap-input";
 export { default as SelectButton } from "./ui/select-button";
 export { default as TokenNumberField } from "./ui/token-number-field";
+export { default as ConnectedWallet } from "./ui/connected-wallet";
 // End Components
 
 setPlatform(Platform.Default);
