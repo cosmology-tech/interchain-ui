@@ -14,23 +14,29 @@ interface BaseNftDetailProps {
   tokensCount: number;
   ownerName: string;
   imgSrc: string;
+  traits?: NftTraitListItemProps[];
+  detailInfo?: NftDetailInfoProps;
+  detailTopOffer?: NftDetailTopOfferProps;
+  detailActivity?: NftDetailActivityListProps;
+  onDownload: () => void;
+  onShare: () => void;
 }
 
 export type NftDetailProps = (
   | {
       type: "listForSale";
-      traits: NftTraitListItemProps[];
+      onTransfer: () => void;
+      onBurn: () => void;
+      onListForSale: () => void;
     }
   | {
       type: "makeOffer";
-      traits: NftTraitListItemProps[];
+      onMakeOffer: () => void;
     }
   | {
       type: "buyNow";
-      traits: NftTraitListItemProps[];
-      detailInfo?: NftDetailInfoProps;
-      detailTopOffer?: NftDetailTopOfferProps;
-      detailActivity?: NftDetailActivityListProps;
+      onBuyNow: () => void;
+      onMakeOffer: () => void;
     }
 ) &
   BaseNftDetailProps;

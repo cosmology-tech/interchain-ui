@@ -1,9 +1,9 @@
 import { NftFeesProps } from "../nft-fees/nft-fees.types";
-export interface NftSellNowProps {
-  bestOffer: number;
-  offerToFloorPriceRatio: string;
+export interface NftMinimumOfferProps {
   floorPrice: number;
-  fees: NftFeesProps;
+  highestOffer: number;
   onList?: () => void;
   onCancel?: () => void;
+  onChange?: (value: string) => void
+  fees:NftFeesProps;
 }

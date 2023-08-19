@@ -85,6 +85,9 @@ export { default as ChainSwapInput } from "./ui/chain-swap-input";
 export { default as SelectButton } from "./ui/select-button";
 export { default as TokenNumberField } from "./ui/token-number-field";
 export { default as Spinner } from "./ui/spinner";
+export { default as NftMinimumOffer } from "./ui/nft-minimum-offer";
+export { default as NftSellNow } from "./ui/nft-sell-now";
+export { default as NftTransfer } from "./ui/nft-transfer";
 // End Components
 
 setPlatform(Platform.Default);

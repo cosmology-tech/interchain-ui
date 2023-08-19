@@ -22,6 +22,9 @@ export const Primary: Story = {
     collections: 1,
     nfts: 6,
     listedForSale: 1,
+    onView() {
+      console.log("onView");
+    },
     list: [
       {
         imgSrc:
@@ -54,14 +57,14 @@ export const Primary: Story = {
       {
         imgSrc:
           "https://res.cloudinary.com/stargaze/image/upload/w_700/benc6jvttlv9nbemyxch.jpg",
-          name: "Bad Kid #9508",
+        name: "Bad Kid #9508",
         highestOffer: "450",
         listPrice: "373",
       },
       {
         imgSrc:
           "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
-          name: "Bad Kid #9509",
+        name: "Bad Kid #9509",
         highestOffer: "450",
         listPrice: "373",
       },

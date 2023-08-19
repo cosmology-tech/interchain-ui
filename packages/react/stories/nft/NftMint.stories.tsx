@@ -25,7 +25,14 @@ export const Primary: Story = {
     available: 2948,
     priceDisplayAmount: 64,
     limited: 50,
-    imgSrc: "https://res.cloudinary.com/stargaze/image/upload/f_auto,w_700/ighabxq1rjqr5xblblue",
+    imgSrc:
+      "https://res.cloudinary.com/stargaze/image/upload/f_auto,w_700/ighabxq1rjqr5xblblue",
     starsPrice: 0.01063943,
+    onMint: () => {
+      console.log("onMint");
+    },
+    onChange: (value) => {
+      console.log("onChange", value);
+    },
   },
 };
