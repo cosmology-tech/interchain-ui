@@ -4,4 +4,5 @@ export interface BondingMoreProps {
   onBond: () => void;
   onChange: (value: string) => void;
   isLoading?: boolean;
+  value?: string;
 }

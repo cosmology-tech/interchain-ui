@@ -5,5 +5,6 @@ export interface NftMinimumOfferProps {
   onList?: () => void;
   onCancel?: () => void;
   onChange?: (value: string) => void
+  value?:string;
   fees:NftFeesProps;
 }

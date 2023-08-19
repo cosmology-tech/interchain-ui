@@ -18,5 +18,14 @@ export const Primary: Story = {
     imgSrc:
       "https://res.cloudinary.com/stargaze/image/upload/erom1wypzaxaratnm7dg.jpg",
     tokenName: "KUJIRANS #763",
+    onChange(value) {
+      console.log("onChange", value);
+    },
+    onMakeOffer() {
+      console.log("onMakeOffer");
+    },
+    onCancel() {
+      console.log("onCancel");
+    },
   },
 };

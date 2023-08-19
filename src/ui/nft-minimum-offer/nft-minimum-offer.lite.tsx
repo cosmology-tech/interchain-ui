@@ -40,6 +40,7 @@ export default function NftMinimumOffer(props: NftMinimumOfferProps) {
         hasProgressBar={false}
         symbol="STARS"
         imgSrc={starIcon}
+        amount={props?.value}
         onAmountChange={(value) => props?.onChange?.(value)}
       />
       <Stack
