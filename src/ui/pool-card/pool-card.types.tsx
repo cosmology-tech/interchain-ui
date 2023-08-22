@@ -1,10 +1,5 @@
-import { PoolNameProps } from "../pool/components/pool-name/pool-name.types";
-
-export interface PoolCardProps extends PoolNameProps {
-  id: string;
-  poolLiquidity: number;
-  fees: number;
-  apr: number;
-  yourLiquidity: number;
-  bonded: number;
+import { PoolDetailProps, PoolListItemProps } from "../pool-list-item/pool-list-item.types";
+export interface PoolCardProps extends PoolListItemProps {
+  myLiquidity: PoolDetailProps["myLiquidity"];
+  unbondedBalance: PoolDetailProps["unbondedBalance"]
 }

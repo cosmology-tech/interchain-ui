@@ -48,7 +48,7 @@ export const percentContainer = style({
   position: "absolute",
   top: "50%",
   transform: "translate(0, -50%)",
-  right: "-300px",
+  right: "-400px",
 });
 
 export const rel = style({

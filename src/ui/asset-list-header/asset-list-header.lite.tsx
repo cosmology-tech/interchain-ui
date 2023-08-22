@@ -3,42 +3,12 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
-import BasicModal from "../basic-modal";
-import OverviewTransfer from "../overview-transfer";
 import * as styles from "./asset-list-header.css";
 import { AssetListHeaderProps } from "./asset-list-header.types";
-import { TransferType } from "../overview-transfer/overview-transfer.types";
-import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export default function AssetListHeader(props: AssetListHeaderProps) {
   useDefaultProps({
     isSingle: false,
-  });
-
-  const state = useStore<{
-    isOpen: boolean;
-    transferType: TransferType;
-    withdraw: () => void;
-    deposit: () => void;
-    handleTransfer: (item: AvailableItem, value: string) => void;
-  }>({
-    isOpen: false,
-    transferType: null,
-    withdraw() {
-      state.transferType = "withdraw";
-      state.isOpen = true;
-    },
-    deposit() {
-      state.transferType = "deposit";
-      state.isOpen = true;
-    },
-    handleTransfer(item: AvailableItem, value: string) {
-      if (state.transferType === "deposit") {
-        props?.onDeposit(item, value);
-      } else {
-        props?.onWithdraw(item, value);
-      }
-    },
   });
 
   return (
@@ -97,12 +67,12 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               className={styles.crossBtn}
             >
               <Show when={!!props.onWithdraw}>
-                <Button intent="tertiary" onClick={() => state.withdraw()}>
+                <Button intent="tertiary" onClick={() => props.onWithdraw?.()}>
                   Withdraw
                 </Button>
               </Show>
               <Show when={!!props.onDeposit}>
-                <Button intent="tertiary" onClick={() => state.deposit()}>
+                <Button intent="tertiary" onClick={() => props.onDeposit?.()}>
                   Deposite
                 </Button>
               </Show>
@@ -140,7 +110,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                 <Button
                   intent="tertiary"
                   attributes={{ width: "$25" }}
-                  onClick={() => state.withdraw()}
+                  onClick={() => props.onWithdraw?.()}
                 >
                   Withdraw
                 </Button>
@@ -149,7 +119,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                 <Button
                   intent="tertiary"
                   attributes={{ width: "$25" }}
-                  onClick={() => state.deposit()}
+                  onClick={() => props.onDeposit?.()}
                 >
                   Deposit
                 </Button>
@@ -158,25 +128,6 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
           </Stack>
         </Show>
       </Stack>
-      <BasicModal
-        isOpen={state.isOpen}
-        title={state.transferType === "deposit" ? "Deposit" : "Withdraw"}
-        onClose={() => (state.isOpen = false)}
-      >
-        <OverviewTransfer
-          type={state.transferType}
-          dropDownList={props.dropDownList}
-          onTransfer={(item: AvailableItem, value: string) => state.handleTransfer(item, value)}
-          onCancel={() => {
-            state.isOpen = false;
-            if (state.transferType === "deposit") {
-              props?.onDepositCancel?.();
-            } else {
-              props?.onWithdrawCancel?.();
-            }
-          }}
-        />
-      </BasicModal>
     </Box>
   );
 }

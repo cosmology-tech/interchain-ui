@@ -17,19 +17,27 @@ type Story = StoryObj<typeof meta>;
 /* This is primary RemoveLiquidity */
 export const Primary: Story = {
   args: {
-    myLiquidity: 0.2,
-    unbondedShares: "1.104915742185",
-    token1: {
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-      amount: 0.009798,
-      symbol: "ATOM",
+    unbondedBalance: "0.338654",
+    unbondedShares: "2.2098786",
+    myLiquidityCoins: [
+      {
+        symbol: "ATOM",
+        displayAmount: "0.01949381023874581",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+      },
+      {
+        symbol: "OSMO",
+        displayAmount: "0.365385514677405108",
+        imgSrc:
+          "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+      },
+    ],
+    onRemoveLiquidity() {
+      console.log("onRemoveLiquidity");
     },
-    token2: {
-      imgSrc:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-      amount: 0.180368,
-      symbol: "OSOM",
+    onChange(progress) {
+      console.log("onChange", progress);
     },
   },
 };

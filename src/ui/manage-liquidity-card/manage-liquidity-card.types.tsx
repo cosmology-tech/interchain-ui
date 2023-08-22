@@ -1,16 +1,12 @@
+import { Coin, PoolDetailProps } from "../pool-list-item/pool-list-item.types";
+
 export interface ManageLiquidityCardProps {
-  token1: {
-    name: string;
-    imgSrc: string;
-    asset: number;
-  };
-  token2: {
-    name: string;
-    imgSrc: string;
-    asset: number;
-  };
-  pollBalance: number;
-  poolShares: number;
-  lpTokens: number;
-  tokenShares: number;
+  totalBalanceCoins: Coin[];
+  totalBalance: PoolDetailProps["totalBalance"];
+  totalShares: PoolDetailProps["totalShares"];
+  lpTokenBalance: PoolDetailProps["lpTokenBalance"];
+  lpTokenShares: PoolDetailProps["lpTokenShares"];
+  onStartEarning: () => void;
+  onAdd: () => void;
+  onRemove: () => void;
 }

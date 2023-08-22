@@ -1,11 +1,14 @@
-type Token = {
-  imgSrc: string;
-  amount: number | string;
-  symbol: string;
-}
-export interface RemoveLiquidityProps{
-  myLiquidity: number;
-  unbondedShares: string;
-  token1: Token;
-  token2: Token
+import {
+  Coin,
+  PoolDetailProps,
+} from "../pool-list-item/pool-list-item.types";
+
+export interface OnRemoveLiquidityDetail {}
+export interface RemoveLiquidityProps {
+  unbondedBalance: PoolDetailProps["unbondedBalance"];
+  unbondedShares: PoolDetailProps["unbondedShares"];
+  myLiquidityCoins: Coin[];
+  isLoading?: boolean;
+  onRemoveLiquidity: () => void;
+  onChange: (progress: number) => void;
 }

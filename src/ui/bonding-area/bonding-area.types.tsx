@@ -1,8 +1,9 @@
 import { BondingCardProps } from "../bonding-card/bonding-card.types";
-import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.types";
+import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 import { BondingListSmProps } from "../bonding-list-sm/bonding-list-sm.types";
+import { BondingListProps } from "../bonding-list/bonding-list.types";
 export interface BondingAreaProps {
   bondingCardList: BondingCardProps[];
-  bondingList: BondingListItemProps[];
+  bondingList: BondingListProps;
   bondingListSm: BondingListSmProps;
 }

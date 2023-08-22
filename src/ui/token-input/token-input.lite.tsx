@@ -28,6 +28,7 @@ useMetadata({
 export default function TokenInput(props: TokenInputProps) {
   useDefaultProps({
     hasProgressBar: true,
+    availableAsMax: false,
   });
   const inputIdRef = useRef(uniqueId("token-input-"));
 
@@ -36,17 +37,15 @@ export default function TokenInput(props: TokenInputProps) {
     disabled: boolean;
     handleTokenInput: (string) => void;
     handleIconClick: (MouseEvent) => void;
-    amount: string;
   }>({
-    symbolValue: "",
+    get symbolValue() {
+      return new BigNumber(props.amount || 0)
+      .multipliedBy(props.priceDisplayAmount)
+      .decimalPlaces(2)
+      .toString()
+    },
     disabled: false,
-    amount: "",
     handleTokenInput(value: string) {
-      state.amount = value;
-      state.symbolValue = new BigNumber(value)
-        .multipliedBy(props.priceDisplayAmount)
-        .decimalPlaces(2)
-        .toString();
       props.onAmountChange && props.onAmountChange(value);
     },
     handleIconClick(e) {
@@ -67,7 +66,6 @@ export default function TokenInput(props: TokenInputProps) {
       state.disabled = false;
     }
 
-    state.handleTokenInput(props.amount ?? "");
   }, [props.progress, props.amount]);
 
   return (
@@ -144,14 +142,18 @@ export default function TokenInput(props: TokenInputProps) {
                 {props.denom}
               </Text>
             </Stack>
-            <Show when={props.progress !== 100}>
+            <div
+              style={{
+                visibility: props.progress !== 100 ? "visible" : "hidden",
+              }}
+            >
               <IconButton
                 intent="text"
                 icon={props.progress === 0 ? "add" : "subtract"}
                 onClick={(e) => state.handleIconClick(e)}
                 className={styles.operationIcon}
               />
-            </Show>
+            </div>
           </Stack>
         </Stack>
       </Show>
@@ -165,8 +167,8 @@ export default function TokenInput(props: TokenInputProps) {
           <NumberInput
             id={inputIdRef}
             min={0}
-            max={props.available}
-            value={state.amount}
+            max={props.availableAsMax ? props.available : undefined}
+            value={props.amount}
             borderless
             disabled={state.disabled}
             startAddon={
@@ -184,6 +186,7 @@ export default function TokenInput(props: TokenInputProps) {
               </Stack>
             }
             onChange={(e) => state.handleTokenInput(e.value)}
+            onFocus={() => props?.onFocus?.()}
             className={styles.token}
             inputContainer={styles.inputContainer}
             inputClassName={styles.inputClassName}
@@ -198,7 +201,7 @@ export default function TokenInput(props: TokenInputProps) {
           }}
         >
           <Text fontWeight="$semibold">{props.symbol} &nbsp;</Text>
-          <Show when={!!state.amount && !new BigNumber(state.amount).eq(0)}>
+          <Show when={!!props.amount && !new BigNumber(props.amount).eq(0)}>
             <Text color="$textSecondary" attributes={{ ml: "$2" }}>
               ≈ ${store.getState().formatNumber({ value: state.symbolValue })}
             </Text>

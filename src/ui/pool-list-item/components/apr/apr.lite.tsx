@@ -1,12 +1,17 @@
-import { Show } from "@builder.io/mitosis";
+import { Show, useMetadata } from "@builder.io/mitosis";
 import Stack from "../../../stack";
 import Text from "../../../text";
 import Box from "../../../box";
 import IconButton from "../../../icon-button";
+import { BaseComponentProps } from "~/models/components.model";
 
+useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["popover"],
+});
 export default function APR(props: {
   className?: string;
-  apr: number;
+  apr: string;
   innerClassName: string;
   title?: string;
 }) {

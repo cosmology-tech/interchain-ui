@@ -19,6 +19,10 @@ export const container = style({
   },
 });
 
+export const hoverStyle = style({
+  cursor: "pointer",
+})
+
 export const divider = styleVariants({
   light: [
     {

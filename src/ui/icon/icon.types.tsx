@@ -35,7 +35,8 @@ type IconName =
   | "moonLine"
   | "sunLine"
   | "arrowDropDown"
-  | "settingFill";
+  | "settingFill"
+  | "loaderLine";
 
 export interface IconProps extends BaseComponentProps {
   name: IconName;

@@ -81,11 +81,16 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             />
           </Show>
 
-          <Box>
+          <Box
+            flex={props.size === "sm" ? "1 0 1px" : undefined}
+            width={props.size === "sm" ? "$full" : undefined}
+          >
             <Stack
               direction="horizontal"
               space="$2"
               attributes={{
+                justifyContent:
+                  props.size === "sm" ? "space-between" : "flex-start",
                 alignItems: "center",
               }}
             >
@@ -159,7 +164,14 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             </Stack>
           </Show>
 
-          <Show when={props.value && props.notionalValue && props.amount && !props.endAddon}>
+          <Show
+            when={
+              props.value &&
+              props.notionalValue &&
+              props.amount &&
+              !props.endAddon
+            }
+          >
             <Stack direction="vertical" space="$0">
               <Text
                 color="$text"
@@ -180,9 +192,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             </Stack>
           </Show>
 
-          <Show when={props.endAddon && !!props.value}>
-            {props.endAddon}
-          </Show>
+          <Show when={props.endAddon && !!props.value}>{props.endAddon}</Show>
         </Show>
       </Box>
     </div>

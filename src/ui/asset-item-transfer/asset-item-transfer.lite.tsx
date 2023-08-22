@@ -22,19 +22,20 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     theme: "light",
     inputAmount: "",
     handleAmountChange(percent) {
-      state.inputAmount = new BigNumber(props.avaliable)
+      state.inputAmount = new BigNumber(props.available)
         .multipliedBy(percent)
         .toString();
     },
     onAmountChange(value) {
       state.inputAmount = value;
+      props?.onChange?.(value);
     },
     get transferDisabled() {
       return (
-        new BigNumber(state.inputAmount).gt(props.avaliable) ||
+        new BigNumber(state.inputAmount).gt(props.available) ||
         state.inputAmount === ""
       );
-    },
+    }
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -166,7 +167,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         priceDisplayAmount={props.priceDisplayAmount}
         symbol={props.fromSymbol}
         denom={props.fromDenom}
-        available={props.avaliable}
+        available={props.available}
         imgSrc={props.fromImgSrc}
         onAmountChange={(value) => state.onAmountChange(value)}
       />
@@ -225,9 +226,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       <Button
         intent="tertiary"
         attributes={{ width: "$full" }}
-        onClick={() =>
-          props?.onTransfer?.({ value: state.inputAmount, type: props.type })
-        }
+        onClick={() => props?.onTransfer?.()}
         disabled={state.transferDisabled}
       >
         <Stack

@@ -17,9 +17,15 @@ type Story = StoryObj<typeof meta>;
 /* This is primary button */
 export const Primary: Story = {
   args: {
-    title: 'Bonded 1 day',
-    amount: 0.33,
-    poolShares: 0,
-    apr: "2.46",
+    title: "Bonded 1 day",
+    bondedValue: 0.33,
+    bondedShares: 0.58,
+    totalApr: "2.46",
+    onBond() {
+      console.log("onBond");;
+    },
+    onUnbond() {
+      console.log("onUnbond");
+    },
   },
 };

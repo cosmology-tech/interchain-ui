@@ -1,38 +1,76 @@
 import { For, useStore } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
 import ProgressBar from "../progress-bar";
+import { store } from "../../models/store";
 
 import * as styles from "./remove-liquidity.css";
 import { RemoveLiquidityProps } from "./remove-liquidity.types";
 
 export default function RemoveLiquidity(props: RemoveLiquidityProps) {
-  const state = useStore({
+  const state = useStore<{
+    progress: number;
+    handeProgressClick: (number) => void;
+    removedBalance: string;
+    removedShares: string;
+    removedAmount0: string;
+    removedAmount1: string;
+  }>({
     progress: 50,
     handeProgressClick(value: number) {
       state.progress = value;
+      props?.onChange(value)
+    },
+    get removedBalance() {
+      return new BigNumber(state.progress)
+        .dividedBy(100)
+        .multipliedBy(props.unbondedBalance)
+        .decimalPlaces(6)
+        .toString();
+    },
+    get removedShares() {
+      return new BigNumber(state.progress)
+        .dividedBy(100)
+        .multipliedBy(props.unbondedShares)
+        .decimalPlaces(6)
+        .toString();
+    },
+    get removedAmount0() {
+      return new BigNumber(state.progress)
+        .dividedBy(100)
+        .multipliedBy(props.myLiquidityCoins[0]?.displayAmount || 0)
+        .decimalPlaces(6)
+        .toString();
+    },
+    get removedAmount1() {
+      return new BigNumber(state.progress)
+        .dividedBy(100)
+        .multipliedBy(props.myLiquidityCoins[1]?.displayAmount || 0)
+        .decimalPlaces(6)
+        .toString();
     },
   });
 
   return (
-    <Box>
+    <Box className={styles.container}>
       <Stack direction="vertical">
-        <Text fontSize="$xl" fontWeight="$semibold">
-          Remove liquidity
-        </Text>
-
         <Stack
           attributes={{
             alignItems: "center",
           }}
         >
-          <Text color="$textSecondary">{props.token1.symbol}</Text>
+          <Text color="$textSecondary">
+            {props?.myLiquidityCoins[0]?.symbol}
+          </Text>
           <Text color="$textSecondary" attributes={{ px: "$3" }}>
             /
           </Text>
-          <Text color="$textSecondary">{props.token2.symbol}</Text>
+          <Text color="$textSecondary">
+            {props?.myLiquidityCoins[1]?.symbol}
+          </Text>
         </Stack>
       </Stack>
       <Stack
@@ -47,7 +85,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
           $
         </Text>
         <Text fontSize="$7xl" fontWeight="$semibold">
-          {props.myLiquidity}
+          {store.getState().formatNumber({ value: state.removedBalance || 0 })}
         </Text>
       </Stack>
       <Stack
@@ -57,7 +95,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
           justifyContent: "center",
         }}
       >
-        <Text attributes={{ marginRight: "$3" }}>{props.unbondedShares}</Text>
+        <Text attributes={{ marginRight: "$3" }}>{state.removedBalance}</Text>
         <Text>pool shares</Text>
       </Stack>
       <Stack
@@ -69,30 +107,40 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
             alignItems: "center",
           }}
         >
-          <img className={styles.img} src={props.token1.imgSrc} />
+          <img
+            className={styles.img}
+            src={props?.myLiquidityCoins[0]?.imgSrc}
+          />
           <Text
             color="$textSecondary"
             fontWeight="$semibold"
             attributes={{ mx: "$4" }}
           >
-            {props.token1.amount}
+            {state.removedAmount0}
           </Text>
-          <Text color="$textSecondary">{props.token1.symbol}</Text>
+          <Text color="$textSecondary">
+            {props?.myLiquidityCoins[0]?.symbol}
+          </Text>
         </Stack>
         <Stack
           attributes={{
             alignItems: "center",
           }}
         >
-          <img className={styles.img} src={props.token2.imgSrc} />
+          <img
+            className={styles.img}
+            src={props?.myLiquidityCoins[1]?.imgSrc}
+          />
           <Text
             color="$textSecondary"
             fontWeight="$semibold"
             attributes={{ mx: "$4" }}
           >
-            {props.token2.amount}
+            {state.removedAmount1}
           </Text>
-          <Text color="$textSecondary">{props.token2.symbol}</Text>
+          <Text color="$textSecondary">
+            {props?.myLiquidityCoins[1]?.symbol}
+          </Text>
         </Stack>
       </Stack>
       <ProgressBar
@@ -119,6 +167,8 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
         size="lg"
         intent="tertiary"
         attributes={{ marginTop: "$18", width: "$full" }}
+        onClick={() => props.onRemoveLiquidity()}
+        isLoading={props.isLoading}
       >
         Remove Liquidity
       </Button>

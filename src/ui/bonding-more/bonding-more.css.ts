@@ -1,6 +1,9 @@
 import { style } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
+export const container = style({
+  width: "464px",
+});
 export const inputContainer = style({
   borderColor: themeVars.colors.inputBorder,
   borderWidth: "1px",

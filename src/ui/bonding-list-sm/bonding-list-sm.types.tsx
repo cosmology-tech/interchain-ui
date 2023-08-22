@@ -2,6 +2,6 @@ import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-ite
 
 export interface BondingListSmProps {
   list: BondingListItemSmProps[];
-  unbondedAmt: number;
-  unbondedShares: number;
+  unbondedBalance: number | string;
+  unbondedShares: number | string;
 }

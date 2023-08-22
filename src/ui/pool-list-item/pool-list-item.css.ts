@@ -5,9 +5,11 @@ import { themeVars } from "../../styles/themes.css";
 export const container = style({
   marginBottom: themeVars.space[10],
   marginRight: themeVars.space[9],
+  display: "flex",
   width: "752px",
   flexWrap: "nowrap",
   justifyContent: "flex-start",
+  alignItems: "center",
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       width: "100%",
@@ -17,6 +19,15 @@ export const container = style({
     },
   },
 });
+
+export const hoverStyle = style({
+  cursor: "pointer",
+  selectors: {
+    "&:hover": {
+      backgroundColor: themeVars.colors.cardBg
+    }
+  },
+})
 
 export const contentContainer = style({
   width: "712px",

@@ -1,6 +1,8 @@
 import Stack from "../stack";
+import BigNumber from "bignumber.js";
 import Button from "../button";
 import Text from "../text";
+import { store } from "../../models/store";
 import * as styles from "./bonding-list-item.css";
 import { BondingListItemProps } from "./bonding-list-item.types";
 
@@ -20,20 +22,31 @@ export default function BondingListItem(props: BondingListItemProps) {
       </Text>
 
       <Text className={styles.item} color="$textSecondary" fontSize="$xs">
-        {props.apr}
+        {new BigNumber(props.totalApr || 0).decimalPlaces(2).toString()}%
       </Text>
 
       <Text className={styles.item} color="$textSecondary" fontSize="$xs">
-        {props.amount}
+        ${store.getState().formatNumber({ value: props.amount || 0 })}
       </Text>
 
       <Text className={styles.item} color="$textSecondary" fontSize="$xs">
-        {props.per}
+        {new BigNumber(props.superfluidApr || 0).decimalPlaces(2).toString()}%
       </Text>
-
-      <Button size="xs" variant="unstyled" onClick={(e) => props.onUnbond(e)}>
-        Unbond All
-      </Button>
+      <Stack
+        attributes={{
+          width: "$25",
+          justifyContent: "flex-end",
+        }}
+      >
+      <Button
+          size="xs"
+          variant="unstyled"
+          onClick={() => props.onUnbond?.()}
+          isLoading={props.isLoading}
+        >
+          Unbond All
+        </Button>
+      </Stack>
     </Stack>
   );
 }

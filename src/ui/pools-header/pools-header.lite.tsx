@@ -86,7 +86,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                   $
                 </Text>
                 <Text color="$text" fontSize="$4xl" fontWeight="$semibold">
-                  {store.getState()?.formatNumber?.({ value: props.price })}
+                  {store.getState()?.formatNumber?.({ value: props.osmoPrice })}
                 </Text>
               </Stack>
             </Box>
@@ -115,7 +115,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               fontSize="$4xl"
               lineHeight="$normal"
             >
-              12
+              {props.countdown[0]}
               <Text
                 className={styles.semocolon}
                 as="span"
@@ -125,7 +125,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 :
               </Text>
-              19
+              {props.countdown[1]}
               <Text
                 className={styles.semocolon}
                 as="span"
@@ -135,7 +135,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 :
               </Text>
-              48
+              {props.countdown[2]}
             </Text>
           </Stack>
         </Box>
@@ -167,7 +167,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 fontSize="$4xl"
                 fontWeight="$semibold"
               >
-                {props.rewards}
+                {props.rewardsAmount}
               </Text>
               <Text
                 className={styles.osom}
@@ -176,11 +176,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 OSMO
               </Text>
-              <Text
-                color="$rewardContent"
-                className={styles.mb3}
-              >
-                {props.$rewards}
+              <Text color="$rewardContent" className={styles.mb3}>
+                $
+                {store
+                  .getState()
+                  .formatNumber({ value: props.totalRewardPerDay })}
               </Text>
             </Stack>
           </Stack>

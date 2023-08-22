@@ -3,7 +3,6 @@ import {
 } from "../transfer-item/transfer-item.types";
 
 export type TransferType = "withdraw" | "deposit";
-
 export interface OverviewTransferProps {
   /**
    * Tranfer type
@@ -16,6 +15,7 @@ export interface OverviewTransferProps {
   /**
    * Callback of transfer button
    */
-  onTransfer: (transferItem: AvailableItem, value: string) => void;
+  onTransfer: () => void;
+  onChange: (selectedItem: AvailableItem, value: string) => void;
   onCancel: () => void;
 }

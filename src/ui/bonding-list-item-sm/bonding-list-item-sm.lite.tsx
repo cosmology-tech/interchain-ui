@@ -1,10 +1,20 @@
+import { useStore } from "@builder.io/mitosis";
+import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import Button from "../button";
+import { store } from "../../models/store";
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
+  const state = useStore<{
+    unbondDisabled: boolean;
+  }>({
+    get unbondDisabled() {
+      return new BigNumber(props.bondedValue || 0).lte(0);
+    },
+  });
   return (
     <Box
       px="$8"
@@ -44,13 +54,20 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               fontWeight="$semibold"
               attributes={{ marginRight: "$3" }}
             >
-              {props.apr}
+              {new BigNumber(props.totalApr || 0).decimalPlaces(2).toString()}
             </Text>
             <Text color="$textSecondary" fontWeight="$semibold">
               %
             </Text>
           </Stack>
-          <Button size="sm" intent="tertiary">
+          <Button
+            size="sm"
+            intent="secondary"
+            variant="outlined"
+            disabled={state.unbondDisabled}
+            onClick={() => props?.onUnbond?.()}
+            isLoading={props.isUnbondLoading}
+          >
             Unbond
           </Button>
         </Box>
@@ -65,7 +82,7 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               $
             </Text>
             <Text fontWeight="$semibold" fontSize="$4xl">
-              {props.amount}
+              {store.getState().formatNumber({ value: props.bondedValue })}
             </Text>
           </Stack>
           <Stack
@@ -75,10 +92,15 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
               marginBottom: "$9",
             }}
           >
-            <Text fontWeight="$semibold">{props.poolShares}&nbsp;</Text>
+            <Text fontWeight="$semibold">{props.bondedShares}&nbsp;</Text>
             <Text>pool shares</Text>
           </Stack>
-          <Button size="sm" intent="tertiary">
+          <Button
+            size="sm"
+            intent="tertiary"
+            onClick={() => props.onBond?.()}
+            isLoading={props.isBondLoading}
+          >
             Bond more
           </Button>
         </Stack>

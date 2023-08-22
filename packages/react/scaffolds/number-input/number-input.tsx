@@ -45,6 +45,8 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
       intent = "default",
       name,
       precision,
+      minFractionDigits = 0,
+      maxFractionDigits = 6,
     } = props;
     const [state, send] = useMachine(
       numberInput.machine({
@@ -56,6 +58,8 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
         max,
         step,
         name,
+        minFractionDigits,
+        maxFractionDigits,
         precision,
         onChange: (details) => {
           onChange?.(details);
@@ -81,7 +85,7 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
       //   api.setValue(value);
       // }
       // api.setValue(value);
-      if(!api.isFocused) {
+      if(!api.isFocused && value) {
         api.setValue(value);
       }
     }, [value]);
@@ -113,6 +117,9 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
               : props?.startAddon}
           <input
             {...api.inputProps}
+            disabled={disabled}
+            id={id}
+            value={value}
             className={clx(
               inputStyles[themeStore.theme],
               inputSizes[size],
