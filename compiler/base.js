@@ -45,6 +45,10 @@ function getScaffoldsDirs(rootPath) {
   };
 }
 
+function removeLiteExtension(fileContent) {
+  return fileContent.replace(/\.lite/g, "");
+}
+
 async function compile(rawOptions) {
   const { watcherEvents, ...defaultOptions } = rawOptions;
 
@@ -83,11 +87,11 @@ async function compile(rawOptions) {
     distFiles.forEach((element) => {
       const data = fs.readFileSync(element, "utf8");
 
-      let result = data
-        // Fix alias
-        .replace(/\~\//g, "../../")
-        // Remove .lite
-        .replace(/\.lite/g, "");
+      let result = removeLiteExtension(
+        data
+          // Fix alias
+          .replace(/\~\//g, "../../")
+      );
 
       if (options.target === "react") {
         result = fixReactTypeIssues(result);
@@ -171,7 +175,8 @@ async function compile(rawOptions) {
       if (isLiteJSXComponent) return;
 
       try {
-        await fsPromise.copyFile(event.path, targetPath);
+        const fileContent = await fsPromise.readFile(event.path, "utf-8");
+        await fsPromise.writeFile(targetPath, removeLiteExtension(fileContent));
       } catch (err) {
         console.log(`handleWatcherEvents() [${event.type}] event error `, err);
       }

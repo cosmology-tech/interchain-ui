@@ -96,5 +96,6 @@ function fixReactTypeIssues(codeStr) {
       )
       // Fix shape rendering not correctly compiled by mitosis
       .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)
+      .replace(/(stroke-width)="(.*)"/g, `strokeWidth="$2"`)
   );
 }
