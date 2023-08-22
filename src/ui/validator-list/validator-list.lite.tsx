@@ -1,0 +1,60 @@
+import { For, Show } from "@builder.io/mitosis";
+import Stack from "../stack";
+import Box from "../box";
+import Text from "../text";
+import ValidatorListItem from "../validator-list-item";
+import * as styles from "./validator-list.css";
+import { ValidatorListItemProps } from "../validator-list-item/validator-list-item.types";
+import { ValidatorListProps } from "./validator-list.types";
+
+export default function BondingList(props: ValidatorListProps) {
+  return (
+    <Box className={styles.container}>
+      <Show when={props.selfValidator}>
+        <Stack
+          attributes={{
+            marginBottom: "$7",
+            paddingRight: "$9",
+          }}
+        >
+          <For each={["Validator", "Amount staked", "Claimable rewards"]}>
+            {(item: string, index: number) => (
+              <Text
+                key={item}
+                className={styles.title}
+                color="$textSecondary"
+                textAlign={index === 0 ? "left" : "right"}
+              >
+                {item}
+              </Text>
+            )}
+          </For>
+          <Box width="$21" />
+        </Stack>
+      </Show>
+      <Box
+        paddingBottom="$7"
+        paddingTop="$7"
+        paddingLeft="$7"
+        paddingRight="$9"
+        backgroundColor={props.selfValidator ? "$cardBg" : "$transparent"}
+        borderRadius="$lg"
+      >
+        <Stack direction="vertical" space="$7">
+          <For each={props.list}>
+            {(item: ValidatorListItemProps, index: number) => (
+              <ValidatorListItem
+                key={index}
+                validatorName={item.validatorName}
+                validatorImg={item.validatorImg}
+                stakedAmount={item.stakedAmount}
+                rewardsAmount={item.rewardsAmount}
+                symbol={item.symbol}
+              />
+            )}
+          </For>
+        </Stack>
+      </Box>
+    </Box>
+  );
+}

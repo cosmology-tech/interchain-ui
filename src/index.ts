@@ -85,6 +85,10 @@ export { default as ChainSwapInput } from "./ui/chain-swap-input";
 export { default as SelectButton } from "./ui/select-button";
 export { default as TokenNumberField } from "./ui/token-number-field";
 export { default as Spinner } from "./ui/spinner";
+export { default as StakingAssetHeader } from "./ui/staking-asset-header";
+export { default as StakingClaimHeader } from "./ui/staking-claim-header";
+export { default as ValidatorListItem } from "./ui/validator-list-item";
+export { default as ValidatorList } from "./ui/validator-list";
 // End Components
 
 setPlatform(Platform.Default);
