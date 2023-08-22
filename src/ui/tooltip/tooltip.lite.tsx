@@ -79,7 +79,7 @@ export default function Tooltip(props: TooltipProps) {
           top: arrowY != null ? `${arrowY}px` : "",
           right: "",
           bottom: "",
-          [staticSide]: "-4px",
+          [staticSide]: "-2px",
         });
       }
     });
@@ -100,7 +100,8 @@ export default function Tooltip(props: TooltipProps) {
       {props?.children}
       <Box
         ref={floatingTargetRef}
-        p="$3"
+        px="$5"
+        py="$3"
         backgroundColor="$text"
         borderRadius="$md"
         position="absolute"
@@ -115,8 +116,8 @@ export default function Tooltip(props: TooltipProps) {
           ref={arrowRef}
           position="absolute"
           transform="rotate(45deg)"
-          width="$6"
-          height="$6"
+          width="$5"
+          height="$5"
           backgroundColor="$text"
         />
       </Box>
