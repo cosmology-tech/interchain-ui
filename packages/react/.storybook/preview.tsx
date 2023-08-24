@@ -1,5 +1,6 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import WithThemeDecorator from "./WithThemeDecorator";
 import { I18nProvider } from "../src";
 
@@ -11,6 +12,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
     },
   },
   decorators: [
