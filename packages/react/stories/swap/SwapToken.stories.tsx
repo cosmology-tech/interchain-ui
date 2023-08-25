@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SwapToken } from "../../src";
+import { SwapToken, BasicModal, Button } from "../../src";
 
 const meta: Meta<typeof SwapToken> = {
   component: SwapToken,
@@ -23,7 +24,6 @@ export const Primary: Story = {
         percentage: "0.2%",
         value: "< $0.01",
       },
-      minimumReceived: "0.018607",
     },
     dropDownList: [
       {
@@ -67,14 +67,29 @@ export const Primary: Story = {
         priceDisplayAmount: 0.0104,
       },
     ],
-    onSwap: (detail) => {
-      console.log("onSwap", detail);
+    onSwap: () => {
+      console.log("onSwap");
     },
-    onChange: (detail) => {
-      console.log("onChange", detail);
+    onChange: () => {
+      console.log("onChange");
     },
     onToteranceChange: (percent) => {
       console.log("onToteranceChange", percent);
     },
+  },
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setIsOpen(true)}>Swap</Button>
+        <BasicModal
+          isOpen={isOpen}
+          title="Swap"
+          onClose={() => setIsOpen(false)}
+        >
+          <SwapToken {...props} />
+        </BasicModal>
+      </>
+    );
   },
 };

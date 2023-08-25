@@ -54,20 +54,6 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
   return (
     <Box className={styles.container}>
-      {/* <Stack>
-        <Text
-          fontSize="$xl"
-          fontWeight="$semibold"
-          attributes={{
-            marginRight: "$3",
-          }}
-        >
-          {`${props.type === "withdraw" ? "Withdraw" : "Deposit"}`}
-        </Text>
-        <Text fontSize="$xl" fontWeight="$semibold">
-          {props.fromSymbol}
-        </Text>
-      </Stack> */}
 
       <Stack
         className={styles.onlySm}

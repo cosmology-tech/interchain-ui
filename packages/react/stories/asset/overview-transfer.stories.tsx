@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { OverviewTransfer } from "../../src";
-import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
+import { OverviewTransfer, BasicModal, Button, Stack } from "../../src";
 
 const meta: Meta<typeof OverviewTransfer> = {
   component: OverviewTransfer,
@@ -52,5 +52,31 @@ export const Primary: Story = {
     onChange(selectedItem, value) {
       console.log("onChange", selectedItem, value);
     },
+  },
+  render: (props) => {
+    const [isDepositOpen, setIsDepositOpen] = useState(false);
+    const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+    return (
+      <>
+        <Stack space="$10">
+          <Button onClick={() => setIsDepositOpen(true)}>Deposit</Button>
+          <Button onClick={() => setIsWithdrawOpen(true)}>Withdraw</Button>
+        </Stack>
+        <BasicModal
+          isOpen={isDepositOpen}
+          title="Deposit"
+          onClose={() => setIsDepositOpen(false)}
+        >
+          <OverviewTransfer {...props} />
+        </BasicModal>
+        <BasicModal
+          isOpen={isWithdrawOpen}
+          title="Withdraw"
+          onClose={() => setIsWithdrawOpen(false)}
+        >
+          <OverviewTransfer {...props} />
+        </BasicModal>
+      </>
+    );
   },
 };

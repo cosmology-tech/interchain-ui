@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AssetItemTransfer } from "../../src";
+import { AssetItemTransfer, BasicModal, Button, Stack } from "../../src";
 
 const meta: Meta<typeof AssetItemTransfer> = {
   component: AssetItemTransfer,
@@ -15,7 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    type: "withdraw",
     fromSymbol: "UMEE",
     fromDenom: "Umee",
     fromAddress: "umee1lqsq...pv4axdaxk",
@@ -29,13 +29,39 @@ export const Primary: Story = {
     amount: "",
     priceDisplayAmount: 0.5,
     onChange: (value) => {
-      console.log("onChange", value)
+      console.log("onChange", value);
     },
     onTransfer: () => {
-      console.log("onTransfer")
+      console.log("onTransfer");
     },
     onCancel: () => {
-      console.log("onCancel")
-    }
+      console.log("onCancel");
+    },
+  },
+  render: (props) => {
+    const [isDepositOpen, setIsDepositOpen] = useState(false);
+    const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+    return (
+      <>
+        <Stack space="$10">
+          <Button onClick={() => setIsDepositOpen(true)}>Deposit</Button>
+          <Button onClick={() => setIsWithdrawOpen(true)}>Withdraw</Button>
+        </Stack>
+        <BasicModal
+          isOpen={isDepositOpen}
+          title="Deposit"
+          onClose={() => setIsDepositOpen(false)}
+        >
+          <AssetItemTransfer {...props} />
+        </BasicModal>
+        <BasicModal
+          isOpen={isWithdrawOpen}
+          title="Withdraw"
+          onClose={() => setIsWithdrawOpen(false)}
+        >
+          <AssetItemTransfer {...props} />
+        </BasicModal>
+      </>
+    );
   },
 };

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ListForSale } from "../../../../src";
+import { ListForSale, BasicModal, Button  } from "../../../../src";
 
 const meta: Meta<typeof ListForSale> = {
   component: ListForSale,

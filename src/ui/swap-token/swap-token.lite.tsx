@@ -224,14 +224,7 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   return (
-    <Box className={styles.swapTokenContainer}>
-      <Text
-        fontSize="$lg"
-        fontWeight="$semibold"
-        attributes={{ marginBottom: "$8" }}
-      >
-        Swap
-      </Text>
+    <Box className={styles.swapTokenContainer} paddingTop="$5">
       <TransferItem
         halfBtn
         maxBtn
