@@ -1154,6 +1154,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.21.0":
+  version "7.22.11"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.11.tgz#7a9ba3bbe406ad6f9e8dd4da2ece453eb23a77a4"
+  integrity sha512-ee7jVNlWN09+KftVOu9n7S8gQzD/Z6hN/I8VBRXW4P1+Xe7kJGXMwu8vds4aGIMHZnNbdpSWCfZZtinytpcAvA==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/template@^7.14.5", "@babel/template@^7.22.5":
   version "7.22.5"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.22.5.tgz"
@@ -1318,6 +1325,21 @@
     hash-sum "^2.0.0"
     node-fetch "^2.3.0"
     tslib "^1.10.0"
+
+"@chain-registry/osmosis@^1.20.0":
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/osmosis/-/osmosis-1.20.0.tgz#a3d4b1ff530a4a7f30b78c534ee2b54e067bfd54"
+  integrity sha512-e4P3S07n/SRQCukzBUZKsSj9cUCsOZYu0orBUCo/Df92pEj6ebX0Mdo+Nci5Mn/SDuMRs1DHqe3kWCKAb+Jy7g==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@chain-registry/types" "^0.16.0"
+
+"@chain-registry/types@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.16.0.tgz#f76409186899a976d33693d7f458c33d71a66730"
+  integrity sha512-4j6vq2Vqn/nF+UBjvRPUVs6eM3+5rJ+dPmEWpd/OoNH3wTy1k6aoilcSTZRR//vGcI5EOVGsxhhJxUzo2qqweA==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -7008,6 +7030,14 @@ chai@^3.5.0:
     assertion-error "^1.0.1"
     deep-eql "^0.1.3"
     type-detect "^1.0.0"
+
+chain-registry@^1.19.0:
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/chain-registry/-/chain-registry-1.19.0.tgz#6d2d56b56efebee0d15ced8f9bd8329a099ce04d"
+  integrity sha512-7Ax0cRurfS+I0Oru3Td8NqBY/2YRCv570XM555E5vu3ib3f/k5SELwxsSalTtQj+Furx6quEyKWuOjrNwPpcQg==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@chain-registry/types" "^0.16.0"
 
 chalk@1.1.3, chalk@^1.1.1:
   version "1.1.3"

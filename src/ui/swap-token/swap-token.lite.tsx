@@ -248,7 +248,6 @@ export default function SwapToken(props: SwapTokenProps) {
       >
         <div className={styles.rel} ref={swapIconRef}>
           <IconButton
-            size="lg"
             className={styles.swapIcon[state.theme]}
             icon={state.swapIcon}
             isRound={true}

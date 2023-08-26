@@ -44,6 +44,7 @@ export const ALL_ICON_NAMES = [
   "informationLine",
   "informationFill",
   "loaderFill",
+  "pencilLine",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];
