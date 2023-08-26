@@ -14,6 +14,7 @@ import Spinner from "../spinner";
 import { store } from "../../models/store";
 import { getSize, recipe, buttonOverrides } from "./button.helper";
 import type { ButtonProps, ButtonState } from "./button.types";
+import * as styles from './button.css'
 
 useMetadata({ isAttachedToShadowDom: true });
 
@@ -52,9 +53,9 @@ export default function Button(props: ButtonProps) {
     <Show when={state.loaded}>
       <Box
         as="button"
-        {...getSize(props.size)}
         {...props.attributes}
         className={clx(
+          styles.buttonSize[props.size],
           recipe({
             variant: props.variant,
             intent: props.intent,

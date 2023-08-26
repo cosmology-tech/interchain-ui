@@ -55,7 +55,7 @@ export const variants = styleVariants({
       background: "none !important",
       color: `${buttonTextColorVar} !important`,
       selectors: {
-        "&:hover": {
+        "&:not([disabled]):hover": {
           opacity: 0.8,
         },
         "&:focus": {
@@ -71,7 +71,7 @@ export const variants = styleVariants({
       fontWeight: themeVars.fontWeight.semibold,
       backgroundColor: "transparent !important",
       selectors: {
-        "&:hover": {
+        "&:not([disabled]):hover": {
           backgroundColor: `${buttonHoverBgVar} !important`,
         },
       },
@@ -85,12 +85,40 @@ export const variants = styleVariants({
   ],
 });
 
+export const buttonSize = styleVariants({
+  xs: {
+    padding: `0px ${themeVars.space["4"]}`,
+    fontSize: themeVars.fontSize.xs,
+    height: themeVars.space["10"],
+    minWidth: themeVars.space["10"],
+    borderRadius: themeVars.radii.base,
+  },
+  sm: {
+    padding: `0px ${themeVars.space["6"]}`,
+    fontSize: themeVars.fontSize.sm,
+    height: themeVars.space["12"],
+    minWidth: themeVars.space["12"],
+  },
+  md: {
+    padding: `0px ${themeVars.space["8"]}`,
+    fontSize: themeVars.fontSize.md,
+    height: themeVars.space["14"],
+    minWidth: themeVars.space["14"],
+  },
+  lg: {
+    padding: `0px ${themeVars.space["10"]}`,
+    fontSize: themeVars.fontSize.lg,
+    height: themeVars.space["17"],
+    minWidth: themeVars.space["17"],
+  },
+});
+
 // ==== Intents
 const intentPrimaryBase = style({
   color: buttonTextColorVar,
   backgroundColor: buttonBgVar,
   selectors: {
-    "&:hover": {
+    "&:not([disabled]):hover": {
       opacity: 0.8,
     },
   },
@@ -124,7 +152,7 @@ const intentSecondaryBase = style({
   color: buttonTextColorVar,
   backgroundColor: buttonBgVar,
   selectors: {
-    "&:hover": {
+    "&:not([disabled]):hover": {
       color: buttonHoverTextColorVar,
       backgroundColor: buttonHoverBgVar,
     },
@@ -161,7 +189,7 @@ const intentTertiaryBase = style({
   color: buttonTextColorVar,
   backgroundColor: buttonBgVar,
   selectors: {
-    "&:hover": {
+    "&:not([disabled]):hover": {
       opacity: 0.8,
     },
   },
@@ -193,7 +221,7 @@ const intentTextBase = style({
   color: buttonTextColorVar,
   backgroundColor: buttonBgVar,
   selectors: {
-    "&:hover": {
+    "&:not([disabled]):hover": {
       opacity: 0.8,
     },
   },
@@ -221,7 +249,7 @@ export const intentText = styleVariants({
 });
 
 export const disabled = style({
-  cursor: "not-allowed !important",
+  position: "relative",
   opacity: 0.6,
-  pointerEvents: "none",
+  cursor: "not-allowed !important",
 });
