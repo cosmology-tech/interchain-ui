@@ -100,10 +100,10 @@ export const buttonSize = styleVariants({
     minWidth: themeVars.space["12"],
   },
   md: {
-    padding: `0px ${themeVars.space["8"]}`,
+    padding: `0px ${themeVars.space["9"]}`,
     fontSize: themeVars.fontSize.md,
-    height: themeVars.space["14"],
-    minWidth: themeVars.space["14"],
+    height: themeVars.space["15"],
+    minWidth: themeVars.space["15"],
   },
   lg: {
     padding: `0px ${themeVars.space["10"]}`,
