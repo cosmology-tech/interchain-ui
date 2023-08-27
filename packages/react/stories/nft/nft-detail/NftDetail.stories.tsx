@@ -65,12 +65,29 @@ export const Primary: Story = {
         rarityPercent: 6.45,
       },
     ],
+    onDownload() {
+      console.log("onDownload");
+    },
+    onShare() {
+      console.log("onShare");
+    },
+    onTransfer() {
+      console.log("onTransfer");
+    },
+    onBurn() {
+      console.log("onBurn");
+    },
+    onListForSale() {
+      console.log("onListForSale");
+    },
   },
 };
 
 export const MakeOffer: Story = {
   args: {
     type: "makeOffer",
+    imgSrc:
+      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
     collectionName: "Shnubbles Breakfast Drop #2",
     tokenName: "Breakfast Shnubble #127",
     creatorName: "stars1ducj...vl342f",
@@ -148,12 +165,23 @@ export const MakeOffer: Story = {
         },
       ],
     },
+    onDownload() {
+      console.log("onDownload");
+    },
+    onShare() {
+      console.log("onShare");
+    },
+    onMakeOffer() {
+      console.log("onMakeOffer");
+    },
   },
 };
 
 export const BuyNow: Story = {
   args: {
     type: "buyNow",
+    imgSrc:
+      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
     collectionName: "Shnubbles Breakfast Drop #2",
     tokenName: "Breakfast Shnubble #127",
     creatorName: "stars1ducj...vl342f",
@@ -200,5 +228,17 @@ export const BuyNow: Story = {
         rarityPercent: 6.45,
       },
     ],
+    onDownload() {
+      console.log("onDownload");
+    },
+    onShare() {
+      console.log("onShare");
+    },
+    onBuyNow() {
+      console.log("onBuyNow");
+    },
+    onMakeOffer() {
+      console.log("onMakeOffer");
+    },
   },
 };
