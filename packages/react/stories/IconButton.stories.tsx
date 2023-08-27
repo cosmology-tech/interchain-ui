@@ -4,7 +4,7 @@ import { IconButton } from "../src";
 
 const meta: Meta<typeof IconButton> = {
   component: IconButton,
-  title: "icon-button",
+  title: "IconButton",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -15,6 +15,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    icon: "copy"
+    icon: "copy",
   },
 };

@@ -86,6 +86,8 @@ function componentHasChildren(component) {
 function fixReactTypeIssues(codeStr) {
   return (
     codeStr
+      // Fix forwardRef<TRef, TProps> not putting the second generic parameter TProps in output code
+      .replace(/forwardRef<(.*)\["(.*)"\]>\(/g, `forwardRef<$1["$2"], $1>(`)
       // Fix typescript types for children prop
       .replace(/children\?:\sany/g, "children?: React.ReactNode")
       .replace(/Children\s=\sany/g, "Children = React.ReactNode")
@@ -94,7 +96,8 @@ function fixReactTypeIssues(codeStr) {
         /contentEditable\=(.*)/g,
         "contentEditable=$1\nsuppressContentEditableWarning={true}"
       )
-      // Fix shape rendering not correctly compiled by mitosis
+      // Fix some svg attributes not correctly compiled
       .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)
+      .replace(/(stroke-width)="(.*)"/g, `strokeWidth="$2"`)
   );
 }

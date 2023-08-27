@@ -74,13 +74,11 @@ export default function Button(props: ButtonProps) {
       >
         <Show when={props.isLoading && props.spinnerPlacement === "start"}>
           <Spinner
-            name={"loaderLine"}
             size={props.iconSize}
             attributes={{
               marginRight: !props.children ? "$0" : "$2",
             }}
           />
-
         </Show>
         <Show when={!!props.leftIcon}>
           <Icon
@@ -99,19 +97,18 @@ export default function Button(props: ButtonProps) {
             name={props.rightIcon}
             size={props.iconSize}
             attributes={{
-              marginRight: !props.children ? "$0" : "$2",
+              marginLeft: !props.children ? "$0" : "$2",
             }}
           />
         </Show>
         <Show when={props.isLoading && props.spinnerPlacement === "end"}>
           <Spinner
-            name={"loaderLine"}
             size={props.iconSize}
             attributes={{
               marginRight: !props.children ? "$0" : "$2",
             }}
           />
-          </Show>
+        </Show>
       </Box>
     </Show>
   );
