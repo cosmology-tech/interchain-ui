@@ -5,7 +5,7 @@ export interface TokenInputProps {
   symbol: AvailableItem["symbol"];
   denom?: AvailableItem["denom"];
   available?: AvailableItem["available"];
-  priceDisplayAmount: AvailableItem["priceDisplayAmount"];
+  priceDisplayAmount?: AvailableItem["priceDisplayAmount"];
   imgSrc: AvailableItem["imgSrc"];
   title?: string | undefined;
   hasProgressBar?: boolean;

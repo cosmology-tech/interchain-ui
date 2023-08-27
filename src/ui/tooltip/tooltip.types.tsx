@@ -1,4 +1,4 @@
-export type Placement = "top" | "bottom" | "left" | "right";
+import { Placement } from "@floating-ui/core";
 export interface TooltipProps {
   title: any;
   placement?: Placement;

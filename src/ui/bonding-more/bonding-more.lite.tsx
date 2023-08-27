@@ -1,7 +1,4 @@
-import {
-  useStore,
-  useMetadata,
-} from "@builder.io/mitosis";
+import { useStore, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -20,14 +17,11 @@ export default function BondingMore(props: BondingMoreProps) {
   const state = useStore<{
     btnText: string;
     disabled: boolean;
-    bondingValue: string;
     handleInputChange: (string) => void;
   }>({
     btnText: "Amount is empty",
     disabled: true,
-    bondingValue: "",
     handleInputChange(value: string) {
-      state.bondingValue = value;
       if (value === "") {
         state.disabled = true;
         state.btnText = "Amount is empty";
@@ -78,7 +72,7 @@ export default function BondingMore(props: BondingMoreProps) {
         <NumberInput
           id="bonding-input"
           min={0}
-          value={state.bondingValue}
+          value={props?.value}
           onChange={(e) => state.handleInputChange(e.value)}
         />
       </Box>

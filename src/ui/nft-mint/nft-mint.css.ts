@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { breakpoints } from "../../styles/tokens";
-import { themeVars } from "~/styles/themes.css";
+import { themeVars } from "../../styles/themes.css";
 
 export const nftMint = style({
   minWidth: breakpoints.tablet,
@@ -11,10 +11,9 @@ export const tip = style({
 });
 
 export const baseInput = style({
-  height: themeVars.space["15"],
+  // height: themeVars.space["15"],
   fontSize: themeVars.fontSize["lg"],
   fontWeight: themeVars.fontWeight["semibold"],
-  boxSizing: "border-box",
 })
 
 export const starContainer = style({
