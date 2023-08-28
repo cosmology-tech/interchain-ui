@@ -161,8 +161,8 @@ export const Primary: Story = {
     ],
   },
   render: (props) => {
-    return <Stack  direction="vertical" attributes={{minWidth: "634px"}}>
-    <Text fontSize="$xl" fontWeight="$semibold">
+    return <Stack  direction="vertical" attributes={{maxWidth: "634px"}}>
+    <Text fontSize="$xl" fontWeight="$semibold" >
       Staking
     </Text>
     <StakingAssetHeader {...props.assetHeader}
