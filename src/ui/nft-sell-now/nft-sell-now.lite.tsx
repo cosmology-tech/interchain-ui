@@ -28,7 +28,7 @@ export default function NftSellNow(props: NftSellNowProps) {
           This offer is
         </Text>
         <Text fontSize="$xs" fontWeight="$semibold" attributes={{ mx: "$3" }}>
-          {`${props?.offerToFloorPriceRatio}X`}
+          {`${props?.offerToFloorPriceRatio}`}
         </Text>
         <Text color="$textSecondary" fontSize="$xs">
           the floor price of
@@ -39,15 +39,26 @@ export default function NftSellNow(props: NftSellNowProps) {
           attributes={{ marginLeft: "$3" }}
         >{`${props?.floorPrice} STARS`}</Text>
       </Stack>
-      <NftFees listFee={0.5} royalities={0.5} fairBurn={0.5} />
+      <NftFees
+        listFee={props?.fees?.listFee}
+        royalities={props?.fees?.royalities}
+        fairBurn={props?.fees?.fairBurn}
+        proceeds={props?.fees?.proceeds}
+      />
       <Button
         intent="tertiary"
         size="lg"
         attributes={{ marginBottom: "$10", width: "$full" }}
+        onClick={() => props.onList?.()}
       >
         List
       </Button>
-      <Button variant="unstyled" size="sm" attributes={{ width: "$full" }}>
+      <Button
+        variant="unstyled"
+        size="sm"
+        attributes={{ width: "$full" }}
+        onClick={() => props.onCancel?.()}
+      >
         Cancel
       </Button>
     </Box>

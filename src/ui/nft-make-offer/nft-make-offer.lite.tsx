@@ -28,16 +28,24 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
           hasProgressBar={false}
           symbol="STARS"
           imgSrc={StarIcon}
+          amount={props?.value}
+          onAmountChange={(value) => props?.onChange?.(value)}
         />
       </Box>
       <Button
         size="lg"
         intent="tertiary"
         attributes={{ marginBottom: "$9", width: "$full" }}
+        onClick={() => props?.onMakeOffer?.()}
       >
         Make Offer
       </Button>
-      <Button variant="unstyled" size="sm" attributes={{ width: "$full" }}>
+      <Button
+        variant="unstyled"
+        size="sm"
+        attributes={{ width: "$full" }}
+        onClick={() => props?.onCancel?.()}
+      >
         Cancel
       </Button>
     </Box>

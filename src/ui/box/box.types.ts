@@ -6,7 +6,6 @@ export type BoxProps = Resolve<Sprinkles> & {
   as?: any;
   className?: ClassValue;
   children?: any;
-  forwardedRef?: any;
   attributes?: any;
   style?: any;
   boxRef?: any;

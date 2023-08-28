@@ -35,12 +35,14 @@ export default function NftProfile(props: NftProfileProps) {
             {props?.name}
           </Text>
           <Show when={props?.isNameVerified}>
-            <Box paddingTop="$5">
+            <Box paddingTop="$3" paddingLeft="$3">
               <Icon name="jaggedCheck" color="$text" size="$xl" />
             </Box>
           </Show>
         </Stack>
-        <Button intent="text">View on Stargaze</Button>
+        <Button intent="text" onClick={() => props?.onView?.()}>
+          View on Stargaze
+        </Button>
       </Stack>
       <Stack space="$10" attributes={{ marginBottom: "$12" }}>
         <Stack attributes={{ alignItems: "center" }} space="$4">

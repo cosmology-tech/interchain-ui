@@ -97,7 +97,7 @@ export default function Button(props: ButtonProps) {
             name={props.rightIcon}
             size={props.iconSize}
             attributes={{
-              marginRight: !props.children ? "$0" : "$2",
+              marginLeft: !props.children ? "$0" : "$2",
             }}
           />
         </Show>
