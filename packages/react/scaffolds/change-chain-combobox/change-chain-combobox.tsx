@@ -125,7 +125,6 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
-    console.log("change", value);
     setInputValue(value);
     setShowInputValue(true);
 
