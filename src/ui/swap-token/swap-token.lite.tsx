@@ -114,7 +114,9 @@ export default function SwapToken(props: SwapTokenProps) {
       state.toggleToteranceStatus();
     },
     exchange() {
-      isSwitchingRef = true;
+      if(!new BigNumber(state.fromAmount).eq(state.toAmount)) {
+        isSwitchingRef = true;
+      }
       const copyFrom: AvailableItem = cloneDeep(state.fromItem);
       const copyTo: AvailableItem = cloneDeep(state.toItem);
       const copyFromList: AvailableItem[] = cloneDeep(state.fromList);

@@ -157,7 +157,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             }}>
               {truncateTextMiddle(props.toAddress, 12)}
             </Text>
-            <IconButton icon="pencilLine" intent="text"  />
+            {/* <IconButton icon="pencilLine" intent="text"  /> */}
           </Stack>
         </Stack>
       </Stack>

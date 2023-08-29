@@ -5,8 +5,8 @@ export const getTransferList = (chainName = "osmosis") => {
     assets.find(({ chain_name }) => chain_name === chainName)?.assets ?? [];
   return assetList.map((item, index) => {
     return {
-      available: 1.5 * (index + 1),
-      priceDisplayAmount: 0.5 * (index + 1),
+      available: 1.33 * (index + 1),
+      priceDisplayAmount: 0.33 * (index + 1),
       symbol: item.symbol,
       denom: item.name,
       imgSrc:
