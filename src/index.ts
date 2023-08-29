@@ -89,6 +89,9 @@ export { default as Spinner } from "./ui/spinner";
 export { default as Toast } from "./ui/toast";
 export { toast } from "./ui/toast/toast.state";
 export { default as Toaster } from "./ui/toast/toaster.lite";
+export { default as Avatar } from "./ui/avatar";
+export { default as ChangeChainListItem } from "./ui/change-chain-list-item";
+export { default as ChangeChainInput } from "./ui/change-chain-input";
 // End Components
 
 setPlatform(Platform.Default);

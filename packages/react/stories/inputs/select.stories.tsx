@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Box width="30" height="700px">
-      <Select label="Favorite Animal">
+      <Select width={300} label="Favorite Animal">
         <SelectOption label="Red Panda">Red Panda</SelectOption>
         <SelectOption label="Cat">Cat</SelectOption>
         <SelectOption label="Dog">Dog</SelectOption>
