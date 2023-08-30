@@ -68,7 +68,7 @@ export default function TransferItem(props: TransferItemProps) {
       }
     },
     handleAmountInput(val: string) {
-      if (new BigNumber(val || 0).eq(lastValueRef || 0)) {
+      if (val === lastValueRef) {
         return;
       }
       lastItemRef = cloneDeep(state.currentItem);

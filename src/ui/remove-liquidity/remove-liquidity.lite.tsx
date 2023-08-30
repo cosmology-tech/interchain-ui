@@ -163,10 +163,11 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
           )}
         </For>
       </Stack>
+      <Box height="$18" />
       <Button
         size="lg"
         intent="tertiary"
-        attributes={{ marginTop: "$18", width: "$full" }}
+        attributes={{ width: "$full" }}
         onClick={() => props.onRemoveLiquidity()}
         isLoading={props.isLoading}
       >

@@ -1,7 +1,5 @@
-import { TransferType } from "../overview-transfer/overview-transfer.types";
 import { AvailableItem } from "../transfer-item/transfer-item.types";
 export interface AssetItemTransferProps {
-  type?: TransferType;
   fromSymbol: AvailableItem["symbol"];
   fromDenom: AvailableItem["denom"];
   fromAddress: string;

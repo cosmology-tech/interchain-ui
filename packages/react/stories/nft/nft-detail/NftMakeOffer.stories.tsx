@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftMakeOffer } from "../../../src";
+import { NftMakeOffer, BasicModal, Button } from "../../../src";
 
 const meta: Meta<typeof NftMakeOffer> = {
   component: NftMakeOffer,
@@ -27,5 +28,20 @@ export const Primary: Story = {
     onCancel() {
       console.log("onCancel");
     },
+  },
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setIsOpen(true)}>Make Offer</Button>
+        <BasicModal
+          isOpen={isOpen}
+          title="Make Offer"
+          onClose={() => setIsOpen(false)}
+        >
+          <NftMakeOffer {...props} />
+        </BasicModal>
+      </>
+    );
   },
 };

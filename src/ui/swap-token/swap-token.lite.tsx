@@ -114,7 +114,9 @@ export default function SwapToken(props: SwapTokenProps) {
       state.toggleToteranceStatus();
     },
     exchange() {
-      isSwitchingRef = true;
+      if(!new BigNumber(state.fromAmount).eq(state.toAmount)) {
+        isSwitchingRef = true;
+      }
       const copyFrom: AvailableItem = cloneDeep(state.fromItem);
       const copyTo: AvailableItem = cloneDeep(state.toItem);
       const copyFromList: AvailableItem[] = cloneDeep(state.fromList);
@@ -224,14 +226,7 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   return (
-    <Box className={styles.swapTokenContainer}>
-      <Text
-        fontSize="$lg"
-        fontWeight="$semibold"
-        attributes={{ marginBottom: "$8" }}
-      >
-        Swap
-      </Text>
+    <Box className={styles.swapTokenContainer} paddingTop="$5">
       <TransferItem
         halfBtn
         maxBtn
@@ -255,7 +250,6 @@ export default function SwapToken(props: SwapTokenProps) {
       >
         <div className={styles.rel} ref={swapIconRef}>
           <IconButton
-            size="lg"
             className={styles.swapIcon[state.theme]}
             icon={state.swapIcon}
             isRound={true}

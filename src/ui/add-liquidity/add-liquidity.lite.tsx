@@ -220,6 +220,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         />
       </Box>
       <Button
+        size="lg"
         disabled={state.disabled}
         intent="tertiary"
         attributes={{ width: "$full" }}

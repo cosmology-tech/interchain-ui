@@ -4,7 +4,7 @@ import { themeVars } from "../../styles/themes.css";
 const buttonTextColorVar = createVar();
 
 export const overviewTransfer = style({
-  minWidth: "670px",
+  minWidth: "630px",
 });
 
 export const img = style({

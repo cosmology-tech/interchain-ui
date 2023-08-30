@@ -166,6 +166,7 @@ export default function NftMint(props: NftMintProps) {
             <Box position="relative">
               {/* @ts-expect-error */}
               <ScaffoldNumberInput
+                size="md"
                 id="nft-mint-amount"
                 min={0}
                 max={props.limited}
@@ -211,7 +212,7 @@ export default function NftMint(props: NftMintProps) {
               <Stack
                 attributes={{
                   alignItems: "center",
-                  paddingBottom: "$2",
+                  paddingBottom: "$1",
                 }}
               >
                 <Text color="$textSecondary" attributes={{ marginRight: "$2" }}>

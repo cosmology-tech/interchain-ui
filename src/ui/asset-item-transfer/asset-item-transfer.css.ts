@@ -4,7 +4,8 @@ import { themeVars } from "../../styles/themes.css";
 const buttonTextColorVar = createVar();
 
 export const container = style({
-  minWidth: "380px",
+  minWidth: "340px",
+  maxWidth: "460px"
 });
 
 export const smImg = style({
@@ -20,6 +21,7 @@ export const img = style({
 
 export const flex1 = style({
   flex: 1,
+  maxWidth: "215px"
 });
 
 export const onlyLg = style({

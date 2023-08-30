@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BondingMore } from "../../../src";
+import { BondingMore, BasicModal, Button } from "../../../src";
 
 const meta: Meta<typeof BondingMore> = {
   component: BondingMore,
@@ -25,5 +25,20 @@ export const Primary: Story = {
     onChange(value) {
       console.log("onChange", value);
     },
+  },
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setIsOpen(true)}>Bond more</Button>
+        <BasicModal
+          isOpen={isOpen}
+          title="Bond more"
+          onClose={() => setIsOpen(false)}
+        >
+          <BondingMore {...props} />
+        </BasicModal>
+      </>
+    );
   },
 };

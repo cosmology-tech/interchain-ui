@@ -69,7 +69,7 @@ export default function NftDetail(props: NftDetailProps) {
           </Stack>
           <Show when={props.type === "listForSale"}>
             <Button
-              size="lg"
+              size="md"
               intent="tertiary"
               leftIcon="priceTagLine"
               attributes={{ width: "$full" }}

@@ -40,14 +40,16 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
       >
         Make Offer
       </Button>
-      <Button
-        variant="unstyled"
-        size="sm"
-        attributes={{ width: "$full" }}
-        onClick={() => props?.onCancel?.()}
-      >
-        Cancel
-      </Button>
+      <Box mt="$9">
+        <Button
+          variant="unstyled"
+          size="sm"
+          attributes={{ width: "$full" }}
+          onClick={() => props?.onCancel?.()}
+        >
+          Cancel
+        </Button>
+      </Box>
     </Box>
   );
 }
