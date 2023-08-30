@@ -40,9 +40,9 @@ export default function TokenInput(props: TokenInputProps) {
   }>({
     get symbolValue() {
       return new BigNumber(props.amount || 0)
-      .multipliedBy(props.priceDisplayAmount)
-      .decimalPlaces(2)
-      .toString()
+        .multipliedBy(props.priceDisplayAmount)
+        .decimalPlaces(2)
+        .toString();
     },
     disabled: false,
     handleTokenInput(value: string) {
@@ -65,7 +65,6 @@ export default function TokenInput(props: TokenInputProps) {
     } else {
       state.disabled = false;
     }
-
   }, [props.progress, props.amount]);
 
   return (
@@ -173,7 +172,7 @@ export default function TokenInput(props: TokenInputProps) {
             disabled={state.disabled}
             startAddon={
               <Stack
-                className={styles.imgBox}
+                className={clsx(styles.imgBox, props.imgClass)}
                 attributes={{ justifyContent: "center", alignItems: "center" }}
               >
                 <Box
@@ -189,7 +188,7 @@ export default function TokenInput(props: TokenInputProps) {
             onFocus={() => props?.onFocus?.()}
             className={styles.token}
             inputContainer={styles.inputContainer}
-            inputClassName={styles.inputClassName}
+            inputClassName={clsx(styles.inputClassName, props.inputClass)}
           />
         </Box>
         <Stack

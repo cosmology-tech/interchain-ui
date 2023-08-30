@@ -1,8 +1,21 @@
 import { assets } from "chain-registry";
 
 export const getTransferList = (chainName = "osmosis") => {
-  const assetList =
-    assets.find(({ chain_name }) => chain_name === chainName)?.assets ?? [];
+  // let assetList =
+  //   assets.find(({ chain_name }) => chain_name === chainName)?.assets ?? [];
+
+  let assetList: any = [];
+  for (let i = 0; i <= assets.length; i++) {
+    let itemList = assets[i]?.assets ?? [];
+    assetList = [...assetList, ...itemList];
+  }
+
+  assetList = Array.from(new Set(assetList.map(item => item.symbol))).map(symbol => {
+    return assetList.find(item => item.symbol === symbol);
+  });
+
+  assetList = assetList.slice(0, 100)
+
   return assetList.map((item, index) => {
     return {
       available: 1.33 * (index + 1),

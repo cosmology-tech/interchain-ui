@@ -171,6 +171,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         available={props.available}
         imgSrc={props.fromImgSrc}
         onAmountChange={(value) => state.onAmountChange(value)}
+        inputClass={styles.inputClass}
+        imgClass={styles.imgClass}
       />
 
       <Stack
@@ -245,14 +247,14 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           </Text>
 
           <Stack
-            className={styles.onlyLg}
+            className={styles.onlySm}
             attributes={{
               alignItems: "center",
             }}
           >
             <Icon
               name="timeLine"
-              size="$xs"
+              size="$lg"
               attributes={{
                 marginLeft: "$8",
                 marginRight: "$4",

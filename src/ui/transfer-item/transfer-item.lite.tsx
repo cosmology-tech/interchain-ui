@@ -159,14 +159,12 @@ export default function TransferItem(props: TransferItemProps) {
         backgroundColor: "$progressBg",
         borderRadius: "$lg",
         position: "relative",
-        paddingTop: "$7",
-        paddingBottom: "$7",
+        paddingTop: "$5",
       }}
     >
       <Stack
         space="$0"
         attributes={{
-          marginBottom: "$7",
           minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
@@ -221,6 +219,7 @@ export default function TransferItem(props: TransferItemProps) {
         >
           {/* @ts-expect-error */}
           <ScaffoldChainSwapCombobox
+            className={styles.comboboxContainer}
             size="md"
             defaultSelected={state.comboboxList[0]}
             options={state.comboboxList}
@@ -252,10 +251,10 @@ export default function TransferItem(props: TransferItemProps) {
                 )}
                 <div
                   style={{
-                    visibility:
+                    display:
                       !!props.amount && props.amount !== "0"
-                        ? "visible"
-                        : "hidden",
+                        ? "block"
+                        : "none",
                   }}
                 >
                   <Text color="$textSecondary" fontSize="$xs" textAlign="right">

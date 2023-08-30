@@ -42,6 +42,22 @@ export const onlySm = style({
   },
 });
 
+export const inputClass = style({
+  "@media": {
+    [`screen and (max-width: 700px)`]: {
+      backgroundColor: themeVars.colors.white
+    },
+  },
+});
+
+export const imgClass = style({
+  "@media": {
+    [`screen and (max-width: 700px)`]: {
+      backgroundColor: themeVars.colors.white
+    },
+  },
+});
+
 const btnTextBase = style({
   color: buttonTextColorVar,
 });
