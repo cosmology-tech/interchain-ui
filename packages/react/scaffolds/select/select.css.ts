@@ -1,12 +1,17 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 import { scrollBar } from "../shared/shared.css";
 
+export const listBoxWidthVar = createVar();
+
 const listBoxBase = style({
+  vars: {
+    [listBoxWidthVar]: "100%",
+  },
+  width: listBoxWidthVar,
   overflow: "auto",
   outline: "2px solid transparent",
   outlineOffset: "2px",
-  width: "100%",
   maxHeight: "304px",
   margin: 0,
   display: "flex",
@@ -47,14 +52,15 @@ export const listboxStyleNoShadow = styleVariants({
   dark: [listBoxBase, scrollBar.dark],
 });
 
-export const selectRoot = style([
-  {
-    position: "relative",
-    display: "inline-flex",
-    flexDirection: "column",
-    width: "100%",
-  },
-]);
+export const selectRoot = style({
+  position: "relative",
+  display: "inline-flex",
+  flexDirection: "column",
+});
+
+export const selectFullWidth = style({
+  width: "100%",
+});
 
 export const selectButton = style({
   position: "relative",

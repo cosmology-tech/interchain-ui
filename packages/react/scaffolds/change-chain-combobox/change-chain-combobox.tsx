@@ -4,6 +4,7 @@ import {
   autoUpdate,
   size,
   flip,
+  offset,
   useId,
   useDismiss,
   useFloating,
@@ -19,10 +20,11 @@ import { create } from "zustand";
 import { store } from "../../models/store";
 
 import Box from "../box";
-import ChainSwapInput from "../chain-swap-input";
-import ChainListItem from "../chain-list-item";
-import { chainSwapListBox } from "./chain-swap-combobox.css";
-import type { ChainListItemProps } from "../chain-list-item/chain-list-item.types";
+import ChangeChainInput from "../change-chain-input";
+import ChangeChainListItem from "../change-chain-list-item";
+import { changeChainListBox } from "./change-chain-combobox.css";
+import { listboxStyle } from "../select/select.css";
+import type { ChainListItemProps } from "../change-chain-list-item/change-chain-list-item.types";
 
 const useStore = create(store);
 
@@ -31,35 +33,20 @@ interface ItemProps {
   size: ChainListItemProps["size"];
   // ====
   iconUrl?: ChainListItemProps["iconUrl"];
-  name: ChainListItemProps["name"];
-  tokenName: ChainListItemProps["tokenName"];
-  amount?: ChainListItemProps["amount"];
-  notionalValue?: ChainListItemProps["notionalValue"];
+  chainName: ChainListItemProps["chainName"];
 }
 
 const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
-  const {
-    isActive,
-    size,
-    iconUrl,
-    name,
-    tokenName,
-    amount,
-    notionalValue,
-    ...rest
-  } = props;
+  const { isActive, size, iconUrl, chainName, ...rest } = props;
   const id = useId();
 
   return (
     <div ref={ref} role="option" id={id} aria-selected={isActive} {...rest}>
-      <ChainListItem
+      <ChangeChainListItem
         isActive={isActive}
         size={size}
         iconUrl={iconUrl}
-        name={name}
-        tokenName={tokenName}
-        amount={amount}
-        notionalValue={notionalValue}
+        chainName={chainName}
       />
     </div>
   );
@@ -68,15 +55,17 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
 type ComboboxOption = Omit<ItemProps, "isActive" | "size">;
 
 export interface ChainSwapComboboxProps {
+  id?: string;
+  isLoading?: boolean;
+  isClearable?: boolean;
+  label?: string;
   size: ChainListItemProps["size"];
-  maxHeight: number;
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
-  defaultOpen: boolean;
-  endAddon?: React.ReactNode | undefined;
-  valueItem: ComboboxOption;
+  defaultOpen?: boolean;
+  valueItem?: ComboboxOption;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -86,8 +75,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }));
 
   const [open, setOpen] = React.useState(!!props.defaultOpen);
+  const [showInputValue, setShowInputValue] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
-    props.defaultSelected?.tokenName ?? ""
+    props.defaultSelected?.chainName ?? ""
   );
   const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
     props.defaultSelected ?? null
@@ -102,12 +92,12 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     onOpenChange: setOpen,
     middleware: [
       flip(),
+      offset(8),
       size({
         apply({ rects, availableHeight, elements }) {
           Object.assign(elements.floating.style, {
-            // ref width + parent padding
-            width: `${rects.reference.width + 40}px`,
-            maxHeight: `${props.maxHeight ?? availableHeight}px`,
+            width: `${rects.reference.width}px`,
+            maxHeight: `${availableHeight}px`,
           });
         },
       }),
@@ -136,47 +126,69 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     setInputValue(value);
+    setShowInputValue(true);
 
     if (value) {
       setOpen(true);
       setActiveIndex(0);
     } else {
-      setOpen(!!props.defaultOpen);
+      setOpen(false);
     }
   }
 
   function defaultFilterOptions(options: Array<ComboboxOption>) {
     return options.filter((item) =>
-      item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
+      item?.chainName?.toLowerCase().startsWith(inputValue?.toLowerCase())
     );
   }
 
-  const items =
-    typeof props.filterFn === "function"
+  const items = React.useMemo(() => {
+    if (!inputValue) return props.options;
+
+    return typeof props.filterFn === "function"
       ? props.filterFn(props.options)
       : defaultFilterOptions(props.options);
+  }, [inputValue, props.options]);
 
   React.useEffect(() => {
-    setSelectedItem(props?.valueItem);
-    setInputValue(props?.valueItem?.tokenName);
+    if (props.valueItem) {
+      setSelectedItem(props?.valueItem);
+    }
+    setInputValue(props?.valueItem?.chainName);
   }, [props.valueItem]);
 
   return (
-    <Box px="$9" py="$7" backgroundColor="$menuItemBg">
+    <Box>
       <div ref={refs.setReference}>
-        <ChainSwapInput
+        <ChangeChainInput
           size={props.size}
-          value={inputValue}
+          label={props.label}
+          value={showInputValue ? inputValue : ""}
+          iconUrl={!selectedItem ? "" : selectedItem?.iconUrl}
+          chainName={!selectedItem ? "" : selectedItem?.chainName}
+          isClearable={!!selectedItem || inputValue}
+          onClear={() => {
+            setInputValue("");
+            setSelectedItem(null);
+          }}
           onDropdownArrowClicked={() => {
             setOpen((isPrevOpen) => !isPrevOpen);
           }}
-          endAddon={props.endAddon}
-          {...selectedItem}
-          label={selectedItem?.name ?? null}
           inputAttributes={getReferenceProps({
             onChange,
-            value: inputValue,
             "aria-autocomplete": "list",
+            onFocus() {
+              if (selectedItem) {
+                setShowInputValue(false);
+              } else {
+                setShowInputValue(true);
+              }
+            },
+            onBlur() {
+              setShowInputValue(false);
+              setActiveIndex(null);
+              setInputValue("");
+            },
             onKeyDown(event) {
               if (
                 event.key === "Enter" &&
@@ -184,9 +196,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 items[activeIndex]
               ) {
                 const selected = items[activeIndex];
-                setInputValue(selected.tokenName);
+                setInputValue(selected.chainName);
                 setActiveIndex(null);
                 setSelectedItem(selected);
+                setShowInputValue(false);
                 setOpen(false);
                 props.onItemSelected?.(selected);
               }
@@ -212,13 +225,14 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
             })}
             className={clx(
               themeStore.themeClass,
-              chainSwapListBox[themeStore.theme]
+              changeChainListBox[themeStore.theme],
+              listboxStyle[themeStore.theme]
             )}
           >
             <FloatingList elementsRef={listRef}>
               {items.map((item, index) => (
                 <Item
-                  key={item.tokenName}
+                  key={item.chainName}
                   size={props.size}
                   isActive={activeIndex === index}
                   {...item}
@@ -227,8 +241,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                       listRef.current[index] = node;
                     },
                     onClick() {
-                      setInputValue(item.tokenName);
+                      setInputValue(item.chainName);
                       setOpen(false);
+                      setShowInputValue(false);
                       setSelectedItem(item);
                       props.onItemSelected?.(item);
                       refs.domReference.current?.focus();
