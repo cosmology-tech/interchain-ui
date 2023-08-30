@@ -64,7 +64,8 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
           direction="horizontal"
           space="$7"
         >
-          <Show when={!props.value}>
+          {/* Still need to show the icon even props.value is empty string */}
+          <Show when={!props.value && !props.iconUrl}>
             <Box
               width={props.size === "md" ? "50px" : "28px"}
               height={props.size === "md" ? "50px" : "28px"}
@@ -73,7 +74,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             />
           </Show>
 
-          <Show when={props.value}>
+          <Show when={props.value || props.iconUrl}>
             <img
               src={props.iconUrl}
               className={chainSwapLogo[props.size]}

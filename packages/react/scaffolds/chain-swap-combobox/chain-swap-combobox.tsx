@@ -140,12 +140,13 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     if (value) {
       setOpen(true);
       setActiveIndex(0);
-    } else {
-      setOpen(!!props.defaultOpen);
     }
   }
 
   function defaultFilterOptions(options: Array<ComboboxOption>) {
+    if (!inputValue) {
+      return options;
+    }
     return options.filter((item) =>
       item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
     );
@@ -160,6 +161,13 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     setSelectedItem(props?.valueItem);
     setInputValue(props?.valueItem?.tokenName);
   }, [props.valueItem]);
+
+  // Make sure onBlur can reset value to the selectedItem
+  React.useLayoutEffect(() => {
+    if (!open && selectedItem) {
+      setInputValue(selectedItem.tokenName);
+    }
+  }, [open, selectedItem, inputValue]);
 
   return (
     <Box px="$9" py="$7" backgroundColor="$menuItemBg">
@@ -191,6 +199,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 props.onItemSelected?.(selected);
               }
             },
+            onFocus() {
+              setInputValue("");
+            },
+            onBlur(e) {},
           })}
         />
       </div>
