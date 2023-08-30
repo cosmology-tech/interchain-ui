@@ -33,3 +33,16 @@ export interface AvatarProps
   showBorder?: boolean;
   borderColor?: Sprinkles["borderColor"];
 }
+
+export type AvatarBadgePlacement =
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+export interface AvatarBadgeProps extends BaseComponentProps {
+  ref?: any;
+  attributes?: any;
+  size?: string;
+  placement?: AvatarBadgePlacement;
+}
