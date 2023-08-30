@@ -92,6 +92,7 @@ export default function TextField(props: TextFieldProps) {
         <Show when={props.startAddon}>{props.startAddon}</Show>
 
         <input
+          {...props.inputAttributes}
           id={props.id}
           className={clx(
             inputStyles[state.theme],
@@ -104,14 +105,19 @@ export default function TextField(props: TextFieldProps) {
           disabled={props.disabled}
           type={validTypes[props.type]}
           value={props.value}
-          onChange={(e) => props.onChange?.(e)}
-          onFocus={() => {
-            state.isFocused = true;
-            props.onFocus?.();
+          onChange={(e) => {
+            props.onChange?.(e);
+            props.inputAttributes?.onChange?.(e);
           }}
-          onBlur={() => {
+          onFocus={(e) => {
+            state.isFocused = true;
+            props.onFocus?.(e);
+            props.inputAttributes?.onFocus?.(e);
+          }}
+          onBlur={(e) => {
             state.isFocused = false;
-            props.onBlur?.();
+            props.onBlur?.(e);
+            props.inputAttributes?.onBlur?.(e);
           }}
           placeholder={!props.disabled ? props.placeholder : undefined}
           inputMode={props.inputMode || defaultInputModesForType[props.type]}

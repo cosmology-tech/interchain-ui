@@ -19,7 +19,7 @@ const hideShadow = style({
 const buttonBase = style([
   unstyledButton,
   hideShadow,
-  style({ fontSize: themeVars.fontSize.sm }),
+  style({ fontSize: themeVars.fontSize.sm, width: "100%" }),
 ]);
 
 export const buttonStyles = styleVariants({
