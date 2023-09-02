@@ -23,7 +23,6 @@ import type { SelectButtonProps } from "./select-button.types";
 export default function SelectButton(props: SelectButtonProps) {
   useDefaultProps({
     intent: "default",
-    isActive: false,
     size: "sm",
   });
 

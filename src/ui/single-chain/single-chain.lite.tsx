@@ -5,9 +5,6 @@ import Text from "../text";
 import ShowMore from "../show-more";
 import * as styles from "./single-chain.css";
 import { SingleChainProps } from "./single-chain.types";
-import {
-  AvailableItem,
-} from "../transfer-item/transfer-item.types";
 
 export default function SingleChain(props: SingleChainProps) {
   return (
@@ -16,13 +13,8 @@ export default function SingleChain(props: SingleChainProps) {
         <AssetListHeader
           isSingle={true}
           total={props.header.total}
-          // totalOnAll={props.header.totalOnAll}
-          onDeposit={() =>
-            props?.header?.onDeposit?.()
-          }
-          onWithdraw={() =>
-            props?.header?.onWithdraw?.()
-          }
+          onDeposit={() => props?.header?.onDeposit?.()}
+          onWithdraw={() => props?.header?.onWithdraw?.()}
         />
         <Text
           color="$textSecondary"

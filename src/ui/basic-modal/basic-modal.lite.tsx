@@ -23,7 +23,7 @@ export default function BasicModal(props: BasicModalProps) {
     theme: "light",
   });
 
-  let cleanupRef = useRef<() => void>(null);
+  let cleanupRef = useRef<(() => void) | null>(null);
   const parentRef = useRef<HTMLDivElement>();
 
   onMount(() => {
@@ -54,7 +54,7 @@ export default function BasicModal(props: BasicModalProps) {
       header={
         <Stack
           className={modalHeader}
-          attributes={{ justifyContent: "space-between", alignItems:"center" }}
+          attributes={{ justifyContent: "space-between", alignItems: "center" }}
         >
           <Text fontSize="$xl" fontWeight="$semibold">
             {props?.title}

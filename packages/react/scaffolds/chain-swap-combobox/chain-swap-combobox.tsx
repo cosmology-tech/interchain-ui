@@ -69,12 +69,12 @@ type ComboboxOption = Omit<ItemProps, "isActive" | "size">;
 
 export interface ChainSwapComboboxProps {
   size: ChainListItemProps["size"];
-  maxHeight: number;
+  maxHeight?: number;
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
-  defaultOpen: boolean;
+  defaultOpen?: boolean;
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
   className: ClassValue;

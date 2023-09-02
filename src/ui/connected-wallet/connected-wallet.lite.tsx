@@ -1,4 +1,4 @@
-import { useStore, useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";

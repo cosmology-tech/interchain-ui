@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.4.1...@interchain-ui/react@1.5.0) (2023-09-02)
+
+### Bug Fixes
+
+- add storybook for ChainSwapCombobox small ([86bc049](https://github.com/cosmology-tech/interchain-ui/commit/86bc04935fe35f57d3320de39c92a8ff7f72d00f))
+- incorrect box types due to mitosis forwardRef ([8d4ccd9](https://github.com/cosmology-tech/interchain-ui/commit/8d4ccd9065c8fa3a5a1ff86dcde5f0d2a8962a5e))
+- type errors broke build ([#91](https://github.com/cosmology-tech/interchain-ui/issues/91)) ([f84d9b8](https://github.com/cosmology-tech/interchain-ui/commit/f84d9b8130a2b75b181a356084e57cbbdc48df15))
+- unnecessary deps ([5c60b6a](https://github.com/cosmology-tech/interchain-ui/commit/5c60b6aded0da1531399bf736ae638cccc8751de))
+
+### Features
+
+- Add addon-viewport ([#86](https://github.com/cosmology-tech/interchain-ui/issues/86)) ([32d5f7f](https://github.com/cosmology-tech/interchain-ui/commit/32d5f7f39db8e8fc3441f999623c1f9475406e98))
+- add select chain combobox ([#88](https://github.com/cosmology-tech/interchain-ui/issues/88)) ([484583d](https://github.com/cosmology-tech/interchain-ui/commit/484583d0ede6828dfd7516b5b006bbdcd2664c10))
+- Added connected-wallet component ([#84](https://github.com/cosmology-tech/interchain-ui/issues/84)) ([14f3583](https://github.com/cosmology-tech/interchain-ui/commit/14f35835766f91f850618a1048d0adc2208dad46))
+- avatar badge ([#90](https://github.com/cosmology-tech/interchain-ui/issues/90)) ([92ec367](https://github.com/cosmology-tech/interchain-ui/commit/92ec3679a0d531e2f9e7dadd1444e141d41afc5d))
+- toast component ([#83](https://github.com/cosmology-tech/interchain-ui/issues/83)) ([16fee1f](https://github.com/cosmology-tech/interchain-ui/commit/16fee1f8e3a220526825f731a13e36cf37ecc861))
+- Update nft props ([#82](https://github.com/cosmology-tech/interchain-ui/issues/82)) ([afe14e3](https://github.com/cosmology-tech/interchain-ui/commit/afe14e3bcb8b6f3e246c51e0d132049e9eb4078d))
+- update props of asset-list & swap-token & provide-liquidity ([#81](https://github.com/cosmology-tech/interchain-ui/issues/81)) ([ff9c262](https://github.com/cosmology-tech/interchain-ui/commit/ff9c2622cfadef5fd4af24498818e760512c058f))
+
 ## [1.4.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.4.0...@interchain-ui/react@1.4.1) (2023-08-15)
 
 **Note:** Version bump only for package @interchain-ui/react

@@ -23,12 +23,8 @@ import { IconProps } from "../icon/icon.types";
 import type { ThemeVariant } from "../../models/system.model";
 
 import * as styles from "./swap-token.css";
-import {
-  SwapTokenProps,
-} from "./swap-token.types";
-import {
-  AvailableItem,
-} from "../transfer-item/transfer-item.types";
+import { SwapTokenProps } from "./swap-token.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
@@ -114,7 +110,7 @@ export default function SwapToken(props: SwapTokenProps) {
       state.toggleToteranceStatus();
     },
     exchange() {
-      if(!new BigNumber(state.fromAmount).eq(state.toAmount)) {
+      if (!new BigNumber(state.fromAmount).eq(state.toAmount)) {
         isSwitchingRef = true;
       }
       const copyFrom: AvailableItem = cloneDeep(state.fromItem);
@@ -164,13 +160,13 @@ export default function SwapToken(props: SwapTokenProps) {
         .dividedBy(selectedItem.priceDisplayAmount)
         .decimalPlaces(6)
         .toString();
-      state.toAmount = newTo
-        props?.onChange?.({
-          fromItem: state.fromItem,
-          toItem: selectedItem,
-          fromAmount: state.fromAmount,
-          toAmount: newTo,
-        });
+      state.toAmount = newTo;
+      props?.onChange?.({
+        fromItem: state.fromItem,
+        toItem: selectedItem,
+        fromAmount: state.fromAmount,
+        toAmount: newTo,
+      });
     },
     handleFromAmountChange(item: AvailableItem, value: string) {
       if (isSwitchingRef) {
@@ -251,7 +247,7 @@ export default function SwapToken(props: SwapTokenProps) {
         <div className={styles.rel} ref={swapIconRef}>
           <IconButton
             className={styles.swapIcon[state.theme]}
-            icon={state.swapIcon}
+            icon={state.swapIcon as IconProps["name"]}
             isRound={true}
             intent="text"
             onClick={(e) => state.exchange()}
@@ -322,7 +318,7 @@ export default function SwapToken(props: SwapTokenProps) {
                   <Button
                     onClick={(e) => {
                       state.setToterance(per);
-                      props?.onToteranceChange?.(per)
+                      props?.onToteranceChange?.(per);
                     }}
                     key={per}
                     size="sm"
@@ -354,9 +350,7 @@ export default function SwapToken(props: SwapTokenProps) {
         swapFee={props?.swapPrice?.swapFee}
       />
       <Button
-        onClick={() =>
-          props?.onSwap?.()
-        }
+        onClick={() => props?.onSwap?.()}
         disabled={state.swapDisabled || new BigNumber(state.fromAmount).eq(0)}
         intent="tertiary"
         size="lg"

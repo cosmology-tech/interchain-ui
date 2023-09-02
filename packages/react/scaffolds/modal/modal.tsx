@@ -16,11 +16,11 @@ import * as styles from "./modal.css";
 
 export interface ModalProps {
   isOpen: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen?: (event?: React.SyntheticEvent) => void;
+  onClose?: (event?: React.SyntheticEvent) => void;
   initialFocusRef?: React.MutableRefObject<any>;
   trigger?: React.ReactElement;
-  header: React.ReactElement;
+  header: React.ReactNode;
   children?: React.ReactNode;
   closeOnClickaway?: boolean;
   preventScroll?: boolean;
@@ -124,15 +124,17 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                     ...contentStyles,
                   }}
                 >
-                  {header &&
-                    cloneElement(header, {
-                      titleProps: api.titleProps,
-                      descriptionProps: api.descriptionProps,
-                      closeButtonProps: {
-                        ...api.closeTriggerProps,
-                        onClick: onCloseButtonClick,
-                      },
-                    })}
+                  {header && React.isValidElement(header)
+                    ? cloneElement(header, {
+                        // @ts-expect-error
+                        titleProps: api.titleProps,
+                        descriptionProps: api.descriptionProps,
+                        closeButtonProps: {
+                          ...api.closeTriggerProps,
+                          onClick: onCloseButtonClick,
+                        },
+                      })
+                    : null}
 
                   <div className={childrenClassName} data-modal-part="children">
                     {children}
