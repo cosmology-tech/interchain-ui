@@ -15,12 +15,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "paths": {
-      "~/utils/*": ["./src/utils/*"],
-      "~/models/*": ["./src/models/*"],
-      "~/*": ["./src/*"]
-    }
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }

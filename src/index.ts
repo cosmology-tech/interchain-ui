@@ -1,4 +1,4 @@
-/// <reference types="./global.d.ts" />
+/// <reference types="./app-env" />
 import { setPlatform, Platform } from "./helpers";
 
 export { setDebugLevel, DebugLevel } from "./helpers";
