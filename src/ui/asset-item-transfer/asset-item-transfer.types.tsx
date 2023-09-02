@@ -10,7 +10,9 @@ export interface AssetItemTransferProps {
   available: AvailableItem["available"];
   priceDisplayAmount: AvailableItem["priceDisplayAmount"];
   amount?: string;
-  onChange?:(value: string) => void;
+  onChange?: (value: string) => void;
   onTransfer?: () => void;
   onCancel?: () => void;
+  onAddressChange?: (value: string) => void;
+  onAddressConfirm?: () => void;
 }

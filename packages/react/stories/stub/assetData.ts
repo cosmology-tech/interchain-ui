@@ -10,6 +10,7 @@ export const getTransferList = (chainName = "osmosis") => {
     assetList = [...assetList, ...itemList];
   }
 
+  // Get the unique symbol
   assetList = Array.from(new Set(assetList.map(item => item.symbol))).map(symbol => {
     return assetList.find(item => item.symbol === symbol);
   });

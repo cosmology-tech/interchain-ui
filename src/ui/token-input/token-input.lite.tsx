@@ -73,6 +73,7 @@ export default function TokenInput(props: TokenInputProps) {
       attributes={{
         flexWrap: "wrap",
         alignItems: "center",
+        ...props.attributes
       }}
     >
       <Stack
