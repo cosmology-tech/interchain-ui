@@ -2,15 +2,15 @@ import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import Box from "../box";
-import Stack from "../stack";
 import Text from "../text";
 import PoolName from "../pool/components/pool-name";
-import APR from "./components/apr"
+import APR from "./components/apr";
 import CellWithTitle from "./components/cell-with-title";
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
 import type { PoolListItemProps } from "./pool-list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
+
 export default function PoolListItem(props: PoolListItemProps) {
   const state = useStore<{ theme: ThemeVariant; apr: string }>({
     theme: "light",
@@ -36,7 +36,7 @@ export default function PoolListItem(props: PoolListItemProps) {
   return (
     <Box
       className={clsx(styles.container, {
-        [styles.hoverStyle]: !!props.onClick
+        [styles.hoverStyle]: !!props.onClick,
       })}
       attributes={{
         alignItems: "center",

@@ -1,4 +1,5 @@
 import { AvailableItem } from "../transfer-item/transfer-item.types";
+
 export interface TokenInputProps {
   progress?: number;
   amount?: string;
@@ -12,5 +13,5 @@ export interface TokenInputProps {
   availableAsMax?: boolean;
   onProgressChange?: (progress: number) => void;
   onAmountChange?: (value: string) => void;
-  onFocus?: () => void
+  onFocus?: (event?: any) => void;
 }

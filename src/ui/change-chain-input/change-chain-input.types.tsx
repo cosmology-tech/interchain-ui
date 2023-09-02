@@ -11,6 +11,7 @@ export interface ChangeChainInputProps
     | "startAddon"
     | "endAddon"
     | "clearLabel"
+    | "onChange"
   > {
   size?: TextFieldProps["size"];
   attributes?: any;
@@ -23,6 +24,7 @@ export interface ChangeChainInputProps
   chainName?: string;
   isLoading?: boolean;
   isClearable?: boolean;
+  onChange?: (e: any) => void;
   onClear?: () => void;
   onDropdownArrowClicked?: () => void;
 }

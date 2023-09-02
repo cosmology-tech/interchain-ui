@@ -1,8 +1,6 @@
-import { BaseComponentProps, BaseState } from "../../models/components.model";
+import { BaseComponentProps } from "../../models/components.model";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { IconProps } from "../icon/icon.types";
-import type { ThemeVariant } from "../../models/system.model";
-import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ButtonVariant, ButtonIntent, ButtonSize } from "./button.helper";
 
 export interface ButtonProps extends BaseComponentProps {
@@ -20,9 +18,4 @@ export interface ButtonProps extends BaseComponentProps {
   domAttributes?: any;
   isLoading?: boolean;
   spinnerPlacement?: "start" | "end";
-}
-
-export interface ButtonState extends BaseState {
-  theme: ThemeVariant;
-  overrideManager: OverrideStyleManager | null;
 }

@@ -15,6 +15,7 @@ import Text from "../text";
 import Box from "../box";
 import IconButton from "../icon-button";
 import CicularProgressBar from "../circular-progress-bar";
+import { toNumber } from "../../helpers/number";
 import * as styles from "./token-input.css";
 
 import { TokenInputProps } from "./token-input.types";
@@ -40,9 +41,9 @@ export default function TokenInput(props: TokenInputProps) {
   }>({
     get symbolValue() {
       return new BigNumber(props.amount || 0)
-      .multipliedBy(props.priceDisplayAmount)
-      .decimalPlaces(2)
-      .toString()
+        .multipliedBy(props.priceDisplayAmount)
+        .decimalPlaces(2)
+        .toString();
     },
     disabled: false,
     handleTokenInput(value: string) {
@@ -65,7 +66,6 @@ export default function TokenInput(props: TokenInputProps) {
     } else {
       state.disabled = false;
     }
-
   }, [props.progress, props.amount]);
 
   return (
@@ -167,7 +167,7 @@ export default function TokenInput(props: TokenInputProps) {
           <NumberInput
             id={inputIdRef}
             min={0}
-            max={props.availableAsMax ? props.available : undefined}
+            max={props.availableAsMax ? toNumber(props.available) : 0}
             value={props.amount}
             borderless
             disabled={state.disabled}
