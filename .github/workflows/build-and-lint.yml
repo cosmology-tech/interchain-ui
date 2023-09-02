@@ -25,10 +25,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: npm
+          cache: yarn
+          check-latest: true
 
       - name: Install
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Build and lint
         run: yarn dev && yarn mitosis:react && yarn b:react
