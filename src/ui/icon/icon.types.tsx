@@ -45,6 +45,12 @@ export const ALL_ICON_NAMES = [
   "informationFill",
   "loaderFill",
   "pencilLine",
+  "arrowRightRounded",
+  "discord",
+  "github",
+  "document",
+  "twitter",
+  "youtube",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];
