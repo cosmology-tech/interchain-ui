@@ -3,12 +3,12 @@ import Stack from "../../../stack";
 import Text from "../../../text";
 import Box from "../../../box";
 import IconButton from "../../../icon-button";
-import { BaseComponentProps } from "~/models/components.model";
 
 useMetadata({
   isAttachedToShadowDom: true,
   scaffolds: ["popover"],
 });
+
 export default function APR(props: {
   className?: string;
   apr: string;

@@ -1,6 +1,4 @@
-import {
-  AddLiquidityProps,
-} from "../add-liquidity/add-liquidity.types";
+import { AddLiquidityProps } from "../add-liquidity/add-liquidity.types";
 import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 import { ManageLiquidityCardProps } from "../manage-liquidity-card/manage-liquidity-card.types";
 import { RemoveLiquidityProps } from "../remove-liquidity/remove-liquidity.types";
@@ -30,7 +28,7 @@ export interface PoolListItemProps {
   apr: string;
   fees7D?: number;
   volume24H?: number | string;
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
 }
 
 export interface PoolDetailProps {

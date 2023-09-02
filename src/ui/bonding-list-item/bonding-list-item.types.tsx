@@ -3,6 +3,6 @@ export interface BondingListItemProps {
   superfluidApr: string;
   amount: number | string;
   totalApr: string;
-  onUnbond: () => void;
-  isLoading?:boolean;
+  onUnbond: (event?: any) => void;
+  isLoading?: boolean;
 }

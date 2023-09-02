@@ -1,7 +1,7 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.svg": [
+    "*.{svg,png}": [
       "@parcel/transformer-raw"
     ],
     "*.css.ts": [
@@ -9,7 +9,8 @@
       "@parcel/transformer-css"
     ],
     "*.{ts,tsx}": [
-      "@parcel/transformer-typescript-tsc"
+      "@parcel/transformer-typescript-tsc",
+      "@parcel/transformer-react-refresh-wrap"
     ]
   },
   "optimizers": {

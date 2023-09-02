@@ -20,7 +20,7 @@ import { clipboardCopyTextOverrides } from "./clipboard-copy-text.helper";
 import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ClipboardCopyTextProps } from "./clipboard-copy-text.types";
-import Text from '../text';
+import Text from "../text";
 
 export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   const state = useStore<{
@@ -28,7 +28,7 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
     theme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
     transform: (text: string) => string;
-    handleOnClick: () => void;
+    handleOnClick: (event?: any) => void;
     getTruncateClass: () => string;
   }>({
     idle: true,
@@ -50,11 +50,11 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
 
       return text;
     },
-    handleOnClick: () => {
+    handleOnClick: (event?: any) => {
       const success = copy(props.text);
 
       if (success) {
-        props.onCopied?.();
+        props.onCopied?.(event);
         state.idle = false;
 
         setTimeout(() => {
@@ -86,12 +86,14 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   return (
     <div
       className={clx(containerStyle[state.theme], props.className)}
-      onClick={() => state.handleOnClick()}
+      onClick={(event) => state.handleOnClick(event)}
       style={state.overrideManager?.applyOverrides(
         clipboardCopyTextOverrides.name
       )}
     >
-      <Text color="$textSecondary" className={state.getTruncateClass()}>{state.transform(props.text)}</Text>
+      <Text color="$textSecondary" className={state.getTruncateClass()}>
+        {state.transform(props.text)}
+      </Text>
 
       <Show
         when={state.idle}

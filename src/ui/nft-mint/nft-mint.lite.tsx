@@ -4,9 +4,9 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
-import TextField from "../text-field";
 import starIcon from "../../assets/stars.png";
 import { store } from "../../models/store";
+import { toNumber } from "../../helpers/number";
 
 import * as styles from "./nft-mint.css";
 import { NftMintProps } from "./nft-mint.types";
@@ -169,7 +169,7 @@ export default function NftMint(props: NftMintProps) {
                 size="md"
                 id="nft-mint-amount"
                 min={0}
-                max={props.limited}
+                max={toNumber(props.limited)}
                 value={state.amount}
                 onChange={(e) => state.handleAmountChange(e.value)}
                 inputClassName={styles.baseInput}

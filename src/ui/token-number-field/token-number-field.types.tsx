@@ -1,8 +1,10 @@
 import type { Children } from "../../models/components.model";
+
 type Value = {
   value: string;
   valueAsNumber: number;
 };
+
 export interface TokenNumberFieldProps {
   id?: string;
   available: string | number;
