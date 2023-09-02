@@ -263,7 +263,7 @@ export default function Toast(props: ToastProps) {
       return;
     }
 
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     // Pause the exit timer on hover
     const pauseTimer = () => {

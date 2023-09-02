@@ -5586,15 +5586,15 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-20.4.2.tgz"
   integrity sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==
 
-"@types/node@18.15.11":
-  version "18.15.11"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.15.11.tgz"
-  integrity sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==
-
 "@types/node@^16.0.0":
   version "16.18.38"
   resolved "https://registry.npmjs.org/@types/node/-/node-16.18.38.tgz"
   integrity sha512-6sfo1qTulpVbkxECP+AVrHV9OoJqhzCsfTNp5NIG+enM4HyM3HvZCO798WShIXBN0+QtDIcutJCjsVYnQP5rIQ==
+
+"@types/node@^20.5.8":
+  version "20.5.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.5.8.tgz#fb171fd22d37ca6e2ea97fde88e6a13ee14bc327"
+  integrity sha512-eajsR9aeljqNhK028VG0Wuw+OaY5LLxYmxeoXynIoE6jannr9/Ucd1LL0hSSoafk5LTYG+FfqsyGt81Q6Zkybw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -15389,10 +15389,15 @@ typedarray@~0.0.5:
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.7.tgz"
   integrity sha512-ueeb9YybpjhivjbHP2LdFDAjbS948fGEPj+ACAMs4xCMmh72OCOMQWBQKlaN4ZNQ04yfLSDLSx1tGRIoWimObQ==
 
-"typescript@^3 || ^4", typescript@^4.8.4, typescript@^4.9.4:
+"typescript@^3 || ^4", typescript@^4.8.4:
   version "4.9.5"
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+
+typescript@^5.1.6:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.2.2.tgz#5ebb5e5a5b75f085f22bc3f8460fba308310fa78"
+  integrity sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==
 
 typical@^4.0.0:
   version "4.0.0"
