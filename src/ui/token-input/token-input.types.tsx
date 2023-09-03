@@ -15,7 +15,7 @@ export interface TokenInputProps {
   availableAsMax?: boolean;
   onProgressChange?: (progress: number) => void;
   onAmountChange?: (value: string) => void;
-  onFocus?: () => void;
+  onFocus?: (e: any) => void;
   inputClass?: ClassValue;
   imgClass?: ClassValue;
 }

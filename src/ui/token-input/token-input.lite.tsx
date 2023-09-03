@@ -187,7 +187,7 @@ export default function TokenInput(props: TokenInputProps) {
               </Stack>
             }
             onChange={(e) => state.handleTokenInput(e.value)}
-            onFocus={() => props?.onFocus?.()}
+            onFocus={(e) => props?.onFocus?.(e)}
             className={styles.token}
             inputContainer={styles.inputContainer}
             inputClassName={clsx(styles.inputClassName, props.inputClass)}
