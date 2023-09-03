@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { VideoCard } from "../../src";
-import thumbnail from "../../src/assets/video-thumbnail.png";
+import thumbnail from "../../static/video-thumbnail.png";
 
 const meta: Meta<typeof VideoCard> = {
   component: VideoCard,

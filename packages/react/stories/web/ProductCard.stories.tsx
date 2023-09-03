@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProductCard } from "../../src";
-import productThumbnail from "../../src/assets/product-thumbnail.svg";
+import productThumbnail from "../../static/product-thumbnail.svg";
 
 const meta: Meta<typeof ProductCard> = {
   component: ProductCard,

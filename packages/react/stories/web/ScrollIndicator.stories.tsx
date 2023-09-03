@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
 import { ScrollIndicator } from "../../src";
 
 const meta: Meta<typeof ScrollIndicator> = {

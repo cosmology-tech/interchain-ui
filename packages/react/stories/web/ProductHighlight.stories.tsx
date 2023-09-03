@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ProductHighlight } from "../../src";
-import interchainUI from "../../src/assets/interchain-ui.png";
+import interchainUI from "../../static/interchain-ui.png";
 
 const meta: Meta<typeof ProductHighlight> = {
   component: ProductHighlight,
