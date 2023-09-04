@@ -1,5 +1,5 @@
 export interface ScrollIndicatorProps {
   direction: "left" | "right";
-  onClick: () => void;
+  onClick: (event?: any) => void;
   noShadow?: boolean;
 }

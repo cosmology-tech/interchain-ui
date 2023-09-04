@@ -3,8 +3,8 @@ import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
+import Icon from "../icon";
 import Box from "../box";
-import starIcon from "../../assets/stars.png";
 import { store } from "../../models/store";
 import { toNumber } from "../../helpers/number";
 
@@ -179,12 +179,13 @@ export default function NftMint(props: NftMintProps) {
                 className={styles.starContainer}
                 attributes={{ position: "absolute", alignItems: "center" }}
               >
-                <Box
-                  as="img"
-                  attributes={{ src: starIcon }}
-                  width="$11"
-                  height="$11"
-                  borderRadius="$full"
+                <Icon
+                  name="stargazePixel"
+                  size="$5xl"
+                  attributes={{
+                    borderRadius: "$full",
+                    backgroundColor: "$black",
+                  }}
                 />
                 <Text
                   fontWeight="$semibold"
