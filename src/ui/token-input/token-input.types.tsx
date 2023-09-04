@@ -1,6 +1,9 @@
 import { BoxProps } from "../box/box.types";
 import { AvailableItem } from "../transfer-item/transfer-item.types";
 import { ClassValue } from "clsx";
+import type { IconName } from "../icon/icon.types";
+import type { LiteralUnion } from "type-fest";
+
 export interface TokenInputProps {
   attributes?: BoxProps["attributes"]
   progress?: number;
@@ -9,7 +12,7 @@ export interface TokenInputProps {
   denom?: AvailableItem["denom"];
   available?: AvailableItem["available"];
   priceDisplayAmount?: AvailableItem["priceDisplayAmount"];
-  imgSrc: AvailableItem["imgSrc"];
+  tokenIcon?: LiteralUnion<IconName, string>;
   title?: string | undefined;
   hasProgressBar?: boolean;
   availableAsMax?: boolean;

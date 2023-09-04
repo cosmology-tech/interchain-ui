@@ -2,7 +2,6 @@ import { For, useStore, onUpdate } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Button from "../button";
 import TokenInput from "../token-input";
-import starIcon from "../../assets/stars.png";
 import StarText from "../star-text";
 import NftFees from "../nft-fees";
 import Box from "../box";
@@ -39,9 +38,12 @@ export default function NftAuction(props: NftAuctionProps) {
         title="Minimum Offer"
         hasProgressBar={false}
         symbol="STARS"
-        imgSrc={starIcon}
+        tokenIcon="stargazePixel"
       />
-      <Stack space="$0" attributes={{ my: "$10", justifyContent: "space-between" }}>
+      <Stack
+        space="$0"
+        attributes={{ my: "$10", justifyContent: "space-between" }}
+      >
         <For each={state.starList}>
           {(item) => (
             <StarText key={item.label} label={item.label} value={item.value} />

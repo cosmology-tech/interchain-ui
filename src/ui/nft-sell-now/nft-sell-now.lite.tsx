@@ -2,7 +2,7 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import Box from "../box";
-import starIcon from "../../assets/stars.png";
+import Icon from "../icon";
 import NftFees from "../nft-fees";
 import { NftSellNowProps } from "./nft-sell-now.types";
 
@@ -12,16 +12,13 @@ export default function NftSellNow(props: NftSellNowProps) {
       <Text color="$textSecondary" fontSize="$lg" fontWeight="$semibold">
         Best Offer
       </Text>
-      <Stack attributes={{ my: "$10", alignItems: "center" }}>
+      <Stack attributes={{ my: "$10", alignItems: "center" }} space="$6">
         <Text>{`${props.bestOffer} STARS`}</Text>
-        <Box
-          as="img"
-          width="$12"
-          height="$12"
-          marginLeft="$6"
-          borderRadius="$full"
-          attributes={{ src: starIcon }}
-        ></Box>
+        <Icon
+          name="stargazePixel"
+          size="$7xl"
+          attributes={{ borderRadius: "$full", backgroundColor: "$black" }}
+        />
       </Stack>
       <Stack attributes={{ marginBottom: "$14", alignItems: "center" }}>
         <Text color="$textSecondary" fontSize="$xs">

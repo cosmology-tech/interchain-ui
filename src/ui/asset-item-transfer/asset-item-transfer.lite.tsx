@@ -302,7 +302,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           symbol={props.fromSymbol}
           denom={props.fromDenom}
           available={props.available}
-          imgSrc={props.fromImgSrc}
+          tokenIcon={props.fromImgSrc}
           onAmountChange={(value) => state.onAmountChange(value)}
           inputClass={styles.inputClass}
           imgClass={styles.imgClass}

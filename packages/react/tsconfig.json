@@ -14,8 +14,7 @@
     "types": ["node"],
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "typeRoots": ["."]
+    "isolatedModules": true
   },
   "exclude": ["node_modules"],
   "include": ["src"]
