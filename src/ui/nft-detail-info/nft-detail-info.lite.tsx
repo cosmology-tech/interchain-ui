@@ -1,7 +1,5 @@
-import { For, Show } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
-import Box from "../box";
 import Icon from "../icon";
 import StarText from "../star-text";
 import * as styles from "./nft-detail-info.css";
@@ -15,14 +13,6 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
         Info
       </Text>
       <Stack attributes={{ justifyContent: "space-between" }}>
-        {/* <For each={["Price", "Last sale", "Owner", "Top offer", "Floor price"]}
-      >
-        {
-          (name: string) => <Stack direction="column">
-            <Text>{name}</Text>
-          </Stack>
-        }
-      </For> */}
         <Stack space="$0" direction="vertical">
           <Text fontSize="$xs" color="$textSecondary">
             Price

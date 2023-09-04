@@ -10,6 +10,7 @@ export type SingleChainListItemProps = Omit<
   AssetListItemProps,
   "isOtherChains"
 >;
+
 export interface SingleChainProps {
   header: SingleChainHeaderProps;
   list: Array<SingleChainListItemProps>;

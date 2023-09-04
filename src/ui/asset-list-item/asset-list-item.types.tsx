@@ -7,6 +7,6 @@ export interface AssetListItemProps {
   tokenAmountPrice: string;
   chainName?: string;
   needChainSpace?: boolean;
-  onDeposit?: () => void;
-  onWithdraw?: () => void;
+  onDeposit?: (event?: any) => void;
+  onWithdraw?: (event?: any) => void;
 }

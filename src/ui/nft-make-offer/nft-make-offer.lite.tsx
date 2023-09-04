@@ -3,7 +3,6 @@ import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import TokenInput from "../token-input";
-import StarIcon from "../../assets/stars.png";
 import * as styles from "./nft-make-offer.css";
 import { NftMakeOfferProps } from "./nft-make-offer.types";
 
@@ -27,7 +26,7 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
           title="Price"
           hasProgressBar={false}
           symbol="STARS"
-          imgSrc={StarIcon}
+          tokenIcon="stargazePixel"
           amount={props?.value}
           onAmountChange={(value) => props?.onChange?.(value)}
         />

@@ -3,6 +3,7 @@ import { themeVars } from "../../styles/themes.css";
 
 export const avatarSizeVar = createVar();
 export const avatarBgVar = createVar();
+export const avatarBorderColorVar = createVar();
 
 export const avatarBase = style({
   display: "inline-flex",
@@ -53,4 +54,58 @@ export const avatarName = style({
 export const avatarImg = style({
   display: "inline-block",
   borderRadius: "100%",
+});
+
+export const avatarBadge = styleVariants({
+  light: [
+    style({
+      vars: {
+        [avatarBorderColorVar]: themeVars.colors.white,
+      },
+      borderStyle: "solid",
+      borderWidth: "0.2em",
+      borderColor: avatarBorderColorVar,
+    }),
+  ],
+  dark: [
+    style({
+      vars: {
+        [avatarBorderColorVar]: themeVars.colors.gray300,
+      },
+      borderStyle: "solid",
+      borderWidth: "0.2em",
+      borderColor: avatarBorderColorVar,
+    }),
+  ],
+});
+
+export const avatarBadgePlacement = styleVariants({
+  "top-left": [
+    {
+      top: "0",
+      left: "0",
+      transform: "translate(-25%, -25%)",
+    },
+  ],
+  "top-right": [
+    {
+      top: "0",
+      right: "0",
+      transform: "translate(25%, -25%)",
+    },
+  ],
+  "bottom-left": [
+    {
+      bottom: "0",
+      left: "0",
+      transform: "translate(-25%, 25%)",
+    },
+  ],
+  "bottom-right": [
+    {
+      bottom: "0",
+      right: "0",
+      transform: "translate(25%, 25%)",
+    },
+  ],
 });

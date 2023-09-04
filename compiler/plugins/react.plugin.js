@@ -99,5 +99,6 @@ function fixReactTypeIssues(codeStr) {
       // Fix some svg attributes not correctly compiled
       .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)
       .replace(/(stroke-width)="(.*)"/g, `strokeWidth="$2"`)
+      .replace(/(srcset)={(.*)}/g, `srcSet={$2}`)
   );
 }

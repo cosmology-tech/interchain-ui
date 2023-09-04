@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactNode } from "react";
 
 type Value = {
   value: string;
@@ -22,15 +22,15 @@ export interface NumberInputProps {
   /**
    * The minimum value of the number input
    */
-  min: number;
+  min?: number;
   /**
    * The maximum value of the number input
    */
-  max: number;
+  max?: number;
   /**
    * The amount to increment or decrement the value by
    */
-  step: number;
+  step?: number;
   /**
    * Function invoked when the value changes
    */
@@ -55,8 +55,8 @@ export interface NumberInputProps {
   inputClassName?: string;
   label?: string;
   borderless?: boolean;
-  startAddon?: ReactElement | undefined;
-  endAddon?: ReactElement | undefined;
+  startAddon?: ReactNode;
+  endAddon?: ReactNode;
   name?: string;
   precision?: number;
   canDecrese?: boolean;

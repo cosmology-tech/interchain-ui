@@ -24,16 +24,16 @@ import ChangeChainInput from "../change-chain-input";
 import ChangeChainListItem from "../change-chain-list-item";
 import { changeChainListBox } from "./change-chain-combobox.css";
 import { listboxStyle } from "../select/select.css";
-import type { ChainListItemProps } from "../change-chain-list-item/change-chain-list-item.types";
+import type { ChangeChainListItemProps } from "../change-chain-list-item/change-chain-list-item.types";
 
 const useStore = create(store);
 
 interface ItemProps {
   isActive: boolean;
-  size: ChainListItemProps["size"];
+  size: ChangeChainListItemProps["size"];
   // ====
-  iconUrl?: ChainListItemProps["iconUrl"];
-  chainName: ChainListItemProps["chainName"];
+  iconUrl?: ChangeChainListItemProps["iconUrl"];
+  chainName: ChangeChainListItemProps["chainName"];
 }
 
 const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
@@ -59,7 +59,7 @@ export interface ChainSwapComboboxProps {
   isLoading?: boolean;
   isClearable?: boolean;
   label?: string;
-  size: ChainListItemProps["size"];
+  size: ChangeChainListItemProps["size"];
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
@@ -166,7 +166,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           value={showInputValue ? inputValue : ""}
           iconUrl={!selectedItem ? "" : selectedItem?.iconUrl}
           chainName={!selectedItem ? "" : selectedItem?.chainName}
-          isClearable={!!selectedItem || inputValue}
+          isClearable={!!selectedItem || !!inputValue}
           onClear={() => {
             setInputValue("");
             setSelectedItem(null);
