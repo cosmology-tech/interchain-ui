@@ -11,7 +11,6 @@ import { store } from "../../models/store";
 import { AssetItemTransferProps } from "./asset-item-transfer.types";
 import { ThemeVariant } from "../../models/system.model";
 import { truncateTextMiddle } from "../../helpers/string";
-import IconButton from "../icon-button";
 
 export default function AssetItemTransfer(props: AssetItemTransferProps) {
   const state = useStore<{
@@ -152,9 +151,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               className={styles.smImg}
               src={props.toImgSrc}
             />
-            <Text color="$textSecondary" attributes={{
-              flex: "1"
-            }}>
+            <Text
+              color="$textSecondary"
+              attributes={{
+                flex: "1",
+              }}
+            >
               {truncateTextMiddle(props.toAddress, 12)}
             </Text>
             {/* <IconButton icon="pencilLine" intent="text"  /> */}
@@ -169,7 +171,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         symbol={props.fromSymbol}
         denom={props.fromDenom}
         available={props.available}
-        imgSrc={props.fromImgSrc}
+        tokenIcon={props.fromImgSrc}
         onAmountChange={(value) => state.onAmountChange(value)}
       />
 

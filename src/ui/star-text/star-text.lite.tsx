@@ -1,8 +1,7 @@
 import { Show } from "@builder.io/mitosis";
 import Stack from "../stack";
-import Box from "../box";
+import Icon from "../icon";
 import Text from "../text";
-import starIcon from "../../assets/stars.png";
 
 import { StarTextProps } from "./star-text.types";
 
@@ -14,16 +13,19 @@ export default function StarText(props: StarTextProps) {
           {props.label}
         </Text>
       </Show>
+
       <Text
         fontWeight="$semibold"
         attributes={{ marginRight: "$3" }}
       >{`${props?.value} STARS`}</Text>
-      <Box
-        as="img"
-        attributes={{ src: starIcon }}
-        borderRadius="$full"
-        width="$8"
-        height="$8"
+
+      <Icon
+        name="stargazePixel"
+        size="$md"
+        attributes={{
+          borderRadius: "$full",
+          backgroundColor: "$black",
+        }}
       />
     </Stack>
   );
