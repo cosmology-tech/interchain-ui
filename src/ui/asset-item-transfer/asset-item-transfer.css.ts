@@ -48,20 +48,25 @@ export const onlySm = style({
   },
 });
 
-export const inputClass = style({
-  "@media": {
-    [`screen and (max-width: 700px)`]: {
-      backgroundColor: themeVars.colors.smTransferInputBg,
-    },
-  },
-});
-
-export const imgClass = style({
-  "@media": {
-    [`screen and (max-width: 700px)`]: {
-      backgroundColor: themeVars.colors.smTransferInputBg,
-    },
-  },
+export const bgClass = styleVariants({
+  light: [
+    style({
+      "@media": {
+        [`screen and (max-width: 700px)`]: {
+          backgroundColor: themeVars.colors.white,
+        },
+      },
+    }),
+  ],
+  dark: [
+    style({
+      "@media": {
+        [`screen and (max-width: 700px)`]: {
+          backgroundColor: "#1D2024",
+        },
+      },
+    }),
+  ],
 });
 
 const btnTextBase = style({
@@ -167,4 +172,17 @@ export const smPanelShow = style({
 export const fromAddressInput = style({
   paddingRight: "20px",
   backgroundColor: themeVars.colors.inputBg,
+});
+
+export const transferMask = styleVariants({
+  light: [
+    style({
+      backgroundColor: themeVars.colors.white,
+    }),
+  ],
+  dark: [
+    style({
+      backgroundColor: themeVars.colors.blackPrimary,
+    }),
+  ],
 });

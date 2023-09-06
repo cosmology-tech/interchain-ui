@@ -69,8 +69,6 @@ export const themeContractTemplate = {
     menuItemBgHovered: ``,
     menuItemBgActive: ``,
     skeletonBg: ``,
-    transferMask: ``,
-    smTransferInputBg: ``,
     ...colors,
   },
   font: {
@@ -277,8 +275,6 @@ export const lightThemeClass = createTheme(themeVars, {
     menuItemBgHovered: `#DDE4ED`,
     menuItemBgActive: `#D0D9E3`,
     skeletonBg: `#DDE4ED`,
-    transferMask: `#ffffff`,
-    smTransferInputBg: `#ffffff`,
     ...colors,
   },
 });
@@ -313,8 +309,6 @@ export const darkThemeClass = createTheme(themeVars, {
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
     skeletonBg: `#3B434D`,
-    transferMask: `#2C3137`,
-    smTransferInputBg: `#1D2024`,
     ...colors,
   },
 });

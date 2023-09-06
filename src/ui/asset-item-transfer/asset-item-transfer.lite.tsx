@@ -236,12 +236,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
                 })}
               >
                 <Text
+                  className={styles.transferMask[state.theme]}
                   color="$textSecondary"
                   fontWeight="$semibold"
                   ellipsis
                   attributes={{
                     paddingBottom: "$6",
-                    backgroundColor: "$transferMask",
                   }}
                 >
                   {`To ${props.toDenom}`}
@@ -304,8 +304,8 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           available={props.available}
           tokenIcon={props.fromImgSrc}
           onAmountChange={(value) => state.onAmountChange(value)}
-          inputClass={styles.inputClass}
-          imgClass={styles.imgClass}
+          inputClass={styles.bgClass[state.theme]}
+          imgClass={styles.bgClass[state.theme]}
         />
 
         <Stack
@@ -414,7 +414,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Box
           position="absolute"
           width="$28"
-          backgroundColor="$transferMask"
+          className={styles.transferMask[state.theme]}
           top="-78px"
           zIndex="1"
         >
@@ -444,10 +444,10 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             <Text
               color="$textSecondary"
               fontWeight="$semibold"
+              className={styles.transferMask[state.theme]}
               ellipsis
               attributes={{
                 paddingBottom: "$6",
-                backgroundColor: "$transferMask",
               }}
             >
               {`From ${props.fromDenom}`}
@@ -493,9 +493,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               color="$textSecondary"
               fontWeight="$semibold"
               ellipsis
+              className={styles.transferMask[state.theme]}
               attributes={{
                 paddingBottom: "$6",
-                backgroundColor: "$transferMask",
               }}
             >
               {`To ${props.toDenom}`}
