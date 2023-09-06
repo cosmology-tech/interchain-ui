@@ -3,7 +3,6 @@ import Stack from "../stack";
 import Button from "../button";
 import Box from "../box";
 import TokenInput from "../token-input";
-import starIcon from "../../assets/stars.png";
 import StarText from "../star-text";
 import NftFees from "../nft-fees";
 import { NftMinimumOfferProps } from "./nft-minimum-offer.types";
@@ -33,13 +32,14 @@ export default function NftMinimumOffer(props: NftMinimumOfferProps) {
       };
     });
   }, [props?.floorPrice, props?.highestOffer]);
+
   return (
     <Box>
       <TokenInput
         title="Minimum Offer"
         hasProgressBar={false}
         symbol="STARS"
-        imgSrc={starIcon}
+        tokenIcon="stargazePixel"
         amount={props?.value}
         onAmountChange={(value) => props?.onChange?.(value)}
       />

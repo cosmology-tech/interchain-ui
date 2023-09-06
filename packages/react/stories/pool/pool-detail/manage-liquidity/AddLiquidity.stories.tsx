@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AddLiquidity } from "../../../../src";
+import { AddLiquidity, BasicModal, Button } from "../../../../src";
 
 const meta: Meta<typeof AddLiquidity> = {
   component: AddLiquidity,
@@ -42,5 +42,20 @@ export const Primary: Story = {
     onChange: (values) => {
       console.log("values", values);
     },
+  },
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setIsOpen(true)}>Add Liquidity</Button>
+        <BasicModal
+          isOpen={isOpen}
+          title="Add Liquidity"
+          onClose={() => setIsOpen(false)}
+        >
+          <AddLiquidity {...props} />
+        </BasicModal>
+      </>
+    );
   },
 };

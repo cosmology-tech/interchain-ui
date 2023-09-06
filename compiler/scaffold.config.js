@@ -39,6 +39,15 @@ module.exports = {
       path: "../chain-swap-combobox",
     },
   },
+  "change-chain-combobox": {
+    jsxMap: {
+      ScaffoldChangeChainCombobox: "ChangeChainCombobox",
+    },
+    import: {
+      imports: { ChangeChainCombobox: "default" },
+      path: "../change-chain-combobox",
+    },
+  },
   "number-input": {
     jsxMap: {
       ScaffoldNumberInput: "NumberInput",

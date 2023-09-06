@@ -1,5 +1,6 @@
 export function truncateTextMiddle(addr: string, maxLength: number) {
   const midChar = "…";
+  if (!addr) addr = "";
 
   if (addr.length <= maxLength) return addr;
 

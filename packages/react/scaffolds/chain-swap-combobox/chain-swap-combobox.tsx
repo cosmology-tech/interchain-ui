@@ -10,6 +10,7 @@ import {
   useInteractions,
   useListNavigation,
   useRole,
+  useFocus,
   useTransitionStyles,
   FloatingFocusManager,
   FloatingList,
@@ -68,12 +69,12 @@ type ComboboxOption = Omit<ItemProps, "isActive" | "size">;
 
 export interface ChainSwapComboboxProps {
   size: ChainListItemProps["size"];
-  maxHeight: number;
+  maxHeight?: number;
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
-  defaultOpen: boolean;
+  defaultOpen?: boolean;
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
 }
@@ -115,6 +116,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
 
   const { isMounted, styles: transitionStyles } = useTransitionStyles(context);
 
+  const focus = useFocus(context, {
+    keyboardOnly: false,
+  });
   const role = useRole(context, { role: "listbox" });
   const dismiss = useDismiss(context);
   const listNav = useListNavigation(context, {
@@ -126,7 +130,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, dismiss, listNav]
+    [role, focus, dismiss, listNav]
   );
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {

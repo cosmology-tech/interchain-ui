@@ -10,6 +10,7 @@ import * as styles from "./asset-item-transfer.css";
 import { store } from "../../models/store";
 import { AssetItemTransferProps } from "./asset-item-transfer.types";
 import { ThemeVariant } from "../../models/system.model";
+import { truncateTextMiddle } from "../../helpers/string";
 
 export default function AssetItemTransfer(props: AssetItemTransferProps) {
   const state = useStore<{
@@ -35,12 +36,13 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         new BigNumber(state.inputAmount).gt(props.available) ||
         state.inputAmount === ""
       );
-    }
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
+    console.log("props.", props);
     state.theme = store.getState().theme;
 
     cleanupRef = store.subscribe((newState) => {
@@ -54,21 +56,6 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
   return (
     <Box className={styles.container}>
-      {/* <Stack>
-        <Text
-          fontSize="$xl"
-          fontWeight="$semibold"
-          attributes={{
-            marginRight: "$3",
-          }}
-        >
-          {`${props.type === "withdraw" ? "Withdraw" : "Deposit"}`}
-        </Text>
-        <Text fontSize="$xl" fontWeight="$semibold">
-          {props.fromSymbol}
-        </Text>
-      </Stack> */}
-
       <Stack
         className={styles.onlySm}
         attributes={{
@@ -78,7 +65,11 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           alignItems: "center",
         }}
       >
-        <img className={styles.img} src={props.fromImgSrc} />
+        <img
+          alt={props.fromDenom}
+          className={styles.img}
+          src={props.fromImgSrc}
+        />
         <Icon
           name="arrowRightLine"
           color="$textSecondary"
@@ -87,13 +78,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             mx: "$9",
           }}
         />
-        <img
-          className={styles.img}
-          src={
-            props.toImgSrc ??
-            "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
-          }
-        />
+        <img className={styles.img} alt={props.toDenom} src={props.toImgSrc} />
       </Stack>
       <Stack
         className={styles.onlyLg}
@@ -108,6 +93,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           <Text
             color="$textSecondary"
             fontWeight="$semibold"
+            ellipsis
             attributes={{
               marginBottom: "$6",
             }}
@@ -122,8 +108,14 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               alignItems: "center",
             }}
           >
-            <img className={styles.smImg} src={props.fromImgSrc} />
-            <Text color="$textSecondary">{props.fromAddress}</Text>
+            <img
+              alt={props.fromDenom}
+              className={styles.smImg}
+              src={props.fromImgSrc}
+            />
+            <Text color="$textSecondary">
+              {truncateTextMiddle(props.fromAddress, 12)}
+            </Text>
           </Stack>
         </Stack>
         <Icon
@@ -139,24 +131,35 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           <Text
             color="$textSecondary"
             fontWeight="$semibold"
+            ellipsis
             attributes={{
               marginBottom: "$6",
             }}
           >
-            {`From ${props.toDenom ?? "Osmosis"}`}
+            {`From ${props.toDenom}`}
           </Text>
           <Stack
             attributes={{
               p: "$6",
               backgroundColor: "$cardBg",
               borderRadius: "$lg",
-              alignItems: "$center",
+              alignItems: "center",
             }}
           >
-            <img className={styles.smImg} src={props.toImgSrc} />
-            <Text color="$textSecondary">
-              {props.toAddress ?? "osmo1lqsq...pv48trj5k"}
+            <img
+              alt={props?.toDenom}
+              className={styles.smImg}
+              src={props.toImgSrc}
+            />
+            <Text
+              color="$textSecondary"
+              attributes={{
+                flex: "1",
+              }}
+            >
+              {truncateTextMiddle(props.toAddress, 12)}
             </Text>
+            {/* <IconButton icon="pencilLine" intent="text"  /> */}
           </Stack>
         </Stack>
       </Stack>
@@ -168,7 +171,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         symbol={props.fromSymbol}
         denom={props.fromDenom}
         available={props.available}
-        imgSrc={props.fromImgSrc}
+        tokenIcon={props.fromImgSrc}
         onAmountChange={(value) => state.onAmountChange(value)}
       />
 
@@ -225,6 +228,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
       <Button
         intent="tertiary"
+        size="lg"
         attributes={{ width: "$full" }}
         onClick={() => props?.onTransfer?.()}
         disabled={state.transferDisabled}
@@ -265,6 +269,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
       </Button>
       <Button
         variant="unstyled"
+        size="lg"
         attributes={{ width: "$full", marginTop: "$5" }}
         onClick={() => props?.onCancel?.()}
       >

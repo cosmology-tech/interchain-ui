@@ -1,5 +1,4 @@
-import React, { useMemo, useId, useState, useEffect, forwardRef } from "react";
-import BigNumber from "bignumber.js";
+import React, { useId, useEffect, forwardRef } from "react";
 import clx from "clsx";
 import { create } from "zustand";
 import * as numberInput from "@zag-js/number-input";
@@ -11,25 +10,20 @@ import {
   inputSizes,
   inputIntent,
   inputRootIntent,
-  clearIcon,
   rootInput,
   rootInputFocused,
-  clearButton,
 } from "../text-field/text-field.css";
-// import {
-//   fieldLabelSizes,
-//   fieldlabelStyle,
-// } from "../field-label/field-label.css";
 import * as styles from "./number-input.css";
 
 const useStore = create(store);
 
-const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (props, forwardedRef) => {
     const themeStore = useStore((state) => ({
       theme: state.theme,
       themeClass: state.themeClass,
     }));
+
     const {
       id = useId(),
       disabled,
@@ -44,7 +38,6 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
       size = "sm",
       intent = "default",
       name,
-      precision,
       minFractionDigits = 0,
       maxFractionDigits = 6,
     } = props;
@@ -60,7 +53,6 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
         name,
         minFractionDigits,
         maxFractionDigits,
-        precision,
         onChange: (details) => {
           onChange?.(details);
         },
@@ -76,32 +68,13 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
     const api = numberInput.connect(state, send, normalizeProps);
 
     useEffect(() => {
-      // const isLastDecimal = value?.substring(value?.length - 1) === ".";
-      // if (new BigNumber(value).gt(max)) {
-      //   api.setToMax();
-      // } else if (new BigNumber(value).lt(min)) {
-      //   api.setToMin();
-      // } else if (!isLastDecimal && typeof value !== "undefined") {
-      //   api.setValue(value);
-      // }
-      // api.setValue(value);
-      if(!api.isFocused && value) {
+      if (!api.isFocused && value) {
         api.setValue(value);
       }
     }, [value]);
 
     return (
       <div {...api.rootProps} className={props?.className}>
-        {/* {props.label && (
-          <label
-            {...api.labelProps}
-            className={clx(fieldlabelStyle, fieldLabelSizes[props.size])}
-            style={{ marginBottom: 8 }}
-          >
-            {props.label}
-          </label>
-        )} */}
-
         <div
           className={clx(
             rootInput,
@@ -112,11 +85,13 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
             props.inputContainer
           )}
         >
-            {props?.canDecrese && props.startAddon
-              ? React.cloneElement(props.startAddon, api.decrementTriggerProps)
-              : props?.startAddon}
+          {props.canDecrese && React.isValidElement(props.startAddon)
+            ? React.cloneElement(props.startAddon, api.decrementTriggerProps)
+            : props?.startAddon}
+
           <input
             {...api.inputProps}
+            ref={forwardedRef}
             disabled={disabled}
             id={id}
             value={value}
@@ -128,7 +103,8 @@ const NumberInput = forwardRef<HTMLDivElement, NumberInputProps>(
               props.borderless && styles.borderless
             )}
           />
-          {props?.canIncrease && props.endAddon
+
+          {props.canIncrease && React.isValidElement(props.endAddon)
             ? React.cloneElement(props.endAddon, api.decrementTriggerProps)
             : props?.endAddon}
         </div>

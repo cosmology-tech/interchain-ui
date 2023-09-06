@@ -23,7 +23,6 @@ import type { SelectButtonProps } from "./select-button.types";
 export default function SelectButton(props: SelectButtonProps) {
   useDefaultProps({
     intent: "default",
-    isActive: false,
     size: "sm",
   });
 
@@ -49,6 +48,7 @@ export default function SelectButton(props: SelectButtonProps) {
 
   return (
     <Box
+      {...props._css}
       className={clx(
         buttonRoot,
         props.disabled ? buttonIntent.disabled : buttonIntent[props.intent],

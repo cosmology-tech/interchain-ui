@@ -7,6 +7,6 @@ export interface BondingListItemSmProps {
   totalApr: APR["totalApr"];
   isUnbondLoading?: boolean;
   isBondLoading?: boolean;
-  onBond?: () => void;
-  onUnbond?: () => void;
+  onBond?: (event?: any) => void;
+  onUnbond?: (event?: any) => void;
 }

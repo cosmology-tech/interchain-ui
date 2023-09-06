@@ -9,7 +9,6 @@ import {
   useMetadata,
 } from "@builder.io/mitosis";
 import cloneDeep from "lodash/cloneDeep";
-import isEqual from "lodash/isEqual";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -68,7 +67,7 @@ export default function TransferItem(props: TransferItemProps) {
       }
     },
     handleAmountInput(val: string) {
-      if (new BigNumber(val || 0).eq(lastValueRef || 0)) {
+      if (val === lastValueRef) {
         return;
       }
       lastItemRef = cloneDeep(state.currentItem);
@@ -134,13 +133,6 @@ export default function TransferItem(props: TransferItemProps) {
   onUpdate(() => {
     state.currentItem = props.selectedItem;
   }, [props.selectedItem]);
-
-  // onUpdate(() => {
-  //   // Trigger props.onChange when state.currentItem changed
-  //   if (state.currentItem) {
-  //     state.handleAmountInput({ target: { value: "0" } });
-  //   }
-  // }, [state.currentItem]);
 
   onUpdate(() => {
     state.mapToComboboxList(props.dropDownList);
@@ -232,7 +224,6 @@ export default function TransferItem(props: TransferItemProps) {
                   <Text fontSize="$2xl">{props.amount}</Text>
                 ) : (
                   <Box>
-                    {/* @ts-expect-error */}
                     <NumberInput
                       borderless
                       disabled={!!props.disabled}
@@ -266,9 +257,7 @@ export default function TransferItem(props: TransferItemProps) {
                 </div>
               </Stack>
             )}
-          >
-            {/* @ts-expect-error */}
-          </ScaffoldChainSwapCombobox>
+          />
         </Box>
       </Show>
     </Stack>

@@ -1,12 +1,11 @@
-import { useStore, useDefaultProps } from "@builder.io/mitosis";
+import { Show, useDefaultProps } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
-import astronaut from "../../assets/astronaut.svg";
-
-import { ConnectedWalletProps } from "./connected-wallet.types";
+import Icon from "../icon";
 import ClipboardCopyText from "../clipboard-copy-text";
+import type { ConnectedWalletProps } from "./connected-wallet.types";
 
 export default function ConnectedWallet(props: ConnectedWalletProps) {
   useDefaultProps({
@@ -14,17 +13,33 @@ export default function ConnectedWallet(props: ConnectedWalletProps) {
     midTruncateLimit: "sm",
     btnText: "My Wallet",
   });
+
   return (
     <Box width="$fit" px="$8" py="$15">
       <Stack direction="vertical" attributes={{ alignItems: "center" }}>
-        <Box
-          as="img"
-          attributes={{ src: props.avatar ? props.avatar : astronaut }}
-          borderRadius="$full"
-          width="$18"
-          height="$18"
-          marginTop="$5"
-        />
+        <Show
+          when={props.avatar}
+          else={
+            <Icon
+              name="astronaut"
+              size="$13xl"
+              attributes={{
+                borderRadius: "$full",
+                marginTop: "$5",
+              }}
+            />
+          }
+        >
+          <Box
+            as="img"
+            attributes={{ src: props.avatar }}
+            borderRadius="$full"
+            width="$18"
+            height="$18"
+            marginTop="$5"
+          />
+        </Show>
+
         <Text
           fontSize="$xl"
           fontWeight="$semibold"

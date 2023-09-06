@@ -21,7 +21,7 @@ export const Primary: Story = {
     denom: "Osmosis",
     available: 0.71263,
     priceDisplayAmount: 0.5,
-    imgSrc:
+    tokenIcon:
       "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
     onAmountChange: (value) => {
       console.log("onAmountChange", value);

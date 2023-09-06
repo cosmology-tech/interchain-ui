@@ -1,4 +1,3 @@
-
 export interface AssetListHeaderProps {
   /**
    * Sinlge chain or cross chain
@@ -12,6 +11,6 @@ export interface AssetListHeaderProps {
    * Total across all chains
    */
   totalOnAll?: string;
-  onDeposit?: () => void;
-  onWithdraw?: () => void;
+  onDeposit?: (event?: any) => void;
+  onWithdraw?: (event?: any) => void;
 }

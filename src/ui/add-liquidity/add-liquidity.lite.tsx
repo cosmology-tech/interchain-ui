@@ -158,6 +158,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       state.amount2 = value2;
     },
   });
+
   onUpdate(() => {
     if (state.isInsufficient) {
       state.btnText = "Insufficient Balance";
@@ -170,6 +171,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       state.disabled = false;
     }
   }, [state.amount1, state.amount2, state.progress1, state.progress2]);
+
   return (
     <Box>
       <Stack direction="vertical" attributes={{ paddingBottom: "$10" }}>
@@ -193,7 +195,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           symbol={props?.poolAssets[0]?.symbol}
           denom={props?.poolAssets[0]?.denom}
           available={props?.poolAssets[0]?.available}
-          imgSrc={props?.poolAssets[0]?.imgSrc}
+          tokenIcon={props?.poolAssets[0]?.imgSrc}
           priceDisplayAmount={props?.poolAssets[0]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress1Change(v)}
           onAmountChange={(value) => state.handleAmount1Change(value)}
@@ -210,7 +212,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           symbol={props?.poolAssets[1]?.symbol}
           denom={props?.poolAssets[1]?.denom}
           available={props?.poolAssets[1]?.available}
-          imgSrc={props?.poolAssets[1]?.imgSrc}
+          tokenIcon={props?.poolAssets[1]?.imgSrc}
           priceDisplayAmount={props?.poolAssets[1]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress2Change(v)}
           onAmountChange={(value) => state.handleAmount2Change(value)}
@@ -220,6 +222,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         />
       </Box>
       <Button
+        size="lg"
         disabled={state.disabled}
         intent="tertiary"
         attributes={{ width: "$full" }}

@@ -3,10 +3,10 @@ import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
+import Icon from "../icon";
 import Box from "../box";
-import TextField from "../text-field";
-import starIcon from "../../assets/stars.png";
 import { store } from "../../models/store";
+import { toNumber } from "../../helpers/number";
 
 import * as styles from "./nft-mint.css";
 import { NftMintProps } from "./nft-mint.types";
@@ -166,9 +166,10 @@ export default function NftMint(props: NftMintProps) {
             <Box position="relative">
               {/* @ts-expect-error */}
               <ScaffoldNumberInput
+                size="md"
                 id="nft-mint-amount"
                 min={0}
-                max={props.limited}
+                max={toNumber(props.limited)}
                 value={state.amount}
                 onChange={(e) => state.handleAmountChange(e.value)}
                 inputClassName={styles.baseInput}
@@ -178,12 +179,13 @@ export default function NftMint(props: NftMintProps) {
                 className={styles.starContainer}
                 attributes={{ position: "absolute", alignItems: "center" }}
               >
-                <Box
-                  as="img"
-                  attributes={{ src: starIcon }}
-                  width="$11"
-                  height="$11"
-                  borderRadius="$full"
+                <Icon
+                  name="stargazePixel"
+                  size="$5xl"
+                  attributes={{
+                    borderRadius: "$full",
+                    backgroundColor: "$black",
+                  }}
                 />
                 <Text
                   fontWeight="$semibold"
@@ -211,7 +213,7 @@ export default function NftMint(props: NftMintProps) {
               <Stack
                 attributes={{
                   alignItems: "center",
-                  paddingBottom: "$2",
+                  paddingBottom: "$1",
                 }}
               >
                 <Text color="$textSecondary" attributes={{ marginRight: "$2" }}>

@@ -1,9 +1,9 @@
 export type ComboboxListItemType = {
-  iconUrl: string;
+  iconUrl?: string;
   name: string;
   tokenName: string;
-  amount: string;
-  notionalValue: string;
+  amount?: string;
+  notionalValue?: string;
 };
 
 export type ComboboxListType = Array<ComboboxListItemType>;

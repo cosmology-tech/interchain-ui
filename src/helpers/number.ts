@@ -1,21 +1,4 @@
 import BigNumber from "bignumber.js";
-import { store } from "../models/store";
-function getNoOpFormatter(
-  // locale: string = "default",
-  locale: string,
-  options?: Intl.NumberFormatOptions
-) {
-  return {
-    format: (x: number | bigint | undefined) => x?.toString() || "",
-    formatToParts: (x: number | bigint | undefined) => [
-      {
-        type: "unknown" as Intl.NumberFormatPartTypes,
-        value: x?.toString() || "",
-      },
-    ],
-    resolvedOptions: new Intl.NumberFormat(locale, options).resolvedOptions,
-  } as Intl.NumberFormat;
-}
 
 export function getCurrencyFormatter(
   // locale: string = "default",
@@ -48,7 +31,7 @@ export function safelyFormatNumberWithFallback(
 export function clampBigNumber(
   min: string | number,
   max: string | number,
-  value: string,
+  value: string
 ): string {
   if (value === "") {
     return "";
@@ -60,4 +43,11 @@ export function clampBigNumber(
     return new BigNumber(min).toString();
   }
   return value?.toString();
+}
+
+export function toNumber(value?: string | number, fallbackValue?: number) {
+  if (value == null) return fallbackValue ?? 0;
+  if (typeof value === "number") return value;
+  if (isNaN(Number(value))) return fallbackValue ?? 0;
+  return Number(value);
 }

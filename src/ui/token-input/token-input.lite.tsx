@@ -13,11 +13,15 @@ import uniqueId from "lodash/uniqueId";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
+import Icon from "../icon";
+import { ALL_ICON_NAMES } from "../icon/icon.types";
 import IconButton from "../icon-button";
 import CicularProgressBar from "../circular-progress-bar";
+import { toNumber } from "../../helpers/number";
 import * as styles from "./token-input.css";
 
-import { TokenInputProps } from "./token-input.types";
+import type { TokenInputProps } from "./token-input.types";
+import type { IconName } from "../icon/icon.types";
 import { store } from "../../models/store";
 
 useMetadata({
@@ -40,9 +44,9 @@ export default function TokenInput(props: TokenInputProps) {
   }>({
     get symbolValue() {
       return new BigNumber(props.amount || 0)
-      .multipliedBy(props.priceDisplayAmount)
-      .decimalPlaces(2)
-      .toString()
+        .multipliedBy(props.priceDisplayAmount)
+        .decimalPlaces(2)
+        .toString();
     },
     disabled: false,
     handleTokenInput(value: string) {
@@ -65,7 +69,6 @@ export default function TokenInput(props: TokenInputProps) {
     } else {
       state.disabled = false;
     }
-
   }, [props.progress, props.amount]);
 
   return (
@@ -167,7 +170,7 @@ export default function TokenInput(props: TokenInputProps) {
           <NumberInput
             id={inputIdRef}
             min={0}
-            max={props.availableAsMax ? props.available : undefined}
+            max={props.availableAsMax ? toNumber(props.available) : 0}
             value={props.amount}
             borderless
             disabled={state.disabled}
@@ -176,13 +179,30 @@ export default function TokenInput(props: TokenInputProps) {
                 className={styles.imgBox}
                 attributes={{ justifyContent: "center", alignItems: "center" }}
               >
-                <Box
-                  as="img"
-                  width="$14"
-                  height="$14"
-                  borderRadius="$full"
-                  attributes={{ src: props?.imgSrc }}
-                />
+                {props.tokenIcon &&
+                ALL_ICON_NAMES.includes(props.tokenIcon as IconName) ? (
+                  <Icon
+                    name={props.tokenIcon as IconName}
+                    size="$9xl"
+                    attributes={{
+                      borderRadius: "$full",
+                      backgroundColor:
+                        props.tokenIcon === "stargazePixel"
+                          ? "$black"
+                          : "transparent",
+                    }}
+                  />
+                ) : typeof props.tokenIcon === "string" ? (
+                  <Box
+                    as="img"
+                    width="$14"
+                    height="$14"
+                    borderRadius="$full"
+                    attributes={{
+                      src: props.tokenIcon,
+                    }}
+                  />
+                ) : null}
               </Stack>
             }
             onChange={(e) => state.handleTokenInput(e.value)}

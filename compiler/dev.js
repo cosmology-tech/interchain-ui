@@ -15,7 +15,7 @@ const { compileReact } = require("./frameworks/react.compile");
     {
       title: "Clean output",
       task: () =>
-        execa("yarn clean:assets").catch(() => {
+        execa("yarn clear:artifacts && yarn clear:builds").catch(() => {
           throw new Error("Cannot remove output directory");
         }),
     },

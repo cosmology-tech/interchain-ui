@@ -12,8 +12,11 @@ import Icon from "../icon";
 import Box from "../box";
 import Spinner from "../spinner";
 import { store } from "../../models/store";
-import { getSize, recipe, buttonOverrides } from "./button.helper";
-import type { ButtonProps, ButtonState } from "./button.types";
+import { recipe, buttonOverrides } from "./button.helper";
+import type { ButtonProps } from "./button.types";
+import type { ThemeVariant } from "../../models/system.model";
+import type { OverrideStyleManager } from "../../styles/override/override";
+import * as styles from "./button.css";
 
 useMetadata({ isAttachedToShadowDom: true });
 
@@ -25,7 +28,11 @@ export default function Button(props: ButtonProps) {
     spinnerPlacement: "start",
   });
 
-  const state = useStore<ButtonState>({
+  const state = useStore<{
+    loaded: boolean;
+    theme: ThemeVariant;
+    overrideManager: OverrideStyleManager | null;
+  }>({
     loaded: false,
     overrideManager: null,
     theme: "light",
@@ -52,14 +59,14 @@ export default function Button(props: ButtonProps) {
     <Show when={state.loaded}>
       <Box
         as="button"
-        {...getSize(props.size)}
         {...props.attributes}
         className={clx(
+          styles.buttonSize[props.size],
           recipe({
             variant: props.variant,
             intent: props.intent,
             isDisabled: props.disabled || props.isLoading,
-            theme: state.theme,
+            theme: state.theme as ThemeVariant,
           }),
           props.className
         )}
