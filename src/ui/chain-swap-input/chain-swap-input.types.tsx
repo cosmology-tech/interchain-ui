@@ -14,6 +14,6 @@ export interface ChainSwapInputProps extends BaseComponentProps {
   iconUrl?: string;
   amount?: string;
   notionalValue?: string;
-  onDropdownArrowClicked: () => void;
+  onDropdownArrowClicked: (event?: any) => void;
   endAddon?: Children | undefined;
 }

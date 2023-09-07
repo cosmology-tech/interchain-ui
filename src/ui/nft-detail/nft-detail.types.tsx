@@ -18,25 +18,25 @@ interface BaseNftDetailProps {
   detailInfo?: NftDetailInfoProps;
   detailTopOffer?: NftDetailTopOfferProps;
   detailActivity?: NftDetailActivityListProps;
-  onDownload: () => void;
-  onShare: () => void;
+  onDownload: (event?: any) => void;
+  onShare: (event?: any) => void;
 }
 
 export type NftDetailProps = (
   | {
       type: "listForSale";
-      onTransfer: () => void;
-      onBurn: () => void;
-      onListForSale: () => void;
+      onTransfer: (event?: any) => void;
+      onBurn: (event?: any) => void;
+      onListForSale: (event?: any) => void;
     }
   | {
       type: "makeOffer";
-      onMakeOffer: () => void;
+      onMakeOffer: (event?: any) => void;
     }
   | {
       type: "buyNow";
-      onBuyNow: () => void;
-      onMakeOffer: () => void;
+      onBuyNow: (event?: any) => void;
+      onMakeOffer: (event?: any) => void;
     }
 ) &
   BaseNftDetailProps;

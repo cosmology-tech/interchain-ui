@@ -6,7 +6,7 @@ export interface SelectButtonProps extends BaseComponentProps {
   placeholder?: string;
   disabled?: boolean;
   intent?: TextFieldProps["intent"];
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
   size?: "sm" | "md";
   attributes?: any;
   buttonAttributes?: any;

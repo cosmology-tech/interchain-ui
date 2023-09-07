@@ -25,6 +25,6 @@ export interface SwapTokenProps {
    */
   dropDownList: Array<AvailableItem>;
   onChange: (detail: SwapInfo) => void
-  onSwap: () => void;
+  onSwap: (event?: any) => void;
   onToteranceChange: (toterancePercent: number) => void
 }

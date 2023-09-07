@@ -3,5 +3,5 @@ export type NftProfileCardProps = {
   name: string;
   highestOffer: string;
   listPrice: string;
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
 };

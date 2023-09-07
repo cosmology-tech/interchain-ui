@@ -17,15 +17,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    // fromSymbol: "UMEE",
-    // fromDenom: "Umee",
-    // fromAddress: "umee1lqsq...pv4axdaxk",
-    // fromImgSrc:
-    //   "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
-    // toDenom: "Osmosis",
-    // toAddress: "osmo1lqsq...pv48trj5k",
-    // toImgSrc:
-    //   "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
+    fromSymbol: "UMEE",
+    fromDenom: "Umee",
+    fromAddress: "umee1lqsq...pv4axdaxk",
+    fromImgSrc:
+      "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
+    toDenom: "Osmosis",
+    toAddress: "osmo1lqsq...pv48trj5k",
+    toImgSrc:
+      "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
     available: "25.89",
     amount: "",
     priceDisplayAmount: 0.5,
@@ -38,19 +38,23 @@ export const Primary: Story = {
     onCancel: () => {
       console.log("onCancel");
     },
+    onAddressChange: (value: string) => {
+      console.log("onAddressChange", value);
+    },
+    onAddressConfirm: () => {
+      console.log("onAddressConfirm");
+    },
   },
   render: (props) => {
     const [isDepositOpen, setIsDepositOpen] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
     const { assetList } = useAssetList({});
-    console.log(assetList)
     const [fromData, setFromData] = useState({});
     const [toData, setToData] = useState({});
 
     useEffect(() => {
       const fromItem = assetList.find((item) => item.symbol === "IBCX");
       const toItem = assetList.find((item) => item.symbol === "OSMO");
-      console.log("fromitem", fromItem, toItem)
       setFromData({
         fromSymbol: fromItem?.symbol,
         fromDenom: fromItem?.name,
@@ -62,14 +66,14 @@ export const Primary: Story = {
       });
       setToData({
         toDenom: toItem?.name,
-        toAddress: toItem?.address || "osmo1qx6kgrla69wmz90tn379p4kaux5prdkuzly2tw",
+        toAddress:
+          toItem?.address || "osmo1qx6kgrla69wmz90tn379p4kaux5prdkuzly2tw",
         toImgSrc:
           toItem?.logo_URIs?.jpeg ||
           toItem?.logo_URIs?.png ||
           toItem?.logo_URIs?.svg,
       });
     }, []);
-    console.log("from to", fromData, toData)
     return (
       <>
         <Stack space="$10">

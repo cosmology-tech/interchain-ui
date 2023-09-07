@@ -128,13 +128,35 @@ export const Primary: Story = {
             intent="secondary"
             onClick={() =>
               toast.promise(promise, {
-                loading: "Loading...",
-                success: "Loaded",
-                error: "Error",
+                loading: "Loading promise...",
+                success: "Loaded promise",
+                error: "Error promise",
               })
             }
           >
             Render Promise Toast
+          </Button>
+        </div>
+
+        <div>
+          <Button
+            intent="secondary"
+            onClick={() =>
+              toast.promise(promise, {
+                loading: "Loading promise...",
+                success: () => {
+                  // Return a promise transition frame
+                  return {
+                    message:
+                      "Loaded promise but some error from external service",
+                    toastType: "error",
+                  };
+                },
+                error: "Error promise",
+              })
+            }
+          >
+            Render Promise Toast with transition frame after success
           </Button>
         </div>
 

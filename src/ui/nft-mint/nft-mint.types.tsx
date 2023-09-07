@@ -11,5 +11,5 @@ export interface NftMintProps {
   imgSrc: string;
   starsPrice: number | string;
   onChange?: (value: string) => void;
-  onMint: () => void;
+  onMint: (event?: any) => void;
 }

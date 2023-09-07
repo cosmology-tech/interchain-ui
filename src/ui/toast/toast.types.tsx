@@ -12,16 +12,19 @@ export type ToastPosition =
 
 export type PromiseLike<Data = any> = Promise<Data> | (() => Promise<Data>);
 
+export type ToastPromiseMessage = BaseComponentProps["children"] | string;
+
+export type ToastPromiseFrame = {
+  message: ToastPromiseMessage;
+  toastType: ToastType;
+};
+
 export type PromiseData<ToastData = any> = ExternalToast & {
-  loading: string | BaseComponentProps["children"];
+  loading: ToastPromiseMessage;
   success:
-    | string
-    | BaseComponentProps["children"]
-    | ((data: ToastData) => BaseComponentProps["children"] | string);
-  error:
-    | string
-    | BaseComponentProps["children"]
-    | ((error: any) => BaseComponentProps["children"] | string);
+    | ToastPromiseMessage
+    | ((data: ToastData) => ToastPromiseMessage | ToastPromiseFrame);
+  error: ToastPromiseMessage | ((error: any) => ToastPromiseMessage);
 };
 
 export interface Toast {

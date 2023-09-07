@@ -5,6 +5,6 @@ export interface NftSellNowProps {
   offerToFloorPriceRatio: string;
   floorPrice: number;
   fees?: NftFeesProps;
-  onList?: () => void;
-  onCancel?: () => void;
+  onList?: (event?: any) => void;
+  onCancel?: (event?: any) => void;
 }

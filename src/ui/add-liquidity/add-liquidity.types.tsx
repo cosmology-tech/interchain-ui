@@ -12,7 +12,7 @@ export type AddItem = {
 
 export interface AddLiquidityProps {
   poolAssets: PoolListItemProps["poolAssets"];
-  onAddLiquidity: () => void;
+  onAddLiquidity: (event?:any) => void;
   onChange: (values: AddItem[]) => void;
   isLoading?: boolean;
 }
