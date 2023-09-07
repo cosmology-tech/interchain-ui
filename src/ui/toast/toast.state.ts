@@ -1,3 +1,4 @@
+import isObject from "lodash/isObject";
 import type { Children } from "../../models/components.model";
 import {
   ExternalToast,
@@ -6,6 +7,8 @@ import {
   PromiseLike,
   ToastToDismiss,
   ToastType,
+  ToastPromiseMessage,
+  ToastPromiseFrame,
 } from "./toast.types";
 
 let toastsCounter = 0;
@@ -154,12 +157,30 @@ class Observer {
 
     const p = promise instanceof Promise ? promise : promise();
 
+    const isFrame = (data: ToastPromiseMessage | ToastPromiseFrame) => {
+      return (
+        isObject(data) &&
+        typeof (data as ToastPromiseFrame)?.toastType === "string"
+      );
+    };
+
     p.then((promiseData) => {
       const message =
         typeof data.success === "function"
           ? data.success(promiseData)
           : data.success;
-      this.create({ id, type: "success", message });
+
+      if (isFrame(message)) {
+        const { message: frameMessage, toastType: frameType } =
+          message as ToastPromiseFrame;
+        this.create({ id, type: frameType, message: frameMessage });
+      } else {
+        this.create({
+          id,
+          type: "success",
+          message: message as ToastPromiseMessage,
+        });
+      }
     }).catch((error) => {
       const message =
         typeof data.error === "function" ? data.error(error) : data.error;

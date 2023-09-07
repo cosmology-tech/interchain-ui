@@ -53,6 +53,7 @@ export const ALL_ICON_NAMES = [
   "youtube",
   "astronaut",
   "stargazePixel",
+  "link",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];

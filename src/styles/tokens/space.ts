@@ -37,5 +37,10 @@ export const space = {
   min: "min-content",
   viewHeight: "100vh",
   viewWidth: "100vw",
+  containerSm: "640px",
+  containerMd: "768px",
+  containerLg: "1024px",
+  containerXl: "1280px",
+  prose: "60ch",
   none: "0",
 };
