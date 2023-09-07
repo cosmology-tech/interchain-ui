@@ -209,7 +209,7 @@ export const intentTertiary = styleVariants({
     style({
       vars: {
         [buttonTextColorVar]: themeVars.colors.cardBg,
-        [buttonBgVar]: themeVars.colors.textSecondary,
+        [buttonBgVar]: themeVars.colors.text,
       },
     }),
     intentTertiaryBase,

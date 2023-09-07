@@ -84,6 +84,8 @@ export const imgBox = style({
   borderColor: themeVars.colors.inputBorder,
   borderRightWidth: "1px",
   borderRightStyle: "solid",
+  borderTopLeftRadius: themeVars.radii.md,
+  borderBottomLeftRadius: themeVars.radii.md,
 });
 
 export const img = style({

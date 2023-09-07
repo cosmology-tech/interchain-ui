@@ -1,5 +1,5 @@
 import * as React from "react";
-import clx from "clsx";
+import clx, { ClassValue } from "clsx";
 import {
   autoUpdate,
   size,
@@ -77,6 +77,7 @@ export interface ChainSwapComboboxProps {
   defaultOpen?: boolean;
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
+  className: ClassValue;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -162,7 +163,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }, [props.valueItem]);
 
   return (
-    <Box px="$9" py="$7" backgroundColor="$menuItemBg">
+    <Box px="$9" py="$7" backgroundColor="$menuItemBg" className={props.className}>
       <div ref={refs.setReference}>
         <ChainSwapInput
           size={props.size}

@@ -274,7 +274,7 @@ export const lightThemeClass = createTheme(themeVars, {
     inputDisabledText: "#8895A3",
     progressBg: `#EEF2F8`,
     progressValue: `#697584`,
-    progressCursor: `2C3137`,
+    progressCursor: `#2C3137`,
     divider: `#D9D9D9`,
     menuItemBg: `#EEF2F8`,
     menuItemBgHovered: `#DDE4ED`,
