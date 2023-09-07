@@ -6,5 +6,5 @@ export interface NftProfileProps {
   nfts: number | undefined;
   listedForSale: number | undefined;
   list: NftProfileCardProps[];
-  onView: () => void
+  onView: (event?: any) => void
 }

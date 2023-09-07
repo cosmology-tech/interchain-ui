@@ -1,7 +1,7 @@
 export interface NftTransferProps {
-  onChange?: () => void;
-  onTrasfer?: () => void;
-  onCancel?: () => void;
+  onChange?: (event?: any) => void;
+  onTrasfer?: (event?: any) => void;
+  onCancel?: (event?: any) => void;
   disabled?: boolean;
   placeholder?: string;
 }

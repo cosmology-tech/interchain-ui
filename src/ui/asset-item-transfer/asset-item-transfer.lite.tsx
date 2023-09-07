@@ -220,7 +220,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             </Stack>
             <Show when={state.lgAddressVisible}>
               <Box
-                className={clsx(styles.addressBackground, {
+                className={clsx(styles.addressBackground, styles.transferMask[state.theme], {
                   [styles.addressBackgroundReverse]: state.reverseAnimation,
                 })}
               />

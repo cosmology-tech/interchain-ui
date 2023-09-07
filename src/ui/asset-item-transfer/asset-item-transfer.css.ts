@@ -136,17 +136,6 @@ const expandVerticalReverse = keyframes({
   "100%": { opacity: "0" },
 });
 
-export const addressBackground = style({
-  animation: `${expandVertical} .5s`,
-  position: "absolute",
-  width: "460px",
-  height: "400px",
-  top: "85px",
-  right: "0",
-  zIndex: "1",
-  backgroundColor: themeVars.colors.transferMask,
-  opacity: 0.8,
-});
 
 export const addressBackgroundReverse = style({
   animation: `${expandVerticalReverse} .5s`,
@@ -185,4 +174,15 @@ export const transferMask = styleVariants({
       backgroundColor: themeVars.colors.blackPrimary,
     }),
   ],
+});
+
+export const addressBackground = style({
+  animation: `${expandVertical} .5s`,
+  position: "absolute",
+  width: "460px",
+  height: "400px",
+  top: "85px",
+  right: "0",
+  zIndex: "1",
+  opacity: 0.8,
 });

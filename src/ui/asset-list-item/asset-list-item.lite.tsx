@@ -92,7 +92,7 @@ export default function AssetListItem(props: AssetListItemProps) {
             <Button
               intent="text"
               size="sm"
-              onClick={() => props.onDeposit()}
+              onClick={(event) => props?.onDeposit?.(event)}
             >
               Deposit
             </Button>
@@ -101,7 +101,7 @@ export default function AssetListItem(props: AssetListItemProps) {
             <Button
               intent="text"
               size="sm"
-              onClick={() => props.onWithdraw()}
+              onClick={(event) => props?.onWithdraw?.(event)}
             >
               Withdraw
             </Button>

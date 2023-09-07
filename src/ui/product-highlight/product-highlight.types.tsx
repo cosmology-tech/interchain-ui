@@ -12,7 +12,7 @@ export interface ProductHighlightProps {
   title: string;
   label: LabelProps;
   description: string;
-  onButtonClick: () => void;
+  onButtonClick: (event?: any) => void;
   bgVariant?: keyof typeof background;
   width?: string;
   height?: string;

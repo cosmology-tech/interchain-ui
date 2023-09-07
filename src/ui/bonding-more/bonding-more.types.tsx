@@ -1,7 +1,7 @@
 export interface BondingMoreProps {
   bondingName: string;
   available: number | string;
-  onBond: () => void;
+  onBond: (event?: any) => void;
   onChange: (value: string) => void;
   isLoading?: boolean;
   value?: string;

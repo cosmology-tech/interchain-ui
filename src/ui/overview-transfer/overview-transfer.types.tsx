@@ -15,7 +15,7 @@ export interface OverviewTransferProps {
   /**
    * Callback of transfer button
    */
-  onTransfer: () => void;
+  onTransfer: (event?: any) => void;
   onChange: (selectedItem: AvailableItem, value: string) => void;
-  onCancel: () => void;
+  onCancel: (event?: any) => void;
 }

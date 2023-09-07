@@ -88,7 +88,7 @@ export interface TextFieldProps extends BaseComponentProps, FieldBaseProps {
   onChange: (e: any) => void;
   onBlur?: (e?: any) => void;
   onFocus?: (e?: any) => void;
-  onClear?: () => void;
+  onClear?: (event?: any) => void;
   size?: "sm" | "md";
   placeholder?: string | undefined;
   label?: Children | undefined;

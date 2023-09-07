@@ -7,7 +7,7 @@ export interface ManageLiquidityCardProps {
   lpTokenBalance: PoolDetailProps["lpTokenBalance"];
   lpTokenShares: PoolDetailProps["lpTokenShares"];
   isEarningLoading?: boolean;
-  onStartEarning: () => void;
-  onAdd: () => void;
-  onRemove: () => void;
+  onStartEarning: (event?: any) => void;
+  onAdd: (event?: any) => void;
+  onRemove: (event?: any) => void;
 }

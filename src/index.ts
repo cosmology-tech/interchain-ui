@@ -177,6 +177,10 @@ export type { TokenNumberFieldProps } from "./ui/token-number-field/token-number
 export { default as ConnectedWallet } from "./ui/connected-wallet";
 export type { ConnectedWalletProps } from "./ui/connected-wallet/connected-wallet.types";
 export { default as Spinner } from "./ui/spinner";
+export { default as StakingAssetHeader } from "./ui/staking-asset-header";
+export { default as StakingClaimHeader } from "./ui/staking-claim-header";
+export { default as ValidatorListItem } from "./ui/validator-list-item";
+export { default as ValidatorList } from "./ui/validator-list";
 export type { SpinnerProps } from "./ui/spinner/spinner.types";
 export { default as ProductCard } from "./ui/product-card";
 export type { ProductCardProps } from "./ui/product-card/product-card.types";
