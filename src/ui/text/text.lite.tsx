@@ -30,7 +30,6 @@ export default function Text(props: TextProps) {
       lineHeight={props.lineHeight}
       textAlign={props.textAlign}
       textTransform={props.textTransform}
-      whiteSpace={props.whiteSpace}
       wordBreak={props.wordBreak}
     >
       {props.children}

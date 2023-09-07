@@ -13,4 +13,6 @@ export interface AssetItemTransferProps {
   onChange?: (value: string) => void;
   onTransfer?: (event?: any) => void;
   onCancel?: (event?: any) => void;
+  onAddressChange?: (value: string) => void;
+  onAddressConfirm?: (event?: any) => void;
 }

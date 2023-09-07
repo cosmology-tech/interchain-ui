@@ -77,6 +77,7 @@ export default function TokenInput(props: TokenInputProps) {
       attributes={{
         flexWrap: "wrap",
         alignItems: "center",
+        ...props.attributes
       }}
     >
       <Stack
@@ -176,7 +177,7 @@ export default function TokenInput(props: TokenInputProps) {
             disabled={state.disabled}
             startAddon={
               <Stack
-                className={styles.imgBox}
+                className={clsx(styles.imgBox, props.imgClass)}
                 attributes={{ justifyContent: "center", alignItems: "center" }}
               >
                 {props.tokenIcon &&
@@ -206,10 +207,10 @@ export default function TokenInput(props: TokenInputProps) {
               </Stack>
             }
             onChange={(e) => state.handleTokenInput(e.value)}
-            onFocus={() => props?.onFocus?.()}
+            onFocus={(e) => props?.onFocus?.(e)}
             className={styles.token}
             inputContainer={styles.inputContainer}
-            inputClassName={styles.inputClassName}
+            inputClassName={clsx(styles.inputClassName, props.inputClass)}
           />
         </Box>
         <Stack

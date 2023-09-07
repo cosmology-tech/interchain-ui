@@ -7,6 +7,7 @@ import { IconButtonProps } from "./icon-button.types";
 export default function IconButton(props: IconButtonProps) {
   return (
     <Button
+      attributes={props.attributes}
       className={clsx(
         styles.container,
         styles.variants({
