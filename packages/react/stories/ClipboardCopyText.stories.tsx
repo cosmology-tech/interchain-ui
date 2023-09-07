@@ -18,6 +18,6 @@ export const Primary: Story = {
   args: {
     text: "stars1lqsqpnga3c7fyjfnrxv7jdt9zmjvgpv4mv8lf4",
     truncate: "middle",
-    midTruncateLimit: "md"
+    midTruncateLimit: "md",
   },
 };

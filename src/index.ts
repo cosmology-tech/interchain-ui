@@ -15,6 +15,8 @@ export type {
 
 // Init Components
 export { default as Box } from "./ui/box";
+export { default as Container } from "./ui/container";
+export { default as Link } from "./ui/link";
 export { default as Stack } from "./ui/stack";
 export { default as Icon } from "./ui/icon";
 export type { IconProps, IconName } from "./ui/icon/icon.types";

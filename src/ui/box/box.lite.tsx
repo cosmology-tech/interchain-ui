@@ -33,7 +33,7 @@ export default function Box(props: BoxProps) {
     },
     calculateStyles() {
       const sprinklesObj = rainbowSprinkles({
-        ...omit(props, ["attributes"]),
+        ...omit(props, ["attributes", "as", "boxRef"]),
         ...props.attributes,
       });
       state.className = clsx(sprinklesObj.className, props.className);

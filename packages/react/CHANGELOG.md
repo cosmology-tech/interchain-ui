@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.6.0...@interchain-ui/react@1.6.1) (2023-09-07)
+
+### Bug Fixes
+
+- improve for create cosmos app ([#96](https://github.com/cosmology-tech/interchain-ui/issues/96)) ([ccf473c](https://github.com/cosmology-tech/interchain-ui/commit/ccf473c2d845d8ea66121d344f590022bc34edb3))
+- optimize assets and fix some types ([#94](https://github.com/cosmology-tech/interchain-ui/issues/94)) ([0766e29](https://github.com/cosmology-tech/interchain-ui/commit/0766e2979cdd79c502d7916a98382dbbd3977dfe))
+
 # [1.6.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.5.0...@interchain-ui/react@1.6.0) (2023-09-04)
 
 ### Features

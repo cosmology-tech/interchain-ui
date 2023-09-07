@@ -1,6 +1,6 @@
 {
   "name": "@interchain-ui/react",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "UI building blocks for Interchain builders",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/react#readme",
@@ -36,6 +36,7 @@
       ]
     }
   },
+  "sideEffects": false,
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
     "@fastify/deepmerge": "^1.3.0",
