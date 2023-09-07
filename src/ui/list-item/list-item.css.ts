@@ -60,3 +60,7 @@ export const listItemSizes = styleVariants({
     }),
   ],
 });
+
+export const listItemSelected = style({
+  backgroundColor: themeVars.colors.menuItemBgActive,
+})

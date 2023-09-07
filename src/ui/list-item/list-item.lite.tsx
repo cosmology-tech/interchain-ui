@@ -7,7 +7,12 @@ import {
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
-import { listItemBase, listItemActive, listItemSizes } from "./list-item.css";
+import {
+  listItemBase,
+  listItemActive,
+  listItemSizes,
+  listItemSelected,
+} from "./list-item.css";
 import type { ListItemProps } from "./list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 
@@ -44,6 +49,7 @@ export default function ComboboxItem(props: ListItemProps) {
         listItemBase,
         props.isActive ? listItemActive.active : listItemActive.inactive,
         listItemSizes[props.size],
+        props.isSelected && listItemSelected,
         props.className
       )}
       ref={props.itemRef}

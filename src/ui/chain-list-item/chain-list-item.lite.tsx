@@ -45,6 +45,7 @@ export default function ChainListItem(props: ChainListItemProps) {
     <ListItem
       itemRef={props.itemRef}
       isActive={props.isActive}
+      isSelected={props.isSelected}
       size={props.size}
       attributes={props.attributes}
       className={props.className}
