@@ -2,8 +2,8 @@ import { BaseComponentProps } from "../../models/components.model";
 
 export interface ConnectModalProps extends BaseComponentProps {
   isOpen: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen?: (event?: any) => void;
+  onClose?: (event?: any) => void;
   header: BaseComponentProps["children"];
   children?: BaseComponentProps["children"];
   className?: string;

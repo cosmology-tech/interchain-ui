@@ -4,6 +4,6 @@ export interface VideoCardProps {
   thumbnail: string;
   title: string;
   duration: string;
-  onClick: () => void;
+  onClick: (event?: any) => void;
   size?: keyof typeof container;
 }

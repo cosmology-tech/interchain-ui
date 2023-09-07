@@ -9,6 +9,6 @@ export interface RemoveLiquidityProps {
   unbondedShares: PoolDetailProps["unbondedShares"];
   myLiquidityCoins: Coin[];
   isLoading?: boolean;
-  onRemoveLiquidity: () => void;
+  onRemoveLiquidity: (event?: any) => void;
   onChange: (progress: number) => void;
 }

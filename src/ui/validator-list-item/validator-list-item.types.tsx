@@ -4,5 +4,5 @@ export interface ValidatorListItemProps {
   stakedAmount: number;
   rewardsAmount: number;
   symbol: string;
-  onSetting?: () => void;
+  onSetting?: (event?: any) => void;
 }

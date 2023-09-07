@@ -14,7 +14,7 @@ export default function BondingList(props: ValidatorListProps) {
         <Stack
           attributes={{
             marginBottom: "$7",
-            paddingRight: "$9",
+            paddingRight: "$22",
           }}
         >
           <For each={["Validator", "Amount staked", "Claimable rewards"]}>
@@ -29,7 +29,6 @@ export default function BondingList(props: ValidatorListProps) {
               </Text>
             )}
           </For>
-          <Box width="$21" />
         </Stack>
       </Show>
       <Box
