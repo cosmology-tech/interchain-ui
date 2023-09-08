@@ -18,6 +18,7 @@ import type { AvatarProps } from "./avatar.types";
 export default function Avatar(props: AvatarProps) {
   useDefaultProps({
     size: "md",
+    rounded: true,
   });
 
   const state = useStore({
@@ -49,12 +50,15 @@ export default function Avatar(props: AvatarProps) {
       as="span"
       borderWidth={props.showBorder ? "$sm" : undefined}
       borderColor={props.borderColor}
+      borderRadius={props.rounded ? "$full" : "$none"}
+      backgroundColor={props.backgroundColor}
       className={clx(avatar[state.theme], props.className)}
       style={assignInlineVars({
         [avatarSizeVar]: `${avatarSize(props.size)}`,
       })}
       attributes={{
         "data-loaded": state.isLoaded,
+        "data-custom-bg": !!props.backgroundColor,
         ...props.attributes,
       }}
     >
