@@ -21,7 +21,6 @@ import { bottomShadow } from "../shared/shared.css";
 import { store } from "../../models/store";
 import type { ConnectModalWalletListProps } from "./connect-modal-wallet-list.types";
 
-
 export default function ConnectModalWalletList(
   props: ConnectModalWalletListProps
 ) {

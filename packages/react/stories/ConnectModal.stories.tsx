@@ -32,7 +32,7 @@ function convert(ws: typeof wallets) {
   return ws.map((wallet) => ({
     ...wallet,
     badge: wallet.metamask_snap ? "SNAP" : undefined,
-    btmLogo: wallet.metamask_snap ? 'MetaMask' : undefined,
+    btmLogo: wallet.metamask_snap ? "MetaMask" : undefined,
   }));
 }
 
