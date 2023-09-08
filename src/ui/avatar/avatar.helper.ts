@@ -7,7 +7,7 @@ export function avatarSize(size: AvatarProps["size"]) {
     "2xs": themeVars.space[8],
     xs: themeVars.space[10],
     sm: themeVars.space[12],
-    md: themeVars.space[15],
+    md: themeVars.space[16],
     lg: themeVars.space[17],
     xl: themeVars.space[21],
     "2xl": themeVars.space[23],

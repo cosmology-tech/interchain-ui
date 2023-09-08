@@ -95,7 +95,8 @@ export default function ConnectModalWalletButton(
             </Show>
 
             {/* When there are logo and btmLogo, use Avatar */}
-            <Show when={props.btmLogo}>
+            {/* List variant */}
+            <Show when={props.btmLogo && props.variant === "list"}>
               <Avatar
                 name={props.name}
                 src={props.logo}
@@ -129,39 +130,52 @@ export default function ConnectModalWalletButton(
               </Avatar>
             </Show>
 
-            {/* <Box
-                p="2px"
-                size="1.2rem"
-                right="0"
-                bottom="5px"
-                position="absolute"
-                transform="translate(25%, 25%)"
-                attributes={{
-                  borderRadius: "$full",
-                  backgroundColor:
-                    state.theme === "dark" ? "$gray300" : "$white",
-                }}
+            {/* Square variant */}
+            <Show
+              when={
+                props.btmLogo && !props.subLogo && props.variant === "square"
+              }
+            >
+              <Avatar
+                name={props.name}
+                src={props.logo}
+                backgroundColor="transparent"
+                rounded={false}
+                size="md"
               >
-                <Box
-                  as="img"
+                <AvatarBadge
+                  size="1.2em"
+                  borderWidth="0.1em"
                   attributes={{
-                    alt: ["MetaMask"].includes(props.btmLogo)
-                      ? props.btmLogo
-                      : `${props.name} logo`,
-                    src: ["MetaMask"].includes(props.btmLogo)
-                      ? WalletPluginSystem[props.btmLogo].logo
-                      : props.btmLogo,
+                    backgroundColor:
+                      state.theme === "dark" ? "$gray300" : "$white",
                   }}
-                  borderRadius="$full"
-                  height="100%"
-                  width="100%"
-                />
-              </Box> */}
+                >
+                  <Box
+                    as="img"
+                    width="100%"
+                    height="100%"
+                    borderRadius="$full"
+                    attributes={{
+                      alt: ["MetaMask"].includes(props.btmLogo)
+                        ? props.btmLogo
+                        : `${props.name} logo`,
+                      src: ["MetaMask"].includes(props.btmLogo)
+                        ? WalletPluginSystem[props.btmLogo].logo
+                        : props.btmLogo,
+                    }}
+                  />
+                </AvatarBadge>
+              </Avatar>
+            </Show>
           </Box>
 
+          {/* If it's metamask snap, it can't be wallet connect based on props.btmLogo */}
           <Show
             when={
-              props.variant === "square" && typeof props.subLogo === "string"
+              props.variant === "square" &&
+              typeof props.subLogo === "string" &&
+              !props.btmLogo
             }
           >
             <span

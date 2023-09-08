@@ -54,7 +54,7 @@ export const avatarName = style({
 
 export const avatarImg = style({
   display: "inline-block",
-  borderRadius: "100%",
+  borderRadius: "inherit",
 });
 
 export const avatarBadge = styleVariants({
