@@ -26,8 +26,10 @@ import {
   buttonLabelOverrides,
   buttonSublogoOverrides,
 } from "./connect-modal-wallet-button.helper";
+import Text from "../text";
 import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
+import { WalletPluginSystem } from "../connect-modal-wallet-list";
 
 useMetadata({ isAttachedToShadowDom: true });
 
@@ -80,7 +82,34 @@ export default function ConnectModalWalletButton(
             })
           )}
         >
-          <img alt={props.name} src={props.logo} className={fullWidthHeight} />
+          <Box position="relative">
+            <img alt={props.name} src={props.logo} className={fullWidthHeight} />
+            <Show when={props.btmLogo}>
+              <Box
+                p='2px'
+                size="1.2rem"
+                right="0"
+                bottom="0"
+                position="absolute"
+                transform="translate(25%, 25%)"
+                attributes={{
+                  borderRadius: "$full",
+                  backgroundColor: state.theme === "dark" ? "$gray300" : "$white",
+                }}
+              >
+              <Box
+                as="img"
+                attributes={{
+                  alt: ['MetaMask'].includes(props.btmLogo) ? props.btmLogo : `${props.name} logo`,
+                  src: ['MetaMask'].includes(props.btmLogo) ? WalletPluginSystem[props.btmLogo].logo : props.btmLogo,
+                }}
+                borderRadius="$full"
+                height="100%"
+                width="100%"
+              />
+              </Box>
+            </Show>
+          </Box>
 
           <Show
             when={
@@ -113,15 +142,30 @@ export default function ConnectModalWalletButton(
         </Box>
       </Show>
 
-      <span
+      <Box
         className={clx(
           buttonTextStyle[state.theme],
           buttonTextVariants({ variant: props.variant })
         )}
         style={state.overrideManager?.applyOverrides(buttonLabelOverrides.name)}
       >
-        {props.name}
-      </span>
+        <Text as="span" attributes={{ display: 'inline-block', position: 'relative', pr: "$2" }}>
+          <Text>{props.name}</Text>
+          <Show when={props.badge}>
+            <Text as="span"  fontSize="10px" fontWeight="$medium"
+              attributes={{
+                px: '$3', py: '4px',
+                borderRadius: '$md',
+                textTransform: 'uppercase',
+                position: 'absolute', top: '$-3', left: '$full',
+                color: state.theme === 'dark' ? '$gray300' : '$gray800',
+                backgroundColor: state.theme === 'dark' ? '$gray600' : '$gray200'
+              }}>
+              {props.badge}
+            </Text>
+          </Show>
+        </Text>
+      </Box>
 
       <Show
         when={props.variant === "list" && typeof props.subLogo === "string"}

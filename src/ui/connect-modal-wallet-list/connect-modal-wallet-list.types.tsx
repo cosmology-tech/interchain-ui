@@ -6,10 +6,12 @@ export interface Wallet {
   prettyName?: string;
   logo: string;
   subLogo?: string;
+  btmLogo?: string;
   mobileDisabled: boolean;
   downloadUrl?: string;
   rejectMessage?: string;
   originalWallet?: any;
+  badge?: string;
   shape?: ConnectModalWalletButtonProps["variant"];
 }
 

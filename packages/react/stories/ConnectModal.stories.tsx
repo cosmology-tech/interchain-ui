@@ -28,6 +28,14 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+function convert(ws: typeof wallets) {
+  return ws.map((wallet) => ({
+    ...wallet,
+    badge: wallet.metamask_snap ? "SNAP" : undefined,
+    btmLogo: wallet.metamask_snap ? 'MetaMask' : undefined,
+  }));
+}
+
 export const Primary: Story = {
   args: {},
   render: () => {
@@ -79,7 +87,7 @@ export const Primary: Story = {
           ) : (
             // <ConnectModalStatus {...modalStatusProps} />
             <ConnectModalWalletList
-              wallets={wallets}
+              wallets={convert(wallets)}
               onWalletItemClick={onNext}
             />
           )}

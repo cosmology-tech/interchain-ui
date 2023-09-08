@@ -21,6 +21,7 @@ import { bottomShadow } from "../shared/shared.css";
 import { store } from "../../models/store";
 import type { ConnectModalWalletListProps } from "./connect-modal-wallet-list.types";
 
+
 export default function ConnectModalWalletList(
   props: ConnectModalWalletListProps
 ) {
@@ -124,6 +125,7 @@ export default function ConnectModalWalletList(
                   name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
                   subLogo={wallet.subLogo}
+                  btmLogo={wallet.btmLogo}
                   onClick={state.onWalletItemClickAsync(async () =>
                     props.onWalletItemClick?.(wallet.originalWallet)
                   )}
@@ -141,7 +143,9 @@ export default function ConnectModalWalletList(
                 variant="list"
                 name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
+                badge={wallet.badge}
                 subLogo={wallet.subLogo}
+                btmLogo={wallet.btmLogo}
                 onClick={state.onWalletItemClickAsync(async () =>
                   props.onWalletItemClick?.(wallet.originalWallet)
                 )}
