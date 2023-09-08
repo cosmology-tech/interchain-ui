@@ -18,10 +18,12 @@ export default function AvatarImage(props: AvatarImageProps) {
     status: "loading" | "failed" | "pending" | "loaded";
     resolvedStatus: "loading" | "failed" | "pending" | "loaded";
     showFallback: boolean;
+    transitionState: "idle" | "entered";
     load: () => void;
     flush: () => void;
   }>({
     status: "pending",
+    transitionState: "idle",
     load() {
       if (!props.src) return;
 
@@ -37,6 +39,10 @@ export default function AvatarImage(props: AvatarImageProps) {
       img.onload = (event) => {
         state.flush();
         state.status = "loaded";
+
+        setTimeout(() => {
+          state.transitionState = "entered";
+        }, 50);
         props.onLoad?.(event);
       };
       img.onerror = (error) => {
@@ -52,6 +58,7 @@ export default function AvatarImage(props: AvatarImageProps) {
         imgRef.onload = null;
         imgRef.onerror = null;
         imgRef = null;
+        state.transitionState = "idle";
       }
     },
     get resolvedStatus() {
@@ -98,6 +105,7 @@ export default function AvatarImage(props: AvatarImageProps) {
       when={state.showFallback}
       else={
         <img
+          ref={imgRef}
           src={props.src}
           srcset={props.srcSet as any}
           alt={props.name}
@@ -106,6 +114,14 @@ export default function AvatarImage(props: AvatarImageProps) {
           crossOrigin={(props.crossOrigin as any) ?? undefined}
           loading={props.loading}
           className={cls(avatarImg, props.className)}
+          data-status={state.resolvedStatus}
+          style={{
+            opacity: `${state.transitionState === "idle" ? 0 : 1}`,
+            transition:
+              state.transitionState === "entered"
+                ? "opacity 150ms cubic-bezier(0.7, 0, 0.84, 0)"
+                : "none !important",
+          }}
         />
       }
     >

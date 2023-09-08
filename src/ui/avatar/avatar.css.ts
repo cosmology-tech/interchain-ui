@@ -7,6 +7,7 @@ export const avatarBorderColorVar = createVar();
 
 export const avatarBase = style({
   display: "inline-flex",
+  borderRadius: "inherit",
   width: avatarSizeVar,
   height: avatarSizeVar,
   position: "relative",
@@ -54,6 +55,7 @@ export const avatarName = style({
 
 export const avatarImg = style({
   display: "inline-block",
+  backgroundColor: "transparent",
   borderRadius: "inherit",
 });
 
