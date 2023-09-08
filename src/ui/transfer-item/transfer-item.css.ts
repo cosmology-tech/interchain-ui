@@ -44,7 +44,8 @@ export const transferInput = style({
   // border: "0",
   // outline: "0",
   fontSize: themeVars.fontSize["2xl"],
-  textAlign: "right"
+  textAlign: "right",
+  width: themeVars.space[28]
 });
 
 export const comboboxContainer = style({
