@@ -19,6 +19,8 @@ import {
 } from "./connect-modal-wallet-button.css";
 import { store } from "../../models/store";
 import Box from "../box";
+import Avatar from "../avatar";
+import AvatarBadge from "../avatar/avatar-badge.lite";
 import Icon from "../icon";
 import { fullWidthHeight } from "../shared/shared.css";
 import {
@@ -83,13 +85,51 @@ export default function ConnectModalWalletButton(
           )}
         >
           <Box position="relative">
-            <img
-              alt={props.name}
-              src={props.logo}
-              className={fullWidthHeight}
-            />
+            {/* When there is only logo, use normal image */}
+            <Show when={props.logo && !props.btmLogo}>
+              <img
+                alt={props.name}
+                src={props.logo}
+                className={fullWidthHeight}
+              />
+            </Show>
+
+            {/* When there are logo and btmLogo, use Avatar */}
             <Show when={props.btmLogo}>
-              <Box
+              <Avatar
+                name={props.name}
+                src={props.logo}
+                backgroundColor="transparent"
+                rounded={false}
+                size="sm"
+              >
+                <AvatarBadge
+                  size="1.2em"
+                  borderWidth="0.1em"
+                  attributes={{
+                    backgroundColor:
+                      state.theme === "dark" ? "$gray300" : "$white",
+                  }}
+                >
+                  <Box
+                    as="img"
+                    width="100%"
+                    height="100%"
+                    borderRadius="$full"
+                    attributes={{
+                      alt: ["MetaMask"].includes(props.btmLogo)
+                        ? props.btmLogo
+                        : `${props.name} logo`,
+                      src: ["MetaMask"].includes(props.btmLogo)
+                        ? WalletPluginSystem[props.btmLogo].logo
+                        : props.btmLogo,
+                    }}
+                  />
+                </AvatarBadge>
+              </Avatar>
+            </Show>
+
+            {/* <Box
                 p="2px"
                 size="1.2rem"
                 right="0"
@@ -116,8 +156,7 @@ export default function ConnectModalWalletButton(
                   height="100%"
                   width="100%"
                 />
-              </Box>
-            </Show>
+              </Box> */}
           </Box>
 
           <Show
