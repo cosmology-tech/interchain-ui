@@ -95,7 +95,7 @@ export const btnText = styleVariants({
 export const addressInput = style({
   paddingLeft: themeVars.space["15"],
   paddingRight: themeVars.space["17"],
-  height: "54px",
+  height: themeVars.space["15"],
   overflow: "hidden",
 });
 
@@ -105,7 +105,7 @@ export const checkIcon = style({
   position: "absolute",
   right: "0",
   bottom: "0",
-  height: "54px",
+  height: themeVars.space["15"],
 });
 
 const expandHorizontal = keyframes({
@@ -127,33 +127,29 @@ export const addressContainerReverse = style({
 });
 
 const expandVertical = keyframes({
-  "0%": { opacity: "0" },
-  "100%": { opacity: "0.8" },
+  "0%": { opacity: "0", height: 0 },
+  "100%": { opacity: "0.8", height: "400px" },
 });
 
 const expandVerticalReverse = keyframes({
-  "0%": { opacity: "0.8" },
-  "100%": { opacity: "0" },
+  "0%": { opacity: "0.8", height: "400px" },
+  "100%": { opacity: "0", height: 0 },
 });
-
 
 export const addressBackgroundReverse = style({
   animation: `${expandVerticalReverse} .5s`,
 });
 
-const smPanelFadeOut = keyframes({
-  "0%": { opacity: 1 },
-  "100%": { opacity: 0 },
-});
 const smPanelFadeOIn = keyframes({
-  "0%": { opacity: 0, },
-  "30%": { opacity: 0, },
+  "0%": { opacity: 0 },
+  "30%": { opacity: 0 },
   "100%": { opacity: 1 },
 });
+
 export const smPanelHide = style({
-  // animation: `${smPanelFadeOut} .5s`,
   visibility: "hidden",
 });
+
 export const smPanelShow = style({
   animation: `${smPanelFadeOIn} .5s`,
 });
@@ -177,11 +173,11 @@ export const transferMask = styleVariants({
 });
 
 export const addressBackground = style({
-  animation: `${expandVertical} .5s`,
+  animation: `${expandVertical} 0.6s cubic-bezier(0.22, 1, 0.36, 1)`,
   position: "absolute",
   width: "460px",
   height: "400px",
-  top: "85px",
+  top: "84px",
   right: "0",
   zIndex: "1",
   opacity: 0.8,
