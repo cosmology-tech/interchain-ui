@@ -7,7 +7,7 @@ import {
   useDefaultProps,
 } from "@builder.io/mitosis";
 import clx from "clsx";
-import Button from "../button";
+import IconButton from "../icon-button";
 import { store } from "../../models/store";
 import * as styles from "./connect-modal-head.css";
 import { connectModalHeadTitleOverrides } from "./connect-modal-head.helper";
@@ -49,13 +49,12 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
     <div className={clx(styles.modalHeader, props.className)}>
       <Show when={props.hasBackButton}>
         <div className={styles.modalBackButton}>
-          <Button
-            rightIcon="arrowLeftSLine"
+          <IconButton
+            icon="arrowLeftSLine"
             intent="secondary"
             variant="ghost"
             size="sm"
             iconSize="$2xl"
-            attributes={{ px: "$0" }}
             onClick={(e) => {
               props.onBack?.(e);
             }}
@@ -75,15 +74,12 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
 
       <Show when={props.hasCloseButton}>
         <div className={styles.modalCloseButton}>
-          <Button
-            rightIcon="closeFilled"
+          <IconButton
+            icon="closeFilled"
             intent="secondary"
             variant="ghost"
             size="sm"
             iconSize="$2xl"
-            attributes={{
-              px: "$0",
-            }}
             domAttributes={props.closeButtonProps}
             onClick={(e) => props.closeButtonProps?.onClick?.(e)}
           />

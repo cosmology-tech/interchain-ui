@@ -1,17 +1,10 @@
 import React from "react";
 import cls from "clsx";
-
-import { create } from "zustand";
-import { store, Box, Button, Icon, ThemeProvider } from "../src";
-
-const useStore = create(store);
+import { Box, IconButton, ThemeProvider, useTheme } from "../src";
+import "../src/styles/global.css";
 
 const WithThemeDecorator = (props) => {
-  const [theme, themeClass, setTheme] = useStore((state) => [
-    state.theme,
-    state.themeClass,
-    state.setThemeMode,
-  ]);
+  const { theme, themeClass, setTheme } = useTheme();
 
   return (
     <ThemeProvider
@@ -46,23 +39,18 @@ const WithThemeDecorator = (props) => {
         >
           {props.children}
           <Box position="absolute" top="$4" right="$4">
-            <Button
+            <IconButton
               variant="ghost"
               intent="secondary"
               size="sm"
+              icon={theme === "dark" ? "sunLine" : "moonLine"}
               onClick={() => {
                 if (theme === "light") {
                   return setTheme("dark");
                 }
                 return setTheme("light");
               }}
-            >
-              {theme === "dark" ? (
-                <Icon name="sunLine" />
-              ) : (
-                <Icon name="moonLine" />
-              )}
-            </Button>
+            />
           </Box>
         </Box>
       </div>

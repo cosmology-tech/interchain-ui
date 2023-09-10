@@ -17,6 +17,7 @@ export default function Stack(props: StackProps) {
       flexDirection={props.direction === "horizontal" ? "row" : "column"}
       gap={props.space}
       className={props.className}
+      attributes={props.domAttributes}
     >
       {props.children}
     </Box>

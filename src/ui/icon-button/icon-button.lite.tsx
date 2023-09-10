@@ -9,10 +9,10 @@ export default function IconButton(props: IconButtonProps) {
     <Button
       attributes={props.attributes}
       className={clsx(
-        styles.container,
         styles.variants({
           round: props.isRound ? true : undefined,
         }),
+        styles.container,
         props.className
       )}
       variant={props.variant}

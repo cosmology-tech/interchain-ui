@@ -56,6 +56,7 @@ export const avatarName = style({
 export const avatarImg = style({
   display: "inline-block",
   backgroundColor: "transparent",
+  maxWidth: "100%",
   borderRadius: "inherit",
 });
 

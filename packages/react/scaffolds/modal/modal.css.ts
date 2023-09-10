@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
 
 export const modalContainer = style({
   position: `fixed`,
@@ -53,3 +54,10 @@ export const modalCloseButton = style({
   top: "50%",
   transform: "translateY(-50%)",
 });
+
+globalStyle(
+  `${modalContainer} *, ${modalContainer} *::before, ${modalContainer} *::after`,
+  {
+    boxSizing: `border-box`,
+  }
+);

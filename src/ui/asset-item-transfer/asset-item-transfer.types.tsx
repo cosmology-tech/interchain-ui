@@ -1,4 +1,5 @@
 import { AvailableItem } from "../transfer-item/transfer-item.types";
+
 export interface AssetItemTransferProps {
   fromSymbol: AvailableItem["symbol"];
   fromDenom: AvailableItem["denom"];
