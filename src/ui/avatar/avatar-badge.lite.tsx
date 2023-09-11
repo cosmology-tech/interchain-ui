@@ -15,6 +15,7 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
   useDefaultProps({
     placement: "bottom-right",
     size: "1.25em",
+    borderWidth: "0.2em",
   });
 
   const state = useStore({
@@ -43,6 +44,7 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
       alignItems="center"
       justifyContent="center"
       borderRadius="$full"
+      borderWidth={props.borderWidth}
       {...props.attributes}
       width={props.size}
       height={props.size}

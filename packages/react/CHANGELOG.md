@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.7.0...@interchain-ui/react@1.7.1) (2023-09-10)
+
+### Bug Fixes
+
+- some style issues ([#100](https://github.com/cosmology-tech/interchain-ui/issues/100)) ([8ec8988](https://github.com/cosmology-tech/interchain-ui/commit/8ec898809e79023748ac0978e5d308d6ce90aaa3))
+
+# [1.7.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.6.1...@interchain-ui/react@1.7.0) (2023-09-08)
+
+### Bug Fixes
+
+- metamask snap square button ([5260a8f](https://github.com/cosmology-tech/interchain-ui/commit/5260a8fa040cc31c552e1b6b9ffb186532723787))
+
+### Features
+
+- Add staking list ([#87](https://github.com/cosmology-tech/interchain-ui/issues/87)) ([783b9e5](https://github.com/cosmology-tech/interchain-ui/commit/783b9e52d20ecfbef98e16ef438a7f8a05c6894b))
+- add swap modal ([#95](https://github.com/cosmology-tech/interchain-ui/issues/95)) ([3d79847](https://github.com/cosmology-tech/interchain-ui/commit/3d79847d37606072ccaddf1c44a79aa4dedd6942))
+- MetaMask Snaps support ([2ad56ca](https://github.com/cosmology-tech/interchain-ui/commit/2ad56cac5b986ae0e38d3cd3ec73eb563bd9d990))
+
 ## [1.6.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.6.0...@interchain-ui/react@1.6.1) (2023-09-07)
 
 ### Bug Fixes

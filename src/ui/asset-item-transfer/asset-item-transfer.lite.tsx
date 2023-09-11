@@ -87,6 +87,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             alignItems: "center",
             position: "relative",
           }}
+          domAttributes={{
+            "data-part-id": "address-only-sm",
+          }}
         >
           <img
             alt={props.fromDenom}
@@ -129,6 +132,9 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             justifyContent: "center",
             alignItems: "flex-end",
           }}
+          domAttributes={{
+            "data-part-id": "address-only-lg",
+          }}
         >
           <Stack direction="vertical" className={styles.flex1}>
             <Text
@@ -168,11 +174,15 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               marginBottom: "$9",
             }}
           />
+
           <Stack
             direction="vertical"
             className={styles.flex1}
             attributes={{
               position: "relative",
+            }}
+            domAttributes={{
+              "data-part-id": "to-address",
             }}
           >
             <Text
@@ -185,12 +195,17 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             >
               {`To ${props.toDenom}`}
             </Text>
+
             <Stack
               attributes={{
                 p: "$6",
+                height: "52px",
                 backgroundColor: "$cardBg",
                 borderRadius: "$lg",
                 alignItems: "center",
+              }}
+              domAttributes={{
+                "data-part-id": "to-address-input",
               }}
             >
               <img
@@ -209,89 +224,98 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               <IconButton
                 icon="pencilLine"
                 intent="text"
+                size="sm"
+                iconSize="$lg"
                 attributes={{
                   height: "$auto",
-                  minWidth: "$12",
                 }}
                 onClick={() => {
                   state.lgAddressVisible = true;
                 }}
               />
             </Stack>
-            <Show when={state.lgAddressVisible}>
-              <Box
-                className={clsx(styles.addressBackground, styles.transferMask[state.theme], {
+
+            {/* Slide-out toAddress input background */}
+            <Box
+              display={state.lgAddressVisible ? "block" : "none"}
+              className={clsx(
+                styles.addressBackground,
+                styles.transferMask[state.theme],
+                {
                   [styles.addressBackgroundReverse]: state.reverseAnimation,
-                })}
+                }
+              )}
+            />
+
+            {/* Slide0out toAddress input field */}
+            <Box
+              display={state.lgAddressVisible ? "block" : "none"}
+              attributes={{
+                position: "absolute",
+                bottom: "1px",
+                right: "0",
+                zIndex: "1",
+              }}
+              className={clsx(styles.addressContainer, {
+                [styles.addressContainerReverse]: state.reverseAnimation,
+              })}
+            >
+              <Text
+                className={styles.transferMask[state.theme]}
+                color="$textSecondary"
+                fontWeight="$semibold"
+                ellipsis
+                attributes={{
+                  paddingBottom: "$6",
+                }}
+              >
+                {`To ${props.toDenom}`}
+              </Text>
+              <TextField
+                id="to-address"
+                value={state.toAddress}
+                onChange={(e) => {
+                  state.toAddress = e.target.value;
+                  props?.onAddressChange(e.target.value);
+                }}
+                inputClassName={styles.addressInput}
               />
-              <Box
+              <Stack
                 attributes={{
                   position: "absolute",
-                  bottom: "0",
-                  right: "0",
-                  zIndex: "1",
+                  left: "$7",
+                  bottom: "$0",
+                  height: "48px",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-                className={clsx(styles.addressContainer, {
-                  [styles.addressContainerReverse]: state.reverseAnimation,
-                })}
               >
-                <Text
-                  className={styles.transferMask[state.theme]}
-                  color="$textSecondary"
-                  fontWeight="$semibold"
-                  ellipsis
-                  attributes={{
-                    paddingBottom: "$6",
-                  }}
-                >
-                  {`To ${props.toDenom}`}
-                </Text>
-                <TextField
-                  id="to-address"
-                  value={state.toAddress}
-                  onChange={(e) => {
-                    state.toAddress = e.target.value;
-                    props?.onAddressChange(e.target.value);
-                  }}
-                  inputClassName={styles.addressInput}
+                <Box
+                  as="img"
+                  width="$11"
+                  height="$11"
+                  borderRadius="$full"
+                  attributes={{ src: props?.toImgSrc }}
                 />
-                <Stack
-                  attributes={{
-                    position: "absolute",
-                    left: "$7",
-                    bottom: "$0",
-                    height: "54px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box
-                    as="img"
-                    width="$11"
-                    height="$11"
-                    borderRadius="$full"
-                    attributes={{ src: props?.toImgSrc }}
-                  />
-                </Stack>
-                <IconButton
-                  icon="checkFill"
-                  intent="tertiary"
-                  size="lg"
-                  attributes={{
-                    minWidth: "$15",
-                  }}
-                  className={styles.checkIcon}
-                  onClick={() => {
-                    state.reverseAnimation = true;
-                    props?.onAddressConfirm?.();
-                    setTimeout(() => {
-                      state.lgAddressVisible = false;
-                      state.reverseAnimation = false;
-                    }, 500);
-                  }}
-                />
-              </Box>
-            </Show>
+              </Stack>
+              <IconButton
+                icon="checkFill"
+                intent="tertiary"
+                size="md"
+                attributes={{
+                  px: "$0",
+                }}
+                className={styles.checkIcon}
+                onClick={() => {
+                  state.reverseAnimation = true;
+                  props?.onAddressConfirm?.();
+                  setTimeout(() => {
+                    state.lgAddressVisible = false;
+                    state.reverseAnimation = false;
+                  }, 500);
+                }}
+              />
+            </Box>
           </Stack>
         </Stack>
         <TokenInput
@@ -470,7 +494,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
                 position: "absolute",
                 left: "$7",
                 bottom: "$0",
-                height: "54px",
+                height: "48px",
                 justifyContent: "center",
                 alignItems: "center",
               }}
@@ -514,7 +538,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
                 position: "absolute",
                 left: "$7",
                 bottom: "$0",
-                height: "54px",
+                height: "48px",
                 justifyContent: "center",
                 alignItems: "center",
               }}

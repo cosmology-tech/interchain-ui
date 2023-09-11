@@ -100,7 +100,9 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               inputSizes[size],
               props.disabled ? inputIntent.disabled : inputIntent[intent],
               props.inputClassName,
-              props.borderless && styles.borderless
+              props.borderless && styles.borderless,
+              disabled && props.startAddon ? styles.withStartAddon : null,
+              disabled && props.endAddon ? styles.withEndAddon : null
             )}
           />
 

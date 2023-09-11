@@ -7,6 +7,7 @@ export const avatarBorderColorVar = createVar();
 
 export const avatarBase = style({
   display: "inline-flex",
+  borderRadius: "inherit",
   width: avatarSizeVar,
   height: avatarSizeVar,
   position: "relative",
@@ -16,10 +17,11 @@ export const avatarBase = style({
   textAlign: "center",
   textTransform: "uppercase",
   fontWeight: themeVars.fontWeight.medium,
-  borderRadius: "100%",
   selectors: {
-    "&:not([data-loaded='true'])": {
+    "&:not([data-loaded='true']):not([data-custom-bg='true'])": {
       backgroundColor: avatarBgVar,
+    },
+    "&:not([data-loaded='true'])": {
       color: themeVars.colors.text,
     },
   },
@@ -53,7 +55,9 @@ export const avatarName = style({
 
 export const avatarImg = style({
   display: "inline-block",
-  borderRadius: "100%",
+  backgroundColor: "transparent",
+  maxWidth: "100%",
+  borderRadius: "inherit",
 });
 
 export const avatarBadge = styleVariants({
@@ -63,7 +67,6 @@ export const avatarBadge = styleVariants({
         [avatarBorderColorVar]: themeVars.colors.white,
       },
       borderStyle: "solid",
-      borderWidth: "0.2em",
       borderColor: avatarBorderColorVar,
     }),
   ],
@@ -73,7 +76,6 @@ export const avatarBadge = styleVariants({
         [avatarBorderColorVar]: themeVars.colors.gray300,
       },
       borderStyle: "solid",
-      borderWidth: "0.2em",
       borderColor: avatarBorderColorVar,
     }),
   ],

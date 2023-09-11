@@ -30,8 +30,10 @@ export interface AvatarProps
   extends AvatarImageProps,
     Omit<AvatarNameProps, "ref"> {
   size?: AvatarSize;
+  rounded?: boolean;
   showBorder?: boolean;
   borderColor?: Sprinkles["borderColor"];
+  backgroundColor?: Sprinkles["backgroundColor"];
 }
 
 export type AvatarBadgePlacement =
@@ -45,4 +47,5 @@ export interface AvatarBadgeProps extends BaseComponentProps {
   attributes?: any;
   size?: string;
   placement?: AvatarBadgePlacement;
+  borderWidth?: Sprinkles["borderWidth"];
 }
