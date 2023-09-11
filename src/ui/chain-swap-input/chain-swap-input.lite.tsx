@@ -65,22 +65,32 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
           space="$7"
         >
           {/* Still need to show the icon even props.value is empty string */}
-          <Show when={!props.value && !props.iconUrl}>
+          <Box
+            width={props.size === "md" ? "50px" : "28px"}
+            height={props.size === "md" ? "50px" : "28px"}
+          >
             <Box
-              width={props.size === "md" ? "50px" : "28px"}
-              height={props.size === "md" ? "50px" : "28px"}
+              style={{
+                display: !props.value && !props.iconUrl ? "block" : "none",
+              }}
+              width="$full"
+              height="$full"
               borderRadius="$full"
               backgroundColor="$skeletonBg"
             />
-          </Show>
 
-          <Show when={props.value || props.iconUrl}>
-            <img
-              src={props.iconUrl}
-              className={chainSwapLogo[props.size]}
-              alt={props.label}
-            />
-          </Show>
+            <Box
+              style={{
+                display: props.value || props.iconUrl ? "block" : "none",
+              }}
+            >
+              <img
+                src={props.iconUrl}
+                className={chainSwapLogo[props.size]}
+                alt={props.label}
+              />
+            </Box>
+          </Box>
 
           <Box
             flex={props.size === "sm" ? "1 0 1px" : undefined}
@@ -105,7 +115,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 />
               </Box>
 
-              <Show when={!!props.value}>
+              <Box style={{ display: !!props.value ? "block" : "none" }}>
                 <button
                   type="button"
                   className={baseButton}
@@ -124,10 +134,18 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                     name="arrowDropDown"
                   />
                 </button>
-              </Show>
+              </Box>
             </Stack>
 
-            <Show when={props.value && props.label && props.size === "md"}>
+            <Box
+              height="$11"
+              style={{
+                visibility:
+                  props.value && props.label && props.size === "md"
+                    ? "visible"
+                    : "hidden",
+              }}
+            >
               <Text
                 as="p"
                 color="$text"
@@ -142,13 +160,13 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
               >
                 {props.label}
               </Text>
-            </Show>
+            </Box>
           </Box>
         </Stack>
 
         {/* Numbers */}
-        <Show when={props.size === "md"}>
-          <Show when={!props.value}>
+        <Box style={{ display: props.size === "md" ? "block" : "none" }}>
+          <Box style={{ display: !props.value ? "block" : "none" }}>
             <Stack direction="vertical" space="$4">
               <Box
                 backgroundColor="$skeletonBg"
@@ -163,15 +181,18 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 height="9px"
               />
             </Stack>
-          </Show>
+          </Box>
 
-          <Show
-            when={
-              props.value &&
-              props.notionalValue &&
-              props.amount &&
-              !props.endAddon
-            }
+          <Box
+            style={{
+              display:
+                props.value &&
+                props.notionalValue &&
+                props.amount &&
+                !props.endAddon
+                  ? "block"
+                  : "none",
+            }}
           >
             <Stack direction="vertical" space="$0">
               <Text
@@ -191,10 +212,16 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 {props.notionalValue}
               </Text>
             </Stack>
-          </Show>
+          </Box>
 
-          <Show when={props.endAddon && !!props.value}>{props.endAddon}</Show>
-        </Show>
+          <Box
+            style={{
+              display: props.endAddon && !!props.value ? "block" : "none",
+            }}
+          >
+            {props.endAddon}
+          </Box>
+        </Box>
       </Box>
     </div>
   );
