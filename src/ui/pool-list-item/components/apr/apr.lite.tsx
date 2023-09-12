@@ -6,7 +6,6 @@ import IconButton from "../../../icon-button";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["popover"],
 });
 
 export default function APR(props: {
