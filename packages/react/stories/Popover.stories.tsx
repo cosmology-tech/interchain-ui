@@ -1,16 +1,10 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  Button,
-  Box,
-} from "../../src";
+import { Popover, PopoverTrigger, PopoverContent, Button, Box } from "../src";
 
 const meta: Meta<typeof Popover> = {
   component: Popover,
-  title: "web/Popover",
+  title: "Popover",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -29,17 +23,17 @@ const content = (
     display="grid"
     placeItems="center"
   >
-    popover content
+    Popover content
   </Box>
 );
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
     offset: 20,
     children: (
       <>
         <PopoverTrigger>
-          <Button>open popver</Button>
+          <Button>Open popver</Button>
         </PopoverTrigger>
         <PopoverContent arrowStyles={{ fill: "lightblue" }}>
           {content}
