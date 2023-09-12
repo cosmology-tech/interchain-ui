@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.7.1...@interchain-ui/react@1.8.0) (2023-09-12)
+
+### Features
+
+- add web components ([#99](https://github.com/cosmology-tech/interchain-ui/issues/99)) ([562d019](https://github.com/cosmology-tech/interchain-ui/commit/562d0197c0af084ac86d47dc7d1d73af40ad0a8b))
+
 ## [1.7.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.7.0...@interchain-ui/react@1.7.1) (2023-09-10)
 
 ### Bug Fixes
