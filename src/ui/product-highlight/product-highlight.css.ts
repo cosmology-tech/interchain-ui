@@ -13,7 +13,7 @@ export const background = styleVariants({
 
 export const button = style({
   marginTop: themeVars.space[15],
-  background: "#EEF2F8",
-  color: themeVars.colors.text,
-  fontSize: themeVars.fontSize.sm,
+  background: "#EEF2F8 !important",
+  color: `${themeVars.colors.text} !important`,
+  fontSize: `${themeVars.fontSize.sm} !important`,
 });

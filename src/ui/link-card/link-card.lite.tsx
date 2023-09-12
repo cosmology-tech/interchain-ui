@@ -8,6 +8,7 @@ import Text from "../text";
 useDefaultProps<Partial<LinkCardProps>>({
   width: "360px",
   height: "210px",
+  iconColor: "$text",
   openInNewTab: true,
 });
 
@@ -33,6 +34,7 @@ export default function LinkCard(props: LinkCardProps) {
       <Icon
         size="$10xl"
         name={props.icon}
+        color={props.iconColor}
         attributes={{ marginBottom: "$9" }}
       />
       <Text

@@ -1,4 +1,4 @@
-import { IconName } from "../icon/icon.types";
+import { IconName, IconProps } from "../icon/icon.types";
 
 export interface LinkCardProps {
   url: string;
@@ -7,5 +7,6 @@ export interface LinkCardProps {
   description: string;
   width?: string;
   height?: string;
+  iconColor?: IconProps["color"];
   openInNewTab?: boolean;
 }
