@@ -30,6 +30,33 @@ module.exports = {
       path: "../select-option",
     },
   },
+  popover: {
+    jsxMap: {
+      ScaffoldPopover: "Popover",
+    },
+    import: {
+      imports: { Popover: "default" },
+      path: "../popover",
+    },
+  },
+  "popover-trigger": {
+    jsxMap: {
+      ScaffoldPopoverTrigger: "PopoverTrigger",
+    },
+    import: {
+      imports: { PopoverTrigger: "default" },
+      path: "../popover-trigger",
+    },
+  },
+  "popover-content": {
+    jsxMap: {
+      ScaffoldPopoverContent: "PopoverContent",
+    },
+    import: {
+      imports: { PopoverContent: "default" },
+      path: "../popover-content",
+    },
+  },
   "chain-swap-combobox": {
     jsxMap: {
       ScaffoldChainSwapCombobox: "ChainSwapCombobox",

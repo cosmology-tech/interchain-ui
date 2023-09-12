@@ -17,6 +17,7 @@ export const Default: Story = {
     title: "Discord",
     icon: "discord",
     description: "Join the community",
+    iconColor: "#453558",
     url: "https://discord.com/invite/xh3ZwHj2qQ",
   },
 };
