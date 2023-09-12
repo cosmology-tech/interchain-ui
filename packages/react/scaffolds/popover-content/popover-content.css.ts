@@ -6,7 +6,9 @@ export const arrow = style({
 
 export const contentWrapper = style({
   zIndex: 999,
-  ":focus": {
-    outline: "none",
+  selectors: {
+    "&:focus": {
+      outline: "none",
+    },
   },
 });
