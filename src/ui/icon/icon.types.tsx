@@ -55,6 +55,15 @@ export const ALL_ICON_NAMES = [
   "astronaut",
   "stargazePixel",
   "link",
+  "playFilled",
+  "rocket",
+  "monitor",
+  "lightning",
+  "truck",
+  "playOutlinedThin",
+  "playOutlinedThick",
+  "previousOutlined",
+  "nextOutlined",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];
