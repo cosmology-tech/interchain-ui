@@ -41,6 +41,7 @@ export default function Avatar(props: AvatarProps) {
   return (
     <Box
       as="span"
+      display="inline-flex"
       borderWidth={props.showBorder ? "$sm" : undefined}
       borderColor={props.borderColor}
       borderRadius={props.rounded ? "$full" : "$none"}

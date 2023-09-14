@@ -64,7 +64,10 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
             <Stack
               direction="horizontal"
               space="$4"
-              attributes={{ alignItems: "center" }}
+              attributes={{
+                alignItems: "center",
+                display: props.showSelectedItem ? "flex" : "none",
+              }}
             >
               <Avatar
                 name={props.chainName}
@@ -114,7 +117,7 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
                   }}
                   onClick={() => props.onClear?.()}
                 >
-                  <Icon name="close" />
+                  <Icon name="close" color="$text" size="$md" />
                 </button>
               ) : null}
             </Box>
@@ -128,7 +131,7 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
               }}
               onClick={() => props.onDropdownArrowClicked?.()}
             >
-              <Icon name="arrowDropDown" />
+              <Icon name="arrowDropDown" color="$text" size="$md" />
             </button>
           </Box>
         </TextFieldAddon>

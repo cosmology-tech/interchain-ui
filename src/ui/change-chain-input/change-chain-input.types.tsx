@@ -24,6 +24,7 @@ export interface ChangeChainInputProps
   chainName?: string;
   isLoading?: boolean;
   isClearable?: boolean;
+  showSelectedItem?: boolean;
   onChange?: (e: any) => void;
   onClear?: (event?: any) => void;
   onDropdownArrowClicked?: (event?: any) => void;

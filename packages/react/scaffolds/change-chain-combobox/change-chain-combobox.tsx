@@ -41,7 +41,14 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
   const id = useId();
 
   return (
-    <div ref={ref} role="option" id={id} aria-selected={isActive} {...rest}>
+    <div
+      ref={ref}
+      role="option"
+      id={id}
+      aria-selected={isActive}
+      tabIndex={isActive ? 0 : -1}
+      {...rest}
+    >
       <ChangeChainListItem
         isActive={isActive}
         size={size}
@@ -63,7 +70,7 @@ export interface ChainSwapComboboxProps {
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
-  onItemSelected?: (selected: ComboboxOption) => void;
+  onItemSelected?: (selected: ComboboxOption | null) => void;
   defaultOpen?: boolean;
   valueItem?: ComboboxOption;
 }
@@ -166,6 +173,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           value={showInputValue ? inputValue : ""}
           iconUrl={!selectedItem ? "" : selectedItem?.iconUrl}
           chainName={!selectedItem ? "" : selectedItem?.chainName}
+          showSelectedItem={!showInputValue}
           isClearable={!!selectedItem || !!inputValue}
           onClear={() => {
             setInputValue("");
@@ -181,6 +189,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
               if (selectedItem) {
                 setShowInputValue(false);
               } else {
+                setActiveIndex(null);
                 setShowInputValue(true);
               }
             },
@@ -201,7 +210,20 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 setSelectedItem(selected);
                 setShowInputValue(false);
                 setOpen(false);
-                props.onItemSelected?.(selected);
+                return props.onItemSelected?.(selected);
+              }
+
+              if (event.key === "Escape") {
+                setShowInputValue(false);
+                setActiveIndex(null);
+                setInputValue("");
+                return;
+              }
+
+              if (event.key === "Backspace" && selectedItem) {
+                setActiveIndex(null);
+                setSelectedItem(null);
+                return props.onItemSelected?.(null);
               }
             },
           })}

@@ -27,6 +27,9 @@ export const Primary: Story = {
         <ChangeChainCombobox
           valueItem={selectedChain ? selectedChain : undefined}
           size="sm"
+          onItemSelected={(item) => {
+            console.log("[Story] Selected Item", item);
+          }}
           options={[
             {
               iconUrl:
