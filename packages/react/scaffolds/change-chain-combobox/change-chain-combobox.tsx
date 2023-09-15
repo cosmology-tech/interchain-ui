@@ -16,17 +16,14 @@ import {
   FloatingFocusManager,
   FloatingList,
 } from "@floating-ui/react";
-import { create } from "zustand";
-import { store } from "../../models/store";
 
-import Box from "../box";
-import ChangeChainInput from "../change-chain-input";
-import ChangeChainListItem from "../change-chain-list-item";
+import Box from "@/ui/box";
+import ChangeChainInput from "@/ui/change-chain-input";
+import ChangeChainListItem from "@/ui/change-chain-list-item";
 import { changeChainListBox } from "./change-chain-combobox.css";
 import { listboxStyle } from "../select/select.css";
-import type { ChangeChainListItemProps } from "../change-chain-list-item/change-chain-list-item.types";
-
-const useStore = create(store);
+import useTheme from "../hooks/use-theme";
+import type { ChangeChainListItemProps } from "@/ui/change-chain-list-item/change-chain-list-item.types";
 
 interface ItemProps {
   isActive: boolean;
@@ -76,10 +73,7 @@ export interface ChainSwapComboboxProps {
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
-  const themeStore = useStore((state) => ({
-    theme: state.theme,
-    themeClass: state.themeClass,
-  }));
+  const { theme, themeClass } = useTheme();
 
   const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [showInputValue, setShowInputValue] = React.useState(false);
@@ -210,7 +204,8 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 setSelectedItem(selected);
                 setShowInputValue(false);
                 setOpen(false);
-                return props.onItemSelected?.(selected);
+                props.onItemSelected?.(selected);
+                return;
               }
 
               if (event.key === "Escape") {
@@ -223,7 +218,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
               if (event.key === "Backspace" && selectedItem) {
                 setActiveIndex(null);
                 setSelectedItem(null);
-                return props.onItemSelected?.(null);
+                setInputValue("");
+                props.onItemSelected?.(null);
+                return;
               }
             },
           })}
@@ -246,9 +243,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
               },
             })}
             className={clx(
-              themeStore.themeClass,
-              changeChainListBox[themeStore.theme],
-              listboxStyle[themeStore.theme]
+              themeClass,
+              changeChainListBox[theme],
+              listboxStyle[theme]
             )}
           >
             <FloatingList elementsRef={listRef}>

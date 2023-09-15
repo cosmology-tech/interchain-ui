@@ -1,10 +1,8 @@
 import React, { useId, useEffect, forwardRef } from "react";
 import clx from "clsx";
-import { create } from "zustand";
 import * as numberInput from "@zag-js/number-input";
 import { useMachine, normalizeProps } from "@zag-js/react";
 import { NumberInputProps } from "./number-input.types";
-import { store } from "../../models/store";
 import {
   inputStyles,
   inputSizes,
@@ -12,18 +10,12 @@ import {
   inputRootIntent,
   rootInput,
   rootInputFocused,
-} from "../text-field/text-field.css";
+} from "@/ui/text-field/text-field.css";
+import useTheme from "../hooks/use-theme";
 import * as styles from "./number-input.css";
-
-const useStore = create(store);
 
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (props, forwardedRef) => {
-    const themeStore = useStore((state) => ({
-      theme: state.theme,
-      themeClass: state.themeClass,
-    }));
-
     const {
       id = useId(),
       disabled,
@@ -41,6 +33,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       minFractionDigits = 0,
       maxFractionDigits = 6,
     } = props;
+
+    const { theme } = useTheme();
     const [state, send] = useMachine(
       numberInput.machine({
         id,
@@ -96,7 +90,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             id={id}
             value={value}
             className={clx(
-              inputStyles[themeStore.theme],
+              inputStyles[theme],
               inputSizes[size],
               props.disabled ? inputIntent.disabled : inputIntent[intent],
               props.inputClassName,

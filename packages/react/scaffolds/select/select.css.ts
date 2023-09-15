@@ -1,6 +1,6 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
-import { themeVars } from "../../styles/themes.css";
-import { scrollBar } from "../shared/shared.css";
+import { themeVars } from "@/styles/themes.css";
+import { scrollBar } from "@/ui/shared/shared.css";
 
 export const listBoxWidthVar = createVar();
 

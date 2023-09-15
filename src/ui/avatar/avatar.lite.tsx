@@ -17,7 +17,8 @@ export default function Avatar(props: AvatarProps) {
   useDefaultProps({
     size: "md",
     rounded: true,
-  });
+    fallbackMode: "initials",
+  } satisfies Partial<AvatarProps>);
 
   const state = useStore({
     theme: "light",
@@ -61,6 +62,7 @@ export default function Avatar(props: AvatarProps) {
           src={props.src}
           srcSet={props.srcSet}
           loading={props.loading}
+          fallbackMode={props.fallbackMode}
           onLoad={(event) => {
             props.onLoad?.(event);
             state.isLoaded = true;

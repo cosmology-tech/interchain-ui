@@ -39,10 +39,7 @@ export default function AvatarImage(props: AvatarImageProps) {
       img.onload = (event) => {
         state.flush();
         state.status = "loaded";
-
-        setTimeout(() => {
-          state.transitionState = "entered";
-        }, 50);
+        state.transitionState = "entered";
         props.onLoad?.(event);
       };
       img.onerror = (error) => {
@@ -125,7 +122,11 @@ export default function AvatarImage(props: AvatarImageProps) {
         />
       }
     >
-      <AvatarName name={props.name} getInitials={props.getInitials} />
+      <AvatarName
+        name={props.name}
+        getInitials={props.getInitials}
+        showInitials={props.fallbackMode === "initials"}
+      />
     </Show>
   );
 }

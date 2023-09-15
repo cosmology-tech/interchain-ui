@@ -16,13 +16,13 @@ import {
   FloatingList,
 } from "@floating-ui/react";
 import { create } from "zustand";
-import { store } from "../../models/store";
+import { store } from "@/models/store";
 
-import Box from "../box";
-import ChainSwapInput from "../chain-swap-input";
-import ChainListItem from "../chain-list-item";
+import Box from "@/ui/box";
+import ChainSwapInput from "@/ui/chain-swap-input";
+import ChainListItem from "@/ui/chain-list-item";
 import { chainSwapListBox } from "./chain-swap-combobox.css";
-import type { ChainListItemProps } from "../chain-list-item/chain-list-item.types";
+import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.types";
 
 const useStore = create(store);
 
@@ -176,7 +176,12 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }, [open, selectedItem, inputValue]);
 
   return (
-    <Box px="$9" py="$7" backgroundColor="$menuItemBg" className={props.className}>
+    <Box
+      px="$9"
+      py="$7"
+      backgroundColor="$menuItemBg"
+      className={props.className}
+    >
       <div ref={refs.setReference}>
         <ChainSwapInput
           size={props.size}

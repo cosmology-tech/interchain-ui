@@ -1,5 +1,5 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { themeVars } from "../../styles/themes.css";
+import { themeVars } from "@/styles/themes.css";
 import { listboxStyleNoShadow } from "../select/select.css";
 
 const spacings = style({

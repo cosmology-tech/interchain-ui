@@ -1,6 +1,9 @@
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BaseComponentProps } from "../../models/components.model";
 
+// Whether to display initials or plain background while avatar src is still loading
+export type AvatarFallbackMode = "initials" | "bg";
+
 export interface AvatarImageProps extends BaseComponentProps {
   src?: string;
   srcSet?: string;
@@ -11,6 +14,7 @@ export interface AvatarImageProps extends BaseComponentProps {
   referrerPolicy?: string;
   crossOrigin?: string;
   sizes?: string;
+  fallbackMode?: AvatarFallbackMode;
   onError?: (error?: any) => void;
   onLoad?: (event?: any) => void;
   getInitials?: (name: string) => string;
@@ -21,6 +25,7 @@ export interface AvatarNameProps extends BaseComponentProps {
   getInitials?: (name: string) => string;
   children?: any;
   ref?: any;
+  showInitials?: boolean;
   attributes?: Sprinkles;
 }
 
@@ -32,6 +37,7 @@ export interface AvatarProps
   size?: AvatarSize;
   rounded?: boolean;
   showBorder?: boolean;
+  fallbackMode?: AvatarFallbackMode;
   borderColor?: Sprinkles["borderColor"];
   backgroundColor?: Sprinkles["backgroundColor"];
 }

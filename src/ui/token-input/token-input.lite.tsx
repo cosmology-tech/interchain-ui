@@ -1,7 +1,6 @@
 import {
   Show,
   useStore,
-  onUpdate,
   useDefaultProps,
   useRef,
   useMetadata,
@@ -33,12 +32,13 @@ export default function TokenInput(props: TokenInputProps) {
   useDefaultProps({
     hasProgressBar: true,
     availableAsMax: false,
-  });
+  } satisfies Partial<TokenInputProps>);
+
   const inputIdRef = useRef(uniqueId("token-input-"));
 
   const state = useStore<{
     symbolValue: string;
-    disabled: boolean;
+    isDisabled: boolean;
     handleTokenInput: (string) => void;
     handleIconClick: (MouseEvent) => void;
   }>({
@@ -48,7 +48,9 @@ export default function TokenInput(props: TokenInputProps) {
         .decimalPlaces(2)
         .toString();
     },
-    disabled: false,
+    get isDisabled() {
+      return props.progress === 0;
+    },
     handleTokenInput(value: string) {
       props.onAmountChange && props.onAmountChange(value);
     },
@@ -63,14 +65,6 @@ export default function TokenInput(props: TokenInputProps) {
     },
   });
 
-  onUpdate(() => {
-    if (props.progress === 0) {
-      state.disabled = true;
-    } else {
-      state.disabled = false;
-    }
-  }, [props.progress, props.amount]);
-
   return (
     <Stack
       space="$0"
@@ -81,7 +75,7 @@ export default function TokenInput(props: TokenInputProps) {
       }}
     >
       <Stack
-        className={clsx({ [styles.disabled]: state.disabled })}
+        className={clsx({ [styles.disabled]: state.isDisabled })}
         space="$0"
         attributes={{
           width: "$full",
@@ -163,7 +157,9 @@ export default function TokenInput(props: TokenInputProps) {
       </Show>
 
       <Stack
-        className={clsx(styles.inputBox, { [styles.disabled]: state.disabled })}
+        className={clsx(styles.inputBox, {
+          [styles.disabled]: state.isDisabled,
+        })}
         space="$0"
       >
         <Box width="$full">
@@ -174,7 +170,7 @@ export default function TokenInput(props: TokenInputProps) {
             max={props.availableAsMax ? toNumber(props.available) : 0}
             value={props.amount}
             borderless
-            disabled={state.disabled}
+            disabled={state.isDisabled}
             startAddon={
               <Stack
                 className={clsx(styles.imgBox, props.imgClass)}

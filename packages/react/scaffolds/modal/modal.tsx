@@ -8,10 +8,9 @@ import React, {
 } from "react";
 import * as dialog from "@zag-js/dialog";
 import clx from "clsx";
-import { create } from "zustand";
 import { useMachine, normalizeProps, Portal } from "@zag-js/react";
-import { store } from "../../models/store";
-import FadeIn from "../fade-in";
+import FadeIn from "@/ui/fade-in";
+import useTheme from "../hooks/use-theme";
 import * as styles from "./modal.css";
 
 export interface ModalProps {
@@ -31,13 +30,8 @@ export interface ModalProps {
   childrenClassName?: string;
 }
 
-const useStore = create(store);
-
 const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
-  const themeStore = useStore((state) => ({
-    theme: state.theme,
-    themeClass: state.themeClass,
-  }));
+  const { themeClass } = useTheme();
 
   const {
     isOpen,
@@ -105,7 +99,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
         <Portal>
           <div
             ref={forwardedRef}
-            className={clx(themeStore.themeClass, className)}
+            className={clx(themeClass, className)}
             style={{
               position: "relative",
               zIndex: 999,

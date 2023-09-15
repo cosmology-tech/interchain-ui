@@ -31,8 +31,32 @@ export const rootInputFocused = style({
   },
 });
 
+export const inputBorderAndShadow = style({
+  borderStyle: "solid",
+  borderWidth: "1px",
+  borderRadius: "6px",
+  borderColor: inputBorderVar,
+  selectors: {
+    "&:hover": {
+      vars: {
+        [inputBorderVar]: themeVars.colors.text,
+      },
+    },
+    "&:focus": {
+      vars: {
+        [inputBorderVar]: themeVars.colors.text,
+      },
+      boxShadow: `
+       ${themeVars.colors.inputBg} 0px 0px 0px 2px,
+       ${themeVars.colors.text} 0px 0px 0px 4px,
+       rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
+    },
+  },
+});
+
 const baseInputStyles = style([
   baseTextStyles,
+  inputBorderAndShadow,
   style({
     flex: "1",
     outline: "none",
@@ -41,27 +65,9 @@ const baseInputStyles = style([
     transitionProperty:
       "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
     transitionDuration: "200ms",
-    borderStyle: "solid",
-    borderWidth: "1px",
-    borderRadius: "6px",
-    borderColor: inputBorderVar,
     backgroundColor: inputBgVar,
     color: "inherit",
     selectors: {
-      "&:hover": {
-        vars: {
-          [inputBorderVar]: themeVars.colors.text,
-        },
-      },
-      "&:focus": {
-        vars: {
-          [inputBorderVar]: themeVars.colors.text,
-        },
-        boxShadow: `
-         ${themeVars.colors.inputBg} 0px 0px 0px 2px,
-         ${themeVars.colors.text} 0px 0px 0px 4px,
-         rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
-      },
       "&::-webkit-outer-spin-button": {
         WebkitAppearance: "none",
         margin: "0",
@@ -120,6 +126,7 @@ export const inputIntent = styleVariants({
 export const inputSizes = styleVariants({
   sm: [
     style({
+      minHeight: themeVars.space[14],
       paddingLeft: themeVars.space[6],
       paddingRight: themeVars.space[6],
       paddingTop: themeVars.space[4],
@@ -128,6 +135,7 @@ export const inputSizes = styleVariants({
   ],
   md: [
     style({
+      minHeight: themeVars.space[16],
       paddingLeft: themeVars.space[10],
       paddingRight: themeVars.space[10],
       paddingTop: themeVars.space[8],

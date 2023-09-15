@@ -26,6 +26,14 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
 
   const state = useStore({
     theme: "light",
+    getIconSize: (size: ChangeChainInputProps["size"]) => {
+      const sizes: Record<ChangeChainInputProps["size"], string> = {
+        sm: "$sm",
+        md: "$md",
+      };
+
+      return sizes[size ?? "sm"];
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -117,7 +125,11 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
                   }}
                   onClick={() => props.onClear?.()}
                 >
-                  <Icon name="close" color="$text" size="$md" />
+                  <Icon
+                    name="close"
+                    color="$text"
+                    size={state.getIconSize(props.size)}
+                  />
                 </button>
               ) : null}
             </Box>
@@ -131,7 +143,11 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
               }}
               onClick={() => props.onDropdownArrowClicked?.()}
             >
-              <Icon name="arrowDropDown" color="$text" size="$md" />
+              <Icon
+                name="arrowDropDown"
+                color="$text"
+                size={state.getIconSize(props.size)}
+              />
             </button>
           </Box>
         </TextFieldAddon>
