@@ -34,7 +34,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     transferDisabled: boolean;
   }>({
     theme: "light",
-    inputAmount: "",
+    inputAmount: "0",
     toAddress: "",
     lgAddressVisible: false,
     smAddressVisible: false,

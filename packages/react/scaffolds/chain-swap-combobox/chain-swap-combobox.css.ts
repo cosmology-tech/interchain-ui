@@ -8,6 +8,7 @@ const spacings = style({
   paddingLeft: themeVars.space[9],
   paddingRight: themeVars.space[9],
   maxHeight: "304px",
+  boxSizing: "border-box",
   zIndex: 5,
   selectors: {
     "& + &": {

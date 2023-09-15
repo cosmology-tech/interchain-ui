@@ -15,7 +15,7 @@ export const getTransferList = (chainName = "osmosis") => {
     return assetList.find(item => item.symbol === symbol);
   });
 
-  assetList = assetList.slice(0, 100)
+  assetList = assetList.slice(0, 60)
 
   return assetList.map((item, index) => {
     return {

@@ -3,6 +3,7 @@ import type { ListItemProps } from "../list-item/list-item.types";
 
 export interface ChainListItemProps extends BaseComponentProps {
   isActive?: ListItemProps["isActive"];
+  isSelected?: ListItemProps["isSelected"];
   size?: ListItemProps["size"];
   attributes?: ListItemProps["attributes"];
   sprinkles?: ListItemProps["sprinkles"];

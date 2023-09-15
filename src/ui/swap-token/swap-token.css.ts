@@ -1,11 +1,10 @@
 import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { zIndex } from "~/styles/tokens";
 
 const swapBorderColorVar = createVar();
 
 export const swapTokenContainer = style({
-  minWidth: "468px",
+  maxWidth: "500px",
 });
 
 export const switchContainer = style({
@@ -23,6 +22,9 @@ const swapIconBase = style([
     top: "50%",
     transform: "translate(-50%, -50%)",
     border: `3px solid ${swapBorderColorVar}`,
+    minWidth: `${themeVars.space[14]} !important`,
+    width: `${themeVars.space[14]} !important`,
+    height: `${themeVars.space[14]} !important`,
   },
 ]);
 

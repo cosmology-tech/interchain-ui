@@ -28,6 +28,7 @@ const useStore = create(store);
 
 interface ItemProps {
   isActive: boolean;
+  isSelected: boolean;
   size: ChainListItemProps["size"];
   // ====
   iconUrl?: ChainListItemProps["iconUrl"];
@@ -46,6 +47,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
     tokenName,
     amount,
     notionalValue,
+    isSelected,
     ...rest
   } = props;
   const id = useId();
@@ -60,12 +62,13 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
         tokenName={tokenName}
         amount={amount}
         notionalValue={notionalValue}
+        isSelected={isSelected}
       />
     </div>
   );
 });
 
-type ComboboxOption = Omit<ItemProps, "isActive" | "size">;
+type ComboboxOption = Omit<ItemProps, "isActive" | "size" | "isSelected">;
 
 export interface ChainSwapComboboxProps {
   size: ChainListItemProps["size"];
@@ -87,6 +90,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }));
 
   const [open, setOpen] = React.useState(!!props.defaultOpen);
+  const [inputFocusing, setInputFocusing] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
     props.defaultSelected?.tokenName ?? ""
   );
@@ -141,12 +145,14 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     if (value) {
       setOpen(true);
       setActiveIndex(0);
-    } else {
-      setOpen(!!props.defaultOpen);
     }
   }
 
   function defaultFilterOptions(options: Array<ComboboxOption>) {
+    // Return all items when inputValue is empty string or input not focusing
+    if (!inputValue || !inputFocusing) {
+      return options;
+    }
     return options.filter((item) =>
       item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
     );
@@ -161,6 +167,13 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     setSelectedItem(props?.valueItem);
     setInputValue(props?.valueItem?.tokenName);
   }, [props.valueItem]);
+
+  // Make sure onBlur can reset value to the selectedItem
+  React.useLayoutEffect(() => {
+    if (!open && selectedItem) {
+      setInputValue(selectedItem.tokenName);
+    }
+  }, [open, selectedItem, inputValue]);
 
   return (
     <Box px="$9" py="$7" backgroundColor="$menuItemBg" className={props.className}>
@@ -192,6 +205,13 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 props.onItemSelected?.(selected);
               }
             },
+            onFocus() {
+              setInputFocusing(true);
+              setInputValue("");
+            },
+            onBlur(e) {
+              setInputFocusing(false);
+            },
           })}
         />
       </div>
@@ -222,6 +242,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                   key={item.tokenName}
                   size={props.size}
                   isActive={activeIndex === index}
+                  isSelected={item.tokenName === selectedItem?.tokenName}
                   {...item}
                   {...getItemProps({
                     ref(node) {

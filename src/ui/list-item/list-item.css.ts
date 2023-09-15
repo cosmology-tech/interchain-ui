@@ -12,6 +12,7 @@ export const listItemBase = style([
     transitionDuration: "200ms",
     color: themeVars.colors.text,
     borderRadius: themeVars.radii.base,
+    boxSizing: "border-box",
   },
 ]);
 
@@ -59,4 +60,8 @@ export const listItemSizes = styleVariants({
       paddingRight: themeVars.space[6],
     }),
   ],
+});
+
+export const listItemSelected = style({
+  backgroundColor: themeVars.colors.menuItemBgActive,
 });
