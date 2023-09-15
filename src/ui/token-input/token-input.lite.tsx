@@ -28,12 +28,12 @@ useMetadata({
   scaffolds: ["number-input"],
 });
 
-export default function TokenInput(props: TokenInputProps) {
-  useDefaultProps({
-    hasProgressBar: true,
-    availableAsMax: false,
-  } satisfies Partial<TokenInputProps>);
+useDefaultProps<Partial<TokenInputProps>>({
+  hasProgressBar: true,
+  availableAsMax: false,
+});
 
+export default function TokenInput(props: TokenInputProps) {
   const inputIdRef = useRef(uniqueId("token-input-"));
 
   const state = useStore<{

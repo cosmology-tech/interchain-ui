@@ -88,7 +88,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             position: "relative",
           }}
           domAttributes={{
-            "data-part-id": "address-only-sm",
+            "data-part-id": "address-fields-sm",
           }}
         >
           <Box
@@ -142,7 +142,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             alignItems: "flex-end",
           }}
           domAttributes={{
-            "data-part-id": "address-only-lg",
+            "data-part-id": "address-fields-lg",
           }}
         >
           <Stack direction="vertical" className={styles.flex1}>
@@ -157,6 +157,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               {`From ${props.fromDenom}`}
             </Text>
             <Stack
+              space="$8"
               attributes={{
                 p: "$6",
                 backgroundColor: "$cardBg",
@@ -215,6 +216,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             </Text>
 
             <Stack
+              space="$8"
               attributes={{
                 p: "$6",
                 height: "52px",
@@ -245,10 +247,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
                 color="$textSecondary"
                 attributes={{
                   flex: "1",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {truncateTextMiddle(props.toAddress, 12)}
               </Text>
+
               <IconButton
                 icon="pencilLine"
                 intent="text"

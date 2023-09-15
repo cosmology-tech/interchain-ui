@@ -3,9 +3,9 @@ import Box from "../box";
 import { avatarName } from "./avatar.css";
 import type { AvatarNameProps } from "./avatar.types";
 
-export default function AvatarName(props: AvatarNameProps) {
-  useDefaultProps({ showInitials: true } satisfies Partial<AvatarNameProps>);
+useDefaultProps<Partial<AvatarNameProps>>({ showInitials: true });
 
+export default function AvatarName(props: AvatarNameProps) {
   const state = useStore({
     initials(name: string) {
       if (typeof props.getInitials === "function") {

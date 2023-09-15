@@ -35,7 +35,6 @@ const responsiveProperties = defineProperties({
   ),
   defaultCondition: "mobile",
   dynamicProperties: {
-    visibility: true,
     display: true,
     flex: true,
     flexDirection: true,
@@ -139,6 +138,7 @@ const interactiveProperties = defineProperties({
   defaultCondition: "base",
   dynamicProperties: {
     color: true,
+    visibility: true,
     backgroundColor: themeVars.colors,
     borderWidth: themeVars.borderWidth,
     borderStyle: themeVars.borderStyle,
