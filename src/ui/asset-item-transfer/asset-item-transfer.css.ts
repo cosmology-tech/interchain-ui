@@ -146,7 +146,7 @@ export const addressBackgroundReverse = style({
 });
 
 export const smPanelShow = style({
-  animation: `${fadeIn} 250ms cubic-bezier(0.22, 1, 0.36, 1)`,
+  animation: `${fadeIn} 350ms cubic-bezier(0.22, 1, 0.36, 1)`,
 });
 
 export const smPanelHide = style({
