@@ -11,6 +11,7 @@ import {
   ConnectModalStatus,
   Button,
 } from "../src";
+import { WalletPluginSystem } from "../src/ui/connect-modal-wallet-list";
 import {
   wallets,
   modalStatusProps,
@@ -31,8 +32,9 @@ type Story = StoryObj<typeof meta>;
 function convert(ws: typeof wallets) {
   return ws.map((wallet) => ({
     ...wallet,
-    badge: wallet.metamask_snap ? "SNAP" : undefined,
-    btmLogo: wallet.metamask_snap ? "MetaMask" : undefined,
+    logo: wallet.extends ? WalletPluginSystem[wallet.extends].logo : wallet.logo,
+    badge: wallet.extends ? WalletPluginSystem[wallet.extends].text : undefined,
+    btmLogo: wallet.extends ? wallet.logo : undefined,
   }));
 }
 
