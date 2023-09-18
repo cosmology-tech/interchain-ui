@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.8.0...@interchain-ui/react@1.9.0) (2023-09-18)
+
+### Bug Fixes
+
+- **combobox:** chain swap combobox avatar alignment ([1b092e0](https://github.com/cosmology-tech/interchain-ui/commit/1b092e01d75b43add019364b96df50c1b6de6668))
+- interaction of chain-swap-combobox ([#97](https://github.com/cosmology-tech/interchain-ui/issues/97)) ([cacae42](https://github.com/cosmology-tech/interchain-ui/commit/cacae42866f90c1f8b8826b372f05be08fb74078))
+
+### Features
+
+- flip logos for MetaMask Snaps ([#102](https://github.com/cosmology-tech/interchain-ui/issues/102)) ([fa25ad2](https://github.com/cosmology-tech/interchain-ui/commit/fa25ad22cb2264220ed967a70b085bc542468e66))
+
 # [1.8.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.7.1...@interchain-ui/react@1.8.0) (2023-09-12)
 
 ### Features
