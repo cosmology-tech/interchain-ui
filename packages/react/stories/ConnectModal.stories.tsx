@@ -32,7 +32,9 @@ type Story = StoryObj<typeof meta>;
 function convert(ws: typeof wallets) {
   return ws.map((wallet) => ({
     ...wallet,
-    logo: wallet.extends ? WalletPluginSystem[wallet.extends].logo : wallet.logo,
+    logo: wallet.extends
+      ? WalletPluginSystem[wallet.extends].logo
+      : wallet.logo,
     badge: wallet.extends ? WalletPluginSystem[wallet.extends].text : undefined,
     btmLogo: wallet.extends ? wallet.logo : undefined,
   }));
