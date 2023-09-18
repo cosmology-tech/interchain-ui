@@ -95,6 +95,9 @@ const responsiveProperties = defineProperties({
     gridTemplate: true,
     gridTemplateAreas: true,
     gridTemplateRows: true,
+    aspectRatio: true,
+    insetInlineStart: true,
+    insetInlineEnd: true,
   },
   staticProperties: {
     width: allSpace,
