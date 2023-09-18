@@ -149,6 +149,7 @@ const interactiveProperties = defineProperties({
     animation: true,
     textDecoration: true,
     zIndex: true,
+    fontVariantNumeric: true,
   },
   staticProperties: {
     color: themeVars.colors,

@@ -1,8 +1,9 @@
-import { AddLiquidityProps } from "../add-liquidity/add-liquidity.types";
-import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-item-sm.types";
-import { ManageLiquidityCardProps } from "../manage-liquidity-card/manage-liquidity-card.types";
-import { RemoveLiquidityProps } from "../remove-liquidity/remove-liquidity.types";
-import { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { AddLiquidityProps } from "../add-liquidity/add-liquidity.types";
+import type { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-item-sm.types";
+import type { ManageLiquidityCardProps } from "../manage-liquidity-card/manage-liquidity-card.types";
+import type { RemoveLiquidityProps } from "../remove-liquidity/remove-liquidity.types";
+import type { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { BaseComponentProps } from "../../models/components.model";
 
 export type APR = {
   totalApr: string;
@@ -21,7 +22,8 @@ export interface Coin {
   imgSrc: string;
   displayAmount?: string;
 }
-export interface PoolListItemProps {
+
+export interface PoolListItemProps extends BaseComponentProps {
   id: string;
   poolAssets: AvailableItem[];
   liquidity: number | string;
