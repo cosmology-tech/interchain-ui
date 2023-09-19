@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { create } from "zustand";
 import { shallow } from "zustand/shallow";
-import { ModePreference } from "../../../models/system.model";
-import { store } from "../../../models/store";
+import { ModePreference } from "@/models/system.model";
+import { store } from "@/models/store";
 
 const useStore = create(store);
 

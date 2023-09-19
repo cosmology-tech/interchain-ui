@@ -71,6 +71,7 @@ export default function ConnectModalWalletButton(
         })
       )}
       style={state.overrideManager?.applyOverrides(buttonOverrides.name)}
+      title={props.name}
       onClick={(event: any) => props.onClick(event)}
     >
       <Show when={!!props.logo}>
@@ -209,18 +210,45 @@ export default function ConnectModalWalletButton(
           buttonTextStyle[state.theme],
           buttonTextVariants({ variant: props.variant })
         )}
-        style={state.overrideManager?.applyOverrides(buttonLabelOverrides.name)}
+        style={{
+          ...state.overrideManager?.applyOverrides(buttonLabelOverrides.name),
+          width: props.variant === "square" ? "calc(80%)" : "auto",
+        }}
       >
-        <Text
-          as="span"
-          attributes={{
-            display: "inline-block",
-            position: "relative",
-            pr: "$2",
-          }}
-        >
-          <Text>{props.name}</Text>
-          <Show when={props.badge}>
+        <Show when={!props.badge}>
+          <Text
+            ellipsis
+            as="span"
+            textAlign={props.variant === "square" ? "center" : "left"}
+            attributes={{
+              width: "100%",
+              display: "inline-block",
+            }}
+          >
+            {props.name}
+          </Text>
+        </Show>
+
+        <Show when={props.badge}>
+          <Text
+            as="p"
+            attributes={{
+              display: "inline-block",
+              position: "relative",
+              pr: "$2",
+            }}
+          >
+            <Text
+              ellipsis
+              as="span"
+              textAlign={props.variant === "square" ? "center" : "left"}
+              attributes={{
+                width: "100%",
+                display: "inline-block",
+              }}
+            >
+              {props.name}
+            </Text>
             <Text
               as="span"
               fontSize="$3xs"
@@ -240,8 +268,8 @@ export default function ConnectModalWalletButton(
             >
               {props.badge}
             </Text>
-          </Show>
-        </Text>
+          </Text>
+        </Show>
       </Box>
 
       <Show

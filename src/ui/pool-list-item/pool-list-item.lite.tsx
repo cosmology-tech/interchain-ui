@@ -4,18 +4,27 @@ import clsx from "clsx";
 import Box from "../box";
 import Text from "../text";
 import PoolName from "../pool/components/pool-name";
-import APR from "./components/apr";
-import CellWithTitle from "./components/cell-with-title";
+import APR from "./apr.lite";
+import CellWithTitle from "./cell-with-title.lite";
+
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
+
 import type { PoolListItemProps } from "./pool-list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 
 export default function PoolListItem(props: PoolListItemProps) {
-  const state = useStore<{ theme: ThemeVariant; apr: string }>({
+  const state = useStore<{
+    theme: ThemeVariant;
+    apr: string;
+    isInteractive: boolean;
+  }>({
     theme: "light",
     get apr() {
       return new BigNumber(props?.apr || 0).decimalPlaces(2).toString();
+    },
+    get isInteractive() {
+      return !!props.onClick && typeof props.onClick === "function";
     },
   });
 
@@ -35,11 +44,11 @@ export default function PoolListItem(props: PoolListItemProps) {
 
   return (
     <Box
+      alignItems="center"
       className={clsx(styles.container, {
         [styles.hoverStyle]: !!props.onClick,
       })}
       attributes={{
-        alignItems: "center",
         onClick: () => props?.onClick?.(),
       }}
     >
@@ -48,6 +57,7 @@ export default function PoolListItem(props: PoolListItemProps) {
         className={styles.nameContainer}
         coins={props.poolAssets}
       />
+
       <Box className={clsx(styles.responsiveText, styles.onlySm)}>
         <APR
           title="APR"

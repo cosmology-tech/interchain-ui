@@ -1,6 +1,6 @@
-import Stack from "../../../stack";
-import Text from "../../../text";
-import Box from "../../../box";
+import Stack from "../stack";
+import Text from "../text";
+import Box from "../box";
 
 export default function CellWithTitle(props: {
   title: string;

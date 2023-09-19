@@ -13,12 +13,13 @@ import { avatarSize } from "./avatar.helper";
 import { avatarSizeVar, avatar } from "./avatar.css";
 import type { AvatarProps } from "./avatar.types";
 
-export default function Avatar(props: AvatarProps) {
-  useDefaultProps({
-    size: "md",
-    rounded: true,
-  });
+useDefaultProps<Partial<AvatarProps>>({
+  size: "md",
+  rounded: true,
+  fallbackMode: "initials",
+});
 
+export default function Avatar(props: AvatarProps) {
   const state = useStore({
     theme: "light",
     isLoaded: false,
@@ -61,6 +62,7 @@ export default function Avatar(props: AvatarProps) {
           src={props.src}
           srcSet={props.srcSet}
           loading={props.loading}
+          fallbackMode={props.fallbackMode}
           onLoad={(event) => {
             props.onLoad?.(event);
             state.isLoaded = true;

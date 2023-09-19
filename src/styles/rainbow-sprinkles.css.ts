@@ -95,6 +95,9 @@ const responsiveProperties = defineProperties({
     gridTemplate: true,
     gridTemplateAreas: true,
     gridTemplateRows: true,
+    aspectRatio: true,
+    insetInlineStart: true,
+    insetInlineEnd: true,
   },
   staticProperties: {
     width: allSpace,
@@ -138,6 +141,7 @@ const interactiveProperties = defineProperties({
   defaultCondition: "base",
   dynamicProperties: {
     color: true,
+    visibility: true,
     backgroundColor: themeVars.colors,
     borderWidth: themeVars.borderWidth,
     borderStyle: themeVars.borderStyle,
@@ -148,6 +152,7 @@ const interactiveProperties = defineProperties({
     animation: true,
     textDecoration: true,
     zIndex: true,
+    fontVariantNumeric: true,
   },
   staticProperties: {
     color: themeVars.colors,

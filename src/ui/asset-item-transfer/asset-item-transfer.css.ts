@@ -14,17 +14,6 @@ export const container = style({
   position: "relative",
 });
 
-export const smImg = style({
-  width: themeVars.space[11],
-  height: themeVars.space[11],
-  marginRight: themeVars.space[5],
-});
-
-export const img = style({
-  width: themeVars.space[15],
-  height: themeVars.space[15],
-});
-
 export const flex1 = style({
   flex: 1,
   maxWidth: "215px",
@@ -136,22 +125,32 @@ const expandVerticalReverse = keyframes({
   "100%": { opacity: "0", height: 0 },
 });
 
+const fadeIn = keyframes({
+  "0%": { opacity: 0, transform: "scale(0.95)" },
+  "100%": {
+    opacity: 1,
+    transform: "scale(1)",
+  },
+});
+
+const fadeOut = keyframes({
+  "0%": { opacity: 0, transform: "scale(0.95)" },
+  "100%": {
+    opacity: 1,
+    transform: "scale(1)",
+  },
+});
+
 export const addressBackgroundReverse = style({
   animation: `${expandVerticalReverse} .5s`,
 });
 
-const smPanelFadeOIn = keyframes({
-  "0%": { opacity: 0 },
-  "30%": { opacity: 0 },
-  "100%": { opacity: 1 },
+export const smPanelShow = style({
+  animation: `${fadeIn} 350ms cubic-bezier(0.22, 1, 0.36, 1)`,
 });
 
 export const smPanelHide = style({
-  visibility: "hidden",
-});
-
-export const smPanelShow = style({
-  animation: `${smPanelFadeOIn} .5s`,
+  animation: `${fadeOut} 250ms cubic-bezier(0.22, 1, 0.36, 1)`,
 });
 
 export const fromAddressInput = style({

@@ -1,8 +1,8 @@
 import { Show, useMetadata } from "@builder.io/mitosis";
-import Stack from "../../../stack";
-import Text from "../../../text";
-import Box from "../../../box";
-import IconButton from "../../../icon-button";
+import Stack from "../stack";
+import Text from "../text";
+import Box from "../box";
+import IconButton from "../icon-button";
 
 useMetadata({
   isAttachedToShadowDom: true,
@@ -40,7 +40,9 @@ export default function APR(props: {
           {props.apr}%
         </Text>
       </Box>
+
       <IconButton
+        variant="ghost"
         className={props.innerClassName}
         icon="verticalMore"
         intent="text"

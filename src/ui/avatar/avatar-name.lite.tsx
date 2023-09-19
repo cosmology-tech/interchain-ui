@@ -1,7 +1,9 @@
-import { Show, useStore } from "@builder.io/mitosis";
+import { Show, useDefaultProps, useStore } from "@builder.io/mitosis";
 import Box from "../box";
 import { avatarName } from "./avatar.css";
 import type { AvatarNameProps } from "./avatar.types";
+
+useDefaultProps<Partial<AvatarNameProps>>({ showInitials: true });
 
 export default function AvatarName(props: AvatarNameProps) {
   const state = useStore({
@@ -30,7 +32,9 @@ export default function AvatarName(props: AvatarNameProps) {
       className={avatarName}
       ref={props.ref}
     >
-      <Show when={!!props.name}>{state.initials(props.name)}</Show>
+      <Show when={!!props.name && props.showInitials}>
+        {state.initials(props.name)}
+      </Show>
     </Box>
   );
 }

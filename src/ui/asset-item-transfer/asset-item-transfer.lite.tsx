@@ -1,10 +1,5 @@
-import {
-  useStore,
-  onMount,
-  onUnMount,
-  useRef,
-  Show,
-} from "@builder.io/mitosis";
+import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import clsx from "clsx";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -19,7 +14,8 @@ import { ThemeVariant } from "../../models/system.model";
 import { truncateTextMiddle } from "../../helpers/string";
 import IconButton from "../icon-button";
 import TextField from "../text-field";
-import clsx from "clsx";
+import { rootInput, inputBorderAndShadow } from "../text-field/text-field.css";
+import { standardTransitionProperties } from "../shared/shared.css";
 
 export default function AssetItemTransfer(props: AssetItemTransferProps) {
   const state = useStore<{
@@ -29,6 +25,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     lgAddressVisible: boolean;
     smAddressVisible: boolean;
     reverseAnimation: boolean;
+    handleConfirmAddress: () => void;
     handleAmountChange: (percent: number) => void;
     onAmountChange: (value: string) => void;
     transferDisabled: boolean;
@@ -39,6 +36,13 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
     lgAddressVisible: false,
     smAddressVisible: false,
     reverseAnimation: false,
+    handleConfirmAddress() {
+      props?.onAddressConfirm?.();
+      state.reverseAnimation = true;
+      state.lgAddressVisible = false;
+      state.smAddressVisible = false;
+      state.reverseAnimation = false;
+    },
     handleAmountChange(percent) {
       state.inputAmount = new BigNumber(props.available)
         .multipliedBy(percent)
@@ -73,11 +77,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
 
   return (
     <Box className={styles.container}>
-      <Box
-        className={clsx({
-          [styles.smPanelHide]: state.smAddressVisible,
-        })}
-      >
+      <Box visibility={state.smAddressVisible ? "hidden" : "visible"}>
         <Stack
           className={styles.onlySm}
           attributes={{
@@ -88,13 +88,17 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             position: "relative",
           }}
           domAttributes={{
-            "data-part-id": "address-only-sm",
+            "data-part-id": "address-fields-sm",
           }}
         >
-          <img
-            alt={props.fromDenom}
-            className={styles.img}
-            src={props.fromImgSrc}
+          <Box
+            as="img"
+            width="$15"
+            height="$15"
+            attributes={{
+              alt: props.fromDenom,
+              src: props.fromImgSrc,
+            }}
           />
           <Icon
             name="arrowRightLine"
@@ -104,10 +108,15 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               mx: "$9",
             }}
           />
-          <img
-            className={styles.img}
-            alt={props.toDenom}
-            src={props.toImgSrc}
+
+          <Box
+            as="img"
+            width="$15"
+            height="$15"
+            attributes={{
+              alt: props.toDenom,
+              src: props.toImgSrc,
+            }}
           />
           <Box
             attributes={{
@@ -127,13 +136,13 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
         <Stack
           className={styles.onlyLg}
           attributes={{
-            marginTop: "$13",
-            marginBottom: "$10",
+            paddingTop: "$13",
+            paddingBottom: "$10",
             justifyContent: "center",
             alignItems: "flex-end",
           }}
           domAttributes={{
-            "data-part-id": "address-only-lg",
+            "data-part-id": "address-fields-lg",
           }}
         >
           <Stack direction="vertical" className={styles.flex1}>
@@ -148,17 +157,27 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               {`From ${props.fromDenom}`}
             </Text>
             <Stack
+              space="$8"
               attributes={{
                 p: "$6",
                 backgroundColor: "$cardBg",
                 borderRadius: "$lg",
                 alignItems: "center",
               }}
+              className={clsx(
+                rootInput,
+                inputBorderAndShadow,
+                standardTransitionProperties
+              )}
             >
-              <img
-                alt={props.fromDenom}
-                className={styles.smImg}
-                src={props.fromImgSrc}
+              <Box
+                as="img"
+                width="$11"
+                height="$11"
+                attributes={{
+                  alt: props.fromDenom,
+                  src: props.fromImgSrc,
+                }}
               />
               <Text color="$textSecondary">
                 {truncateTextMiddle(props.fromAddress, 12)}
@@ -197,6 +216,7 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
             </Text>
 
             <Stack
+              space="$8"
               attributes={{
                 p: "$6",
                 height: "52px",
@@ -207,20 +227,32 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               domAttributes={{
                 "data-part-id": "to-address-input",
               }}
+              className={clsx(
+                rootInput,
+                inputBorderAndShadow,
+                standardTransitionProperties
+              )}
             >
-              <img
-                alt={props?.toDenom}
-                className={styles.smImg}
-                src={props.toImgSrc}
+              <Box
+                as="img"
+                width="$11"
+                height="$11"
+                attributes={{
+                  alt: props.toDenom,
+                  src: props.toImgSrc,
+                }}
               />
+
               <Text
                 color="$textSecondary"
                 attributes={{
                   flex: "1",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {truncateTextMiddle(props.toAddress, 12)}
               </Text>
+
               <IconButton
                 icon="pencilLine"
                 intent="text"
@@ -247,74 +279,80 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               )}
             />
 
-            {/* Slide0out toAddress input field */}
+            {/* Slide-out toAddress input field */}
             <Box
               display={state.lgAddressVisible ? "block" : "none"}
-              attributes={{
-                position: "absolute",
-                bottom: "1px",
-                right: "0",
-                zIndex: "1",
-              }}
+              position="absolute"
+              bottom="0"
+              right="0"
+              top="0"
+              zIndex="1"
+              backgroundColor={
+                state.theme === "light" ? "$white" : "$blackPrimary"
+              }
               className={clsx(styles.addressContainer, {
                 [styles.addressContainerReverse]: state.reverseAnimation,
               })}
             >
-              <Text
-                className={styles.transferMask[state.theme]}
-                color="$textSecondary"
-                fontWeight="$semibold"
-                ellipsis
+              <Box
+                position="relative"
                 attributes={{
-                  paddingBottom: "$6",
+                  "data-part-id": "to-address-field-container",
                 }}
               >
-                {`To ${props.toDenom}`}
-              </Text>
-              <TextField
-                id="to-address"
-                value={state.toAddress}
-                onChange={(e) => {
-                  state.toAddress = e.target.value;
-                  props?.onAddressChange(e.target.value);
-                }}
-                inputClassName={styles.addressInput}
-              />
-              <Stack
-                attributes={{
-                  position: "absolute",
-                  left: "$7",
-                  bottom: "$0",
-                  height: "48px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Box
-                  as="img"
-                  width="$11"
-                  height="$11"
-                  borderRadius="$full"
-                  attributes={{ src: props?.toImgSrc }}
+                <Text
+                  className={styles.transferMask[state.theme]}
+                  color="$textSecondary"
+                  fontWeight="$semibold"
+                  ellipsis
+                  attributes={{
+                    paddingBottom: "$6",
+                  }}
+                >
+                  {`To ${props.toDenom}`}
+                </Text>
+
+                <TextField
+                  id="to-address"
+                  value={state.toAddress}
+                  onChange={(e) => {
+                    state.toAddress = e.target.value;
+                    props?.onAddressChange(e.target.value);
+                  }}
+                  inputClassName={styles.addressInput}
                 />
-              </Stack>
-              <IconButton
-                icon="checkFill"
-                intent="tertiary"
-                size="md"
-                attributes={{
-                  px: "$0",
-                }}
-                className={styles.checkIcon}
-                onClick={() => {
-                  state.reverseAnimation = true;
-                  props?.onAddressConfirm?.();
-                  setTimeout(() => {
-                    state.lgAddressVisible = false;
-                    state.reverseAnimation = false;
-                  }, 500);
-                }}
-              />
+
+                <Stack
+                  attributes={{
+                    position: "absolute",
+                    left: "$7",
+                    bottom: "$0",
+                    height: "48px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box
+                    as="img"
+                    width="$11"
+                    height="$11"
+                    borderRadius="$full"
+                    attributes={{ src: props?.toImgSrc }}
+                  />
+                </Stack>
+                <IconButton
+                  icon="checkFill"
+                  intent="tertiary"
+                  size="md"
+                  attributes={{
+                    px: "$0",
+                  }}
+                  className={styles.checkIcon}
+                  onClick={() => {
+                    state.handleConfirmAddress();
+                  }}
+                />
+              </Box>
             </Box>
           </Stack>
         </Stack>
@@ -434,31 +472,45 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
           Cancel
         </Button>
       </Box>
-      <Show when={state.smAddressVisible}>
+
+      {/* Sm breakpoint address panel */}
+      <Box visibility={state.smAddressVisible ? "visible" : "hidden"}>
+        {/* Back button */}
         <Box
           position="absolute"
           width="$28"
-          className={styles.transferMask[state.theme]}
-          top="-78px"
+          className={clsx(styles.transferMask[state.theme], {
+            [styles.smPanelShow]: state.smAddressVisible,
+            [styles.smPanelHide]: !state.smAddressVisible,
+          })}
+          top="-76px"
+          left="-14px"
           zIndex="1"
         >
-          <Button
+          <IconButton
+            icon="arrowLeftSLine"
+            iconSize="$4xl"
             variant="unstyled"
-            attributes={{ paddingLeft: "0" }}
             onClick={() => {
               state.smAddressVisible = false;
             }}
-          >
-            <Icon name="arrowLeftSLine" size="$3xl" />
-          </Button>
+          />
         </Box>
+
+        {/* Address fields */}
         <Box
           position="absolute"
           width="$full"
           height="$full"
           top="0"
           left="0"
-          className={styles.smPanelShow}
+          attributes={{
+            "data-part-id": "sm-panel",
+          }}
+          className={{
+            [styles.smPanelShow]: state.smAddressVisible,
+            [styles.smPanelHide]: !state.smAddressVisible,
+          }}
         >
           <Box
             attributes={{
@@ -480,7 +532,6 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               id="from-address"
               disabled
               value={props.fromAddress}
-              onChange={(e) => {}}
               inputClassName={clsx(
                 styles.addressInput,
                 styles.fromAddressInput
@@ -560,17 +611,12 @@ export default function AssetItemTransfer(props: AssetItemTransferProps) {
               }}
               className={styles.checkIcon}
               onClick={() => {
-                state.reverseAnimation = true;
-                props?.onAddressConfirm?.();
-                setTimeout(() => {
-                  state.lgAddressVisible = false;
-                  state.reverseAnimation = false;
-                }, 500);
+                state.handleConfirmAddress();
               }}
             />
           </Box>
         </Box>
-      </Show>
+      </Box>
     </Box>
   );
 }

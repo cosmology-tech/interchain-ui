@@ -17,12 +17,9 @@ import {
   FloatingFocusManager,
   FloatingList,
 } from "@floating-ui/react";
-import { create } from "zustand";
-import { store } from "../../models/store";
-import { lightThemeClass, darkThemeClass } from "../../styles/themes.css";
-
-import FieldLabel from "../field-label";
-import SelectButton from "../select-button";
+import useTheme from "../hooks/use-theme";
+import FieldLabel from "@/ui/field-label";
+import SelectButton from "@/ui/select-button";
 import {
   listBoxWidthVar,
   selectRoot,
@@ -43,8 +40,6 @@ interface SelectContextValue {
 export const SelectContext = React.createContext<SelectContextValue>(
   {} as SelectContextValue
 );
-
-const useStore = create(store);
 
 function useMeasure() {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -100,10 +95,7 @@ export interface SelectProps {
 }
 
 export default function Select(props: SelectProps) {
-  const themeStore = useStore((state) => ({
-    theme: state.theme,
-    themeClass: state.themeClass,
-  }));
+  const { theme, themeClass } = useTheme();
 
   const [measureRef, measureRect] = useMeasure();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -220,10 +212,7 @@ export default function Select(props: SelectProps) {
               <FloatingFocusManager context={context} modal={false}>
                 <div
                   ref={wrapperRef}
-                  className={clx(listboxStyle[themeStore.theme], {
-                    [`${lightThemeClass}`]: themeStore.theme === "light",
-                    [`${darkThemeClass}`]: themeStore.theme === "dark",
-                  })}
+                  className={clx(listboxStyle[theme], themeClass)}
                   style={assignInlineVars({
                     [listBoxWidthVar]: `max(${measureRect.width}px, ${DEFAULT_LIST_WIDTH}px)`,
                   })}

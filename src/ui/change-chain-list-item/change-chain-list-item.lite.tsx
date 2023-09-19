@@ -53,6 +53,7 @@ export default function ChangeChainListItem(props: ChangeChainListItemProps) {
           getInitials={(name) => name[0]}
           size={state.avatarSize()}
           src={props.iconUrl}
+          fallbackMode="bg"
         />
         <Text fontSize="$lg" fontWeight="$normal" color="$text">
           {props.chainName}

@@ -1,8 +1,8 @@
 import * as React from "react";
 import clx from "clsx";
 import { useListItem } from "@floating-ui/react";
-import ListItem from "../list-item";
-import { baseButton } from "../button/button.css";
+import ListItem from "@/ui/list-item";
+import { baseButton } from "@/ui/button/button.css";
 import { SelectContext } from "../select/select";
 
 export interface SelectOptionProps {

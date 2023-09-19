@@ -85,7 +85,7 @@ export interface TextFieldProps extends BaseComponentProps, FieldBaseProps {
   type?: keyof typeof validTypes;
   inputMode?: InputMode;
   intent?: "default" | "error";
-  onChange: (e: any) => void;
+  onChange?: (e: any) => void;
   onBlur?: (e?: any) => void;
   onFocus?: (e?: any) => void;
   onClear?: (event?: any) => void;
