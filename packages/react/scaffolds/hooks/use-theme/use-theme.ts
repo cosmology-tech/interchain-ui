@@ -24,9 +24,18 @@ export default function useTheme() {
     setThemeMode(mode);
   }, []);
 
+  const toggleColorMode = useCallback(() => {
+    setThemeMode(theme === "light" ? "dark" : "light");
+  }, []);
+
   return {
     theme,
     themeClass,
     setTheme,
+    // TODO: refactor to use colorMode naming instead of theme
+    // Aliasing for refactoring later
+    colorMode: theme,
+    setColorMode: setTheme,
+    toggleColorMode,
   };
 }
