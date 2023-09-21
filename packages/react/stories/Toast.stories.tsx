@@ -39,7 +39,6 @@ export const Primary: Story = {
     const [showAutoClose, setShowAutoClose] = React.useState(false);
     const [showDismiss, setShowDismiss] = React.useState(false);
     const [isFinally, setIsFinally] = React.useState(false);
-
     return (
       <Stack direction="vertical" space="$6">
         <Stack space="$6">
