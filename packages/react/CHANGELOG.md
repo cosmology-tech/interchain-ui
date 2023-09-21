@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.9.1...@interchain-ui/react@1.10.0) (2023-09-21)
+
+### Features
+
+- add useColorModeValue hook ([#103](https://github.com/cosmology-tech/interchain-ui/issues/103)) ([7d01f47](https://github.com/cosmology-tech/interchain-ui/commit/7d01f479713e1cb493cae92788c4b709df2451c7))
+
 ## [1.9.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.9.0...@interchain-ui/react@1.9.1) (2023-09-19)
 
 ### Bug Fixes
