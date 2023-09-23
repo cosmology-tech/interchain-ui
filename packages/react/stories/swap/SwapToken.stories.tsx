@@ -75,8 +75,8 @@ export const Primary: Story = {
     onChange: () => {
       console.log("onChange");
     },
-    onToteranceChange: (percent) => {
-      console.log("onToteranceChange", percent);
+    onToleranceChange: (percent) => {
+      console.log("onToleranceChange", percent);
     },
   },
   render: (props) => {

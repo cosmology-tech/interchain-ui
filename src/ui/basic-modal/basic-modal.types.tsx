@@ -4,7 +4,7 @@ export interface BasicModalProps extends BaseComponentProps {
   isOpen: boolean;
   onOpen?: (event?: any) => void;
   onClose?: (event?: any) => void;
-  title: string;
+  title: BaseComponentProps["children"];
   children?: BaseComponentProps["children"];
   className?: string;
   modalContainerClassName?: string;

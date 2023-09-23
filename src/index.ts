@@ -182,6 +182,8 @@ export { default as StakingAssetHeader } from "./ui/staking-asset-header";
 export { default as StakingClaimHeader } from "./ui/staking-claim-header";
 export { default as ValidatorListItem } from "./ui/validator-list-item";
 export { default as ValidatorList } from "./ui/validator-list";
+export { default as LiquidStaking } from "./ui/liquid-staking";
+export type { LiquidStakingProps } from "./ui/liquid-staking/liquid-staking.types";
 export type { SpinnerProps } from "./ui/spinner/spinner.types";
 export { default as ProductCard } from "./ui/product-card";
 export type { ProductCardProps } from "./ui/product-card/product-card.types";

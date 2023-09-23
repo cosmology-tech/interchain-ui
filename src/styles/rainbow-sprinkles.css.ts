@@ -37,6 +37,8 @@ const responsiveProperties = defineProperties({
   dynamicProperties: {
     display: true,
     flex: true,
+    flexShrink: true,
+    flexGrow: true,
     flexDirection: true,
     flexWrap: true,
     alignItems: true,
@@ -77,6 +79,8 @@ const responsiveProperties = defineProperties({
     wordBreak: true,
     fill: true,
     overflow: true,
+    overflowX: true,
+    overflowY: true,
     textOverflow: true,
     opacity: true,
     cursor: true,

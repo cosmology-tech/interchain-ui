@@ -28,4 +28,5 @@ export interface TextProps extends BaseComponentProps {
   ellipsis?: boolean;
   underline?: boolean;
   attributes?: Sprinkles;
+  domAttributes?: any;
 }

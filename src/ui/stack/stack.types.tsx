@@ -5,6 +5,7 @@ import type { BaseComponentProps } from "../../models/components.model";
 export interface StackProps extends Omit<BaseComponentProps, "className"> {
   as?: any;
   className?: ClassValue;
+  boxRef?: any;
   children?: any;
   forwardedRef?: any;
   domAttributes?: any;

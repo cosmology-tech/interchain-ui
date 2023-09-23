@@ -16,6 +16,7 @@ export default function Text(props: TextProps) {
   return (
     <Box
       {...props.attributes}
+      {...props.domAttributes}
       as={props.as}
       {...getVariantStyles(props.variant ?? "body")}
       {...getTextTransformStyles({

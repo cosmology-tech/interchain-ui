@@ -51,3 +51,7 @@ export function toNumber(value?: string | number, fallbackValue?: number) {
   if (isNaN(Number(value))) return fallbackValue ?? 0;
   return Number(value);
 }
+
+export function formatNumeric(value: string | number, precision = 6) {
+  return new BigNumber(value).decimalPlaces(precision).toString();
+}

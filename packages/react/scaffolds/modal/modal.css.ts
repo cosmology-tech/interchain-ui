@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { globalStyle } from "@vanilla-extract/css";
+import { themeVars } from "@/styles/themes.css";
 
 export const modalContainer = style({
   position: `fixed`,
@@ -13,6 +14,7 @@ export const modalContainer = style({
   alignItems: `center`,
   justifyContent: `center`,
   transition: `opacity 300ms ease-in-out`,
+  padding: themeVars.space[8], // top and bottom gutters
   selectors: {
     '&[data-modal-open="true"]': {
       opacity: 1,
