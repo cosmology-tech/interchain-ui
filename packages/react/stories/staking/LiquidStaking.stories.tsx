@@ -35,7 +35,7 @@ export const Primary: Story = {
 
     const [stakeToken, setStakeToken] = useState<
       LiquidStakingProps["stakeToken"] | null
-    >(null);
+    >(dropDownList[0]);
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"]>({
       ...dropDownList[0],
@@ -61,7 +61,7 @@ export const Primary: Story = {
               }}
             >
               <Text fontSize="$xl" fontWeight="$semibold">
-                Liquid Staking ATOM
+                Liquid Staking {stakeToken?.denom}
               </Text>
               <Icon name="informationLine" size="$md" color="$textSecondary" />
             </Stack>

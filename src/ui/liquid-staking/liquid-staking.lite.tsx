@@ -345,6 +345,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
             direction="vertical"
             space="$8"
             attributes={{
+              paddingTop: "$2",
               paddingBottom: state.expanded ? "150px" : "$0",
             }}
             domAttributes={{
@@ -357,7 +358,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   <Stack
                     direction="horizontal"
                     space="$4"
-                    attributes={{ py: "$4" }}
+                    attributes={{ py: "$4", height: "$12" }}
                   >
                     <Text
                       as="p"
@@ -389,6 +390,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   as="a"
                   px="$4"
                   py="$2"
+                  textDecoration="none"
                   borderRadius="$md"
                   display="inline-block"
                   backgroundColor="$background"
@@ -398,7 +400,14 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                     rel: "noopener noreferrer",
                   }}
                 >
-                  <Stack as="span" space="$2" direction="horizontal">
+                  <Stack
+                    as="span"
+                    space="$2"
+                    direction="horizontal"
+                    attributes={{
+                      alignItems: "center",
+                    }}
+                  >
                     <Text as="span" color="$textSecondary" fontSize="$sm">
                       {props.bottomLink.label}
                     </Text>
