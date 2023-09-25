@@ -256,8 +256,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                     onClick() {
                       setInputValue(item.tokenName);
                       setOpen(false);
-                      setSelectedItem(item);
-                      props.onItemSelected?.(item);
+                      if (item) {
+                        setSelectedItem(item);
+                        props.onItemSelected?.(item);
+                      }
                       refs.domReference.current?.focus();
                     },
                   })}

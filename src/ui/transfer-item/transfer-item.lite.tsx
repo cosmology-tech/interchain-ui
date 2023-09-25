@@ -40,6 +40,7 @@ export default function TransferItem(props: TransferItemProps) {
 
   let lastItemRef = useRef<AvailableItem>(null);
   let lastValueRef = useRef<string>("");
+
   const state = useStore<{
     theme: ThemeVariant;
     currentItem: AvailableItem;
@@ -215,7 +216,10 @@ export default function TransferItem(props: TransferItemProps) {
             size="md"
             defaultSelected={state.comboboxList[0]}
             options={state.comboboxList}
-            onItemSelected={(item) => state.itemSelected(item)}
+            onItemSelected={(item) => {
+              console.log("[TransferItem] onItemSelected", item);
+              state.itemSelected(item);
+            }}
             valueItem={state.getComboboxItem(state.currentItem)}
             endAddon={() => (
               <Stack direction="vertical" space="$0">
@@ -243,9 +247,7 @@ export default function TransferItem(props: TransferItemProps) {
                 <div
                   style={{
                     display:
-                      !!props.amount && props.amount !== "0"
-                        ? "block"
-                        : "none",
+                      !!props.amount && props.amount !== "0" ? "block" : "none",
                   }}
                 >
                   <Text color="$textSecondary" fontSize="$xs" textAlign="right">

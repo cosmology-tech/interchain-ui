@@ -21,3 +21,9 @@ export interface NumberFormatProps {
   style?: string;
 }
 export type NumberFormatter = (props: NumberFormatProps) => string;
+
+export type Token = {
+  iconSrc: string;
+  name: string;
+  symbol: string;
+};

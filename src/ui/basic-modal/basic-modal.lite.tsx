@@ -1,4 +1,5 @@
 import {
+  Show,
   useStore,
   onMount,
   onUnMount,
@@ -56,16 +57,23 @@ export default function BasicModal(props: BasicModalProps) {
           className={modalHeader}
           attributes={{ justifyContent: "space-between", alignItems: "center" }}
         >
-          <Text fontSize="$xl" fontWeight="$semibold">
-            {props?.title}
-          </Text>
+          {/* Default title */}
+          {props.title && typeof props.title === "string" ? (
+            <Text fontSize="$xl" fontWeight="$semibold">
+              {props?.title}
+            </Text>
+          ) : null}
+
+          {/* Custom title */}
+          {props.title && typeof props.title !== "string" ? props.title : null}
+
+          {/* Close button */}
           <IconButton
             icon="closeFilled"
             iconSize="$4xl"
             variant="unstyled"
             onClick={(e) => {
-              e.stopPropagation();
-              props.onClose?.();
+              props.onClose?.(e);
             }}
           />
         </Stack>
@@ -78,7 +86,6 @@ export default function BasicModal(props: BasicModalProps) {
       childrenClassName={modalChildren}
     >
       <div ref={parentRef}>{props.children}</div>
-
       {/* @ts-expect-error */}
     </ScaffoldModal>
   );
