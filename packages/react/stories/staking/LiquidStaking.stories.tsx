@@ -116,9 +116,7 @@ export const Primary: Story = {
 
                 setReward((prevReward) => {
                   const amt = String(random(100, 1000, true));
-                  const notional = BigNumber(amt)
-                    .multipliedBy(prevReward.priceDisplayAmount ?? 0)
-                    .toString();
+                  const notional = String(random(500, 20000, true));
 
                   return {
                     ...prevReward,
