@@ -38,6 +38,7 @@ export interface LiquidStakingProps extends BaseComponentProps {
   timeEstimateLabel: string;
   submitButtonLabel?: string;
   rewardLabel?: string;
+  stakeLabel?: string;
   accordionLabel?: BaseComponentProps["children"];
   footerLabel?: BaseComponentProps["children"];
   // ==== Number format props

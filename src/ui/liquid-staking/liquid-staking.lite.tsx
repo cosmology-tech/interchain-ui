@@ -7,6 +7,7 @@ import {
   useStore,
   useDefaultProps,
 } from "@builder.io/mitosis";
+import clx from "clsx";
 import { store } from "../../models/store";
 import { formatNumeric } from "../../helpers/number";
 import Text from "../text";
@@ -19,6 +20,7 @@ import Divider from "../divider";
 import TransferItem from "../transfer-item";
 
 import * as styles from "./liquid-staking.css";
+import { scrollBar } from "../shared/shared.css";
 
 import type { ThemeVariant } from "../../models/system.model";
 import type {
@@ -31,6 +33,7 @@ useDefaultProps<Partial<LiquidStakingProps>>({
   rewardLabel: "What you'll get",
   accordionLabel: "Learn more",
   submitButtonLabel: "Liquid Stake",
+  stakeLabel: "Select amount",
   footerLabel: "Powered by Cosmology",
 });
 
@@ -134,7 +137,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         halfBtn
         maxBtn
         hasAvailable
-        title="From"
+        title={props.stakeLabel}
         amount={String(state.stakeToken?.available ?? 0)}
         selectedItem={state.stakeToken}
         dropDownList={props.options}
@@ -276,6 +279,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               justifyContent: "flex-end",
               zIndex: 1,
               overflowX: "clip",
+              backgroundColor:
+                state.theme === "light" ? "$white" : "$blackPrimary",
+              width: state.scrollOffset > 0 ? "100%" : "$fit",
+              marginLeft: "auto",
             }}
             domAttributes={{
               "data-part-id": "accordion-button",
@@ -334,11 +341,12 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
         <div
           ref={scrollRef}
-          className={
+          className={clx(
             state.expanded
               ? styles.accordionPanel.expanded
-              : styles.accordionPanel.contracted
-          }
+              : styles.accordionPanel.contracted,
+            scrollBar[state.theme]
+          )}
           data-part-id="scroll-container"
         >
           <Stack
