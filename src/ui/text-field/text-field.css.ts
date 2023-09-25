@@ -42,7 +42,7 @@ export const inputBorderAndShadow = style({
         [inputBorderVar]: themeVars.colors.text,
       },
     },
-    "&:focus": {
+    "&:focus-visible": {
       vars: {
         [inputBorderVar]: themeVars.colors.text,
       },

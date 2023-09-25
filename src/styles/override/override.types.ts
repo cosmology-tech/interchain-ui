@@ -1,7 +1,6 @@
 import { createVar } from "@vanilla-extract/css";
-import { LiteralUnion } from "../../helpers/types";
 import { themeContractTemplate } from "../../styles/themes.css";
-import type { PartialDeep } from "type-fest";
+import type { LiteralUnion, PartialDeep } from "type-fest";
 
 export type CssVar = ReturnType<typeof createVar>;
 

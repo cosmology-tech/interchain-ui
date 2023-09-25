@@ -1,3 +1,6 @@
+import { LiteralUnion } from "type-fest";
+import type { ThemeVariant } from "../../models/system.model";
+
 export const colors = {
   black: "#000",
   blackPrimary: "#2C3137",
@@ -94,14 +97,49 @@ export const colors = {
   primary700: "#1b2cbc",
   primary800: "#1624b5",
   primary900: "#0d17a9",
-  purple50: "#FAF5FF",
-  purple100: "#E9D8FD",
-  purple200: "#D6BCFA",
+  purple50: "#C99EFF",
+  purple100: "#782FD2",
+  purple200: "#5B249E",
   purple300: "#B794F4",
-  purple400: "#9F7AEA",
-  purple500: "#805AD5",
+  purple400: "#7310FF",
+  purple500: "#421876",
   purple600: "#6B46C1",
   purple700: "#553C9A",
   purple800: "#44337A",
   purple900: "#322659",
 };
+
+export const DEFAULT_ACCENTS = [
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "purple",
+  "blue",
+] as const;
+
+export type Accent = LiteralUnion<(typeof DEFAULT_ACCENTS)[number], string>;
+
+export const accents: { [key in ThemeVariant]: { [key in Accent]: string } } = {
+  light: {
+    red: colors.red400,
+    orange: colors.orange400,
+    yellow: colors.yellow400,
+    green: colors.green400,
+    purple: colors.purple400,
+    blue: colors.primary400,
+  },
+  dark: {
+    red: colors.red300,
+    orange: colors.orange300,
+    yellow: colors.yellow300,
+    green: colors.green300,
+    purple: colors.purple200,
+    blue: colors.primary300,
+  },
+} as const;
+
+export const accentsForeground: { [key in ThemeVariant]: string } = {
+  light: colors.white,
+  dark: "#EEF2F8",
+} as const;

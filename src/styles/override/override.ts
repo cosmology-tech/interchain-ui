@@ -140,9 +140,9 @@ const merge = deepmerge({ all: true });
 
 export function assignThemeVars(
   customTheme: CustomThemeVars,
-  scheme: ThemeVariant
+  colorMode: ThemeVariant
 ) {
-  const schemeClass = scheme === "light" ? lightThemeClass : darkThemeClass;
+  const schemeClass = colorMode === "light" ? lightThemeClass : darkThemeClass;
   const elements = document.getElementsByClassName(schemeClass);
 
   for (let el of elements) {

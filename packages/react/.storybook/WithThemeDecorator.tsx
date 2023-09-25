@@ -1,33 +1,46 @@
-import React from "react";
+import * as React from "react";
 import cls from "clsx";
-import { Box, IconButton, ThemeProvider, useTheme } from "../src";
+import {
+  Box,
+  Stack,
+  Text,
+  IconButton,
+  ThemeProvider,
+  Select,
+  SelectOption,
+  useTheme,
+} from "../src";
+import { DEFAULT_ACCENTS, Accent } from "../src/styles/tokens";
+import { getAccent } from "../src/helpers/style";
 import "../src/styles/global.css";
 
 const WithThemeDecorator = (props) => {
   const { theme, themeClass, setTheme } = useTheme();
+  const [accent, setAccent] = React.useState<Accent>("blue");
 
   return (
     <ThemeProvider
-    // themeDefs={[
-    //   {
-    //     name: "custom",
-    //     vars: {
-    //       colors: {
-    //         primary500: "#4A5568",
-    //       },
-    //     },
-    //   },
-    // ]}
-    // customTheme="custom"
-    // Try out custom themes
-    // overrides={{
-    //   button: {
-    //     bg: {
-    //       light: "red",
-    //       dark: "blue",
-    //     },
-    //   },
-    // }}
+      accent={accent}
+      // themeDefs={[
+      //   {
+      //     name: "custom",
+      //     vars: {
+      //       colors: {
+      //         primary500: "#4A5568",
+      //       },
+      //     },
+      //   },
+      // ]}
+      // customTheme="custom"
+      // Try out custom themes
+      // overrides={{
+      //   button: {
+      //     bg: {
+      //       light: "red",
+      //       dark: "blue",
+      //     },
+      //   },
+      // }}
     >
       <div id="app-root1" className={cls("app", themeClass)}>
         <Box
@@ -38,19 +51,54 @@ const WithThemeDecorator = (props) => {
           position="relative"
         >
           {props.children}
-          <Box position="absolute" top="$4" right="$4">
-            <IconButton
-              variant="ghost"
-              intent="secondary"
-              size="sm"
-              icon={theme === "dark" ? "sunLine" : "moonLine"}
-              onClick={() => {
-                if (theme === "light") {
-                  return setTheme("dark");
-                }
-                return setTheme("light");
+          <Box position="absolute" top="$4" right="$6">
+            <Stack
+              direction="horizontal"
+              space="$4"
+              attributes={{
+                p: "$2",
+                alignItems: "center",
               }}
-            />
+            >
+              <Select
+                size="sm"
+                width={180}
+                placeholder="Accent"
+                onSelectItem={(selectedIndex) => {
+                  if (selectedIndex == null) return;
+
+                  const item = DEFAULT_ACCENTS[selectedIndex];
+                  setAccent(item);
+                  console.log("[Storybook root] Selected accent ", item);
+                }}
+              >
+                {DEFAULT_ACCENTS.map((accent) => (
+                  <SelectOption label={`Accent ${accent}`} key={accent}>
+                    <Stack direction="horizontal" space="$4">
+                      <Box
+                        backgroundColor={getAccent(accent, theme)}
+                        height="$8"
+                        width="$8"
+                        borderRadius="$full"
+                      />
+                      <Text fontSize="$sm">{accent}</Text>
+                    </Stack>
+                  </SelectOption>
+                ))}
+              </Select>
+              <IconButton
+                variant="ghost"
+                intent="secondary"
+                size="sm"
+                icon={theme === "dark" ? "sunLine" : "moonLine"}
+                onClick={() => {
+                  if (theme === "light") {
+                    return setTheme("dark");
+                  }
+                  return setTheme("light");
+                }}
+              />
+            </Stack>
           </Box>
         </Box>
       </div>

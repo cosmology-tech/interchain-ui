@@ -88,7 +88,8 @@ export interface SelectProps {
   fullWidth?: boolean;
   width?: number | string;
   size?: "sm" | "md" | "lg";
-  label: React.ReactNode;
+  label?: React.ReactNode;
+  placeholder?: string;
   onSelectItem?: (index: number | null) => void;
   children?: React.ReactNode;
   className?: string;
@@ -178,11 +179,13 @@ export default function Select(props: SelectProps) {
         props.className
       )}
     >
-      <FieldLabel htmlFor={props.id} label={props.label} size={props.size} />
+      {props.label ? (
+        <FieldLabel htmlFor={props.id} label={props.label} size={props.size} />
+      ) : null}
 
       <div ref={refs.setReference}>
         <SelectButton
-          placeholder={selectedLabel ?? "Select an option"}
+          placeholder={selectedLabel || props.placeholder || "Select an option"}
           _css={{
             width: props.width
               ? typeof props.width === "number"
