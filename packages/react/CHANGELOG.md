@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.1...@interchain-ui/react@1.11.2) (2023-09-27)
+
+### Bug Fixes
+
+- **staking:** chain data fixture ([81c405e](https://github.com/cosmology-tech/interchain-ui/commit/81c405ed98bfe6e7d9cec141c8390d1506f4283c))
+
 ## [1.11.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.0...@interchain-ui/react@1.11.1) (2023-09-27)
 
 ### Bug Fixes
