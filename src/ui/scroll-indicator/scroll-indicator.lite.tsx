@@ -6,7 +6,7 @@ import * as styles from "./scroll-indicator.css";
 import { ScrollIndicatorProps } from "./scroll-indicator.types";
 
 useDefaultProps<Partial<ScrollIndicatorProps>>({
-  noShadow: false,
+  showShadow: true,
 });
 
 export default function ScrollIndicator(props: ScrollIndicatorProps) {
@@ -19,7 +19,7 @@ export default function ScrollIndicator(props: ScrollIndicatorProps) {
       attributes={{ onClick: () => props.onClick() }}
       display="grid"
       placeItems="center"
-      className={clx(styles.indicator, !props.noShadow ? styles.shadow : null)}
+      className={clx(styles.indicator, props.showShadow ? styles.shadow : null)}
       transform={`rotate(${props.direction === "left" ? 180 : 0}deg)`}
     >
       <Icon

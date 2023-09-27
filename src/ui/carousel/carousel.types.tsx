@@ -1,9 +1,14 @@
 export interface CarouselProps {
-  width: string;
   children: any;
+  width?: string;
   gap?: string;
+  verticalAlign?: "start" | "center" | "end";
   scrollOffset?: number;
-  indicatorsMargin?: string;
-  noIndicatorsShadow?: boolean;
+  showIndicators: boolean;
+  showIndicatorsShadow?: boolean;
+  indicatorsXOffset?: number;
   indicatorsYOffset?: number;
+  initialPosition?: number;
+  showFadeOut?: boolean;
+  fadeOutWidth?: number;
 }
