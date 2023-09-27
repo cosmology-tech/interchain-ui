@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from "react";
 import random from "lodash/random";
-import BigNumber from "bignumber.js";
 import { getTransferList } from "../stub/assetData";
+import strideLogo from "../../static/stride-logo.png";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 import {
+  Box,
   LiquidStaking,
   LiquidStakingProps,
   BasicModal,
@@ -127,6 +128,29 @@ export const Primary: Story = {
                 });
               }
             }}
+            footerLabel={
+              <Stack
+                direction="horizontal"
+                space="$4"
+                attributes={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text fontWeight="$normal" fontSize="$sm" color="#A7B4C2">
+                  Powered by
+                </Text>
+                <Box
+                  as="img"
+                  height="$8"
+                  width="auto"
+                  attributes={{
+                    src: strideLogo,
+                    alt: "Stride",
+                  }}
+                />
+              </Stack>
+            }
             onSubmit={() => {
               alert(
                 `Staked [${stakeToken?.denom}]: amt ${stakedAmount} rward ${reward.rewardAmount}`

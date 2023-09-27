@@ -125,7 +125,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
   return (
     <Box
       minHeight="444px"
-      py="$8"
+      pt="$8"
       position="relative"
       className={props.className}
       boxRef={props.forwardedRef}
