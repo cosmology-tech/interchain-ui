@@ -1,0 +1,30 @@
+diff --git a/node_modules/mlly/dist/index.cjs b/node_modules/mlly/dist/index.cjs
+index be9b792..b83095b 100644
+--- a/node_modules/mlly/dist/index.cjs
++++ b/node_modules/mlly/dist/index.cjs
+@@ -1,17 +1,17 @@
+ 'use strict';
+ 
+ const acorn = require('acorn');
+-const node_module = require('node:module');
+-const fs = require('node:fs');
+-const node_url = require('node:url');
++const node_module = require('module');
++const fs = require('fs');
++const node_url = require('url');
+ const ufo = require('ufo');
+ const pathe = require('pathe');
+ const pkgTypes = require('pkg-types');
+-const assert = require('node:assert');
+-const process$1 = require('node:process');
+-const path = require('node:path');
+-const v8 = require('node:v8');
+-const node_util = require('node:util');
++const assert = require('assert');
++const process$1 = require('process');
++const path = require('path');
++const v8 = require('v8');
++const node_util = require('util');
+ 
+ function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e.default : e; }
+ 

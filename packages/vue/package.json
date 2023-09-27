@@ -31,13 +31,13 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@parcel/compressor-brotli": "2.8.3",
-    "@parcel/compressor-gzip": "2.8.3",
-    "@parcel/transformer-typescript-tsc": "2.8.3",
-    "@parcel/transformer-typescript-types": "2.8.3",
+    "@parcel/compressor-brotli": "^2.9.3",
+    "@parcel/compressor-gzip": "^2.9.3",
+    "@parcel/transformer-typescript-tsc": "^2.9.3",
+    "@parcel/transformer-typescript-types": "^2.9.3",
     "@types/animejs": "^3.1.7",
     "@vanilla-extract/parcel-transformer": "^1.0.0",
-    "parcel": "2.8.3"
+    "parcel": "^2.9.3"
   },
   "peerDependencies": {
     "vue": "^3.x"
