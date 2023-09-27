@@ -33,15 +33,16 @@ export const Primary: Story = {
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropDownList = useMemo(() => getTransferList(), []);
+    const stride = dropDownList.find((item) => item.symbol === "STRD");
 
     const [stakeToken, setStakeToken] = useState<
       LiquidStakingProps["stakeToken"] | null
     >(dropDownList[0]);
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"]>({
-      ...dropDownList[0],
-      denom: `Staked ${dropDownList[0].denom}`,
-      symbol: `st${dropDownList[0].symbol}`,
+      ...stride,
+      denom: `Staked ${stride.denom}`,
+      symbol: `${stride.symbol}`,
       apr: "19.42",
       rewardAmount: "0",
     });

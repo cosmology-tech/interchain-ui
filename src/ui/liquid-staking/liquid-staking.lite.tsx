@@ -171,7 +171,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
           }}
         >
           {/* Reward token icon */}
-          <Box display="block" width="50px" height="50px">
+          <Box display="block" width="50px" height="50px" flexShrink="0">
             <img
               src={props.reward.imgSrc}
               width="50"

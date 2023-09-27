@@ -1,9 +1,20 @@
 import { assets } from "chain-registry";
 
-export const getTransferList = (chainName = "osmosis") => {
+export const getTransferList = (
+  filterFn?: (assetList: typeof assets) => boolean
+) => {
+  let filteredAssets = assets;
+
   let assetList: any = [];
-  for (let i = 0; i <= assets.length; i++) {
-    const itemList = assets[i]?.assets ?? [];
+
+  if (!filterFn) {
+    filteredAssets = assets.filter((item) =>
+      ["cosmoshub", "stride", "stargaze"].includes(item.chain_name)
+    );
+  }
+
+  for (let i = 0; i <= filteredAssets.length; i++) {
+    const itemList = filteredAssets[i]?.assets ?? [];
     assetList = [...assetList, ...itemList];
   }
 
