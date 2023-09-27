@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.0...@interchain-ui/react@1.11.1) (2023-09-27)
+
+### Bug Fixes
+
+- **staking:** story stride icon ([edac9f7](https://github.com/cosmology-tech/interchain-ui/commit/edac9f7ae6e023531b6cb997a447b061e0703a44))
+
 # [1.11.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.10.0...@interchain-ui/react@1.11.0) (2023-09-25)
 
 ### Features
