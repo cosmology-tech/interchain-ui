@@ -10,7 +10,6 @@ import {
 import BigNumber from "bignumber.js";
 import { animate } from "motion";
 import cloneDeep from "lodash/cloneDeep";
-import clsx from "clsx";
 import Stack from "../stack";
 import Text from "../text";
 import IconButton from "../icon-button";
@@ -318,7 +317,7 @@ export default function SwapToken(props: SwapTokenProps) {
                   <Button
                     onClick={(e) => {
                       state.setToterance(per);
-                      props?.onToteranceChange?.(per);
+                      props?.onToleranceChange?.(per);
                     }}
                     key={per}
                     size="sm"

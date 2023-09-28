@@ -70,20 +70,14 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             height={props.size === "md" ? "50px" : "28px"}
           >
             <Box
-              style={{
-                display: !props.value && !props.iconUrl ? "block" : "none",
-              }}
+              display={props.value || props.iconUrl ? "none" : "block"}
               width="$full"
               height="$full"
               borderRadius="$full"
               backgroundColor="$skeletonBg"
             />
 
-            <Box
-              style={{
-                display: props.value || props.iconUrl ? "block" : "none",
-              }}
-            >
+            <Box display={props.value && props.iconUrl ? "block" : "none"}>
               <img
                 src={props.iconUrl}
                 className={chainSwapLogo[props.size]}
@@ -156,6 +150,9 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 attributes={{
                   maxWidth: props.value ? "100px" : "166px",
                   display: "block",
+                }}
+                domAttributes={{
+                  title: props.label,
                 }}
               >
                 {props.label}

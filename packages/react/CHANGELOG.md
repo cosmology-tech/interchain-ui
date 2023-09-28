@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.1...@interchain-ui/react@1.11.2) (2023-09-27)
+
+### Bug Fixes
+
+- **staking:** chain data fixture ([81c405e](https://github.com/cosmology-tech/interchain-ui/commit/81c405ed98bfe6e7d9cec141c8390d1506f4283c))
+
+## [1.11.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.0...@interchain-ui/react@1.11.1) (2023-09-27)
+
+### Bug Fixes
+
+- **staking:** story stride icon ([edac9f7](https://github.com/cosmology-tech/interchain-ui/commit/edac9f7ae6e023531b6cb997a447b061e0703a44))
+
+# [1.11.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.10.0...@interchain-ui/react@1.11.0) (2023-09-25)
+
+### Features
+
+- add liquid staking component ([#104](https://github.com/cosmology-tech/interchain-ui/issues/104)) ([c330c81](https://github.com/cosmology-tech/interchain-ui/commit/c330c811ffb17db5df1f23323b3b6901b4870643))
+
 # [1.10.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.9.1...@interchain-ui/react@1.10.0) (2023-09-21)
 
 ### Features

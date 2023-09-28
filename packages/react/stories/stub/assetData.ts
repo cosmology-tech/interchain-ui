@@ -1,21 +1,31 @@
 import { assets } from "chain-registry";
 
-export const getTransferList = (chainName = "osmosis") => {
-  // let assetList =
-  //   assets.find(({ chain_name }) => chain_name === chainName)?.assets ?? [];
+export const getTransferList = (
+  filterFn?: (assetList: typeof assets) => boolean
+) => {
+  let filteredAssets = assets;
 
   let assetList: any = [];
-  for (let i = 0; i <= assets.length; i++) {
-    let itemList = assets[i]?.assets ?? [];
+
+  if (!filterFn) {
+    filteredAssets = assets.filter((item) =>
+      ["cosmoshub", "stride", "stargaze"].includes(item.chain_name)
+    );
+  }
+
+  for (let i = 0; i <= filteredAssets.length; i++) {
+    const itemList = filteredAssets[i]?.assets ?? [];
     assetList = [...assetList, ...itemList];
   }
 
   // Get the unique symbol
-  assetList = Array.from(new Set(assetList.map(item => item.symbol))).map(symbol => {
-    return assetList.find(item => item.symbol === symbol);
-  });
+  assetList = Array.from(new Set(assetList.map((item) => item.symbol))).map(
+    (symbol) => {
+      return assetList.find((item) => item.symbol === symbol);
+    }
+  );
 
-  assetList = assetList.slice(0, 60)
+  assetList = assetList.slice(0, 60);
 
   return assetList.map((item, index) => {
     return {
