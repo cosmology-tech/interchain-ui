@@ -145,6 +145,8 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     if (value) {
       setOpen(true);
       setActiveIndex(0);
+    } else {
+      setOpen(false);
     }
   }
 
@@ -158,19 +160,27 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     );
   }
 
+  function handleEmptyInputEscape() {
+    if (inputValue === "" && selectedItem) {
+      setInputValue(selectedItem.tokenName);
+    }
+  }
+
   const items =
     typeof props.filterFn === "function"
       ? props.filterFn(props.options)
       : defaultFilterOptions(props.options);
 
   React.useEffect(() => {
-    setSelectedItem(props?.valueItem);
-    setInputValue(props?.valueItem?.tokenName);
+    if (!inputFocusing) {
+      setSelectedItem(props?.valueItem);
+      setInputValue(props?.valueItem?.tokenName);
+    }
   }, [props.valueItem]);
 
   // Make sure onBlur can reset value to the selectedItem
   React.useLayoutEffect(() => {
-    if (!open && selectedItem) {
+    if (!open && selectedItem && !inputFocusing) {
       setInputValue(selectedItem.tokenName);
     }
   }, [open, selectedItem, inputValue]);
@@ -209,6 +219,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 setOpen(false);
                 props.onItemSelected?.(selected);
               }
+
+              if (event.key === "Escape") {
+                handleEmptyInputEscape();
+              }
             },
             onFocus() {
               setInputFocusing(true);
@@ -216,6 +230,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
             },
             onBlur(e) {
               setInputFocusing(false);
+              handleEmptyInputEscape();
             },
           })}
         />

@@ -70,7 +70,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             height={props.size === "md" ? "50px" : "28px"}
           >
             <Box
-              display={props.value || props.iconUrl ? "none" : "block"}
+              display={!props.value || !props.iconUrl ? "block" : "none"}
               width="$full"
               height="$full"
               borderRadius="$full"
