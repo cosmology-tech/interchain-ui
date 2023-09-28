@@ -27,6 +27,6 @@ export const Right: Story = {
 export const NoShadow: Story = {
   args: {
     direction: "right",
-    noShadow: true,
+    showShadow: false,
   },
 };

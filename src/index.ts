@@ -185,20 +185,15 @@ export { default as ValidatorList } from "./ui/validator-list";
 export { default as LiquidStaking } from "./ui/liquid-staking";
 export type { LiquidStakingProps } from "./ui/liquid-staking/liquid-staking.types";
 export type { SpinnerProps } from "./ui/spinner/spinner.types";
-export { default as ProductCard } from "./ui/product-card";
-export type { ProductCardProps } from "./ui/product-card/product-card.types";
-export { default as ProductHighlight } from "./ui/product-highlight";
-export type { ProductHighlightProps } from "./ui/product-highlight/product-highlight.types";
-export { default as Label } from "./ui/label";
-export type { LabelProps } from "./ui/label/label.types";
 export { default as Divider } from "./ui/divider";
 export type { DividerProps } from "./ui/divider/divider.types";
-export { default as LinkCard } from "./ui/link-card";
-export type { LinkCardProps } from "./ui/link-card/link-card.types";
-export { default as VideoCard } from "./ui/video-card";
-export type { VideoCardProps } from "./ui/video-card/video-card.types";
 export { default as Carousel } from "./ui/carousel";
 export type { CarouselProps } from "./ui/carousel/carousel.types";
+export { default as Breadcrumb } from "./ui/breadcrumb";
+export type {
+  BreadcrumbProps,
+  BreadcrumbLink,
+} from "./ui/breadcrumb/breadcrumb.types";
 export { default as ScrollIndicator } from "./ui/scroll-indicator";
 export type { ScrollIndicatorProps } from "./ui/scroll-indicator/scroll-indicator.types";
 export { default as NftMinimumOffer } from "./ui/nft-minimum-offer";

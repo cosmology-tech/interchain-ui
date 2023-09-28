@@ -66,6 +66,7 @@ export const ALL_ICON_NAMES = [
   "nextOutlined",
   "externalLinkLine",
   "timeLine",
+  "arrowDownload",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];
