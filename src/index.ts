@@ -199,6 +199,11 @@ export { default as VideoCard } from "./ui/video-card";
 export type { VideoCardProps } from "./ui/video-card/video-card.types";
 export { default as Carousel } from "./ui/carousel";
 export type { CarouselProps } from "./ui/carousel/carousel.types";
+export { default as Breadcrumb } from "./ui/breadcrumb";
+export type {
+  BreadcrumbProps,
+  BreadcrumbLink,
+} from "./ui/breadcrumb/breadcrumb.types";
 export { default as ScrollIndicator } from "./ui/scroll-indicator";
 export type { ScrollIndicatorProps } from "./ui/scroll-indicator/scroll-indicator.types";
 export { default as NftMinimumOffer } from "./ui/nft-minimum-offer";
