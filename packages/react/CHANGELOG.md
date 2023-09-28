@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.2...@interchain-ui/react@1.11.3) (2023-09-28)
+
+### Bug Fixes
+
+- **chainswapcombobox:** clicking on filtered options not working ([bcb0985](https://github.com/cosmology-tech/interchain-ui/commit/bcb0985715738cd4c072b7857785dfdb4e845e27))
+
 ## [1.11.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.1...@interchain-ui/react@1.11.2) (2023-09-27)
 
 ### Bug Fixes
