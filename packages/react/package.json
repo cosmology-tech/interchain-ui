@@ -58,7 +58,6 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "lodash": "^4.17.21",
-    "motion": "^10.16.2",
     "rainbow-sprinkles": "^0.17.0",
     "zustand": "^4.3.8"
   },

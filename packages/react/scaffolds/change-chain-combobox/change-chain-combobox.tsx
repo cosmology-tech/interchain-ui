@@ -108,7 +108,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   const { isMounted, styles: transitionStyles } = useTransitionStyles(context);
 
   const focus = useFocus(context, {
-    keyboardOnly: false,
+    visibleOnly: false,
   });
   const role = useRole(context, { role: "listbox" });
   const dismiss = useDismiss(context);
