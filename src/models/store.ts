@@ -15,6 +15,7 @@ import {
   safelyFormatNumberWithFallback,
 } from "../helpers/number";
 import { darkThemeClass, lightThemeClass } from "../styles/themes.css";
+import { Accent } from "../styles/tokens";
 import {
   OverrideStyleManager,
   assignThemeVars,
@@ -30,6 +31,7 @@ export interface UIState {
   // which is derived from themeMode
   theme: ThemeVariant;
   themeClass: string;
+  themeAccent: Accent;
   customTheme: string | null;
   themeDefs: Array<ThemeDef>;
   overrideStyleManager: OverrideStyleManager;
@@ -43,6 +45,7 @@ export interface UIAction {
   setTheme: (theme: ThemeVariant, themeClass: string) => void;
   setThemeDefs: (defs: Array<ThemeDef>, defaultTheme?: string) => void;
   setCustomTheme: (customTheme: string) => void;
+  setThemeAccent: (accent: Accent) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
 }
 
@@ -62,6 +65,7 @@ export const store = createStore(
       themeMode: null,
       theme: null,
       themeClass: "",
+      themeAccent: "blue",
       // Custom theme contract
       themeDefs: [],
       customTheme: null,
@@ -121,6 +125,10 @@ export const store = createStore(
               assignThemeVars(customThemeObj.vars, state.theme);
             }
           }
+        }),
+      setThemeAccent: (accent: Accent) =>
+        set((state) => {
+          state.themeAccent = accent;
         }),
       formatNumber: (props: NumberFormatProps): string => {
         const formatter = getCurrencyFormatter("en-US", {

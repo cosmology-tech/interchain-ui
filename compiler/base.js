@@ -163,6 +163,7 @@ async function compile(rawOptions) {
 
     const isLiteJSXComponent =
       parsedPath.ext === ".tsx" && parsedPath.name.includes(".lite");
+    const isScaffold = parsedPath.dir.includes("scaffolds");
 
     const targetPath = path.join(
       outPath,
@@ -172,7 +173,7 @@ async function compile(rawOptions) {
 
     if (event.type === "create" || event.type === "update") {
       // Only process non lite jsx files in this handler
-      if (isLiteJSXComponent) return;
+      if (isLiteJSXComponent || isScaffold) return;
 
       try {
         const fileContent = await fsPromise.readFile(event.path, "utf-8");

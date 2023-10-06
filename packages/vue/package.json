@@ -21,23 +21,21 @@
     "@vanilla-extract/css": "^1.12.0",
     "@vanilla-extract/dynamic": "^2.0.3",
     "@vanilla-extract/recipes": "^0.4.0",
-    "@zag-js/dialog": "^0.2.13",
     "@zag-js/vue": "^0.2.10",
     "animejs": "^3.2.1",
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
-    "motion": "^10.16.2",
     "type-fest": "^4.2.0",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@parcel/compressor-brotli": "2.8.3",
-    "@parcel/compressor-gzip": "2.8.3",
-    "@parcel/transformer-typescript-tsc": "2.8.3",
-    "@parcel/transformer-typescript-types": "2.8.3",
+    "@parcel/compressor-brotli": "^2.9.3",
+    "@parcel/compressor-gzip": "^2.9.3",
+    "@parcel/transformer-typescript-tsc": "^2.9.3",
+    "@parcel/transformer-typescript-types": "^2.9.3",
     "@types/animejs": "^3.1.7",
     "@vanilla-extract/parcel-transformer": "^1.0.0",
-    "parcel": "2.8.3"
+    "parcel": "^2.9.3"
   },
   "peerDependencies": {
     "vue": "^3.x"

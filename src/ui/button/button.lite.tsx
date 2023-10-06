@@ -7,15 +7,21 @@ import {
   useStore,
   useRef,
 } from "@builder.io/mitosis";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clx from "clsx";
 import Icon from "../icon";
 import Box from "../box";
 import Spinner from "../spinner";
 import { store } from "../../models/store";
 import { recipe, buttonOverrides } from "./button.helper";
+import { isDefaultAccent, getAccentHover } from "../../helpers/style";
+import { themeVars } from "../../styles/themes.css";
+
+import type { UnknownRecord } from "type-fest";
 import type { ButtonProps } from "./button.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { OverrideStyleManager } from "../../styles/override/override";
+
 import * as styles from "./button.css";
 
 useMetadata({ isAttachedToShadowDom: true });
@@ -32,10 +38,26 @@ export default function Button(props: ButtonProps) {
     loaded: boolean;
     theme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
+    getVars: () => UnknownRecord;
   }>({
     loaded: false,
     overrideManager: null,
     theme: "light",
+    getVars() {
+      const isDefaultAppearance =
+        isDefaultAccent(state.themeAccent) && state.themeAccent === "blue";
+
+      // Only allow accent customization for 'primary' Intent
+      const isPrimaryIntent = props.intent === "primary";
+
+      return isDefaultAppearance || !isPrimaryIntent
+        ? state.overrideManager?.applyOverrides(buttonOverrides.name)
+        : assignInlineVars({
+            [styles.buttonBgVar]: themeVars.colors.accent,
+            [styles.buttonTextColorVar]: themeVars.colors.accentText,
+            [styles.buttonHoverBgVar]: getAccentHover(themeVars.colors.accent),
+          });
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -43,10 +65,12 @@ export default function Button(props: ButtonProps) {
   onMount(() => {
     state.loaded = true;
     state.theme = store.getState().theme;
+    state.themeAccent = store.getState().themeAccent;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState, prevState) => {
       state.theme = newState.theme;
+      state.themeAccent = newState.themeAccent;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -75,7 +99,7 @@ export default function Button(props: ButtonProps) {
           onMouseEnter: (event) => props.onHoverStart?.(event),
           onMouseLeave: (event) => props.onHoverEnd?.(event),
           disabled: props.disabled,
-          style: state.overrideManager?.applyOverrides(buttonOverrides.name),
+          style: state.getVars(),
           ...props.domAttributes,
         }}
       >

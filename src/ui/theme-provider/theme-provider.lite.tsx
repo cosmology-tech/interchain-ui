@@ -6,11 +6,16 @@ import {
   useRef,
 } from "@builder.io/mitosis";
 import isEqual from "lodash/isEqual";
-import { mediaQueryColorScheme } from "../../helpers/style";
+import {
+  mediaQueryColorScheme,
+  resolveThemeMode,
+  getAccent,
+  getAccentText,
+} from "../../helpers/style";
 import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
 import { ThemeVariant } from "../../models/system.model";
-import { resolveThemeMode } from "../../helpers/style";
+import { assignThemeVars } from "../../styles/override/override";
 import type { ThemeProviderProps } from "./theme-provider.types";
 import "../../styles/global.css";
 
@@ -77,6 +82,27 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     const overrideStyleManager = store.getState().overrideStyleManager;
     overrideStyleManager.update(props.overrides, null);
   }, [props.overrides]);
+
+  onUpdate(() => {
+    const prevAccent = store.getState().themeAccent;
+    const currentColorMode = store.getState().theme;
+
+    if (prevAccent !== props.accent) {
+      store.getState().setThemeAccent(props.accent ?? "blue");
+
+      assignThemeVars(
+        {
+          colors: {
+            // @ts-expect-error
+            accent: getAccent(props.accent, currentColorMode ?? "light"),
+            // @ts-expect-error
+            accentText: getAccentText(currentColorMode ?? "light"),
+          },
+        },
+        currentColorMode
+      );
+    }
+  }, [props.accent]);
 
   onMount(() => {
     resolveThemeMode(props.defaultTheme);

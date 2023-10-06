@@ -45,7 +45,11 @@ const { compileReact } = require("./frameworks/react.compile");
           {
             title: "Recompile Mitosis",
             task: async () => {
-              const watchDir = path.resolve(process.cwd(), "src");
+              const srcDir = path.resolve(process.cwd(), "src");
+              const scaffoldDir = path.resolve(
+                process.cwd(),
+                "packages/react/scaffolds"
+              );
 
               const onChange = lodash.debounce((err, _events) => {
                 const spinner = ora(`Watching src/ for changes...`).start();
@@ -72,13 +76,31 @@ const { compileReact } = require("./frameworks/react.compile");
                 }
               }, 500);
 
-              let watch = watcher.subscribe(watchDir, (err, _events) => {
+              let watchSrc = watcher.subscribe(srcDir, (err, _events) => {
                 onChange(err, _events);
               });
 
-              return watch.then((subscription) => {
-                unsub = () => subscription.unsubscribe();
-              });
+              let watchScaffold = watcher.subscribe(
+                scaffoldDir,
+                (err, _events) => {
+                  onChange(err, _events);
+                }
+              );
+
+              return Promise.all([watchSrc, watchScaffold]).then(
+                (subscriptions) => {
+                  unsub = () => {
+                    subscriptions.forEach((subscription) => {
+                      if (
+                        subscription &&
+                        typeof subscription.unsubscribe === "function"
+                      ) {
+                        subscription.unsubscribe();
+                      }
+                    });
+                  };
+                }
+              );
             },
             options: {
               persistentOutput: true,

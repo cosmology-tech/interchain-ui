@@ -1,7 +1,7 @@
 import { useRef, useStore, Show, For, Fragment } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
-import { animate } from "motion";
+import anime from "animejs";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
@@ -9,9 +9,12 @@ import IconButton from "../icon-button";
 import * as styles from "./swap-price.css";
 import { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
 import { store } from "../../models/store";
+import type { AnimeInstance } from "animejs";
 
 export default function SwapPrice(props: SwapPriceProps) {
   const priceRef = useRef(null);
+  let animationRef = useRef<AnimeInstance | null>(null);
+
   const state = useStore<{
     isExpanded: boolean;
     toggleExpand: () => void;
@@ -22,17 +25,19 @@ export default function SwapPrice(props: SwapPriceProps) {
       const curStatus = !state.isExpanded;
       state.isExpanded = curStatus;
       if (curStatus) {
-        animate(
-          priceRef,
-          { maxHeight: "1000px" },
-          { duration: 0.2, easing: "ease-in-out" }
-        );
+        anime({
+          targets: [priceRef],
+          maxHeight: "1000px",
+          easing: "easeInQuint",
+          duration: 250,
+        });
       } else {
-        animate(
-          priceRef,
-          { maxHeight: "0" },
-          { duration: 0.2, easing: "ease-in-out" }
-        );
+        anime({
+          targets: [priceRef],
+          maxHeight: "0",
+          easing: "easeOutQuint",
+          duration: 250,
+        });
       }
     },
     get routesPath() {

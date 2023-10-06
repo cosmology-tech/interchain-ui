@@ -42,6 +42,8 @@ export const boxShadow = {
 
 export const themeContractTemplate = {
   colors: {
+    accent: ``,
+    accentText: ``,
     primary: ``,
     body: ``,
     background: ``,
@@ -253,6 +255,8 @@ export const commonVars = {
 export const lightThemeClass = createTheme(themeVars, {
   ...commonVars,
   colors: {
+    accent: colors.primary500,
+    accentText: "#2C3137",
     primary: colors.primary500,
     body: colors.gray800,
     background: colors.gray100,
@@ -287,6 +291,8 @@ export const lightThemeClass = createTheme(themeVars, {
 export const darkThemeClass = createTheme(themeVars, {
   ...commonVars,
   colors: {
+    accent: colors.primary400,
+    accentText: "#EEF2F8",
     primary: colors.primary400,
     body: colors.gray300,
     background: colors.gray800,

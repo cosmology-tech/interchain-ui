@@ -63,6 +63,7 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
       </Show>
 
       <p
+        id={props.id}
         className={styles.modalHeaderText[state.theme]}
         style={state.overrideManager?.applyOverrides(
           connectModalHeadTitleOverrides.name

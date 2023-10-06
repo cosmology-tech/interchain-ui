@@ -24,6 +24,7 @@ export interface SwapTokenProps {
    * Drop down list of available items
    */
   dropDownList: Array<AvailableItem>;
+  toleranceLimits?: Array<number>;
   onChange: (detail: SwapInfo) => void;
   onSwap: (event?: any) => void;
   onToleranceChange: (toterancePercent: number) => void;

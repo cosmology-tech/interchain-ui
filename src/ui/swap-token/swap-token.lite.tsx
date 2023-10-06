@@ -4,11 +4,11 @@ import {
   onMount,
   onUnMount,
   useStore,
-  Show,
+  useDefaultProps,
   For,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
-import { animate } from "motion";
+import anime from "animejs";
 import cloneDeep from "lodash/cloneDeep";
 import Stack from "../stack";
 import Text from "../text";
@@ -24,6 +24,10 @@ import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./swap-token.css";
 import { SwapTokenProps } from "./swap-token.types";
 import { AvailableItem } from "../transfer-item/transfer-item.types";
+
+useDefaultProps<Partial<SwapTokenProps>>({
+  toleranceLimits: [1, 2.5, 3, 5],
+});
 
 export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
@@ -80,27 +84,30 @@ export default function SwapToken(props: SwapTokenProps) {
     fromList: [],
     toList: [],
     toggleIcon(deg, icon) {
-      animate(
-        swapIconRef,
-        { rotate: deg },
-        { duration: 0.1, easing: "ease-in-out" }
-      );
+      anime({
+        targets: [swapIconRef],
+        rotate: deg,
+      });
       state.swapIcon = icon;
     },
     toggleToteranceStatus() {
       let curSetting: boolean = !state.isSetting;
       if (curSetting) {
-        animate(
-          toteranceRef,
-          { right: 0, opacity: 1 },
-          { duration: 0.2, easing: "ease-in-out" }
-        );
+        anime({
+          targets: [toteranceRef],
+          opacity: 1,
+          right: 0,
+          easing: "easeInQuint",
+          duration: 300,
+        });
       } else {
-        animate(
-          toteranceRef,
-          { right: "-300px", opacity: 0 },
-          { duration: 0.2, easing: "ease-in-out" }
-        );
+        anime({
+          targets: [toteranceRef],
+          opacity: 0,
+          right: -300,
+          easing: "easeOutQuint",
+          duration: 250,
+        });
       }
       state.isSetting = curSetting;
     },
@@ -287,24 +294,24 @@ export default function SwapToken(props: SwapTokenProps) {
             alignItems: "center",
           }}
         >
-          <Show when={!state.isSetting}>
-            <Stack
-              space="$7"
-              attributes={{
-                alignItems: "center",
-              }}
-            >
-              <Text color="$textSecondary" fontWeight="$bold">
-                {state.tolerance}%
-              </Text>
-              <IconButton
-                icon="settingFill"
-                size="sm"
-                intent="text"
-                onClick={(e) => state.toggleToteranceStatus()}
-              />
-            </Stack>
-          </Show>
+          <Stack
+            space="$7"
+            attributes={{
+              display: state.isSetting ? "none" : "flex",
+              alignItems: "center",
+            }}
+          >
+            <Text color="$textSecondary" fontWeight="$bold">
+              {state.tolerance}%
+            </Text>
+            <IconButton
+              icon="settingFill"
+              size="sm"
+              intent="text"
+              onClick={(e) => state.toggleToteranceStatus()}
+            />
+          </Stack>
+
           <div ref={toteranceRef} className={styles.percentContainer}>
             <Stack
               attributes={{
@@ -312,18 +319,18 @@ export default function SwapToken(props: SwapTokenProps) {
               }}
               space="$5"
             >
-              <For each={[1, 2.5, 3, 5]}>
-                {(per) => (
+              <For each={props.toleranceLimits}>
+                {(percent) => (
                   <Button
                     onClick={(e) => {
-                      state.setToterance(per);
-                      props?.onToleranceChange?.(per);
+                      state.setToterance(percent);
+                      props?.onToleranceChange?.(percent);
                     }}
-                    key={per}
+                    key={percent}
                     size="sm"
-                    intent={state.tolerance === per ? "tertiary" : "text"}
+                    intent={state.tolerance === percent ? "tertiary" : "text"}
                   >
-                    {per}%
+                    {percent}%
                   </Button>
                 )}
               </For>

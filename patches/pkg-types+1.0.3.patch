@@ -1,0 +1,12 @@
+diff --git a/node_modules/pkg-types/dist/index.cjs b/node_modules/pkg-types/dist/index.cjs
+index 36243f9..ea88a23 100644
+--- a/node_modules/pkg-types/dist/index.cjs
++++ b/node_modules/pkg-types/dist/index.cjs
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-const node_fs = require('node:fs');
++const node_fs = require('fs');
+ const pathe = require('pathe');
+ const mlly = require('mlly');
+ 
