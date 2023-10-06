@@ -52,7 +52,6 @@
     "@vanilla-extract/dynamic": "^2.0.3",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/babel-preset-app": "^5.0.8",
-    "@zag-js/dialog": "^0.15.0",
     "@zag-js/number-input": "^0.15.0",
     "@zag-js/react": "^0.15.0",
     "@zag-js/vue": "^0.15.0",

@@ -7,6 +7,7 @@ export interface ConnectModalHeadProps extends BaseComponentProps {
   onClose: (event: any) => void;
   onBack?: (event: any) => void;
   // zagjs props, will be injected through scaffold modal
+  id?: string;
   titleProps?: any;
   closeButtonProps?: any;
 }
