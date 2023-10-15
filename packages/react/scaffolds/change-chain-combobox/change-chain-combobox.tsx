@@ -63,6 +63,7 @@ export interface ChainSwapComboboxProps {
   isLoading?: boolean;
   isClearable?: boolean;
   label?: string;
+  maxHeight?: number;
   size: ChangeChainListItemProps["size"];
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
@@ -98,7 +99,11 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
         apply({ rects, availableHeight, elements }) {
           Object.assign(elements.floating.style, {
             width: `${rects.reference.width}px`,
-            maxHeight: `${availableHeight}px`,
+            maxHeight: `${
+              props.maxHeight
+                ? Math.min(availableHeight, props.maxHeight)
+                : availableHeight
+            }px`,
           });
         },
       }),
