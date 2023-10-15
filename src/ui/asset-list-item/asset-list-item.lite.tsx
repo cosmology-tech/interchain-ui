@@ -3,7 +3,6 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
-import * as styles from "./asset-list-item.css";
 import type { AssetListItemProps } from "./asset-list-item.types";
 import type { BoxProps } from "../box/box.types";
 
@@ -29,18 +28,25 @@ export default function AssetListItem(props: AssetListItemProps) {
         minWidth: "720px",
         alignItems: "center",
       }}
+      className={props.className}
     >
       <Box width="$19">
-        <img
-          src={props.imgSrc}
-          className={props.isOtherChains ? styles.smImg : styles.lgImg}
+        <Box
+          as="img"
+          attributes={{
+            src: props.imgSrc,
+          }}
+          width={props.isOtherChains ? "$10" : "$14"}
+          height={props.isOtherChains ? "$10" : "$14"}
         />
       </Box>
       <Stack attributes={{ alignItems: "center", flex: 1 }}>
         <Stack
           space="$0"
           direction="vertical"
-          className={styles.fieldContainer}
+          attributes={{
+            width: "25%",
+          }}
         >
           <Text
             fontSize={state.size}
@@ -54,7 +60,11 @@ export default function AssetListItem(props: AssetListItemProps) {
           </Text>
         </Stack>
         <Show when={props.needChainSpace}>
-          <Stack className={styles.fieldContainer}>
+          <Stack
+            attributes={{
+              width: "25%",
+            }}
+          >
             <Show when={props.isOtherChains}>
               <Text fontSize={state.size} color="$textSecondary">
                 {props.chainName}
@@ -64,8 +74,10 @@ export default function AssetListItem(props: AssetListItemProps) {
         </Show>
         <Stack
           space="$0"
-          className={styles.fieldContainer}
           direction="vertical"
+          attributes={{
+            width: "25%",
+          }}
         >
           <Text
             fontSize={state.size}
@@ -79,12 +91,16 @@ export default function AssetListItem(props: AssetListItemProps) {
           </Text>
         </Stack>
         <Show when={!props.needChainSpace}>
-          <Stack className={styles.fieldContainer}></Stack>
+          <Stack
+            attributes={{
+              width: "25%",
+            }}
+          ></Stack>
         </Show>
         <Stack
           space="$5"
-          className={styles.fieldContainer}
           attributes={{
+            width: "25%",
             justifyContent: "flex-end",
           }}
         >
