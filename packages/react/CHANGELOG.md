@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.3...@interchain-ui/react@1.11.4) (2023-10-15)
+
+### Bug Fixes
+
+- improve button accent customization and reduce dependencies ([#105](https://github.com/cosmology-tech/interchain-ui/issues/105)) ([b7e2331](https://github.com/cosmology-tech/interchain-ui/commit/b7e2331dcb8d4ae9e4f45252080e02b645e65947))
+- update web components ([#106](https://github.com/cosmology-tech/interchain-ui/issues/106)) ([3148c2b](https://github.com/cosmology-tech/interchain-ui/commit/3148c2b6481ed8e2466233cdff8ef1ddcf71a638))
+- use chain registry for stories and fix some component props to be more generic ([#107](https://github.com/cosmology-tech/interchain-ui/issues/107)) ([4526c7b](https://github.com/cosmology-tech/interchain-ui/commit/4526c7b23f7f103bb25eb24e62a5cb62f881cc0d))
+
 ## [1.11.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.2...@interchain-ui/react@1.11.3) (2023-09-28)
 
 ### Bug Fixes

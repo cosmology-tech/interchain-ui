@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.1...@interchain-ui/vue@1.2.2) (2023-10-15)
+
+### Bug Fixes
+
+- improve button accent customization and reduce dependencies ([#105](https://github.com/cosmology-tech/interchain-ui/issues/105)) ([b7e2331](https://github.com/cosmology-tech/interchain-ui/commit/b7e2331dcb8d4ae9e4f45252080e02b645e65947))
+
 ## [1.2.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.0...@interchain-ui/vue@1.2.1) (2023-08-15)
 
 **Note:** Version bump only for package @interchain-ui/vue
