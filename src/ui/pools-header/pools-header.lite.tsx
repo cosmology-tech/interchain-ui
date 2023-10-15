@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  useDefaultProps,
+  onMount,
+  onUnMount,
+  useRef,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -6,6 +12,10 @@ import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
 import type { PoolsHeaderProps } from "./pools-header.types";
 import type { ThemeVariant } from "../../models/system.model";
+
+useDefaultProps<Partial<PoolsHeaderProps>>({
+  title: "Liquidity Pools",
+});
 
 export default function PoolsHeader(props: PoolsHeaderProps) {
   const state = useStore<{ theme: ThemeVariant }>({
@@ -26,29 +36,15 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
     if (typeof cleanupRef === "function") cleanupRef();
   });
 
-  function Semocolon() {
-    return (
-      <Text
-        className={styles.semocolon}
-        as="span"
-        color="$textSecondary"
-        fontWeight="$semibold"
-        fontSize="$4xl"
-      >
-        :
-      </Text>
-    );
-  }
-
   return (
-    <Box>
+    <Box {...props.attributes} className={props.className}>
       <Text
         color="$text"
         fontSize="$xl"
         fontWeight="$semibold"
         attributes={{ marginBottom: "$10" }}
       >
-        Liquidity Pools
+        {props.title}
       </Text>
       <Stack className={styles.container} space="$10">
         <Box className={styles.baseBox}>
@@ -60,7 +56,8 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
           >
             <img
               className={styles.image}
-              src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.svg"
+              src={props.tokenData.iconUrl}
+              alt={props.tokenData.title}
             />
             <Box lineHeight="$shorter">
               <Text
@@ -69,7 +66,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 fontSize="$sm"
                 className={styles.mb3}
               >
-                OSMO Price
+                {props.tokenData.title}
               </Text>
               <Stack
                 space="$0"
@@ -86,12 +83,15 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                   $
                 </Text>
                 <Text color="$text" fontSize="$4xl" fontWeight="$semibold">
-                  {store.getState()?.formatNumber?.({ value: props.osmoPrice })}
+                  {store
+                    .getState()
+                    ?.formatNumber?.({ value: props.tokenData.price })}
                 </Text>
               </Stack>
             </Box>
           </Stack>
         </Box>
+
         <Box className={styles.baseBox}>
           <Stack
             space="$0"
@@ -107,7 +107,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               fontSize="$sm"
               className={styles.mb3}
             >
-              Reward distribution in
+              {props.rewardCountdownData.title}
             </Text>
             <Text
               color="$text"
@@ -115,7 +115,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               fontSize="$4xl"
               lineHeight="$normal"
             >
-              {props.countdown[0]}
+              {props.rewardCountdownData.hours}
               <Text
                 className={styles.semocolon}
                 as="span"
@@ -125,7 +125,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 :
               </Text>
-              {props.countdown[1]}
+              {props.rewardCountdownData.minutes}
               <Text
                 className={styles.semocolon}
                 as="span"
@@ -135,7 +135,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               >
                 :
               </Text>
-              {props.countdown[2]}
+              {props.rewardCountdownData.seconds}
             </Text>
           </Stack>
         </Box>
@@ -154,7 +154,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
               fontSize="$sm"
               className={styles.mb3}
             >
-              Yesterdays rewards
+              {props.rewardData.title}
             </Text>
             <Stack
               space="$0"
@@ -167,20 +167,20 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 fontSize="$4xl"
                 fontWeight="$semibold"
               >
-                {props.rewardsAmount}
+                {props.rewardData.rewardAmount}
               </Text>
               <Text
                 className={styles.osom}
                 color="$rewardContent"
                 fontWeight="$semibold"
               >
-                OSMO
+                {props.rewardData.rewardTokenName}
               </Text>
               <Text color="$rewardContent" className={styles.mb3}>
                 $
-                {store
-                  .getState()
-                  .formatNumber({ value: props.totalRewardPerDay })}
+                {store.getState().formatNumber({
+                  value: props.rewardData.rewardNotionalValue,
+                })}
               </Text>
             </Stack>
           </Stack>

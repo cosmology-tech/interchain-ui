@@ -7,6 +7,8 @@ export type AvatarFallbackMode = "initials" | "bg";
 export interface AvatarImageProps extends BaseComponentProps {
   src?: string;
   srcSet?: string;
+  width?: string;
+  height?: string;
   name: string;
   borderRadius?: Sprinkles["borderRadius"];
   loading?: "eager" | "lazy";

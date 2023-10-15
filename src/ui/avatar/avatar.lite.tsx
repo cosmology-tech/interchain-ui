@@ -67,6 +67,8 @@ export default function Avatar(props: AvatarProps) {
             props.onLoad?.(event);
             state.isLoaded = true;
           }}
+          width={avatarSize(props.size) as string}
+          height={avatarSize(props.size) as string}
           onError={props.onError}
           getInitials={props.getInitials}
           name={props.name}

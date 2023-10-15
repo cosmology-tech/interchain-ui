@@ -107,6 +107,8 @@ export default function AvatarImage(props: AvatarImageProps) {
           srcset={props.srcSet as any}
           alt={props.name}
           onLoad={props.onLoad}
+          width={props.width}
+          height={props.height}
           referrerPolicy={props.referrerPolicy as any}
           crossOrigin={(props.crossOrigin as any) ?? undefined}
           loading={props.loading}

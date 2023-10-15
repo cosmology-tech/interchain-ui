@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { breakpoints } from "../../styles/tokens";
 import { themeVars } from "../../styles/themes.css";
 
 export const container = style([
