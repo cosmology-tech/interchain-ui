@@ -1,4 +1,6 @@
-export interface AssetListItemProps {
+import type { BaseComponentProps } from "../../models/components.model";
+
+export interface AssetListItemProps extends BaseComponentProps {
   isOtherChains?: boolean;
   imgSrc: string;
   symbol: string;

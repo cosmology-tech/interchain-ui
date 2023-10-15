@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { AssetListItem } from "../../src";
+import { getTransferList } from "../stub/assetData";
 
 const meta: Meta<typeof AssetListItem> = {
   component: AssetListItem,
@@ -14,21 +15,22 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const item = getTransferList().find((i) => i.symbol === "ATOM");
+
 export const Primary: Story = {
   args: {
     isOtherChains: false,
-    imgSrc:
-      "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
-    symbol: "OSMO",
-    denom: "Osmosis",
+    imgSrc: item.imgSrc,
+    symbol: item.symbol,
+    denom: item.denom,
     tokenAmount: "102.61",
     tokenAmountPrice: "101.02",
     chainName: "Juno",
     onDeposit: () => {
-      console.log("onDeposit")
+      console.log("onDeposit");
     },
     onWithdraw: () => {
-      console.log("onWithdraw")
+      console.log("onWithdraw");
     },
   },
 };

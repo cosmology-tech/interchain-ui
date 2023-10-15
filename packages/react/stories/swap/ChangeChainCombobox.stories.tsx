@@ -2,6 +2,7 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ChangeChainCombobox, Box } from "../../src";
+import { getChainSwapComboboxOptions } from "../stub/chainSwapComboboxData";
 
 const meta: Meta<typeof ChangeChainCombobox> = {
   component: ChangeChainCombobox,
@@ -22,56 +23,26 @@ export const Primary: Story = {
       chainName: string;
     } | null>(null);
 
+    const options = React.useMemo(
+      () =>
+        getChainSwapComboboxOptions().map((i) => ({
+          iconUrl: i.iconUrl,
+          chainName: i.tokenName,
+        })),
+      []
+    );
+
     return (
       <Box maxWidth="350px">
         <ChangeChainCombobox
+          maxHeight={350}
           valueItem={selectedChain ? selectedChain : undefined}
           size="sm"
           onItemSelected={(item) => {
             console.log("[Story] Selected Item", item);
+            setSelectedChain(item);
           }}
-          options={[
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "ATOM",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "ZIL",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "BTC",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "ETH",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "LTC",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "RAR",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "AR",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              chainName: "BOZ",
-            },
-          ]}
+          options={options}
         />
       </Box>
     );

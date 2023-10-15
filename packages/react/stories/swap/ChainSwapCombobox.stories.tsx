@@ -2,6 +2,7 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ChainSwapCombobox, Box } from "../../src";
+import { getChainSwapComboboxOptions } from "../stub/chainSwapComboboxData";
 
 const meta: Meta<typeof ChainSwapCombobox> = {
   component: ChainSwapCombobox,
@@ -12,245 +13,51 @@ const meta: Meta<typeof ChainSwapCombobox> = {
 
 export default meta;
 
+function useChainSwapState() {
+  const options = React.useMemo(() => getChainSwapComboboxOptions(), []);
+  const [selected, setSelected] = React.useState(options[0]);
+
+  return {
+    selected,
+    setSelected,
+    options,
+  };
+}
+
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {
-    size: "md",
-    defaultSelected: {
-      iconUrl:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-      name: "Cosmos",
-      tokenName: "ATOM",
-      amount: "0.79824",
-      notionalValue: "$0.69",
-    },
-    options: [
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Cosmos",
-        tokenName: "ATOM",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Zil",
-        tokenName: "ZIL",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Bitcoin",
-        tokenName: "BTC",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Ethereum",
-        tokenName: "ETH",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Litecoin",
-        tokenName: "LTC",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "RArar",
-        tokenName: "RAR",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Areo",
-        tokenName: "AR",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Bozo",
-        tokenName: "BOZ",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-    ],
+  args: {},
+  render: (props) => {
+    const { selected, setSelected, options } = useChainSwapState();
+
+    return (
+      <ChainSwapCombobox
+        size="md"
+        maxHeight={350}
+        valueItem={selected}
+        onItemSelected={setSelected}
+        options={options}
+        defaultSelected={selected}
+      />
+    );
   },
 };
 
 export const Small: Story = {
-  args: {
-    size: "sm",
-    defaultSelected: {
-      iconUrl:
-        "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-      name: "Cosmos",
-      tokenName: "ATOM",
-      amount: "0.79824",
-      notionalValue: "$0.69",
-    },
-    options: [
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Cosmos",
-        tokenName: "ATOM",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Zil",
-        tokenName: "ZIL",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Bitcoin",
-        tokenName: "BTC",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Ethereum",
-        tokenName: "ETH",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Litecoin",
-        tokenName: "LTC",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "RArar",
-        tokenName: "RAR",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Areo",
-        tokenName: "AR",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-      {
-        iconUrl:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-        name: "Bozo",
-        tokenName: "BOZ",
-        amount: "0.79824",
-        notionalValue: "$0.69",
-      },
-    ],
-  },
+  args: {},
   render: (props) => {
+    const { selected, setSelected, options } = useChainSwapState();
+
     return (
       <Box maxWidth="260px">
         <ChainSwapCombobox
           size="sm"
-          defaultSelected={{
-            iconUrl:
-              "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-            name: "Cosmos",
-            tokenName: "ATOM",
-            amount: "0.79824",
-            notionalValue: "$0.69",
-          }}
-          options={[
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Cosmos",
-              tokenName: "ATOM",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Zil",
-              tokenName: "ZIL",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Bitcoin",
-              tokenName: "BTC",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Ethereum",
-              tokenName: "ETH",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Litecoin",
-              tokenName: "LTC",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "RArar",
-              tokenName: "RAR",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Areo",
-              tokenName: "AR",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-            {
-              iconUrl:
-                "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-              name: "Bozo",
-              tokenName: "BOZ",
-              amount: "0.79824",
-              notionalValue: "$0.69",
-            },
-          ]}
+          maxHeight={350}
+          valueItem={selected}
+          onItemSelected={setSelected}
+          options={options}
+          defaultSelected={selected}
         />
       </Box>
     );
