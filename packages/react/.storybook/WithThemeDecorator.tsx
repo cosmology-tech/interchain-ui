@@ -46,7 +46,7 @@ const WithThemeDecorator = (props) => {
         <Box
           backgroundColor={theme == "dark" ? "$gray700" : "$white"}
           px="$10"
-          py="$14"
+          py="$16"
           minHeight="700px"
           position="relative"
         >
@@ -60,7 +60,7 @@ const WithThemeDecorator = (props) => {
                 alignItems: "center",
               }}
             >
-              <Select
+              {/* <Select
                 size="sm"
                 width={180}
                 placeholder="Accent"
@@ -85,7 +85,7 @@ const WithThemeDecorator = (props) => {
                     </Stack>
                   </SelectOption>
                 ))}
-              </Select>
+              </Select> */}
               <IconButton
                 variant="ghost"
                 intent="secondary"

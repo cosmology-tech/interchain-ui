@@ -80,7 +80,7 @@ export interface ChainSwapComboboxProps {
   defaultOpen?: boolean;
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
-  className: ClassValue;
+  className?: ClassValue;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
