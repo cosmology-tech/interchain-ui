@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AssetListItem } from "../../src";
+import AssetListItem from "../../src/ui/asset-list-item";
 import { getTransferList } from "../stub/assetData";
 
 const meta: Meta<typeof AssetListItem> = {

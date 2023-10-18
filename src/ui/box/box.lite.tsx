@@ -55,7 +55,7 @@ export default function Box(props: BoxProps) {
       className={state.className}
       style={state.style}
       {...state._passThroughProps}
-      ref={props.boxRef}
+      ref={props.ref}
     >
       {props.children}
     </props.as>

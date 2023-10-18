@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolCardList } from "../../src";
+import PoolCardList from "../../src/ui/pool-card-list";
 
 const meta: Meta<typeof PoolCardList> = {
   component: PoolCardList,

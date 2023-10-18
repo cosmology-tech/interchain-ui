@@ -1,22 +1,14 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  ConnectModal,
-  Box,
-  ConnectModalQRCode,
-  ConnectModalHead,
-  ConnectModalWalletButton,
-  ConnectModalWalletList,
-  ConnectModalStatus,
-  Button,
-} from "../src";
+import Button from "../src/ui/button";
+import Box from "../src/ui/box";
+import ConnectModal from "../src/ui/connect-modal";
+import ConnectModalQRCode from "../src/ui/connect-modal-qrcode";
+import ConnectModalHead from "../src/ui/connect-modal-head";
+import ConnectModalWalletList from "../src/ui/connect-modal-wallet-list";
 import { WalletPluginSystem } from "../src/ui/connect-modal-wallet-list";
-import {
-  wallets,
-  modalStatusProps,
-  qrCodeProps,
-} from "./stub/connectWalletData";
+import { wallets, qrCodeProps } from "./stub/connectWalletData";
 
 const meta: Meta<typeof ConnectModal> = {
   component: ConnectModal,

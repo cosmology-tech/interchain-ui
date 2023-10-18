@@ -1,7 +1,9 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Box, Text, Icon } from "../src";
+import Box from "../src/ui/box";
+import Text from "../src/ui/text";
+import Icon from "../src/ui/icon";
 import { ALL_ICON_NAMES } from "../src/ui/icon/icon.types";
 
 const meta: Meta<typeof Icon> = {

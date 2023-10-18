@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AddLiquidity, BasicModal, Button } from "../../../../src";
+import Button from "../../../../src/ui/button";
+import BasicModal from "../../../../src/ui/basic-modal";
+import AddLiquidity from "../../../../src/ui/add-liquidity";
 
 const meta: Meta<typeof AddLiquidity> = {
   component: AddLiquidity,
@@ -46,16 +48,18 @@ export const Primary: Story = {
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-      <>
-        <Button onClick={() => setIsOpen(true)}>Add Liquidity</Button>
-        <BasicModal
-          isOpen={isOpen}
-          title="Add Liquidity"
-          onClose={() => setIsOpen(false)}
-        >
-          <AddLiquidity {...props} />
-        </BasicModal>
-      </>
+      <BasicModal
+        renderTrigger={(triggerProps) => (
+          <Button {...triggerProps} onClick={() => setIsOpen(true)}>
+            Add Liquidity
+          </Button>
+        )}
+        isOpen={isOpen}
+        title="Add Liquidity"
+        onClose={() => setIsOpen(false)}
+      >
+        <AddLiquidity {...props} />
+      </BasicModal>
     );
   },
 };

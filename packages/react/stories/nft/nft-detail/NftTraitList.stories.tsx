@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftTraitList } from "../../../src";
+import NftTraitList from "../../../src/ui/nft-trait-list";
 
 const meta: Meta<typeof NftTraitList> = {
   component: NftTraitList,

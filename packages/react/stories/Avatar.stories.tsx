@@ -1,8 +1,10 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Avatar, AvatarBadge, Box, Stack } from "../src";
-// import BasicModal from '../scaffolds/modal/modal'
+import Avatar from "../src/ui/avatar";
+import AvatarBadge from "../src/ui/avatar/avatar-badge";
+import Box from "../src/ui/box";
+import Stack from "../src/ui/stack";
 
 const meta: Meta<typeof Avatar> = {
   component: Avatar,

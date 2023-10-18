@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BasicModal, Button, Text } from "../src";
-// import BasicModal from '../scaffolds/modal/modal'
+import BasicModal from "../src/ui/basic-modal";
+import Button from "../src/ui/button";
+import Text from "../src/ui/text";
 
 const meta: Meta<typeof BasicModal> = {
   component: BasicModal,
@@ -21,8 +22,12 @@ export const Primary: Story = {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <div>
-        <Button onClick={() => setIsOpen(true)}>open</Button>
         <BasicModal
+          renderTrigger={(triggerProps = {}) => (
+            <Button {...triggerProps} onClick={() => setIsOpen(true)}>
+              open
+            </Button>
+          )}
           isOpen={isOpen}
           title="List for Sale"
           onClose={() => setIsOpen(false)}

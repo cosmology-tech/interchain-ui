@@ -7,9 +7,9 @@ import Button from "../button";
 import Icon from "../icon";
 import Box from "../box";
 import TokenInput from "../token-input";
-import * as styles from "./asset-item-transfer.css";
+import * as styles from "./asset-withdraw-tokens.css";
 import { store } from "../../models/store";
-import { AssetItemTransferProps } from "./asset-item-transfer.types";
+import { AssetWithdrawTokensProps } from "./asset-withdraw-tokens.types";
 import { ThemeVariant } from "../../models/system.model";
 import { truncateTextMiddle } from "../../helpers/string";
 import IconButton from "../icon-button";
@@ -17,7 +17,7 @@ import TextField from "../text-field";
 import { rootInput, inputBorderAndShadow } from "../text-field/text-field.css";
 import { standardTransitionProperties } from "../shared/shared.css";
 
-export default function AssetItemTransfer(props: AssetItemTransferProps) {
+export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
   const state = useStore<{
     theme: ThemeVariant;
     inputAmount: string;

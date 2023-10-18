@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ConnectedWallet } from "../src";
+import ConnectedWallet from "../src/ui/connected-wallet";
 
 const meta: Meta<typeof ConnectedWallet> = {
   component: ConnectedWallet,

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SwapPrice } from "../../src";
+import SwapPrice from "../../src/ui/swap-price";
 
 const meta: Meta<typeof SwapPrice> = {
   component: SwapPrice,

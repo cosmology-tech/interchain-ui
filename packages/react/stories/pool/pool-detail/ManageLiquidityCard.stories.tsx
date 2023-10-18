@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ManageLiquidityCard } from "../../../src";
+import ManageLiquidityCard from "../../../src/ui/manage-liquidity-card";
 
 const meta: Meta<typeof ManageLiquidityCard> = {
   component: ManageLiquidityCard,

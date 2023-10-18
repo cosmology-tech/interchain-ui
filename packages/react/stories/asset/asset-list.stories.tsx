@@ -1,8 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AssetList } from "../../src";
-import { AssetListItemProps } from "../../src/ui/asset-list-item/asset-list-item.types";
+import AssetList from "../../src/ui/asset-list";
 
 const meta: Meta<typeof AssetList> = {
   component: AssetList,
@@ -29,10 +28,10 @@ export const Primary: Story = {
         tokenAmountPrice: "10",
         chainName: "Juno",
         onDeposit: () => {
-          console.log("onDeposit")
+          console.log("onDeposit");
         },
         onWithdraw: () => {
-          console.log("onWithdraw")
+          console.log("onWithdraw");
         },
       },
       {
@@ -45,12 +44,12 @@ export const Primary: Story = {
         tokenAmountPrice: "101.02",
         chainName: "Juno",
         onDeposit: () => {
-          console.log("onDeposit")
+          console.log("onDeposit");
         },
         onWithdraw: () => {
-          console.log("onWithdraw")
+          console.log("onWithdraw");
         },
       },
-    ]
+    ],
   },
 };

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolInfoHeader } from "../../../src";
+import PoolInfoHeader from "../../../src/ui/pool-info-header";
 
 const meta: Meta<typeof PoolInfoHeader> = {
   component: PoolInfoHeader,

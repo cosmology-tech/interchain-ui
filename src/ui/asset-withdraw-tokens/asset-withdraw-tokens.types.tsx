@@ -1,6 +1,8 @@
-import { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { BaseComponentProps } from "../../models/components.model";
+import type { AvailableItem } from "../transfer-item/transfer-item.types";
 
-export interface AssetItemTransferProps {
+export interface AssetWithdrawTokensProps extends BaseComponentProps {
+  isDropdown?: boolean;
   fromSymbol: AvailableItem["symbol"];
   fromDenom: AvailableItem["denom"];
   fromAddress: string;

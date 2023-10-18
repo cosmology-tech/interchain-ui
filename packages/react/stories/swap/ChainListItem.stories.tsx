@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ChainListItem } from "../../src";
+import ChainListItem from "../../src/ui/chain-list-item";
 
 const meta: Meta<typeof ChainListItem> = {
   component: ChainListItem,

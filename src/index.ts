@@ -1,9 +1,4 @@
 /// <reference types="./app-env" />
-import { setPlatform, Platform } from "./helpers";
-
-export { setDebugLevel, DebugLevel } from "./helpers";
-export { store } from "./models/store";
-
 export type { UIStore, UIState, UIAction } from "./models/store";
 export type {
   Intent,
@@ -109,8 +104,8 @@ export type {
 } from "./ui/single-chain/single-chain.types";
 export { default as OverviewTransfer } from "./ui/overview-transfer";
 export type { OverviewTransferProps } from "./ui/overview-transfer/overview-transfer.types";
-export { default as AssetItemTransfer } from "./ui/asset-item-transfer";
-export type { AssetItemTransferProps } from "./ui/asset-item-transfer/asset-item-transfer.types";
+export { default as AssetWithdrawTokens } from "./ui/asset-withdraw-tokens";
+export type { AssetWithdrawTokensProps } from "./ui/asset-withdraw-tokens/asset-withdraw-tokens.types";
 export { default as NftMint } from "./ui/nft-mint";
 export type { NftMintProps } from "./ui/nft-mint/nft-mint.types";
 export { default as NftProfileCard } from "./ui/nft-profile-card";
@@ -220,5 +215,3 @@ export type { ChangeChainListItemProps } from "./ui/change-chain-list-item/chang
 export { default as ChangeChainInput } from "./ui/change-chain-input";
 export type { ChangeChainInputProps } from "./ui/change-chain-input/change-chain-input.types";
 // End Components
-
-setPlatform(Platform.Default);

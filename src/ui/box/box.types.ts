@@ -8,7 +8,7 @@ export type BoxProps = Resolve<Sprinkles> & {
   children?: any;
   attributes?: any;
   style?: any;
-  boxRef?: any;
+  ref?: any;
 };
 
 export const DEFAULT_VALUES = {

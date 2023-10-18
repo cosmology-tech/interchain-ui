@@ -35,12 +35,10 @@ export default function Button(props: ButtonProps) {
   });
 
   const state = useStore<{
-    loaded: boolean;
     theme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
     getVars: () => UnknownRecord;
   }>({
-    loaded: false,
     overrideManager: null,
     theme: "light",
     getVars() {
@@ -63,7 +61,6 @@ export default function Button(props: ButtonProps) {
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.loaded = true;
     state.theme = store.getState().theme;
     state.themeAccent = store.getState().themeAccent;
     state.overrideManager = store.getState().overrideStyleManager;
@@ -80,67 +77,66 @@ export default function Button(props: ButtonProps) {
   });
 
   return (
-    <Show when={state.loaded}>
-      <Box
-        as="button"
-        {...props.attributes}
-        className={clx(
-          styles.buttonSize[props.size],
-          recipe({
-            variant: props.variant,
-            intent: props.intent,
-            isDisabled: props.disabled || props.isLoading,
-            theme: state.theme as ThemeVariant,
-          }),
-          props.className
-        )}
-        attributes={{
-          onClick: (event) => props.onClick?.(event),
-          onMouseEnter: (event) => props.onHoverStart?.(event),
-          onMouseLeave: (event) => props.onHoverEnd?.(event),
-          disabled: props.disabled,
-          style: state.getVars(),
-          ...props.domAttributes,
-        }}
-      >
-        <Show when={props.isLoading && props.spinnerPlacement === "start"}>
-          <Spinner
-            size={props.iconSize}
-            attributes={{
-              marginRight: !props.children ? "$0" : "$2",
-            }}
-          />
-        </Show>
-        <Show when={!!props.leftIcon}>
-          <Icon
-            name={props.leftIcon}
-            size={props.iconSize}
-            attributes={{
-              marginRight: !props.children ? "$0" : "$2",
-            }}
-          />
-        </Show>
+    <Box
+      as="button"
+      ref={props.ref}
+      {...props.attributes}
+      className={clx(
+        styles.buttonSize[props.size],
+        recipe({
+          variant: props.variant,
+          intent: props.intent,
+          isDisabled: props.disabled || props.isLoading,
+          theme: state.theme as ThemeVariant,
+        }),
+        props.className
+      )}
+      attributes={{
+        onClick: (event) => props.onClick?.(event),
+        onMouseEnter: (event) => props.onHoverStart?.(event),
+        onMouseLeave: (event) => props.onHoverEnd?.(event),
+        disabled: props.disabled,
+        style: state.getVars(),
+        ...props.domAttributes,
+      }}
+    >
+      <Show when={props.isLoading && props.spinnerPlacement === "start"}>
+        <Spinner
+          size={props.iconSize}
+          attributes={{
+            marginRight: !props.children ? "$0" : "$2",
+          }}
+        />
+      </Show>
+      <Show when={!!props.leftIcon}>
+        <Icon
+          name={props.leftIcon}
+          size={props.iconSize}
+          attributes={{
+            marginRight: !props.children ? "$0" : "$2",
+          }}
+        />
+      </Show>
 
-        {props.children}
+      {props.children}
 
-        <Show when={!!props.rightIcon}>
-          <Icon
-            name={props.rightIcon}
-            size={props.iconSize}
-            attributes={{
-              marginLeft: !props.children ? "$0" : "$2",
-            }}
-          />
-        </Show>
-        <Show when={props.isLoading && props.spinnerPlacement === "end"}>
-          <Spinner
-            size={props.iconSize}
-            attributes={{
-              marginRight: !props.children ? "$0" : "$2",
-            }}
-          />
-        </Show>
-      </Box>
-    </Show>
+      <Show when={!!props.rightIcon}>
+        <Icon
+          name={props.rightIcon}
+          size={props.iconSize}
+          attributes={{
+            marginLeft: !props.children ? "$0" : "$2",
+          }}
+        />
+      </Show>
+      <Show when={props.isLoading && props.spinnerPlacement === "end"}>
+        <Spinner
+          size={props.iconSize}
+          attributes={{
+            marginRight: !props.children ? "$0" : "$2",
+          }}
+        />
+      </Show>
+    </Box>
   );
 }

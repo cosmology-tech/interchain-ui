@@ -1,7 +1,11 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Stack, Button, Toast, Toaster, toast } from "../src";
+import Stack from "../src/ui/stack";
+import Button from "../src/ui/button";
+import Toast from "../src/ui/toast";
+import Toaster from "../src/ui/toast/toaster";
+import { toast } from "../src/ui/toast/toast.state";
 
 const meta: Meta<typeof Toast> = {
   component: Toast,

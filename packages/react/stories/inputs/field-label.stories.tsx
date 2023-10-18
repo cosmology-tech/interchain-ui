@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { FieldLabel } from "../../src";
+import FieldLabel from "../../src/ui/field-label";
 
 const meta: Meta<typeof FieldLabel> = {
   component: FieldLabel,

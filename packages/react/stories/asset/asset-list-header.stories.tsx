@@ -1,8 +1,6 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AssetListHeader } from "../../src";
-import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
+import AssetListHeader from "../../src/ui/asset-list-header";
 
 const meta: Meta<typeof AssetListHeader> = {
   component: AssetListHeader,

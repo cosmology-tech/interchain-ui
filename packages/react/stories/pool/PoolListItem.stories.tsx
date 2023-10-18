@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolListItem } from "../../src";
+import PoolListItem from "../../src/ui/pool-list-item";
 
 const meta: Meta<typeof PoolListItem> = {
   component: PoolListItem,
@@ -40,8 +40,8 @@ export const Primary: Story = {
     liquidity: "29422809",
     volume24H: 3288612,
     fees7D: 59075,
-    onClick:() => {
-      console.log("onClick")
-    }
+    onClick: () => {
+      console.log("onClick");
+    },
   },
 };

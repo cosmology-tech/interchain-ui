@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { StarText } from "../../src";
+import StarText from "../../src/ui/star-text";
 
 const meta: Meta<typeof StarText> = {
   component: StarText,
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     label: "Floor price",
-    value: 100
-  }
+    value: 100,
+  },
 };

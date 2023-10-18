@@ -128,7 +128,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       pt="$8"
       position="relative"
       className={props.className}
-      boxRef={props.forwardedRef}
+      ref={props.forwardedRef}
       {...props.attributes}
       {...props.domAttributes}
     >

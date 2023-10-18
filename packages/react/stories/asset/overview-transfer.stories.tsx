@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { OverviewTransfer, BasicModal, Button, Stack } from "../../src";
+import Button from "../../src/ui/button";
+import BasicModal from "../../src/ui/basic-modal";
+import Stack from "../../src/ui/stack";
+import OverviewTransfer from "../../src/ui/overview-transfer";
 
 const meta: Meta<typeof OverviewTransfer> = {
   component: OverviewTransfer,
@@ -57,12 +60,13 @@ export const Primary: Story = {
     const [isDepositOpen, setIsDepositOpen] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
     return (
-      <>
-        <Stack space="$10">
-          <Button onClick={() => setIsDepositOpen(true)}>Deposit</Button>
-          <Button onClick={() => setIsWithdrawOpen(true)}>Withdraw</Button>
-        </Stack>
+      <Stack space="$10">
         <BasicModal
+          renderTrigger={(triggerProps) => (
+            <Button {...triggerProps} onClick={() => setIsDepositOpen(true)}>
+              Deposit
+            </Button>
+          )}
           isOpen={isDepositOpen}
           title="Deposit"
           onClose={() => setIsDepositOpen(false)}
@@ -70,13 +74,18 @@ export const Primary: Story = {
           <OverviewTransfer {...props} />
         </BasicModal>
         <BasicModal
+          renderTrigger={(triggerProps) => (
+            <Button {...triggerProps} onClick={() => setIsWithdrawOpen(true)}>
+              Withdraw
+            </Button>
+          )}
           isOpen={isWithdrawOpen}
           title="Withdraw"
           onClose={() => setIsWithdrawOpen(false)}
         >
           <OverviewTransfer {...props} />
         </BasicModal>
-      </>
+      </Stack>
     );
   },
 };

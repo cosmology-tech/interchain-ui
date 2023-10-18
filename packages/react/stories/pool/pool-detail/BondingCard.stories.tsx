@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BondingCard } from "../../../src";
+import BondingCard from "../../../src/ui/bonding-card";
 
 const meta: Meta<typeof BondingCard> = {
   component: BondingCard,
@@ -18,6 +18,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     title: "a day bonding",
-    value: "20.24%"
+    value: "20.24%",
   },
 };

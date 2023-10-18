@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftTransfer } from "../../../src";
+import NftTransfer from "../../../src/ui/nft-transfer";
 
 const meta: Meta<typeof NftTransfer> = {
   component: NftTransfer,

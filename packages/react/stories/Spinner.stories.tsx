@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Spinner } from "../src";
+import Spinner from "../src/ui/spinner";
 
 const meta: Meta<typeof Spinner> = {
   component: Spinner,

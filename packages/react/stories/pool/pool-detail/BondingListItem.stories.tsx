@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BondingListItem } from "../../../src";
+import BondingListItem from "../../../src/ui/bonding-list-item";
 
 const meta: Meta<typeof BondingListItem> = {
   component: BondingListItem,

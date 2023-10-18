@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftProfileCard } from "../../src";
+import NftProfileCard from "../../src/ui/nft-profile-card";
 
 const meta: Meta<typeof NftProfileCard> = {
   component: NftProfileCard,

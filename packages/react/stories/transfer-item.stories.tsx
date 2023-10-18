@@ -1,7 +1,8 @@
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { getTransferList } from "./stub/assetData";
 
-import { TransferItem } from "../src";
+import TransferItem from "../src/ui/transfer-item";
 
 const meta: Meta<typeof TransferItem> = {
   component: TransferItem,
