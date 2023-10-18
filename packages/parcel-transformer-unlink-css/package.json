@@ -14,7 +14,7 @@
     "lib"
   ],
   "engines": {
-    "parcel": "^2.9.3"
+    "parcel": "^2.10.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -28,7 +28,7 @@
     "url": "https://github.com/cosmology-tech/ui-kit/issues"
   },
   "dependencies": {
-    "@parcel/plugin": "^2.9.3",
-    "@parcel/utils": "^2.9.3"
+    "@parcel/plugin": "^2.10.0",
+    "@parcel/utils": "^2.10.0"
   }
 }
