@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SelectButton } from "../../src";
+import SelectButton from "../../src/ui/select-button";
 
 const meta: Meta<typeof SelectButton> = {
   component: SelectButton,
@@ -16,8 +16,6 @@ type Story = StoryObj<typeof meta>;
 /* This is Default SelectButton */
 export const Default: Story = {
   args: {
-    fieldId: "name",
-    label: "Select name",
     placeholder: "Select a name option",
     onClick: () => {
       console.log("Clicked");

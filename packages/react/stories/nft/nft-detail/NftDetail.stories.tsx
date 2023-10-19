@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftDetail } from "../../../src";
+import NftDetail from "../../../src/ui/nft-detail";
 
 const meta: Meta<typeof NftDetail> = {
   component: NftDetail,

@@ -1,7 +1,9 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ShowMore, Stack, Box, Text } from "../src";
+import ShowMore from "../src/ui/show-more";
+import Stack from "../src/ui/stack";
+import Text from "../src/ui/text";
 
 const meta: Meta<typeof ShowMore> = {
   component: ShowMore,
@@ -19,7 +21,7 @@ export const Primary: Story = {
     children: (
       <Stack direction="vertical" space="5">
         {Array.from(Array(10).keys()).map((item, i) => (
-          <Text color="text" size="4xl" weight="semibold">
+          <Text color="$text" fontSize="$4xl" fontWeight="$semibold">
             {" "}
             {i + 1}{" "}
           </Text>
@@ -28,6 +30,6 @@ export const Primary: Story = {
     ),
     showMoreTitle: "Show more",
     showLessTitle: "Show less",
-    heightToShowMore: 100
+    heightToShowMore: 100,
   },
 };

@@ -1,7 +1,11 @@
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-
-import { StakingAssetHeader, Stack, Text, StakingClaimHeader, ValidatorList } from "../../src";
+import Text from "../../src/ui/text";
+import Stack from "../../src/ui/stack";
+import StakingAssetHeader from "../../src/ui/staking-asset-header";
+import StakingClaimHeader from "../../src/ui/staking-claim-header";
+import ValidatorList from "../../src/ui/validator-list";
 
 const meta: Meta = {
   title: "staking/Staking",
@@ -161,34 +165,32 @@ export const Primary: Story = {
     ],
   },
   render: (props) => {
-    return <Stack  direction="vertical" attributes={{maxWidth: "634px"}}>
-    <Text fontSize="$xl" fontWeight="$semibold" >
-      Staking
-    </Text>
-    <StakingAssetHeader {...props.assetHeader}
-    />
-    <StakingClaimHeader {...props.claimHeader}
-    />
-    <Text
-      color="$textSecondary"
-      fontSize="$lg"
-      fontWeight="$semibold"
-      attributes={{ marginBottom: "$9" }}
-    >
-      Your Validators
-    </Text>
-    <ValidatorList list={props.selfValidators} selfValidator={true} />
-    <Text
-      color="$textSecondary"
-      fontSize="$lg"
-      fontWeight="$semibold"
-      attributes={{ my: "$12" }}
-    >
-      All Validators
-    </Text>
-    <ValidatorList list={props.allValidators} selfValidator={false} />
-  </Stack>
-
-  }
+    return (
+      <Stack direction="vertical" attributes={{ maxWidth: "634px" }}>
+        <Text fontSize="$xl" fontWeight="$semibold">
+          Staking
+        </Text>
+        <StakingAssetHeader {...props.assetHeader} />
+        <StakingClaimHeader {...props.claimHeader} />
+        <Text
+          color="$textSecondary"
+          fontSize="$lg"
+          fontWeight="$semibold"
+          attributes={{ marginBottom: "$9" }}
+        >
+          Your Validators
+        </Text>
+        <ValidatorList list={props.selfValidators} selfValidator={true} />
+        <Text
+          color="$textSecondary"
+          fontSize="$lg"
+          fontWeight="$semibold"
+          attributes={{ my: "$12" }}
+        >
+          All Validators
+        </Text>
+        <ValidatorList list={props.allValidators} selfValidator={false} />
+      </Stack>
+    );
+  },
 };
-

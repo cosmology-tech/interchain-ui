@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftDetailActivityListItem } from "../../../src";
+import NftDetailActivityListItem from "../../../src/ui/nft-detail-activity-list-item";
 
 const meta: Meta<typeof NftDetailActivityListItem> = {
   component: NftDetailActivityListItem,
@@ -18,6 +18,6 @@ export const Primary: Story = {
     price: 200,
     event: "List",
     from: "shane.stars",
-    date: "12 days ago"
-  }
+    date: "12 days ago",
+  },
 };

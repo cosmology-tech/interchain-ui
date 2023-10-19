@@ -1,5 +1,5 @@
 import React from "react";
-import { usePopoverContext } from "../popover/popover";
+import { usePopoverContext } from "../popover/popover.context";
 import * as styles from "./popover-trigger.css";
 
 export interface PopoverTriggerProps {

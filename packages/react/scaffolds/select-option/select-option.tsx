@@ -3,7 +3,7 @@ import clx from "clsx";
 import { useListItem } from "@floating-ui/react";
 import ListItem from "@/ui/list-item";
 import { baseButton } from "@/ui/button/button.css";
-import { SelectContext } from "../select/select";
+import { SelectContext } from "../select/select.context";
 
 export interface SelectOptionProps {
   label: string;

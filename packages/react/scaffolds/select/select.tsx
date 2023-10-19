@@ -27,19 +27,9 @@ import {
   listboxStyle,
   selectFullWidth,
 } from "./select.css";
+import { SelectContext } from "./select.context";
 
 const DEFAULT_LIST_WIDTH = "220";
-
-interface SelectContextValue {
-  activeIndex: number | null;
-  selectedIndex: number | null;
-  getItemProps: ReturnType<typeof useInteractions>["getItemProps"];
-  handleSelect: (index: number | null) => void;
-}
-
-export const SelectContext = React.createContext<SelectContextValue>(
-  {} as SelectContextValue
-);
 
 function useMeasure() {
   const ref = React.useRef<HTMLDivElement | null>(null);

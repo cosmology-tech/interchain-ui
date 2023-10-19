@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import useAssetList from "../stub/hooks/useAssetList";
-import { AssetItemTransfer, BasicModal, Button, Stack } from "../../src";
+import AssetWithdrawTokens from "../../src/ui/asset-withdraw-tokens";
+import BasicModal from "../../src/ui/basic-modal";
+import Button from "../../src/ui/button";
+import Stack from "../../src/ui/stack";
 
-const meta: Meta<typeof AssetItemTransfer> = {
-  component: AssetItemTransfer,
-  title: "Asset/AssetItemTransfer",
+const meta: Meta<typeof AssetWithdrawTokens> = {
+  component: AssetWithdrawTokens,
+  title: "Asset/WithdrawTokens",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -74,27 +77,34 @@ export const Primary: Story = {
           toItem?.logo_URIs?.svg,
       });
     }, []);
+
     return (
-      <>
-        <Stack space="$10">
-          <Button onClick={() => setIsDepositOpen(true)}>Deposit</Button>
-          <Button onClick={() => setIsWithdrawOpen(true)}>Withdraw</Button>
-        </Stack>
+      <Stack space="$10">
         <BasicModal
+          renderTrigger={(triggerProps) => (
+            <Button {...triggerProps} onClick={() => setIsDepositOpen(true)}>
+              Deposit
+            </Button>
+          )}
           isOpen={isDepositOpen}
           title="Deposit"
           onClose={() => setIsDepositOpen(false)}
         >
-          <AssetItemTransfer {...props} />
+          <AssetWithdrawTokens {...props} />
         </BasicModal>
         <BasicModal
+          renderTrigger={(triggerProps) => (
+            <Button {...triggerProps} onClick={() => setIsWithdrawOpen(true)}>
+              Withdraw
+            </Button>
+          )}
           isOpen={isWithdrawOpen}
           title="Withdraw"
           onClose={() => setIsWithdrawOpen(false)}
         >
-          <AssetItemTransfer {...Object.assign(props, fromData, toData)} />
+          <AssetWithdrawTokens {...Object.assign(props, fromData, toData)} />
         </BasicModal>
-      </>
+      </Stack>
     );
   },
 };

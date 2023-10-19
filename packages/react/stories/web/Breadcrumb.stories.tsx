@@ -1,6 +1,9 @@
 import React from "react";
-import { Box, Breadcrumb, BreadcrumbLink } from "../../src";
 import type { Meta, StoryObj } from "@storybook/react";
+
+import Box from "../../src/ui/box";
+import Breadcrumb from "../../src/ui/breadcrumb";
+import { BreadcrumbLink } from "../../src/ui/breadcrumb/breadcrumb.types";
 
 const meta: Meta<typeof Breadcrumb> = {
   component: Breadcrumb,

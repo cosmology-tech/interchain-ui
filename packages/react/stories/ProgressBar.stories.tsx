@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ProgressBar } from "../src";
+import ProgressBar from "../src/ui/progress-bar";
 
 const meta: Meta<typeof ProgressBar> = {
   component: ProgressBar,

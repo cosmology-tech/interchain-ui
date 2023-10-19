@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PoolsHeader } from "../../src";
+import PoolsHeader from "../../src/ui/pools-header";
 import { getTransferList } from "../stub/assetData";
 
 const meta: Meta<typeof PoolsHeader> = {

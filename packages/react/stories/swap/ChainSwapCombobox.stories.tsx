@@ -1,7 +1,8 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ChainSwapCombobox, Box } from "../../src";
+import Box from "../../src/ui/box";
+import ChainSwapCombobox from "../../src/ui/chain-swap-combobox";
 import { getChainSwapComboboxOptions } from "../stub/chainSwapComboboxData";
 
 const meta: Meta<typeof ChainSwapCombobox> = {

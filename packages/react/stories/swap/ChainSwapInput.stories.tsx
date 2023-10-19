@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ChainSwapInput } from "../../src";
+import ChainSwapInput from "../../src/ui/chain-swap-input";
 
 const meta: Meta<typeof ChainSwapInput> = {
   component: ChainSwapInput,

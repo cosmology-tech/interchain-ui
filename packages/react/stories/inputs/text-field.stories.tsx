@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { TextField } from "../../src";
+import TextField from "../../src/ui/text-field";
 
 const meta: Meta<typeof TextField> = {
   component: TextField,
@@ -24,9 +24,9 @@ export const Default: Story = {
   render: (props) => {
     const [val, setVal] = useState("");
     const handleChange = (e) => {
-      console.log(e)
-      setVal(e.target.value)
+      console.log(e);
+      setVal(e.target.value);
     };
-    return <TextField  {...props} onChange={handleChange} value={val} />;
+    return <TextField {...props} onChange={handleChange} value={val} />;
   },
 };

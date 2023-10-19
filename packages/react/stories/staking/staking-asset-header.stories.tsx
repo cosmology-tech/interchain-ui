@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { StakingAssetHeader } from "../../src";
+import StakingAssetHeader from "../../src/ui/staking-asset-header";
 
 const meta: Meta<typeof StakingAssetHeader> = {
   component: StakingAssetHeader,

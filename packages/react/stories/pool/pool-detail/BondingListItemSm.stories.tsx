@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { BondingListItemSm } from "../../../src";
+import BondingListItemSm from "../../../src/ui/bonding-list-item-sm";
 
 const meta: Meta<typeof BondingListItemSm> = {
   component: BondingListItemSm,
@@ -22,7 +22,7 @@ export const Primary: Story = {
     bondedShares: 0.58,
     totalApr: "2.46",
     onBond() {
-      console.log("onBond");;
+      console.log("onBond");
     },
     onUnbond() {
       console.log("onUnbond");

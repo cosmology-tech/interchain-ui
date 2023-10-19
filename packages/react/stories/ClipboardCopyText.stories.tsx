@@ -1,7 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ClipboardCopyText } from "../src";
+import ClipboardCopyText from "../src/ui/clipboard-copy-text";
 
 const meta: Meta<typeof ClipboardCopyText> = {
   component: ClipboardCopyText,

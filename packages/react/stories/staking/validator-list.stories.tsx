@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ValidatorList } from "../../src";
+import ValidatorList from "../../src/ui/validator-list";
 
 const meta: Meta<typeof ValidatorList> = {
   component: ValidatorList,

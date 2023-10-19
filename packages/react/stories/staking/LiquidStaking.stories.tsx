@@ -5,16 +5,14 @@ import strideLogo from "../../static/stride-logo.png";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import {
-  Box,
-  LiquidStaking,
-  LiquidStakingProps,
-  BasicModal,
-  Button,
-  Text,
-  Stack,
-  Icon,
-} from "../../src";
+import Box from "../../src/ui/box";
+import LiquidStaking from "../../src/ui/liquid-staking";
+import { LiquidStakingProps } from "../../src/ui/liquid-staking/liquid-staking.types";
+import BasicModal from "../../src/ui/basic-modal";
+import Button from "../../src/ui/button";
+import Text from "../../src/ui/text";
+import Stack from "../../src/ui/stack";
+import Icon from "../../src/ui/icon";
 
 const meta: Meta<typeof LiquidStaking> = {
   component: LiquidStaking,
@@ -51,8 +49,12 @@ export const Primary: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>Liquid stake</Button>
         <BasicModal
+          renderTrigger={(triggerProps) => (
+            <Button {...triggerProps} onClick={() => setIsOpen(true)}>
+              Liquid stake
+            </Button>
+          )}
           isOpen={isOpen}
           title={
             <Stack

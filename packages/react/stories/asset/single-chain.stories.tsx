@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SingleChain, ShowMore } from "../../src";
-import { SingleChainListItemProps } from "../../src/ui/single-chain/single-chain.types";
-import { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
+import SingleChain from "../../src/ui/single-chain";
 
 const meta: Meta<typeof SingleChain> = {
   component: SingleChain,

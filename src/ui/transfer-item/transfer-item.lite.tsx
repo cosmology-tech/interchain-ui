@@ -227,6 +227,7 @@ export default function TransferItem(props: TransferItemProps) {
                   <Text fontSize="$2xl">{props.amount}</Text>
                 ) : (
                   <Box>
+                    {/* @ts-ignore */}
                     <NumberInput
                       borderless
                       disabled={!!props.disabled}

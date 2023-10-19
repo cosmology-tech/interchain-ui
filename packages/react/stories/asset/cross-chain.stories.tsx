@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { CrossChain, ShowMore } from "../../src";
-import { CrossChainListItemProps } from "../../src/ui/cross-chain/cross-chain.types";
+import CrossChain from "../../src/ui/cross-chain/cross-chain";
 
 const meta: Meta<typeof CrossChain> = {
   component: CrossChain,

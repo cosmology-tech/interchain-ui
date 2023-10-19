@@ -3,7 +3,9 @@ import { getTransferList } from "../stub/assetData";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { SwapToken, BasicModal, Button } from "../../src";
+import SwapToken from "../../src/ui/swap-token";
+import BasicModal from "../../src/ui/basic-modal";
+import Button from "../../src/ui/button";
 
 const meta: Meta<typeof SwapToken> = {
   component: SwapToken,
@@ -84,16 +86,18 @@ export const Primary: Story = {
     const dropDownList = useMemo(() => getTransferList(), []);
 
     return (
-      <>
-        <Button onClick={() => setIsOpen(true)}>Swap</Button>
-        <BasicModal
-          isOpen={isOpen}
-          title="Swap"
-          onClose={() => setIsOpen(false)}
-        >
-          <SwapToken {...props} dropDownList={dropDownList} />
-        </BasicModal>
-      </>
+      <BasicModal
+        renderTrigger={(triggerProps) => (
+          <Button {...triggerProps} onClick={() => setIsOpen(true)}>
+            Swap
+          </Button>
+        )}
+        isOpen={isOpen}
+        title="Swap"
+        onClose={() => setIsOpen(false)}
+      >
+        <SwapToken {...props} dropDownList={dropDownList} />
+      </BasicModal>
     );
   },
 };

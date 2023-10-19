@@ -1,7 +1,9 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Tooltip, Icon, Stack } from "../src";
+import Tooltip from "../src/ui/tooltip";
+import Icon from "../src/ui/icon";
+import Stack from "../src/ui/stack";
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,

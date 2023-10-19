@@ -1,5 +1,4 @@
 import {
-  Show,
   useStore,
   onMount,
   onUnMount,
@@ -52,6 +51,7 @@ export default function BasicModal(props: BasicModalProps) {
       onOpen={() => props.onOpen?.()}
       onClose={() => props.onClose?.()}
       preventScroll={true}
+      renderTrigger={props.renderTrigger}
       header={
         <Stack
           className={modalHeader}

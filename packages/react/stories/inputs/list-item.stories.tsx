@@ -1,7 +1,8 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Stack, ListItem } from "../../src";
+import Stack from "../../src/ui/stack";
+import ListItem from "../../src/ui/list-item";
 
 const meta: Meta<typeof ListItem> = {
   component: ListItem,

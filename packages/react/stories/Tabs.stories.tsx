@@ -1,6 +1,7 @@
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Tabs } from "../src";
+import Tabs from "../src/ui/tabs";
 
 const meta: Meta<typeof Tabs> = {
   component: Tabs,

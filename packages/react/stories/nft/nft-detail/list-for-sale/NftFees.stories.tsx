@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { NftFees } from "../../../../src";
+import NftFees from "../../../../src/ui/nft-fees";
 
 const meta: Meta<typeof NftFees> = {
   component: NftFees,

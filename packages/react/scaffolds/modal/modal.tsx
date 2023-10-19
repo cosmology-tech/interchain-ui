@@ -24,7 +24,35 @@ interface DialogOptions {
   onOpenChange?: (open: boolean) => void;
 }
 
-export function useDialog({
+function useClickAway(cb: (e: Event) => void) {
+  const ref = React.useRef(null);
+  const refCb = React.useRef(cb);
+
+  React.useLayoutEffect(() => {
+    refCb.current = cb;
+  });
+
+  React.useEffect(() => {
+    const handler = (e: Event) => {
+      const element = ref.current;
+      if (element && !element.contains(e.target)) {
+        refCb.current(e);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, []);
+
+  return ref;
+}
+
+function useDialog({
   initialOpen = false,
   open: controlledOpen,
   closeOnClickaway,
@@ -39,6 +67,13 @@ export function useDialog({
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
 
+  const clickawayRef = useClickAway(() => {
+    if (closeOnClickaway) {
+      console.log("Clickaway");
+      setOpen(false);
+    }
+  });
+
   const data = useFloating({
     open,
     onOpenChange: setOpen,
@@ -49,17 +84,16 @@ export function useDialog({
   const click = useClick(context, {
     enabled: controlledOpen == null,
   });
-  const dismiss = useDismiss(context, { outsidePressEvent: "mousedown" });
+  const dismiss = useDismiss(context, { outsidePress: true, escapeKey: true });
   const role = useRole(context);
 
-  const interactions = useInteractions(
-    closeOnClickaway ? [click, dismiss, role] : [click, role]
-  );
+  const interactions = useInteractions([click, dismiss, role]);
 
   return React.useMemo(
     () => ({
       open,
       setOpen,
+      clickawayRef,
       ...interactions,
       ...data,
       labelId,
@@ -77,7 +111,7 @@ export interface ModalProps {
   onOpen?: (open: boolean) => void;
   onClose?: (event?: React.SyntheticEvent) => void;
   initialFocusRef?: React.MutableRefObject<any>;
-  trigger?: React.ReactElement;
+  renderTrigger?: (props: any) => React.ReactNode;
   header: React.ReactNode;
   children?: React.ReactNode;
   closeOnClickaway?: boolean;
@@ -98,7 +132,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     onOpen,
     onClose,
     children,
-    trigger,
+    renderTrigger,
     header,
     initialFocusRef,
     closeOnClickaway = true,
@@ -132,16 +166,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
   };
 
   const dialogRef = useMergeRefs([dialog.refs.setFloating, forwardedRef]);
+  const triggerProps = dialog.getReferenceProps({
+    ref: dialog.refs.setReference,
+  });
 
   return (
     <>
-      {trigger &&
-        cloneElement(
-          trigger,
-          dialog.getReferenceProps({
-            ref: dialog.refs.setReference,
-          })
-        )}
+      {typeof renderTrigger === "function" ? renderTrigger(triggerProps) : null}
 
       {dialog.open && (
         <FloatingPortal>
@@ -167,6 +198,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                 >
                   <div className={styles.modalContainer}>
                     <div
+                      ref={dialog.clickawayRef}
                       className={clx(styles.modalContent, contentClassName)}
                       data-modal-part="content"
                       style={{
