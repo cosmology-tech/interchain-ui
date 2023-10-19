@@ -7,7 +7,7 @@ import {
   FloatingArrow,
 } from "@floating-ui/react";
 
-import { usePopoverContext } from "../popover/popover";
+import { usePopoverContext } from "../popover/popover.context";
 import * as styles from "./popover-content.css";
 
 export interface PopoverContentProps {

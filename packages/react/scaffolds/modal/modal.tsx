@@ -111,7 +111,7 @@ export interface ModalProps {
   onOpen?: (open: boolean) => void;
   onClose?: (event?: React.SyntheticEvent) => void;
   initialFocusRef?: React.MutableRefObject<any>;
-  renderTrigger?: (props: any) => React.ReactElement;
+  renderTrigger?: (props: any) => React.ReactNode;
   header: React.ReactNode;
   children?: React.ReactNode;
   closeOnClickaway?: boolean;
