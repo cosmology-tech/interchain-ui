@@ -1,9 +1,14 @@
 import { ReactNode } from "react";
+import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
 
 type Value = {
   value: string;
   valueAsNumber: number;
 };
+
+type FocusChangeValue = {
+  focused: boolean;
+} & Value;
 
 export interface NumberInputProps {
   id?: string;
@@ -38,15 +43,9 @@ export interface NumberInputProps {
   /**
    * Function invoked when the number input is focused
    */
-  onFocus?: (
-    details: Value & {
-      srcElement: HTMLElement | null;
-    }
-  ) => void;
-  /**
-   * The value of the input when it is blurred
-   */
-  onBlur?: (details: Value) => void;
+  onFocus?: (details: FocusChangeValue) => void;
+  textAlign?: Sprinkles["textAlign"];
+  fontSize?: Sprinkles["fontSize"];
   size?: "sm" | "md";
   placeholder?: string | undefined;
   intent?: "default" | "error";

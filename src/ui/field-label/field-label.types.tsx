@@ -8,6 +8,6 @@ export interface FieldLabelProps extends BaseComponentProps {
   size?: "sm" | "md" | "lg";
   description?: BaseComponentProps["children"];
   descriptionId?: string;
-  data?: any;
   attributes?: any;
+  labelAttributes?: any;
 }

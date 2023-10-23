@@ -21,7 +21,7 @@
     "@vanilla-extract/css": "^1.12.0",
     "@vanilla-extract/dynamic": "^2.0.3",
     "@vanilla-extract/recipes": "^0.4.0",
-    "@zag-js/vue": "^0.2.10",
+    "@zag-js/vue": "^0.26.0",
     "animejs": "^3.2.1",
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",

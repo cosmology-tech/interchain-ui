@@ -1,11 +1,12 @@
 import { style } from "@vanilla-extract/css";
 
 export const borderless = style({
-  border: "0",
-  padding: "0",
+  border: "0 !important",
+  paddingTop: "0 !important",
+  paddingBottom: "0 !important",
   selectors: {
     "&:focus": {
-      boxShadow: "none",
+      boxShadow: "none !important",
     },
   },
 });
