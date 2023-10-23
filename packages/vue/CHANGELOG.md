@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.2...@interchain-ui/vue@1.2.3) (2023-10-23)
+
+### Bug Fixes
+
+- number input borderless and typography props, upgrade deps ([#109](https://github.com/cosmology-tech/interchain-ui/issues/109)) ([4e99963](https://github.com/cosmology-tech/interchain-ui/commit/4e999638cbce0a9705d54f57ee5bcfe4836ca1eb))
+
 ## [1.2.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.1...@interchain-ui/vue@1.2.2) (2023-10-15)
 
 ### Bug Fixes

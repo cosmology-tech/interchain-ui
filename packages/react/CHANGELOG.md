@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.4...@interchain-ui/react@1.11.5) (2023-10-23)
+
+### Bug Fixes
+
+- improve dev speed ([#108](https://github.com/cosmology-tech/interchain-ui/issues/108)) ([571450f](https://github.com/cosmology-tech/interchain-ui/commit/571450fe5374d483ea376d37bb14054f0a1ebdfd))
+- number input borderless and typography props, upgrade deps ([#109](https://github.com/cosmology-tech/interchain-ui/issues/109)) ([4e99963](https://github.com/cosmology-tech/interchain-ui/commit/4e999638cbce0a9705d54f57ee5bcfe4836ca1eb))
+
 ## [1.11.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.3...@interchain-ui/react@1.11.4) (2023-10-15)
 
 ### Bug Fixes
