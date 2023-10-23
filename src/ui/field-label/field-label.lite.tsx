@@ -18,7 +18,11 @@ export default function FieldLabel(props: FieldLabelProps) {
             <Show
               when={props.htmlFor === false}
               else={
-                <label id={props.id} htmlFor={props.htmlFor as any}>
+                <label
+                  id={props.id}
+                  htmlFor={props.htmlFor as any}
+                  {...props.labelAttributes}
+                >
                   <span
                     className={clx(
                       fieldlabelStyle,
@@ -30,7 +34,10 @@ export default function FieldLabel(props: FieldLabelProps) {
                 </label>
               }
             >
-              <p className={clx(fieldlabelStyle, fieldLabelSizes[props.size])}>
+              <p
+                className={clx(fieldlabelStyle, fieldLabelSizes[props.size])}
+                {...props.labelAttributes}
+              >
                 <span>{props.label}</span>
               </p>
             </Show>

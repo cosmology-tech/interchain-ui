@@ -1,4 +1,4 @@
-import React, { useId, useEffect, forwardRef } from "react";
+import React, { useId, forwardRef } from "react";
 import clx from "clsx";
 import * as numberInput from "@zag-js/number-input";
 import { useMachine, normalizeProps } from "@zag-js/react";
@@ -11,6 +11,9 @@ import {
   rootInput,
   rootInputFocused,
 } from "@/ui/text-field/text-field.css";
+import FieldLabel from "@/ui/field-label";
+import Stack from "@/ui/stack";
+import Box from "@/ui/box";
 import useTheme from "../hooks/use-theme";
 import * as styles from "./number-input.css";
 
@@ -18,6 +21,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (props, forwardedRef) => {
     const {
       id = useId(),
+      label,
       disabled,
       readOnly,
       value,
@@ -26,7 +30,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       step,
       onChange,
       onFocus,
-      onBlur,
       size = "sm",
       intent = "default",
       name,
@@ -35,6 +38,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     } = props;
 
     const { theme } = useTheme();
+
     const [state, send] = useMachine(
       numberInput.machine({
         id,
@@ -45,65 +49,65 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         max,
         step,
         name,
-        minFractionDigits,
-        maxFractionDigits,
-        onChange: (details) => {
-          onChange?.(details);
+        formatOptions: {
+          maximumFractionDigits: maxFractionDigits,
+          minimumFractionDigits: minFractionDigits,
         },
-        onFocus: (details) => {
-          onFocus?.(details);
-        },
-        onBlur: (details) => {
-          onBlur?.(details);
-        },
+        onValueChange: onChange,
+        onFocusChange: onFocus,
       })
     );
 
     const api = numberInput.connect(state, send, normalizeProps);
 
-    useEffect(() => {
-      if (!api.isFocused && value) {
-        api.setValue(value);
-      }
-    }, [value]);
-
     return (
       <div {...api.rootProps} className={props?.className}>
-        <div
-          className={clx(
-            rootInput,
-            api.isFocused ? rootInputFocused : null,
-            props.disabled
-              ? inputRootIntent.disabled
-              : inputRootIntent[props.intent],
-            props.inputContainer
+        <Stack direction="vertical" space="$4">
+          {label && (
+            <FieldLabel htmlFor={id} label={label} {...api.labelProps} />
           )}
-        >
-          {props.canDecrese && React.isValidElement(props.startAddon)
-            ? React.cloneElement(props.startAddon, api.decrementTriggerProps)
-            : props?.startAddon}
 
-          <input
-            {...api.inputProps}
-            ref={forwardedRef}
-            disabled={disabled}
-            id={id}
-            value={value}
+          <div
             className={clx(
-              inputStyles[theme],
-              inputSizes[size],
-              props.disabled ? inputIntent.disabled : inputIntent[intent],
-              props.inputClassName,
-              props.borderless && styles.borderless,
-              disabled && props.startAddon ? styles.withStartAddon : null,
-              disabled && props.endAddon ? styles.withEndAddon : null
+              rootInput,
+              api.isFocused ? rootInputFocused : null,
+              props.disabled
+                ? inputRootIntent.disabled
+                : inputRootIntent[props.intent],
+              props.inputContainer
             )}
-          />
+          >
+            {props.canDecrese && React.isValidElement(props.startAddon)
+              ? React.cloneElement(props.startAddon, api.decrementTriggerProps)
+              : props?.startAddon}
 
-          {props.canIncrease && React.isValidElement(props.endAddon)
-            ? React.cloneElement(props.endAddon, api.decrementTriggerProps)
-            : props?.endAddon}
-        </div>
+            <Box
+              as="input"
+              attributes={{
+                ...api.inputProps,
+                id,
+                disabled,
+                value,
+              }}
+              ref={forwardedRef}
+              textAlign={props.textAlign}
+              fontSize={props.fontSize}
+              className={clx(
+                inputStyles[theme],
+                inputSizes[size],
+                props.disabled ? inputIntent.disabled : inputIntent[intent],
+                props.inputClassName,
+                props.borderless && styles.borderless,
+                disabled && props.startAddon ? styles.withStartAddon : null,
+                disabled && props.endAddon ? styles.withEndAddon : null
+              )}
+            />
+
+            {props.canIncrease && React.isValidElement(props.endAddon)
+              ? React.cloneElement(props.endAddon, api.decrementTriggerProps)
+              : props?.endAddon}
+          </div>
+        </Stack>
       </div>
     );
   }
