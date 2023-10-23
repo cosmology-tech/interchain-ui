@@ -67,6 +67,11 @@ export const ALL_ICON_NAMES = [
   "externalLinkLine",
   "timeLine",
   "arrowDownload",
+  "phone",
+  "tablet",
+  "desktop",
+  "search",
+  "menuBar",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];
