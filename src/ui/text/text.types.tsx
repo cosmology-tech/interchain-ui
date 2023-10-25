@@ -16,6 +16,7 @@ export interface TextProps extends BaseComponentProps {
     | "p"
     | "span";
   color?: Sprinkles["color"];
+  fontFamily?: Sprinkles["fontFamily"];
   fontSize?: Sprinkles["fontSize"];
   fontWeight?: Sprinkles["fontWeight"];
   letterSpacing?: Sprinkles["letterSpacing"];

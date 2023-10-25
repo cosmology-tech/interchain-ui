@@ -26,6 +26,7 @@ export default function Text(props: TextProps) {
       })}
       className={props.className}
       color={props.color}
+      fontFamily={props.fontFamily}
       fontSize={props.fontSize}
       fontWeight={props.fontWeight}
       letterSpacing={props.letterSpacing}
