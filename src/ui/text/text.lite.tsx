@@ -19,14 +19,13 @@ export default function Text(props: TextProps) {
       {...props.attributes}
       {...props.domAttributes}
       as={props.as}
-      {...getVariantStyles(props.variant ?? "body")}
+      {...getVariantStyles(props.variant ?? "body", props.fontFamily)}
       {...getTextTransformStyles({
         ellipsis: props.ellipsis,
         underline: props.underline,
       })}
       className={props.className}
       color={props.color}
-      fontFamily={props.fontFamily}
       fontSize={props.fontSize}
       fontWeight={props.fontWeight}
       letterSpacing={props.letterSpacing}
