@@ -6,11 +6,13 @@ import { themeVars } from "../../styles/themes.css";
 const variant = {
   body: style({
     fontSize: themeVars.fontSize.sm,
+    color: themeVars.colors.text,
     fontWeight: themeVars.fontWeight.normal,
     lineHeight: themeVars.lineHeight.normal,
   }),
   heading: style({
     fontSize: themeVars.fontSize.md,
+    color: themeVars.colors.text,
     fontWeight: themeVars.fontWeight.semibold,
     lineHeight: themeVars.lineHeight.tall,
   }),
