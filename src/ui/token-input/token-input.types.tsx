@@ -5,9 +5,9 @@ import type { IconName } from "../icon/icon.types";
 import type { LiteralUnion } from "type-fest";
 
 export interface TokenInputProps {
-  attributes?: BoxProps["attributes"]
+  attributes?: BoxProps["attributes"];
   progress?: number;
-  amount?: string;
+  amount?: number;
   symbol?: AvailableItem["symbol"];
   denom?: AvailableItem["denom"];
   available?: AvailableItem["available"];
@@ -17,8 +17,8 @@ export interface TokenInputProps {
   hasProgressBar?: boolean;
   availableAsMax?: boolean;
   onProgressChange?: (progress: number) => void;
-  onAmountChange?: (value: string) => void;
-  onFocus?: (e: any) => void;
+  onAmountChange?: (value: number) => void;
+  onFocus?: (e?: any) => void;
   inputClass?: ClassValue;
   imgClass?: ClassValue;
 }

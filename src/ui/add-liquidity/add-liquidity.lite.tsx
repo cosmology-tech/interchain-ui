@@ -21,8 +21,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
   const state = useStore<{
     progress1: number;
     progress2: number;
-    amount1: string;
-    amount2: string;
+    amount1: number;
+    amount2: number;
     btnText: string;
     disabled: boolean;
     isInsufficient: boolean;
@@ -37,8 +37,8 @@ export default function AddLiquidity(props: AddLiquidityProps) {
   }>({
     progress1: 50,
     progress2: 50,
-    amount1: "",
-    amount2: "",
+    amount1: 0,
+    amount2: 0,
     btnText: "Add liquidity",
     disabled: true,
     onChangeHandler(values) {
@@ -116,10 +116,10 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       let value1 = value;
       let value2 = state.amount2;
       if (state.progress1 === 50) {
-        value2 = new BigNumber(value || 0)
+        value2 = new BigNumber(`${value || 0}`)
           .multipliedBy(props?.poolAssets[0]?.priceDisplayAmount || 0)
           .dividedBy(props?.poolAssets[1]?.priceDisplayAmount)
-          .toString();
+          .toNumber();
       }
       state.onChangeHandler([
         {
@@ -139,10 +139,10 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       let value2 = value;
       let value1 = state.amount1;
       if (state.progress2 === 50) {
-        value1 = new BigNumber(value || 0)
+        value1 = new BigNumber(`${value || 0}`)
           .multipliedBy(props?.poolAssets[1]?.priceDisplayAmount || 0)
           .dividedBy(props?.poolAssets[0]?.priceDisplayAmount)
-          .toString();
+          .toNumber();
       }
       state.onChangeHandler([
         {
@@ -199,7 +199,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           priceDisplayAmount={props?.poolAssets[0]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress1Change(v)}
           onAmountChange={(value) => state.handleAmount1Change(value)}
-          onFocus={(e) => {
+          onFocus={() => {
             amountChangeTypeRef = "1";
           }}
         />
@@ -216,7 +216,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           priceDisplayAmount={props?.poolAssets[1]?.priceDisplayAmount}
           onProgressChange={(v) => state.handleProgress2Change(v)}
           onAmountChange={(value) => state.handleAmount2Change(value)}
-          onFocus={(e) => {
+          onFocus={() => {
             amountChangeTypeRef = "2";
           }}
         />

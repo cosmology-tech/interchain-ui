@@ -3,7 +3,7 @@
     "jsx": "react-jsx",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
-    "module": "es2020",
+    "module": "ESNext",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,

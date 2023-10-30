@@ -15,11 +15,11 @@ export type AvailableItem = {
   /**
    * Available amount
    */
-  available?: string | number;
+  available?: number;
   /**
    * Dollar price for per token
    */
-  priceDisplayAmount?: number | string;
+  priceDisplayAmount?: number;
 };
 
 export interface TransferItemProps {
@@ -43,7 +43,7 @@ export interface TransferItemProps {
    * Title of the transfer-item
    */
   title?: string;
-  onChange?: (item: AvailableItem, value: string) => void;
+  onChange?: (item: AvailableItem, value: number) => void;
   /**
    * Disabled status of input
    */
@@ -55,7 +55,7 @@ export interface TransferItemProps {
    */
   onItemSelected?: (selectItem: AvailableItem) => void;
   selectedItem: AvailableItem;
-  amount?: string;
+  amount?: number;
   defaultAmountPrice?: string;
   availableAsMax?: boolean;
 }

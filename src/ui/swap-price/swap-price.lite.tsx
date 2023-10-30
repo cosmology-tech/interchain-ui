@@ -169,7 +169,7 @@ export default function SwapPrice(props: SwapPriceProps) {
           >
             <Text color="$textSecondary">Minimum received after slippage</Text>
             <Text color="$textSecondary" fontWeight="$bold">
-              {`${props?.minimumReceived} ${props?.toItem?.symbol}`}
+              {`${props?.minimumReceived ?? 0} ${props?.toItem?.symbol}`}
             </Text>
           </Stack>
           <Show when={props?.hasRoute}>

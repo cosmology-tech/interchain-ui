@@ -22,21 +22,21 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
     theme: ThemeVariant;
     transferDisabled: boolean;
     curSelectedItem: AvailableItem;
-    amount: string;
-    handleTransferChange: (item: AvailableItem, value: string) => void;
+    amount: number;
+    handleTransferChange: (item: AvailableItem, value: number) => void;
   }>({
     theme: "light",
     transferDisabled: true,
     curSelectedItem: null,
-    amount: "0",
-    handleTransferChange(item: AvailableItem, value: string) {
+    amount: 0,
+    handleTransferChange(item: AvailableItem, value: number) {
       state.curSelectedItem = item;
       state.amount = value;
       state.transferDisabled =
         new BigNumber(value).isGreaterThan(item?.available) ||
         new BigNumber(value).isLessThanOrEqualTo(0) ||
-        value === "";
-        props?.onChange?.(item, value)
+        value === 0;
+      props?.onChange?.(item, value);
     },
   });
 
@@ -73,12 +73,12 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         dropDownList={props.dropDownList}
         selectedItem={state.curSelectedItem}
         amount={state.amount}
-        onChange={(item: AvailableItem, value: string) =>
+        onChange={(item: AvailableItem, value: number) =>
           state.handleTransferChange(item, value)
         }
         onItemSelected={(selectedItem: AvailableItem) => {
           state.curSelectedItem = selectedItem;
-          props?.onChange?.(selectedItem, state.amount)
+          props?.onChange?.(selectedItem, state.amount);
         }}
       />
       <Stack

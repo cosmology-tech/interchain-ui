@@ -9,9 +9,8 @@ export interface SwapItemProps extends TransferItemProps {}
 export type SwapInfo = {
   fromItem: AvailableItem;
   toItem: AvailableItem;
-  fromAmount: string;
-  toAmount: string;
-  // minimumReceived: string;
+  fromAmount: number;
+  toAmount: number;
 };
 
 export interface SwapTokenProps {

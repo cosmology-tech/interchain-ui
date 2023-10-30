@@ -25,7 +25,7 @@ import { store } from "../../models/store";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["number-input"],
+  scaffolds: ["number-field"],
 });
 
 useDefaultProps<Partial<TokenInputProps>>({
@@ -39,8 +39,8 @@ export default function TokenInput(props: TokenInputProps) {
   const state = useStore<{
     symbolValue: string;
     isDisabled: boolean;
-    handleTokenInput: (string) => void;
-    handleIconClick: (MouseEvent) => void;
+    handleTokenInput: (value: number) => void;
+    handleIconClick: () => void;
   }>({
     get symbolValue() {
       return new BigNumber(props.amount || 0)
@@ -51,10 +51,10 @@ export default function TokenInput(props: TokenInputProps) {
     get isDisabled() {
       return props.progress === 0;
     },
-    handleTokenInput(value: string) {
-      props.onAmountChange && props.onAmountChange(value);
+    handleTokenInput(value: number) {
+      props.onAmountChange?.(value);
     },
-    handleIconClick(e) {
+    handleIconClick() {
       let newProgress: number = 0;
       if (props.progress === 50) {
         newProgress = 0;
@@ -148,7 +148,7 @@ export default function TokenInput(props: TokenInputProps) {
               <IconButton
                 intent="text"
                 icon={props.progress === 0 ? "add" : "subtract"}
-                onClick={(e) => state.handleIconClick(e)}
+                onClick={() => state.handleIconClick()}
                 className={styles.operationIcon}
               />
             </div>
@@ -164,14 +164,14 @@ export default function TokenInput(props: TokenInputProps) {
       >
         <Box width="$full">
           {/* @ts-expect-error */}
-          <NumberInput
+          <ScaffoldNumberField
             id={inputIdRef}
-            min={0}
-            max={props.availableAsMax ? toNumber(props.available) : 0}
+            minValue={0}
+            maxValue={props.availableAsMax ? toNumber(props.available) : 0}
             value={props.amount}
             borderless
-            disabled={state.isDisabled}
-            startAddon={
+            isDisabled={state.isDisabled}
+            decrementButton={
               <Stack
                 className={clsx(styles.imgBox, props.imgClass)}
                 attributes={{ justifyContent: "center", alignItems: "center" }}
@@ -202,8 +202,8 @@ export default function TokenInput(props: TokenInputProps) {
                 ) : null}
               </Stack>
             }
-            onChange={(e) => state.handleTokenInput(e.value)}
-            onFocus={(e) => props?.onFocus?.(e)}
+            onChange={(value) => state.handleTokenInput(value)}
+            onFocus={(e?: any) => props?.onFocus?.(e)}
             className={styles.token}
             inputContainer={styles.inputContainer}
             inputClassName={clsx(styles.inputClassName, props.inputClass)}

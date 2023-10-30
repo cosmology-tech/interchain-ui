@@ -41,10 +41,10 @@ export default function SwapToken(props: SwapTokenProps) {
     swapDisabled: boolean;
     tolerance: number;
     isSetting: boolean;
-    fromAmount: string;
-    toAmount: string;
+    fromAmount: number;
+    toAmount: number;
     fromDollarValue: BigNumber;
-    minimumReceived: string;
+    minimumReceived: number;
     fromItem: AvailableItem;
     toItem: AvailableItem;
     fromList: Array<AvailableItem>;
@@ -55,15 +55,15 @@ export default function SwapToken(props: SwapTokenProps) {
     exchange: () => void;
     handleFromListItemSelected: (selectedItem: AvailableItem) => void;
     handleToListItemSelected: (selectedItem: AvailableItem) => void;
-    handleFromAmountChange: (item: AvailableItem, value: string) => void;
-    handleToAmountChange: (item: AvailableItem, value: string) => void;
+    handleFromAmountChange: (item: AvailableItem, value: number) => void;
+    handleToAmountChange: (item: AvailableItem, value: number) => void;
   }>({
     theme: "light",
     swapIcon: "arrowDownLine",
     tolerance: 1,
     isSetting: false,
-    fromAmount: "0",
-    toAmount: "0",
+    fromAmount: 0,
+    toAmount: 0,
     get swapDisabled() {
       return new BigNumber(state.fromAmount).gt(state?.fromItem?.available);
     },
@@ -77,7 +77,7 @@ export default function SwapToken(props: SwapTokenProps) {
         .multipliedBy(100 - state.tolerance)
         .dividedBy(100)
         .decimalPlaces(6)
-        .toString();
+        .toNumber();
     },
     fromItem: null,
     toItem: null,
@@ -148,7 +148,8 @@ export default function SwapToken(props: SwapTokenProps) {
         .multipliedBy(selectedItem.priceDisplayAmount)
         .dividedBy(state.toItem.priceDisplayAmount)
         .decimalPlaces(6)
-        .toString();
+        .toNumber();
+
       state.toAmount = newTo;
       props?.onChange?.({
         fromItem: selectedItem,
@@ -165,7 +166,7 @@ export default function SwapToken(props: SwapTokenProps) {
       let newTo = state.fromDollarValue
         .dividedBy(selectedItem.priceDisplayAmount)
         .decimalPlaces(6)
-        .toString();
+        .toNumber();
       state.toAmount = newTo;
       props?.onChange?.({
         fromItem: state.fromItem,
@@ -174,7 +175,7 @@ export default function SwapToken(props: SwapTokenProps) {
         toAmount: newTo,
       });
     },
-    handleFromAmountChange(item: AvailableItem, value: string) {
+    handleFromAmountChange(item: AvailableItem, value: number) {
       if (isSwitchingRef) {
         isSwitchingRef = false;
         return;
@@ -184,7 +185,7 @@ export default function SwapToken(props: SwapTokenProps) {
         .multipliedBy(item.priceDisplayAmount)
         .dividedBy(state.toItem.priceDisplayAmount)
         .decimalPlaces(6)
-        .toString();
+        .toNumber();
       state.toAmount = newToAmount;
       props?.onChange?.({
         fromItem: item,
@@ -193,7 +194,7 @@ export default function SwapToken(props: SwapTokenProps) {
         toAmount: newToAmount,
       });
     },
-    handleToAmountChange(item: AvailableItem, value: string) {
+    handleToAmountChange(item: AvailableItem, value: number) {
       state.toAmount = value;
       props?.onChange?.({
         fromItem: state.fromItem,
@@ -240,7 +241,7 @@ export default function SwapToken(props: SwapTokenProps) {
         onItemSelected={(selectedItem: AvailableItem) =>
           state.handleFromListItemSelected(selectedItem)
         }
-        onChange={(item: AvailableItem, value: string) =>
+        onChange={(item: AvailableItem, value: number) =>
           state.handleFromAmountChange(item, value)
         }
       />
@@ -273,7 +274,7 @@ export default function SwapToken(props: SwapTokenProps) {
         onItemSelected={(selectedItem: AvailableItem) =>
           state.handleToListItemSelected(selectedItem)
         }
-        onChange={(item: AvailableItem, value: string) =>
+        onChange={(item: AvailableItem, value: number) =>
           state.handleToAmountChange(item, value)
         }
       />

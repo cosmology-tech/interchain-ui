@@ -1,8 +1,8 @@
 export interface NftMakeOfferProps {
   imgSrc: string;
   tokenName: string;
-  onChange?: (value: string) => void;
-  onMakeOffer?:(event?: any) => void;
+  onChange?: (value: number) => void;
+  onMakeOffer?: (event?: any) => void;
   onCancel?: (event?: any) => void;
-  value?: string;
+  value?: number;
 }

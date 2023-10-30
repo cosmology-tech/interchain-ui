@@ -10,27 +10,24 @@ import { BondingMoreProps } from "./bonding-more.types";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["number-input"],
+  scaffolds: ["number-field"],
 });
 
 export default function BondingMore(props: BondingMoreProps) {
   const state = useStore<{
     btnText: string;
     disabled: boolean;
-    handleInputChange: (string) => void;
+    handleInputChange: (value: number) => void;
   }>({
     btnText: "Amount is empty",
     disabled: true,
-    handleInputChange(value: string) {
-      if (value === "") {
-        state.disabled = true;
-        state.btnText = "Amount is empty";
-      } else if (new BigNumber(value).eq(0)) {
+    handleInputChange(value: number) {
+      if (value === 0) {
         state.disabled = true;
         state.btnText = "Amount is zero";
       } else if (new BigNumber(value).gt(props.available)) {
         state.disabled = true;
-        state.btnText = "Insufficient mount";
+        state.btnText = "Insufficient amount";
       } else {
         state.disabled = false;
         state.btnText = "Bond";
@@ -69,11 +66,11 @@ export default function BondingMore(props: BondingMoreProps) {
       </Stack>
       <Box marginBottom="$10" marginTop="$5">
         {/* @ts-expect-error */}
-        <NumberInput
+        <ScaffoldNumberField
           id="bonding-input"
-          min={0}
+          minValue={0}
           value={props?.value}
-          onChange={(e) => state.handleInputChange(e.value)}
+          onChange={(value) => state.handleInputChange(value)}
         />
       </Box>
       <Button
