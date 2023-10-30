@@ -31,6 +31,7 @@ export default function BondingList(props: ValidatorListProps) {
           </For>
         </Stack>
       </Show>
+
       <Box
         paddingBottom="$7"
         paddingTop="$7"

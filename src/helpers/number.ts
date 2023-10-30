@@ -1,11 +1,24 @@
 import BigNumber from "bignumber.js";
 
 export function getCurrencyFormatter(
-  // locale: string = "default",
-  locale: string,
+  locale?: string,
   options?: Intl.NumberFormatOptions
 ): Intl.NumberFormat {
-  return new Intl.NumberFormat(locale, options);
+  return new Intl.NumberFormat(locale ?? "en-US", options);
+}
+
+export function formatCurrency(
+  value: number,
+  locale?: string,
+  options?: Intl.NumberFormatOptions
+) {
+  const formatter = new Intl.NumberFormat(locale ?? "en-US", {
+    ...options,
+    style: options?.style ?? "currency",
+    currency: options?.currency ?? "USD",
+    maximumFractionDigits: options?.maximumFractionDigits ?? 4,
+  });
+  return formatter.format(value);
 }
 
 export function safelyFormatNumberWithFallback(

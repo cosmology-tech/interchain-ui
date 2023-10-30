@@ -3,7 +3,9 @@ import Text from "../text";
 import IconButton from "../icon-button";
 
 import * as styles from "./validator-list-item.css";
-import { ValidatorListItemProps } from "./validator-list-item.types";
+import { formatNumeric } from "../../helpers/number";
+
+import type { ValidatorListItemProps } from "./validator-list-item.types";
 
 export default function ValidatorListItem(props: ValidatorListItemProps) {
   return (
@@ -20,7 +22,7 @@ export default function ValidatorListItem(props: ValidatorListItemProps) {
         attributes={{ justifyContent: "flex-end" }}
       >
         <Text fontWeight="$semibold" attributes={{ marginRight: "$5" }}>
-          {props.stakedAmount}
+          {formatNumeric(`${props.stakedAmount}`, 4)}
         </Text>
         <Text color="$textSecondary" fontWeight="$semibold">
           {props.symbol}
@@ -31,7 +33,7 @@ export default function ValidatorListItem(props: ValidatorListItemProps) {
         attributes={{ justifyContent: "flex-end" }}
       >
         <Text fontWeight="$semibold" attributes={{ marginRight: "$5" }}>
-          {props.rewardsAmount}
+          {formatNumeric(props.rewardsAmount, 4)}
         </Text>
         <Text color="$textSecondary" fontWeight="$semibold">
           {props.symbol}
