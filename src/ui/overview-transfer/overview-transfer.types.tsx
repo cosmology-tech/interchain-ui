@@ -1,8 +1,7 @@
-import {
-  AvailableItem,
-} from "../transfer-item/transfer-item.types";
+import { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export type TransferType = "withdraw" | "deposit";
+
 export interface OverviewTransferProps {
   /**
    * Tranfer type
@@ -16,6 +15,6 @@ export interface OverviewTransferProps {
    * Callback of transfer button
    */
   onTransfer: (event?: any) => void;
-  onChange: (selectedItem: AvailableItem, value: string) => void;
+  onChange: (selectedItem: AvailableItem, value: number) => void;
   onCancel: (event?: any) => void;
 }

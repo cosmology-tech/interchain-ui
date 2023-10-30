@@ -4,26 +4,26 @@ import { TokenNumberFieldProps } from "./token-number-field.types";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["number-input"],
+  scaffolds: ["number-field"],
 });
 
 export default function TokenNumberField(props: TokenNumberFieldProps) {
   return (
     <Box width="$full" height="$full">
       {/* @ts-expect-error */}
-      <ScaffoldNumberInput
+      <ScaffoldNumberField
         id={props?.id}
         value={props.value}
-        min={0}
-        max={isNaN(Number(props.available)) ? 0 : Number(props.available)}
-        disabled={props.disabled}
-        onChange={(e) => props?.onChange?.(e)}
+        minValue={0}
+        maxValue={isNaN(Number(props.available)) ? 0 : Number(props.available)}
+        isDisabled={props.disabled}
+        onChange={(value) => props?.onChange?.(value)}
         className={props?.className}
         inputContainer={props?.inputContainer}
         inputClassName={props?.inputClassName}
         borderless={props.borderless}
-        startAddon={props.startAddon}
-        endAddon={props.endAddon}
+        decrementButton={props.decrementButton}
+        incrementButton={props.incrementButton}
       />
     </Box>
   );

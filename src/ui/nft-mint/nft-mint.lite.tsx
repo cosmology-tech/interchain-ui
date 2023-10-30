@@ -13,24 +13,24 @@ import { NftMintProps } from "./nft-mint.types";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["number-input"],
+  scaffolds: ["number-field"],
 });
 
 export default function NftMint(props: NftMintProps) {
   const state = useStore<{
-    amount: string;
+    amount: number;
     starsAmount: string;
     starsAmountPrice: string;
     isAffordable: boolean;
     isMintLoading: boolean;
-    handleAmountChange: (string) => void;
+    handleAmountChange: (value: number) => void;
   }>({
-    amount: "",
+    amount: 0,
     starsAmount: "",
     starsAmountPrice: "",
     isAffordable: true,
     isMintLoading: false,
-    handleAmountChange(value: string) {
+    handleAmountChange(value: number) {
       let starsCount: BigNumber = new BigNumber(value).multipliedBy(
         props.priceDisplayAmount
       );
@@ -165,13 +165,13 @@ export default function NftMint(props: NftMintProps) {
             </Stack>
             <Box position="relative">
               {/* @ts-expect-error */}
-              <ScaffoldNumberInput
+              <ScaffoldNumberField
                 size="md"
                 id="nft-mint-amount"
-                min={0}
-                max={toNumber(props.limited)}
+                minValue={0}
+                maxValue={toNumber(props.limited)}
                 value={state.amount}
-                onChange={(e) => state.handleAmountChange(e.value)}
+                onChange={(value) => state.handleAmountChange(value)}
                 inputClassName={styles.baseInput}
               />
 

@@ -9,11 +9,11 @@ export interface TokenNumberFieldProps {
   id?: string;
   available: string | number;
   disabled?: boolean;
-  value: string;
+  value: number;
   /**
    * Function invoked when the value changes
    */
-  onChange?: (details: Value) => void;
+  onChange?: (value: number) => void;
   /**
    * Function invoked when the number input is focused
    */
@@ -30,6 +30,6 @@ export interface TokenNumberFieldProps {
   inputClassName?: string;
   className?: string;
   borderless?: boolean;
-  startAddon?: Children;
-  endAddon?: Children;
+  decrementButton?: Children;
+  incrementButton?: Children;
 }

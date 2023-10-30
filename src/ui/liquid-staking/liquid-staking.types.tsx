@@ -15,7 +15,7 @@ type BottomLink = {
 
 type OnChangePayload = {
   stakeToken: AvailableItem;
-  stakeAmount: string;
+  stakeAmount: number;
 };
 
 export type RewardDescriptionItem = {

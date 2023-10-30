@@ -1,11 +1,11 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import NumberInput from "../src/ui/number-input";
+import NumberField from "../src/ui/number-field";
 
-const meta: Meta<typeof NumberInput> = {
-  component: NumberInput,
-  title: "NumberInput",
+const meta: Meta<typeof NumberField> = {
+  component: NumberField,
+  title: "NumberField",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -17,19 +17,19 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {},
   render: () => {
-    const [value, setValue] = React.useState("0");
+    const [value, setValue] = React.useState(0);
 
     return (
-      <NumberInput
+      <NumberField
         id="my-num-input"
         label="My Amount"
-        min={0}
-        max={2000}
+        minValue={0}
+        maxValue={2000}
         textAlign="right"
         value={value}
-        onChange={(details) => {
-          console.log("Change", details.value);
-          setValue(details.value);
+        onChange={(value) => {
+          console.log("Change", value);
+          setValue(value);
         }}
       />
     );

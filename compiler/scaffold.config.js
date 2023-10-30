@@ -75,13 +75,13 @@ module.exports = {
       path: "../change-chain-combobox",
     },
   },
-  "number-input": {
+  "number-field": {
     jsxMap: {
-      ScaffoldNumberInput: "NumberInput",
+      ScaffoldNumberField: "NumberField",
     },
     import: {
-      imports: { NumberInput: "default" },
-      path: "../number-input",
+      imports: { NumberField: "default" },
+      path: "../number-field",
     },
   },
 };

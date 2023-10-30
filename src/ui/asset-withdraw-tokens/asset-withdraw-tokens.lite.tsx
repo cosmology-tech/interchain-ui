@@ -20,7 +20,7 @@ import { standardTransitionProperties } from "../shared/shared.css";
 export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
   const state = useStore<{
     theme: ThemeVariant;
-    inputAmount: string;
+    inputAmount: number;
     toAddress: string;
     lgAddressVisible: boolean;
     smAddressVisible: boolean;
@@ -31,7 +31,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
     transferDisabled: boolean;
   }>({
     theme: "light",
-    inputAmount: "0",
+    inputAmount: 0,
     toAddress: "",
     lgAddressVisible: false,
     smAddressVisible: false,
@@ -46,7 +46,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
     handleAmountChange(percent) {
       state.inputAmount = new BigNumber(props.available)
         .multipliedBy(percent)
-        .toString();
+        .toNumber();
     },
     onAmountChange(value) {
       state.inputAmount = value;
@@ -55,7 +55,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
     get transferDisabled() {
       return (
         new BigNumber(state.inputAmount).gt(props.available) ||
-        state.inputAmount === ""
+        state.inputAmount === 0
       );
     },
   });

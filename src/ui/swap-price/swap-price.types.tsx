@@ -33,11 +33,11 @@ export interface SwapPriceProps {
     percentage: string;
     value: string;
   };
-  minimumReceived: string | undefined;
+  minimumReceived?: number;
   // internal props
   fromItem: AvailableItem;
   toItem: AvailableItem;
   disabled?: boolean;
-  fromAmount: string;
-  toAmount: string;
+  fromAmount: number;
+  toAmount: number;
 }

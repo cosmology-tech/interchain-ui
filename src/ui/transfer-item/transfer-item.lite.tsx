@@ -27,7 +27,7 @@ import type { ThemeVariant } from "../../models/system.model";
 
 useMetadata({
   isAttachedToShadowDom: true,
-  scaffolds: ["chain-swap-combobox", "number-input"],
+  scaffolds: ["chain-swap-combobox", "number-field"],
 });
 
 export default function TransferItem(props: TransferItemProps) {
@@ -39,14 +39,14 @@ export default function TransferItem(props: TransferItemProps) {
   });
 
   let lastItemRef = useRef<AvailableItem>(null);
-  let lastValueRef = useRef<string>("");
+  let lastValueRef = useRef<number>(0);
 
   const state = useStore<{
     theme: ThemeVariant;
     currentItem: AvailableItem;
     amountPrice: string;
     comboboxList: ComboboxListType;
-    handleAmountInput: (string) => void;
+    handleAmountInput: (value: number) => void;
     handleHalf: () => void;
     handleMax: () => void;
     getComboboxItem: (item: AvailableItem) => ComboboxListItemType;
@@ -58,31 +58,31 @@ export default function TransferItem(props: TransferItemProps) {
     currentItem: null,
     comboboxList: [],
     get amountPrice() {
-      if (props.amount === "") {
-        return "";
+      if (props.amount === 0) {
+        return 0;
       } else {
         return new BigNumber(state.currentItem?.priceDisplayAmount)
           .multipliedBy(props.amount)
           .decimalPlaces(6)
-          .toString();
+          .toNumber();
       }
     },
-    handleAmountInput(val: string) {
-      if (val === lastValueRef) {
+    handleAmountInput(value: number) {
+      if (value === lastValueRef) {
         return;
       }
       lastItemRef = cloneDeep(state.currentItem);
-      lastValueRef = val;
-      props?.onChange?.(state.currentItem, val);
+      lastValueRef = value;
+      props?.onChange?.(state.currentItem, value);
     },
     handleHalf() {
       let value = new BigNumber(state.currentItem.available)
         .dividedBy(2)
-        .toString();
+        .toNumber();
       state.handleAmountInput(value);
     },
     handleMax() {
-      let value = new BigNumber(state.currentItem.available).toString();
+      let value = new BigNumber(state.currentItem.available).toNumber();
       state.handleAmountInput(value);
     },
     getComboboxItem(item: AvailableItem) {
@@ -228,16 +228,16 @@ export default function TransferItem(props: TransferItemProps) {
                 ) : (
                   <Box>
                     {/* @ts-ignore */}
-                    <NumberInput
+                    <ScaffoldNumberField
                       borderless
-                      disabled={!!props.disabled}
+                      isDisabled={!!props.disabled}
                       value={props.amount}
-                      onChange={(e) => {
-                        state.handleAmountInput(e.value);
+                      onChange={(value) => {
+                        state.handleAmountInput(value);
                       }}
                       inputClassName={styles.transferInput}
-                      min={0}
-                      max={
+                      minValue={0}
+                      maxValue={
                         props.availableAsMax
                           ? state.currentItem?.available
                           : undefined
@@ -248,7 +248,7 @@ export default function TransferItem(props: TransferItemProps) {
                 <div
                   style={{
                     display:
-                      !!props.amount && props.amount !== "0" ? "block" : "none",
+                      !!props.amount && props.amount > 0 ? "block" : "none",
                   }}
                 >
                   <Text color="$textSecondary" fontSize="$xs" textAlign="right">

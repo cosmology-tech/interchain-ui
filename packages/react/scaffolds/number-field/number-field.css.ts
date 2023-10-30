@@ -11,12 +11,12 @@ export const borderless = style({
   },
 });
 
-export const withStartAddon = style({
+export const withDecrementButton = style({
   borderTopLeftRadius: 0,
   borderBottomLeftRadius: 0,
 });
 
-export const withEndAddon = style({
+export const withIncrementButton = style({
   borderTopRightRadius: 0,
   borderBottomRightRadius: 0,
 });
