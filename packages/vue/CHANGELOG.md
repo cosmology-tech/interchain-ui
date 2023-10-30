@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.6...@interchain-ui/vue@1.2.7) (2023-10-30)
+
+### Bug Fixes
+
+- **number-field:** remove zagjs and use react-aria ([#113](https://github.com/cosmology-tech/interchain-ui/issues/113)) ([75a3254](https://github.com/cosmology-tech/interchain-ui/commit/75a3254656ac773ba5b2087b5763830e79c9c60e))
+
 ## [1.2.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.5...@interchain-ui/vue@1.2.6) (2023-10-26)
 
 **Note:** Version bump only for package @interchain-ui/vue
