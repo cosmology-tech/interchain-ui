@@ -115,6 +115,9 @@
     "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@chain-registry/osmosis": "^1.21.0",
+    "@chain-registry/types": "^0.17.0",
+    "@chain-registry/utils": "^1.14.0",
     "@parcel/optimizer-swc": "^2.10.0",
     "@parcel/reporter-bundle-analyzer": "^2.10.0",
     "@parcel/transformer-typescript-tsc": "^2.10.0",

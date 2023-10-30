@@ -2113,12 +2113,37 @@
     node-fetch "^2.3.0"
     tslib "^1.10.0"
 
+"@chain-registry/osmosis@^1.21.0":
+  version "1.21.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/osmosis/-/osmosis-1.21.0.tgz#d0e42750af192508696c262f3d4ba3da881a4fbf"
+  integrity sha512-lftrfO+HYhW7YovRLblEcWNIRWq32THpfxAJyPa2RoeHLQvNw7vYBc/Z8GQetvKTkY7QclgX/PEKiI2YxvjxaQ==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@chain-registry/types" "^0.17.0"
+
 "@chain-registry/types@^0.16.0":
   version "0.16.0"
   resolved "https://registry.npmjs.org/@chain-registry/types/-/types-0.16.0.tgz"
   integrity sha512-4j6vq2Vqn/nF+UBjvRPUVs6eM3+5rJ+dPmEWpd/OoNH3wTy1k6aoilcSTZRR//vGcI5EOVGsxhhJxUzo2qqweA==
   dependencies:
     "@babel/runtime" "^7.21.0"
+
+"@chain-registry/types@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.17.0.tgz#bbe9176a6d30a491259fab1fcdcee2b7edf6141f"
+  integrity sha512-lavACU4oDxioUy8lZOFZN0Vrr2qR+Dg2yEh/mkrPfOldcioavREXJou0elDyyXwq4pGLC5YQ+IISCtQ4Du0bdw==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+
+"@chain-registry/utils@^1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/utils/-/utils-1.14.0.tgz#e6043009d80bfb702067c3a92970fae9350f8689"
+  integrity sha512-Xn55RSG76UrE0EAuZMgAiH/zC0xHc+904ydcdMr4Ix+ZsK6nxjwX4mRl9MOx83I1H+Om9GTMtDuXAjy0zxBmqg==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@chain-registry/types" "^0.17.0"
+    bignumber.js "9.1.1"
+    sha.js "^2.4.11"
 
 "@colors/colors@1.5.0":
   version "1.5.0"
@@ -7676,7 +7701,7 @@ big-integer@^1.6.44:
   resolved "https://registry.npmjs.org/big-integer/-/big-integer-1.6.51.tgz"
   integrity sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==
 
-bignumber.js@^9.1.1:
+bignumber.js@9.1.1, bignumber.js@^9.1.1:
   version "9.1.1"
   resolved "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.1.1.tgz"
   integrity sha512-pHm4LsMJ6lzgNGVfZHjMoO8sdoRhOzOH4MLmY65Jg70bpxCKu5iOHNJyfF6OyvYw7t8Fpf35RuzUyqnQsj8Vig==
@@ -17340,6 +17365,14 @@ setprototypeof@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
+
+sha.js@^2.4.11:
+  version "2.4.11"
+  resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.4.11.tgz#37a5cf0b81ecbc6943de109ba2960d1b26584ae7"
+  integrity sha512-QMEp5B7cftE7APOjk5Y6xgrbWu+WkLVQwk8JNjZ8nKRciZaByEW6MubieAiToS7+dwvrjGhH8jRXz3MVd0AYqQ==
+  dependencies:
+    inherits "^2.0.1"
+    safe-buffer "^5.0.1"
 
 shallow-clone@^3.0.0:
   version "3.0.1"

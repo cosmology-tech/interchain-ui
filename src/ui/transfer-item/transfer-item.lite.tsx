@@ -228,7 +228,7 @@ export default function TransferItem(props: TransferItemProps) {
                 ) : (
                   <Box>
                     {/* @ts-ignore */}
-                    <ScaffoldNumberField
+                    <NumberField
                       borderless
                       isDisabled={!!props.disabled}
                       value={props.amount}

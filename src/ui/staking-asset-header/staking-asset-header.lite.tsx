@@ -1,8 +1,14 @@
+import { useDefaultProps } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
+import { formatCurrency } from "../../helpers/number";
 import * as styles from "./staking-asset-header.css";
 import { StakingAssetHeaderProps } from "./staking-asset-header.types";
-import { store } from "../../models/store";
+
+useDefaultProps<Partial<StakingAssetHeaderProps>>({
+  totalLabel: "Total",
+  availableLabel: "Available",
+});
 
 export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
   return (
@@ -11,10 +17,11 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
         className={styles.cardContainer}
         attributes={{ width: "50%", p: "$5" }}
       >
-        <img className={styles.img} src={props.imgSrc} />
+        <img className={styles.img} src={props.imgSrc} alt="staking logo" />
+
         <Stack direction="vertical">
           <Text color="$textSecondary" fontWeight="$semibold">
-            Total
+            {props.totalLabel}
           </Text>
           <Stack
             space="$5"
@@ -33,8 +40,7 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
           </Stack>
           <Stack attributes={{ alignItems: "center" }}>
             <Text fontSize="$xs" color="$rewardContent" fontWeight="$medium">
-              ≈ $
-              {store.getState().formatNumber({ value: props.totalPrice })}
+              ≈ {formatCurrency(props.totalPrice)}
             </Text>
           </Stack>
         </Stack>
@@ -46,7 +52,7 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
         attributes={{ width: "1/2", p: "$5" }}
       >
         <Text color="$textSecondary" fontWeight="$semibold">
-          Available
+          {props.availableLabel}
         </Text>
         <Stack space="$5" attributes={{ alignItems: "center" }}>
           <Text fontSize="$3xl" fontWeight="$semibold">
