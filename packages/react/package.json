@@ -26,13 +26,21 @@
     "main": {
       "optimize": true,
       "includeNodeModules": [
-        "@formkit/auto-animate"
+        "@formkit/auto-animate",
+        "@react-aria/i18n",
+        "@react-aria/numberfield",
+        "@react-aria/utils",
+        "@react-stately/numberfield"
       ]
     },
     "module": {
       "optimize": true,
       "includeNodeModules": [
-        "@formkit/auto-animate"
+        "@formkit/auto-animate",
+        "@react-aria/i18n",
+        "@react-aria/numberfield",
+        "@react-aria/utils",
+        "@react-stately/numberfield"
       ]
     }
   },
