@@ -15,33 +15,8 @@
         "import": "./dist/index.d.ts",
         "default": "./dist/index.d.ts"
       },
-      "development": {
-        "worker": {
-          "module": "./dist/interchain-ui-kit-react.development.worker.esm.js",
-          "import": "./dist/interchain-ui-kit-react.development.worker.cjs.mjs",
-          "default": "./dist/interchain-ui-kit-react.development.worker.cjs.js"
-        },
-        "browser": {
-          "module": "./dist/interchain-ui-kit-react.browser.development.esm.js",
-          "import": "./dist/interchain-ui-kit-react.browser.development.cjs.mjs",
-          "default": "./dist/interchain-ui-kit-react.browser.development.cjs.js"
-        },
-        "module": "./dist/interchain-ui-kit-react.development.esm.js",
-        "import": "./dist/interchain-ui-kit-react.development.cjs.mjs",
-        "default": "./dist/interchain-ui-kit-react.development.cjs.js"
-      },
-      "worker": {
-        "module": "./dist/interchain-ui-kit-react.worker.esm.js",
-        "import": "./dist/interchain-ui-kit-react.worker.cjs.mjs",
-        "default": "./dist/interchain-ui-kit-react.worker.cjs.js"
-      },
-      "browser": {
-        "module": "./dist/interchain-ui-kit-react.browser.esm.js",
-        "import": "./dist/interchain-ui-kit-react.browser.cjs.mjs",
-        "default": "./dist/interchain-ui-kit-react.browser.cjs.js"
-      },
       "module": "./dist/interchain-ui-kit-react.esm.js",
-      "import": "./dist/interchain-ui-kit-react.cjs.mjs",
+      "import": "./dist/interchain-ui-kit-react.cjs.js",
       "default": "./dist/interchain-ui-kit-react.cjs.js"
     },
     "./styles": "./dist/interchain-ui-kit-react.cjs.css",
