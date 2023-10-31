@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.10](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.9...@interchain-ui/react@1.11.10) (2023-10-31)
+
+### Bug Fixes
+
+- remove unused exports ([6bee3d3](https://github.com/cosmology-tech/interchain-ui/commit/6bee3d3cf6f8e4394299d0eb08ecbaf317bfc484))
+- storybook chain data ([#114](https://github.com/cosmology-tech/interchain-ui/issues/114)) ([808975e](https://github.com/cosmology-tech/interchain-ui/commit/808975ebd7024861bd03c9816bc5a07cb688bd84))
+
 ## [1.11.9](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.8...@interchain-ui/react@1.11.9) (2023-10-30)
 
 ### Bug Fixes
