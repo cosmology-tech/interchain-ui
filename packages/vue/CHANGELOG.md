@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.8](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.7...@interchain-ui/vue@1.2.8) (2023-10-31)
+
+**Note:** Version bump only for package @interchain-ui/vue
+
 ## [1.2.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.6...@interchain-ui/vue@1.2.7) (2023-10-30)
 
 ### Bug Fixes
