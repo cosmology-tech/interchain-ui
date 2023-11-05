@@ -1,6 +1,12 @@
-import { onMount, onUpdate, useRef } from "@builder.io/mitosis";
+import { onMount, onUpdate, useRef, useMetadata } from "@builder.io/mitosis";
 import * as styles from "./progress-bar.css";
 import { ProgressBarProps } from "./progress-bar.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ProgressBar(props: ProgressBarProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);

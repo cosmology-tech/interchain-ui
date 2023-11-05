@@ -6,6 +6,7 @@ import {
   onUnMount,
   useStore,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
@@ -27,6 +28,12 @@ import type {
   LiquidStakingProps,
   LiquidStakingToken,
 } from "./liquid-staking.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<LiquidStakingProps>>({
   decimals: 6,

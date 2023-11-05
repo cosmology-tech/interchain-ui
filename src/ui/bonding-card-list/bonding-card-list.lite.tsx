@@ -1,10 +1,16 @@
-import { For } from "@builder.io/mitosis";
+import { For, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Box from "../box";
 import BondingCard from "../bonding-card";
 import { BondingCardListProps } from "./bonding-card-list.types";
 import { BondingCardProps } from "../bonding-card/bonding-card.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function PoolCardList(props: BondingCardListProps) {
   return (

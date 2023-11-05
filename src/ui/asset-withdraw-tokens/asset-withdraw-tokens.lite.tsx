@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  useMetadata,
+} from "@builder.io/mitosis";
 import clsx from "clsx";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
@@ -16,6 +22,12 @@ import IconButton from "../icon-button";
 import TextField from "../text-field";
 import { rootInput, inputBorderAndShadow } from "../text-field/text-field.css";
 import { standardTransitionProperties } from "../shared/shared.css";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
   const state = useStore<{

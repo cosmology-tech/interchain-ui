@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  useMetadata,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
 import ListItem from "../list-item";
@@ -8,6 +14,12 @@ import Avatar from "../avatar";
 import { changeChainListItem } from "./change-chain-list-item.css";
 import type { AvatarSize } from "../avatar/avatar.types";
 import type { ChangeChainListItemProps } from "./change-chain-list-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ChangeChainListItem(props: ChangeChainListItemProps) {
   const state = useStore({

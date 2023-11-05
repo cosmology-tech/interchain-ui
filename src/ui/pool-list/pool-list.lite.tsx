@@ -1,10 +1,16 @@
-import { For, useStore } from "@builder.io/mitosis";
+import { For, useStore, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import PoolListItem from "../pool-list-item";
 import * as styles from "./pool-list.css";
-import { PoolListProps } from "./pool-list.types";
+import type { PoolListProps } from "./pool-list.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function PoolList(props: PoolListProps) {
   const state = useStore({
@@ -29,14 +35,14 @@ export default function PoolList(props: PoolListProps) {
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem
-            key={item.id}
-            id={item?.id}
-            poolAssets={item.poolAssets}
-            liquidity={item.liquidity}
-            apr={item.apr}
-            fees7D={item.fees7D}
-            volume24H={item.volume24H}
-            onClick={() => item.onClick()}
+              key={item.id}
+              id={item?.id}
+              poolAssets={item.poolAssets}
+              liquidity={item.liquidity}
+              apr={item.apr}
+              fees7D={item.fees7D}
+              volume24H={item.volume24H}
+              onClick={() => item.onClick()}
             />
           )}
         </For>

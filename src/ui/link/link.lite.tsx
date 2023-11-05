@@ -1,7 +1,13 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
 import type { LinkProps } from "./link.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<LinkProps>>({
   as: "a",

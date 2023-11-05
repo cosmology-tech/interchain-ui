@@ -4,7 +4,7 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
-  Show,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
@@ -20,6 +20,12 @@ import {
 } from "./chain-swap-input.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ChainSwapInputProps } from "./chain-swap-input.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ChainSwapInput(props: ChainSwapInputProps) {
   useDefaultProps({

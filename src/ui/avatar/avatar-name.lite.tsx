@@ -1,7 +1,18 @@
-import { Show, useDefaultProps, useStore } from "@builder.io/mitosis";
+import {
+  Show,
+  useDefaultProps,
+  useStore,
+  useMetadata,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import { avatarName } from "./avatar.css";
 import type { AvatarNameProps } from "./avatar.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<AvatarNameProps>>({ showInitials: true });
 

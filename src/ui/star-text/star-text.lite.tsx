@@ -1,9 +1,15 @@
-import { Show } from "@builder.io/mitosis";
+import { Show, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Icon from "../icon";
 import Text from "../text";
 
-import { StarTextProps } from "./star-text.types";
+import type { StarTextProps } from "./star-text.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function StarText(props: StarTextProps) {
   return (

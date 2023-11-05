@@ -1,6 +1,13 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function CellWithTitle(props: {
   title: string;

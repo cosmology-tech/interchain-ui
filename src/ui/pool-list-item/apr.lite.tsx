@@ -6,6 +6,9 @@ import IconButton from "../icon-button";
 
 useMetadata({
   isAttachedToShadowDom: true,
+  rsc: {
+    componentType: "client",
+  },
 });
 
 export default function APR(props: {

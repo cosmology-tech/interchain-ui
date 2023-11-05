@@ -1,7 +1,6 @@
 import {
-  Show,
   For,
-  useDefaultProps,
+  useMetadata,
   useStore,
   onUpdate,
   useRef,
@@ -10,13 +9,17 @@ import {
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clsx from "clsx";
 import Box from "../box";
-import Stack from "../stack";
 import Text from "../text";
-import Button from "../button";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./tabs.css";
 import { TabProps, TabsProps } from "./tabs.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Tabs(props: TabsProps) {
   const state = useStore<{

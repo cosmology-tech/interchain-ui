@@ -8,6 +8,7 @@ import {
   onMount,
   useDefaultProps,
   Show,
+  useMetadata,
 } from "@builder.io/mitosis";
 import qrcodegen from "./qrcodegen/qrcodegen";
 import {
@@ -25,6 +26,12 @@ import {
   getImageSettings,
   getMarginSize,
 } from "./qrcode.helpers";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function QRCode(props: QRProps) {
   useDefaultProps({

@@ -1,3 +1,4 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -5,6 +6,12 @@ import Box from "../box";
 import Icon from "../icon";
 import NftFees from "../nft-fees";
 import { NftSellNowProps } from "./nft-sell-now.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftSellNow(props: NftSellNowProps) {
   return (

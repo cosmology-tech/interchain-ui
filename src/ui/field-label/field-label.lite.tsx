@@ -1,9 +1,15 @@
-import { Show, useDefaultProps } from "@builder.io/mitosis";
+import { Show, useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
 import Stack from "../stack";
 import type { FieldLabelProps } from "./field-label.types";
 import { fieldLabelSizes, fieldlabelStyle } from "./field-label.css";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function FieldLabel(props: FieldLabelProps) {
   useDefaultProps({

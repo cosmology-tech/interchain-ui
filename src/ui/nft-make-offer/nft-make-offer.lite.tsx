@@ -1,3 +1,4 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -5,6 +6,12 @@ import Button from "../button";
 import TokenInput from "../token-input";
 import * as styles from "./nft-make-offer.css";
 import { NftMakeOfferProps } from "./nft-make-offer.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftMakeOffer(props: NftMakeOfferProps) {
   return (

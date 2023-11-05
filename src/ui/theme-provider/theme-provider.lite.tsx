@@ -4,6 +4,7 @@ import {
   onMount,
   onUnMount,
   useRef,
+  useMetadata,
 } from "@builder.io/mitosis";
 import isEqual from "lodash/isEqual";
 import {
@@ -17,7 +18,12 @@ import { store } from "../../models/store";
 import { ThemeVariant } from "../../models/system.model";
 import { assignThemeVars } from "../../styles/override/override";
 import type { ThemeProviderProps } from "./theme-provider.types";
-import "../../styles/global.css";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ThemeProvider(props: ThemeProviderProps) {
   let cleanupRef = useRef<() => void>(null);
@@ -134,5 +140,13 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     }
   });
 
-  return <div>{props.children}</div>;
+  return (
+    <div
+      data-interchain-color-mode={
+        props.forceColorMode == null ? undefined : props.forceColorMode
+      }
+    >
+      {props.children}
+    </div>
+  );
 }

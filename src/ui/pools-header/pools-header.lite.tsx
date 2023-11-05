@@ -4,6 +4,7 @@ import {
   onMount,
   onUnMount,
   useRef,
+  useMetadata,
 } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
@@ -12,6 +13,12 @@ import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
 import type { PoolsHeaderProps } from "./pools-header.types";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<PoolsHeaderProps>>({
   title: "Liquidity Pools",

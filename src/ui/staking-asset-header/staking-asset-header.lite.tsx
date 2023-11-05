@@ -1,9 +1,15 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import { formatCurrency } from "../../helpers/number";
 import * as styles from "./staking-asset-header.css";
 import { StakingAssetHeaderProps } from "./staking-asset-header.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<StakingAssetHeaderProps>>({
   totalLabel: "Total",

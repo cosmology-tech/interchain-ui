@@ -4,12 +4,19 @@ import {
   useRef,
   onMount,
   onUnMount,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
 import { store } from "../../models/store";
 import { avatarBadge, avatarBadgePlacement } from "./avatar.css";
 import type { AvatarBadgeProps } from "./avatar.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AvatarBadge(props: AvatarBadgeProps) {
   useDefaultProps({

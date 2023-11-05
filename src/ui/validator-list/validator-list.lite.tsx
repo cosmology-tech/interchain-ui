@@ -1,11 +1,17 @@
-import { For, Show } from "@builder.io/mitosis";
+import { For, Show, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import ValidatorListItem from "../validator-list-item";
 import * as styles from "./validator-list.css";
-import { ValidatorListItemProps } from "../validator-list-item/validator-list-item.types";
-import { ValidatorListProps } from "./validator-list.types";
+import type { ValidatorListItemProps } from "../validator-list-item/validator-list-item.types";
+import type { ValidatorListProps } from "./validator-list.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BondingList(props: ValidatorListProps) {
   return (

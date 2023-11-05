@@ -1,10 +1,16 @@
-import { For, Show, useDefaultProps, useStore } from "@builder.io/mitosis";
+import { For, Show, useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import * as styles from "./asset-list-header.css";
 import { AssetListHeaderProps } from "./asset-list-header.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AssetListHeader(props: AssetListHeaderProps) {
   useDefaultProps({

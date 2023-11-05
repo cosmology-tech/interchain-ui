@@ -1,3 +1,4 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import BigNumber from "bignumber.js";
 import Button from "../button";
@@ -5,6 +6,12 @@ import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./bonding-list-item.css";
 import { BondingListItemProps } from "./bonding-list-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BondingListItem(props: BondingListItemProps) {
   return (
@@ -38,7 +45,7 @@ export default function BondingListItem(props: BondingListItemProps) {
           justifyContent: "flex-end",
         }}
       >
-      <Button
+        <Button
           size="xs"
           variant="unstyled"
           onClick={(event) => props.onUnbond?.(event)}

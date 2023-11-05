@@ -1,4 +1,4 @@
-import { onMount, Show, useStore, onUpdate, For } from "@builder.io/mitosis";
+import { useMetadata, useStore, onUpdate, For } from "@builder.io/mitosis";
 import isNil from "lodash/isNil";
 import cloneDeep from "lodash/cloneDeep";
 import Stack from "../stack";
@@ -8,6 +8,12 @@ import Icon from "../icon";
 import Box from "../box";
 import * as styles from "./nft-fees.css";
 import { NftFeesProps, NftFeeItemProps } from "./nft-fees.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftFees(props: NftFeesProps) {
   const state = useStore<{

@@ -1,7 +1,13 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import type { CenterProps } from "./center.types";
 import { getAxisStyles } from "./center.helper";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<CenterProps>>({
   as: "div",

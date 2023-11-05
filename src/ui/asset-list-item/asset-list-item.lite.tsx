@@ -1,10 +1,22 @@
-import { Show, useDefaultProps, useStore, onUpdate } from "@builder.io/mitosis";
+import {
+  Show,
+  useDefaultProps,
+  useMetadata,
+  useStore,
+  onUpdate,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import type { AssetListItemProps } from "./asset-list-item.types";
 import type { BoxProps } from "../box/box.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AssetListItem(props: AssetListItemProps) {
   useDefaultProps({

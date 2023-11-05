@@ -1,8 +1,14 @@
-import { useStore, useDefaultProps } from "@builder.io/mitosis";
+import { useStore, useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Text from "../text";
 import TextField from "../text-field";
 import Button from "../button";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftTransfer(props) {
   useDefaultProps({

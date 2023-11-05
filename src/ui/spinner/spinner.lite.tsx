@@ -1,7 +1,14 @@
+import { useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
 import Icon from "../icon";
 import { loader } from "./spinner.css";
-import { SpinnerProps } from "./spinner.types";
+import type { SpinnerProps } from "./spinner.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Spinner(props: SpinnerProps) {
   return (

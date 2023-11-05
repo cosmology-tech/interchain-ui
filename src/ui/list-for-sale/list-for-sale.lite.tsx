@@ -1,4 +1,4 @@
-import { useStore } from "@builder.io/mitosis";
+import { useStore, useMetadata } from "@builder.io/mitosis";
 import Tabs from "../tabs";
 import Box from "../box";
 import NftFixedPrice from "../nft-fixed-price";
@@ -6,6 +6,12 @@ import NftAuction from "../nft-auction";
 import NftSellNow from "../nft-sell-now";
 import * as styles from "./list-for-sale.css";
 import type { TabProps } from "../tabs/tabs.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ListForSale(props) {
   const state = useStore<{

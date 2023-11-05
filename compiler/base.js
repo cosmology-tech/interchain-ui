@@ -226,7 +226,7 @@ async function compile(rawOptions) {
     };
   }
 
-  async function addHooksExports() {
+  async function addReactSpecificCode() {
     const targetRootPath = path.resolve(
       cwd(),
       `packages/${options.target}/src`
@@ -256,7 +256,9 @@ async function compile(rawOptions) {
           })
           .join("\n");
 
-        const indexResult = `${indexData}\n${hooksExports}`;
+        const clientOnlyMarker = `import "client-only";`;
+
+        const indexResult = `${indexData}\n${clientOnlyMarker}\n${hooksExports}`;
 
         // Skip if hooks exports are the same
         if (indexResult === indexData) {
@@ -327,7 +329,7 @@ async function compile(rawOptions) {
   }
 
   if (options.target === "react") {
-    addHooksExports();
+    addReactSpecificCode();
   }
 
   spinner.succeed();

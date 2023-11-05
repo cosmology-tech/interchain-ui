@@ -1,11 +1,17 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import IconButton from "../icon-button";
-
 import * as styles from "./validator-list-item.css";
 import { formatNumeric } from "../../helpers/number";
 
 import type { ValidatorListItemProps } from "./validator-list-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ValidatorListItem(props: ValidatorListItemProps) {
   return (

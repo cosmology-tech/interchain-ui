@@ -4,6 +4,7 @@ import {
   onUnMount,
   Show,
   useRef,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import copy from "copy-to-clipboard";
@@ -21,6 +22,12 @@ import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ClipboardCopyTextProps } from "./clipboard-copy-text.types";
 import Text from "../text";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   const state = useStore<{

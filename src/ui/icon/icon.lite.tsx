@@ -1,7 +1,13 @@
-import { Show } from "@builder.io/mitosis";
+import { Show, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import allIcons from "./icons.svg";
 import { IconProps } from "./icon.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Icon(props: IconProps) {
   return (

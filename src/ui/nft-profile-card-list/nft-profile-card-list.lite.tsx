@@ -1,10 +1,17 @@
-import { For } from "@builder.io/mitosis";
+import { For, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import NftProfileCard from "../nft-profile-card";
-import { NftProfileCardProps } from "../nft-profile-card/nft-profile-card.types";
 import * as styles from "./nft-profile-card-list.css";
-import { NftProfileCardListProps } from "./nft-profile-card-list-types";
+
+import type { NftProfileCardProps } from "../nft-profile-card/nft-profile-card.types";
+import type { NftProfileCardListProps } from "./nft-profile-card-list-types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftProfileCardList(props: NftProfileCardListProps) {
   return (

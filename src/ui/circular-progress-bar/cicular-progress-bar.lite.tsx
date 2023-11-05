@@ -3,11 +3,18 @@ import {
   onMount,
   onUpdate,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import * as styles from "./circular-progress-bar.css";
 import { CircularProgressBarProps } from "./circular-progress-bar.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function CicularProgressBar(props: CircularProgressBarProps) {
   useDefaultProps({

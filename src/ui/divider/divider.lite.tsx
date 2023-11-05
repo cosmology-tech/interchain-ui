@@ -1,6 +1,12 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import { DividerProps } from "./divider.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<DividerProps>({
   orientation: "horizontal",

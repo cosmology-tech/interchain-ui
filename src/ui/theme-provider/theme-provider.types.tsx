@@ -12,7 +12,10 @@ export const DEFAULT_VALUES = {
 
 export interface ThemeProviderProps extends BaseComponentProps {
   accent?: Accent;
+  // TODO: rename all ThemeVariant related public API to use colorMode
   defaultTheme?: UIState["theme"];
+  // Force color mode regardless of what locally saved mode is
+  forceColorMode?: UIState["theme"];
   overrides?: ComponentOverrideMap;
   children?: any;
   themeDefs?: Array<ThemeDef>;

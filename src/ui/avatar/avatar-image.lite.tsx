@@ -4,11 +4,18 @@ import {
   useStore,
   useRef,
   onUnMount,
+  useMetadata,
 } from "@builder.io/mitosis";
 import cls from "clsx";
 import AvatarName from "./avatar-name.lite";
 import { avatarImg } from "./avatar.css";
 import type { AvatarImageProps } from "./avatar.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AvatarImage(props: AvatarImageProps) {
   let imgRef = useRef<HTMLImageElement | null>(null);

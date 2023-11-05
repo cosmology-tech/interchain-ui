@@ -9,11 +9,14 @@ import { store } from "../../models/store";
 import { toNumber } from "../../helpers/number";
 
 import * as styles from "./nft-mint.css";
-import { NftMintProps } from "./nft-mint.types";
+import type { NftMintProps } from "./nft-mint.types";
 
 useMetadata({
   isAttachedToShadowDom: true,
   scaffolds: ["number-field"],
+  rsc: {
+    componentType: "client",
+  },
 });
 
 export default function NftMint(props: NftMintProps) {

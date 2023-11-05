@@ -1,4 +1,4 @@
-import { useStore, onUpdate, useRef } from "@builder.io/mitosis";
+import { useStore, onUpdate, useRef, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import isEqual from "lodash/isEqual";
 import cloneDeep from "lodash/cloneDeep";
@@ -12,6 +12,12 @@ import {
   AddLiquidityProps,
   onAddLiquidityItem,
 } from "./add-liquidity.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AddLiquidity(props: AddLiquidityProps) {
   // amountChangeTypeRef is represented for which amount is changing now, and it's not for UI rendering

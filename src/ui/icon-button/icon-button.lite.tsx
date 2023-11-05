@@ -1,8 +1,15 @@
+import { useMetadata } from "@builder.io/mitosis";
 import clsx from "clsx";
 import Icon from "../icon";
 import Button from "../button";
 import * as styles from "./icon-button.css";
-import { IconButtonProps } from "./icon-button.types";
+import type { IconButtonProps } from "./icon-button.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function IconButton(props: IconButtonProps) {
   return (

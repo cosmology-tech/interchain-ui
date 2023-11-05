@@ -1,10 +1,4 @@
-import {
-  useStore,
-  onUpdate,
-  onMount,
-  onUnMount,
-  useRef,
-} from "@builder.io/mitosis";
+import { onMount, useRef, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import {
   getCurrencyFormatter,
@@ -13,6 +7,12 @@ import {
 import { store } from "../../models/store";
 import { I18nProviderProps } from "./i18n-provider.types";
 import { NumberFormatProps } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function I18nProvider(props: I18nProviderProps) {
   let numberFormatterRef = useRef<Intl.NumberFormat>(null);

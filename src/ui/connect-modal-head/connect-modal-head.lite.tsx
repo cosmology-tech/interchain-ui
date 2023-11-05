@@ -5,6 +5,7 @@ import {
   useRef,
   Show,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import IconButton from "../icon-button";
@@ -14,6 +15,12 @@ import { connectModalHeadTitleOverrides } from "./connect-modal-head.helper";
 import type { ThemeVariant } from "../../models/system.model";
 import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ConnectModalHeadProps } from "./connect-modal-head.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalHead(props: ConnectModalHeadProps) {
   useDefaultProps({

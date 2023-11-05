@@ -1,9 +1,15 @@
-import { For } from "@builder.io/mitosis";
+import { For, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import BondingListItem from "../bonding-list-item";
 import { BondingListProps } from "./bonding-list.types";
 import { BondingListItemProps } from "../bonding-list-item/bonding-list-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BondingList(props: BondingListProps) {
   return (

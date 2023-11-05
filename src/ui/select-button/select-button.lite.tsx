@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import Icon from "../icon";
@@ -19,6 +20,12 @@ import {
 } from "./select-button.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { SelectButtonProps } from "./select-button.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function SelectButton(props: SelectButtonProps) {
   useDefaultProps({

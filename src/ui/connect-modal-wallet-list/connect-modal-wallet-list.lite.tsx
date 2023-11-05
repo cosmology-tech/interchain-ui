@@ -5,6 +5,7 @@ import {
   onUnMount,
   onUpdate,
   useRef,
+  useMetadata,
   For,
 } from "@builder.io/mitosis";
 import anime from "animejs";
@@ -20,6 +21,12 @@ import {
 import { bottomShadow } from "../shared/shared.css";
 import { store } from "../../models/store";
 import type { ConnectModalWalletListProps } from "./connect-modal-wallet-list.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalWalletList(
   props: ConnectModalWalletListProps

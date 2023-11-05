@@ -1,5 +1,5 @@
 import {
-  onUpdate,
+  useMetadata,
   onMount,
   useRef,
   useDefaultProps,
@@ -18,6 +18,12 @@ import { store } from "../../models/store";
 import type { ShowMoreProps } from "./show-more.types";
 import * as styles from "./show-more.css";
 import { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ShowMore(props: ShowMoreProps) {
   useDefaultProps({
@@ -66,31 +72,31 @@ export default function ShowMore(props: ShowMoreProps) {
     });
 
     setTimeout(() => {
-    if (elementRef.offsetHeight > props.heightToShowMore) {
-      state.showToggle = true;
+      if (elementRef.offsetHeight > props.heightToShowMore) {
+        state.showToggle = true;
 
-      // Listen the resize event to get container height
-      resizeRef = debounce(() => {
-        elementRef.style.height = "auto";
-        eleHeight = elementRef.offsetHeight + 50;
-        elementRef.style.height = isVisibleRef
-          ? `${eleHeight}px`
-          : `${props.heightToShowMore}px`;
-        state.updateAnimationRef();
-      }, 100);
-      window.addEventListener("resize", resizeRef);
-
-      // Simulate useLayoutEffect
-      setTimeout(() => {
-        if (!eleHeight) {
+        // Listen the resize event to get container height
+        resizeRef = debounce(() => {
+          elementRef.style.height = "auto";
           eleHeight = elementRef.offsetHeight + 50;
-        }
+          elementRef.style.height = isVisibleRef
+            ? `${eleHeight}px`
+            : `${props.heightToShowMore}px`;
+          state.updateAnimationRef();
+        }, 100);
+        window.addEventListener("resize", resizeRef);
 
-        state.updateAnimationRef();
-      }, 0);
-    } else {
-      state.showToggle = false;
-    }
+        // Simulate useLayoutEffect
+        setTimeout(() => {
+          if (!eleHeight) {
+            eleHeight = elementRef.offsetHeight + 50;
+          }
+
+          state.updateAnimationRef();
+        }, 0);
+      } else {
+        state.showToggle = false;
+      }
     }, 100);
   });
 

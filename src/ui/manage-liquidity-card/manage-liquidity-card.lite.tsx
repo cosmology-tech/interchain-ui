@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   Show,
+  useMetadata,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 
@@ -15,6 +16,12 @@ import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import * as styles from "./manage-liquidity-card.css";
 import { ManageLiquidityCardProps } from "./manage-liquidity-card.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
   const state = useStore<{

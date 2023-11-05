@@ -3,7 +3,7 @@ import {
   useDefaultProps,
   useRef,
   onUpdate,
-  onMount,
+  useMetadata,
 } from "@builder.io/mitosis";
 import {
   computePosition,
@@ -18,7 +18,13 @@ import Box from "../box";
 import Text from "../text";
 
 import * as styles from "./tooltip.css";
-import { TooltipProps } from "./tooltip.types";
+import type { TooltipProps } from "./tooltip.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Tooltip(props: TooltipProps) {
   useDefaultProps({

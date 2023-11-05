@@ -1,10 +1,16 @@
-import { For } from "@builder.io/mitosis";
+import { For, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import NftTraitListItem from "../nft-trait-list-item";
 import * as styles from "./nft-trait-list.css";
 import { NftTraitListItemProps } from "../nft-trait-list-item/nft-trait-list-item.types";
 import { NftTraitListProps } from "./nft-trait-list.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftTraitList(props: NftTraitListProps) {
   return (

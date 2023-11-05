@@ -1,8 +1,14 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 
 import Box from "../box";
 import BreadcrumbItem from "./breadcrumb-item.lite";
 import { BreadcrumbProps } from "./breadcrumb.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<BreadcrumbProps>>({
   width: { tablet: "90%", desktop: "80%" },
