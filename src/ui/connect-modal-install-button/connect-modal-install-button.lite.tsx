@@ -1,10 +1,22 @@
-import { onMount, onUnMount, useStore, useRef } from "@builder.io/mitosis";
+import {
+  onMount,
+  onUnMount,
+  useStore,
+  useRef,
+  useMetadata,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
 import { store } from "../../models/store";
 import { installButtonStyles } from "./connect-modal-install-button.css";
 import { installButtonOverrides } from "./connect-modal-install-button.helper";
 import type { ConnectModalInstallButtonProps } from "./connect-modal-install-button.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalInstallButton(
   props: ConnectModalInstallButtonProps

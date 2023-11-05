@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import { store } from "../../models/store";
 import Text from "../text";
@@ -17,6 +18,12 @@ import TextField from "../text-field";
 import { baseButton } from "../button/button.css";
 import { textFieldRoot, chainItem } from "./change-chain-input.css";
 import type { ChangeChainInputProps } from "./change-chain-input.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ChangeChainInput(props: ChangeChainInputProps) {
   useDefaultProps({

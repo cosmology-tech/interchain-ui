@@ -11,7 +11,12 @@ import { rainbowSprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BoxProps } from "./box.types";
 import { DEFAULT_VALUES } from "./box.types";
 
-useMetadata({ isAttachedToShadowDom: true });
+useMetadata({
+  isAttachedToShadowDom: true,
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Box(props: BoxProps) {
   useDefaultProps({

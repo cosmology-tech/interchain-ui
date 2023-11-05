@@ -28,6 +28,9 @@ import type { ThemeVariant } from "../../models/system.model";
 useMetadata({
   isAttachedToShadowDom: true,
   scaffolds: ["chain-swap-combobox", "number-field"],
+  rsc: {
+    componentType: "client",
+  },
 });
 
 export default function TransferItem(props: TransferItemProps) {

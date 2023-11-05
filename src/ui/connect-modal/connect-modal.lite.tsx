@@ -17,7 +17,13 @@ import {
 import { connectModalOverrides } from "./connect-modal.helper";
 import type { OverrideStyleManager } from "../../styles/override/override";
 
-useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
+useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["modal"],
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModal(props: ConnectModalProps) {
   const state = useStore<{

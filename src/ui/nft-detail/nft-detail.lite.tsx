@@ -1,4 +1,4 @@
-import { For, Show, useStore } from "@builder.io/mitosis";
+import { useMetadata, Show } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
@@ -14,8 +14,13 @@ import NftDetailActivityList from "../nft-detail-activity-list";
 import * as styles from "./nft-detail.css";
 import { NftDetailProps } from "./nft-detail.types";
 
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
+
 export default function NftDetail(props: NftDetailProps) {
-  const state = useStore<{}>({});
   return (
     <Box className={styles.nftDetail}>
       <Stack space="$10">

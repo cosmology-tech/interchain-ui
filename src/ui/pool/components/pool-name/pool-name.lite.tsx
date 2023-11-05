@@ -1,9 +1,15 @@
-import { useStore} from "@builder.io/mitosis";
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../../../stack";
 import Box from "../../../box";
 import Text from "../../../text";
-import { PoolNameProps } from "./pool-name.types";
+import type { PoolNameProps } from "./pool-name.types";
 import * as styles from "./pool-name.css";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function PoolName(props: PoolNameProps) {
   return (

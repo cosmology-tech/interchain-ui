@@ -26,6 +26,9 @@ import { store } from "../../models/store";
 useMetadata({
   isAttachedToShadowDom: true,
   scaffolds: ["number-field"],
+  rsc: {
+    componentType: "client",
+  },
 });
 
 useDefaultProps<Partial<TokenInputProps>>({

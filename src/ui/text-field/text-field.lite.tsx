@@ -5,6 +5,7 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import Stack from "../stack";
@@ -25,6 +26,12 @@ import {
 import { validTypes, defaultInputModesForType } from "./text-field.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { TextFieldProps } from "./text-field.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function TextField(props: TextFieldProps) {
   useDefaultProps({

@@ -1,6 +1,12 @@
-import { onMount, onUpdate, useRef } from "@builder.io/mitosis";
+import { onMount, onUpdate, useRef, useMetadata } from "@builder.io/mitosis";
 import { animateLayout } from "./animate-layout.helper";
 import type { AnimateLayoutProps } from "./animate-layout.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function AnimateLayout(props: AnimateLayoutProps) {
   let parentRef = useRef<HTMLDivElement>(null);

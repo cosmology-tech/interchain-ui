@@ -1,6 +1,12 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import type { StackProps } from "./stack.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Stack(props: StackProps) {
   useDefaultProps({

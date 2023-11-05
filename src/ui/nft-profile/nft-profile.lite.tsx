@@ -1,4 +1,4 @@
-import { Show } from "@builder.io/mitosis";
+import { Show, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -6,7 +6,13 @@ import Box from "../box";
 import Icon from "../icon";
 import NftProfileCardList from "../nft-profile-card-list";
 import * as styles from "./nft-profile.css";
-import { NftProfileProps } from "./nft-profile.types";
+import type { NftProfileProps } from "./nft-profile.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftProfile(props: NftProfileProps) {
   return (

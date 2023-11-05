@@ -1,6 +1,7 @@
 import {
   useStore,
   useDefaultProps,
+  useMetadata,
   useRef,
   onMount,
   onUnMount,
@@ -12,6 +13,12 @@ import { store } from "../../models/store";
 import { avatarSize } from "./avatar.helper";
 import { avatarSizeVar, avatar } from "./avatar.css";
 import type { AvatarProps } from "./avatar.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<AvatarProps>>({
   size: "md",

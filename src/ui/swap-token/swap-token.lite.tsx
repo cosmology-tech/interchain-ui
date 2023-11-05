@@ -5,6 +5,7 @@ import {
   onUnMount,
   useStore,
   useDefaultProps,
+  useMetadata,
   For,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
@@ -22,8 +23,14 @@ import { IconProps } from "../icon/icon.types";
 import type { ThemeVariant } from "../../models/system.model";
 
 import * as styles from "./swap-token.css";
-import { SwapTokenProps } from "./swap-token.types";
-import { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { SwapTokenProps } from "./swap-token.types";
+import type { AvailableItem } from "../transfer-item/transfer-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<SwapTokenProps>>({
   toleranceLimits: [1, 2.5, 3, 5],

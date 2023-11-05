@@ -5,6 +5,7 @@ import {
   onUpdate,
   onMount,
   onUnMount,
+  useMetadata,
 } from "@builder.io/mitosis";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clx from "clsx";
@@ -14,7 +15,6 @@ import {
   SWIPE_TRESHOLD,
   TIME_BEFORE_UNMOUNT,
 } from "./toast.constants";
-import Spinner from "../spinner";
 import Icon from "../icon";
 import {
   // ==== css vars
@@ -38,6 +38,12 @@ import {
 import { store } from "../../models/store";
 import type { ToastHeight, ToastProps } from "./toast.types";
 import type { IconName } from "../icon/icon.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Toast(props: ToastProps) {
   const toastRef = useRef<HTMLLIElement>(null);

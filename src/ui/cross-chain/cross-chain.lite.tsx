@@ -1,9 +1,16 @@
+import { useMetadata } from "@builder.io/mitosis";
 import AssetListHeader from "../asset-list-header";
 import AssetList from "../asset-list";
 import Box from "../box";
 import Text from "../text";
 import * as styles from "./cross-chain.css";
-import { CrossChainProps } from "./cross-chain.types";
+import type { CrossChainProps } from "./cross-chain.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function CrossChain(props: CrossChainProps) {
   return (

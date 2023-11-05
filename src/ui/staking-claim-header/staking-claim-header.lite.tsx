@@ -1,9 +1,16 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Button from "../button";
 import * as styles from "./staking-claim-header.css";
-import { StakingClaimHeaderProps } from "./staking-claim-header.types";
+import type { StakingClaimHeaderProps } from "./staking-claim-header.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
   return (

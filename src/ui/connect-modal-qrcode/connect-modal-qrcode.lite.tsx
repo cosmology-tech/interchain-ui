@@ -6,6 +6,7 @@ import {
   onUpdate,
   useRef,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import anime from "animejs";
 import type { ConnectModalQRCodeProps } from "./connect-modal-qrcode.types";
@@ -32,6 +33,12 @@ import {
 import type { AnimeInstance } from "animejs";
 import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   useDefaultProps({

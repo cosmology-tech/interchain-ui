@@ -1,9 +1,16 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./pool-info-header.css";
 import { PoolInfoHeaderProps } from "./pool-info-header.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function PoolsHeader(props: PoolInfoHeaderProps) {
   return (

@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  useMetadata,
+} from "@builder.io/mitosis";
 import clx from "clsx";
 import type { ConnectModalQRCodeErrorProps } from "./connect-modal-qrcode-error.types";
 import QRCode from "../qrcode";
@@ -21,6 +27,12 @@ import {
 } from "./connect-modal-qrcode-error.helper";
 import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalQrCodeError(
   props: ConnectModalQRCodeErrorProps

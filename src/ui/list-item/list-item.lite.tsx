@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
@@ -15,6 +16,12 @@ import {
 } from "./list-item.css";
 import type { ListItemProps } from "./list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ComboboxItem(props: ListItemProps) {
   useDefaultProps({

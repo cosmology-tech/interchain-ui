@@ -1,4 +1,4 @@
-import { For, useStore } from "@builder.io/mitosis";
+import { For, useStore, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -8,7 +8,13 @@ import ProgressBar from "../progress-bar";
 import { store } from "../../models/store";
 
 import * as styles from "./remove-liquidity.css";
-import { RemoveLiquidityProps } from "./remove-liquidity.types";
+import type { RemoveLiquidityProps } from "./remove-liquidity.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function RemoveLiquidity(props: RemoveLiquidityProps) {
   const state = useStore<{
@@ -22,7 +28,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
     progress: 50,
     handeProgressClick(value: number) {
       state.progress = value;
-      props?.onChange(value)
+      props?.onChange(value);
     },
     get removedBalance() {
       return new BigNumber(state.progress)

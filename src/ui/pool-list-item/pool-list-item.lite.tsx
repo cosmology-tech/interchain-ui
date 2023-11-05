@@ -1,4 +1,10 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  useMetadata,
+} from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import Box from "../box";
@@ -12,6 +18,12 @@ import * as styles from "./pool-list-item.css";
 
 import type { PoolListItemProps } from "./pool-list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function PoolListItem(props: PoolListItemProps) {
   const state = useStore<{

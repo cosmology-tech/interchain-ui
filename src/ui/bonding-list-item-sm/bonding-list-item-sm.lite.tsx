@@ -1,4 +1,4 @@
-import { useStore } from "@builder.io/mitosis";
+import { useStore, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Box from "../box";
@@ -6,6 +6,12 @@ import Text from "../text";
 import Button from "../button";
 import { store } from "../../models/store";
 import { BondingListItemSmProps } from "./bonding-list-item-sm.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BondingListItemSm(props: BondingListItemSmProps) {
   const state = useStore<{

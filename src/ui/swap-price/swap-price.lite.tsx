@@ -1,4 +1,11 @@
-import { useRef, useStore, Show, For, Fragment } from "@builder.io/mitosis";
+import {
+  useRef,
+  useStore,
+  Show,
+  For,
+  Fragment,
+  useMetadata,
+} from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
 import anime from "animejs";
@@ -7,9 +14,15 @@ import Box from "../box";
 import Text from "../text";
 import IconButton from "../icon-button";
 import * as styles from "./swap-price.css";
-import { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
+import type { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
 import { store } from "../../models/store";
 import type { AnimeInstance } from "animejs";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function SwapPrice(props: SwapPriceProps) {
   const priceRef = useRef(null);

@@ -1,4 +1,4 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
 import {
   textFieldAddon,
@@ -7,6 +7,12 @@ import {
   textFieldAddonDivider,
 } from "./text-field-addon.css";
 import type { TextFieldAddonProps } from "./text-field-addon.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function TextFieldAddon(props: TextFieldAddonProps) {
   useDefaultProps({

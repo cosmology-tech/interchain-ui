@@ -16,7 +16,13 @@ import type { ThemeVariant } from "../../models/system.model";
 import type { BasicModalProps } from "./basic-modal.types";
 import { modalHeader, modalContent, modalChildren } from "./basic-modal.css";
 
-useMetadata({ isAttachedToShadowDom: true, scaffolds: ["modal"] });
+useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["modal"],
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BasicModal(props: BasicModalProps) {
   const state = useStore<{ theme: ThemeVariant }>({

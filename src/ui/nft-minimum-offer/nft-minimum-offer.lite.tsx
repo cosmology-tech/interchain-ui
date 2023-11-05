@@ -1,11 +1,17 @@
-import { For, useStore, onUpdate } from "@builder.io/mitosis";
+import { For, useStore, onUpdate, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Button from "../button";
 import Box from "../box";
 import TokenInput from "../token-input";
 import StarText from "../star-text";
 import NftFees from "../nft-fees";
-import { NftMinimumOfferProps } from "./nft-minimum-offer.types";
+import type { NftMinimumOfferProps } from "./nft-minimum-offer.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftMinimumOffer(props: NftMinimumOfferProps) {
   const state = useStore<{

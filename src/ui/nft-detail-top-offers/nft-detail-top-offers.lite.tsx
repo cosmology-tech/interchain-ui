@@ -1,9 +1,16 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import StarText from "../star-text";
 
 import * as styles from "./nft-detail-top-offers.css";
-import { NftDetailTopOfferProps } from "./nft-detail-top-offers.types";
+import type { NftDetailTopOfferProps } from "./nft-detail-top-offers.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftDetailTopOffer(props: NftDetailTopOfferProps) {
   return (

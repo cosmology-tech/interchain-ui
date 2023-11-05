@@ -11,6 +11,9 @@ import { BondingMoreProps } from "./bonding-more.types";
 useMetadata({
   isAttachedToShadowDom: true,
   scaffolds: ["number-field"],
+  rsc: {
+    componentType: "client",
+  },
 });
 
 export default function BondingMore(props: BondingMoreProps) {

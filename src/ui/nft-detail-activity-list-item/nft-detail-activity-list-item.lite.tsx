@@ -1,10 +1,17 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Box from "../box";
 
 import * as styles from "./nft-detail-activity-list-item.css";
-import { NftDetailActivityListItemProps } from "./nft-detail-activity-list-item.types";
+import type { NftDetailActivityListItemProps } from "./nft-detail-activity-list-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftDetailActivityListItem(
   props: NftDetailActivityListItemProps

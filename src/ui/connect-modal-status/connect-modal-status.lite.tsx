@@ -4,6 +4,7 @@ import {
   onMount,
   onUnMount,
   useRef,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
@@ -35,6 +36,12 @@ import { bottomShadow } from "../shared/shared.css";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ConnectModalStatusProps } from "./connect-modal-status.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalStatus(props: ConnectModalStatusProps) {
   const state = useStore<{ theme: ThemeVariant }>({

@@ -1,10 +1,17 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import type { TextProps } from "./text.types";
 import { getTextTransformStyles, getVariantStyles } from "./text.helper";
 
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
+
 export default function Text(props: TextProps) {
-  useDefaultProps({
+  useDefaultProps<Partial<TextProps>>({
+    as: "p",
     fontSize: "$sm",
     color: "$text",
     variant: "body",

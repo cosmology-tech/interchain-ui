@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
+  useMetadata,
   Show,
 } from "@builder.io/mitosis";
 import ListItem from "../list-item";
@@ -14,6 +15,12 @@ import { store } from "../../models/store";
 import { chainLogoSizes } from "./chain-list-item.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ChainListItemProps } from "./chain-list-item.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ChainListItem(props: ChainListItemProps) {
   useDefaultProps({

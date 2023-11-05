@@ -1,9 +1,15 @@
-import { useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
 import Icon from "../icon";
 import * as styles from "./scroll-indicator.css";
 import { ScrollIndicatorProps } from "./scroll-indicator.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<ScrollIndicatorProps>>({
   showShadow: true,

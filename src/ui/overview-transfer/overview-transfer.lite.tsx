@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   onUpdate,
+  useMetadata,
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
@@ -16,6 +17,12 @@ import { store } from "../../models/store";
 import type { OverviewTransferProps } from "./overview-transfer.types";
 import { AvailableItem } from "../transfer-item/transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function OverviewTransfer(props: OverviewTransferProps) {
   const state = useStore<{

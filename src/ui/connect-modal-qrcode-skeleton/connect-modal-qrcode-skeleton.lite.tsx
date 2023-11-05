@@ -1,10 +1,22 @@
-import { useStore, onMount, onUnMount, useRef } from "@builder.io/mitosis";
+import {
+  useStore,
+  onMount,
+  onUnMount,
+  useRef,
+  useMetadata,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import { qrcodeSkeleton } from "./connect-modal-qrcode-skeleton.css";
 import { store } from "../../models/store";
 import { connectModalQRCodeSkeletonOverrides } from "./connect-modal-qrcode-skeleton.helper";
 import type { ThemeVariant } from "../../models/system.model";
 import type { OverrideStyleManager } from "../../styles/override/override";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalQrCodeSkeleton(props) {
   const state = useStore<{

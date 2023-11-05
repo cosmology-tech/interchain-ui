@@ -33,7 +33,12 @@ import type { OverrideStyleManager } from "../../styles/override/override";
 import type { ThemeVariant } from "../../models/system.model";
 import { WalletPluginSystem } from "../connect-modal-wallet-list";
 
-useMetadata({ isAttachedToShadowDom: true });
+useMetadata({
+  isAttachedToShadowDom: true,
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function ConnectModalWalletButton(
   props: ConnectModalWalletButtonProps

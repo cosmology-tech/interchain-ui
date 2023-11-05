@@ -4,6 +4,7 @@ import {
   onUnMount,
   useRef,
   Show,
+  useMetadata,
 } from "@builder.io/mitosis";
 import clsx from "clsx";
 import BigNumber from "bignumber.js";
@@ -15,6 +16,12 @@ import PoolName from "../pool/components/pool-name";
 import * as styles from "./pool-card.css";
 import type { PoolCardProps } from "./pool-card.types";
 import type { ThemeVariant } from "../../models/system.model";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function PoolCard(props: PoolCardProps) {
   const state = useStore<{ theme: ThemeVariant }>({

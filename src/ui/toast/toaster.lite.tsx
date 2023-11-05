@@ -5,6 +5,7 @@ import {
   onMount,
   onUnMount,
   useDefaultProps,
+  useMetadata,
   For,
   Show,
 } from "@builder.io/mitosis";
@@ -34,6 +35,12 @@ import {
   toaster,
 } from "./toast.css";
 import { store } from "../../models/store";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function Toaster(props: ToasterProps) {
   useDefaultProps({

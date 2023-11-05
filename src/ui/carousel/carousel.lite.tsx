@@ -2,6 +2,7 @@ import {
   Show,
   For,
   useStore,
+  useMetadata,
   onUpdate,
   useDefaultProps,
 } from "@builder.io/mitosis";
@@ -11,6 +12,12 @@ import ScrollIndicator from "../scroll-indicator";
 import { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { CarouselProps } from "./carousel.types";
 import * as styles from "./carousel.css";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 useDefaultProps<Partial<CarouselProps>>({
   gap: "20px",

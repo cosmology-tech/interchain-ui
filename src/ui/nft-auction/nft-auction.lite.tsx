@@ -1,11 +1,17 @@
-import { For, useStore, onUpdate } from "@builder.io/mitosis";
+import { For, useStore, onUpdate, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Button from "../button";
 import TokenInput from "../token-input";
 import StarText from "../star-text";
 import NftFees from "../nft-fees";
 import Box from "../box";
-import { NftAuctionProps } from "./nft-auction.types";
+import type { NftAuctionProps } from "./nft-auction.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftAuction(props: NftAuctionProps) {
   const state = useStore<{

@@ -1,7 +1,14 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import { BondingCardProps } from "./bonding-card.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BondingCard(props: BondingCardProps) {
   return (

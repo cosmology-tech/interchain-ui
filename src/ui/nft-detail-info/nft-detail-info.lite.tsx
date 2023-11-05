@@ -1,10 +1,17 @@
+import { useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import StarText from "../star-text";
 import * as styles from "./nft-detail-info.css";
-import { NftDetailInfoProps } from "./nft-detail-info.type";
+import type { NftDetailInfoProps } from "./nft-detail-info.type";
 import isNumber from "lodash/isNumber";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function NftDetailInfo(props: NftDetailInfoProps) {
   return (

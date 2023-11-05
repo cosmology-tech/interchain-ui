@@ -1,7 +1,13 @@
-import { onUpdate, useRef } from "@builder.io/mitosis";
+import { onUpdate, useRef, useMetadata } from "@builder.io/mitosis";
 import anime from "animejs";
 import type { AnimeInstance } from "animejs";
 import type { FadeInProps } from "./fade-in.types";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function FadeIn(props: FadeInProps) {
   let fadeInAnimationRef = useRef<AnimeInstance | null>(null);

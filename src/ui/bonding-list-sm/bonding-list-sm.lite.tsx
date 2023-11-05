@@ -1,14 +1,18 @@
 import BigNumber from "bignumber.js";
-import { For } from "@builder.io/mitosis";
+import { For, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import BondingListItemSm from "../bonding-list-item-sm";
 import { BondingListSmProps } from "./bonding-list-sm.types";
-import {
-  BondingListItemSmProps,
-} from "../bonding-list-item-sm/bonding-list-item-sm.types";
+import { BondingListItemSmProps } from "../bonding-list-item-sm/bonding-list-item-sm.types";
 import { store } from "../../models/store";
+
+useMetadata({
+  rsc: {
+    componentType: "client",
+  },
+});
 
 export default function BondingListSm(props: BondingListSmProps) {
   return (

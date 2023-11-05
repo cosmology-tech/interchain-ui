@@ -5,6 +5,9 @@ import { TokenNumberFieldProps } from "./token-number-field.types";
 useMetadata({
   isAttachedToShadowDom: true,
   scaffolds: ["number-field"],
+  rsc: {
+    componentType: "client",
+  },
 });
 
 export default function TokenNumberField(props: TokenNumberFieldProps) {
