@@ -18,22 +18,29 @@
       "import": "./dist/interchain-ui-kit-react.cjs.css",
       "require": "./dist/interchain-ui-kit-react.cjs.css"
     },
+    "./globalStyles": {
+      "import": "./dist/styles/global.css.css",
+      "require": "./dist/styles/global.css.css"
+    },
     "./package.json": "./package.json"
   },
   "targets": {
     "main": {
       "optimize": true,
       "includeNodeModules": [
-        "@formkit/auto-animate",
-        "zustand"
+        "@formkit/auto-animate"
       ]
     },
     "module": {
       "optimize": true,
       "includeNodeModules": [
-        "@formkit/auto-animate",
-        "zustand"
+        "@formkit/auto-animate"
       ]
+    },
+    "globalStyles": {
+      "source": "src/styles/global.css.ts",
+      "context": "browser",
+      "distDir": "./dist"
     }
   },
   "sideEffects": false,

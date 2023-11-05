@@ -1,4 +1,5 @@
 import { globalStyle } from "@vanilla-extract/css";
+import { themeVars } from "./themes.css";
 
 globalStyle(`*, *::before, *::after`, {
   boxSizing: `border-box`,
@@ -10,6 +11,7 @@ globalStyle(`*`, {
 
 globalStyle(`html, body`, {
   height: `100%`,
+  fontFamily: themeVars.font.body,
 });
 
 globalStyle(`body`, {
