@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.12...@interchain-ui/react@1.12.0) (2023-11-05)
+
+### Bug Fixes
+
+- next js server issues ([c979dda](https://github.com/cosmology-tech/interchain-ui/commit/c979dda89ef8b20c13f1e914258273350012180f))
+
+### Features
+
+- add forced color mode ([861fc34](https://github.com/cosmology-tech/interchain-ui/commit/861fc343e4f28dc7262a83ac1b8dd60591452544))
+- add global style reset import ([58cdaf3](https://github.com/cosmology-tech/interchain-ui/commit/58cdaf3415defd1a51d1fff29146f71c656afdf2))
+
 ## [1.11.12](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.11...@interchain-ui/react@1.11.12) (2023-10-31)
 
 ### Bug Fixes
