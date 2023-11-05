@@ -31,6 +31,7 @@ export interface UIState {
   // which is derived from themeMode
   theme: ThemeVariant;
   themeClass: string;
+  themeClasses: [string, string];
   themeAccent: Accent;
   customTheme: string | null;
   themeDefs: Array<ThemeDef>;
@@ -65,6 +66,7 @@ export const store = createStore(
       themeMode: null,
       theme: null,
       themeClass: "",
+      themeClasses: [lightThemeClass, darkThemeClass],
       themeAccent: "blue",
       // Custom theme contract
       themeDefs: [],

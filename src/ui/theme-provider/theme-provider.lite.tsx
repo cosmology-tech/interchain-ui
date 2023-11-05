@@ -140,5 +140,13 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     }
   });
 
-  return <div>{props.children}</div>;
+  return (
+    <div
+      data-interchain-color-mode={
+        props.forceColorMode == null ? undefined : props.forceColorMode
+      }
+    >
+      {props.children}
+    </div>
+  );
 }
