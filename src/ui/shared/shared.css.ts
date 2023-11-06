@@ -38,6 +38,10 @@ export const fullWidthHeight = style({
   height: "100%",
 });
 
+export const fullWidth = style({
+  width: "100%",
+});
+
 export const scrollBarThumbBgVar = createVar();
 
 const scrollBarBase = style({

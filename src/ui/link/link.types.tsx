@@ -8,6 +8,8 @@ export interface LinkProps extends Omit<BaseComponentProps, "className"> {
   target?: string;
   rel?: string;
   underline?: boolean;
+  background?: boolean;
+  color?: Sprinkles["color"];
   className?: ClassValue;
   children?: any;
   attributes?: Sprinkles;

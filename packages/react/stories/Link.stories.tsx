@@ -17,6 +17,12 @@ export const Primary: Story = {
   args: {
     href: "google.com",
     target: "_blank",
+    background: true,
+    underline: true,
+    color: {
+      base: "$textSecondary",
+      hover: "$linkHover",
+    },
     children: "Go to google",
   },
 };
