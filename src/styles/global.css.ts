@@ -1,5 +1,5 @@
 import { globalStyle } from "@vanilla-extract/css";
-import { themeVars } from "./themes.css";
+import { SYSTEM_FONT_STACK } from "../styles/tokens/typography";
 
 globalStyle(`*, *::before, *::after`, {
   boxSizing: `border-box`,
@@ -11,7 +11,7 @@ globalStyle(`*`, {
 
 globalStyle(`html, body`, {
   height: `100%`,
-  fontFamily: themeVars.font.body,
+  fontFamily: `Inter, ${SYSTEM_FONT_STACK}`,
 });
 
 globalStyle(`body`, {
