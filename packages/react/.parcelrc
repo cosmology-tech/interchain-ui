@@ -19,8 +19,8 @@
   },
   "optimizers": {
     "*.js": [
-      "@parcel/optimizer-terser",
-      "parcel-optimizer-unlink-css"
+      "parcel-optimizer-unlink-css",
+      "@parcel/optimizer-terser"
     ]
   }
 }
