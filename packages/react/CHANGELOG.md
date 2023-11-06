@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.12.0...@interchain-ui/react@1.12.1) (2023-11-06)
+
+### Bug Fixes
+
+- parcel unlink css transform not run for cjs ([#118](https://github.com/cosmology-tech/interchain-ui/issues/118)) ([28d772e](https://github.com/cosmology-tech/interchain-ui/commit/28d772e7dc21920a0ddcb81dd24b996cfa4c85d6))
+
 # [1.12.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.11.12...@interchain-ui/react@1.12.0) (2023-11-05)
 
 ### Bug Fixes
