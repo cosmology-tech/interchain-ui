@@ -16,7 +16,7 @@ import {
 } from "@floating-ui/dom";
 import Box from "../box";
 import Text from "../text";
-
+import { standardTransitionProperties } from "../shared/shared.css";
 import * as styles from "./tooltip.css";
 import type { TooltipProps } from "./tooltip.types";
 
@@ -66,7 +66,7 @@ export default function Tooltip(props: TooltipProps) {
       Object.assign(floatingTargetRef.style, {
         left: `${x}px`,
         top: `${y}px`,
-        visibility: state.hovered ? "visible" : "hidden",
+        opacity: state.hovered ? "1" : "0",
       });
 
       if (res.middlewareData.arrow) {
@@ -80,7 +80,7 @@ export default function Tooltip(props: TooltipProps) {
           left: "right",
         }[placement.split("-")[0]];
         Object.assign(arrowRef.style, {
-          visibility: state.hovered ? "visible" : "hidden",
+          opacity: state.hovered ? "1" : "0",
           left: arrowX != null ? `${arrowX}px` : "",
           top: arrowY != null ? `${arrowY}px` : "",
           right: "",
@@ -115,6 +115,7 @@ export default function Tooltip(props: TooltipProps) {
         left="0"
         top="0"
         zIndex="1"
+        className={standardTransitionProperties}
       >
         <Text color="$progressBg">{props.title}</Text>
 

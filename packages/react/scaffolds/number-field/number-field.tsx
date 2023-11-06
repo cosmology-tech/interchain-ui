@@ -1,7 +1,6 @@
 import React, { useState, useId, forwardRef } from "react";
-import { useNumberFieldState } from "@react-stately/numberfield";
-import { useNumberField } from "@react-aria/numberfield";
-import { useLocale } from "@react-aria/i18n";
+import { useNumberFieldState } from "react-stately";
+import { useNumberField, useLocale } from "react-aria";
 import { mergeRefs } from "@react-aria/utils";
 
 import clx from "clsx";

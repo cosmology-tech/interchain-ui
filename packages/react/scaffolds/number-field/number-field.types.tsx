@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
-import type { AriaNumberFieldProps } from "@react-aria/numberfield";
+import type { AriaNumberFieldProps } from "react-aria";
 
 export interface NumberInputProps {
   // ==== Core logic props

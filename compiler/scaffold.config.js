@@ -84,4 +84,31 @@ module.exports = {
       path: "../number-field",
     },
   },
+  "governance-checkbox": {
+    jsxMap: {
+      ScaffoldGovernanceCheckbox: "GovernanceCheckbox",
+    },
+    import: {
+      imports: { GovernanceCheckbox: "default" },
+      path: "../governance-checkbox",
+    },
+  },
+  "governance-radio": {
+    jsxMap: {
+      ScaffoldGovernanceRadio: "GovernanceRadio",
+    },
+    import: {
+      imports: { GovernanceRadio: "default" },
+      path: "../governance-radio",
+    },
+  },
+  "governance-radio-group": {
+    jsxMap: {
+      ScaffoldGovernanceRadioGroup: "GovernanceRadioGroup",
+    },
+    import: {
+      imports: { GovernanceRadioGroup: "default" },
+      path: "../governance-radio-group",
+    },
+  },
 };

@@ -214,4 +214,10 @@ export { default as ChangeChainListItem } from "./ui/change-chain-list-item";
 export type { ChangeChainListItemProps } from "./ui/change-chain-list-item/change-chain-list-item.types";
 export { default as ChangeChainInput } from "./ui/change-chain-input";
 export type { ChangeChainInputProps } from "./ui/change-chain-input/change-chain-input.types";
+
+// Governance
+export { default as GovernanceProposalItem } from "./ui/governance/governance-proposal-item.lite";
+export { default as GovernanceVoteBreakdown } from "./ui/governance/governance-vote-breakdown.lite";
+export { default as GovernanceResultCard } from "./ui/governance/governance-result-card.lite";
+
 // End Components

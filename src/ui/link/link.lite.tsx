@@ -22,10 +22,17 @@ export default function Link(props: LinkProps) {
       className={clx(props.className)}
       fontFamily="$body"
       fontSize="$sm"
-      color={{
-        base: "$link",
-        hover: "$link",
-      }}
+      backgroundColor={props.background ? "$cardBg" : undefined}
+      p={props.background ? "$2" : undefined}
+      borderRadius={props.background ? "$md" : undefined}
+      color={
+        props.color
+          ? props.color
+          : {
+              base: "$link",
+              hover: "$link",
+            }
+      }
       textDecoration={{
         base: "none",
         hover: props.underline ? "underline" : "none",
