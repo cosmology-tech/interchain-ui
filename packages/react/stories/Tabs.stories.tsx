@@ -19,15 +19,15 @@ export const Primary: Story = {
     tabs: [
       {
         label: "Tab One",
-        Component: () => <h1>Tab1</h1>,
+        content: <h1>Tab1</h1>,
       },
       {
         label: "Tab Two",
-        Component: () => <h1>Tab2</h1>,
+        content: <h1>Tab2</h1>,
       },
       {
         label: "Tab Three",
-        Component: () => <h1>Tab3</h1>,
+        content: <h1>Tab3</h1>,
       },
     ],
   },

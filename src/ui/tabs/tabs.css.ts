@@ -1,16 +1,13 @@
-import { style, createVar, styleVariants } from "@vanilla-extract/css";
-import { themeVars } from "../../styles/themes.css";
+import { style, createVar } from "@vanilla-extract/css";
 
-const selectedTextColor = createVar();
 export const selectedWidth = createVar();
 export const selectedLeft = createVar();
+
 export const tabsBase = style([
   {
     listStyle: "none",
     display: "flex",
     borderRadius: "50px",
-    minWidth: "465px",
-    zIndex: "1",
   },
 ]);
 
@@ -20,20 +17,8 @@ export const tabsHorizontal = style([
     flexDirection: "row",
   },
 ]);
-export const tabsVertical = style([
-  tabsBase,
-  {
-    flexDirection: "column",
-  },
-]);
 
-export const selected = style([
-  {
-    zIndex: "-1",
-  },
-]);
-
-export const baseBtn = style([
+export const tabButton = style(
   {
     all: "unset",
     cursor: "pointer",
@@ -41,38 +26,14 @@ export const baseBtn = style([
     textAlign: "center",
     borderRadius: "50px",
   },
-]);
+);
 
-export const baseText = style({
-  borderRadius: "50px",
-  transition: "background-color 0.2s ease-in",
-});
-
-export const selectedText = styleVariants({
-  light: [
-    style({
-      vars: {
-        [selectedTextColor]: themeVars.colors.white,
-      },
-      color: selectedTextColor,
-    }),
-  ],
-  dark: [
-    style({
-      vars: {
-        [selectedTextColor]: themeVars.colors.cardBg,
-      },
-      color: selectedTextColor,
-    }),
-  ],
-});
-
-export const selectedBg = style({
-  position: "absolute",
-  zIndex: "-1",
-  borderRadius: "50px",
-  transition: "left 0.1s ease-out",
-  width: selectedWidth,
-  left: selectedLeft,
-  backgroundColor: themeVars.colors.text,
-});
+export const tabSelection = style({
+  zIndex: -1,
+  height: '100%',
+  position: 'absolute',
+  left: 0,
+  borderRadius: '50px',
+  willChange: `transform, width`,
+  transition: `transform 150ms, width 100ms`,
+})

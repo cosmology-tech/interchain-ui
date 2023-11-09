@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
@@ -79,48 +79,58 @@ const proposalListData: GovernanceProposalListData = [
   },
 ];
 
+const PrimaryExample = () => {
+  const proposalsRender = React.useMemo(
+    () => (
+      <Box py="$10">
+        <GovernanceProposalList list={proposalListData} />
+      </Box>
+    ),
+    [proposalListData]
+  );
+
+  const tabs = React.useMemo(
+    () => [
+      {
+        label: "All",
+        content: proposalsRender,
+      },
+      {
+        label: "Pending",
+        content: proposalsRender,
+      },
+      {
+        label: "Passed",
+        content: proposalsRender,
+      },
+      {
+        label: "Rejected",
+        content: proposalsRender,
+      },
+    ],
+    []
+  );
+
+  return (
+    <Box display="flex" flexDirection="column">
+      <Text
+        color="$text"
+        fontSize="$lg"
+        fontWeight="$semibold"
+        attributes={{
+          marginBottom: "$10",
+        }}
+      >
+        Proposals
+      </Text>
+
+      <Tabs tabs={tabs} />
+    </Box>
+  );
+};
 export const Primary: Story = {
   args: {},
   render: (props) => {
-    const proposalsRender = React.useMemo(
-      () => <GovernanceProposalList list={proposalListData} />,
-      [proposalListData]
-    );
-
-    return (
-      <Box display="flex" flexDirection="column">
-        <Text
-          color="$text"
-          fontSize="$lg"
-          fontWeight="$semibold"
-          attributes={{
-            marginBottom: "$10",
-          }}
-        >
-          Proposals
-        </Text>
-
-        <Tabs
-          tabs={[
-            {
-              label: "All",
-              Component: () => proposalsRender,
-            },
-            {
-              label: "Pending",
-              Component: () => proposalsRender,
-            },
-            {
-              label: "Passed",
-              Component: () => proposalsRender,
-            },
-            {
-              label: "Rejected",
-              Component: () => proposalsRender,
-            },
-          ]}
-        />
-      </Box>
-    );
+    return <PrimaryExample />;
   },
 };
