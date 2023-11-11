@@ -11,7 +11,7 @@ export type ComboboxListType = Array<ComboboxListItemType>;
 export type AvailableItem = {
   imgSrc: string;
   symbol: string;
-  denom: string;
+  name: string;
   /**
    * Available amount
    */

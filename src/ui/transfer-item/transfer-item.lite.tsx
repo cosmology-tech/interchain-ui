@@ -99,7 +99,7 @@ export default function TransferItem(props: TransferItemProps) {
       });
       return {
         iconUrl: item?.imgSrc,
-        name: item?.denom,
+        name: item?.name,
         tokenName: item?.symbol,
         amount: `${item?.available}`,
         notionalValue: dollarAmount,

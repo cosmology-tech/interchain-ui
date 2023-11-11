@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     symbol: "OMSO",
-    denom: "Osmosis",
+    name: "Osmosis",
     available: 0.71263,
     priceDisplayAmount: 0.5,
     tokenIcon:

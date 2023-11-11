@@ -108,7 +108,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
             width="$15"
             height="$15"
             attributes={{
-              alt: props.fromDenom,
+              alt: props.fromName,
               src: props.fromImgSrc,
             }}
           />
@@ -126,7 +126,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
             width="$15"
             height="$15"
             attributes={{
-              alt: props.toDenom,
+              alt: props.toName,
               src: props.toImgSrc,
             }}
           />
@@ -166,7 +166,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 marginBottom: "$6",
               }}
             >
-              {`From ${props.fromDenom}`}
+              {`From ${props.fromName}`}
             </Text>
             <Stack
               space="$8"
@@ -187,7 +187,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 width="$11"
                 height="$11"
                 attributes={{
-                  alt: props.fromDenom,
+                  alt: props.fromName,
                   src: props.fromImgSrc,
                 }}
               />
@@ -224,7 +224,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 marginBottom: "$6",
               }}
             >
-              {`To ${props.toDenom}`}
+              {`To ${props.toName}`}
             </Text>
 
             <Stack
@@ -250,7 +250,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 width="$11"
                 height="$11"
                 attributes={{
-                  alt: props.toDenom,
+                  alt: props.toName,
                   src: props.toImgSrc,
                 }}
               />
@@ -321,7 +321,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                     paddingBottom: "$6",
                   }}
                 >
-                  {`To ${props.toDenom}`}
+                  {`To ${props.toName}`}
                 </Text>
 
                 <TextField
@@ -374,7 +374,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
           amount={state.inputAmount}
           priceDisplayAmount={props.priceDisplayAmount}
           symbol={props.fromSymbol}
-          denom={props.fromDenom}
+          name={props.fromName}
           available={props.available}
           tokenIcon={props.fromImgSrc}
           onAmountChange={(value) => state.onAmountChange(value)}
@@ -538,7 +538,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 paddingBottom: "$6",
               }}
             >
-              {`From ${props.fromDenom}`}
+              {`From ${props.fromName}`}
             </Text>
             <TextField
               id="from-address"
@@ -585,7 +585,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 paddingBottom: "$6",
               }}
             >
-              {`To ${props.toDenom}`}
+              {`To ${props.toName}`}
             </Text>
             <TextField
               id="to-address"

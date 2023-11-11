@@ -140,7 +140,7 @@ export default function TokenInput(props: TokenInputProps) {
             >
               <Text fontWeight="$semibold">{props.symbol}</Text>
               <Text color="$textSecondary" fontSize="$xs">
-                {props.denom}
+                {props.name}
               </Text>
             </Stack>
             <div

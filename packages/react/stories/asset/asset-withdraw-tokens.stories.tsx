@@ -21,15 +21,15 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     fromSymbol: "UMEE",
-    fromDenom: "Umee",
+    fromName: "Umee",
     fromAddress: "umee1lqsq...pv4axdaxk",
     fromImgSrc:
       "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.svg",
-    toDenom: "Osmosis",
+    toName: "Osmosis",
     toAddress: "osmo1lqsq...pv48trj5k",
     toImgSrc:
       "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg",
-    available: "25.89",
+    available: 25.89,
     amount: "",
     priceDisplayAmount: 0.5,
     onChange: (value) => {

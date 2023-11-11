@@ -211,7 +211,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 {props.reward.symbol}
               </Text>
               <Text color="$textSecondary" fontSize="$sm" fontWeight="$normal">
-                {props.reward.denom}
+                {props.reward.name}
               </Text>
             </Stack>
 

@@ -4,7 +4,7 @@ export interface AssetListItemProps extends BaseComponentProps {
   isOtherChains?: boolean;
   imgSrc: string;
   symbol: string;
-  denom: string;
+  name: string;
   tokenAmount: string;
   tokenAmountPrice: string;
   chainName?: string;
