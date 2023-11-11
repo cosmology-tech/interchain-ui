@@ -1,11 +1,10 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import AssetList from "../../src/ui/asset-list";
+import SingleChain from "../../src/ui/single-chain";
 
-const meta: Meta<typeof AssetList> = {
-  component: AssetList,
-  title: "Asset/AssetList",
+const meta: Meta<typeof SingleChain> = {
+  component: SingleChain,
+  title: "Asset/SingleChain",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -16,14 +15,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    isOtherChains: false,
+    header: {
+      total: "144.23",
+      onDeposit: () => {
+        console.log("onDeposit");
+      },
+      onWithdraw: () => {
+        console.log("onWithdraw");
+      },
+    },
     list: [
       {
-        isOtherChains: false,
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
         symbol: "USTC",
-        denom: "Terra Classic",
+        name: "Terra Classic",
         tokenAmount: "89.66",
         tokenAmountPrice: "10",
         chainName: "Juno",
@@ -35,11 +41,10 @@ export const Primary: Story = {
         },
       },
       {
-        isOtherChains: false,
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
         symbol: "TORI",
-        denom: "Teritori",
+        name: "Teritori",
         tokenAmount: "102.61",
         tokenAmountPrice: "101.02",
         chainName: "Juno",
