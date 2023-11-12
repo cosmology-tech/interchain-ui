@@ -53,7 +53,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     } = useNumberField(props, state, inputRef);
 
     return (
-      <Box className={props?.className}>
+      <Box className={props?.className} {...props.attributes}>
         <Stack direction="vertical" space="$4">
           {label && <FieldLabel htmlFor={id} label={label} {...labelProps} />}
 

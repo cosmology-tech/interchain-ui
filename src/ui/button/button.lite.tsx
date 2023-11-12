@@ -16,6 +16,7 @@ import { store } from "../../models/store";
 import { recipe, buttonOverrides } from "./button.helper";
 import { isDefaultAccent, getAccentHover } from "../../helpers/style";
 import { themeVars } from "../../styles/themes.css";
+import { fullWidth } from "../shared/shared.css";
 
 import type { UnknownRecord } from "type-fest";
 import type { ButtonProps } from "./button.types";
@@ -94,6 +95,7 @@ export default function Button(props: ButtonProps) {
           isDisabled: props.disabled || props.isLoading,
           theme: state.theme as ThemeVariant,
         }),
+        props.fluidWidth ? fullWidth : null,
         props.className
       )}
       attributes={{

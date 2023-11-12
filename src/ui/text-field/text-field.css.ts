@@ -126,7 +126,7 @@ export const inputIntent = styleVariants({
 export const inputSizes = styleVariants({
   sm: [
     style({
-      minHeight: themeVars.space[14],
+      height: themeVars.space[14],
       paddingLeft: themeVars.space[6],
       paddingRight: themeVars.space[6],
       paddingTop: themeVars.space[4],
@@ -135,11 +135,20 @@ export const inputSizes = styleVariants({
   ],
   md: [
     style({
-      minHeight: themeVars.space[16],
+      height: themeVars.space[16],
       paddingLeft: themeVars.space[10],
       paddingRight: themeVars.space[10],
       paddingTop: themeVars.space[8],
       paddingBottom: themeVars.space[8],
+    }),
+  ],
+  lg: [
+    style({
+      height: themeVars.space[17],
+      paddingLeft: themeVars.space[10],
+      paddingRight: themeVars.space[10],
+      paddingTop: themeVars.space[9],
+      paddingBottom: themeVars.space[9],
     }),
   ],
 });
