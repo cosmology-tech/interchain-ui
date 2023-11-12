@@ -36,6 +36,7 @@ const responsiveProperties = defineProperties({
   defaultCondition: "mobile",
   dynamicProperties: {
     display: true,
+    objectFit: true,
     flex: true,
     flexShrink: true,
     flexGrow: true,

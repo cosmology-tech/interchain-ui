@@ -1,9 +1,9 @@
 import { useMetadata } from "@builder.io/mitosis";
+import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import StarText from "../star-text";
 
-import * as styles from "./nft-detail-top-offers.css";
 import type { NftDetailTopOfferProps } from "./nft-detail-top-offers.types";
 
 useMetadata({
@@ -14,7 +14,7 @@ useMetadata({
 
 export default function NftDetailTopOffer(props: NftDetailTopOfferProps) {
   return (
-    <Stack className={styles.container} direction="vertical" space="$0">
+    <Stack direction="vertical" space="$0">
       <Text
         fontSize="$xl"
         fontWeight="$semibold"
@@ -22,7 +22,25 @@ export default function NftDetailTopOffer(props: NftDetailTopOfferProps) {
       >
         Top offers
       </Text>
-      <Stack attributes={{ justifyContent: "space-between" }}>
+
+      <Box
+        display="grid"
+        gridTemplateColumns={{
+          mobile: "repeat(auto-fill, minmax(100px, 1fr))",
+          tablet: "repeat(auto-fill, minmax(150px, 1fr))",
+          desktop: "repeat(auto-fill, minmax(150px, 1fr))",
+        }}
+        rowGap={{
+          mobile: "$4",
+          tablet: "$6",
+          desktop: "$6",
+        }}
+        columnGap={{
+          mobile: "$10",
+          tablet: "$14",
+          desktop: "$14",
+        }}
+      >
         <Stack direction="vertical" space="$0">
           <Text fontSize="$xs" color="$textSecondary">
             Price
@@ -51,7 +69,7 @@ export default function NftDetailTopOffer(props: NftDetailTopOfferProps) {
           </Text>
           <Text fontWeight="$semibold">{props?.from}</Text>
         </Stack>
-      </Stack>
+      </Box>
     </Stack>
   );
 }

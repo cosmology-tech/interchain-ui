@@ -1,8 +1,8 @@
 import { useMetadata } from "@builder.io/mitosis";
+import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 
-import * as styles from "./nft-trait-list-item.css";
 import type { NftTraitListItemProps } from "./nft-trait-list-item.types";
 
 useMetadata({
@@ -13,14 +13,12 @@ useMetadata({
 
 export default function NftTraitListItem(props: NftTraitListItemProps) {
   return (
-    <Stack
-      className={styles.nftTraitListItem}
-      attributes={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingBottom: "$8",
-      }}
-      space="$0"
+    <Box
+      display="flex"
+      flexWrap="nowrap"
+      justifyContent="space-between"
+      alignItems="center"
+      gap="$0"
     >
       <Stack direction="vertical" space="$0">
         <Text color="$textSecondary" fontSize="$xs">
@@ -31,6 +29,6 @@ export default function NftTraitListItem(props: NftTraitListItemProps) {
       <Text fontSize="$xl" fontWeight="$semibold">
         {props?.rarityPercent}%
       </Text>
-    </Stack>
+    </Box>
   );
 }

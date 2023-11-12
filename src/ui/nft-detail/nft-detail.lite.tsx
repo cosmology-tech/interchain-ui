@@ -11,8 +11,12 @@ import NftDetailInfo from "../nft-detail-info";
 import NftDetailTopOffer from "../nft-detail-top-offers";
 import NftDetailActivityList from "../nft-detail-activity-list";
 
-import * as styles from "./nft-detail.css";
-import { NftDetailProps } from "./nft-detail.types";
+import type {
+  NftDetailProps,
+  ListForSale,
+  MakeOffer,
+  BuyNow,
+} from "./nft-detail.types";
 
 useMetadata({
   rsc: {
@@ -22,44 +26,121 @@ useMetadata({
 
 export default function NftDetail(props: NftDetailProps) {
   return (
-    <Box className={styles.nftDetail}>
-      <Stack space="$10">
-        <Box flex={1}>
+    <Box
+      className={props.className}
+      maxWidth={{
+        mobile: "unset",
+        tablet: "776px",
+        desktop: "776px",
+      }}
+      {...props.attributes}
+    >
+      <Box
+        display="flex"
+        flexDirection={{
+          mobile: "column",
+          tablet: "row",
+          desktop: "row",
+        }}
+        gap={{
+          mobile: "$6",
+          tablet: "$10",
+          desktop: "$10",
+        }}
+      >
+        {/* Main Image */}
+        <Box
+          flex={1}
+          borderRadius="$md"
+          borderColor="$divider"
+          borderWidth="0.5px"
+          borderStyle="solid"
+        >
           <Box
             as="img"
             width="$full"
             height="$auto"
             borderRadius="$md"
+            maxHeight={{
+              mobile: "$30",
+              tablet: "unset",
+              desktop: "unset",
+            }}
+            objectFit="contain"
             attributes={{
               src: props.imgSrc,
+              alt: props.collectionName,
             }}
           />
         </Box>
+
         <Box flex={1}>
           <Text
             color="$textSecondary"
+            fontSize={{
+              mobile: "$xs",
+              tablet: "$sm",
+              desktop: "$sm",
+            }}
             fontWeight="$semibold"
-            attributes={{ marginBottom: "$5" }}
+            attributes={{
+              marginBottom: { mobile: "$2", tablet: "$5", desktop: "$5" },
+            }}
           >
-            {props?.collectionName}
+            {props.collectionName}
           </Text>
           <Text
-            fontSize="$4xl"
+            fontSize={{
+              mobile: "$2xl",
+              tablet: "$4xl",
+              desktop: "$4xl",
+            }}
             fontWeight="$semibold"
-            attributes={{ marginBottom: "$7" }}
+            attributes={{
+              marginBottom: { mobile: "$4", tablet: "$7", desktop: "$7" },
+            }}
           >
-            {props?.tokenName}
+            {props.name}
           </Text>
+
           <Stack attributes={{ marginBottom: "$7", alignItems: "center" }}>
-            <Text color="$textSecondary" attributes={{ marginRight: "$3" }}>
+            <Text
+              fontSize={{
+                mobile: "$xs",
+                tablet: "$sm",
+                desktop: "$sm",
+              }}
+              color="$textSecondary"
+              attributes={{ marginRight: "$3" }}
+            >
               Created by
             </Text>
-            <Text fontWeight="$semibold">{props?.creatorName}</Text>
+            <Text
+              fontSize={{
+                mobile: "$xs",
+                tablet: "$sm",
+                desktop: "$sm",
+              }}
+              fontWeight="$semibold"
+            >
+              {props.creatorName}
+            </Text>
           </Stack>
-          <Text color="$textSecondary" attributes={{ marginBottom: "7" }}>
-            {props?.collectionDesc}
+
+          <Text
+            fontSize={{
+              mobile: "$xs",
+              tablet: "$sm",
+              desktop: "$sm",
+            }}
+            color="$textSecondary"
+            attributes={{ marginBottom: "$7" }}
+          >
+            {props.collectionDesc}
           </Text>
-          <StarText label="Minted for" value={props?.mintPrice} />
+
+          <StarText label="Minted for" value={props.mintPrice} />
+
           <Stack
             attributes={{
               alignItems: "center",
@@ -67,21 +148,41 @@ export default function NftDetail(props: NftDetailProps) {
               marginTop: "$4",
             }}
           >
-            <Text color="$textSecondary" attributes={{ marginRight: "$3" }}>
+            <Text
+              fontSize={{
+                mobile: "$xs",
+                tablet: "$sm",
+                desktop: "$sm",
+              }}
+              color="$textSecondary"
+              attributes={{ marginRight: "$3" }}
+            >
               Owned by
             </Text>
-            <Text fontWeight="$semibold">{props?.ownerName}</Text>
+            <Text
+              fontSize={{
+                mobile: "$xs",
+                tablet: "$sm",
+                desktop: "$sm",
+              }}
+              fontWeight="$semibold"
+            >
+              {props.ownerName}
+            </Text>
           </Stack>
+
+          {/* ==== CTA */}
           <Show when={props.type === "listForSale"}>
             <Button
               size="md"
               intent="tertiary"
               leftIcon="priceTagLine"
               attributes={{ width: "$full" }}
-              onClick={() => props?.onListForSale?.()}
+              onClick={() => (props as ListForSale).onListForSale?.()}
             >
               List for Sale
             </Button>
+
             <Stack space="$8" attributes={{ marginTop: "$8" }}>
               <Box flex={1}>
                 <Button
@@ -89,7 +190,7 @@ export default function NftDetail(props: NftDetailProps) {
                   intent="text"
                   leftIcon="sendLine"
                   attributes={{ width: "$full" }}
-                  onClick={() => props?.onTransfer?.()}
+                  onClick={() => (props as ListForSale).onTransfer?.()}
                 >
                   Transfer
                 </Button>
@@ -100,31 +201,33 @@ export default function NftDetail(props: NftDetailProps) {
                   intent="text"
                   leftIcon="fireLine"
                   attributes={{ width: "$full" }}
-                  onClick={() => props?.onBurn?.()}
+                  onClick={() => (props as ListForSale).onBurn?.()}
                 >
                   Burn
                 </Button>
               </Box>
             </Stack>
           </Show>
-          <Show when={props?.type === "makeOffer"}>
+
+          <Show when={props.type === "makeOffer"}>
             <Button
               intent="tertiary"
               size="lg"
               leftIcon="coinsLine"
               attributes={{ width: "$full" }}
-              onClick={() => props?.onMakeOffer?.()}
+              onClick={() => (props as MakeOffer).onMakeOffer?.()}
             >
               Make Offer
             </Button>
           </Show>
-          <Show when={props?.type === "buyNow"}>
+
+          <Show when={props.type === "buyNow"}>
             <Stack space="$8">
               <Button
                 intent="tertiary"
                 size="lg"
                 leftIcon="shoppingBagLine"
-                onClick={() => props?.onBuyNow?.()}
+                onClick={() => (props as BuyNow).onBuyNow?.()}
               >
                 Buy Now
               </Button>
@@ -132,14 +235,16 @@ export default function NftDetail(props: NftDetailProps) {
                 intent="text"
                 size="lg"
                 leftIcon="coinsLine"
-                onClick={() => props?.onMakeOffer?.()}
+                onClick={() => (props as BuyNow).onMakeOffer?.()}
               >
                 Make Offer
               </Button>
             </Stack>
           </Show>
         </Box>
-      </Stack>
+      </Box>
+
+      {/* Supply details */}
       <Stack
         attributes={{
           alignItems: "center",
@@ -149,50 +254,55 @@ export default function NftDetail(props: NftDetailProps) {
       >
         <Text color="$textSecondary">Rank</Text>
         <Text fontWeight="$semibold" attributes={{ mx: "$2" }}>
-          {store.getState()?.formatNumber?.({ value: props?.rarityOrder })}
+          {store.getState()?.formatNumber?.({ value: props.rarityOrder })}
         </Text>
         <Text color="$textSecondary">{`of ${store
           .getState()
-          ?.formatNumber?.({ value: props?.tokensCount })}`}</Text>
+          ?.formatNumber?.({ value: props.tokensCount })}`}</Text>
       </Stack>
+
       <Stack space="$8" attributes={{ marginBottom: "$11" }}>
-        <Button size="sm" intent="text" onClick={() => props?.onDownload?.()}>
+        <Button size="sm" intent="text" onClick={() => props.onDownload?.()}>
           Download
         </Button>
         <IconButton
           size="sm"
           icon="uploadLine"
           intent="text"
-          onClick={() => props?.onShare?.()}
+          onClick={() => props.onShare?.()}
         />
       </Stack>
-      <Show when={!!props?.traits}>
-        <NftTraitList list={props?.traits} />
+
+      {/* Traits */}
+      <Show when={!!props.traits}>
+        <NftTraitList list={props.traits} />
       </Show>
+
       <Show when={!!props.detailInfo}>
         <Box height="$14" />
         <NftDetailInfo
-          price={props?.detailInfo?.price}
-          owner={props?.detailInfo?.owner}
-          lastSale={props?.detailInfo?.lastSale}
-          topOffer={props?.detailInfo?.topOffer}
-          floorPrice={props?.detailInfo?.floorPrice}
-          isNameVerified={props?.detailInfo?.isNameVerified}
+          price={props.detailInfo?.price}
+          owner={props.detailInfo?.owner}
+          lastSale={props.detailInfo?.lastSale}
+          topOffer={props.detailInfo?.topOffer}
+          floorPrice={props.detailInfo?.floorPrice}
+          isNameVerified={props.detailInfo?.isNameVerified}
         />
       </Show>
+
       <Show when={!!props.detailTopOffer}>
         <Box height="$16" />
         <NftDetailTopOffer
-          price={props?.detailTopOffer?.price}
-          floorPrice={props?.detailTopOffer?.floorPrice}
-          expires={props?.detailTopOffer?.expires}
-          from={props?.detailTopOffer?.from}
+          price={props.detailTopOffer?.price}
+          floorPrice={props.detailTopOffer?.floorPrice}
+          expires={props.detailTopOffer?.expires}
+          from={props.detailTopOffer?.from}
         />
       </Show>
 
       <Show when={!!props.detailActivity}>
         <Box height="$17" />
-        <NftDetailActivityList list={props?.detailActivity?.list} />
+        <NftDetailActivityList list={props.detailActivity?.list} />
       </Show>
     </Box>
   );

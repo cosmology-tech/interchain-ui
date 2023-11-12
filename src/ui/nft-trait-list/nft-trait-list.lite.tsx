@@ -1,8 +1,6 @@
 import { For, useMetadata } from "@builder.io/mitosis";
-import Stack from "../stack";
 import Box from "../box";
 import NftTraitListItem from "../nft-trait-list-item";
-import * as styles from "./nft-trait-list.css";
 import { NftTraitListItemProps } from "../nft-trait-list-item/nft-trait-list-item.types";
 import { NftTraitListProps } from "./nft-trait-list.types";
 
@@ -14,14 +12,28 @@ useMetadata({
 
 export default function NftTraitList(props: NftTraitListProps) {
   return (
-    <Stack
-      className={styles.container}
-      space="$0"
-      attributes={{ flexWrap: "wrap" }}
+    <Box
+      className={props.className}
+      display="grid"
+      gridTemplateColumns={{
+        mobile: "repeat(auto-fit, minmax(250px, 1fr))",
+        tablet: "repeat(auto-fit, minmax(329px, 1fr))",
+      }}
+      rowGap={{
+        mobile: "$4",
+        tablet: "$8",
+        desktop: "$8",
+      }}
+      columnGap={{
+        mobile: "$12",
+        tablet: "$17",
+        desktop: "$17",
+      }}
+      {...props.attributes}
     >
-      <For each={props?.list}>
+      <For each={props.list}>
         {(item: NftTraitListItemProps, index: number) => (
-          <Box key={index} className={styles.traitItemBox} paddingRight="$14">
+          <Box key={index}>
             <NftTraitListItem
               key={item?.name}
               name={item?.name}
@@ -31,6 +43,6 @@ export default function NftTraitList(props: NftTraitListProps) {
           </Box>
         )}
       </For>
-    </Stack>
+    </Box>
   );
 }
