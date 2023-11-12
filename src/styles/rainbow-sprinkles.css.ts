@@ -30,7 +30,7 @@ const margins = {
 };
 
 const responsiveProperties = defineProperties({
-  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {} }>(
+  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {}, mdMobile: {}, smDesktop: {} }>(
     breakpoints
   ),
   defaultCondition: "mobile",

@@ -17,11 +17,24 @@ type Story = StoryObj<typeof meta>;
 /* This is primary NftProfile */
 export const Primary: Story = {
   args: {
+    title: "Profile",
+    headerButtonLabel: "View on Stargaze",
+    meta: [
+      {
+        label: "Collections",
+        value: "1",
+      },
+      {
+        label: "NFTs",
+        value: "6",
+      },
+      {
+        label: "Listed on marketplace",
+        value: "12",
+      },
+    ],
     name: "shane.stars",
-    isNameVerified: true,
-    collections: 1,
-    nfts: 6,
-    listedForSale: 1,
+    isVerified: true,
     onView() {
       console.log("onView");
     },

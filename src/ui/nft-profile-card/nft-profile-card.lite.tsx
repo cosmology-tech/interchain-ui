@@ -5,7 +5,6 @@ import Box from "../box";
 import Text from "../text";
 import StarText from "../star-text";
 
-import * as styles from "./nft-profile-card.css";
 import type { NftProfileCardProps } from "./nft-profile-card.types";
 
 useMetadata({
@@ -17,10 +16,9 @@ useMetadata({
 export default function NftProfileCard(props: NftProfileCardProps) {
   return (
     <Box
-      className={clsx(styles.nftProfileCard, {
-        [styles.hoverStyle]: !!props.onClick,
-      })}
-      attributes={{ onClick: () => props?.onClick?.() }}
+      className={clsx(props.className)}
+      cursor={typeof props.onClick === "function" ? "pointer" : "default"}
+      attributes={{ ...props.attributes, onClick: () => props?.onClick?.() }}
     >
       <Stack direction="vertical" space="$4">
         <Box width="$full">
@@ -29,12 +27,15 @@ export default function NftProfileCard(props: NftProfileCardProps) {
             height="auto"
             as="img"
             borderRadius="$md"
-            attributes={{ src: props?.imgSrc }}
-          ></Box>
+            attributes={{ src: props.imgSrc, alt: props.name }}
+          />
         </Box>
-        <Text fontWeight="$semibold">{props?.name}</Text>
-        <StarText label="Highest offer" value={props?.highestOffer} />
-        <StarText label="List price" value={props?.listPrice} />
+
+        <Text fontWeight="$semibold">{props.name}</Text>
+
+        <StarText label="Highest offer" value={props.highestOffer} />
+
+        <StarText label="List price" value={props.listPrice} />
       </Stack>
     </Box>
   );
