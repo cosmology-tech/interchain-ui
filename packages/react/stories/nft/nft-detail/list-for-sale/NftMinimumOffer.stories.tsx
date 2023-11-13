@@ -27,6 +27,8 @@ export const Primary: Story = {
       console.log("onChange", value);
     },
     fees: {
+      title: "Fees",
+      symbol: "STARS",
       listFee: 0.5,
       royalities: 0.5,
       fairBurn: 0.5,

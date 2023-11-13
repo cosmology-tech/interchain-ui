@@ -15,6 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    symbol: "STARS",
+    title: "Fee",
     listFee: 0.5,
     royalities: 0.5,
     fairBurn: 0.5,

@@ -38,6 +38,7 @@ const responsiveProperties = defineProperties({
     display: true,
     objectFit: true,
     flex: true,
+    flexBasis: true,
     flexShrink: true,
     flexGrow: true,
     flexDirection: true,

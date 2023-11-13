@@ -63,11 +63,23 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         borderRadius: "$lg",
       }}
     >
-      <Stack attributes={{ flexWrap: "nowrap", alignItems: "flex-end" }}>
+      <Stack
+        direction="horizontal"
+        space="$8"
+        attributes={{
+          width: "100%",
+          justifyContent: "space-between",
+          flexWrap: "nowrap",
+          alignItems: "flex-end",
+        }}
+      >
         <Stack
-          className={styles.poolBalanceContainer}
           direction="vertical"
           space="$0"
+          attributes={{
+            flexShrink: "0",
+            flexBasis: "50%",
+          }}
         >
           <Text color="$textSecondary" fontWeight="$semibold">
             Your pool balance
@@ -103,10 +115,13 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
             Add Liquidity
           </Button>
         </Stack>
+
         <Stack
           direction="vertical"
           attributes={{
             alignItems: "flex-end",
+            flexShrink: "0",
+            flexBasis: "50%",
           }}
           space="$0"
         >
@@ -158,6 +173,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           </Button>
         </Stack>
       </Stack>
+
       <Stack direction="vertical" className={styles.tokenContainer} space="$0">
         <Text color="$textSecondary" fontWeight="$semibold">
           Available LP Tokens

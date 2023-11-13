@@ -23,10 +23,6 @@ export const iconBox = style([
   },
 ]);
 
-export const symbolBox = style({
-  flex: 1,
-});
-
 export const denom = style({
   fontSize: themeVars.space["xs"],
 });
@@ -44,13 +40,9 @@ export const icon = style({
 });
 
 export const inputBox = style({
-  borderColor: themeVars.colors["inputBorder"],
   borderRadius: themeVars.radii["md"],
   backgroundColor: themeVars.colors["cardBg"],
   position: "relative",
-  borderWidth: "1px",
-  borderStyle: "solid",
-  height: "68px",
   flex: 1,
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
@@ -69,6 +61,11 @@ export const token = style({
 
 export const inputContainer = style({
   height: "100%",
+  overflow: 'hidden',
+  borderRadius: themeVars.radii["md"],
+  borderWidth: "1px",
+  borderStyle: "solid",
+  borderColor: themeVars.colors["inputBorder"],
 });
 
 export const inputClassName = style({
@@ -79,35 +76,13 @@ export const inputClassName = style({
 });
 
 export const imgBox = style({
-  width: themeVars.space[18],
-  height: "100%",
-  borderColor: themeVars.colors.inputBorder,
   borderRightWidth: "1px",
   borderRightStyle: "solid",
   borderTopLeftRadius: themeVars.radii.md,
   borderBottomLeftRadius: themeVars.radii.md,
 });
 
-export const img = style({
-  width: themeVars.space[14],
-  height: themeVars.space[14],
-});
-
-export const caulator = style({
-  position: "absolute",
-  height: "100%",
-  right: themeVars.space[9],
-});
-
 export const disabled = style({
   opacity: 0.6,
   cursor: "not-allowed",
-});
-
-export const inputTitle = style({
-  flex: 1,
-});
-
-export const operationIcon = style({
-  fontSize: themeVars.fontSize["3xl"],
 });

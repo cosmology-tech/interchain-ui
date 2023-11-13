@@ -3,7 +3,6 @@ import { breakpoints } from "../../styles/tokens";
 import { themeVars } from "../../styles/themes.css";
 
 export const container = style({
-  minWidth: "370px",
   backgroundColor: themeVars.colors.cardBg,
   paddingTop: themeVars.space[9],
   paddingRight: themeVars.space[10],

@@ -89,7 +89,7 @@ export default function TokenInput(props: TokenInputProps) {
         <Show when={!!props.title}>
           <Box
             as="label"
-            className={styles.inputTitle}
+            flex="1"
             color="$textSecondary"
             fontWeight="$semibold"
             fontSize="$lg"
@@ -101,6 +101,7 @@ export default function TokenInput(props: TokenInputProps) {
             {props.title}
           </Box>
         </Show>
+
         <Show when={!isNil(props.available)}>
           <Stack space="$3" attributes={{ alignItems: "center" }}>
             <Text color="$textSecondary">Available</Text>
@@ -113,6 +114,7 @@ export default function TokenInput(props: TokenInputProps) {
           </Stack>
         </Show>
       </Stack>
+
       <Show when={props.hasProgressBar}>
         <Stack
           className={styles.progressContainer}
@@ -130,9 +132,9 @@ export default function TokenInput(props: TokenInputProps) {
             }}
           >
             <Stack
-              className={styles.symbolBox}
               direction="vertical"
               attributes={{
+                flex: 1,
                 justifyContent: "center",
                 width: "$20",
                 px: "$7",
@@ -152,7 +154,9 @@ export default function TokenInput(props: TokenInputProps) {
                 intent="text"
                 icon={props.progress === 0 ? "add" : "subtract"}
                 onClick={() => state.handleIconClick()}
-                className={styles.operationIcon}
+                attributes={{
+                  fontSize: "$3xl",
+                }}
               />
             </div>
           </Stack>
@@ -169,6 +173,7 @@ export default function TokenInput(props: TokenInputProps) {
           {/* @ts-expect-error */}
           <ScaffoldNumberField
             id={inputIdRef}
+            size="lg"
             minValue={0}
             maxValue={props.availableAsMax ? toNumber(props.available) : 0}
             value={props.amount}
@@ -177,7 +182,14 @@ export default function TokenInput(props: TokenInputProps) {
             decrementButton={
               <Stack
                 className={clsx(styles.imgBox, props.imgClass)}
-                attributes={{ justifyContent: "center", alignItems: "center" }}
+                attributes={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexShrink: "0",
+                  height: "$17",
+                  width: "$18",
+                  borderColor: "$inputBorder",
+                }}
               >
                 {props.tokenIcon &&
                 ALL_ICON_NAMES.includes(props.tokenIcon as IconName) ? (
@@ -212,12 +224,15 @@ export default function TokenInput(props: TokenInputProps) {
             inputClassName={clsx(styles.inputClassName, props.inputClass)}
           />
         </Box>
+
         <Stack
-          className={styles.caulator}
           space="$0"
           attributes={{
             justifyContent: "flex-end",
             alignItems: "center",
+            position: "absolute",
+            height: "100%",
+            right: "$9",
           }}
         >
           <Text fontWeight="$semibold">{props.symbol} &nbsp;</Text>

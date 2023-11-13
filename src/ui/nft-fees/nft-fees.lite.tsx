@@ -6,7 +6,6 @@ import Text from "../text";
 import Tooltip from "../tooltip";
 import Icon from "../icon";
 import Box from "../box";
-import * as styles from "./nft-fees.css";
 import { NftFeesProps, NftFeeItemProps } from "./nft-fees.types";
 
 useMetadata({
@@ -55,36 +54,43 @@ export default function NftFees(props: NftFeesProps) {
     let list = [];
     cloneDeep(state.fees).forEach((item: NftFeeItemProps) => {
       if (!isNil(props[item.amountKey])) {
-        item.amount = props[item.amountKey];
+        item.amount = props[item.amountKey] ?? 0;
         list.push(item);
       }
     });
     state.fees = list;
   }, [props.listFee, props.royalities, props.fairBurn, props.proceeds]);
+
   return (
-    <Box className={styles.container}>
+    <Box>
       <Text
         color="$textSecondary"
         fontWeight="$semibold"
         attributes={{ marginBottom: "$8" }}
       >
-        Fee
+        {props.title}
       </Text>
-      <Stack space="$0" attributes={{ alignItems: "center", flexWrap: "wrap" }}>
+
+      <Box
+        display="grid"
+        columnGap={{
+          mobile: "$4",
+          tablet: "$8",
+        }}
+        rowGap="$5"
+        gridTemplateColumns={{
+          mobile: "repeat(auto-fit, minmax(180px, 1fr))",
+          mdMobile: "repeat(2, 1fr)",
+        }}
+      >
         <For each={state.fees}>
           {(item: NftFeeItemProps, index: number) => (
-            <Box
-              key={item.feeName}
-              className={styles.feeItem}
-              width="50%"
-              paddingRight={index % 2 === 0 ? "$4" : "$0"}
-              paddingLeft={index % 2 === 0 ? "$0" : "$4"}
-              paddingBottom="$5"
-            >
+            <Box key={item.feeName}>
               <Stack
                 attributes={{
                   justifyContent: "space-between",
                   alignItems: "center",
+                  flexWrap: "nowrap",
                 }}
               >
                 <Stack space="$0" attributes={{ alignItems: "center" }}>
@@ -106,12 +112,12 @@ export default function NftFees(props: NftFeesProps) {
                 <Text
                   fontSize="$xs"
                   fontWeight={index === 3 ? "$semibold" : "$normal"}
-                >{`${item?.amount} STARS`}</Text>
+                >{`${item?.amount} ${props.symbol}`}</Text>
               </Stack>
             </Box>
           )}
         </For>
-      </Stack>
+      </Box>
     </Box>
   );
 }

@@ -1,18 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-
-export const container = style([
-  {
-    minWidth: "450px",
-    transition: "ease all .5s",
-    flexWrap: "nowrap",
-    "@media": {
-      [`screen and (max-width: 900px)`]: {
-        flexWrap: "wrap",
-      },
-    },
-  },
-]);
+import { breakpoints } from '../../styles/tokens/breakpoints'
 
 const base = style({
   paddingLeft: themeVars.space[8],
@@ -53,14 +41,7 @@ export const baseBox = style([
   base,
   {
     backgroundColor: themeVars.colors.cardBg,
-    width: "234px",
-    "@media": {
-      [`screen and (max-width: 900px)`]: {
-        width: "calc(50% - 12px)",
-        maxWidth: "calc(50% - 12px)",
-        minWidth: "179px",
-      },
-    },
+    width: '100%',
   },
 ]);
 
@@ -69,15 +50,7 @@ export const rewardBox = style([
   {
     backgroundColor: themeVars.colors.rewardBg,
     color: themeVars.colors.rewardContent,
-    width: "234px",
-    maxWidth: "234px",
-    "@media": {
-      [`screen and (max-width: 900px)`]: {
-        width: "100%",
-        maxWidth: "100%",
-        minWidth: "382px",
-      },
-    },
+    width: '100%',
   },
 ]);
 
