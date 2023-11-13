@@ -57,34 +57,52 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
       space="$0"
       className={styles.container}
       attributes={{
-        alignItems: "flex-end",
-        marginTop: "$16",
-        marginBottom: "$10",
+        px: "$10",
+        py: "$9",
         borderRadius: "$lg",
+        ...props.attributes,
       }}
     >
-      <Stack
-        direction="horizontal"
-        space="$8"
-        attributes={{
-          width: "100%",
-          justifyContent: "space-between",
-          flexWrap: "nowrap",
-          alignItems: "flex-end",
+      {/* ==== Pool balance column */}
+      <Box
+        maxWidth={{
+          mobile: "100%",
+          tablet: "330px",
+        }}
+        width="100%"
+        flexGrow={{
+          mobile: "1",
+          tablet: "0",
+          desktop: "0",
+        }}
+        flexBasis={{
+          mobile: "100%",
+          tablet: "50%",
+          desktop: "50%",
         }}
       >
-        <Stack
-          direction="vertical"
-          space="$0"
-          attributes={{
-            flexShrink: "0",
-            flexBasis: "50%",
-          }}
+        {/* === Title */}
+        <Text color="$textSecondary" fontWeight="$semibold">
+          Your pool balance
+        </Text>
+
+        {/* === First row info */}
+        <Box
+          display="flex"
+          gap="$12"
+          justifyContent="space-between"
+          alignItems="baseline"
         >
-          <Text color="$textSecondary" fontWeight="$semibold">
-            Your pool balance
-          </Text>
-          <Stack attributes={{ my: "$2", alignItems: "baseline" }} space="$0">
+          {/* == col 1 */}
+          <Stack
+            direction="horizontal"
+            space="$0"
+            attributes={{
+              flex: "0 0 calc(50% - 20px)",
+              justifyContent: "flex-start",
+              alignItems: "baseline",
+            }}
+          >
             <Text fontWeight="$semibold" attributes={{ marginRight: "$1" }}>
               $
             </Text>
@@ -94,38 +112,15 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
                 .formatNumber({ value: props.totalBalance || 0 })}
             </Text>
           </Stack>
-          <Show when={state.hasTotalShares}>
-            <Text>
-              {" "}
-              {`${new BigNumber(props.totalShares)
-                .decimalPlaces(6)
-                .toString()} pool shares`}
-            </Text>
-          </Show>
-          <Show when={!state.hasTotalShares}>
-            <Text>No pool shares yet</Text>
-          </Show>
-          <Button
-            attributes={{ marginTop: "$11" }}
-            intent="tertiary"
-            onClick={() => {
-              props?.onAdd?.();
+
+          {/* == col 2 */}
+          <Stack
+            space="$0"
+            attributes={{
+              flex: "0 0 calc(50% - 20px)",
+              justifyContent: "flex-end",
             }}
           >
-            Add Liquidity
-          </Button>
-        </Stack>
-
-        <Stack
-          direction="vertical"
-          attributes={{
-            alignItems: "flex-end",
-            flexShrink: "0",
-            flexBasis: "50%",
-          }}
-          space="$0"
-        >
-          <Stack space="$0">
             <img
               className={styles.image}
               src={props.totalBalanceCoins[0]?.imgSrc}
@@ -143,8 +138,39 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
               {props.totalBalanceCoins[0]?.symbol}
             </Text>
           </Stack>
-          <Box height="$5" />
-          <Stack space="$0">
+        </Box>
+
+        {/* === Second row info */}
+        <Box
+          display="flex"
+          gap="$12"
+          justifyContent="space-between"
+          alignItems="baseline"
+        >
+          {/* == col 1 */}
+          <Box flex="0 0 calc(50% - 20px)" justifyContent="flex-start">
+            <Show when={state.hasTotalShares}>
+              <Text>
+                {" "}
+                {`${new BigNumber(props.totalShares)
+                  .decimalPlaces(6)
+                  .toString()} pool shares`}
+              </Text>
+            </Show>
+
+            <Show when={!state.hasTotalShares}>
+              <Text>No pool shares yet</Text>
+            </Show>
+          </Box>
+
+          {/* == col 2 */}
+          <Stack
+            space="$0"
+            attributes={{
+              flex: "0 0 calc(50% - 20px)",
+              justifyContent: "flex-end",
+            }}
+          >
             <img
               className={styles.image}
               src={props.totalBalanceCoins[1]?.imgSrc}
@@ -162,22 +188,72 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
               {props.totalBalanceCoins[1]?.symbol}
             </Text>
           </Stack>
-          <Button
-            attributes={{ marginTop: "$11" }}
-            intent="tertiary"
-            onClick={() => {
-              props?.onRemove?.();
-            }}
-          >
-            Remove Liquidity
-          </Button>
-        </Stack>
-      </Stack>
+        </Box>
 
-      <Stack direction="vertical" className={styles.tokenContainer} space="$0">
+        {/* === Third row info (CTA) */}
+        <Box
+          display="flex"
+          flexWrap={{
+            mobile: "wrap",
+            tablet: "nowrap",
+            desktop: "nowrap",
+          }}
+          gap="$8"
+          justifyContent="space-between"
+          alignItems="baseline"
+          paddingTop="$11"
+        >
+          <Box
+            flex={{
+              mobile: "0 0 calc(50% - 20px)",
+              desktop: "auto",
+            }}
+            justifyContent="flex-start"
+          >
+            <Button
+              fluidWidth
+              intent="tertiary"
+              onClick={() => {
+                props?.onAdd?.();
+              }}
+            >
+              Add Liquidity
+            </Button>
+          </Box>
+
+          <Box
+            flex={{
+              mobile: "0 0 calc(50% - 20px)",
+              desktop: "auto",
+            }}
+            justifyContent="flex-end"
+          >
+            <Button
+              fluidWidth
+              intent="tertiary"
+              onClick={() => {
+                props?.onRemove?.();
+              }}
+            >
+              Remove Liquidity
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+
+      {/* ==== Pool avail LP column */}
+      <Stack
+        direction="vertical"
+        className={styles.tokenContainer}
+        space="$0"
+        attributes={{
+          justifyContent: "space-between",
+        }}
+      >
         <Text color="$textSecondary" fontWeight="$semibold">
           Available LP Tokens
         </Text>
+
         <Stack
           attributes={{
             alignItems: "baseline",
@@ -193,23 +269,28 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
               .formatNumber({ value: props.lpTokenBalance || 0 })}
           </Text>
         </Stack>
+
         <Show when={state.hasLPTokenShares}>
           <Text>{`${new BigNumber(props.lpTokenShares)
             .decimalPlaces(6)
             .toString()} pool shares`}</Text>
         </Show>
+
         <Show when={!state.hasLPTokenShares}>
           <Text>No pool shares yet</Text>
         </Show>
-        <Button
-          attributes={{ marginTop: "$11" }}
-          intent="secondary"
-          variant="outlined"
-          onClick={() => props?.onStartEarning()}
-          isLoading={props.isEarningLoading}
-        >
-          Start earning
-        </Button>
+
+        <Box pt="$10" width="100%">
+          <Button
+            fluidWidth
+            intent="secondary"
+            variant="outlined"
+            onClick={() => props?.onStartEarning()}
+            isLoading={props.isEarningLoading}
+          >
+            Start earning
+          </Button>
+        </Box>
       </Stack>
     </Stack>
   );

@@ -110,6 +110,7 @@ const responsiveProperties = defineProperties({
     aspectRatio: true,
     insetInlineStart: true,
     insetInlineEnd: true,
+    transform: true
   },
   staticProperties: {
     width: allSpace,

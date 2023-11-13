@@ -17,10 +17,6 @@ export const container = style({
   },
 });
 
-export const poolBalanceContainer = style({
-  marginRight: themeVars.space[8],
-});
-
 export const image = style({
   width: themeVars.space[8],
   height: themeVars.space[8],

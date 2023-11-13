@@ -1,9 +1,9 @@
 import { useMetadata } from "@builder.io/mitosis";
+import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
 import Button from "../button";
-import * as styles from "./staking-claim-header.css";
 import type { StakingClaimHeaderProps } from "./staking-claim-header.types";
 
 useMetadata({
@@ -14,15 +14,19 @@ useMetadata({
 
 export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
   return (
-    <Stack
-      className={styles.container}
-      space="$8"
-      attributes={{ marginBottom: "$14" }}
+    <Box
+      display="grid"
+      gridTemplateColumns={{
+        mobile: "repeat(1, 1fr)",
+        tablet: "repeat(2, minmax(310px, 1fr))",
+        desktop: "repeat(2, minmax(310px, 1fr))",
+      }}
+      gap="$8"
     >
       <Stack
         direction="vertical"
-        className={styles.cardContainer}
         attributes={{
+          minHeight: "$19",
           px: "$8",
           py: "$7",
           backgroundColor: "$cardBg",
@@ -46,10 +50,11 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
           {props.symbol}
         </Text>
       </Stack>
+
       <Stack
         direction="horizontal"
-        className={styles.cardContainer}
         attributes={{
+          minHeight: "$19",
           justifyContent: "space-between",
           alignItems: "flex-end",
           px: "$8",
@@ -81,6 +86,6 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
           Claim
         </Button>
       </Stack>
-    </Stack>
+    </Box>
   );
 }
