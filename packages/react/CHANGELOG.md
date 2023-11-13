@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.2...@interchain-ui/react@1.13.3) (2023-11-13)
+
+### Bug Fixes
+
+- asset list responsive style ([#121](https://github.com/cosmology-tech/interchain-ui/issues/121)) ([e65bd3d](https://github.com/cosmology-tech/interchain-ui/commit/e65bd3dafaaf127c280054ee2ac22ed2a438f032))
+
 ## [1.13.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.1...@interchain-ui/react@1.13.2) (2023-11-13)
 
 **Note:** Version bump only for package @interchain-ui/react
