@@ -30,7 +30,7 @@ export interface NumberInputProps {
   textAlign?: Sprinkles["textAlign"];
   fontSize?: Sprinkles["fontSize"];
   attributes?: any;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   placeholder?: string | undefined;
   intent?: "default" | "error";
   className?: string;
