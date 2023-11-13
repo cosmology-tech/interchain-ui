@@ -72,6 +72,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
         >
           {/* Still need to show the icon even props.value is empty string */}
           <Box
+            flexShrink="0"
             width={props.size === "md" ? "50px" : "28px"}
             height={props.size === "md" ? "50px" : "28px"}
           >

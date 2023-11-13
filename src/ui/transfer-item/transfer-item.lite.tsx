@@ -150,12 +150,15 @@ export default function TransferItem(props: TransferItemProps) {
     <Stack
       space="$0"
       direction="vertical"
-      className={styles.container}
       attributes={{
         backgroundColor: "$progressBg",
         borderRadius: "$lg",
         position: "relative",
         paddingTop: "$5",
+        minWidth: {
+          mobile: "unset",
+          desktop: "468px",
+        },
       }}
     >
       <Stack
@@ -220,7 +223,6 @@ export default function TransferItem(props: TransferItemProps) {
             defaultSelected={state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {
-              console.log("[TransferItem] onItemSelected", item);
               state.itemSelected(item);
             }}
             valueItem={state.getComboboxItem(state.currentItem)}
