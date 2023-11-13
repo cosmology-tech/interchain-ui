@@ -199,7 +199,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           amount={state.amount1}
           progress={state.progress1}
           symbol={props?.poolAssets[0]?.symbol}
-          denom={props?.poolAssets[0]?.denom}
+          name={props?.poolAssets[0]?.name}
           available={props?.poolAssets[0]?.available}
           tokenIcon={props?.poolAssets[0]?.imgSrc}
           priceDisplayAmount={props?.poolAssets[0]?.priceDisplayAmount}
@@ -216,7 +216,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           amount={state.amount2}
           progress={state.progress2}
           symbol={props?.poolAssets[1]?.symbol}
-          denom={props?.poolAssets[1]?.denom}
+          name={props?.poolAssets[1]?.name}
           available={props?.poolAssets[1]?.available}
           tokenIcon={props?.poolAssets[1]?.imgSrc}
           priceDisplayAmount={props?.poolAssets[1]?.priceDisplayAmount}

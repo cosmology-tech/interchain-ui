@@ -5,6 +5,7 @@ import Button from "../../src/ui/button";
 import BasicModal from "../../src/ui/basic-modal";
 import Stack from "../../src/ui/stack";
 import OverviewTransfer from "../../src/ui/overview-transfer";
+import { getTransferList } from "../stub/assetData";
 
 const meta: Meta<typeof OverviewTransfer> = {
   component: OverviewTransfer,
@@ -20,32 +21,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     type: "withdraw",
-    dropDownList: [
-      {
-        available: "713.32",
-        symbol: "UMEE",
-        denom: "Umee",
-        imgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
-        priceDisplayAmount: 0.5,
-      },
-      {
-        available: "89.66",
-        symbol: "USTC",
-        denom: "Terra Classic",
-        imgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
-        priceDisplayAmount: 10,
-      },
-      {
-        available: "102.61",
-        symbol: "TORI",
-        denom: "Teritori",
-        imgSrc:
-          "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
-        priceDisplayAmount: 5,
-      },
-    ],
+    dropDownList: getTransferList(),
     onTransfer() {
       console.log("onTransfer");
     },
@@ -59,6 +35,7 @@ export const Primary: Story = {
   render: (props) => {
     const [isDepositOpen, setIsDepositOpen] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+
     return (
       <Stack space="$10">
         <BasicModal

@@ -4,6 +4,7 @@ import { asset_list, assets } from "@chain-registry/osmosis";
 import { getAssetByDenom } from "@chain-registry/utils";
 import { Asset as OsmosisAsset } from "@chain-registry/types";
 
+import Box from "../../src/ui/box";
 import Text from "../../src/ui/text";
 import Stack from "../../src/ui/stack";
 import StakingAssetHeader from "../../src/ui/staking-asset-header";
@@ -96,8 +97,26 @@ export const Primary: Story = {
         <Text fontSize="$xl" fontWeight="$semibold">
           Staking
         </Text>
-        <StakingAssetHeader {...props.assetHeader} />
-        <StakingClaimHeader {...props.claimHeader} />
+
+        <Box
+          pt={{
+            mobile: "$10",
+            tablet: "$13",
+            desktop: "$13",
+          }}
+          pb={{
+            mobile: "$8",
+            tablet: "$12",
+            desktop: "$12",
+          }}
+        >
+          <StakingAssetHeader {...props.assetHeader} />
+        </Box>
+
+        <Box pb="$14">
+          <StakingClaimHeader {...props.claimHeader} />
+        </Box>
+
         <Text
           color="$textSecondary"
           fontSize="$lg"
@@ -106,7 +125,9 @@ export const Primary: Story = {
         >
           Your Validators
         </Text>
+
         <ValidatorList list={props.selfValidators} selfValidator={true} />
+
         <Text
           color="$textSecondary"
           fontSize="$lg"
@@ -115,6 +136,7 @@ export const Primary: Story = {
         >
           All Validators
         </Text>
+
         <ValidatorList list={props.allValidators} selfValidator={false} />
       </Stack>
     );

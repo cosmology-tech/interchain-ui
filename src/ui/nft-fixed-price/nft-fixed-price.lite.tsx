@@ -57,7 +57,16 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
           )}
         </For>
       </Stack>
-      <NftFees listFee={0.5} royalities={0.5} fairBurn={0.5} proceeds={-0.5} />
+
+      <NftFees
+        symbol="STARS"
+        title="Fee"
+        listFee={0.5}
+        royalities={0.5}
+        fairBurn={0.5}
+        proceeds={-0.5}
+      />
+
       <Button
         intent="tertiary"
         size="lg"

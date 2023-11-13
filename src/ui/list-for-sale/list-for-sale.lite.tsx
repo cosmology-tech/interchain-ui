@@ -20,15 +20,15 @@ export default function ListForSale(props) {
     tabs: [
       {
         label: "Fixed Price",
-        Component: () => <NftFixedPrice floorPrice={300} highestOffer={189} />,
+        content: <NftFixedPrice floorPrice={300} highestOffer={189} />,
       },
       {
         label: "Auction",
-        Component: () => <NftAuction floorPrice={300} highestOffer={189} />,
+        content: <NftAuction floorPrice={300} highestOffer={189} />,
       },
       {
         label: "Sell Now",
-        Component: () => (
+        content: (
           <NftSellNow
             bestOffer={120}
             offerToFloorPriceRatio="0.05"

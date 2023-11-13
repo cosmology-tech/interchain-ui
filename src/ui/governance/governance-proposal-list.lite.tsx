@@ -17,6 +17,7 @@ export default function GovernanceProposalList(
     <For each={props.list}>
       {(proposalItem) => (
         <Box
+          key={proposalItem.title}
           display="flex"
           flexDirection="column"
           gap={{
@@ -42,7 +43,7 @@ export default function GovernanceProposalList(
             {proposalItem.title}
           </Text>
           <For each={proposalItem.proposals}>
-            {(proposal) => (
+            {(proposal, index) => (
               <GovernanceProposalItem
                 status={proposal.status}
                 title={proposal.title}
@@ -50,6 +51,7 @@ export default function GovernanceProposalList(
                 endTime={proposal.endTime}
                 endTimeLabel={proposal.endTimeLabel}
                 votes={proposal.votes}
+                key={`${proposal.id}-${index}`}
               />
             )}
           </For>

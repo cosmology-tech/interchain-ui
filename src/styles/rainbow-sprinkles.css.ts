@@ -30,20 +30,24 @@ const margins = {
 };
 
 const responsiveProperties = defineProperties({
-  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {} }>(
+  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {}, mdMobile: {}, smDesktop: {} }>(
     breakpoints
   ),
   defaultCondition: "mobile",
   dynamicProperties: {
     display: true,
+    objectFit: true,
     flex: true,
+    flexBasis: true,
     flexShrink: true,
     flexGrow: true,
     flexDirection: true,
     flexWrap: true,
     alignItems: true,
     justifyContent: true,
-    gap: themeVars.space,
+    gap: true,
+    columnGap: true,
+    rowGap: true,
     padding: allSpace,
     paddingLeft: allSpace,
     paddingRight: allSpace,
@@ -106,6 +110,7 @@ const responsiveProperties = defineProperties({
     aspectRatio: true,
     insetInlineStart: true,
     insetInlineEnd: true,
+    transform: true
   },
   staticProperties: {
     width: allSpace,
@@ -115,6 +120,9 @@ const responsiveProperties = defineProperties({
     maxWidth: allSpace,
     maxHeight: allSpace,
     fontFamily: themeVars.font,
+    gap: themeVars.space,
+    columnGap: themeVars.space,
+    rowGap: themeVars.space,
   },
   shorthands: {
     p: ["padding"],

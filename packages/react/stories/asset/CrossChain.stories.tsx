@@ -30,7 +30,7 @@ export const Primary: Story = {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
         symbol: "USTC",
-        denom: "Terra Classic",
+        name: "Terra Classic",
         tokenAmount: "89.66",
         tokenAmountPrice: "10",
         chainName: "Juno",
@@ -45,7 +45,7 @@ export const Primary: Story = {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
         symbol: "TORI",
-        denom: "Teritori",
+        name: "Teritori",
         tokenAmount: "102.61",
         tokenAmountPrice: "101.02",
         chainName: "Juno",
@@ -62,7 +62,7 @@ export const Primary: Story = {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
         symbol: "USTC",
-        denom: "Terra Classic",
+        name: "Terra Classic",
         tokenAmount: "89.66",
         tokenAmountPrice: "10",
         chainName: "Juno",
@@ -77,7 +77,7 @@ export const Primary: Story = {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
         symbol: "TORI",
-        denom: "Teritori",
+        name: "Teritori",
         tokenAmount: "102.61",
         tokenAmountPrice: "101.02",
         chainName: "Juno",

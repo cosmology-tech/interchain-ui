@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    title: "NFT Mint",
     tag: "NOW LIVE",
     name: "Bipz",
     description:

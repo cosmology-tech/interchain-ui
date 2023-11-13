@@ -1,8 +1,8 @@
 import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
+import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import { formatCurrency } from "../../helpers/number";
-import * as styles from "./staking-asset-header.css";
 import { StakingAssetHeaderProps } from "./staking-asset-header.types";
 
 useMetadata({
@@ -18,17 +18,24 @@ useDefaultProps<Partial<StakingAssetHeaderProps>>({
 
 export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
   return (
-    <Stack className={styles.container}>
-      <Stack
-        className={styles.cardContainer}
-        attributes={{ width: "50%", p: "$5" }}
-      >
-        <img className={styles.img} src={props.imgSrc} alt="staking logo" />
+    <Box display="flex" justifyContent="space-between" flexWrap="wrap" gap="$8">
+      <Stack attributes={{ flexBasis: "1/2", flexShrink: "0" }}>
+        <Box
+          as="img"
+          width="$16"
+          height="$16"
+          marginRight="$8"
+          attributes={{
+            src: props.imgSrc,
+            alt: "staking logo",
+          }}
+        />
 
         <Stack direction="vertical">
           <Text color="$textSecondary" fontWeight="$semibold">
             {props.totalLabel}
           </Text>
+
           <Stack
             space="$5"
             attributes={{
@@ -37,10 +44,23 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
               alignItems: "center",
             }}
           >
-            <Text fontWeight="$semibold" fontSize="$3xl">
+            <Text
+              fontWeight="$semibold"
+              fontSize="$3xl"
+              whiteSpace="nowrap"
+              attributes={{
+                flexShrink: "0",
+              }}
+            >
               {props.totalAmount}
             </Text>
-            <Text color="$textSecondary" fontWeight="$semibold">
+            <Text
+              color="$textSecondary"
+              fontWeight="$semibold"
+              attributes={{
+                flexShrink: "0",
+              }}
+            >
               {props.symbol}
             </Text>
           </Stack>
@@ -51,12 +71,7 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
           </Stack>
         </Stack>
       </Stack>
-      <Stack
-        direction="vertical"
-        className={styles.cardContainer}
-        space="$2"
-        attributes={{ width: "1/2", p: "$5" }}
-      >
+      <Stack direction="vertical" space="$2" attributes={{ flexBasis: "1/2" }}>
         <Text color="$textSecondary" fontWeight="$semibold">
           {props.availableLabel}
         </Text>
@@ -69,6 +84,6 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
           </Text>
         </Stack>
       </Stack>
-    </Stack>
+    </Box>
   );
 }

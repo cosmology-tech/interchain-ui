@@ -22,7 +22,7 @@ export const Primary: Story = {
     isOtherChains: false,
     imgSrc: item.imgSrc,
     symbol: item.symbol,
-    denom: item.denom,
+    name: item.name,
     tokenAmount: "102.61",
     tokenAmountPrice: "101.02",
     chainName: "Juno",

@@ -3,7 +3,7 @@ import { AssetListItemProps } from "../asset-list-item/asset-list-item.types";
 
 export type CrossChainHeaderProps = Omit<AssetListHeaderProps, "isSingle">;
 
-export type CrossChainListItemProps = Omit<AssetListItemProps, "isOtherChains">
+export type CrossChainListItemProps = Omit<AssetListItemProps, "isOtherChains">;
 
 export interface CrossChainProps {
   header: CrossChainHeaderProps;

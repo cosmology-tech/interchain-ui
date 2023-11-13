@@ -51,7 +51,7 @@ export default function AssetList(props: AssetListProps) {
                 isOtherChains={props.isOtherChains}
                 imgSrc={item.imgSrc}
                 symbol={item.symbol}
-                denom={item.denom}
+                name={item.name}
                 tokenAmount={item.tokenAmount}
                 tokenAmountPrice={item.tokenAmountPrice}
                 chainName={item?.chainName}

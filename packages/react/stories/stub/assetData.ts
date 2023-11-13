@@ -32,7 +32,7 @@ export const getTransferList = (
       available: 1.33 * (index + 1),
       priceDisplayAmount: 0.33 * (index + 1),
       symbol: item.symbol,
-      denom: item.name,
+      name: item.name,
       imgSrc:
         item.logo_URIs?.jpeg || item.logo_URIs?.png || item.logo_URIs?.svg,
     };

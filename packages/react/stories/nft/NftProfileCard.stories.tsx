@@ -1,6 +1,7 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
+import Box from "../../src/ui/box";
 import NftProfileCard from "../../src/ui/nft-profile-card";
 
 const meta: Meta<typeof NftProfileCard> = {
@@ -25,5 +26,12 @@ export const Primary: Story = {
     onClick() {
       console.log("onClick");
     },
+  },
+  render(props) {
+    return (
+      <Box maxWidth="250px">
+        <NftProfileCard {...props} />
+      </Box>
+    );
   },
 };

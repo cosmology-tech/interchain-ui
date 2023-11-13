@@ -49,9 +49,17 @@ export default function NftMinimumOffer(props: NftMinimumOfferProps) {
         amount={props?.value}
         onAmountChange={(value) => props?.onChange?.(value)}
       />
+
       <Stack
         space="$0"
-        attributes={{ my: "$10", justifyContent: "space-between" }}
+        attributes={{
+          py: {
+            mobile: "$6",
+            tablet: "$10",
+          },
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+        }}
       >
         <For each={state.starList}>
           {(item) => (
@@ -59,28 +67,39 @@ export default function NftMinimumOffer(props: NftMinimumOfferProps) {
           )}
         </For>
       </Stack>
+
       <NftFees
+        symbol="STARS"
+        title="Fee"
         listFee={props?.fees?.listFee}
         royalities={props?.fees?.royalities}
         fairBurn={props?.fees?.fairBurn}
         proceeds={props?.fees?.proceeds}
       />
-      <Button
-        intent="tertiary"
-        size="lg"
-        attributes={{ marginBottom: "$10", width: "$full" }}
-        onClick={() => props.onList?.()}
+
+      <Box
+        pt={{
+          mobile: "$4",
+          tablet: "$9",
+        }}
       >
-        List
-      </Button>
-      <Button
-        variant="unstyled"
-        size="sm"
-        attributes={{ width: "$full" }}
-        onClick={() => props.onCancel?.()}
-      >
-        Cancel
-      </Button>
+        <Button
+          intent="tertiary"
+          size="lg"
+          attributes={{ marginBottom: "$10", width: "$full" }}
+          onClick={() => props.onList?.()}
+        >
+          List
+        </Button>
+        <Button
+          variant="unstyled"
+          size="sm"
+          attributes={{ width: "$full" }}
+          onClick={() => props.onCancel?.()}
+        >
+          Cancel
+        </Button>
+      </Box>
     </Box>
   );
 }

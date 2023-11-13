@@ -4,10 +4,10 @@ import type { AvailableItem } from "../transfer-item/transfer-item.types";
 export interface AssetWithdrawTokensProps extends BaseComponentProps {
   isDropdown?: boolean;
   fromSymbol: AvailableItem["symbol"];
-  fromDenom: AvailableItem["denom"];
+  fromName: AvailableItem["name"];
   fromAddress: string;
   fromImgSrc: AvailableItem["imgSrc"];
-  toDenom: AvailableItem["denom"];
+  toName: AvailableItem["name"];
   toAddress: string;
   toImgSrc: AvailableItem["imgSrc"];
   available: AvailableItem["available"];

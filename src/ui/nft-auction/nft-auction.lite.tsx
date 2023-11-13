@@ -38,6 +38,7 @@ export default function NftAuction(props: NftAuctionProps) {
       };
     });
   }, [props?.floorPrice, props?.highestOffer]);
+
   return (
     <Box>
       <TokenInput
@@ -56,7 +57,15 @@ export default function NftAuction(props: NftAuctionProps) {
           )}
         </For>
       </Stack>
-      <NftFees listFee={0.5} royalities={0.5} fairBurn={0.5} />
+
+      <NftFees
+        symbol="STARS"
+        title="Fee"
+        listFee={0.5}
+        royalities={0.5}
+        fairBurn={0.5}
+      />
+
       <Button
         intent="tertiary"
         size="lg"

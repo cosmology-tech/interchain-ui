@@ -9,7 +9,7 @@ export interface TokenInputProps {
   progress?: number;
   amount?: number;
   symbol?: AvailableItem["symbol"];
-  denom?: AvailableItem["denom"];
+  name?: AvailableItem["name"];
   available?: AvailableItem["available"];
   priceDisplayAmount?: AvailableItem["priceDisplayAmount"];
   tokenIcon?: LiteralUnion<IconName, string>;

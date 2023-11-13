@@ -29,7 +29,8 @@ export interface NumberInputProps {
   // ==== Style props
   textAlign?: Sprinkles["textAlign"];
   fontSize?: Sprinkles["fontSize"];
-  size?: "sm" | "md";
+  attributes?: any;
+  size?: "sm" | "md" | "lg";
   placeholder?: string | undefined;
   intent?: "default" | "error";
   className?: string;

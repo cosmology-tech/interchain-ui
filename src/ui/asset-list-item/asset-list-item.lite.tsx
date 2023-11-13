@@ -68,7 +68,7 @@ export default function AssetListItem(props: AssetListItemProps) {
             {props.symbol}
           </Text>
           <Text fontSize={state.size} color="$textSecondary">
-            {props.denom}
+            {props.name}
           </Text>
         </Stack>
         <Show when={props.needChainSpace}>

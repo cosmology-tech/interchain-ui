@@ -11,6 +11,7 @@ import Stack from "../stack";
 import Text from "../text";
 import { store } from "../../models/store";
 import * as styles from "./pools-header.css";
+import { standardTransitionProperties } from "../shared/shared.css";
 import type { PoolsHeaderProps } from "./pools-header.types";
 import type { ThemeVariant } from "../../models/system.model";
 
@@ -53,8 +54,27 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
       >
         {props.title}
       </Text>
-      <Stack className={styles.container} space="$10">
-        <Box className={styles.baseBox}>
+
+      <Box
+        className={standardTransitionProperties}
+        gap="$10"
+        display="grid"
+        gridTemplateAreas={{
+          mobile: `
+            "a b"
+            "c c"
+          `,
+          desktop: `
+            "a b c"
+          `,
+        }}
+        gridTemplateColumns={{
+          mobile: "repeat(auto-fill, minmax(180px, 1fr))",
+          tablet: "repeat(2, 1fr)",
+          desktop: "repeat(3, 1fr)",
+        }}
+      >
+        <Box gridArea="a" className={styles.baseBox}>
           <Stack
             attributes={{
               overflow: "hidden",
@@ -89,7 +109,15 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 >
                   $
                 </Text>
-                <Text color="$text" fontSize="$4xl" fontWeight="$semibold">
+                <Text
+                  color="$text"
+                  fontSize={{
+                    mobile: "$2xl",
+                    tablet: "$4xl",
+                    desktop: "$4xl",
+                  }}
+                  fontWeight="$semibold"
+                >
                   {store
                     .getState()
                     ?.formatNumber?.({ value: props.tokenData.price })}
@@ -99,12 +127,13 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
           </Stack>
         </Box>
 
-        <Box className={styles.baseBox}>
+        <Box gridArea="b" className={styles.baseBox}>
           <Stack
             space="$0"
             direction="vertical"
             attributes={{
               justifyContent: "center",
+              flexWrap: "nowrap",
             }}
           >
             <Text
@@ -119,7 +148,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             <Text
               color="$text"
               fontWeight="$semibold"
-              fontSize="$4xl"
+              fontSize={{
+                mobile: "$2xl",
+                tablet: "$4xl",
+                desktop: "$4xl",
+              }}
               lineHeight="$normal"
             >
               {props.rewardCountdownData.hours}
@@ -128,7 +161,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 as="span"
                 color="$textSecondary"
                 fontWeight="$semibold"
-                fontSize="$4xl"
+                fontSize={{
+                  mobile: "$2xl",
+                  tablet: "$4xl",
+                  desktop: "$4xl",
+                }}
               >
                 :
               </Text>
@@ -138,7 +175,11 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
                 as="span"
                 color="$textSecondary"
                 fontWeight="$semibold"
-                fontSize="$4xl"
+                fontSize={{
+                  mobile: "$2xl",
+                  tablet: "$4xl",
+                  desktop: "$4xl",
+                }}
               >
                 :
               </Text>
@@ -146,7 +187,8 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             </Text>
           </Stack>
         </Box>
-        <Box className={styles.rewardBox}>
+
+        <Box gridArea="c" className={styles.rewardBox}>
           <Stack
             direction="vertical"
             space="$0"
@@ -192,7 +234,7 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
             </Stack>
           </Stack>
         </Box>
-      </Stack>
+      </Box>
     </Box>
   );
 }

@@ -1,4 +1,7 @@
-export interface NftMintProps {
+import type { BaseComponentProps } from "../../models/components.model";
+
+export interface NftMintProps extends BaseComponentProps {
+  title: string;
   tag: string;
   name: string;
   description: string;
