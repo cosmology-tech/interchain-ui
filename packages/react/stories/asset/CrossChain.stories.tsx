@@ -15,16 +15,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    header: {
-      total: "144.23",
-      totalOnAll: "732.16",
-      onDeposit: () => {
-        console.log("onDeposit");
+    title: "Your assets",
+    multiChainHeader: [
+      {
+        label: "Total on Osmosis",
+        value: "144.23",
       },
-      onWithdraw: () => {
-        console.log("onWithdraw");
+      {
+        label: "Total across all chains",
+        value: "732.16",
       },
+    ],
+    onDeposit: () => {
+      console.log("onDeposit");
     },
+    onWithdraw: () => {
+      console.log("onWithdraw");
+    },
+    listTitle: "On Osmosis",
+    otherListTitle: "On other chains",
     list: [
       {
         imgSrc:

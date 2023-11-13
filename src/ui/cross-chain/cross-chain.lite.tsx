@@ -3,7 +3,6 @@ import AssetListHeader from "../asset-list-header";
 import AssetList from "../asset-list";
 import Box from "../box";
 import Text from "../text";
-import * as styles from "./cross-chain.css";
 import type { CrossChainProps } from "./cross-chain.types";
 
 useMetadata({
@@ -14,13 +13,14 @@ useMetadata({
 
 export default function CrossChain(props: CrossChainProps) {
   return (
-    <Box className={styles.container}>
+    <Box className={props.className} {...props.attributes}>
       <AssetListHeader
-        isSingle={false}
-        total={props.header.total}
-        totalOnAll={props.header.totalOnAll}
-        onDeposit={() => props?.header?.onDeposit?.()}
-        onWithdraw={() => props?.header?.onWithdraw?.()}
+        title={props.title}
+        multiChainHeader={props.multiChainHeader}
+        depositButtonLabel={props.depositButtonLabel}
+        withdrawButtonLabel={props.withdrawButtonLabel}
+        onDeposit={() => props.onDeposit?.()}
+        onWithdraw={() => props.onWithdraw?.()}
       />
       <Text
         color="$textSecondary"
@@ -28,7 +28,7 @@ export default function CrossChain(props: CrossChainProps) {
         fontWeight="$semibold"
         attributes={{ my: "$9" }}
       >
-        On Osmosis
+        {props.listTitle}
       </Text>
       <AssetList
         needChainSpace={true}
@@ -41,7 +41,7 @@ export default function CrossChain(props: CrossChainProps) {
         fontWeight="$semibold"
         attributes={{ marginTop: "$15", marginBottom: "$9" }}
       >
-        On other chains
+        {props.otherListTitle}
       </Text>
       <AssetList
         needChainSpace={true}
