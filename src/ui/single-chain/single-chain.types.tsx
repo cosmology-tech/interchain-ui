@@ -1,17 +1,13 @@
-import { AssetListHeaderProps } from "../asset-list-header/asset-list-header.types";
-import { AssetListItemProps } from "../asset-list-item/asset-list-item.types";
-
-export type SingleChainHeaderProps = Omit<
-  AssetListHeaderProps,
-  "isSingle" | "totalOnAll"
->;
+import type { AssetListHeaderProps } from "../asset-list-header/asset-list-header.types";
+import type { AssetListItemProps } from "../asset-list-item/asset-list-item.types";
 
 export type SingleChainListItemProps = Omit<
   AssetListItemProps,
   "isOtherChains"
 >;
 
-export interface SingleChainProps {
-  header: SingleChainHeaderProps;
+export interface SingleChainProps
+  extends Omit<AssetListHeaderProps, "multiChainHeader"> {
   list: Array<SingleChainListItemProps>;
+  listTitle: string;
 }

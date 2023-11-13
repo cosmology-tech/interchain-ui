@@ -4,8 +4,7 @@ import AssetList from "../asset-list";
 import Box from "../box";
 import Text from "../text";
 import ShowMore from "../show-more";
-import * as styles from "./single-chain.css";
-import { SingleChainProps } from "./single-chain.types";
+import type { SingleChainProps } from "./single-chain.types";
 
 useMetadata({
   rsc: {
@@ -15,22 +14,26 @@ useMetadata({
 
 export default function SingleChain(props: SingleChainProps) {
   return (
-    <ShowMore className={styles.container}>
-      <Box>
+    <ShowMore>
+      <Box className={props.className} {...props.attributes}>
         <AssetListHeader
-          isSingle={true}
-          total={props.header.total}
-          onDeposit={() => props?.header?.onDeposit?.()}
-          onWithdraw={() => props?.header?.onWithdraw?.()}
+          title={props.title}
+          singleChainHeader={props.singleChainHeader}
+          depositButtonLabel={props.depositButtonLabel}
+          withdrawButtonLabel={props.withdrawButtonLabel}
+          onDeposit={() => props.onDeposit?.()}
+          onWithdraw={() => props.onWithdraw?.()}
         />
+
         <Text
           color="$textSecondary"
           fontSize="$lg"
           fontWeight="$semibold"
           attributes={{ marginTop: "$10", marginBottom: "$9" }}
         >
-          On Osmosis
+          {props.listTitle}
         </Text>
+
         <AssetList
           needChainSpace={false}
           isOtherChains={false}
