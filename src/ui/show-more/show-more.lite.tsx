@@ -72,6 +72,8 @@ export default function ShowMore(props: ShowMoreProps) {
     });
 
     setTimeout(() => {
+      if (!elementRef) return;
+
       if (elementRef.offsetHeight > props.heightToShowMore) {
         state.showToggle = true;
 
