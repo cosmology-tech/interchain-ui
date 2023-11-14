@@ -93,13 +93,11 @@ export type { AssetListProps } from "./ui/asset-list/asset-list.types";
 export { default as CrossChain } from "./ui/cross-chain";
 export type {
   CrossChainProps,
-  CrossChainHeaderProps,
   CrossChainListItemProps,
 } from "./ui/cross-chain/cross-chain.types";
 export { default as SingleChain } from "./ui/single-chain";
 export type {
   SingleChainProps,
-  SingleChainHeaderProps,
   SingleChainListItemProps,
 } from "./ui/single-chain/single-chain.types";
 export { default as OverviewTransfer } from "./ui/overview-transfer";

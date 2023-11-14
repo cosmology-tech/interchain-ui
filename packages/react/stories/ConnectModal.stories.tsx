@@ -30,6 +30,7 @@ function convert(ws: typeof wallets) {
     badge: wallet.extends ? WalletPluginSystem[wallet.extends].text : undefined,
     btmLogo: wallet.extends ? wallet.logo : undefined,
   }));
+  // .slice(0, 2);
 }
 
 export const Primary: Story = {
