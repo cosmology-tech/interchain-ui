@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.3...@interchain-ui/react@1.13.4) (2023-11-14)
+
+### Bug Fixes
+
+- **connect-modal:** pass through custom class names ([#122](https://github.com/cosmology-tech/interchain-ui/issues/122)) ([cac52d7](https://github.com/cosmology-tech/interchain-ui/commit/cac52d766977d4b5c260c626048830d013ff40b5))
+
 ## [1.13.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.2...@interchain-ui/react@1.13.3) (2023-11-13)
 
 ### Bug Fixes
