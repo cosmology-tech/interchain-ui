@@ -37,7 +37,7 @@ export const modalContent = styleVariants({
 });
 
 export const modalAnimateContainer = style({
-  minHeight: themeVars.space[30],
+  minHeight: `clamp(100%, ${themeVars.space[30]}px, ${themeVars.space[30]}px)`,
 });
 
 export const modalChildren = style({

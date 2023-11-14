@@ -5,6 +5,7 @@ import {
   useMetadata,
   useRef,
 } from "@builder.io/mitosis";
+import clx from "clsx";
 import AnimateLayout from "../animate-layout";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
@@ -58,11 +59,15 @@ export default function ConnectModal(props: ConnectModalProps) {
       onClose={() => props.onClose?.()}
       header={props.header}
       className={props.modalContainerClassName}
-      contentClassName={modalContent[state.theme]}
-      contentStyles={state.overrideManager?.applyOverrides(
-        connectModalOverrides.name
+      contentClassName={clx(
+        modalContent[state.theme],
+        props.modalContentClassName
       )}
-      childrenClassName={modalChildren}
+      contentStyles={{
+        ...state.overrideManager?.applyOverrides(connectModalOverrides.name),
+        ...props.modalContentStyles,
+      }}
+      childrenClassName={clx(modalChildren, props.modalChildrenClassName)}
     >
       <AnimateLayout className={modalAnimateContainer}>
         {props.children}

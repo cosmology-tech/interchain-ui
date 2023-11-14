@@ -11,6 +11,7 @@ import {
 import anime from "animejs";
 import type { AnimeInstance } from "animejs";
 import clx from "clsx";
+import Box from "../box";
 import WalletButton from "../connect-modal-wallet-button";
 import {
   walletList,
@@ -43,6 +44,9 @@ export default function ConnectModalWalletList(
       void (async function () {
         await exec();
       })();
+    },
+    getListShapeWallets() {
+      return props.wallets.filter((w) => w.shape === "list");
     },
   });
 
@@ -115,7 +119,11 @@ export default function ConnectModalWalletList(
 
   return (
     <div className={clx(container, props.className)}>
-      <div ref={measureRef} className={walletList}>
+      <div
+        ref={measureRef}
+        className={walletList}
+        data-has-list-wallets={state.getListShapeWallets().length > 0}
+      >
         <Show
           when={props.wallets
             .slice(0, 2)
@@ -126,7 +134,7 @@ export default function ConnectModalWalletList(
             <For each={props.wallets.slice(0, 2)}>
               {(wallet, index) => (
                 <WalletButton
-                  key={wallet.name}
+                  key={`${wallet.name}-${index}`}
                   variant="square"
                   name={wallet.prettyName ?? wallet.name}
                   logo={wallet.logo}
@@ -141,11 +149,14 @@ export default function ConnectModalWalletList(
           </div>
         </Show>
 
-        <div className={listWallets}>
-          <For each={props.wallets.filter((w) => w.shape === "list")}>
+        <Box
+          display={state.getListShapeWallets().length === 0 ? "none" : "grid"}
+          className={listWallets}
+        >
+          <For each={state.getListShapeWallets()}>
             {(wallet, index) => (
               <WalletButton
-                key={wallet.name}
+                key={`${wallet.name}-${index}`}
                 variant="list"
                 name={wallet.prettyName ?? wallet.name}
                 logo={wallet.logo}
@@ -158,7 +169,7 @@ export default function ConnectModalWalletList(
               />
             )}
           </For>
-        </div>
+        </Box>
       </div>
 
       <div ref={shadowRef} className={bottomShadow[state.theme]} />

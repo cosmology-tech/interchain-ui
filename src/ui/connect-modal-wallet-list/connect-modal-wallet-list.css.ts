@@ -11,12 +11,14 @@ export const walletList = style({
   width: "100%",
   overflow: "auto",
   scrollbarWidth: "none",
-  paddingBottom: themeVars.space[8],
   paddingTop: themeVars.space[1],
   selectors: {
     "&::-webkit-scrollbar": {
       display: "none" /* Safari and Chrome */,
     },
+    "&[data-has-list-wallets='true']": {
+      paddingBottom: themeVars.space[8],
+    }
   },
 });
 
@@ -30,7 +32,6 @@ export const squareWallets = style({
 });
 
 export const listWallets = style({
-  display: "grid",
   rowGap: themeVars.space[2],
   gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
   paddingBottom: themeVars.space[4],

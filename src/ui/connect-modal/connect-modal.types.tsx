@@ -8,4 +8,7 @@ export interface ConnectModalProps extends BaseComponentProps {
   children?: BaseComponentProps["children"];
   className?: string;
   modalContainerClassName?: string;
+  modalContentClassName?: string;
+  modalChildrenClassName?: string;
+  modalContentStyles?: any;
 }
