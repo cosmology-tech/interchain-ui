@@ -1,17 +1,6 @@
 import { createRainbowSprinkles, defineProperties } from "rainbow-sprinkles";
-import { calc } from "@vanilla-extract/css-utils";
 import { themeVars } from "./themes.css";
 import { breakpoints } from "./tokens";
-
-const negativeSpace = {
-  ["-px"]: `-1px`,
-  ["-1"]: `${calc(themeVars.space["1"]).negate()}`,
-  ["-2"]: `${calc(themeVars.space["2"]).negate()}`,
-  ["-3"]: `${calc(themeVars.space["3"]).negate()}`,
-  ["-4"]: `${calc(themeVars.space["4"]).negate()}`,
-  ["-5"]: `${calc(themeVars.space["4"]).negate()}`,
-  ["-6"]: `${calc(themeVars.space["4"]).negate()}`,
-};
 
 const extendedSpace = {
   "1/5": "20%",
@@ -24,13 +13,10 @@ const extendedSpace = {
 
 const allSpace = { ...themeVars.space, ...extendedSpace };
 
-const margins = {
-  ...themeVars.space,
-  ...negativeSpace,
-};
+const margins = themeVars.space;
 
 const responsiveProperties = defineProperties({
-  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {}, mdMobile: {}, smDesktop: {} }>(
+  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {}, mdMobile: {} }>(
     breakpoints
   ),
   defaultCondition: "mobile",
@@ -45,26 +31,23 @@ const responsiveProperties = defineProperties({
     flexWrap: true,
     alignItems: true,
     justifyContent: true,
-    gap: true,
-    columnGap: true,
-    rowGap: true,
     padding: allSpace,
     paddingLeft: allSpace,
     paddingRight: allSpace,
     paddingTop: allSpace,
     paddingBottom: allSpace,
-    width: true,
-    height: true,
-    minWidth: true,
-    minHeight: true,
-    maxWidth: true,
-    maxHeight: true,
+    width: allSpace,
+    height: allSpace,
+    minWidth: allSpace,
+    minHeight: allSpace,
+    maxWidth: allSpace,
+    maxHeight: allSpace,
     borderRadius: themeVars.radii,
     borderTopLeftRadius: true,
     borderBottomLeftRadius: true,
     borderTopRightRadius: true,
     borderBottomRightRadius: true,
-    fontFamily: true,
+    fontFamily: themeVars.font,
     fontSize: themeVars.fontSize,
     lineHeight: themeVars.lineHeight,
     textAlign: true,
@@ -90,6 +73,7 @@ const responsiveProperties = defineProperties({
     overflowX: true,
     overflowY: true,
     textOverflow: true,
+    aspectRatio: true,
     opacity: true,
     cursor: true,
     gridTemplateColumns: true,
@@ -101,28 +85,18 @@ const responsiveProperties = defineProperties({
     gridColumn: true,
     gridColumnEnd: true,
     gridColumnStart: true,
-    gridRow: true,
-    gridRowEnd: true,
-    gridRowStart: true,
     gridTemplate: true,
     gridTemplateAreas: true,
     gridTemplateRows: true,
-    aspectRatio: true,
-    insetInlineStart: true,
-    insetInlineEnd: true,
-    transform: true
-  },
-  staticProperties: {
-    width: allSpace,
-    height: allSpace,
-    minWidth: allSpace,
-    minHeight: allSpace,
-    maxWidth: allSpace,
-    maxHeight: allSpace,
-    fontFamily: themeVars.font,
+    gridRow: true,
+    gridRowEnd: true,
+    gridRowStart: true,
     gap: themeVars.space,
     columnGap: themeVars.space,
     rowGap: themeVars.space,
+    insetInlineStart: true,
+    insetInlineEnd: true,
+    transform: true,
   },
   shorthands: {
     p: ["padding"],
@@ -134,8 +108,6 @@ const responsiveProperties = defineProperties({
     paddingY: ["paddingTop", "paddingBottom"],
     px: ["paddingLeft", "paddingRight"],
     py: ["paddingTop", "paddingBottom"],
-    placeItems: ["alignItems", "justifyContent"],
-    typeSize: ["fontSize", "lineHeight"],
     m: ["margin"],
     mr: ["marginRight"],
     ml: ["marginLeft"],
@@ -145,6 +117,7 @@ const responsiveProperties = defineProperties({
     marginY: ["marginTop", "marginBottom"],
     mx: ["marginLeft", "marginRight"],
     my: ["marginTop", "marginBottom"],
+    placeItems: ["alignItems", "justifyContent"],
     size: ["height", "width"],
   },
 });
@@ -157,7 +130,7 @@ const interactiveProperties = defineProperties({
   },
   defaultCondition: "base",
   dynamicProperties: {
-    color: true,
+    color: themeVars.colors,
     visibility: true,
     backgroundColor: themeVars.colors,
     borderWidth: themeVars.borderWidth,
@@ -168,12 +141,8 @@ const interactiveProperties = defineProperties({
     transition: true,
     animation: true,
     textDecoration: true,
-    zIndex: true,
-    fontVariantNumeric: true,
-  },
-  staticProperties: {
-    color: themeVars.colors,
     zIndex: themeVars.zIndex,
+    fontVariantNumeric: true,
   },
   shorthands: {
     bg: ["backgroundColor"],

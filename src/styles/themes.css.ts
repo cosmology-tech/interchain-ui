@@ -220,6 +220,7 @@ export const themeContractTemplate = {
     "15xl": ``,
   },
   zIndex: {
+    "-1": ``,
     "0": ``,
     "10": ``,
     "20": ``,
