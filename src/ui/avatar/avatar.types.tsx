@@ -31,7 +31,15 @@ export interface AvatarNameProps extends BaseComponentProps {
   attributes?: Sprinkles;
 }
 
-export type AvatarSize = "xs" | "2xs" | "sm" | "md" | "lg" | "xl" | "2xl";
+export type AvatarSize =
+  | "3xs"
+  | "2xs"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "2xl";
 
 export interface AvatarProps
   extends AvatarImageProps,
