@@ -7,6 +7,7 @@ export type {
   NumberFormatProps,
   NumberFormatter,
 } from "./models/system.model";
+export type { Sprinkles } from './styles/rainbow-sprinkles.css';
 
 // Init Components
 export { default as Box } from "./ui/box";
