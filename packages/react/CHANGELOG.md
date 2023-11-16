@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.4...@interchain-ui/react@1.13.5) (2023-11-16)
+
+### Bug Fixes
+
+- improve bundle size and remove unused stuff ([779c311](https://github.com/cosmology-tech/interchain-ui/commit/779c3114778df5dc227927ab90eaa1296b49eed3))
+- **liquid-stake:** normalize api and props ([b0249ae](https://github.com/cosmology-tech/interchain-ui/commit/b0249ae4783ff32a56e22a9dd6a8f629df0e8c2e))
+
 ## [1.13.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.3...@interchain-ui/react@1.13.4) (2023-11-14)
 
 ### Bug Fixes
