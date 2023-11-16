@@ -39,13 +39,13 @@ export const Primary: Story = {
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"]>({
       ...stride,
-      denom: `Staked ${stride.denom}`,
+      name: `Staked ${stride.denom}`,
       symbol: `${stride.symbol}`,
       apr: "19.42",
-      rewardAmount: "0",
+      rewardAmount: 0,
     });
 
-    const [stakedAmount, setStakedAmount] = useState<string>("0");
+    const [stakedAmount, setStakedAmount] = useState<number>(0);
 
     return (
       <>
@@ -65,7 +65,7 @@ export const Primary: Story = {
               }}
             >
               <Text fontSize="$xl" fontWeight="$semibold">
-                Liquid Staking {stakeToken?.denom}
+                Liquid Staking {stakeToken?.name}
               </Text>
               <Icon name="informationLine" size="$md" color="$textSecondary" />
             </Stack>
@@ -73,6 +73,7 @@ export const Primary: Story = {
           onClose={() => setIsOpen(false)}
         >
           <LiquidStaking
+            stakeAmount={stakedAmount}
             stakeToken={stakeToken}
             reward={reward}
             options={dropDownList}
@@ -114,17 +115,19 @@ export const Primary: Story = {
               stakeAmount: payloadStakedAmount,
             }) => {
               if (payloadToken) {
-                console.log("selected", payloadToken);
+                console.log("[SB]", {
+                  payloadToken,
+                  payloadStakedAmount,
+                });
                 setStakedAmount(payloadStakedAmount);
                 setStakeToken(payloadToken);
-
                 setReward((prevReward) => {
-                  const amt = String(random(100, 1000, true));
-                  const notional = String(random(500, 20000, true));
+                  // This is just mock reward calculation
+                  const amt = random(100, 1000, true);
+                  const notional = random(500, 20000, true);
 
                   return {
                     ...prevReward,
-                    // Mock reward calculation
                     rewardAmount: amt,
                     priceDisplayAmount: notional,
                   };
@@ -156,7 +159,7 @@ export const Primary: Story = {
             }
             onSubmit={() => {
               alert(
-                `Staked [${stakeToken?.denom}]: amt ${stakedAmount} rward ${reward.rewardAmount}`
+                `Staked [${stakeToken?.symbol}]: amt ${stakedAmount} rward ${reward.rewardAmount}`
               );
             }}
           />

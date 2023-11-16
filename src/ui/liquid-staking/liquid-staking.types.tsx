@@ -5,7 +5,7 @@ import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 export type LiquidStakingToken = AvailableItem;
 
 export interface LiquidStakingReward extends AvailableItem {
-  rewardAmount: string;
+  rewardAmount: number;
 }
 
 type BottomLink = {
@@ -27,6 +27,7 @@ export type RewardDescriptionItem = {
 export interface LiquidStakingProps extends BaseComponentProps {
   options: Array<AvailableItem>;
   stakeToken?: AvailableItem | null;
+  stakeAmount: number;
   reward: LiquidStakingReward;
   bottomLink?: BottomLink;
   decimals?: number;

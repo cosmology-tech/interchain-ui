@@ -180,7 +180,7 @@ export default function TransferItem(props: TransferItemProps) {
         >
           <Show when={props.hasAvailable}>
             <Text color="$textSecondary" fontWeight="$semibold">
-              Available
+              {props.availableLabel ?? "Available"}
             </Text>
             <Text
               fontWeight="$semibold"
@@ -195,7 +195,7 @@ export default function TransferItem(props: TransferItemProps) {
               size="xs"
               onClick={() => state.handleHalf()}
             >
-              Half
+              {props.halfBtnLabel ?? "Half"}
             </Button>
           </Show>
           <Box width="$5" />
@@ -205,7 +205,7 @@ export default function TransferItem(props: TransferItemProps) {
               size="xs"
               onClick={() => state.handleMax()}
             >
-              Max
+              {props.maxBtnLabel ?? "Max"}
             </Button>
           </Show>
         </Stack>

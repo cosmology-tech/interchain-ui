@@ -29,7 +29,7 @@ export const getTransferList = (
 
   return assetList.map((item, index) => {
     return {
-      available: 1.33 * (index + 1),
+      available: 200,
       priceDisplayAmount: 0.33 * (index + 1),
       symbol: item.symbol,
       name: item.name,
