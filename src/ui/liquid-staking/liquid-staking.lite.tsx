@@ -54,7 +54,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     scrollOffset: number;
     stakeToken: LiquidStakingToken | null;
     stakeAmount: number;
-    rewardAmount: string;
+    rewardAmount: number;
     handleToggleExpand: () => void;
     handleStakeTokenSelected: (item: LiquidStakingToken) => void;
     handleStakeAmountChange: (item: LiquidStakingToken, value: number) => void;
@@ -65,7 +65,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     expanded: false,
     stakeToken: null,
     stakeAmount: 0,
-    rewardAmount: "0",
+    rewardAmount: 0,
     handleToggleExpand() {
       if (state.expanded) {
         if (scrollRef) {
@@ -86,9 +86,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     },
     handleStakeAmountChange(selectedItem: LiquidStakingToken, value: number) {
       state.stakeAmount = value;
+      console.log("State onChange", selectedItem, value);
       props?.onChange?.({
         stakeToken: selectedItem,
-        stakeAmount: state.stakeAmount,
+        stakeAmount: value,
       });
     },
     get isAccordionVisible() {
@@ -145,7 +146,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         maxBtn
         hasAvailable
         title={props.stakeLabel}
-        amount={state.stakeToken?.available ?? 0}
+        amount={props.stakeAmount ?? 0}
         selectedItem={state.stakeToken}
         dropDownList={props.options}
         onItemSelected={(selectedItem: LiquidStakingToken) =>

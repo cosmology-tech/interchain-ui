@@ -15,14 +15,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const dropdownList = getTransferList();
+
 /* This is primary TransferItem */
 export const Primary: Story = {
   args: {
     title: "From",
     maxBtn: true,
+    halfBtn: true,
     hasAvailable: true,
   },
   render: (props) => {
-    return <TransferItem {...props} dropDownList={getTransferList()} />;
+    const [amountStaked, setAmountStaked] = React.useState<number>(0);
+
+    return (
+      <TransferItem
+        {...props}
+        dropDownList={dropdownList}
+        amount={amountStaked}
+        onChange={(item, amount) => {
+          setAmountStaked(amount);
+        }}
+      />
+    );
   },
 };

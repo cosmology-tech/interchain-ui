@@ -31,14 +31,17 @@ export interface TransferItemProps {
    * If show the available amount
    */
   hasAvailable?: boolean;
+  availableLabel?: string;
   /**
    * Is there a half button
    */
   halfBtn?: boolean;
+  halfBtnLabel?: string;
   /**
    * Is there a max button
    */
   maxBtn?: boolean;
+  maxBtnLabel?: string;
   /**
    * Title of the transfer-item
    */
