@@ -309,6 +309,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
             <Show when={typeof props.renderAccordionButton === "function"}>
               {props.renderAccordionButton({
+                expanded: state.expanded,
                 onClick: () => {
                   state.handleToggleExpand();
                 },
