@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.5...@interchain-ui/react@1.13.6) (2023-11-16)
+
+### Bug Fixes
+
+- **liquid-stake:** allow custom elements ([0cbd552](https://github.com/cosmology-tech/interchain-ui/commit/0cbd55257f60e1ed14ded60747f947b5369e063c))
+
 ## [1.13.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.4...@interchain-ui/react@1.13.5) (2023-11-16)
 
 ### Bug Fixes
