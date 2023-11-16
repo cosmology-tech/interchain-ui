@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "incremental": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "node",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -17,8 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "rainbow-sprinkles": ["../../node_modules/rainbow-sprinkles/"]
+      "@/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules"],
