@@ -86,7 +86,6 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     },
     handleStakeAmountChange(selectedItem: LiquidStakingToken, value: number) {
       state.stakeAmount = value;
-      console.log("State onChange", selectedItem, value);
       props?.onChange?.({
         stakeToken: selectedItem,
         stakeAmount: value,
