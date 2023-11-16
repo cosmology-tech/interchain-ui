@@ -73,15 +73,21 @@ export default function BasicModal(props: BasicModalProps) {
           {/* Custom title */}
           {props.title && typeof props.title !== "string" ? props.title : null}
 
-          {/* Close button */}
-          <IconButton
-            icon="closeFilled"
-            iconSize="$4xl"
-            variant="unstyled"
-            onClick={(e) => {
-              props.onClose?.(e);
-            }}
-          />
+          {/* Custom close button */}
+          {typeof props.renderCloseButton === "function" ? (
+            props.renderCloseButton({
+              onClose: props.onClose,
+            })
+          ) : (
+            <IconButton
+              icon="closeFilled"
+              iconSize="$4xl"
+              variant="unstyled"
+              onClick={(e) => {
+                props.onClose?.(e);
+              }}
+            />
+          )}
         </Stack>
       }
       className={props.modalContainerClassName}

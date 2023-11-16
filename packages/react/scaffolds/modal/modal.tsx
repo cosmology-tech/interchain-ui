@@ -69,7 +69,6 @@ function useDialog({
 
   const clickawayRef = useClickAway(() => {
     if (closeOnClickaway) {
-      console.log("Clickaway");
       setOpen(false);
     }
   });

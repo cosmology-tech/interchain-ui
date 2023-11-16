@@ -452,29 +452,40 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         }}
       >
         <Stack direction="vertical" space="$10">
-          <Button
-            onClick={(event) => props.onSubmit?.(event)}
-            disabled={props.isSubmitDisabled}
-            intent="tertiary"
-            size="lg"
-            attributes={{ width: "$full" }}
-          >
-            <Box as="span" mr="$8">
-              {props.submitButtonLabel}
-            </Box>
+          <Show when={typeof props.renderSubmitButton === "function"}>
+            {props.renderSubmitButton()}
+          </Show>
 
-            <Icon
-              name="timeLine"
-              color="inherit"
-              attributes={{
-                mr: "$4",
-              }}
-            />
+          <Show when={typeof props.renderSubmitButton !== "function"}>
+            <Button
+              onClick={(event) => props.onSubmit?.(event)}
+              disabled={props.isSubmitDisabled}
+              intent="tertiary"
+              size="lg"
+              attributes={{ width: "$full" }}
+            >
+              <Box as="span" mr="$8">
+                {props.submitButtonLabel}
+              </Box>
 
-            <Text fontSize="$sm" fontWeight="$normal" as="span" color="inherit">
-              ≈ &nbsp; {props.timeEstimateLabel}
-            </Text>
-          </Button>
+              <Icon
+                name="timeLine"
+                color="inherit"
+                attributes={{
+                  mr: "$4",
+                }}
+              />
+
+              <Text
+                fontSize="$sm"
+                fontWeight="$normal"
+                as="span"
+                color="inherit"
+              >
+                ≈ &nbsp; {props.timeEstimateLabel}
+              </Text>
+            </Button>
+          </Show>
 
           <Text
             fontSize="$sm"
