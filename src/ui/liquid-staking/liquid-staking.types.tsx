@@ -44,6 +44,7 @@ export interface LiquidStakingProps extends BaseComponentProps {
   footerLabel?: BaseComponentProps["children"];
   // ==== Custom elements
   renderSubmitButton?: (props?: any) => BaseComponentProps["children"];
+  renderAccordionButton?: (props?: any) => BaseComponentProps["children"];
   // ==== Number format props
   precision?: number;
   // ==== Box props

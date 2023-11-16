@@ -307,13 +307,23 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               {props.accordionLabel}
             </Text>
 
-            <IconButton
-              size="sm"
-              intent={state.expanded ? "tertiary" : "secondary"}
-              icon={state.expanded ? "arrowUpS" : "arrowDownS"}
-              iconSize="$3xl"
-              onClick={() => state.handleToggleExpand()}
-            />
+            <Show when={typeof props.renderAccordionButton === "function"}>
+              {props.renderAccordionButton({
+                onClick: () => {
+                  state.handleToggleExpand();
+                },
+              })}
+            </Show>
+
+            <Show when={typeof props.renderAccordionButton !== "function"}>
+              <IconButton
+                size="sm"
+                intent={state.expanded ? "tertiary" : "secondary"}
+                icon={state.expanded ? "arrowUpS" : "arrowDownS"}
+                iconSize="$3xl"
+                onClick={() => state.handleToggleExpand()}
+              />
+            </Show>
 
             <Box
               p="$4"
