@@ -1,4 +1,4 @@
-import { styleVariants, keyframes } from "@vanilla-extract/css";
+import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 
 const EXPANDED_HEIGHT_PX = `458px`;
 const CONTRACTED_HEIGHT_PX = `32px`;

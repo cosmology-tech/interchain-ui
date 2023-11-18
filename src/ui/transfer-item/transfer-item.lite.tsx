@@ -8,6 +8,7 @@ import {
   Show,
   useMetadata,
 } from "@builder.io/mitosis";
+import clx from "clsx";
 import cloneDeep from "lodash/cloneDeep";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
@@ -147,23 +148,24 @@ export default function TransferItem(props: TransferItemProps) {
   });
 
   return (
-    <Stack
-      space="$0"
-      direction="vertical"
+    <Box
+      gap="$0"
+      display="flex"
+      flexDirection="column"
+      backgroundColor="$progressBg"
+      borderRadius="$lg"
+      position="relative"
+      paddingTop="$5"
+      bg="$cardBg"
       attributes={{
-        backgroundColor: "$progressBg",
-        borderRadius: "$lg",
-        position: "relative",
-        paddingTop: "$5",
-        minWidth: {
-          mobile: "unset",
-          desktop: "468px",
-        },
+        "data-part-id": "transfer-item-root",
       }}
+      className={clx(props.className, styles.root)}
     >
       <Stack
         space="$0"
         attributes={{
+          flexWrap: "wrap",
           minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
@@ -172,10 +174,12 @@ export default function TransferItem(props: TransferItemProps) {
         }}
       >
         <Text color="$textSecondary">{props.title}</Text>
+
         <Stack
           space="$0"
           attributes={{
             alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Show when={props.hasAvailable}>
@@ -189,6 +193,7 @@ export default function TransferItem(props: TransferItemProps) {
               {state.currentItem?.available}
             </Text>
           </Show>
+
           <Show when={props.halfBtn}>
             <Button
               className={styles.textBtn[state.theme]}
@@ -198,7 +203,9 @@ export default function TransferItem(props: TransferItemProps) {
               {props.halfBtnLabel ?? "Half"}
             </Button>
           </Show>
+
           <Box width="$5" />
+
           <Show when={props.maxBtn}>
             <Button
               className={styles.textBtn[state.theme]}
@@ -210,6 +217,7 @@ export default function TransferItem(props: TransferItemProps) {
           </Show>
         </Stack>
       </Stack>
+
       <Show when={state.comboboxList.length > 0}>
         <Box
           attributes={{
@@ -267,6 +275,6 @@ export default function TransferItem(props: TransferItemProps) {
           />
         </Box>
       </Show>
-    </Stack>
+    </Box>
   );
 }
