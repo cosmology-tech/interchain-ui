@@ -352,6 +352,7 @@ export default function SwapToken(props: SwapTokenProps) {
           </div>
         </Stack>
       </Stack>
+
       <SwapPrice
         fromItem={state.fromItem}
         toItem={state.toItem}
@@ -363,15 +364,19 @@ export default function SwapToken(props: SwapTokenProps) {
         priceImpact={props?.swapPrice?.priceImpact}
         swapFee={props?.swapPrice?.swapFee}
       />
-      <Button
-        onClick={() => props?.onSwap?.()}
-        disabled={state.swapDisabled || new BigNumber(state.fromAmount).eq(0)}
-        intent="tertiary"
-        size="lg"
-        attributes={{ width: "$full" }}
-      >
-        {`${state.swapDisabled ? "Insufficient balance" : "Swap"}`}
-      </Button>
+
+      <Box width="100%">
+        <Button
+          fluidWidth
+          onClick={() => props?.onSwap?.()}
+          disabled={state.swapDisabled || new BigNumber(state.fromAmount).eq(0)}
+          intent="tertiary"
+          size="lg"
+          attributes={{ width: "$full" }}
+        >
+          {`${state.swapDisabled ? "Insufficient balance" : "Swap"}`}
+        </Button>
+      </Box>
     </Box>
   );
 }

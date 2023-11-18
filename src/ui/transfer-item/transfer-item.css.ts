@@ -1,8 +1,18 @@
-import { style, styleVariants, createVar } from "@vanilla-extract/css";
+import {
+  style,
+  styleVariants,
+  createVar,
+  createContainer,
+} from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
 
 const textButtonBgVar = createVar();
+export const transferItemRootContainer = createContainer();
+
+export const root = style({
+  containerName: transferItemRootContainer,
+});
 
 export const img = style({
   width: themeVars.space[15],
@@ -40,17 +50,13 @@ export const textBtn = styleVariants({
 export const transferInput = style({
   fontSize: themeVars.fontSize["2xl"],
   textAlign: "right",
-  width: themeVars.space[24],
-  paddingLeft: '0',
-  paddingRight: '0',
-  "@media": {
-    [`screen and (min-width: ${breakpoints.tablet}px)`]: {
-      width: themeVars.space[28]
-    },
-  },
+  width: "100%",
+  paddingLeft: "0",
+  paddingRight: "0",
 });
 
 export const comboboxContainer = style({
+  minHeight: "86px",
   borderBottomLeftRadius: themeVars.radii.lg,
   borderBottomRightRadius: themeVars.radii.lg,
-})
+});

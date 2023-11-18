@@ -1,4 +1,4 @@
-import { styleVariants, keyframes } from "@vanilla-extract/css";
+import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 
 const EXPANDED_HEIGHT_PX = `458px`;
 const CONTRACTED_HEIGHT_PX = `32px`;
@@ -13,8 +13,13 @@ const expandVerticalReverse = keyframes({
   "100%": { height: CONTRACTED_HEIGHT_PX },
 });
 
+export const accordionBase = style({
+  position: "relative",
+});
+
 export const accordionPanel = styleVariants({
   expanded: [
+    accordionBase,
     {
       height: EXPANDED_HEIGHT_PX,
       overflow: "auto",
@@ -22,6 +27,7 @@ export const accordionPanel = styleVariants({
     },
   ],
   contracted: [
+    accordionBase,
     {
       height: CONTRACTED_HEIGHT_PX,
       opacity: 1,

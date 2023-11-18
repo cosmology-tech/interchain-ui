@@ -57,24 +57,34 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
     <div className={clx(container, props.className)} ref={props.containerRef}>
       <Box
         width="$full"
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
+        display="grid"
+        gridTemplateColumns={{
+          mobile: "repeat(2, minmax(0, 1fr))",
+          tablet: "repeat(2, minmax(0, 1fr))",
+        }}
       >
         {/* logo + input */}
         <Stack
           attributes={{
-            flex: "1",
-            alignItems: props.value && props.label ? "center" : "flex-start",
+            alignItems:
+              props.value && props.label ? "flex-start" : "flex-start",
+            zIndex: "1",
           }}
           direction="horizontal"
           space="$7"
         >
+          {/* ==== Placeholder skeleton */}
           {/* Still need to show the icon even props.value is empty string */}
           <Box
             flexShrink="0"
-            width={props.size === "md" ? "50px" : "28px"}
-            height={props.size === "md" ? "50px" : "28px"}
+            width={{
+              mobile: "$11",
+              mdMobile: props.size === "md" ? "50px" : "$11",
+            }}
+            height={{
+              mobile: "$11",
+              mdMobile: props.size === "md" ? "50px" : "$11",
+            }}
           >
             <Box
               display={!props.value || !props.iconUrl ? "block" : "none"}
@@ -94,8 +104,14 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
           </Box>
 
           <Box
-            flex={props.size === "sm" ? "1 0 1px" : undefined}
+            flex={{
+              mobile: "1",
+              tablet: props.size === "sm" ? "1 0 1px" : undefined,
+            }}
             width={props.size === "sm" ? "$full" : undefined}
+            attributes={{
+              "data-part-id": "input-container",
+            }}
           >
             <Stack
               direction="horizontal"
@@ -106,35 +122,43 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 alignItems: "center",
               }}
             >
-              <Box maxWidth={props.value ? "100px" : "166px"}>
+              <Box display="block" position="relative" maxWidth="100%">
                 <input
                   value={props.value}
                   placeholder={props.placeholder}
                   className={chainSwapInput[props.size]}
                   data-input-value={!!props.value}
+                  data-part-id="chain-swap-input"
                   {...props.inputAttributes}
                 />
-              </Box>
 
-              <Box style={{ display: !!props.value ? "block" : "none" }}>
-                <button
-                  type="button"
-                  className={baseButton}
-                  onClick={() => props.onDropdownArrowClicked?.()}
-                  style={{
-                    backgroundColor: "transparent",
-                    maxHeight: "24px",
-                  }}
+                {/* === Arrow dropdown button */}
+                <Box
+                  position="absolute"
+                  top="0"
+                  right="0"
+                  zIndex="1"
+                  width="$12"
+                  height="$12"
+                  display={!!props.value ? "block" : "none"}
                 >
-                  <Icon
-                    color="$textSecondary"
-                    attributes={{
-                      width: "36px",
-                      height: "36px",
+                  <button
+                    type="button"
+                    className={baseButton}
+                    onClick={() => props.onDropdownArrowClicked?.()}
+                    style={{
+                      backgroundColor: "transparent",
+                      height: "100%",
+                      width: "100%",
                     }}
-                    name="arrowDropDown"
-                  />
-                </button>
+                  >
+                    <Icon
+                      color="$textSecondary"
+                      size="$6xl"
+                      name="arrowDropDown"
+                    />
+                  </button>
+                </Box>
               </Box>
             </Stack>
 
@@ -170,7 +194,14 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
 
         {/* Numbers */}
         <Box style={{ display: props.size === "md" ? "block" : "none" }}>
-          <Box style={{ display: !props.value ? "block" : "none" }}>
+          {/* === Empty skeleton */}
+          <Box
+            display={!props.value ? "flex" : "none"}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="flex-end"
+            pr="$4"
+          >
             <Stack direction="vertical" space="$4">
               <Box
                 backgroundColor="$skeletonBg"

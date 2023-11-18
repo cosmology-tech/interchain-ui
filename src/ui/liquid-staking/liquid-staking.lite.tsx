@@ -132,8 +132,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
   return (
     <Box
       minHeight="444px"
-      pt="$8"
+      p="$8"
+      borderRadius="$md"
       position="relative"
+      backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
       className={props.className}
       ref={props.forwardedRef}
       {...props.attributes}
@@ -178,12 +180,21 @@ export default function LiquidStaking(props: LiquidStakingProps) {
           }}
         >
           {/* Reward token icon */}
-          <Box display="block" width="50px" height="50px" flexShrink="0">
-            <img
-              src={props.reward.imgSrc}
-              width="50"
-              height="50"
-              alt={props.reward.symbol}
+          <Box display="block" flexShrink="0">
+            <Box
+              as="img"
+              attributes={{
+                src: props.reward.imgSrc,
+                alt: props.reward.symbol,
+              }}
+              width={{
+                mobile: "28px",
+                mdMobile: "50px",
+              }}
+              height={{
+                mobile: "28px",
+                mdMobile: "50px",
+              }}
             />
           </Box>
 
@@ -204,7 +215,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               }}
             >
               <Text
-                fontSize="$3xl"
+                fontSize={{
+                  mobile: "$lg",
+                  mdMobile: "$3xl",
+                }}
                 fontWeight="$semibold"
                 lineHeight="$shorter"
               >
@@ -261,7 +275,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       {/* Description list */}
       <Box
         position="relative"
-        maxWidth="468px"
+        maxWidth="100%"
         minHeight="$16"
         attributes={{
           "data-part-id": "accordion",
@@ -281,7 +295,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
             direction="horizontal"
             space="$4"
             attributes={{
-              p: "$4",
+              py: "$4",
               position: "relative",
               justifyContent: "flex-end",
               zIndex: 1,
@@ -454,8 +468,11 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       <Box
         position={state.expanded ? "absolute" : "relative"}
         bottom={state.expanded ? 0 : "unset"}
+        left={state.expanded ? "0" : "unset"}
+        right={state.expanded ? "0" : "unset"}
         width="$full"
         py="$4"
+        px={state.expanded ? "$8" : "$0"}
         backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
         attributes={{
           "data-part-id": "footer",
@@ -468,6 +485,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
           <Show when={typeof props.renderSubmitButton !== "function"}>
             <Button
+              fluidWidth
               onClick={(event) => props.onSubmit?.(event)}
               disabled={props.isSubmitDisabled}
               intent="tertiary"

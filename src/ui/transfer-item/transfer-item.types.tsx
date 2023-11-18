@@ -1,3 +1,5 @@
+import type { BaseComponentProps } from "../../models/components.model";
+
 export type ComboboxListItemType = {
   iconUrl?: string;
   name: string;
@@ -22,7 +24,7 @@ export type AvailableItem = {
   priceDisplayAmount?: number;
 };
 
-export interface TransferItemProps {
+export interface TransferItemProps extends BaseComponentProps {
   /**
    * Drop down list of available items
    */
