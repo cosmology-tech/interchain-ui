@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.11](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.10...@interchain-ui/react@1.13.11) (2023-11-18)
+
+### Bug Fixes
+
+- **staking:** footer position ([2e2993a](https://github.com/cosmology-tech/interchain-ui/commit/2e2993a7b25c44240e9f59dbcf91b49a7c86fc8a))
+- **staking:** responsive without modal ([f8d774f](https://github.com/cosmology-tech/interchain-ui/commit/f8d774f2b5397696cebfbe07823312ec90f45b58))
+- **swap-token:** force dropdown placement bottom ([0cdc4af](https://github.com/cosmology-tech/interchain-ui/commit/0cdc4af4939b87b91c912377ade7e01198929228))
+
 ## [1.13.10](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.9...@interchain-ui/react@1.13.10) (2023-11-16)
 
 **Note:** Version bump only for package @interchain-ui/react
