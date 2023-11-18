@@ -40,6 +40,7 @@ export const chainSwapInput = styleVariants({
       "@media": {
         [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
           fontSize: themeVars.fontSize["2xl"],
+          maxWidth: "160px",
         },
       },
       "@container": {

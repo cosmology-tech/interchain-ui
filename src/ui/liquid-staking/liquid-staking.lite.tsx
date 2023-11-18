@@ -295,7 +295,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
             direction="horizontal"
             space="$4"
             attributes={{
-              p: "$4",
+              py: "$4",
               position: "relative",
               justifyContent: "flex-end",
               zIndex: 1,
@@ -468,9 +468,11 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       <Box
         position={state.expanded ? "absolute" : "relative"}
         bottom={state.expanded ? 0 : "unset"}
-        // width="$full"
-        width={state.expanded ? `calc(100% - 32px)` : "$full"}
+        left={state.expanded ? "0" : "unset"}
+        right={state.expanded ? "0" : "unset"}
+        width="$full"
         py="$4"
+        px={state.expanded ? "$8" : "$0"}
         backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
         attributes={{
           "data-part-id": "footer",
