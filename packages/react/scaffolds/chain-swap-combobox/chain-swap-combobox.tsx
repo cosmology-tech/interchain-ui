@@ -3,7 +3,6 @@ import clx, { ClassValue } from "clsx";
 import {
   autoUpdate,
   size,
-  flip,
   useId,
   useDismiss,
   useFloating,
@@ -104,9 +103,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
     open,
+    placement: "bottom",
     onOpenChange: setOpen,
     middleware: [
-      flip(),
       size({
         apply({ rects, availableHeight, elements }) {
           Object.assign(elements.floating.style, {
