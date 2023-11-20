@@ -102,6 +102,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   );
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const listRef = React.useRef<Array<HTMLElement | null>>([]);
 
   const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
@@ -112,9 +113,12 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     middleware: [
       size({
         apply({ rects, availableHeight, elements }) {
+          const containerWidth =
+            containerRef.current.getBoundingClientRect().width;
+
           Object.assign(elements.floating.style, {
-            // ref width + parent padding
-            width: `${rects.reference.width + 40}px`,
+            // ref width + parent padding, but not exceeding the real container width
+            width: `${Math.min(rects.reference.width + 40, containerWidth)}px`,
             maxHeight: `${props.maxHeight ?? availableHeight}px`,
           });
         },
@@ -182,7 +186,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }, [props.valueItem]);
 
   // Make sure onBlur can reset value to the selectedItem
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!open && selectedItem && !inputFocusing) {
       setInputValue(selectedItem.tokenName);
     }
@@ -193,6 +197,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       px="$9"
       py="$7"
       backgroundColor="$menuItemBg"
+      ref={containerRef}
       {...props.attributes}
       className={props.className}
     >

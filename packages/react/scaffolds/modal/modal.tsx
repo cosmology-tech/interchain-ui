@@ -28,7 +28,7 @@ function useClickAway(cb: (e: Event) => void) {
   const ref = React.useRef(null);
   const refCb = React.useRef(cb);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     refCb.current = cb;
   });
 
@@ -154,7 +154,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
 
   const { styles: transitionStyles } = useTransitionStyles(dialog.context);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     dialog.setLabelId(id);
     return () => dialog.setLabelId(undefined);
   }, [id, dialog.setLabelId]);

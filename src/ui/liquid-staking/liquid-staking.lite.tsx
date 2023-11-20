@@ -21,7 +21,6 @@ import Divider from "../divider";
 import TransferItem from "../transfer-item";
 
 import * as styles from "./liquid-staking.css";
-import * as chainSwapInputStyles from "../chain-swap-input/chain-swap-input.css";
 import { scrollBar } from "../shared/shared.css";
 
 import type { ThemeVariant } from "../../models/system.model";
@@ -157,7 +156,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     <Box
       minHeight="444px"
       borderRadius="$md"
-      p={state.isMounted ? (state.width < 568 ? "$4" : "$10") : "$10"}
+      p={state.isMounted ? (state.width < 350 ? "$4" : "$10") : "$10"}
       position="relative"
       backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
       className={clx(props.className, styles.root)}
@@ -440,7 +439,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
           >
             <For each={props.descriptionList}>
               {(listItem) => (
-                <Stack direction="vertical" space="$4">
+                <Stack key={listItem.title} direction="vertical" space="$4">
                   <Stack
                     direction="horizontal"
                     space="$4"

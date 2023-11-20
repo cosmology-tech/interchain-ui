@@ -56,7 +56,11 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
   });
 
   return (
-    <div className={clx(container, props.className)} ref={props.containerRef}>
+    <div
+      className={clx(container, props.className)}
+      ref={props.containerRef}
+      data-part-id="chain-swap-input-root"
+    >
       <Box
         width="$full"
         display="grid"
