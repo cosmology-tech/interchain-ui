@@ -13,11 +13,35 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const SingleChainHeader: Story = {
   args: {
-    isSingle: false,
-    total: "144.23",
-    totalOnAll: "732.16",
+    title: "Your asset",
+    singleChainHeader: {
+      label: "Total on Osmosis",
+      value: "144.23",
+    },
+    onDeposit: () => {
+      console.log("onDeposit");
+    },
+    onWithdraw: () => {
+      console.log("onWithdraw");
+    },
+  },
+};
+
+export const MultiChainHeader: Story = {
+  args: {
+    title: "Your assets",
+    multiChainHeader: [
+      {
+        label: "Total on Osmosis",
+        value: "144.23",
+      },
+      {
+        label: "Total across all chains",
+        value: "732.16",
+      },
+    ],
     onDeposit: () => {
       console.log("onDeposit");
     },

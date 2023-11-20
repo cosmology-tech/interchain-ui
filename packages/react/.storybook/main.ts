@@ -1,18 +1,16 @@
 import { dirname, join } from "path";
+import { mergeConfig, splitVendorChunkPlugin } from "vite";
+import react from "@vitejs/plugin-react";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  stories: [
-    "../src/**/*.mdx",
-    "../src/**/*.stories.@(jsx|ts|tsx)",
-    "../stories/**/*mdx",
-    "../stories/**/*.stories.@(jsx|ts|tsx)",
-  ],
+  stories: ["../stories/**/*mdx", "../stories/**/*.stories.@(jsx|ts|tsx)"],
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
-    getAbsolutePath("@storybook/addon-viewport")
+    getAbsolutePath("@storybook/addon-viewport"),
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
@@ -20,6 +18,32 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+  },
+  core: {
+    builder: "@storybook/builder-vite", // 👈 The builder enabled here.
+  },
+  async viteFinal(config, { configType }) {
+    // return the customized config
+    if (configType === "PRODUCTION") {
+      return mergeConfig(config, {
+        // customize the Vite config here
+        plugins: [react(), splitVendorChunkPlugin(), vanillaExtractPlugin()],
+        build: {
+          rollupOptions: {
+            output: {
+              manualChunks(id: string) {
+                // creating a chunk for mock data
+                if (id.includes("stub/")) {
+                  return "stub";
+                }
+              },
+            },
+          },
+        },
+      });
+    }
+
+    return config;
   },
 };
 
