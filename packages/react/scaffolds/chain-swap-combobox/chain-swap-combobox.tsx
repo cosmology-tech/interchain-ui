@@ -13,6 +13,7 @@ import {
   useTransitionStyles,
   FloatingFocusManager,
   FloatingList,
+  FloatingPortal,
 } from "@floating-ui/react";
 import { create } from "zustand";
 import { store } from "@/models/store";
@@ -22,6 +23,7 @@ import ChainSwapInput from "@/ui/chain-swap-input";
 import ChainListItem from "@/ui/chain-list-item";
 import { chainSwapListBox } from "./chain-swap-combobox.css";
 import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.types";
+import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
 
 const useStore = create(store);
 
@@ -80,6 +82,8 @@ export interface ChainSwapComboboxProps {
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
   className?: ClassValue;
+  inputClassName?: string;
+  attributes?: Sprinkles;
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -98,6 +102,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   );
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const listRef = React.useRef<Array<HTMLElement | null>>([]);
 
   const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
@@ -108,9 +113,12 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     middleware: [
       size({
         apply({ rects, availableHeight, elements }) {
+          const containerWidth =
+            containerRef.current.getBoundingClientRect().width;
+
           Object.assign(elements.floating.style, {
-            // ref width + parent padding
-            width: `${rects.reference.width + 40}px`,
+            // ref width + parent padding, but not exceeding the real container width
+            width: `${Math.min(rects.reference.width + 40, containerWidth)}px`,
             maxHeight: `${props.maxHeight ?? availableHeight}px`,
           });
         },
@@ -178,7 +186,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }, [props.valueItem]);
 
   // Make sure onBlur can reset value to the selectedItem
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!open && selectedItem && !inputFocusing) {
       setInputValue(selectedItem.tokenName);
     }
@@ -189,6 +197,8 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       px="$9"
       py="$7"
       backgroundColor="$menuItemBg"
+      ref={containerRef}
+      {...props.attributes}
       className={props.className}
     >
       <div ref={refs.setReference}>
@@ -201,6 +211,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           endAddon={props.endAddon}
           {...selectedItem}
           label={selectedItem?.name ?? null}
+          inputClassName={props.inputClassName}
           inputAttributes={getReferenceProps({
             onChange,
             value: inputValue,
@@ -241,46 +252,48 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           initialFocus={-1}
           visuallyHiddenDismiss
         >
-          <div
-            {...getFloatingProps({
-              ref: refs.setFloating,
-              style: {
-                ...floatingStyles,
-                ...(isMounted ? transitionStyles : {}),
-                overflowY: "auto",
-              },
-            })}
-            className={clx(
-              themeStore.themeClass,
-              chainSwapListBox[themeStore.theme]
-            )}
-          >
-            <FloatingList elementsRef={listRef}>
-              {items.map((item, index) => (
-                <Item
-                  key={item.tokenName}
-                  size={props.size}
-                  isActive={activeIndex === index}
-                  isSelected={item.tokenName === selectedItem?.tokenName}
-                  {...item}
-                  {...getItemProps({
-                    ref(node) {
-                      listRef.current[index] = node;
-                    },
-                    onClick() {
-                      setInputValue(item.tokenName);
-                      setOpen(false);
-                      if (item) {
-                        setSelectedItem(item);
-                        props.onItemSelected?.(item);
-                      }
-                      refs.domReference.current?.focus();
-                    },
-                  })}
-                />
-              ))}
-            </FloatingList>
-          </div>
+          <FloatingPortal>
+            <div
+              {...getFloatingProps({
+                ref: refs.setFloating,
+                style: {
+                  ...floatingStyles,
+                  ...(isMounted ? transitionStyles : {}),
+                  overflowY: "auto",
+                },
+              })}
+              className={clx(
+                themeStore.themeClass,
+                chainSwapListBox[themeStore.theme]
+              )}
+            >
+              <FloatingList elementsRef={listRef}>
+                {items.map((item, index) => (
+                  <Item
+                    key={item.tokenName}
+                    size={props.size}
+                    isActive={activeIndex === index}
+                    isSelected={item.tokenName === selectedItem?.tokenName}
+                    {...item}
+                    {...getItemProps({
+                      ref(node) {
+                        listRef.current[index] = node;
+                      },
+                      onClick() {
+                        setInputValue(item.tokenName);
+                        setOpen(false);
+                        if (item) {
+                          setSelectedItem(item);
+                          props.onItemSelected?.(item);
+                        }
+                        refs.domReference.current?.focus();
+                      },
+                    })}
+                  />
+                ))}
+              </FloatingList>
+            </div>
+          </FloatingPortal>
         </FloatingFocusManager>
       )}
     </Box>

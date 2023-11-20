@@ -41,7 +41,7 @@ function useMeasure() {
     height: 0,
   });
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!ref.current) return;
 
     const observer = new ResizeObserver(([entry]) => {
