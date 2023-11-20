@@ -13,6 +13,7 @@ export const chainSwapInputBase = style({
   border: "none",
   outline: "none",
   padding: 0,
+  height: "auto",
   backgroundColor: "transparent",
   fontFamily: themeVars.font.body,
   transitionProperty:
@@ -34,18 +35,22 @@ export const chainSwapInput = styleVariants({
     chainSwapInputBase,
     style({
       maxWidth: "100px",
-      height: themeVars.space[11],
+      maxHeight: themeVars.space[11],
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
-      "@media": {
-        [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
-          fontSize: themeVars.fontSize["2xl"],
-          maxWidth: "160px",
-        },
-      },
       "@container": {
         [`${transferItemRootContainer} (min-width: 350px)`]: {
           maxWidth: "160px",
+        },
+      },
+      "@supports": {
+        [`not (container-type: inline-size)`]: {
+          "@media": {
+            [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
+              fontSize: themeVars.fontSize["2xl"],
+              maxWidth: "160px",
+            },
+          },
         },
       },
     }),
@@ -66,31 +71,45 @@ export const chainSwapInput = styleVariants({
   ],
 });
 
-export const chainSwapLogo = styleVariants({
-  md: [
-    chainLogoBase,
-    {
+export const logoMd = style({
+  "@container": {
+    [`${transferItemRootContainer} (min-width: 0px)`]: {
       width: "28px",
       height: "28px",
+    },
+    [`${transferItemRootContainer} (min-width: 310px)`]: {
+      width: "50px",
+      height: "50px",
+    },
+  },
+  "@supports": {
+    [`not (container-type: inline-size)`]: {
       "@media": {
+        [`screen and (min-width: ${breakpoints.mobile}px)`]: {
+          width: "28px",
+          height: "28px",
+        },
         [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
           width: "50px",
           height: "50px",
         },
       },
     },
-  ],
-  sm: [
-    chainLogoBase,
-    {
-      width: "16px",
-      height: "16px",
-      "@media": {
-        [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
-          width: "28px",
-          height: "28px",
-        },
-      },
+  },
+});
+
+export const logoSm = style({
+  width: "16px",
+  height: "16px",
+  "@media": {
+    [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
+      width: "28px",
+      height: "28px",
     },
-  ],
+  },
+});
+
+export const chainSwapLogo = styleVariants({
+  md: [chainLogoBase, logoMd],
+  sm: [chainLogoBase, logoSm],
 });

@@ -17,6 +17,8 @@ import {
   container,
   chainSwapInput,
   chainSwapLogo,
+  logoMd,
+  logoSm,
 } from "./chain-swap-input.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ChainSwapInputProps } from "./chain-swap-input.types";
@@ -77,14 +79,8 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
           {/* Still need to show the icon even props.value is empty string */}
           <Box
             flexShrink="0"
-            width={{
-              mobile: "$11",
-              mdMobile: props.size === "md" ? "50px" : "$11",
-            }}
-            height={{
-              mobile: "$11",
-              mdMobile: props.size === "md" ? "50px" : "$11",
-            }}
+            position="relative"
+            className={props.size === "md" ? logoMd : logoSm}
           >
             <Box
               display={!props.value || !props.iconUrl ? "block" : "none"}
@@ -126,7 +122,10 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 <input
                   value={props.value}
                   placeholder={props.placeholder}
-                  className={chainSwapInput[props.size]}
+                  className={clx(
+                    chainSwapInput[props.size],
+                    props.inputClassName
+                  )}
                   data-input-value={!!props.value}
                   data-part-id="chain-swap-input"
                   {...props.inputAttributes}

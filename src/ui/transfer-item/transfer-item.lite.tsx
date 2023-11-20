@@ -46,9 +46,8 @@ export default function TransferItem(props: TransferItemProps) {
   let lastValueRef = useRef<number>(0);
 
   const state = useStore<{
-    theme: ThemeVariant;
     currentItem: AvailableItem;
-    amountPrice: string;
+    amountPrice: number;
     comboboxList: ComboboxListType;
     handleAmountInput: (value: number) => void;
     handleHalf: () => void;
@@ -57,6 +56,8 @@ export default function TransferItem(props: TransferItemProps) {
     mapToComboboxList: (list: AvailableItem[]) => void;
     getSelectedItem: (selectedItem: ComboboxListItemType) => AvailableItem;
     itemSelected: (selectedItem: ComboboxListItemType) => void;
+    // === UI states
+    theme: ThemeVariant;
   }>({
     theme: "light",
     currentItem: null,
@@ -164,58 +165,100 @@ export default function TransferItem(props: TransferItemProps) {
     >
       <Stack
         space="$0"
+        direction="vertical"
         attributes={{
-          flexWrap: "wrap",
           minHeight: "$10",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingLeft: "$9",
-          paddingRight: "$5",
+          paddingLeft: props.isSmall ? "$6" : "$9",
+          paddingRight: props.isSmall ? "$4" : "$5",
         }}
       >
-        <Text color="$textSecondary">{props.title}</Text>
-
-        <Stack
-          space="$0"
+        <Text
+          fontSize={props.isSmall ? "$xs" : "$sm"}
+          color="$textSecondary"
           attributes={{
-            alignItems: "center",
-            justifyContent: "space-between",
+            flex: 1,
           }}
         >
+          {props.title}
+        </Text>
+
+        <Box display="flex" flexWrap="wrap" gap={"$2"}>
+          {/* Available amount */}
           <Show when={props.hasAvailable}>
-            <Text color="$textSecondary" fontWeight="$semibold">
-              {props.availableLabel ?? "Available"}
-            </Text>
-            <Text
-              fontWeight="$semibold"
-              attributes={{ marginLeft: "$4", marginRight: "$9" }}
+            <Stack
+              direction="horizontal"
+              space="$4"
+              attributes={{
+                flexGrow: "1",
+                overflow: "auto",
+                flexShrink: "0",
+                alignItems: "center",
+              }}
             >
-              {state.currentItem?.available}
-            </Text>
+              <Text
+                fontSize={props.isSmall ? "$2xs" : "$sm"}
+                color="$textSecondary"
+                fontWeight="$semibold"
+                attributes={{
+                  flexShrink: "0",
+                }}
+              >
+                {props.availableLabel ?? "Available"}
+              </Text>
+
+              <Text
+                fontWeight="$semibold"
+                fontSize={props.isSmall ? "$2xs" : "$sm"}
+                attributes={{
+                  marginRight: props.isSmall ? "$0" : "$9",
+                  flexShrink: "0",
+                }}
+              >
+                {state.currentItem?.available}
+              </Text>
+            </Stack>
           </Show>
 
-          <Show when={props.halfBtn}>
-            <Button
-              className={styles.textBtn[state.theme]}
-              size="xs"
-              onClick={() => state.handleHalf()}
+          {/* Half and max buttons */}
+          <Show when={props.halfBtn || props.maxBtn}>
+            <Stack
+              direction="horizontal"
+              space="$0"
+              align="center"
+              attributes={{
+                justifyContent: "flex-end",
+                flexGrow: "0",
+                flexShrink: "1",
+              }}
             >
-              {props.halfBtnLabel ?? "Half"}
-            </Button>
-          </Show>
+              <Show when={props.halfBtn}>
+                <Button
+                  className={styles.textBtn[state.theme]}
+                  size="xs"
+                  onClick={() => state.handleHalf()}
+                >
+                  <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
+                    {props.halfBtnLabel ?? "Half"}
+                  </Box>
+                </Button>
+              </Show>
 
-          <Box width="$5" />
+              <Box width={props.isSmall ? "$2" : "$5"} />
 
-          <Show when={props.maxBtn}>
-            <Button
-              className={styles.textBtn[state.theme]}
-              size="xs"
-              onClick={() => state.handleMax()}
-            >
-              {props.maxBtnLabel ?? "Max"}
-            </Button>
+              <Show when={props.maxBtn}>
+                <Button
+                  className={styles.textBtn[state.theme]}
+                  size="xs"
+                  onClick={() => state.handleMax()}
+                >
+                  <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
+                    {props.maxBtnLabel ?? "Max"}
+                  </Box>
+                </Button>
+              </Show>
+            </Stack>
           </Show>
-        </Stack>
+        </Box>
       </Stack>
 
       <Show when={state.comboboxList.length > 0}>
@@ -248,7 +291,10 @@ export default function TransferItem(props: TransferItemProps) {
                       onChange={(value) => {
                         state.handleAmountInput(value);
                       }}
-                      inputClassName={styles.transferInput}
+                      inputClassName={clx(
+                        styles.transferInput,
+                        props.isSmall ? styles.smComboboxInput : null
+                      )}
                       minValue={0}
                       maxValue={
                         props.availableAsMax
@@ -272,6 +318,17 @@ export default function TransferItem(props: TransferItemProps) {
                 </div>
               </Stack>
             )}
+            attributes={
+              props.isSmall
+                ? {
+                    px: "$6",
+                    py: "$4",
+                  }
+                : {
+                    px: "$9",
+                    py: "$7",
+                  }
+            }
           />
         </Box>
       </Show>

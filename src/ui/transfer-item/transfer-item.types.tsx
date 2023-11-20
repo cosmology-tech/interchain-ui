@@ -63,4 +63,6 @@ export interface TransferItemProps extends BaseComponentProps {
   amount?: number;
   defaultAmountPrice?: string;
   availableAsMax?: boolean;
+  // Use the super tight spacing version for use as a widget
+  isSmall?: boolean;
 }

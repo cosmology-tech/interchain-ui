@@ -1,4 +1,7 @@
-import type { BaseComponentProps, Children } from "../../models/components.model";
+import type {
+  BaseComponentProps,
+  Children,
+} from "../../models/components.model";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
 export interface ChainSwapInputProps extends BaseComponentProps {
@@ -7,6 +10,7 @@ export interface ChainSwapInputProps extends BaseComponentProps {
   sprinkles?: Sprinkles;
   containerRef?: any;
   inputAttributes?: any;
+  inputClassName?: string;
   // ====
   value: string;
   placeholder?: string;

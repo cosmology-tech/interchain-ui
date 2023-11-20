@@ -5,13 +5,13 @@ import {
   createContainer,
 } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { breakpoints } from "../../styles/tokens";
 
 const textButtonBgVar = createVar();
 export const transferItemRootContainer = createContainer();
 
 export const root = style({
   containerName: transferItemRootContainer,
+  containerType: "inline-size",
 });
 
 export const img = style({
@@ -59,4 +59,9 @@ export const comboboxContainer = style({
   minHeight: "86px",
   borderBottomLeftRadius: themeVars.radii.lg,
   borderBottomRightRadius: themeVars.radii.lg,
+});
+
+export const smComboboxInput = style({
+  height: "auto !important",
+  fontSize: "18px !important",
 });

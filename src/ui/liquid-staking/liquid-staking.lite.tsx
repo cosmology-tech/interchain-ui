@@ -21,6 +21,7 @@ import Divider from "../divider";
 import TransferItem from "../transfer-item";
 
 import * as styles from "./liquid-staking.css";
+import * as chainSwapInputStyles from "../chain-swap-input/chain-swap-input.css";
 import { scrollBar } from "../shared/shared.css";
 
 import type { ThemeVariant } from "../../models/system.model";
@@ -47,25 +48,33 @@ useDefaultProps<Partial<LiquidStakingProps>>({
 export default function LiquidStaking(props: LiquidStakingProps) {
   let cleanupRef = useRef<() => void>(null);
   let scrollRef = useRef<HTMLDivElement | null>(null);
+  let rootRef = useRef<HTMLDivElement | null>(null);
+  let resizeObserver = useRef<ResizeObserver | null>(null);
 
   let state = useStore<{
-    theme: ThemeVariant;
-    expanded: boolean;
-    scrollOffset: number;
     stakeToken: LiquidStakingToken | null;
     stakeAmount: number;
     rewardAmount: number;
     handleToggleExpand: () => void;
     handleStakeTokenSelected: (item: LiquidStakingToken) => void;
     handleStakeAmountChange: (item: LiquidStakingToken, value: number) => void;
+    // ==== UI states
+    theme: ThemeVariant;
+    isMounted: boolean;
+    expanded: boolean;
+    scrollOffset: number;
     isAccordionVisible: boolean;
+    width: number;
+    isSmallSize: () => boolean;
   }>({
     theme: "light",
+    isMounted: false,
     scrollOffset: 0,
     expanded: false,
     stakeToken: null,
     stakeAmount: 0,
     rewardAmount: 0,
+    width: 0,
     handleToggleExpand() {
       if (state.expanded) {
         if (scrollRef) {
@@ -97,10 +106,14 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         props.descriptionList?.length > 0
       );
     },
+    isSmallSize() {
+      return state.width < 326;
+    },
   });
 
   onMount(() => {
     state.theme = store.getState().theme;
+    state.isMounted = true;
 
     function handleScroll(_event: Event) {
       state.scrollOffset = scrollRef.scrollTop;
@@ -108,12 +121,23 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
     scrollRef.addEventListener("scroll", handleScroll);
 
+    resizeObserver = new ResizeObserver((entries) => {
+      const rootWidth = entries[0]?.borderBoxSize[0]?.inlineSize ?? 0;
+      state.width = rootWidth;
+    });
+
+    resizeObserver.observe(rootRef, { box: "border-box" });
+
     const cleanupStore = store.subscribe((newState) => {
       state.theme = newState.theme;
     });
 
     cleanupRef = () => {
       cleanupStore();
+
+      if (rootRef instanceof Element) {
+        resizeObserver.unobserve(rootRef);
+      }
 
       if (scrollRef) {
         scrollRef.removeEventListener("scroll", handleScroll);
@@ -132,43 +156,58 @@ export default function LiquidStaking(props: LiquidStakingProps) {
   return (
     <Box
       minHeight="444px"
-      p="$8"
       borderRadius="$md"
+      p={state.isMounted ? (state.width < 568 ? "$4" : "$10") : "$10"}
       position="relative"
       backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
-      className={props.className}
-      ref={props.forwardedRef}
+      className={clx(props.className, styles.root)}
+      ref={rootRef}
       {...props.attributes}
       {...props.domAttributes}
     >
       {/* Staked token */}
-      <TransferItem
-        halfBtn
-        maxBtn
-        hasAvailable
-        title={props.stakeLabel}
-        amount={props.stakeAmount ?? 0}
-        selectedItem={state.stakeToken}
-        dropDownList={props.options}
-        onItemSelected={(selectedItem: LiquidStakingToken) =>
-          state.handleStakeTokenSelected(selectedItem)
-        }
-        onChange={(item: LiquidStakingToken, value: number) =>
-          state.handleStakeAmountChange(item, value)
-        }
-      />
+      <Box zIndex="$10">
+        <TransferItem
+          halfBtn
+          maxBtn
+          hasAvailable
+          isSmall={state.isSmallSize()}
+          title={props.stakeLabel}
+          amount={props.stakeAmount ?? 0}
+          selectedItem={state.stakeToken}
+          dropDownList={props.options}
+          onItemSelected={(selectedItem: LiquidStakingToken) =>
+            state.handleStakeTokenSelected(selectedItem)
+          }
+          onChange={(item: LiquidStakingToken, value: number) =>
+            state.handleStakeAmountChange(item, value)
+          }
+        />
+      </Box>
 
       {/* Reward */}
       <Stack
         direction="vertical"
         space="$6"
-        attributes={{
-          pl: "18px",
-          pr: "$8",
-          py: "$8",
-        }}
+        attributes={
+          state.isSmallSize()
+            ? {
+                pl: "$4",
+                pr: "$4",
+                py: "$6",
+              }
+            : {
+                pl: "18px",
+                pr: "$8",
+                py: "$8",
+              }
+        }
       >
-        <Text fontSize="$sm" fontWeight="$normal" color="$textSecondary">
+        <Text
+          fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+          fontWeight="$normal"
+          color="$textSecondary"
+        >
           {props.rewardLabel}
         </Text>
 
@@ -187,14 +226,8 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 src: props.reward.imgSrc,
                 alt: props.reward.symbol,
               }}
-              width={{
-                mobile: "28px",
-                mdMobile: "50px",
-              }}
-              height={{
-                mobile: "28px",
-                mdMobile: "50px",
-              }}
+              width={state.isSmallSize() ? "28px" : "50px"}
+              height={state.isSmallSize() ? "28px" : "50px"}
             />
           </Box>
 
@@ -215,10 +248,14 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               }}
             >
               <Text
-                fontSize={{
-                  mobile: "$lg",
-                  mdMobile: "$3xl",
-                }}
+                fontSize={
+                  state.isSmallSize()
+                    ? "$lg"
+                    : {
+                        mobile: "$lg",
+                        mdMobile: "$3xl",
+                      }
+                }
                 fontWeight="$semibold"
                 lineHeight="$shorter"
               >
@@ -241,7 +278,14 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               }}
             >
               <Text
-                fontSize="$3xl"
+                fontSize={
+                  state.isSmallSize()
+                    ? "$lg"
+                    : {
+                        mobile: "$lg",
+                        mdMobile: "$3xl",
+                      }
+                }
                 fontWeight="$semibold"
                 lineHeight="$shorter"
               >
@@ -309,17 +353,19 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               "data-part-id": "accordion-button",
             }}
           >
-            <Text
-              as="p"
-              fontSize="$sm"
-              fontWeight="$semibold"
-              color="$textSecondary"
-              attributes={{
-                py: "$2",
-              }}
-            >
-              {props.accordionLabel}
-            </Text>
+            <Show when={!state.isSmallSize()}>
+              <Text
+                as="p"
+                fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+                fontWeight="$semibold"
+                color="$textSecondary"
+                attributes={{
+                  py: "$2",
+                }}
+              >
+                {props.accordionLabel}
+              </Text>
+            </Show>
 
             <Show when={typeof props.renderAccordionButton === "function"}>
               {props.renderAccordionButton({
@@ -335,7 +381,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 size="sm"
                 intent={state.expanded ? "tertiary" : "secondary"}
                 icon={state.expanded ? "arrowUpS" : "arrowDownS"}
-                iconSize="$3xl"
+                iconSize={state.isSmallSize() ? "$4xl" : "$3xl"}
                 onClick={() => state.handleToggleExpand()}
               />
             </Show>
@@ -474,11 +520,12 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         py="$4"
         px={state.expanded ? "$8" : "$0"}
         backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
+        zIndex="$0"
         attributes={{
           "data-part-id": "footer",
         }}
       >
-        <Stack direction="vertical" space="$10">
+        <Stack direction="vertical" space={state.isSmallSize() ? "$6" : "$10"}>
           <Show when={typeof props.renderSubmitButton === "function"}>
             {props.renderSubmitButton()}
           </Show>
@@ -489,10 +536,13 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               onClick={(event) => props.onSubmit?.(event)}
               disabled={props.isSubmitDisabled}
               intent="tertiary"
-              size="lg"
-              attributes={{ width: "$full" }}
+              size={state.isSmallSize() ? "sm" : "lg"}
             >
-              <Box as="span" mr="$8">
+              <Box
+                as="span"
+                mr={state.isSmallSize() ? "$4" : "$8"}
+                fontSize={state.isSmallSize() ? "$xs" : "inherit"}
+              >
                 {props.submitButtonLabel}
               </Box>
 
@@ -500,7 +550,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 name="timeLine"
                 color="inherit"
                 attributes={{
-                  mr: "$4",
+                  mr: state.isSmallSize() ? "$2" : "$4",
                 }}
               />
 

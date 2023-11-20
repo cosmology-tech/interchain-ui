@@ -1,7 +1,17 @@
-import { style, styleVariants, keyframes } from "@vanilla-extract/css";
+import {
+  style,
+  styleVariants,
+  keyframes,
+  createContainer,
+} from "@vanilla-extract/css";
 
 const EXPANDED_HEIGHT_PX = `458px`;
 const CONTRACTED_HEIGHT_PX = `32px`;
+export const liqStakingRootContainer = createContainer();
+
+export const root = style({
+  containerName: liqStakingRootContainer,
+});
 
 const expandVertical = keyframes({
   "0%": { opacity: "0", height: CONTRACTED_HEIGHT_PX },

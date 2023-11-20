@@ -9,7 +9,7 @@ const spacings = style({
   paddingRight: themeVars.space[9],
   maxHeight: "304px",
   boxSizing: "border-box",
-  zIndex: 5,
+  zIndex: themeVars.zIndex[100],
   selectors: {
     "& + &": {
       marginTop: themeVars.space[2],
