@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.12](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.11...@interchain-ui/react@1.13.12) (2023-11-20)
+
+### Bug Fixes
+
+- **liquid-stake:** responsive for use in tight widget size ([67926ae](https://github.com/cosmology-tech/interchain-ui/commit/67926ae491a782500972c9649b4de6cd7465a8d0))
+- style ([f9d0cff](https://github.com/cosmology-tech/interchain-ui/commit/f9d0cffd2773444e2a15dced15e91f3ded5d1b70))
+
 ## [1.13.11](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.10...@interchain-ui/react@1.13.11) (2023-11-18)
 
 ### Bug Fixes
