@@ -77,7 +77,7 @@ export const logoMd = style({
       width: "28px",
       height: "28px",
     },
-    [`${transferItemRootContainer} (min-width: 310px)`]: {
+    [`${transferItemRootContainer} (min-width: 284px)`]: {
       width: "50px",
       height: "50px",
     },
