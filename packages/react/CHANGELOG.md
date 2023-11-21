@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.14](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.13...@interchain-ui/react@1.13.14) (2023-11-21)
+
+### Bug Fixes
+
+- global css for stories and improve chunking ([386d1a9](https://github.com/cosmology-tech/interchain-ui/commit/386d1a93d47ae707f02b105948779d2ad77bba40))
+- update assetListHeader stories ([eea6154](https://github.com/cosmology-tech/interchain-ui/commit/eea61544b3d76a8900afc18c21d3e7a25ba17d98))
+
 ## [1.13.13](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.12...@interchain-ui/react@1.13.13) (2023-11-20)
 
 **Note:** Version bump only for package @interchain-ui/react
