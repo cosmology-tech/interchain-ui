@@ -126,7 +126,14 @@ export default function NftProfile(props: NftProfileProps) {
         </For>
       </Box>
 
-      <NftProfileCardList list={props.list} />
+      <Show when={props.children == null && Array.isArray(props.list)}>
+        <NftProfileCardList
+          list={props.list}
+          thumbnailBehavior={props.thumbnailBehavior}
+        />
+      </Show>
+
+      <Show when={props.children != null}>{props.children}</Show>
     </Stack>
   );
 }
