@@ -1,4 +1,4 @@
-import { Show, useMetadata, useDefaultProps } from "@builder.io/mitosis";
+import { Show, For, useMetadata, useDefaultProps } from "@builder.io/mitosis";
 import clsx from "clsx";
 import Stack from "../stack";
 import Box from "../box";
@@ -69,9 +69,18 @@ export default function NftProfileCard(props: NftProfileCardProps) {
 
         <Text fontWeight="$semibold">{props.name}</Text>
 
-        <StarText label="Highest offer" value={props.highestOffer} />
-
-        <StarText label="List price" value={props.listPrice} />
+        <For each={props.priceItems}>
+          {(priceItem, index) => (
+            <StarText
+              key={`${priceItem.label}-${index}`}
+              label={priceItem.label}
+              tokenName={priceItem.tokenName}
+              value={priceItem.value}
+              iconSrc={priceItem.iconSrc}
+              onClick={priceItem.onClick}
+            />
+          )}
+        </For>
       </Stack>
     </Box>
   );

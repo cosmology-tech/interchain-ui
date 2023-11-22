@@ -27,9 +27,8 @@ export default function NftProfileCardList(props: NftProfileCardListProps) {
               key={item.imgSrc}
               name={item?.name}
               imgSrc={item?.imgSrc}
+              priceItems={item.priceItems}
               thumbnailBehavior={props.thumbnailBehavior}
-              highestOffer={item?.highestOffer}
-              listPrice={item?.listPrice}
             />
           </Box>
         )}
