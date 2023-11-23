@@ -174,10 +174,10 @@ export default function NftDetail(props: NftDetailProps) {
           {/* ==== CTA */}
           <Show when={props.type === "listForSale"}>
             <Button
+              fluidWidth
               size="md"
               intent="tertiary"
               leftIcon="priceTagLine"
-              attributes={{ width: "$full" }}
               onClick={() => (props as ListForSale).onListForSale?.()}
             >
               List for Sale
@@ -186,10 +186,10 @@ export default function NftDetail(props: NftDetailProps) {
             <Stack space="$8" attributes={{ marginTop: "$8" }}>
               <Box flex={1}>
                 <Button
+                  fluidWidth
                   size="sm"
                   intent="text"
                   leftIcon="sendLine"
-                  attributes={{ width: "$full" }}
                   onClick={() => (props as ListForSale).onTransfer?.()}
                 >
                   Transfer
@@ -197,6 +197,7 @@ export default function NftDetail(props: NftDetailProps) {
               </Box>
               <Box flex={1}>
                 <Button
+                  fluidWidth
                   size="sm"
                   intent="text"
                   leftIcon="fireLine"
@@ -211,10 +212,10 @@ export default function NftDetail(props: NftDetailProps) {
 
           <Show when={props.type === "makeOffer"}>
             <Button
+              fluidWidth
               intent="tertiary"
-              size="lg"
+              size="md"
               leftIcon="coinsLine"
-              attributes={{ width: "$full" }}
               onClick={() => (props as MakeOffer).onMakeOffer?.()}
             >
               Make Offer
@@ -224,16 +225,18 @@ export default function NftDetail(props: NftDetailProps) {
           <Show when={props.type === "buyNow"}>
             <Stack space="$8">
               <Button
+                fluidWidth
                 intent="tertiary"
-                size="lg"
+                size="md"
                 leftIcon="shoppingBagLine"
                 onClick={() => (props as BuyNow).onBuyNow?.()}
               >
                 Buy Now
               </Button>
               <Button
+                fluidWidth
                 intent="text"
-                size="lg"
+                size="md"
                 leftIcon="coinsLine"
                 onClick={() => (props as BuyNow).onMakeOffer?.()}
               >
@@ -241,6 +244,8 @@ export default function NftDetail(props: NftDetailProps) {
               </Button>
             </Stack>
           </Show>
+
+          <Show when={props.type === "custom"}>{props.children}</Show>
         </Box>
       </Box>
 
