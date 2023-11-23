@@ -1,4 +1,9 @@
-import { useStore, Show, useMetadata } from "@builder.io/mitosis";
+import {
+  useStore,
+  Show,
+  useDefaultProps,
+  useMetadata,
+} from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -19,39 +24,49 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<NftMintProps>>({
+  mintButtonLabel: "Mint",
+  mintButtonDisabledLabel: "Insufficient balance",
+  tokenName: "STAR",
+});
+
 export default function NftMint(props: NftMintProps) {
   const state = useStore<{
     amount: number;
     starsAmount: string;
     starsAmountPrice: string;
-    isAffordable: boolean;
-    isMintLoading: boolean;
     handleAmountChange: (value: number) => void;
+    isControlled: () => boolean;
   }>({
     amount: 0,
     starsAmount: "",
     starsAmountPrice: "",
-    isAffordable: true,
-    isMintLoading: false,
+    isControlled() {
+      return typeof props.amount !== "undefined";
+    },
     handleAmountChange(value: number) {
+      props?.onChange?.(value);
+
+      // Update internal amount if uncontrolled
+      if (!state.isControlled()) {
+        state.amount = value;
+      }
+
       let starsCount: BigNumber = new BigNumber(value).multipliedBy(
         props.priceDisplayAmount
       );
-      props?.onChange?.(value);
-      state.amount = value;
+
       if (new BigNumber(value || 0).eq(0)) {
         state.starsAmount = "";
         state.starsAmountPrice = "";
-        state.isAffordable = true;
       } else {
         state.starsAmount = starsCount.decimalPlaces(2).toString();
         state.starsAmountPrice = store.getState().formatNumber({
           value: starsCount
-            .multipliedBy(props.starsPrice)
+            .multipliedBy(props.pricePerToken)
             .decimalPlaces(2)
             .toString(),
         });
-        state.isAffordable = starsCount.lt(props.available);
       }
     },
   });
@@ -349,7 +364,7 @@ export default function NftMint(props: NftMintProps) {
               }}
               fontWeight="$semibold"
             >
-              {`${props?.available} STARS`}
+              {`${props?.available} ${props.tokenName}`}
             </Text>
           </Stack>
         </Stack>
@@ -366,11 +381,18 @@ export default function NftMint(props: NftMintProps) {
           {/* @ts-expect-error */}
           <ScaffoldNumberField
             size="sm"
+            value={state.isControlled() ? props.amount : undefined}
+            defaultValue={
+              state.isControlled() ? props.amount : props.defaultAmount ?? 0
+            }
             minValue={0}
             maxValue={toNumber(props.limited)}
-            value={state.amount}
             onChange={(value) => state.handleAmountChange(value)}
             inputClassName={styles.baseInput}
+            formatOptions={{
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }}
           />
 
           <Stack
@@ -394,7 +416,7 @@ export default function NftMint(props: NftMintProps) {
             <Text
               fontSize="$sm"
               fontWeight="$semibold"
-            >{`${state.starsAmount} STARS`}</Text>
+            >{`${state.starsAmount} ${props.tokenName}`}</Text>
 
             <Show when={!!state.starsAmountPrice}>
               <Text color="textSecondary">{`≈ $${state.starsAmountPrice}`}</Text>
@@ -415,11 +437,18 @@ export default function NftMint(props: NftMintProps) {
           {/* @ts-expect-error */}
           <ScaffoldNumberField
             size="lg"
+            value={state.isControlled() ? props.amount : undefined}
+            defaultValue={
+              state.isControlled() ? props.amount : props.defaultAmount ?? 0
+            }
             minValue={0}
             maxValue={toNumber(props.limited)}
-            value={state.amount}
             onChange={(value) => state.handleAmountChange(value)}
             inputClassName={styles.baseInput}
+            formatOptions={{
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            }}
           />
 
           <Stack
@@ -444,7 +473,7 @@ export default function NftMint(props: NftMintProps) {
                 marginLeft: "$6",
                 marginRight: "$4",
               }}
-            >{`${state.starsAmount} STARS`}</Text>
+            >{`${state.starsAmount} ${props.tokenName}`}</Text>
             <Show when={!!state.starsAmountPrice}>
               <Text color="textSecondary">{`≈ $${state.starsAmountPrice}`}</Text>
             </Show>
@@ -498,7 +527,7 @@ export default function NftMint(props: NftMintProps) {
             >
               {`${store.getState()?.formatNumber?.({
                 value: props?.priceDisplayAmount,
-              })} STARS`}
+              })} ${props.tokenName}`}
             </Text>
           </Stack>
           <Text
@@ -527,11 +556,15 @@ export default function NftMint(props: NftMintProps) {
             size="md"
             intent="tertiary"
             fluidWidth
-            disabled={new BigNumber(state.amount).lte(0) || !state.isAffordable}
+            disabled={props.isMintButtonDisabled}
             onClick={() => props?.onMint?.()}
-            isLoading={state.isMintLoading}
+            isLoading={props.isMintLoading}
           >
-            {`${state.isAffordable ? "Mint" : "Insufficient Balance"}`}
+            {`${
+              props.isMintButtonDisabled
+                ? props.mintButtonDisabledLabel
+                : props.mintButtonLabel
+            }`}
           </Button>
         </Box>
 
@@ -548,11 +581,15 @@ export default function NftMint(props: NftMintProps) {
             size="lg"
             intent="tertiary"
             fluidWidth
-            disabled={new BigNumber(state.amount).lte(0) || !state.isAffordable}
+            disabled={props.isMintButtonDisabled}
             onClick={() => props?.onMint?.()}
-            isLoading={state.isMintLoading}
+            isLoading={props.isMintLoading}
           >
-            {`${state.isAffordable ? "Mint" : "Insufficient Balance"}`}
+            {`${
+              props.isMintButtonDisabled
+                ? props.mintButtonDisabledLabel
+                : props.mintButtonLabel
+            }`}
           </Button>
         </Box>
       </Box>

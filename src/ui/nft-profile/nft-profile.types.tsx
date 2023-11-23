@@ -13,6 +13,7 @@ export interface NftProfileProps extends BaseComponentProps {
   name: string;
   isVerified: boolean;
   list: NftProfileCardProps[];
+  thumbnailBehavior?: NftProfileCardProps["thumbnailBehavior"];
   onView: (event?: any) => void;
   attributes?: any;
 }

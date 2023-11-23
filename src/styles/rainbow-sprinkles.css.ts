@@ -16,12 +16,19 @@ const allSpace = { ...themeVars.space, ...extendedSpace };
 const margins = themeVars.space;
 
 const responsiveProperties = defineProperties({
-  conditions: transformBreakpoints<{ mobile: {}; tablet: {}; desktop: {}, mdMobile: {} }>(
-    breakpoints
-  ),
+  conditions: transformBreakpoints<{
+    mobile: {};
+    tablet: {};
+    desktop: {};
+    mdMobile: {};
+  }>(breakpoints),
   defaultCondition: "mobile",
   dynamicProperties: {
     display: true,
+    backgroundImage: true,
+    backgroundSize: true,
+    backgroundPosition: true,
+    backgroundRepeat: true,
     objectFit: true,
     flex: true,
     flexBasis: true,

@@ -4,7 +4,7 @@ import type { NftDetailInfoProps } from "../nft-detail-info/nft-detail-info.type
 import type { NftDetailTopOfferProps } from "../nft-detail-top-offers/nft-detail-top-offers.types";
 import type { NftDetailActivityListProps } from "../nft-detail-activity-list/nft-detail-activity-list.types";
 
-export type DetailType = "listForSale" | "makeOffer" | "buyNow";
+export type DetailType = "listForSale" | "makeOffer" | "buyNow" | "custom";
 
 interface BaseNftDetailProps extends BaseComponentProps {
   collectionName: string;
@@ -23,6 +23,7 @@ interface BaseNftDetailProps extends BaseComponentProps {
   onDownload: (event?: any) => void;
   onShare: (event?: any) => void;
   attributes?: any;
+  children?: BaseComponentProps["children"];
 }
 
 export type ListForSale = {
@@ -43,6 +44,10 @@ export type BuyNow = {
   onMakeOffer: (event?: any) => void;
 };
 
-export type NftDetailVariant = ListForSale | MakeOffer | BuyNow;
+export type Custom = {
+  type: "custom";
+};
+
+export type NftDetailVariant = ListForSale | MakeOffer | BuyNow | Custom;
 
 export type NftDetailProps = NftDetailVariant & BaseNftDetailProps;

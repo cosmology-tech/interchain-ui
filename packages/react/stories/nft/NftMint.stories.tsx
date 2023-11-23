@@ -1,3 +1,4 @@
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import NftMint from "../../src/ui/nft-mint";
@@ -28,12 +29,29 @@ export const Primary: Story = {
     limited: 50,
     imgSrc:
       "https://res.cloudinary.com/stargaze/image/upload/f_auto,w_700/ighabxq1rjqr5xblblue",
-    starsPrice: 0.01063943,
-    onMint: () => {
-      console.log("onMint");
-    },
-    onChange: (value) => {
+    pricePerToken: 0.01063943,
+    tokenName: "STARS",
+  },
+  render: (props) => {
+    const [amount, setAmount] = React.useState<number>(0);
+    const onChange = (value) => {
       console.log("onChange", value);
-    },
+      setAmount(value);
+    };
+
+    const onMint = () => {
+      setAmount(0);
+      console.log("minted and reset amount to 0");
+    };
+
+    return (
+      <NftMint
+        {...props}
+        amount={amount}
+        defaultAmount={0}
+        onChange={onChange}
+        onMint={onMint}
+      />
+    );
   },
 };
