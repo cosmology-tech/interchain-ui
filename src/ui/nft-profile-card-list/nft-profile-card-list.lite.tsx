@@ -28,6 +28,7 @@ export default function NftProfileCardList(props: NftProfileCardListProps) {
               name={item?.name}
               imgSrc={item?.imgSrc}
               priceItems={item.priceItems}
+              onClick={(event) => item.onClick(event)}
               thumbnailBehavior={props.thumbnailBehavior}
             />
           </Box>

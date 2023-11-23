@@ -22,7 +22,10 @@ export default function NftProfileCard(props: NftProfileCardProps) {
     <Box
       className={clsx(props.className)}
       cursor={typeof props.onClick === "function" ? "pointer" : "default"}
-      attributes={{ ...props.attributes, onClick: () => props?.onClick?.() }}
+      attributes={{
+        ...props.attributes,
+        onClick: (event) => props.onClick?.(event),
+      }}
     >
       <Stack direction="vertical" space="$4">
         <Show when={props.thumbnailBehavior === "full"}>
