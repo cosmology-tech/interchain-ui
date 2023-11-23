@@ -10,6 +10,9 @@ export type ProfileCardPriceItem = {
 };
 
 export interface NftProfileCardProps extends BaseComponentProps {
+  // ==== Controls the thumbnail display behavior
+  // "full" means the img will have its original aspect ratio fit within the square
+  // "contain" means the img will have a fixed aspect ratio to fit the square
   thumbnailBehavior?: "full" | "contain";
   width?: Sprinkles["width"];
   imgSrc: string;

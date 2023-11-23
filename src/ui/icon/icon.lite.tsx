@@ -709,8 +709,8 @@ export default function Icon(props: IconProps) {
           y="0px"
           viewBox="0 0 432 432"
           style={{
-            "enable-background": "new 0 0 432 432",
-            "background-color": "black",
+            enableBackground: "new 0 0 432 432",
+            backgroundColor: "black",
           }}
         >
           <g>
