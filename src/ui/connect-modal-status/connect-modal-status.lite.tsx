@@ -185,13 +185,17 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </div>
 
         <div className={widthContainer}>
-          <Box maxWidth="$29" mx="auto">
+          <Box
+            maxWidth="$29"
+            mx="auto"
+            attributes={{
+              "data-part-id": "ConnectModalStatus-disconnect",
+            }}
+          >
             <Button
+              fluidWidth
               leftIcon="walletFilled"
               onClick={() => props.onDisconnect?.()}
-              attributes={{
-                width: "$full",
-              }}
             >
               Disconnect
             </Button>
