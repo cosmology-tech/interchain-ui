@@ -93,10 +93,14 @@ export default function ConnectModalWalletButton(
           <Box position="relative">
             {/* When there is only logo, use normal image */}
             <Show when={props.logo && !props.btmLogo}>
-              <img
-                alt={props.name}
-                src={props.logo}
-                className={fullWidthHeight}
+              <Box
+                as="img"
+                attributes={{
+                  alt: props.name,
+                  src: props.logo,
+                }}
+                width={props.variant === "square" ? "$16" : "$12"}
+                height={props.variant === "square" ? "$16" : "$12"}
               />
             </Show>
 

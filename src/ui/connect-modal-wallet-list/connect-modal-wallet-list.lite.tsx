@@ -12,6 +12,7 @@ import anime from "animejs";
 import type { AnimeInstance } from "animejs";
 import clx from "clsx";
 import Box from "../box";
+import FadeIn from "../fade-in";
 import WalletButton from "../connect-modal-wallet-button";
 import {
   walletList,
@@ -47,6 +48,11 @@ export default function ConnectModalWalletList(
     },
     getListShapeWallets() {
       return props.wallets.filter((w) => w.shape === "list");
+    },
+    showSquareShapeWallets() {
+      return props.wallets
+        .slice(0, 2)
+        .every((wallet) => wallet.shape === "square");
     },
   });
 
@@ -124,52 +130,51 @@ export default function ConnectModalWalletList(
         className={walletList}
         data-has-list-wallets={state.getListShapeWallets().length > 0}
       >
-        <Show
-          when={props.wallets
-            .slice(0, 2)
-            .every((wallet) => wallet.shape === "square")}
-        >
-          <div className={squareWallets}>
-            {/* First 2 wallets are square */}
-            <For each={props.wallets.slice(0, 2)}>
-              {(wallet, index) => (
-                <WalletButton
-                  key={`${wallet.name}-${index}`}
-                  variant="square"
-                  name={wallet.prettyName ?? wallet.name}
-                  logo={wallet.logo}
-                  subLogo={wallet.subLogo}
-                  btmLogo={wallet.btmLogo}
-                  onClick={state.onWalletItemClickAsync(async () =>
-                    props.onWalletItemClick?.(wallet.originalWallet)
-                  )}
-                />
-              )}
-            </For>
-          </div>
+        <Show when={state.showSquareShapeWallets()}>
+          <FadeIn isVisible={state.showSquareShapeWallets()}>
+            <Box display={"grid"} className={squareWallets}>
+              {/* First 2 wallets are square */}
+              <For each={props.wallets.slice(0, 2)}>
+                {(wallet, index) => (
+                  <WalletButton
+                    key={`${wallet.name}-${index}`}
+                    variant="square"
+                    name={wallet.prettyName ?? wallet.name}
+                    logo={wallet.logo}
+                    subLogo={wallet.subLogo}
+                    btmLogo={wallet.btmLogo}
+                    onClick={state.onWalletItemClickAsync(async () =>
+                      props.onWalletItemClick?.(wallet.originalWallet)
+                    )}
+                  />
+                )}
+              </For>
+            </Box>
+          </FadeIn>
         </Show>
 
-        <Box
-          display={state.getListShapeWallets().length === 0 ? "none" : "grid"}
-          className={listWallets}
-        >
-          <For each={state.getListShapeWallets()}>
-            {(wallet, index) => (
-              <WalletButton
-                key={`${wallet.name}-${index}`}
-                variant="list"
-                name={wallet.prettyName ?? wallet.name}
-                logo={wallet.logo}
-                badge={wallet.badge}
-                subLogo={wallet.subLogo}
-                btmLogo={wallet.btmLogo}
-                onClick={state.onWalletItemClickAsync(async () =>
-                  props.onWalletItemClick?.(wallet.originalWallet)
+        <Show when={state.getListShapeWallets().length > 0}>
+          <FadeIn isVisible={state.getListShapeWallets().length > 0}>
+            <Box display={"grid"} className={listWallets}>
+              <For each={state.getListShapeWallets()}>
+                {(wallet, index) => (
+                  <WalletButton
+                    key={`${wallet.name}-${index}`}
+                    variant="list"
+                    name={wallet.prettyName ?? wallet.name}
+                    logo={wallet.logo}
+                    badge={wallet.badge}
+                    subLogo={wallet.subLogo}
+                    btmLogo={wallet.btmLogo}
+                    onClick={state.onWalletItemClickAsync(async () =>
+                      props.onWalletItemClick?.(wallet.originalWallet)
+                    )}
+                  />
                 )}
-              />
-            )}
-          </For>
-        </Box>
+              </For>
+            </Box>
+          </FadeIn>
+        </Show>
       </div>
 
       <div ref={shadowRef} className={bottomShadow[state.theme]} />

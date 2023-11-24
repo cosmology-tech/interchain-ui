@@ -30,6 +30,7 @@ export default function AnimateLayout(props: AnimateLayoutProps) {
       style={{
         backfaceVisibility: "hidden",
       }}
+      data-part-id="animate-layout"
     >
       {props.children}
     </div>

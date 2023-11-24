@@ -18,12 +18,11 @@ export const walletList = style({
     },
     "&[data-has-list-wallets='true']": {
       paddingBottom: themeVars.space[8],
-    }
+    },
   },
 });
 
 export const squareWallets = style({
-  display: "grid",
   columnGap: themeVars.space[5],
   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
   marginBottom: themeVars.space[5],
