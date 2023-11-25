@@ -1,4 +1,10 @@
-import { style, styleVariants, createVar } from "@vanilla-extract/css";
+import {
+  style,
+  styleVariants,
+  createVar,
+  keyframes,
+  globalStyle,
+} from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
 const listBottomShadowBgVar = createVar();
@@ -96,4 +102,32 @@ export const visuallyHidden = style({
   padding: 0,
   position: "absolute",
   whiteSpace: "nowrap",
+});
+
+const skeletonGlow = keyframes({
+  "0%": {
+    background: "rgba(211,216,222,.2)",
+    borderColor: "rgba(211,216,222,.2)",
+  },
+  "100%": {
+    background: "rgba(95,107,124,.2)",
+    borderColor: "rgba(95,107,124,.2)",
+  },
+});
+
+export const skeleton = style({
+  animation: `${skeletonGlow} 1s linear infinite alternate`,
+  background: "rgba(211,216,222,.2)",
+  backgroundClip: `padding-box !important`,
+  borderColor: "rgba(211,216,222,.2) !important",
+  boxShadow: "none !important",
+  color: "transparent !important",
+  cursor: "default",
+  pointerEvents: "none",
+  userSelect: "none",
+});
+
+globalStyle(`${skeleton} *, ${skeleton}:after, ${skeleton}:before`, {
+  // @ts-ignore
+  visibility: "hidden !important",
 });
