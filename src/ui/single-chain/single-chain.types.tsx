@@ -8,6 +8,7 @@ export type SingleChainListItemProps = Omit<
 
 export interface SingleChainProps
   extends Omit<AssetListHeaderProps, "multiChainHeader"> {
+  isLoading?: boolean;
   list: Array<SingleChainListItemProps>;
   listTitle: string;
 }

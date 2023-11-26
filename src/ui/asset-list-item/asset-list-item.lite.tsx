@@ -18,12 +18,16 @@ useMetadata({
   },
 });
 
-export default function AssetListItem(props: AssetListItemProps) {
-  useDefaultProps({
-    isOtherChains: false,
-    needChainSpace: false,
-  });
+useDefaultProps<Partial<AssetListItemProps>>({
+  isOtherChains: false,
+  needChainSpace: false,
+  showDeposit: true,
+  showWithdraw: true,
+  depositLabel: "Deposit",
+  withdrawLabel: "Withdraw",
+});
 
+export default function AssetListItem(props: AssetListItemProps) {
   const state = useStore<{
     size: BoxProps["fontSize"];
   }>({
@@ -99,9 +103,10 @@ export default function AssetListItem(props: AssetListItemProps) {
             {props.tokenAmount}
           </Text>
           <Text fontSize={state.size} color="$textSecondary">
-            ${props.tokenAmountPrice}
+            {props.tokenAmountPrice}
           </Text>
         </Stack>
+
         <Show when={!props.needChainSpace}>
           <Stack
             attributes={{
@@ -109,6 +114,7 @@ export default function AssetListItem(props: AssetListItemProps) {
             }}
           ></Stack>
         </Show>
+
         <Stack
           space="$5"
           attributes={{
@@ -116,22 +122,23 @@ export default function AssetListItem(props: AssetListItemProps) {
             justifyContent: "flex-end",
           }}
         >
-          <Show when={!!props.onDeposit}>
+          <Show when={!!props.onDeposit && props.showDeposit}>
             <Button
               intent="text"
               size="sm"
               onClick={(event) => props?.onDeposit?.(event)}
             >
-              Deposit
+              {props.depositLabel}
             </Button>
           </Show>
-          <Show when={!!props.onWithdraw}>
+
+          <Show when={!!props.onWithdraw && props.showWithdraw}>
             <Button
               intent="text"
               size="sm"
               onClick={(event) => props?.onWithdraw?.(event)}
             >
-              Withdraw
+              {props.withdrawLabel}
             </Button>
           </Show>
         </Stack>

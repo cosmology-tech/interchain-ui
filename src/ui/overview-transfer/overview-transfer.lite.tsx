@@ -1,12 +1,14 @@
 import {
+  Show,
   useStore,
   onMount,
   onUnMount,
   useRef,
+  useDefaultProps,
   onUpdate,
   useMetadata,
 } from "@builder.io/mitosis";
-import BigNumber from "bignumber.js";
+import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -24,30 +26,30 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<OverviewTransferProps>>({
+  transferLabel: "Transfer",
+  cancelLabel: "Cancel",
+});
+
 export default function OverviewTransfer(props: OverviewTransferProps) {
   const state = useStore<{
     theme: ThemeVariant;
-    transferDisabled: boolean;
     curSelectedItem: AvailableItem;
     amount: number;
     handleTransferChange: (item: AvailableItem, value: number) => void;
   }>({
     theme: "light",
-    transferDisabled: true,
     curSelectedItem: null,
     amount: 0,
     handleTransferChange(item: AvailableItem, value: number) {
       state.curSelectedItem = item;
       state.amount = value;
-      state.transferDisabled =
-        new BigNumber(value).isGreaterThan(item?.available) ||
-        new BigNumber(value).isLessThanOrEqualTo(0) ||
-        value === 0;
-      props?.onChange?.(item, value);
+      props.onChange?.(item, value);
     },
   });
 
   let cleanupRef = useRef<() => void>(null);
+  let selectedItemRef = useRef<AvailableItem | null>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
@@ -62,22 +64,24 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
   });
 
   onUpdate(() => {
-    state.curSelectedItem = props.dropDownList[0];
-  }, [props.dropDownList]);
+    state.curSelectedItem = props.selectedItem ?? props.dropdownList[0];
+  }, [props.dropdownList, props.selectedItem]);
 
   return (
-    <Stack className={styles.overviewTransfer} direction="vertical">
-      {/* <Text
-        fontSize="$xl"
-        fontWeight="$semibold"
-        attributes={{ marginBottom: "$10" }}
-      >
-        {props.type}
-      </Text> */}
+    <Stack
+      direction="vertical"
+      attributes={{
+        width: {
+          mobile: "100%",
+          mdMobile: "620px",
+        },
+      }}
+    >
       <TransferItem
         maxBtn
         hasAvailable
-        dropDownList={props.dropDownList}
+        defaultSelectedItem={props.defaultSelected}
+        dropdownList={props.dropdownList}
         selectedItem={state.curSelectedItem}
         amount={state.amount}
         onChange={(item: AvailableItem, value: number) =>
@@ -85,7 +89,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
         }
         onItemSelected={(selectedItem: AvailableItem) => {
           state.curSelectedItem = selectedItem;
-          props?.onChange?.(selectedItem, state.amount);
+          props.onChange?.(selectedItem, state.amount);
         }}
       />
       <Stack
@@ -96,7 +100,16 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
           alignItems: "center",
         }}
       >
-        <img className={styles.img} src={state?.curSelectedItem?.imgSrc} />
+        <Box
+          as="img"
+          width="$15"
+          height="$15"
+          attributes={{
+            alt: "from chain",
+            src: props.fromChainLogoUrl,
+          }}
+        />
+
         <Icon
           name="arrowRightLine"
           color="$textSecondary"
@@ -105,15 +118,23 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
             mx: "$9",
           }}
         />
-        <img
-          className={styles.img}
-          src="https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+
+        <Box
+          as="img"
+          width="$15"
+          height="$15"
+          attributes={{
+            alt: "to asset",
+            src: props.toChainLogoUrl,
+          }}
         />
       </Stack>
+
       <Button
         intent="tertiary"
-        disabled={state.transferDisabled}
-        onClick={() => props?.onTransfer()}
+        size="lg"
+        disabled={props.isSubmitDisabled}
+        onClick={() => props.onTransfer()}
       >
         <Stack
           attributes={{
@@ -125,8 +146,9 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
             fontSize="$lg"
             fontWeight="$semibold"
           >
-            Transfer
+            {props.transferLabel}
           </Text>
+
           <Icon
             name="timeLine"
             size="$xs"
@@ -135,13 +157,17 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
               marginRight: "$4",
             }}
           />
-          <Text className={styles.btnText[state.theme]} fontSize="$xs">
-            ≈ 20 seconds
-          </Text>
+
+          <Show when={!!props.timeEstimateLabel}>
+            <Text className={styles.btnText[state.theme]} fontSize="$xs">
+              {props.timeEstimateLabel}
+            </Text>
+          </Show>
         </Stack>
       </Button>
-      <Button variant="unstyled" onClick={() => props?.onCancel()}>
-        Cancel
+
+      <Button variant="unstyled" onClick={() => props.onCancel()}>
+        {props.cancelLabel}
       </Button>
     </Stack>
   );

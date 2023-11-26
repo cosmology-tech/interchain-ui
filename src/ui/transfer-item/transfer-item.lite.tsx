@@ -114,12 +114,12 @@ export default function TransferItem(props: TransferItemProps) {
       state.comboboxList = res;
     },
     getSelectedItem(selectedItem: ComboboxListItemType) {
-      return props.dropDownList.find(
+      return props.dropdownList.find(
         (item: AvailableItem) => item.symbol === selectedItem.tokenName
       );
     },
     itemSelected(selectedItem: ComboboxListItemType) {
-      state.currentItem = props.dropDownList.find(
+      state.currentItem = props.dropdownList.find(
         (item) => item.symbol === selectedItem.tokenName
       );
       props?.onItemSelected?.(state.getSelectedItem(selectedItem));
@@ -141,8 +141,8 @@ export default function TransferItem(props: TransferItemProps) {
   }, [props.selectedItem]);
 
   onUpdate(() => {
-    state.mapToComboboxList(props.dropDownList);
-  }, [props.dropDownList]);
+    state.mapToComboboxList(props.dropdownList ?? []);
+  }, [props.dropdownList]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
@@ -271,7 +271,7 @@ export default function TransferItem(props: TransferItemProps) {
           <ScaffoldChainSwapCombobox
             className={styles.comboboxContainer}
             size="md"
-            defaultSelected={state.comboboxList[0]}
+            defaultSelected={props.defaultSelectedItem ?? state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {
               state.itemSelected(item);

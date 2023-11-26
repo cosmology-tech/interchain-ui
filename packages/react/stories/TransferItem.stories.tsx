@@ -31,7 +31,7 @@ export const Primary: Story = {
     return (
       <TransferItem
         {...props}
-        dropDownList={dropdownList}
+        dropdownList={dropdownList}
         amount={amountStaked}
         onChange={(item, amount) => {
           setAmountStaked(amount);

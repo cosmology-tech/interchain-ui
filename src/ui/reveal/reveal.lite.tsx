@@ -39,14 +39,12 @@ export default function Reveal(props: RevealProps) {
 
   const state = useStore<{
     isVisible: boolean;
-    showToggle: boolean;
     toggle: () => void;
     updateAnimationRef: () => void;
     theme: ThemeVariant;
   }>({
     theme: "light",
     isVisible: false,
-    showToggle: false,
     toggle() {
       isVisibleRef = !state.isVisible;
       state.isVisible = !state.isVisible;
@@ -66,7 +64,7 @@ export default function Reveal(props: RevealProps) {
   });
 
   let cleanupRef = useRef<() => void>(null);
-  let resizeRef = useRef<() => void>(null);
+  let resizeListenerRef = useRef<() => void>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
@@ -77,30 +75,28 @@ export default function Reveal(props: RevealProps) {
     setTimeout(() => {
       if (!elementRef) return;
 
-      if (elementRef.offsetHeight > props.hideThresholdHeight) {
-        state.showToggle = true;
+      const TOGGLE_SPACE = 40;
 
+      if (elementRef.offsetHeight > props.hideThresholdHeight) {
         // Listen the resize event to get container height
-        resizeRef = debounce(() => {
+        resizeListenerRef = debounce(() => {
           elementRef.style.height = "auto";
-          eleHeight = elementRef.offsetHeight + 50;
+          eleHeight = elementRef.offsetHeight + TOGGLE_SPACE;
           elementRef.style.height = isVisibleRef
             ? `${eleHeight}px`
             : `${props.hideThresholdHeight}px`;
           state.updateAnimationRef();
         }, 100);
 
-        window.addEventListener("resize", resizeRef);
+        window.addEventListener("resize", resizeListenerRef);
 
         // Simulate useLayoutEffect
         setTimeout(() => {
           if (!eleHeight) {
-            eleHeight = elementRef.offsetHeight + 50;
+            eleHeight = elementRef.offsetHeight + TOGGLE_SPACE;
           }
           state.updateAnimationRef();
-        }, 0);
-      } else {
-        state.showToggle = false;
+        }, 100);
       }
     }, 100);
   });
@@ -109,7 +105,7 @@ export default function Reveal(props: RevealProps) {
     if (typeof cleanupRef === "function") cleanupRef();
 
     if (window) {
-      window.removeEventListener("resize", resizeRef);
+      window.removeEventListener("resize", resizeListenerRef);
     }
   });
 
@@ -120,7 +116,7 @@ export default function Reveal(props: RevealProps) {
       <Stack
         direction="vertical"
         attributes={{
-          display: !state.isVisible && state.showToggle ? "flex" : "none",
+          display: !state.isVisible ? "flex" : "none",
           cursor: "pointer",
           position: "absolute",
           bottom: 0,
@@ -144,7 +140,7 @@ export default function Reveal(props: RevealProps) {
           width="$full"
           display="flex"
           alignItems="center"
-          backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
+          backgroundColor={state.theme === "light" ? "$white" : "$gray900"}
           justifyContent="center"
           flex="1"
           attributes={{
@@ -170,7 +166,7 @@ export default function Reveal(props: RevealProps) {
 
       <Stack
         attributes={{
-          display: !!state.isVisible && state.showToggle ? "flex" : "none",
+          display: !!state.isVisible ? "flex" : "none",
           cursor: "pointer",
           position: "absolute",
           bottom: 0,

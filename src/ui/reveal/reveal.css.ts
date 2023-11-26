@@ -15,7 +15,7 @@ export const shadow = styleVariants({
   dark: [
     {
       backgroundImage:
-        "linear-gradient(rgba(44, 49, 55, 0), rgba(44, 49, 55, 1))",
+        "linear-gradient(rgba(52, 58, 66, 0), rgba(52, 58, 66, 1))",
     },
   ],
 });

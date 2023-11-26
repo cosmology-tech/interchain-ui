@@ -29,7 +29,7 @@ export const Primary: Story = {
         value: "< $0.01",
       },
     },
-    // dropDownList: [
+    // dropdownList: [
     //   {
     //     available: 57.61,
     //     symbol: "OSMO",
@@ -83,7 +83,7 @@ export const Primary: Story = {
   },
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
-    const dropDownList = useMemo(() => getTransferList(), []);
+    const dropdownList = useMemo(() => getTransferList(), []);
 
     return (
       <BasicModal
@@ -96,7 +96,7 @@ export const Primary: Story = {
         title="Swap"
         onClose={() => setIsOpen(false)}
       >
-        <SwapToken {...props} dropDownList={dropDownList} />
+        <SwapToken {...props} dropdownList={dropdownList} />
       </BasicModal>
     );
   },

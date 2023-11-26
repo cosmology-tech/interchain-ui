@@ -30,13 +30,13 @@ export const Primary: Story = {
   args: {},
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
-    const dropDownList = useMemo(() => getTransferList(), []);
-    const stride = dropDownList.find((item) => item.symbol === "STRD");
+    const dropdownList = useMemo(() => getTransferList(), []);
+    const stride = dropdownList.find((item) => item.symbol === "STRD");
     console.log("stride", stride);
 
     const [stakeToken, setStakeToken] = useState<
       LiquidStakingProps["stakeToken"] | null
-    >(dropDownList[0]);
+    >(dropdownList[0]);
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"]>({
       ...stride,
@@ -54,7 +54,7 @@ export const Primary: Story = {
           stakeAmount={stakedAmount}
           stakeToken={stakeToken}
           reward={reward}
-          options={dropDownList}
+          options={dropdownList}
           precision={2}
           bottomLink={{
             href: "https://cosmology.tech/",
@@ -150,13 +150,13 @@ export const WithModal: Story = {
   args: {},
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
-    const dropDownList = useMemo(() => getTransferList(), []);
-    const stride = dropDownList.find((item) => item.symbol === "STRD");
+    const dropdownList = useMemo(() => getTransferList(), []);
+    const stride = dropdownList.find((item) => item.symbol === "STRD");
     console.log("stride", stride);
 
     const [stakeToken, setStakeToken] = useState<
       LiquidStakingProps["stakeToken"] | null
-    >(dropDownList[0]);
+    >(dropdownList[0]);
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"]>({
       ...stride,
@@ -198,7 +198,7 @@ export const WithModal: Story = {
               stakeAmount={stakedAmount}
               stakeToken={stakeToken}
               reward={reward}
-              options={dropDownList}
+              options={dropdownList}
               precision={2}
               bottomLink={{
                 href: "https://cosmology.tech/",
