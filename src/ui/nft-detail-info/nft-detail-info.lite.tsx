@@ -1,4 +1,4 @@
-import { useMetadata } from "@builder.io/mitosis";
+import { Show, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
@@ -41,16 +41,19 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
           <StarText value={props?.price} />
         </Stack>
 
-        <Stack direction="vertical" space="$0">
-          <Text fontSize="$xs" color="$textSecondary">
-            Last sale
-          </Text>
-          <Text fontWeight="$semibold">
-            {`${
-              isNumber(props?.lastSale) ? `${props?.lastSale} STARS` : "---"
-            }`}
-          </Text>
-        </Stack>
+        <Show when={!!props.lastSale}>
+          <Stack direction="vertical" space="$0">
+            <Text fontSize="$xs" color="$textSecondary">
+              Last sale
+            </Text>
+
+            <Text fontWeight="$semibold">
+              {`${
+                isNumber(props?.lastSale) ? `${props?.lastSale} STARS` : "---"
+              }`}
+            </Text>
+          </Stack>
+        </Show>
 
         <Stack direction="vertical" space="0">
           <Text fontSize="$xs" color="$textSecondary">
