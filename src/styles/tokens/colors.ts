@@ -4,6 +4,7 @@ import type { ThemeVariant } from "../../models/system.model";
 export const colors = {
   black: "#000",
   blackPrimary: "#2C3137",
+  blackSecondary: "#3B434D",
   white: "#fff",
   transparent: "transparent",
   current: "currentColor",

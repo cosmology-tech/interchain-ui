@@ -3,6 +3,7 @@ import clx, { ClassValue } from "clsx";
 import {
   autoUpdate,
   size,
+  offset,
   useId,
   useDismiss,
   useFloating,
@@ -111,6 +112,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     placement: "bottom",
     onOpenChange: setOpen,
     middleware: [
+      offset({
+        // Minus offset from containerRef padding because ref element is a direct child
+        crossAxis: -5,
+      }),
       size({
         apply({ rects, availableHeight, elements }) {
           const containerWidth =
@@ -118,7 +123,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
 
           Object.assign(elements.floating.style, {
             // ref width + parent padding, but not exceeding the real container width
-            width: `${Math.min(rects.reference.width + 40, containerWidth)}px`,
+            width: `${Math.min(rects.reference.width + 30, containerWidth)}px`,
             maxHeight: `${props.maxHeight ?? availableHeight}px`,
           });
         },
@@ -194,14 +199,15 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
 
   return (
     <Box
-      px="$9"
+      pr="$9"
+      pl="$9"
       py="$7"
       backgroundColor="$menuItemBg"
       ref={containerRef}
       {...props.attributes}
       className={props.className}
     >
-      <div ref={refs.setReference}>
+      <div data-part-id="chain-swap-combobox-reference" ref={refs.setReference}>
         <ChainSwapInput
           size={props.size}
           value={inputValue}
