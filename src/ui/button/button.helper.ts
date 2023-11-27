@@ -7,6 +7,9 @@ import {
   intentSecondary,
   intentTertiary,
   intentText,
+  intentWarning,
+  intentSuccess,
+  intentDanger,
   disabled,
   baseButton,
   buttonBgVar,
@@ -23,7 +26,15 @@ export type ButtonVariant =
   | "link"
   | "ghost"
   | "unstyled";
-export type ButtonIntent = "primary" | "secondary" | "tertiary" | "text";
+
+export type ButtonIntent =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "text"
+  | "warning"
+  | "success"
+  | "danger";
 
 const buttonSize: Record<ButtonSize, Sprinkles> = {
   xs: {
@@ -71,6 +82,9 @@ export function recipe({
     primary: intentPrimary,
     secondary: intentSecondary,
     tertiary: intentTertiary,
+    warning: intentWarning,
+    success: intentSuccess,
+    danger: intentDanger,
     text: intentText,
   };
 

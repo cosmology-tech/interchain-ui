@@ -248,6 +248,82 @@ export const intentText = styleVariants({
   ],
 });
 
+// ==== Intent warning
+const intentColorfulBase = style({
+  color: buttonTextColorVar,
+  backgroundColor: buttonBgVar,
+  selectors: {
+    "&:not([disabled]):hover": {
+      opacity: 0.8,
+    },
+  },
+});
+
+export const intentWarning = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonBgVar]: themeVars.colors.yellow500,
+      },
+    }),
+    intentColorfulBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.blackPrimary,
+        [buttonBgVar]: themeVars.colors.yellow400,
+      },
+    }),
+    intentColorfulBase,
+  ],
+});
+
+// ==== Intent success
+export const intentSuccess = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonBgVar]: themeVars.colors.green500,
+      },
+    }),
+    intentColorfulBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.text,
+        [buttonBgVar]: themeVars.colors.green400,
+      },
+    }),
+    intentColorfulBase,
+  ],
+});
+
+// ==== Intent danger
+export const intentDanger = styleVariants({
+  light: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonBgVar]: themeVars.colors.red500,
+      },
+    }),
+    intentColorfulBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [buttonTextColorVar]: themeVars.colors.text,
+        [buttonBgVar]: themeVars.colors.red400,
+      },
+    }),
+    intentColorfulBase,
+  ],
+});
+
 export const disabled = style({
   position: "relative",
   opacity: 0.6,

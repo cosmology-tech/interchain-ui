@@ -35,6 +35,27 @@ export const Tertiary: Story = {
   },
 };
 
+export const IntentSuccess: Story = {
+  args: {
+    children: "Button",
+    intent: "success",
+  },
+};
+
+export const IntentWarning: Story = {
+  args: {
+    children: "Button",
+    intent: "warning",
+  },
+};
+
+export const IntentDanger: Story = {
+  args: {
+    children: "Button",
+    intent: "danger",
+  },
+};
+
 export const SecondaryGhost: Story = {
   args: {
     children: "Button",
