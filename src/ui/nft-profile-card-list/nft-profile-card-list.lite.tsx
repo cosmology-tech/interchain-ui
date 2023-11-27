@@ -16,11 +16,15 @@ export default function NftProfileCardList(props: NftProfileCardListProps) {
     <Box
       display="grid"
       gap="$6"
-      gridTemplateColumns="repeat(auto-fit, minmax(232px, 1fr))"
+      gridTemplateColumns={
+        props.list.length > 1
+          ? "repeat(auto-fit, minmax(232px, 1fr))"
+          : "repeat(auto-fit, 232px)"
+      }
       className={props.className}
       {...props.attributes}
     >
-      <For each={props?.list}>
+      <For each={props.list}>
         {(item: NftProfileCardProps, index: number) => (
           <Box key={`${item?.name}-${index}`}>
             <NftProfileCard
