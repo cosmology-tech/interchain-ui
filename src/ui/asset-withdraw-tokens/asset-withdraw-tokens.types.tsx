@@ -13,6 +13,11 @@ export interface AssetWithdrawTokensProps extends BaseComponentProps {
   available: AvailableItem["available"];
   priceDisplayAmount: AvailableItem["priceDisplayAmount"];
   amount?: string;
+  // ==== Labels
+  transferLabel?: string;
+  cancelLabel?: string;
+  timeEstimateLabel: string;
+  isSubmitDisabled?: boolean;
   onChange?: (value: string) => void;
   onTransfer?: (event?: any) => void;
   onCancel?: (event?: any) => void;

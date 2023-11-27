@@ -32,6 +32,7 @@ export const Primary: Story = {
     available: 25.89,
     amount: "",
     priceDisplayAmount: 0.5,
+    timeEstimateLabel: "20 seconds",
     onChange: (value) => {
       console.log("onChange", value);
     },
