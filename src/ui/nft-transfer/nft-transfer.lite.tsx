@@ -3,6 +3,7 @@ import Box from "../box";
 import Text from "../text";
 import TextField from "../text-field";
 import Button from "../button";
+import type { NftTransferProps } from "./nft-transfer.types";
 
 useMetadata({
   rsc: {
@@ -10,17 +11,22 @@ useMetadata({
   },
 });
 
-export default function NftTransfer(props) {
-  useDefaultProps({
-    placeholder: "Enter address",
-  });
+useDefaultProps<Partial<NftTransferProps>>({
+  placeholder: "Enter address",
+  transferLabel: "Transfer",
+  cancelLabel: "Cancel",
+  label: "Recipient",
+});
+
+export default function NftTransfer(props: NftTransferProps) {
   const state = useStore<{
     address: string;
   }>({
     address: "",
   });
+
   return (
-    <Box>
+    <Box className={props.className}>
       <Text
         fontSize="$lg"
         color="$textSecondary"
@@ -30,34 +36,38 @@ export default function NftTransfer(props) {
           marginBottom: "$6",
         }}
       >
-        Recipient
+        {props.label}
       </Text>
+
       <TextField
-        id="nft-transfer-address"
+        id={props.id}
         placeholder={props.placeholder}
         value={state.address}
         onChange={(e) => {
           state.address = e.target.value;
-          props?.onChange?.(e.target.value);
+          props.onChange?.(e.target.value);
         }}
       />
+
       <Box height="$14" />
+
       <Button
+        fluidWidth
         intent="tertiary"
         size="lg"
-        attributes={{ width: "$full" }}
-        disabled={props?.disabled}
-        onClick={() => props?.onTransfer?.()}
+        disabled={props.disabled}
+        onClick={() => props.onTransfer?.()}
       >
-        Transfer
+        {props.transferLabel}
       </Button>
+
       <Button
+        fluidWidth
         variant="unstyled"
         size="lg"
-        attributes={{ width: "$full" }}
-        onClick={() => props?.onCancel?.()}
+        onClick={() => props.onCancel?.()}
       >
-        Cancel
+        {props.cancelLabel}
       </Button>
     </Box>
   );

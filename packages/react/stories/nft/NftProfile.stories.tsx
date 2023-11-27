@@ -226,6 +226,6 @@ export const Primary: Story = {
     onView() {
       console.log("onView");
     },
-    list: list2,
+    list: list2.slice(0, 1),
   },
 };
