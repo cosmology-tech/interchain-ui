@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.20](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.19...@interchain-ui/react@1.13.20) (2023-11-27)
+
+### Bug Fixes
+
+- **nft:** styles issue ([a494f60](https://github.com/cosmology-tech/interchain-ui/commit/a494f603195b94c8342fecb72bdc3659b429e7cd))
+
 ## [1.13.19](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.18...@interchain-ui/react@1.13.19) (2023-11-27)
 
 ### Bug Fixes
