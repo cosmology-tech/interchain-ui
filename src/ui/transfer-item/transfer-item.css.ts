@@ -7,6 +7,7 @@ import {
 import { themeVars } from "../../styles/themes.css";
 
 const textButtonBgVar = createVar();
+const textButtonColorVar = createVar();
 export const transferItemRootContainer = createContainer();
 
 export const root = style({
@@ -24,8 +25,13 @@ export const dropdowBtn = style({
 });
 
 const textBtnBase = style({
-  color: themeVars.colors.white,
-  backgroundColor: textButtonBgVar,
+  color: `${textButtonColorVar} !important`,
+  backgroundColor: `${textButtonBgVar} !important`,
+  selectors: {
+    "&:hover": {
+      opacity: 0.89,
+    },
+  },
 });
 
 export const textBtn = styleVariants({
@@ -33,7 +39,8 @@ export const textBtn = styleVariants({
     textBtnBase,
     style({
       vars: {
-        [textButtonBgVar]: "#A2AEBB",
+        [textButtonColorVar]: themeVars.colors.white,
+        [textButtonBgVar]: themeVars.colors.textPlaceholder,
       },
     }),
   ],
@@ -41,7 +48,8 @@ export const textBtn = styleVariants({
     textBtnBase,
     style({
       vars: {
-        [textButtonBgVar]: "#434B55",
+        [textButtonColorVar]: themeVars.colors.text,
+        [textButtonBgVar]: themeVars.colors.blackSecondary,
       },
     }),
   ],

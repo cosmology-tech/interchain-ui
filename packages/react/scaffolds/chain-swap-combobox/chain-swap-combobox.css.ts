@@ -6,7 +6,7 @@ const spacings = style({
   paddingTop: themeVars.space[9],
   paddingBottom: themeVars.space[9],
   paddingLeft: themeVars.space[9],
-  paddingRight: themeVars.space[9],
+  paddingRight: themeVars.space[5],
   maxHeight: "304px",
   boxSizing: "border-box",
   zIndex: themeVars.zIndex[100],

@@ -233,6 +233,7 @@ export default function TransferItem(props: TransferItemProps) {
             >
               <Show when={props.halfBtn}>
                 <Button
+                  variant="unstyled"
                   className={styles.textBtn[state.theme]}
                   size="xs"
                   onClick={() => state.handleHalf()}
@@ -247,6 +248,7 @@ export default function TransferItem(props: TransferItemProps) {
 
               <Show when={props.maxBtn}>
                 <Button
+                  variant="unstyled"
                   className={styles.textBtn[state.theme]}
                   size="xs"
                   onClick={() => state.handleMax()}
@@ -321,11 +323,13 @@ export default function TransferItem(props: TransferItemProps) {
             attributes={
               props.isSmall
                 ? {
-                    px: "$6",
+                    pr: "$5",
+                    pl: "$6",
                     py: "$4",
                   }
                 : {
-                    px: "$9",
+                    pr: "$5",
+                    pl: "$9",
                     py: "$7",
                   }
             }

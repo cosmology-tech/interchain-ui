@@ -203,7 +203,6 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             flexDirection="column"
             justifyContent="center"
             alignItems="flex-end"
-            pr="$4"
           >
             <Stack direction="vertical" space="$4">
               <Box
