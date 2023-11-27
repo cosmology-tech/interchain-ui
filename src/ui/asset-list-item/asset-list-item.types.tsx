@@ -9,6 +9,11 @@ export interface AssetListItemProps extends BaseComponentProps {
   tokenAmountPrice: string;
   chainName?: string;
   needChainSpace?: boolean;
+  // Withdraw and deposit button props
+  depositLabel?: string;
+  withdrawLabel?: string;
+  showDeposit?: boolean;
+  showWithdraw?: boolean;
   onDeposit?: (event?: any) => void;
   onWithdraw?: (event?: any) => void;
 }

@@ -5,7 +5,7 @@ export interface BasicModalProps extends BaseComponentProps {
   onOpen?: (event?: any) => void;
   onClose?: (event?: any) => void;
   renderCloseButton?: (props: any) => BaseComponentProps["children"];
-  renderTrigger: (props: any) => BaseComponentProps["children"];
+  renderTrigger?: (props: any) => BaseComponentProps["children"];
   title: BaseComponentProps["children"];
   children?: BaseComponentProps["children"];
   className?: string;

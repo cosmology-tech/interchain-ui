@@ -3,8 +3,8 @@ import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import AssetListItem from "../asset-list-item";
-import { AssetListProps } from "./asset-list.types";
-import { AssetListItemProps } from "../asset-list-item/asset-list-item.types";
+import type { AssetListProps } from "./asset-list.types";
+import type { AssetListItemProps } from "../asset-list-item/asset-list-item.types";
 
 useMetadata({
   rsc: {
@@ -12,11 +12,12 @@ useMetadata({
   },
 });
 
-export default function AssetList(props: AssetListProps) {
-  useDefaultProps({
-    isOtherChains: false,
-  });
+useDefaultProps<Partial<AssetListProps>>({
+  isOtherChains: false,
+  titles: ["Asset", "Balance"],
+});
 
+export default function AssetList(props: AssetListProps) {
   return (
     <Box
       overflowX={{
@@ -32,7 +33,7 @@ export default function AssetList(props: AssetListProps) {
           <Box width="$19" />
           <Stack space="$0" attributes={{ marginBottom: "$12", flex: 1 }}>
             <Text attributes={{ width: "25%" }} color="$textSecondary">
-              Asset
+              {props.titles[0]}
             </Text>
             <Show when={props.needChainSpace}>
               <Box width="25%">
@@ -42,7 +43,7 @@ export default function AssetList(props: AssetListProps) {
               </Box>
             </Show>
             <Text attributes={{ width: "25%" }} color="$textSecondary">
-              Balance
+              {props.titles[1]}
             </Text>
           </Stack>
         </Stack>
@@ -60,6 +61,8 @@ export default function AssetList(props: AssetListProps) {
                   tokenAmount={item.tokenAmount}
                   tokenAmountPrice={item.tokenAmountPrice}
                   chainName={item?.chainName}
+                  showDeposit={item.showDeposit}
+                  showWithdraw={item.showWithdraw}
                   onDeposit={() => item?.onDeposit()}
                   onWithdraw={() => item?.onWithdraw()}
                 />

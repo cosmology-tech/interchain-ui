@@ -5,7 +5,7 @@ import type { BaseComponentProps } from "../../models/components.model";
 export interface ContainerProps extends Omit<BaseComponentProps, "className"> {
   as?: any;
   className?: ClassValue;
-  children?: any;
+  children?: BaseComponentProps["children"];
   maxWidth?: Sprinkles["maxWidth"];
   attributes?: Sprinkles;
 }

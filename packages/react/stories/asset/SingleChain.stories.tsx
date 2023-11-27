@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    isLoading: false,
     title: "Your asset",
     listTitle: "On Osmosis",
     onDeposit: () => {

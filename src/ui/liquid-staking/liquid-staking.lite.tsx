@@ -174,7 +174,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
           title={props.stakeLabel}
           amount={props.stakeAmount ?? 0}
           selectedItem={state.stakeToken}
-          dropDownList={props.options}
+          dropdownList={props.options}
           onItemSelected={(selectedItem: LiquidStakingToken) =>
             state.handleStakeTokenSelected(selectedItem)
           }

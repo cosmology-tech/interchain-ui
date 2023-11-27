@@ -11,11 +11,14 @@ useMetadata({
   },
 });
 
-export default function AssetListHeader(props: AssetListHeaderProps) {
-  useDefaultProps({
-    isSingle: false,
-  });
+useDefaultProps<Partial<AssetListHeaderProps>>({
+  showDeposit: true,
+  showWithdraw: true,
+  withdrawButtonLabel: "Withdraw",
+  depositButtonLabel: "Deposit",
+});
 
+export default function AssetListHeader(props: AssetListHeaderProps) {
   return (
     <Box
       display="flex"
@@ -178,7 +181,11 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               desktop: "$12",
             }}
           >
-            <Show when={!!props.onWithdraw}>
+            <Show
+              when={
+                typeof props.onWithdraw === "function" && props.showWithdraw
+              }
+            >
               <Box
                 flex={{
                   mobile: "1",
@@ -196,12 +203,14 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                   intent="secondary"
                   onClick={() => props.onWithdraw?.()}
                 >
-                  {props.withdrawButtonLabel ?? "Withdraw"}
+                  {props.withdrawButtonLabel}
                 </Button>
               </Box>
             </Show>
 
-            <Show when={!!props.onDeposit}>
+            <Show
+              when={typeof props.onDeposit === "function" && props.showDeposit}
+            >
               <Box
                 flex={{
                   mobile: "1",
@@ -218,7 +227,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
                   intent="tertiary"
                   onClick={() => props.onDeposit?.()}
                 >
-                  {props.depositButtonLabel ?? "Deposit"}
+                  {props.depositButtonLabel}
                 </Button>
               </Box>
             </Show>

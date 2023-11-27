@@ -5,6 +5,7 @@ import Button from "../../src/ui/button";
 import BasicModal from "../../src/ui/basic-modal";
 import Stack from "../../src/ui/stack";
 import OverviewTransfer from "../../src/ui/overview-transfer";
+import type { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
 import { getTransferList } from "../stub/assetData";
 
 const meta: Meta<typeof OverviewTransfer> = {
@@ -18,23 +19,30 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const dropdownList = getTransferList();
+const stride = dropdownList.find((item) => item.name === "Stride");
+
 export const Primary: Story = {
   args: {
-    type: "withdraw",
-    dropDownList: getTransferList(),
+    dropdownList: dropdownList,
+    timeEstimateLabel: "~ 20 seconds",
     onTransfer() {
       console.log("onTransfer");
     },
     onCancel() {
       console.log("onCancel");
     },
-    onChange(selectedItem, value) {
-      console.log("onChange", selectedItem, value);
-    },
   },
   render: (props) => {
     const [isDepositOpen, setIsDepositOpen] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+
+    const [selected, setSelected] = useState<AvailableItem>(dropdownList[1]);
+
+    const onChange = (selectedItem, value) => {
+      console.log("onChange", selectedItem, value);
+      setSelected(selectedItem);
+    };
 
     return (
       <Stack space="$10">
@@ -48,7 +56,13 @@ export const Primary: Story = {
           title="Deposit"
           onClose={() => setIsDepositOpen(false)}
         >
-          <OverviewTransfer {...props} />
+          <OverviewTransfer
+            {...props}
+            selectedItem={selected}
+            fromChainLogoUrl={selected.imgSrc}
+            toChainLogoUrl={stride.imgSrc}
+            onChange={onChange}
+          />
         </BasicModal>
         <BasicModal
           renderTrigger={(triggerProps) => (

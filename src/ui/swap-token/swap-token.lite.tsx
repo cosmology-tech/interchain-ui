@@ -147,7 +147,7 @@ export default function SwapToken(props: SwapTokenProps) {
       });
     },
     handleFromListItemSelected(selectedItem) {
-      state.toList = props.dropDownList.filter(
+      state.toList = props.dropdownList.filter(
         (item) => item.symbol !== selectedItem.symbol
       );
       state.fromItem = selectedItem;
@@ -166,7 +166,7 @@ export default function SwapToken(props: SwapTokenProps) {
       });
     },
     handleToListItemSelected(selectedItem) {
-      state.fromList = props.dropDownList.filter(
+      state.fromList = props.dropdownList.filter(
         (item) => item.symbol !== selectedItem.symbol
       );
       state.toItem = selectedItem;
@@ -221,15 +221,15 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   onUpdate(() => {
-    let initialFromList = cloneDeep(props.dropDownList);
+    let initialFromList = cloneDeep(props.dropdownList);
     initialFromList.splice(1, 1);
-    let initialToList = cloneDeep(props.dropDownList);
+    let initialToList = cloneDeep(props.dropdownList);
     initialToList.splice(0, 1);
     state.fromList = initialFromList;
     state.toList = initialToList;
     state.fromItem = initialFromList[0];
     state.toItem = initialToList[0];
-  }, [props.dropDownList]);
+  }, [props.dropdownList]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
@@ -244,7 +244,7 @@ export default function SwapToken(props: SwapTokenProps) {
         title="From"
         amount={state.fromAmount}
         selectedItem={state.fromItem}
-        dropDownList={state.fromList}
+        dropdownList={state.fromList}
         onItemSelected={(selectedItem: AvailableItem) =>
           state.handleFromListItemSelected(selectedItem)
         }
@@ -277,7 +277,7 @@ export default function SwapToken(props: SwapTokenProps) {
         title="To"
         amount={state.toAmount}
         selectedItem={state.toItem}
-        dropDownList={state.toList}
+        dropdownList={state.toList}
         onItemSelected={(selectedItem: AvailableItem) =>
           state.handleToListItemSelected(selectedItem)
         }

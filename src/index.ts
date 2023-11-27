@@ -7,7 +7,9 @@ export type {
   NumberFormatProps,
   NumberFormatter,
 } from "./models/system.model";
-export type { Sprinkles } from './styles/rainbow-sprinkles.css';
+export type { Sprinkles } from "./styles/rainbow-sprinkles.css";
+
+export { skeleton as skeletonClass } from "./ui/shared/shared.css";
 
 // Init Components
 export { default as Box } from "./ui/box";
@@ -21,6 +23,7 @@ export { default as Text } from "./ui/text";
 export type { TextProps } from "./ui/text/text.types";
 export { default as Button } from "./ui/button";
 export type { ButtonProps } from "./ui/button/button.types";
+export { default as Skeleton } from "./ui/skeleton";
 export { default as ClipboardCopyText } from "./ui/clipboard-copy-text";
 export type { ClipboardCopyTextProps } from "./ui/clipboard-copy-text/clipboard-copy-text.types";
 export { default as ThemeProvider } from "./ui/theme-provider";
@@ -51,7 +54,7 @@ export { default as ConnectModalWalletButton } from "./ui/connect-modal-wallet-b
 export type { ConnectModalWalletButtonProps } from "./ui/connect-modal-wallet-button/connect-modal-wallet-button.types";
 export { default as ConnectModalWalletList } from "./ui/connect-modal-wallet-list";
 export type { ConnectModalWalletListProps } from "./ui/connect-modal-wallet-list/connect-modal-wallet-list.types";
-export { default as ShowMore } from "./ui/show-more";
+export { default as Reveal } from "./ui/reveal";
 export { default as I18nProvider } from "./ui/i18n-provider";
 export { default as PoolInfoHeader } from "./ui/pool-info-header";
 export type { PoolInfoHeaderProps } from "./ui/pool-info-header/pool-info-header.types";

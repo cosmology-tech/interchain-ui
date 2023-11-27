@@ -14,6 +14,7 @@ export type AvailableItem = {
   imgSrc: string;
   symbol: string;
   name: string;
+  denom?: string;
   /**
    * Available amount
    */
@@ -28,7 +29,7 @@ export interface TransferItemProps extends BaseComponentProps {
   /**
    * Drop down list of available items
    */
-  dropDownList: AvailableItem[];
+  dropdownList: AvailableItem[];
   /**
    * If show the available amount
    */
@@ -60,6 +61,7 @@ export interface TransferItemProps extends BaseComponentProps {
    */
   onItemSelected?: (selectItem: AvailableItem) => void;
   selectedItem: AvailableItem;
+  defaultSelectedItem?: AvailableItem;
   amount?: number;
   defaultAmountPrice?: string;
   availableAsMax?: boolean;
