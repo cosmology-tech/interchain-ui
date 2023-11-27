@@ -1,7 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 import { breakpoints } from "../../styles/tokens";
-import { chainLogoBase } from "../chain-list-item/chain-list-item.css";
 import { transferItemRootContainer } from "../transfer-item/transfer-item.css";
 
 export const container = style({
@@ -72,6 +71,8 @@ export const chainSwapInput = styleVariants({
 });
 
 export const logoMd = style({
+  maxWidth: "50px",
+  maxHeight: "50px",
   "@container": {
     [`${transferItemRootContainer} (min-width: 0px)`]: {
       width: "28px",
@@ -109,7 +110,13 @@ export const logoSm = style({
   },
 });
 
+const logoBase = style({
+  display: "block",
+  borderRadius: "50%",
+  background: themeVars.colors.skeletonBg,
+});
+
 export const chainSwapLogo = styleVariants({
-  md: [chainLogoBase, logoMd],
-  sm: [chainLogoBase, logoSm],
+  md: [logoBase, logoMd],
+  sm: [logoBase, logoSm],
 });
