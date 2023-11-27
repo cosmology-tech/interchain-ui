@@ -1,5 +1,7 @@
 import {
+  Show,
   useStore,
+  useDefaultProps,
   onMount,
   onUnMount,
   useRef,
@@ -15,18 +17,24 @@ import Box from "../box";
 import TokenInput from "../token-input";
 import * as styles from "./asset-withdraw-tokens.css";
 import { store } from "../../models/store";
-import { AssetWithdrawTokensProps } from "./asset-withdraw-tokens.types";
-import { ThemeVariant } from "../../models/system.model";
 import { truncateTextMiddle } from "../../helpers/string";
 import IconButton from "../icon-button";
 import TextField from "../text-field";
 import { rootInput, inputBorderAndShadow } from "../text-field/text-field.css";
 import { standardTransitionProperties } from "../shared/shared.css";
 
+import type { ThemeVariant } from "../../models/system.model";
+import type { AssetWithdrawTokensProps } from "./asset-withdraw-tokens.types";
+
 useMetadata({
   rsc: {
     componentType: "client",
   },
+});
+
+useDefaultProps<Partial<AssetWithdrawTokensProps>>({
+  transferLabel: "Transfer",
+  cancelLabel: "Cancel",
 });
 
 export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
@@ -39,8 +47,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
     reverseAnimation: boolean;
     handleConfirmAddress: () => void;
     handleAmountChange: (percent: number) => void;
-    onAmountChange: (value: string) => void;
-    transferDisabled: boolean;
+    onAmountChange: (value: number) => void;
   }>({
     theme: "light",
     inputAmount: 0,
@@ -49,7 +56,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
     smAddressVisible: false,
     reverseAnimation: false,
     handleConfirmAddress() {
-      props?.onAddressConfirm?.();
+      props.onAddressConfirm?.();
       state.reverseAnimation = true;
       state.lgAddressVisible = false;
       state.smAddressVisible = false;
@@ -62,13 +69,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
     },
     onAmountChange(value) {
       state.inputAmount = value;
-      props?.onChange?.(value);
-    },
-    get transferDisabled() {
-      return (
-        new BigNumber(state.inputAmount).gt(props.available) ||
-        state.inputAmount === 0
-      );
+      props.onChange?.(new BigNumber(value).toString());
     },
   });
 
@@ -88,7 +89,18 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
   });
 
   return (
-    <Box className={styles.container}>
+    <Box
+      className={props.className}
+      position="relative"
+      minWidth={{
+        mobile: "unset",
+        mdMobile: "340px",
+      }}
+      maxWidth={{
+        mobile: "unset",
+        mdMobile: "460px",
+      }}
+    >
       <Box visibility={state.smAddressVisible ? "hidden" : "visible"}>
         <Stack
           className={styles.onlySm}
@@ -329,7 +341,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                   value={state.toAddress}
                   onChange={(e) => {
                     state.toAddress = e.target.value;
-                    props?.onAddressChange(e.target.value);
+                    props.onAddressChange(e.target.value);
                   }}
                   inputClassName={styles.addressInput}
                 />
@@ -349,7 +361,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                     width="$11"
                     height="$11"
                     borderRadius="$full"
-                    attributes={{ src: props?.toImgSrc }}
+                    attributes={{ src: props.toImgSrc }}
                   />
                 </Stack>
                 <IconButton
@@ -368,6 +380,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
             </Box>
           </Stack>
         </Stack>
+
         <TokenInput
           title="Select amount"
           hasProgressBar={false}
@@ -437,9 +450,9 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
         <Button
           intent="tertiary"
           size="lg"
-          attributes={{ width: "$full" }}
-          onClick={() => props?.onTransfer?.()}
-          disabled={state.transferDisabled}
+          fluidWidth
+          onClick={() => props.onTransfer?.()}
+          disabled={props.isSubmitDisabled}
         >
           <Stack
             attributes={{
@@ -451,37 +464,40 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               fontSize="$lg"
               fontWeight="$semibold"
             >
-              Transfer
+              {props.transferLabel}
             </Text>
 
-            <Stack
-              className={styles.onlySm}
-              attributes={{
-                alignItems: "center",
-              }}
-            >
-              <Icon
-                name="timeLine"
-                size="$lg"
+            <Show when={!!props.timeEstimateLabel}>
+              <Stack
+                className={styles.onlySm}
                 attributes={{
-                  marginLeft: "$8",
-                  marginRight: "$4",
+                  alignItems: "center",
                 }}
-              />
+              >
+                <Icon
+                  name="timeLine"
+                  size="$lg"
+                  attributes={{
+                    marginLeft: "$8",
+                    marginRight: "$4",
+                  }}
+                />
 
-              <Text fontSize="$xs" className={styles.btnText[state.theme]}>
-                ≈ 20 seconds
-              </Text>
-            </Stack>
+                <Text fontSize="$xs" className={styles.btnText[state.theme]}>
+                  ≈ {props.timeEstimateLabel}
+                </Text>
+              </Stack>
+            </Show>
           </Stack>
         </Button>
         <Button
           variant="unstyled"
           size="lg"
-          attributes={{ width: "$full", marginTop: "$5" }}
-          onClick={() => props?.onCancel?.()}
+          fluidWidth
+          attributes={{ marginTop: "$5" }}
+          onClick={() => props.onCancel?.()}
         >
-          Cancel
+          {props.cancelLabel}
         </Button>
       </Box>
 
@@ -567,7 +583,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 width="$11"
                 height="$11"
                 borderRadius="$full"
-                attributes={{ src: props?.fromImgSrc }}
+                attributes={{ src: props.fromImgSrc }}
               />
             </Stack>
           </Box>
@@ -592,7 +608,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               value={state.toAddress}
               onChange={(e) => {
                 state.toAddress = e.target.value;
-                props?.onAddressChange(e.target.value);
+                props.onAddressChange(e.target.value);
               }}
               inputClassName={styles.addressInput}
             />
@@ -611,7 +627,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 width="$11"
                 height="$11"
                 borderRadius="$full"
-                attributes={{ src: props?.toImgSrc }}
+                attributes={{ src: props.toImgSrc }}
               />
             </Stack>
             <IconButton
