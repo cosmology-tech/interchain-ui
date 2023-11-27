@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.14.0...@interchain-ui/react@1.14.1) (2023-11-27)
+
+### Bug Fixes
+
+- **chain-swap:** spacing and colors ([e0b7a5f](https://github.com/cosmology-tech/interchain-ui/commit/e0b7a5f5ad2ab4af79afac70b6e6b6ae59701ecc))
+- dropdown offset calculation ([623dcac](https://github.com/cosmology-tech/interchain-ui/commit/623dcac37280004cd26536639c44737a9f5db38a))
+
 # [1.14.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.20...@interchain-ui/react@1.14.0) (2023-11-27)
 
 ### Features
