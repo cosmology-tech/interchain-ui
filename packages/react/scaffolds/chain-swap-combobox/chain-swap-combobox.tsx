@@ -109,21 +109,23 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
     open,
-    placement: "bottom",
+    placement: "bottom-start",
     onOpenChange: setOpen,
     middleware: [
-      offset({
-        // Minus offset from containerRef padding because ref element is a direct child
-        crossAxis: -5,
+      offset(({ rects }) => {
+        const containerX = containerRef.current.getBoundingClientRect().left;
+        const referenceX = rects.reference.x;
+
+        return {
+          crossAxis: containerX - referenceX,
+        };
       }),
       size({
         apply({ rects, availableHeight, elements }) {
           const containerWidth =
             containerRef.current.getBoundingClientRect().width;
-
           Object.assign(elements.floating.style, {
-            // ref width + parent padding, but not exceeding the real container width
-            width: `${Math.min(rects.reference.width + 30, containerWidth)}px`,
+            width: `${containerWidth}px`,
             maxHeight: `${props.maxHeight ?? availableHeight}px`,
           });
         },
@@ -252,7 +254,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
         />
       </div>
 
-      {open && (
+      {(open || true) && (
         <FloatingFocusManager
           context={context}
           initialFocus={-1}
