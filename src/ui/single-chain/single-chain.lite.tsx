@@ -37,13 +37,23 @@ export default function SingleChain(props: SingleChainProps) {
           {props.listTitle}
         </Text>
 
-        <Reveal hideThresholdHeight={400}>
+        <Show when={props.list.length > 4}>
+          <Reveal hideThresholdHeight={400}>
+            <AssetList
+              needChainSpace={false}
+              isOtherChains={false}
+              list={props.list}
+            />
+          </Reveal>
+        </Show>
+
+        <Show when={props.list.length <= 4}>
           <AssetList
             needChainSpace={false}
             isOtherChains={false}
             list={props.list}
           />
-        </Reveal>
+        </Show>
       </Show>
 
       <Show when={!!props.isLoading}>
