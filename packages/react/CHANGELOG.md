@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.20...@interchain-ui/react@1.14.0) (2023-11-27)
+
+### Features
+
+- **button:** add color intent to primary button ([cd090a0](https://github.com/cosmology-tech/interchain-ui/commit/cd090a091f397576086f53f737510a6fa2f766a8))
+
 ## [1.13.20](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.13.19...@interchain-ui/react@1.13.20) (2023-11-27)
 
 ### Bug Fixes
