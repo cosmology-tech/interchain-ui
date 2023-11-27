@@ -11,7 +11,7 @@ interface BaseNftDetailProps extends BaseComponentProps {
   name: string;
   creatorName: string;
   collectionDesc: string;
-  mintPrice: string;
+  mintPrice?: string;
   rarityOrder: number;
   tokensCount: number;
   ownerName: string;

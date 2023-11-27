@@ -139,7 +139,9 @@ export default function NftDetail(props: NftDetailProps) {
             {props.collectionDesc}
           </Text>
 
-          <StarText label="Minted for" value={props.mintPrice} />
+          <Show when={!!props.mintPrice}>
+            <StarText label="Minted for" value={props.mintPrice} />
+          </Show>
 
           <Stack
             attributes={{
