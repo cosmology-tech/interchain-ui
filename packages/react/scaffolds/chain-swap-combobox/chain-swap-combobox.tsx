@@ -254,7 +254,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
         />
       </div>
 
-      {(open || true) && (
+      {open && (
         <FloatingFocusManager
           context={context}
           initialFocus={-1}
