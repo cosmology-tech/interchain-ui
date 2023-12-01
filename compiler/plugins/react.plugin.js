@@ -98,7 +98,12 @@ function fixReactTypeIssues(codeStr) {
       )
       // Fix some svg attributes not correctly compiled
       .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)
+      .replace(/(clip-path)="(.*)"/g, `clipPath="$2"`)
+      .replace(/(clip-rule)="(.*)"/g, `clipRule="$2"`)
+      .replace(/(stroke-linejoin)="(.*)"/g, `strokeLinejoin="$2"`)
+      .replace(/(stroke-linecap)="(.*)"/g, `strokeLinecap="$2"`)
       .replace(/(stroke-width)="(.*)"/g, `strokeWidth="$2"`)
+      .replace(/(fill-rule)="(.*)"/g, `fillRule="$2"`)
       .replace(/(srcset)={(.*)}/g, `srcSet={$2}`)
   );
 }
