@@ -34,12 +34,14 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
           desktop: "$14",
         }}
       >
-        <Stack space="$0" direction="vertical">
-          <Text fontSize="$xs" color="$textSecondary">
-            Price
-          </Text>
-          <StarText value={props?.price} />
-        </Stack>
+        <Show when={!!props.price}>
+          <Stack space="$0" direction="vertical">
+            <Text fontSize="$xs" color="$textSecondary">
+              Price
+            </Text>
+            <StarText value={props.price} />
+          </Stack>
+        </Show>
 
         <Show when={!!props.lastSale}>
           <Stack direction="vertical" space="$0">
@@ -49,44 +51,50 @@ export default function NftDetailInfo(props: NftDetailInfoProps) {
 
             <Text fontWeight="$semibold">
               {`${
-                isNumber(props?.lastSale) ? `${props?.lastSale} STARS` : "---"
+                isNumber(props.lastSale) ? `${props.lastSale} STARS` : "---"
               }`}
             </Text>
           </Stack>
         </Show>
 
-        <Stack direction="vertical" space="0">
-          <Text fontSize="$xs" color="$textSecondary">
-            Owner
-          </Text>
-          <Stack attributes={{ alignItems: "center" }} space="$0">
-            <Text fontWeight="$semibold" attributes={{ marginRight: "$3" }}>
-              {props?.owner}
+        <Show when={!!props.owner}>
+          <Stack direction="vertical" space="0">
+            <Text fontSize="$xs" color="$textSecondary">
+              Owner
             </Text>
-            <Icon
-              attributes={{
-                transform: "translateY(1px)",
-              }}
-              name="jaggedCheck"
-              size="$md"
-              color="$text"
-            />
+            <Stack attributes={{ alignItems: "center" }} space="$0">
+              <Text fontWeight="$semibold" attributes={{ marginRight: "$3" }}>
+                {props.owner}
+              </Text>
+              <Icon
+                attributes={{
+                  transform: "translateY(1px)",
+                }}
+                name="jaggedCheck"
+                size="$md"
+                color="$text"
+              />
+            </Stack>
           </Stack>
-        </Stack>
+        </Show>
 
-        <Stack direction="vertical" space="0">
-          <Text fontSize="$xs" color="$textSecondary">
-            Top offer
-          </Text>
-          <StarText value={props?.topOffer} />
-        </Stack>
+        <Show when={!!props.topOffer}>
+          <Stack direction="vertical" space="0">
+            <Text fontSize="$xs" color="$textSecondary">
+              Top offer
+            </Text>
+            <StarText value={props.topOffer} />
+          </Stack>
+        </Show>
 
-        <Stack direction="vertical" space="$0">
-          <Text fontSize="$xs" color="$textSecondary">
-            Floor price
-          </Text>
-          <StarText value={props?.floorPrice} />
-        </Stack>
+        <Show when={!!props.floorPrice}>
+          <Stack direction="vertical" space="$0">
+            <Text fontSize="$xs" color="$textSecondary">
+              Floor price
+            </Text>
+            <StarText value={props.floorPrice} />
+          </Stack>
+        </Show>
       </Box>
     </Stack>
   );

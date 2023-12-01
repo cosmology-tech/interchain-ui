@@ -1,4 +1,4 @@
-import { Show, useMetadata } from "@builder.io/mitosis";
+import { Show, useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Icon from "../icon";
@@ -12,21 +12,39 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<StarTextProps>>({
+  size: "md",
+  tokenName: "STARS",
+  showTokenIcon: true,
+});
+
 export default function StarText(props: StarTextProps) {
   return (
-    <div className={props.className} onClick={props.onClick}>
+    <Box
+      className={props.className}
+      attributes={{
+        ...props.attributes,
+        onClick: () => props.onClick?.(),
+      }}
+    >
       <Stack attributes={{ alignItems: "center" }}>
         <Show when={!!props.label}>
-          <Text color="$textSecondary" attributes={{ marginRight: "$3" }}>
+          <Text
+            fontSize={props.size === "md" ? "$sm" : "$xl"}
+            color="$textSecondary"
+            attributes={{ marginRight: "$3" }}
+          >
             {props.label}
           </Text>
         </Show>
 
-        <Text fontWeight="$semibold" attributes={{ marginRight: "$3" }}>{`${
-          props.value
-        } ${props.tokenName ?? "STARS"}`}</Text>
+        <Text
+          fontSize={props.size === "md" ? "$sm" : "$xl"}
+          fontWeight="$semibold"
+          attributes={{ marginRight: "$3" }}
+        >{`${props.value} ${props.tokenName}`}</Text>
 
-        <Show when={!props.iconSrc}>
+        <Show when={!props.iconSrc && props.showTokenIcon}>
           <Icon
             name="stargazePixel"
             size="$md"
@@ -37,7 +55,7 @@ export default function StarText(props: StarTextProps) {
           />
         </Show>
 
-        <Show when={typeof props.iconSrc === "string"}>
+        <Show when={typeof props.iconSrc === "string" && props.showTokenIcon}>
           <Box
             width="$8"
             height="$8"
@@ -51,6 +69,6 @@ export default function StarText(props: StarTextProps) {
           />
         </Show>
       </Stack>
-    </div>
+    </Box>
   );
 }

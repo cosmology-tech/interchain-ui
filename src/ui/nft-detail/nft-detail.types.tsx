@@ -6,6 +6,11 @@ import type { NftDetailActivityListProps } from "../nft-detail-activity-list/nft
 
 export type DetailType = "listForSale" | "makeOffer" | "buyNow" | "custom";
 
+export type TokenInfo = {
+  tokenName?: string;
+  iconSrc?: string;
+};
+
 interface BaseNftDetailProps extends BaseComponentProps {
   collectionName: string;
   name: string;
@@ -16,6 +21,8 @@ interface BaseNftDetailProps extends BaseComponentProps {
   tokensCount: number;
   ownerName: string;
   imgSrc: string;
+  price?: number;
+  tokenInfo?: TokenInfo;
   traits?: NftTraitListItemProps[];
   detailInfo?: NftDetailInfoProps;
   detailTopOffer?: NftDetailTopOfferProps;

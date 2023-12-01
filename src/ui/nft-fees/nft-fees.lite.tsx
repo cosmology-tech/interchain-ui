@@ -101,7 +101,7 @@ export default function NftFees(props: NftFeesProps) {
                   >
                     {item.feeName}
                   </Text>
-                  <Tooltip title={item?.feeName}>
+                  <Tooltip title={item?.desc}>
                     <Icon
                       name="informationLine"
                       size="$md"
