@@ -8,6 +8,8 @@ export type TabProps = {
 
 export interface TabsProps extends BaseComponentProps {
   defaultActiveTab?: number;
+  activeTab?: number;
+  onActiveTabChange?: (tabId: number) => void;
   tabs: TabProps[];
   attributes?: BoxProps;
 }

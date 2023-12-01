@@ -8,7 +8,6 @@ import {
   onMount,
   onUnMount,
 } from "@builder.io/mitosis";
-import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clsx from "clsx";
 import Box from "../box";
 import Text from "../text";
@@ -40,15 +39,25 @@ export default function Tabs(props: TabsProps) {
     width: number;
     transform: string;
     setActiveStyles: (activeTab: number) => void;
+    isControlled: () => boolean;
+    getActiveTabId: () => number;
   }>({
     isMounted: false,
     theme: "light",
     active: 0,
     width: 0,
     transform: "translateX(0)",
+    isControlled() {
+      return typeof props.activeTab !== "undefined";
+    },
+    getActiveTabId() {
+      return state.isControlled() ? props.activeTab : state.active;
+    },
     findActiveTabContent() {
+      const finalActiveTab = state.getActiveTabId();
+
       const panel: TabProps | null = props?.tabs
-        ? props?.tabs.find((_, index) => index === state.active) ?? null
+        ? props?.tabs.find((_, index) => index === finalActiveTab) ?? null
         : null;
       return panel?.content ?? null;
     },
@@ -56,7 +65,9 @@ export default function Tabs(props: TabsProps) {
       return state.theme === "light" ? "$gray200" : "$gray800";
     },
     getTextColor(tabIndex: number) {
-      if (tabIndex !== state.active) {
+      const finalActiveTab = state.getActiveTabId();
+
+      if (tabIndex !== finalActiveTab) {
         return "$textSecondary";
       }
       return state.theme === "light" ? "$white" : "$gray900";
@@ -73,18 +84,19 @@ export default function Tabs(props: TabsProps) {
     },
   });
   let cleanupRef = useRef<() => void>(null);
-  let activeTabContentRef = useRef(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
     state.isMounted = true;
 
     setTimeout(() => {
-      state.setActiveStyles(props.defaultActiveTab ?? state.active);
+      const finalActiveTab = state.getActiveTabId();
+      state.setActiveStyles(props.defaultActiveTab ?? finalActiveTab);
     }, 100);
 
     const handleResize = () => {
-      state.setActiveStyles(state.active);
+      const finalActiveTab = state.getActiveTabId();
+      state.setActiveStyles(finalActiveTab);
     };
 
     window.addEventListener("resize", handleResize, true);
@@ -95,15 +107,17 @@ export default function Tabs(props: TabsProps) {
     });
   });
 
+  onUpdate(() => {
+    // Only apply this effect for controlled component
+    if (!state.isControlled()) return;
+    state.setActiveStyles(props.activeTab);
+  }, [props.activeTab]);
+
   onUnMount(() => {
     if (typeof cleanupRef === "function") {
       cleanupRef();
     }
   });
-
-  onUpdate(() => {
-    activeTabContentRef = state.findActiveTabContent();
-  }, [state.active]);
 
   return (
     <Box className={props.className} {...props.attributes}>
@@ -151,7 +165,7 @@ export default function Tabs(props: TabsProps) {
               attributes={{
                 role: "tab",
                 "data-tab-key": `tab-${index}`,
-                "aria-selected": state.active === index,
+                "aria-selected": state.getActiveTabId() === index,
                 "aria-controls": `tabpanel-${index}`,
               }}
               key={tab.label}
@@ -161,7 +175,9 @@ export default function Tabs(props: TabsProps) {
                 className={styles.tabButton}
                 attributes={{
                   onClick: () => {
-                    state.active = index;
+                    if (!state.isControlled()) {
+                      state.active = index;
+                    }
                     state.setActiveStyles(index);
                   },
                 }}
@@ -187,7 +203,7 @@ export default function Tabs(props: TabsProps) {
                       desktop: "$7",
                     },
                     borderRadius: "50px",
-                    zIndex: state.active === index ? -1 : undefined,
+                    zIndex: state.getActiveTabId() === index ? -1 : undefined,
                   }}
                 >
                   {tab.label}
@@ -202,12 +218,11 @@ export default function Tabs(props: TabsProps) {
         <Box
           attributes={{
             role: "tabpanel",
-            "aria-labelledby": `btn-${state.active}`,
-            "data-tab-panel-key": `tabpanel-${state.active}`,
+            "aria-labelledby": `btn-${state.getActiveTabId()}`,
+            "data-tab-panel-key": `tabpanel-${state.getActiveTabId()}`,
           }}
         >
-          <Show when={state.isMounted}>{activeTabContentRef}</Show>
-          <Show when={!state.isMounted}>{state.findActiveTabContent()}</Show>
+          {state.findActiveTabContent()}
         </Box>
       </Box>
     </Box>
