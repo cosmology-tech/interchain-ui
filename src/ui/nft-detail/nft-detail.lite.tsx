@@ -140,7 +140,21 @@ export default function NftDetail(props: NftDetailProps) {
           </Text>
 
           <Show when={!!props.mintPrice}>
-            <StarText label="Minted for" value={props.mintPrice} />
+            <StarText
+              label="Minted for"
+              value={props.mintPrice}
+              iconSrc={props.tokenInfo?.iconSrc}
+              tokenName={props.tokenInfo?.tokenName}
+            />
+          </Show>
+
+          <Show when={!!props.detailInfo?.lastSale}>
+            <StarText
+              label="Last sale"
+              value={props.detailInfo?.lastSale}
+              iconSrc={props.tokenInfo?.iconSrc}
+              tokenName={props.tokenInfo?.tokenName}
+            />
           </Show>
 
           <Stack
@@ -173,6 +187,20 @@ export default function NftDetail(props: NftDetailProps) {
             </Text>
           </Stack>
 
+          <Show when={!!props.price}>
+            <StarText
+              label="Price"
+              size="lg"
+              value={props.detailInfo?.lastSale}
+              showTokenIcon={false}
+              iconSrc={props.tokenInfo?.iconSrc}
+              tokenName={props.tokenInfo?.tokenName}
+              attributes={{
+                py: "$4",
+              }}
+            />
+          </Show>
+
           {/* ==== CTA */}
           <Show when={props.type === "listForSale"}>
             <Button
@@ -203,7 +231,6 @@ export default function NftDetail(props: NftDetailProps) {
                   size="sm"
                   intent="text"
                   leftIcon="fireLine"
-                  attributes={{ width: "$full" }}
                   onClick={() => (props as ListForSale).onBurn?.()}
                 >
                   Burn

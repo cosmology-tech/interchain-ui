@@ -2,8 +2,9 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import NftDetail from "../../../src/ui/nft-detail";
+import type { NftDetailProps } from "../../../src/ui/nft-detail/nft-detail.types";
 
-const meta: Meta<typeof NftDetail> = {
+const meta: Meta<NftDetailProps> = {
   component: NftDetail,
   title: "nft/nft-detail/NftDetail",
   tags: ["autodocs"],
@@ -12,15 +13,15 @@ const meta: Meta<typeof NftDetail> = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<NftDetailProps>;
 
 export const Primary: Story = {
   args: {
     type: "listForSale",
     imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
+      "https://i.stargaze-apis.com/d0jFShn3t5aytKZw5OkUa1uuscynGjUNDYD5pg14p4w/f:jpg/resize:fit:700:::/dpr:2/plain/ipfs://QmbGvE3wmxex8KiBbbvMjR8f9adR28s3XkiZSTuGmHoMHV/3924.jpg",
     collectionName: "Shnubbles Breakfast Drop #2",
-    tokenName: "Bad Kid #9509",
+    name: "Bad Kid #9509",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
@@ -28,6 +29,15 @@ export const Primary: Story = {
     rarityOrder: 2864,
     tokensCount: 10000,
     ownerName: "shane.stars",
+    price: 670,
+    detailInfo: {
+      price: 400,
+      lastSale: 385,
+      owner: 100,
+      topOffer: 400,
+      floorPrice: 400,
+      isNameVerified: true,
+    },
     traits: [
       {
         name: "Accessories",
@@ -89,7 +99,7 @@ export const MakeOffer: Story = {
     imgSrc:
       "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
     collectionName: "Shnubbles Breakfast Drop #2",
-    tokenName: "Breakfast Shnubble #127",
+    name: "Breakfast Shnubble #127",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
@@ -136,7 +146,7 @@ export const MakeOffer: Story = {
     ],
     detailInfo: {
       price: 200,
-      // lastSale: 1000,
+      lastSale: 1000,
       owner: "shane.stars",
       topOffer: 5,
       floorPrice: 149,
@@ -183,7 +193,7 @@ export const BuyNow: Story = {
     imgSrc:
       "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
     collectionName: "Shnubbles Breakfast Drop #2",
-    tokenName: "Breakfast Shnubble #127",
+    name: "Breakfast Shnubble #127",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",

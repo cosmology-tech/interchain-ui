@@ -1,8 +1,8 @@
 export interface NftDetailInfoProps {
-  price: number;
+  price?: number;
   lastSale?: number;
-  owner: number;
-  topOffer: number;
-  floorPrice: number;
+  owner?: number;
+  topOffer?: number;
+  floorPrice?: number;
   isNameVerified: boolean;
 }
