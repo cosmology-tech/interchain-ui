@@ -12,6 +12,8 @@ import Text from "../text";
 import Box from "../box";
 import Icon from "../icon";
 import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import { ALL_ICON_NAMES } from "../icon/icon.types";
 import { getIntentColors } from "./callout.helpers";
 import type { CalloutProps } from "./callout.types";
@@ -28,10 +30,17 @@ useDefaultProps<Partial<CalloutProps>>({
 });
 
 export default function Callout(props: CalloutProps) {
-  const state = useStore({
+  const state = useStore<{
+    theme: ThemeVariant;
+    colorsProperties: {
+      color: Sprinkles["color"];
+      bg: Sprinkles["bg"];
+    };
+    isValidIconName: () => boolean;
+  }>({
     theme: "light",
     get colorsProperties() {
-      return getIntentColors(props.intent, state.theme);
+      return getIntentColors(props.intent, state.theme as ThemeVariant);
     },
     isValidIconName() {
       return ALL_ICON_NAMES.includes(props.iconName);
