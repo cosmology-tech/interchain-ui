@@ -19,9 +19,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
-  core: {
-    builder: "@storybook/builder-vite", // 👈 The builder enabled here.
-  },
+  core: {},
   async viteFinal(config, { configType }) {
     // return the customized config
     if (configType === "PRODUCTION") {
