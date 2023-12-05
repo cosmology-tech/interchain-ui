@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Select from "../../src/ui/select";
@@ -20,21 +20,33 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Box width="30" height="700px">
-      <Select width={300} label="Favorite Animal">
-        <SelectOption label="Red Panda">Red Panda</SelectOption>
-        <SelectOption label="Cat">Cat</SelectOption>
-        <SelectOption label="Dog">Dog</SelectOption>
-        <SelectOption label="Aardvark">Aardvark</SelectOption>
-        <SelectOption label="Kangaroo">Kangaroo</SelectOption>
-        <SelectOption label="Snake">Snake</SelectOption>
-        <SelectOption label="Kangaroo 2">Kangaroo 2</SelectOption>
-        <SelectOption label="Snake 2">Snake 2</SelectOption>
-        <SelectOption label="Kangaroo 3">Kangaroo 3</SelectOption>
-        <SelectOption label="Snake 3">Snake 3</SelectOption>
-        <SelectOption label="Kangaroo 4">Kangaroo 4</SelectOption>
-        <SelectOption label="Snake 4">Snake 4</SelectOption>
-        <SelectOption label="Kangaroo 5">Kangaroo 5</SelectOption>
-        <SelectOption label="Snake 5">Snake 5</SelectOption>
+      <Select
+        width={300}
+        defaultSelectedItem={{
+          key: "Dog",
+          label: "Dog",
+          index: 2,
+        }}
+        label="Favorite Animal"
+      >
+        <SelectOption optionKey="Red Panda" label="Red Panda">
+          Red Panda
+        </SelectOption>
+        <SelectOption optionKey="Cat" label="Cat">
+          Cat
+        </SelectOption>
+        <SelectOption optionKey="Dog" label="Dog">
+          Dog
+        </SelectOption>
+        <SelectOption optionKey="Aardvark" label="Aardvark">
+          Aardvark
+        </SelectOption>
+        <SelectOption optionKey="Kangaroo" label="Kangaroo">
+          Kangaroo
+        </SelectOption>
+        <SelectOption optionKey="Snake" label="Snake">
+          Snake
+        </SelectOption>
       </Select>
     </Box>
   ),

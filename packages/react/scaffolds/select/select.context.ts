@@ -1,11 +1,17 @@
 import React from "react";
 import { useInteractions } from "@floating-ui/react";
 
+export type Item = {
+  key: string;
+  label: string;
+  index: number;
+};
+
 export interface SelectContextValue {
   activeIndex: number | null;
-  selectedIndex: number | null;
+  selectedItem: Item | null;
   getItemProps: ReturnType<typeof useInteractions>["getItemProps"];
-  handleSelect: (index: number | null) => void;
+  handleSelect: (selectedItem: Item | null) => void;
 }
 
 export const SelectContext = React.createContext<SelectContextValue>(

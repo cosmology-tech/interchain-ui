@@ -71,7 +71,9 @@ export default function SelectButton(props: SelectButtonProps) {
         {...props.buttonAttributes}
       >
         <span className={buttonContent}>
-          <span>{props.placeholder ?? "Select option"}</span>
+          <span {...props.valueProps}>
+            {props.placeholder ?? "Select option"}
+          </span>
           <Icon name="arrowDropDown" className={arrowDropDown} />
         </span>
       </button>

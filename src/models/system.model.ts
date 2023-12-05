@@ -1,5 +1,5 @@
 export enum Intent {
-  None = "",
+  None = "none",
   Info = "info",
   Success = "warning",
   Warning = "success",
@@ -9,6 +9,8 @@ export enum Intent {
 export const intents = Object.entries(Intent).map(
   ([key, value]: [string, string]) => ({ key, value })
 );
+
+export type IntentValues = "none" | "info" | "warning" | "success" | "error";
 
 export type ThemeVariant = "light" | "dark";
 

@@ -11,5 +11,6 @@ export interface SelectButtonProps extends BaseComponentProps {
   attributes?: any;
   buttonAttributes?: any;
   buttonRef?: any;
+  valueProps?: any;
   _css?: Sprinkles;
 }

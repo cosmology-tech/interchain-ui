@@ -33,6 +33,7 @@ export default function Tabs(props: TabsProps) {
     theme: ThemeVariant;
     active: number;
     findActiveTabContent: () => any;
+    getTabContentFor: (id: number) => any;
     getBgColor: () => Sprinkles["backgroundColor"];
     getTextColor: (tabIndex: number) => Sprinkles["color"];
     // Active state styles
@@ -58,6 +59,12 @@ export default function Tabs(props: TabsProps) {
 
       const panel: TabProps | null = props?.tabs
         ? props?.tabs.find((_, index) => index === finalActiveTab) ?? null
+        : null;
+      return panel?.content ?? null;
+    },
+    getTabContentFor(id: number) {
+      const panel: TabProps | null = props?.tabs
+        ? props?.tabs.find((_, index) => index === id) ?? null
         : null;
       return panel?.content ?? null;
     },
@@ -222,7 +229,19 @@ export default function Tabs(props: TabsProps) {
             "data-tab-panel-key": `tabpanel-${state.getActiveTabId()}`,
           }}
         >
-          {state.findActiveTabContent()}
+          <Show when={props.isLazy}>{state.findActiveTabContent()}</Show>
+          <Show when={!props.isLazy}>
+            <For each={props.tabs}>
+              {(_tabItem, index) => (
+                <Box
+                  key={index}
+                  display={state.getActiveTabId() === index ? "block" : "none"}
+                >
+                  {state.getTabContentFor(index)}
+                </Box>
+              )}
+            </For>
+          </Show>
         </Box>
       </Box>
     </Box>
