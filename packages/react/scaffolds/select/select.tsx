@@ -27,7 +27,7 @@ import {
   listboxStyle,
   selectFullWidth,
 } from "./select.css";
-import { SelectContext } from "./select.context";
+import { Item, SelectContext, SelectContextValue } from "./select.context";
 
 const DEFAULT_LIST_WIDTH = "220";
 
@@ -80,7 +80,9 @@ export interface SelectProps {
   size?: "sm" | "md" | "lg";
   label?: React.ReactNode;
   placeholder?: string;
-  onSelectItem?: (index: number | null) => void;
+  defaultSelectedItem?: Item;
+  selectedIndex?: number;
+  onSelectItem?: (item: Item | null) => void;
   children?: React.ReactNode;
   className?: string;
 }
@@ -93,9 +95,11 @@ export default function Select(props: SelectProps) {
   const [pointer, setPointer] = React.useState(false);
   const isTypingRef = React.useRef<boolean>(false);
 
+  const [selectedItem, setSelectedItem] = React.useState<Item | null>(null);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
-  const [selectedLabel, setSelectedLabel] = React.useState<string | null>(null);
+  const isControlled = React.useRef<boolean>(
+    typeof props.selectedIndex !== "undefined"
+  );
 
   const { refs, floatingStyles, context } = useFloating({
     placement: "bottom-start",
@@ -111,35 +115,64 @@ export default function Select(props: SelectProps) {
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const labelsRef = React.useRef<Array<string | null>>([]);
 
-  const handleSelect = React.useCallback((index: number | null) => {
-    setSelectedIndex(index);
+  const handleSelect = React.useCallback((item: Item | null) => {
+    setSelectedItem(item);
     setIsOpen(false);
-    if (index !== null) {
-      if (typeof props.onSelectItem === "function") {
-        props.onSelectItem(index);
-      }
-      setSelectedLabel(labelsRef.current[index]);
+
+    if (item !== null && typeof props.onSelectItem === "function") {
+      props.onSelectItem(item);
     }
   }, []);
+
+  const handleSelectIndex = React.useCallback(
+    (index: number | null) => {
+      const element = elementsRef[index];
+      if (!element) return;
+
+      const optionKey = element.dataset.selectKey;
+      const optionLabel = element.dataset.selectLabel;
+
+      handleSelect({
+        index,
+        key: optionKey,
+        label: optionLabel,
+      });
+    },
+    [elementsRef, handleSelect]
+  );
+
+  React.useEffect(() => {
+    if (!!props.defaultSelectedItem) {
+      handleSelect(props.defaultSelectedItem);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    // Controlled usage
+    if (isControlled.current) {
+      handleSelectIndex(props.selectedIndex);
+    }
+  }, [props.selectedIndex]);
 
   function handleTypeaheadMatch(index: number | null) {
     if (isOpen) {
       setActiveIndex(index);
     } else {
-      handleSelect(index);
+      handleSelectIndex(index);
     }
   }
 
   const listNav = useListNavigation(context, {
     listRef: elementsRef,
     activeIndex,
-    selectedIndex,
+    selectedIndex: selectedItem?.index,
     onNavigate: setActiveIndex,
   });
+
   const typeahead = useTypeahead(context, {
     listRef: labelsRef,
     activeIndex,
-    selectedIndex,
+    selectedIndex: selectedItem?.index,
     onMatch: handleTypeaheadMatch,
   });
   const click = useClick(context);
@@ -150,14 +183,14 @@ export default function Select(props: SelectProps) {
     [listNav, typeahead, click, dismiss, role]
   );
 
-  const selectContext = React.useMemo(
+  const selectContext: SelectContextValue = React.useMemo(
     () => ({
       activeIndex,
-      selectedIndex,
+      selectedItem,
       getItemProps,
       handleSelect,
     }),
-    [activeIndex, selectedIndex, getItemProps, handleSelect]
+    [activeIndex, selectedItem, getItemProps, handleSelect]
   );
 
   return (
@@ -170,12 +203,21 @@ export default function Select(props: SelectProps) {
       )}
     >
       {props.label ? (
-        <FieldLabel htmlFor={props.id} label={props.label} size={props.size} />
+        <FieldLabel
+          htmlFor={props.id}
+          label={props.label}
+          size={props.size}
+          attributes={{
+            marginBottom: "$4",
+          }}
+        />
       ) : null}
 
       <div ref={refs.setReference}>
         <SelectButton
-          placeholder={selectedLabel || props.placeholder || "Select an option"}
+          placeholder={
+            selectedItem?.label || props.placeholder || "Select an option"
+          }
           _css={{
             width: props.width
               ? typeof props.width === "number"
@@ -214,16 +256,16 @@ export default function Select(props: SelectProps) {
                       setPointer(false);
 
                       if (e.key === "Enter" && activeIndex !== null) {
-                        handleSelect(activeIndex);
+                        return handleSelectIndex(activeIndex);
                       }
 
                       if (e.key === " " && !isTypingRef.current) {
-                        e.preventDefault();
+                        return e.preventDefault();
                       }
                     },
                     onKeyUp(e) {
                       if (e.key === " " && !isTypingRef.current) {
-                        handleSelect(activeIndex);
+                        handleSelectIndex(activeIndex);
                       }
                     },
                     onPointerMove() {

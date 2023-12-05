@@ -6,17 +6,19 @@ import { baseButton } from "@/ui/button/button.css";
 import { SelectContext } from "../select/select.context";
 
 export interface SelectOptionProps {
+  optionKey: string;
   label: string;
   children?: React.ReactNode;
   className?: string;
 }
 
 export default function SelectOption(props: SelectOptionProps) {
-  const { activeIndex, selectedIndex, getItemProps, handleSelect } =
+  const { activeIndex, selectedItem, getItemProps, handleSelect } =
     React.useContext(SelectContext);
 
   const { ref, index } = useListItem({ label: props.label });
 
+  const selectedIndex = selectedItem?.index ?? null;
   const isActive = activeIndex === index;
   const isSelected = selectedIndex === index;
 
@@ -25,6 +27,8 @@ export default function SelectOption(props: SelectOptionProps) {
       ref={ref}
       role="option"
       aria-selected={isActive && isSelected}
+      data-select-key={props.optionKey}
+      data-select-label={props.label}
       tabIndex={isActive ? 0 : -1}
       className={clx(baseButton, props.className)}
       style={{
@@ -34,7 +38,12 @@ export default function SelectOption(props: SelectOptionProps) {
         textAlign: "left",
       }}
       {...getItemProps({
-        onClick: () => handleSelect(index),
+        onClick: () =>
+          handleSelect({
+            key: props.optionKey,
+            label: props.label,
+            index,
+          }),
       })}
     >
       <ListItem isActive={isActive}>{props.children ?? props.label}</ListItem>
