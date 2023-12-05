@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.14.3...@interchain-ui/react@1.15.0) (2023-12-05)
+
+### Features
+
+- **core:** add callout component ([c420660](https://github.com/cosmology-tech/interchain-ui/commit/c420660b9ca74e0abc4bfcaf11a473054f24b490))
+- **select:** add controlled usage and default selected prop ([6e9f5d0](https://github.com/cosmology-tech/interchain-ui/commit/6e9f5d03d3d39c9f051dd0551b98770e12a24f3d))
+
 ## [1.14.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.14.2...@interchain-ui/react@1.14.3) (2023-12-01)
 
 ### Bug Fixes
