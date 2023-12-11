@@ -1,6 +1,7 @@
+import type { BaseComponentProps } from "../../models/components.model";
 import { NftFeesProps } from "../nft-fees/nft-fees.types";
 
-export interface NftMinimumOfferProps {
+export interface NftMinimumOfferProps extends BaseComponentProps {
   floorPrice: number;
   highestOffer: number;
   onList?: (event?: any) => void;

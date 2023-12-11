@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import NftMakeOffer from "../../../src/ui/nft-make-offer";
 import Button from "../../../src/ui/button";
 import BasicModal from "../../../src/ui/basic-modal";
+import badkid1 from "../../../static/nft/badkid-3543.jpeg";
 
 const meta: Meta<typeof NftMakeOffer> = {
   component: NftMakeOffer,
@@ -18,9 +19,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/erom1wypzaxaratnm7dg.jpg",
-    tokenName: "KUJIRANS #763",
+    imgSrc: badkid1,
+    tokenName: "BadKid #3543",
     onChange(value) {
       console.log("onChange", value);
     },

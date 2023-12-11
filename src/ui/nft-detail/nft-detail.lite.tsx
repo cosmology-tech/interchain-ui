@@ -49,24 +49,19 @@ export default function NftDetail(props: NftDetailProps) {
         }}
       >
         {/* Main Image */}
-        <Box
-          flex={1}
-          borderRadius="$md"
-          borderColor="$divider"
-          borderWidth="0.5px"
-          borderStyle="solid"
-        >
+        <Box flex={1} borderRadius="$md">
           <Box
             as="img"
             width="$full"
             height="$auto"
             borderRadius="$md"
+            aspectRatio="1"
             maxHeight={{
               mobile: "$30",
               tablet: "unset",
               desktop: "unset",
             }}
-            objectFit="contain"
+            objectFit="cover"
             attributes={{
               src: props.imgSrc,
               alt: props.collectionName,
