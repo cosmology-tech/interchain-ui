@@ -12,7 +12,11 @@ import clsx from "clsx";
 import Box from "../box";
 import Text from "../text";
 import { store } from "../../models/store";
-import { standardTransitionProperties, scrollBar } from "../shared/shared.css";
+import {
+  standardTransitionProperties,
+  scrollBar,
+  visuallyHidden,
+} from "../shared/shared.css";
 import * as styles from "./tabs.css";
 
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
@@ -96,6 +100,7 @@ export default function Tabs(props: TabsProps) {
     state.theme = store.getState().theme;
     state.isMounted = true;
 
+    console.log("lazy or not", props.isLazy);
     setTimeout(() => {
       const finalActiveTab = state.getActiveTabId();
       state.setActiveStyles(props.defaultActiveTab ?? finalActiveTab);
@@ -186,6 +191,7 @@ export default function Tabs(props: TabsProps) {
                       state.active = index;
                     }
                     state.setActiveStyles(index);
+                    props.onActiveTabChange?.(index);
                   },
                 }}
               >
@@ -235,7 +241,11 @@ export default function Tabs(props: TabsProps) {
               {(_tabItem, index) => (
                 <Box
                   key={index}
-                  display={state.getActiveTabId() === index ? "block" : "none"}
+                  opacity={state.getActiveTabId() === index ? 1 : 0}
+                  transition={standardTransitionProperties}
+                  className={
+                    state.getActiveTabId() === index ? "" : visuallyHidden
+                  }
                 >
                   {state.getTabContentFor(index)}
                 </Box>
