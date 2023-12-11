@@ -2,6 +2,8 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import NftDetail from "../../../src/ui/nft-detail";
+
+import badkid1 from "../../../static/nft/badkid-3543.jpeg";
 import type { NftDetailProps } from "../../../src/ui/nft-detail/nft-detail.types";
 
 const meta: Meta<NftDetailProps> = {
@@ -18,10 +20,9 @@ type Story = StoryObj<NftDetailProps>;
 export const Primary: Story = {
   args: {
     type: "listForSale",
-    imgSrc:
-      "https://i.stargaze-apis.com/d0jFShn3t5aytKZw5OkUa1uuscynGjUNDYD5pg14p4w/f:jpg/resize:fit:700:::/dpr:2/plain/ipfs://QmbGvE3wmxex8KiBbbvMjR8f9adR28s3XkiZSTuGmHoMHV/3924.jpg",
-    collectionName: "Shnubbles Breakfast Drop #2",
-    name: "Bad Kid #9509",
+    imgSrc: badkid1,
+    collectionName: "Bad Kids",
+    name: "Bad Kid #3543",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
@@ -96,10 +97,9 @@ export const Primary: Story = {
 export const MakeOffer: Story = {
   args: {
     type: "makeOffer",
-    imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
-    collectionName: "Shnubbles Breakfast Drop #2",
-    name: "Breakfast Shnubble #127",
+    imgSrc: badkid1,
+    collectionName: "Bad Kids",
+    name: "Bad Kid #3543",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",
@@ -190,10 +190,9 @@ export const MakeOffer: Story = {
 export const BuyNow: Story = {
   args: {
     type: "buyNow",
-    imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
-    collectionName: "Shnubbles Breakfast Drop #2",
-    name: "Breakfast Shnubble #127",
+    imgSrc: badkid1,
+    collectionName: "Bad Kids",
+    name: "Bad Kid #3543",
     creatorName: "stars1ducj...vl342f",
     collectionDesc:
       "The tastiest NFT-heroes of the interchain Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend.",

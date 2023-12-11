@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import NftProfileCard from "../../src/ui/nft-profile-card";
+import badkid1 from "../../static/nft/badkid-3543.jpeg";
 
 const meta: Meta<typeof NftProfileCard> = {
   component: NftProfileCard,
@@ -18,11 +19,18 @@ type Story = StoryObj<typeof meta>;
 /* This is primary NftProfileCard */
 export const Primary: Story = {
   args: {
-    imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/w_700/ndkbjpwtgys09w1xxwny.jpg",
-    name: "Bad Kid #9509",
-    highestOffer: "450",
-    listPrice: "373",
+    imgSrc: badkid1,
+    name: "Bad Kid #3543",
+    priceItems: [
+      {
+        label: "Highest offer",
+        value: "450",
+      },
+      {
+        label: "Listing price",
+        value: "373",
+      },
+    ],
     onClick() {
       console.log("onClick");
     },

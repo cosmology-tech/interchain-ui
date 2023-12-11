@@ -2,6 +2,7 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import NftMint from "../../src/ui/nft-mint";
+import bipz1 from "../../static/nft/bipz-1.jpeg";
 
 const meta: Meta<typeof NftMint> = {
   component: NftMint,
@@ -27,8 +28,7 @@ export const Primary: Story = {
     available: 2948,
     priceDisplayAmount: 64,
     limited: 50,
-    imgSrc:
-      "https://res.cloudinary.com/stargaze/image/upload/f_auto,w_700/ighabxq1rjqr5xblblue",
+    imgSrc: bipz1,
     pricePerToken: 0.01063943,
     tokenName: "STARS",
   },
