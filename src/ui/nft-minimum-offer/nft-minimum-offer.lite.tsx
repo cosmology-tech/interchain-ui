@@ -84,17 +84,18 @@ export default function NftMinimumOffer(props: NftMinimumOfferProps) {
         }}
       >
         <Button
+          fluidWidth
           intent="tertiary"
           size="lg"
-          attributes={{ marginBottom: "$10", width: "$full" }}
+          attributes={{ marginBottom: "$10" }}
           onClick={() => props.onList?.()}
         >
           List
         </Button>
         <Button
+          fluidWidth
           variant="unstyled"
-          size="sm"
-          attributes={{ width: "$full" }}
+          size="md"
           onClick={() => props.onCancel?.()}
         >
           Cancel

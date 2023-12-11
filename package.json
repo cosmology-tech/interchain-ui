@@ -70,6 +70,7 @@
     "gluegun": "^5.1.2",
     "husky": "^8.0.3",
     "lerna": "^6.6.1",
+    "lerna-changelog": "^2.2.0",
     "listr2": "^5.0.8",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
@@ -108,5 +109,16 @@
     "packages": [
       "packages/*"
     ]
+  },
+  "changelog": {
+    "labels": {
+      "feat": "New Feature",
+      "fix": "Bug Fix",
+      "doc": "Documentation",
+      "refactor": "Refactor",
+      "breaking": "Breaking Change",
+      "enhancement": "Enhancement",
+      "chore": "Chore"
+    }
   }
 }

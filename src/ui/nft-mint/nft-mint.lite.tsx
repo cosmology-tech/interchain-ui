@@ -474,8 +474,9 @@ export default function NftMint(props: NftMintProps) {
                 marginRight: "$4",
               }}
             >{`${state.starsAmount} ${props.tokenName}`}</Text>
+
             <Show when={!!state.starsAmountPrice}>
-              <Text color="textSecondary">{`≈ $${state.starsAmountPrice}`}</Text>
+              <Text color="$textSecondary">{`≈ $${state.starsAmountPrice}`}</Text>
             </Show>
           </Stack>
         </Box>

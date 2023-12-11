@@ -79,14 +79,79 @@ const proposalListData: GovernanceProposalListData = [
   },
 ];
 
+const pendingProposalListData: GovernanceProposalListData = [
+  {
+    title: "January",
+    proposals: [
+      {
+        status: "passed",
+        title: "Signaling Proposal: Ion 🧿 DAO & Treasury",
+        id: "#00121",
+        endTime: "2022-01-11 10:48",
+        votes: {
+          yes: 650,
+          no: 200,
+          abstain: 400,
+          noWithVeto: 34,
+        },
+      },
+    ],
+  },
+  {
+    title: "February",
+    proposals: [
+      {
+        status: "pending",
+        title: "Signaling Proposal: Ion 🧿 DAO & Treasury",
+        id: "#00120",
+        endTime: "2022-01-11 10:48",
+        votes: {
+          yes: 500,
+          no: 678,
+          abstain: 45,
+          noWithVeto: 34,
+        },
+      },
+      {
+        status: "passed",
+        title: "Signaling Proposal: Ion 🧿 DAO & Treasury",
+        id: "#00121",
+        endTime: "2022-01-11 10:48",
+        votes: {
+          yes: 650,
+          no: 200,
+          abstain: 400,
+          noWithVeto: 34,
+        },
+      },
+      {
+        status: "rejected",
+        title: "Signaling Proposal: Ion 🧿 DAO & Treasury",
+        id: "#00122",
+        endTime: "2022-01-11 10:48",
+        votes: {
+          yes: 245,
+          no: 777,
+          abstain: 100,
+          noWithVeto: 560,
+        },
+      },
+    ],
+  },
+];
+
 const PrimaryExample = () => {
+  const [tabId, setTabId] = React.useState(0);
+
   const proposalsRender = React.useMemo(
     () => (
       <Box py="$10">
-        <GovernanceProposalList list={proposalListData} />
+        <GovernanceProposalList
+          list={tabId === 1 ? pendingProposalListData : proposalListData}
+        />
       </Box>
     ),
-    [proposalListData]
+    [proposalListData, pendingProposalListData, tabId]
   );
 
   const tabs = React.useMemo(
@@ -108,7 +173,7 @@ const PrimaryExample = () => {
         content: proposalsRender,
       },
     ],
-    []
+    [proposalsRender]
   );
 
   return (
@@ -124,7 +189,13 @@ const PrimaryExample = () => {
         Proposals
       </Text>
 
-      <Tabs tabs={tabs} />
+      <Tabs
+        tabs={tabs}
+        onActiveTabChange={(id) => {
+          console.log(id);
+          setTabId(id);
+        }}
+      />
     </Box>
   );
 };

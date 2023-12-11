@@ -1,11 +1,11 @@
-import { useMetadata } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
 import TokenInput from "../token-input";
 import * as styles from "./nft-make-offer.css";
-import { NftMakeOfferProps } from "./nft-make-offer.types";
+import type { NftMakeOfferProps } from "./nft-make-offer.types";
 
 useMetadata({
   rsc: {
@@ -13,9 +13,15 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<NftMakeOfferProps>>({
+  symbol: "STARS",
+  makeOfferLabel: "Make Offer",
+  cancelLabel: "Cancel",
+});
+
 export default function NftMakeOffer(props: NftMakeOfferProps) {
   return (
-    <Box className={styles.container}>
+    <Box className={styles.container} {...props.attributes}>
       <Stack attributes={{ alignItems: "center" }} space="$0">
         <Box
           as="img"
@@ -28,32 +34,36 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
         <Text attributes={{ marginRight: "$2" }}>for</Text>
         <Text fontWeight="$semibold">{props.tokenName}</Text>
       </Stack>
+
       <Box my="$12">
         <TokenInput
           title="Price"
           hasProgressBar={false}
-          symbol="STARS"
+          symbol={props.symbol}
           tokenIcon="stargazePixel"
           amount={props?.value}
           onAmountChange={(value) => props?.onChange?.(value)}
         />
       </Box>
+
       <Button
         size="lg"
         intent="tertiary"
-        attributes={{ marginBottom: "$9", width: "$full" }}
+        fluidWidth
+        attributes={{ marginBottom: "$9" }}
         onClick={() => props?.onMakeOffer?.()}
       >
-        Make Offer
+        {props.makeOfferLabel}
       </Button>
-      <Box mt="$9">
+
+      <Box pt="$9">
         <Button
+          fluidWidth
           variant="unstyled"
-          size="sm"
-          attributes={{ width: "$full" }}
+          size="md"
           onClick={() => props?.onCancel?.()}
         >
-          Cancel
+          {props.cancelLabel}
         </Button>
       </Box>
     </Box>

@@ -15,7 +15,10 @@ export default function NftProfileCardList(props: NftProfileCardListProps) {
   return (
     <Box
       display="grid"
-      gap="$6"
+      gap={{
+        mobile: "$8",
+        tablet: "$10",
+      }}
       gridTemplateColumns={
         props.list.length > 1
           ? "repeat(auto-fit, minmax(232px, 1fr))"
