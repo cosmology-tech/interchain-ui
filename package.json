@@ -2,6 +2,10 @@
   "name": "interchain-ui",
   "description": "UI building blocks for Interchain builders",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cosmology-tech/interchain-ui.git"
+  },
   "publishConfig": {
     "access": "restricted"
   },
