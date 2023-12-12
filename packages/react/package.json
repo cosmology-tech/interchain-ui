@@ -93,7 +93,12 @@
     "lint": "tsc --noEmit",
     "ci": "yarn lint && yarn build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "sb:postbuild": "npm run sb:seo",
+    "sb:seo": "node ./storybook-seo/seo.js",
+    "sb:deploy": "AWS_PROFILE=webinc aws s3 sync storybook-static/ s3://storybook.cosmology.zone",
+    "sb:invalidate": "AWS_PROFILE=webinc aws cloudfront create-invalidation --distribution-id E30W90TP7JYGCN --paths \"/*\"",
+    "sb:deploy:all": "npm run build-storybook && npm run sb:postbuild && npm run sb:deploy && ./storybook-seo/prepare.sh"
   },
   "devDependencies": {
     "@chain-registry/osmosis": "^1.21.0",

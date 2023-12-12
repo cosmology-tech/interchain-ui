@@ -20,6 +20,9 @@ const config: StorybookConfig = {
     autodocs: "tag",
   },
   core: {},
+  features: {
+    buildStoriesJson: true,
+  },
   async viteFinal(config, { configType }) {
     // return the customized config
     if (configType === "PRODUCTION") {
