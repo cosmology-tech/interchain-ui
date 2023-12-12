@@ -27,6 +27,9 @@ export const Primary: Story = {
         maxValue={2000}
         textAlign="right"
         value={value}
+        onInput={(event) => {
+          console.log("Input", event.target.value);
+        }}
         onChange={(value) => {
           console.log("Change", value);
           setValue(value);

@@ -21,11 +21,12 @@ export interface NumberInputProps {
   name?: string;
   label?: string;
   onChange?: (value: number) => void;
-  onBlur?: (e?: any) => void;
-  onFocus?: (e?: any) => void;
+  onInput?: AriaNumberFieldProps["onInput"];
+  onBlur?: AriaNumberFieldProps["onBlur"];
+  onFocus?: AriaNumberFieldProps["onFocus"];
   onFocusChange?: (isFocused: boolean) => void;
-  onKeyDown?: (e?: any) => void;
-  onKeyUp?: (e?: any) => void;
+  onKeyDown?: AriaNumberFieldProps["onKeyDown"];
+  onKeyUp?: AriaNumberFieldProps["onKeyUp"];
   // ==== Style props
   textAlign?: Sprinkles["textAlign"];
   fontSize?: Sprinkles["fontSize"];
