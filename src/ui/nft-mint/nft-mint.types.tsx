@@ -19,6 +19,7 @@ export interface NftMintProps extends BaseComponentProps {
   amount?: number;
   defaultAmount?: number;
   onChange?: (value: number) => void;
+  onInput?: (event?: any) => void;
   // ==== Mint button props
   isMintButtonDisabled?: boolean;
   isMintLoading?: boolean;

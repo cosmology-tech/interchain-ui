@@ -387,6 +387,7 @@ export default function NftMint(props: NftMintProps) {
             }
             minValue={0}
             maxValue={toNumber(props.limited)}
+            onInput={(event) => props?.onInput?.(event)}
             onChange={(value) => state.handleAmountChange(value)}
             inputClassName={styles.baseInput}
             formatOptions={{
@@ -443,6 +444,7 @@ export default function NftMint(props: NftMintProps) {
             }
             minValue={0}
             maxValue={toNumber(props.limited)}
+            onInput={(event) => props?.onInput?.(event)}
             onChange={(value) => state.handleAmountChange(value)}
             inputClassName={styles.baseInput}
             formatOptions={{
