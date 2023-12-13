@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.15.1...@interchain-ui/react@1.16.0) (2023-12-13)
+
+### Bug Fixes
+
+- **numberfield:** forward onInput handler ([dad84bf](https://github.com/cosmology-tech/interchain-ui/commit/dad84bf6b0f2d2ccd37434533b3370117f969ea6))
+
+### Features
+
+- setup storybook aws deployment ([4641313](https://github.com/cosmology-tech/interchain-ui/commit/4641313e3563b46ffe8174efe21d63f6e74e9768))
+
 ## [1.15.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.15.0...@interchain-ui/react@1.15.1) (2023-12-11)
 
 ### Bug Fixes
