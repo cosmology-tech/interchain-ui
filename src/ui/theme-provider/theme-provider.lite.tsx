@@ -145,6 +145,9 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       data-interchain-color-mode={
         props.forceColorMode == null ? undefined : props.forceColorMode
       }
+      style={{
+        visibility: state.isMounted ? "visible" : "hidden",
+      }}
     >
       {props.children}
     </div>
