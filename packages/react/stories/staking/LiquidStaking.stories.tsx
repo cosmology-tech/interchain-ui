@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import random from "lodash/random";
 import { getTransferList } from "../stub/assetData";
+// @ts-expect-error
 import strideLogo from "../../static/stride-logo.png";
 
 import type { Meta, StoryObj } from "@storybook/react";
@@ -29,14 +30,15 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {},
   render: (props) => {
-    const [isOpen, setIsOpen] = useState(false);
     const dropdownList = useMemo(() => getTransferList(), []);
     const stride = dropdownList.find((item) => item.symbol === "STRD");
-    console.log("stride", stride);
 
     const [stakeToken, setStakeToken] = useState<
       LiquidStakingProps["stakeToken"] | null
-    >(dropdownList[0]);
+    >({
+      ...dropdownList[0],
+      available: 440.22,
+    });
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"]>({
       ...stride,
@@ -54,7 +56,6 @@ export const Primary: Story = {
           stakeAmount={stakedAmount}
           stakeToken={stakeToken}
           reward={reward}
-          options={dropdownList}
           precision={2}
           bottomLink={{
             href: "https://cosmology.tech/",
@@ -88,29 +89,20 @@ export const Primary: Story = {
               desc: "The total value of ATOM locked on Stride.",
             },
           ]}
-          onChange={({
-            stakeToken: payloadToken,
-            stakeAmount: payloadStakedAmount,
-          }) => {
-            if (payloadToken) {
-              console.log("[SB]", {
-                payloadToken,
-                payloadStakedAmount,
-              });
-              setStakedAmount(payloadStakedAmount);
-              setStakeToken(payloadToken);
-              setReward((prevReward) => {
-                // This is just mock reward calculation
-                const amt = random(100, 1000, true);
-                const notional = random(500, 20000, true);
+          onChange={(stakeAmount) => {
+            console.log("staked", stakeAmount);
+            setStakedAmount(stakeAmount);
+            setReward((prevReward) => {
+              // This is just mock reward calculation
+              const amt = random(100, 1000, true);
+              const notional = random(500, 20000, true);
 
-                return {
-                  ...prevReward,
-                  rewardAmount: amt,
-                  priceDisplayAmount: notional,
-                };
-              });
-            }
+              return {
+                ...prevReward,
+                rewardAmount: amt,
+                priceDisplayAmount: notional,
+              };
+            });
           }}
           footerLabel={
             <Stack
@@ -198,7 +190,6 @@ export const WithModal: Story = {
               stakeAmount={stakedAmount}
               stakeToken={stakeToken}
               reward={reward}
-              options={dropdownList}
               precision={2}
               bottomLink={{
                 href: "https://cosmology.tech/",
@@ -232,29 +223,19 @@ export const WithModal: Story = {
                   desc: "The total value of ATOM locked on Stride.",
                 },
               ]}
-              onChange={({
-                stakeToken: payloadToken,
-                stakeAmount: payloadStakedAmount,
-              }) => {
-                if (payloadToken) {
-                  console.log("[SB]", {
-                    payloadToken,
-                    payloadStakedAmount,
-                  });
-                  setStakedAmount(payloadStakedAmount);
-                  setStakeToken(payloadToken);
-                  setReward((prevReward) => {
-                    // This is just mock reward calculation
-                    const amt = random(100, 1000, true);
-                    const notional = random(500, 20000, true);
+              onChange={(stakeAmount) => {
+                setStakedAmount(stakeAmount);
+                setReward((prevReward) => {
+                  // This is just mock reward calculation
+                  const amt = random(100, 1000, true);
+                  const notional = random(500, 20000, true);
 
-                    return {
-                      ...prevReward,
-                      rewardAmount: amt,
-                      priceDisplayAmount: notional,
-                    };
-                  });
-                }
+                  return {
+                    ...prevReward,
+                    rewardAmount: amt,
+                    priceDisplayAmount: notional,
+                  };
+                });
               }}
               footerLabel={
                 <Stack

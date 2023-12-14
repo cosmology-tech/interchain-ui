@@ -100,7 +100,6 @@ export default function Tabs(props: TabsProps) {
     state.theme = store.getState().theme;
     state.isMounted = true;
 
-    console.log("lazy or not", props.isLazy);
     setTimeout(() => {
       const finalActiveTab = state.getActiveTabId();
       state.setActiveStyles(props.defaultActiveTab ?? finalActiveTab);

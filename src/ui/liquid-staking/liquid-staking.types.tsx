@@ -13,11 +13,6 @@ type BottomLink = {
   label: string;
 };
 
-type OnChangePayload = {
-  stakeToken: AvailableItem;
-  stakeAmount: number;
-};
-
 export type RewardDescriptionItem = {
   title: string;
   subtitle: string;
@@ -25,7 +20,6 @@ export type RewardDescriptionItem = {
 };
 
 export interface LiquidStakingProps extends BaseComponentProps {
-  options: Array<AvailableItem>;
   stakeToken?: AvailableItem | null;
   stakeAmount: number;
   reward: LiquidStakingReward;
@@ -33,13 +27,19 @@ export interface LiquidStakingProps extends BaseComponentProps {
   decimals?: number;
   descriptionList?: Array<RewardDescriptionItem>;
   isSubmitDisabled?: boolean;
-  onChange?: (payload: OnChangePayload) => void;
+  onChange?: (stakeAmount: number) => void;
   onSubmit: (event?: any) => void;
+  // Half and max buttons
+  halfButtonLabel?: string;
+  maxButtonLabel?: string;
+  onHalf?: () => void;
+  onMax?: () => void;
   // ==== Labels
   timeEstimateLabel: string;
   submitButtonLabel?: string;
   rewardLabel?: string;
   stakeLabel?: string;
+  availableLabel?: string;
   accordionLabel?: BaseComponentProps["children"];
   footerLabel?: BaseComponentProps["children"];
   // ==== Custom elements
