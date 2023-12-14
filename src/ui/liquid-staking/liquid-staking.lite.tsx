@@ -18,8 +18,8 @@ import Icon from "../icon";
 import IconButton from "../icon-button";
 import Stack from "../stack";
 import Divider from "../divider";
-import TransferItem from "../transfer-item";
-
+import Bignumber from "bignumber.js";
+import { toNumber } from "../../helpers/number";
 import * as styles from "./liquid-staking.css";
 import { scrollBar } from "../shared/shared.css";
 
@@ -30,6 +30,8 @@ import type {
 } from "./liquid-staking.types";
 
 useMetadata({
+  isAttachedToShadowDom: true,
+  scaffolds: ["number-field"],
   rsc: {
     componentType: "client",
   },
@@ -42,6 +44,9 @@ useDefaultProps<Partial<LiquidStakingProps>>({
   submitButtonLabel: "Liquid Stake",
   stakeLabel: "Select amount",
   footerLabel: "Powered by Cosmology",
+  halfButtonLabel: "Half",
+  maxButtonLabel: "Max",
+  availableLabel: "Available",
 });
 
 export default function LiquidStaking(props: LiquidStakingProps) {
@@ -55,8 +60,9 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     stakeAmount: number;
     rewardAmount: number;
     handleToggleExpand: () => void;
-    handleStakeTokenSelected: (item: LiquidStakingToken) => void;
-    handleStakeAmountChange: (item: LiquidStakingToken, value: number) => void;
+    handleStakeAmountChange: (stakeAmount: number) => void;
+    handleStakeHalf: () => void;
+    handleStakeMax: () => void;
     // ==== UI states
     theme: ThemeVariant;
     isMounted: boolean;
@@ -84,20 +90,27 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         state.expanded = true;
       }
     },
-    handleStakeTokenSelected(selectedItem) {
-      if (!selectedItem) return;
-      state.stakeToken = selectedItem;
-      props?.onChange?.({
-        stakeToken: selectedItem,
-        stakeAmount: state.stakeAmount,
-      });
+    handleStakeAmountChange(amount: number) {
+      state.stakeAmount = amount;
+      props?.onChange?.(amount);
     },
-    handleStakeAmountChange(selectedItem: LiquidStakingToken, value: number) {
-      state.stakeAmount = value;
-      props?.onChange?.({
-        stakeToken: selectedItem,
-        stakeAmount: value,
-      });
+    handleStakeHalf() {
+      if (typeof props.onHalf === "function") {
+        return props.onHalf();
+      }
+
+      const result = new Bignumber(props.stakeToken.available ?? 0)
+        .dividedBy(2)
+        .toNumber();
+      props.onChange?.(result);
+    },
+    handleStakeMax() {
+      if (typeof props.onMax === "function") {
+        return props.onMax();
+      }
+
+      const result = new Bignumber(props.stakeToken.available ?? 0).toNumber();
+      props.onChange?.(result);
     },
     get isAccordionVisible() {
       return (
@@ -165,23 +178,224 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       {...props.domAttributes}
     >
       {/* Staked token */}
-      <Box zIndex="$10">
-        <TransferItem
-          halfBtn
-          maxBtn
-          hasAvailable
-          isSmall={state.isSmallSize()}
-          title={props.stakeLabel}
-          amount={props.stakeAmount ?? 0}
-          selectedItem={state.stakeToken}
-          dropdownList={props.options}
-          onItemSelected={(selectedItem: LiquidStakingToken) =>
-            state.handleStakeTokenSelected(selectedItem)
+      <Box zIndex="$10" bg="$inputBg" borderRadius="$md">
+        <Stack
+          direction="vertical"
+          space="$6"
+          attributes={
+            state.isSmallSize()
+              ? {
+                  pl: "$4",
+                  pr: "$4",
+                  py: "$6",
+                }
+              : {
+                  pl: "18px",
+                  pr: "$8",
+                  py: "$8",
+                }
           }
-          onChange={(item: LiquidStakingToken, value: number) =>
-            state.handleStakeAmountChange(item, value)
-          }
-        />
+        >
+          <Stack
+            direction="horizontal"
+            space="$4"
+            attributes={{
+              justifyContent: "space-between",
+            }}
+          >
+            {/* Label */}
+            <Text
+              fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+              fontWeight="$normal"
+              color="$textSecondary"
+              attributes={{
+                flex: "1",
+              }}
+            >
+              {props.stakeLabel}
+            </Text>
+
+            <Stack
+              direction="horizontal"
+              space="$8"
+              attributes={{
+                alignItems: "center",
+              }}
+            >
+              {/* Available amount */}
+              <Stack direction="horizontal" space="$4">
+                <Text
+                  fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+                  fontWeight="$semibold"
+                  color="$textSecondary"
+                >
+                  {props.availableLabel}
+                </Text>
+                <Text
+                  fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+                  fontWeight="$semibold"
+                  color="$text"
+                >
+                  {formatNumeric(
+                    props.stakeToken.available ?? 0,
+                    props.precision
+                  )}
+                </Text>
+              </Stack>
+
+              {/* Half and max btn */}
+              <Stack
+                direction="horizontal"
+                space="$4"
+                align="center"
+                attributes={{
+                  justifyContent: "flex-end",
+                  flexGrow: "0",
+                  flexShrink: "1",
+                }}
+              >
+                <Button
+                  variant="unstyled"
+                  className={styles.headerButton[state.theme]}
+                  size="xs"
+                  onClick={() => state.handleStakeHalf()}
+                >
+                  <Box
+                    as="span"
+                    fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+                  >
+                    {props.halfButtonLabel}
+                  </Box>
+                </Button>
+
+                <Button
+                  variant="unstyled"
+                  className={styles.headerButton[state.theme]}
+                  size="xs"
+                  onClick={() => state.handleStakeMax()}
+                >
+                  <Box
+                    as="span"
+                    fontSize={state.isSmallSize() ? "$2xs" : "$sm"}
+                  >
+                    {props.maxButtonLabel}
+                  </Box>
+                </Button>
+              </Stack>
+            </Stack>
+          </Stack>
+
+          <Stack
+            direction="horizontal"
+            space="$8"
+            domAttributes={{
+              "data-part-id": "stake",
+            }}
+          >
+            {/* Stake token icon */}
+            <Box display="block" flexShrink="0">
+              <Box
+                as="img"
+                attributes={{
+                  src: props.stakeToken.imgSrc,
+                  alt: props.stakeToken.symbol,
+                }}
+                width={state.isSmallSize() ? "28px" : "50px"}
+                height={state.isSmallSize() ? "28px" : "50px"}
+              />
+            </Box>
+
+            <Stack
+              direction="horizontal"
+              space="$0"
+              attributes={{
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              {/* Symbols */}
+              <Stack
+                direction="vertical"
+                space="$1"
+                attributes={{
+                  justifyContent: "space-between",
+                }}
+                domAttributes={{
+                  "data-part-id": "stake-symbol",
+                }}
+              >
+                <Text
+                  fontSize={
+                    state.isSmallSize()
+                      ? "$lg"
+                      : {
+                          mobile: "$lg",
+                          mdMobile: "$3xl",
+                        }
+                  }
+                  fontWeight="$semibold"
+                  lineHeight="$shorter"
+                >
+                  {props.stakeToken.symbol}
+                </Text>
+                <Text
+                  color="$textSecondary"
+                  fontSize="$sm"
+                  fontWeight="$normal"
+                >
+                  {props.stakeToken.name}
+                </Text>
+              </Stack>
+
+              {/* Stake amount input */}
+              <Stack
+                direction="vertical"
+                space="$1"
+                attributes={{
+                  width: {
+                    mobile: "120px",
+                    mdMobile: "228px",
+                  },
+                  alignItems: "flex-end",
+                }}
+                domAttributes={{
+                  "data-part-id": "stake-amt",
+                }}
+              >
+                {/* @ts-expect-error */}
+                <ScaffoldNumberField
+                  size="sm"
+                  borderless
+                  value={props.stakeAmount}
+                  minValue={0}
+                  maxValue={toNumber(props.stakeToken.available)}
+                  onChange={(value) => state.handleStakeAmountChange(value)}
+                  formatOptions={{
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: props.precision,
+                  }}
+                  inputClassName={
+                    state.isSmallSize()
+                      ? styles.numberInputSm
+                      : styles.numberInputMd
+                  }
+                />
+
+                <Text
+                  color="$textSecondary"
+                  fontSize="$xs"
+                  fontWeight="$normal"
+                >
+                  $
+                  {formatNumeric(
+                    props.stakeToken.priceDisplayAmount,
+                    props.precision
+                  )}
+                </Text>
+              </Stack>
+            </Stack>
+          </Stack>
+        </Stack>
       </Box>
 
       {/* Reward */}
@@ -282,7 +496,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                     ? "$lg"
                     : {
                         mobile: "$lg",
-                        mdMobile: "$3xl",
+                        mdMobile: "$xl",
                       }
                 }
                 fontWeight="$semibold"
@@ -291,7 +505,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 {formatNumeric(props.reward.rewardAmount, props.precision)}
               </Text>
 
-              <Text color="$textSecondary" fontSize="$sm" fontWeight="$normal">
+              <Text color="$textSecondary" fontSize="$xs" fontWeight="$normal">
                 $
                 {formatNumeric(
                   props.reward.priceDisplayAmount,
