@@ -198,9 +198,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         >
           <Stack
             direction="horizontal"
-            space="$4"
+            space={state.isSmallSize() ? "$2" : "$4"}
             attributes={{
               justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             {/* Label */}
@@ -209,7 +210,8 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               fontWeight="$normal"
               color="$textSecondary"
               attributes={{
-                flex: "1",
+                flexShrink: "1",
+                flexGrow: "0",
               }}
             >
               {props.stakeLabel}
@@ -217,8 +219,11 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
             <Stack
               direction="horizontal"
-              space="$8"
+              space={state.isSmallSize() ? "$4" : "$8"}
               attributes={{
+                flexShrink: "0",
+                flexGrow: "1",
+                justifyContent: "flex-end",
                 alignItems: "center",
               }}
             >
@@ -319,6 +324,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 space="$1"
                 attributes={{
                   justifyContent: "space-between",
+                  flexShrink: "0",
                 }}
                 domAttributes={{
                   "data-part-id": "stake-symbol",
