@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.16.3...@interchain-ui/react@1.16.4) (2023-12-14)
+
+### Bug Fixes
+
+- **nft:** add controlled prop tokenAmount ([e9e59f6](https://github.com/cosmology-tech/interchain-ui/commit/e9e59f65301884e33c9b79fb13e42be7a364a68d))
+
 ## [1.16.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.16.2...@interchain-ui/react@1.16.3) (2023-12-14)
 
 ### Bug Fixes
