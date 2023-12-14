@@ -27,6 +27,7 @@ export const Primary: Story = {
     quantity: 5000,
     royalties: 10,
     minted: 46,
+    tokenAmount: 24,
     available: 2948,
     priceDisplayAmount: 64,
     limited: 50,

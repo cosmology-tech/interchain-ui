@@ -33,12 +33,10 @@ useDefaultProps<Partial<NftMintProps>>({
 export default function NftMint(props: NftMintProps) {
   const state = useStore<{
     amount: number;
-    starsAmount: string;
     handleAmountChange: (value: number) => void;
     isControlled: () => boolean;
   }>({
     amount: 0,
-    starsAmount: "",
     isControlled() {
       return typeof props.amount !== "undefined";
     },
@@ -48,16 +46,6 @@ export default function NftMint(props: NftMintProps) {
       // Update internal amount if uncontrolled
       if (!state.isControlled()) {
         state.amount = value;
-      }
-
-      let starsCount: BigNumber = new BigNumber(value).multipliedBy(
-        props.priceDisplayAmount
-      );
-
-      if (new BigNumber(value || 0).eq(0)) {
-        state.starsAmount = "";
-      } else {
-        state.starsAmount = starsCount.decimalPlaces(2).toString();
       }
     },
   });
@@ -405,12 +393,11 @@ export default function NftMint(props: NftMintProps) {
               }}
             />
 
-            <Text
-              fontSize="$sm"
-              fontWeight="$semibold"
-            >{`${state.starsAmount} ${props.tokenName}`}</Text>
+            <Text fontSize="$sm" fontWeight="$semibold">{`${
+              props.tokenAmount ?? 0
+            } ${props.tokenName}`}</Text>
 
-            <Show when={props.notionalAmount != null}>
+            <Show when={!!props.notionalAmount}>
               <Text color="$textPlaceholder">{`≈ $${props.notionalAmount}`}</Text>
             </Show>
           </Stack>
@@ -466,9 +453,9 @@ export default function NftMint(props: NftMintProps) {
                 marginLeft: "$6",
                 marginRight: "$4",
               }}
-            >{`${state.starsAmount} ${props.tokenName}`}</Text>
+            >{`${props.tokenAmount ?? 0} ${props.tokenName}`}</Text>
 
-            <Show when={props.notionalAmount != null}>
+            <Show when={!!props.notionalAmount}>
               <Text color="$textSecondary">{`≈ $${props.notionalAmount}`}</Text>
             </Show>
           </Stack>

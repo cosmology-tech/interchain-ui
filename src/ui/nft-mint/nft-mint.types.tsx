@@ -18,6 +18,7 @@ export interface NftMintProps extends BaseComponentProps {
   // ==== Amount to bid for NFT
   amount?: number;
   defaultAmount?: number;
+  tokenAmount?: number;
   notionalAmount?: number;
   onChange?: (value: number) => void;
   onInput?: (event?: any) => void;
