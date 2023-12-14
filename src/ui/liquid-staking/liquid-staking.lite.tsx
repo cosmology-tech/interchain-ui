@@ -178,7 +178,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       {...props.domAttributes}
     >
       {/* Staked token */}
-      <Box zIndex="$10" bg="$inputBg" borderRadius="$md">
+      <Box bg="$inputBg" borderRadius="$md">
         <Stack
           direction="vertical"
           space="$6"
