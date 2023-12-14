@@ -3,6 +3,7 @@ import Box from "../box";
 import Stack from "../stack";
 import Icon from "../icon";
 import Text from "../text";
+import { formatNumeric } from "../../helpers/number";
 
 import type { StarTextProps } from "./star-text.types";
 
@@ -42,7 +43,7 @@ export default function StarText(props: StarTextProps) {
           fontSize={props.size === "md" ? "$sm" : "$xl"}
           fontWeight="$semibold"
           attributes={{ marginRight: "$3" }}
-        >{`${props.value} ${props.tokenName}`}</Text>
+        >{`${formatNumeric(props.value, 2)} ${props.tokenName}`}</Text>
 
         <Show when={!props.iconSrc && props.showTokenIcon}>
           <Icon

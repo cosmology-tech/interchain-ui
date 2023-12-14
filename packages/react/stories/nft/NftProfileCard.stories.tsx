@@ -24,11 +24,11 @@ export const Primary: Story = {
     priceItems: [
       {
         label: "Highest offer",
-        value: "450",
+        value: "450.55",
       },
       {
         label: "Listing price",
-        value: "373",
+        value: "373.66",
       },
     ],
     onClick() {
