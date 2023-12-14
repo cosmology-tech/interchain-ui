@@ -1,7 +1,9 @@
 import * as React from "react";
+import BigNumber from "bignumber.js";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import NftMint from "../../src/ui/nft-mint";
+// @ts-expect-error
 import bipz1 from "../../static/nft/bipz-1.jpeg";
 
 const meta: Meta<typeof NftMint> = {
@@ -33,10 +35,20 @@ export const Primary: Story = {
     tokenName: "STARS",
   },
   render: (props) => {
+    const PRICE_PER_TOKEN = 0.2;
+
     const [amount, setAmount] = React.useState<number>(0);
+    const [notionalAmount, setNotionalAmount] = React.useState<number>(0);
+
     const onChange = (value) => {
       console.log("onChange", value);
       setAmount(value);
+      setNotionalAmount(
+        new BigNumber(value)
+          .multipliedBy(PRICE_PER_TOKEN)
+          .precision(2)
+          .toNumber()
+      );
     };
 
     const onMint = () => {
@@ -48,6 +60,7 @@ export const Primary: Story = {
       <NftMint
         {...props}
         amount={amount}
+        notionalAmount={notionalAmount}
         defaultAmount={0}
         onChange={onChange}
         onMint={onMint}

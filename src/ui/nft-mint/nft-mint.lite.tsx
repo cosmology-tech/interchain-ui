@@ -34,13 +34,11 @@ export default function NftMint(props: NftMintProps) {
   const state = useStore<{
     amount: number;
     starsAmount: string;
-    starsAmountPrice: string;
     handleAmountChange: (value: number) => void;
     isControlled: () => boolean;
   }>({
     amount: 0,
     starsAmount: "",
-    starsAmountPrice: "",
     isControlled() {
       return typeof props.amount !== "undefined";
     },
@@ -58,15 +56,8 @@ export default function NftMint(props: NftMintProps) {
 
       if (new BigNumber(value || 0).eq(0)) {
         state.starsAmount = "";
-        state.starsAmountPrice = "";
       } else {
         state.starsAmount = starsCount.decimalPlaces(2).toString();
-        state.starsAmountPrice = store.getState().formatNumber({
-          value: starsCount
-            .multipliedBy(props.pricePerToken)
-            .decimalPlaces(2)
-            .toString(),
-        });
       }
     },
   });
@@ -419,8 +410,8 @@ export default function NftMint(props: NftMintProps) {
               fontWeight="$semibold"
             >{`${state.starsAmount} ${props.tokenName}`}</Text>
 
-            <Show when={!!state.starsAmountPrice}>
-              <Text color="$textPlaceholder">{`≈ $${state.starsAmountPrice}`}</Text>
+            <Show when={props.notionalAmount != null}>
+              <Text color="$textPlaceholder">{`≈ $${props.notionalAmount}`}</Text>
             </Show>
           </Stack>
         </Box>
@@ -477,8 +468,8 @@ export default function NftMint(props: NftMintProps) {
               }}
             >{`${state.starsAmount} ${props.tokenName}`}</Text>
 
-            <Show when={!!state.starsAmountPrice}>
-              <Text color="$textSecondary">{`≈ $${state.starsAmountPrice}`}</Text>
+            <Show when={props.notionalAmount != null}>
+              <Text color="$textSecondary">{`≈ $${props.notionalAmount}`}</Text>
             </Show>
           </Stack>
         </Box>
