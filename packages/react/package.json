@@ -11,6 +11,7 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/interchain-ui-kit-react.esm.js",
       "require": "./dist/interchain-ui-kit-react.cjs.js"
     },
@@ -91,6 +92,7 @@
     "build:analyze": "parcel build --detailed-report --reporter @parcel/reporter-bundle-analyzer",
     "clean": "rimraf ./dist",
     "lint": "tsc --noEmit",
+    "attw": "attw --pack",
     "ci": "yarn lint && yarn build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -101,6 +103,7 @@
     "sb:deploy:all": "npm run build-storybook && npm run sb:postbuild && npm run sb:deploy && ./storybook-seo/prepare.sh"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.13.3",
     "@chain-registry/osmosis": "^1.21.0",
     "@chain-registry/types": "^0.17.0",
     "@chain-registry/utils": "^1.14.0",
