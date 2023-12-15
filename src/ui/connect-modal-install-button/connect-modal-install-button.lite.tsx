@@ -8,7 +8,10 @@ import {
 import clx from "clsx";
 import Box from "../box";
 import { store } from "../../models/store";
-import { installButtonStyles } from "./connect-modal-install-button.css";
+import {
+  installButtonStyles,
+  fluidWidth,
+} from "./connect-modal-install-button.css";
 import { installButtonOverrides } from "./connect-modal-install-button.helper";
 import type { ConnectModalInstallButtonProps } from "./connect-modal-install-button.types";
 
@@ -46,7 +49,11 @@ export default function ConnectModalInstallButton(
     <Box
       as="button"
       {...props.attributes}
-      className={clx(installButtonStyles[state.theme], props.className)}
+      className={clx(
+        installButtonStyles[state.theme],
+        props.fluidWidth ? fluidWidth : "",
+        props.className
+      )}
       attributes={{
         onClick: (event) => props.onClick?.(event),
         onMouseEnter: (event) => props.onHoverStart?.(event),

@@ -82,9 +82,9 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
+            fluidWidth
             onClick={() => props.onConnect?.()}
             attributes={{
-              width: "$full",
               marginBottom: "$3",
             }}
           >
@@ -225,9 +225,9 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <div className={widthContainer}>
           <Box mt="$7">
             <InstallButton
+              fluidWidth
               onClick={() => props.onInstall?.()}
               disabled={!!props.disableInstall}
-              attributes={{ width: "$full" }}
             >
               <Box
                 as="span"
@@ -265,9 +265,9 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
+            fluidWidth
             onClick={() => props.onConnect?.()}
             attributes={{
-              width: "$full",
               marginBottom: "$3",
             }}
           >
@@ -301,9 +301,9 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         <div className={widthContainer}>
           <Button
             leftIcon="walletFilled"
+            fluidWidth
             onClick={() => props.onChangeWallet?.()}
             attributes={{
-              width: "$full",
               marginBottom: "$3",
             }}
           >

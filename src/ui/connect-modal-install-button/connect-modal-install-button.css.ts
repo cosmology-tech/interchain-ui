@@ -54,3 +54,5 @@ export const installButtonStyles = styleVariants({
     baseInstallButton,
   ],
 });
+
+export const fluidWidth = style({ width: "100% !important" });

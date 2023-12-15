@@ -4,6 +4,7 @@ import type { IconProps } from "../icon/icon.types";
 
 export interface ConnectModalInstallButtonProps extends BaseComponentProps {
   disabled?: boolean;
+  fluidWidth?: boolean;
   iconSize?: IconProps["size"];
   icon?: BaseComponentProps["children"];
   onClick?: (event: any) => void;
