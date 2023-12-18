@@ -34,6 +34,7 @@ export const Primary: Story = {
         />
         <Avatar name="Abu Da" size="sm" src="https://bit.ly/hellasdasdasd" />
         <Avatar name="Baby G" size="md" src="https://bit.ly/hellasdasdasd" />
+        <Avatar name="Baby G" size="lg" src="https://bit.ly/hellasdasdasd" />
         <Avatar
           name="Dan Abrahmov"
           size="xl"

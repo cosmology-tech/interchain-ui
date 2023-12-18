@@ -126,7 +126,7 @@ export const Primary: Story = {
           Your Validators
         </Text>
 
-        <ValidatorList list={props.selfValidators} selfValidator={true} />
+        <ValidatorList list={props.selfValidators} variant="card" />
 
         <Text
           color="$textSecondary"
@@ -137,7 +137,7 @@ export const Primary: Story = {
           All Validators
         </Text>
 
-        <ValidatorList list={props.allValidators} selfValidator={false} />
+        <ValidatorList list={props.allValidators} variant="table" />
       </Stack>
     );
   },
