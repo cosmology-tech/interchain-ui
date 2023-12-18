@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.16.7...@interchain-ui/react@1.17.0) (2023-12-18)
+
+### Features
+
+- add staking delegate component ([1de1763](https://github.com/cosmology-tech/interchain-ui/commit/1de176379129f32edd755f2e078a880b6b2c0f7f))
+
 ## [1.16.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.16.6...@interchain-ui/react@1.16.7) (2023-12-15)
 
 ### Bug Fixes
