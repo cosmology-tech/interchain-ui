@@ -282,7 +282,14 @@ export default function TransferItem(props: TransferItemProps) {
             endAddon={() => (
               <Stack direction="vertical" space="$0">
                 {props.disabled ? (
-                  <Text fontSize="$2xl">{props.amount}</Text>
+                  <Box
+                    width="auto"
+                    flex="1"
+                    display="flex"
+                    justifyContent="flex-end"
+                  >
+                    <Text fontSize="$2xl">{props.amount}</Text>
+                  </Box>
                 ) : (
                   <Box>
                     {/* @ts-ignore */}
