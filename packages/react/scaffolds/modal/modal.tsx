@@ -107,7 +107,7 @@ function useDialog({
 export interface ModalProps {
   isOpen: boolean;
   initialOpen?: boolean;
-  onOpen?: (open: boolean) => void;
+  onOpen?: () => void;
   onClose?: (event?: React.SyntheticEvent) => void;
   initialFocusRef?: React.MutableRefObject<any>;
   renderTrigger?: (props: any) => React.ReactNode;
@@ -146,7 +146,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
   const dialog = useDialog({
     initialOpen,
     open: isOpen,
-    onOpenChange: onOpen,
+    onOpenChange: (isOpen) => {
+      if (isOpen) {
+        onOpen();
+      } else {
+        onClose();
+      }
+    },
     closeOnClickaway,
   });
 
