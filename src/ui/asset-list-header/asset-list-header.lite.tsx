@@ -145,7 +145,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
           gap="$10"
           justifyContent="space-between"
           alignItems="center"
-          width="100%"
+          width="auto"
           minHeight="$21"
           py="$10"
           px="$10"
