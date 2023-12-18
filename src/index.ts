@@ -182,6 +182,7 @@ export { default as ValidatorListItem } from "./ui/validator-list-item";
 export { default as ValidatorList } from "./ui/validator-list";
 export { default as LiquidStaking } from "./ui/liquid-staking";
 export type { LiquidStakingProps } from "./ui/liquid-staking/liquid-staking.types";
+export { default as StakingDelegate } from "./ui/staking-delegate";
 export type { SpinnerProps } from "./ui/spinner/spinner.types";
 export { default as Divider } from "./ui/divider";
 export type { DividerProps } from "./ui/divider/divider.types";

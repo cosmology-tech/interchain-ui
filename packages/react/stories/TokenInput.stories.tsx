@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 /* This is primary TokenInput */
 export const Primary: Story = {
   args: {
-    symbol: "OMSO",
+    symbol: "OSMO",
     name: "Osmosis",
     available: 0.71263,
     priceDisplayAmount: 0.5,

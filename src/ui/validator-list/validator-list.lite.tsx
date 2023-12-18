@@ -1,4 +1,4 @@
-import { For, Show, useMetadata } from "@builder.io/mitosis";
+import { For, Show, useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
@@ -12,6 +12,10 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<ValidatorListProps>>({
+  variant: "card",
+});
+
 export default function BondingList(props: ValidatorListProps) {
   return (
     <Box
@@ -22,7 +26,7 @@ export default function BondingList(props: ValidatorListProps) {
       }}
     >
       <Box minWidth="634px">
-        <Show when={props.selfValidator}>
+        <Show when={props.variant === "card"}>
           <Stack
             attributes={{
               marginBottom: "$7",
@@ -51,7 +55,9 @@ export default function BondingList(props: ValidatorListProps) {
           paddingTop="$7"
           paddingLeft="$7"
           paddingRight="$9"
-          backgroundColor={props.selfValidator ? "$cardBg" : "$transparent"}
+          backgroundColor={
+            props.variant === "card" ? "$cardBg" : "$transparent"
+          }
           borderRadius="$lg"
         >
           <Stack direction="vertical" space="$7">
