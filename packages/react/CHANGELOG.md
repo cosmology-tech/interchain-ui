@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.17.0...@interchain-ui/react@1.17.1) (2023-12-18)
+
+### Bug Fixes
+
+- **modal:** close on backdrop click ([00905ee](https://github.com/cosmology-tech/interchain-ui/commit/00905ee76e5545b146efd1f6afb5693d5c3aac47))
+
 # [1.17.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.16.7...@interchain-ui/react@1.17.0) (2023-12-18)
 
 ### Features
