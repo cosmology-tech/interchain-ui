@@ -2,6 +2,7 @@ import { BaseComponentProps } from "../../models/components.model";
 
 export interface BasicModalProps extends BaseComponentProps {
   isOpen: boolean;
+  closeOnClickaway?: boolean;
   onOpen?: (event?: any) => void;
   onClose?: (event?: any) => void;
   renderCloseButton?: (props: any) => BaseComponentProps["children"];

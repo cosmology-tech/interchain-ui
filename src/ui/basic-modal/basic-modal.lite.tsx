@@ -3,6 +3,7 @@ import {
   onMount,
   onUnMount,
   useMetadata,
+  useDefaultProps,
   onUpdate,
   useRef,
 } from "@builder.io/mitosis";
@@ -22,6 +23,10 @@ useMetadata({
   rsc: {
     componentType: "client",
   },
+});
+
+useDefaultProps<Partial<BasicModalProps>>({
+  closeOnClickaway: false,
 });
 
 export default function BasicModal(props: BasicModalProps) {
@@ -54,6 +59,7 @@ export default function BasicModal(props: BasicModalProps) {
     // @ts-expect-error
     <ScaffoldModal
       isOpen={props.isOpen}
+      closeOnClickaway={props.closeOnClickaway}
       onOpen={() => props.onOpen?.()}
       onClose={() => props.onClose?.()}
       preventScroll={true}

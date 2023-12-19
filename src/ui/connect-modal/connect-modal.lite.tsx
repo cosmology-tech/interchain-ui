@@ -55,6 +55,7 @@ export default function ConnectModal(props: ConnectModalProps) {
     // @ts-expect-error
     <ScaffoldModal
       isOpen={props.isOpen}
+      closeOnClickaway={true}
       onOpen={() => props.onOpen?.()}
       onClose={() => props.onClose?.()}
       header={props.header}
