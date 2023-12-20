@@ -107,7 +107,7 @@ function useDialog({
 export interface ModalProps {
   isOpen: boolean;
   initialOpen?: boolean;
-  onOpen?: () => void;
+  onOpen?: (event?: React.SyntheticEvent) => void;
   onClose?: (event?: React.SyntheticEvent) => void;
   initialFocusRef?: React.MutableRefObject<any>;
   renderTrigger?: (props: any) => React.ReactNode;
