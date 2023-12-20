@@ -4,6 +4,7 @@ import {
   createVar,
   createContainer,
 } from "@vanilla-extract/css";
+import { buttonSize, baseButton } from "../button/button.css";
 import { themeVars } from "../../styles/themes.css";
 
 const textButtonBgVar = createVar();
@@ -27,6 +28,9 @@ export const dropdowBtn = style({
 const textBtnBase = style({
   color: `${textButtonColorVar} !important`,
   backgroundColor: `${textButtonBgVar} !important`,
+  borderRadius: themeVars.radii.base,
+  minWidth: "42px",
+  minHeight: themeVars.space["10"],
   selectors: {
     "&:hover": {
       opacity: 0.89,
@@ -36,6 +40,7 @@ const textBtnBase = style({
 
 export const textBtn = styleVariants({
   light: [
+    baseButton,
     textBtnBase,
     style({
       vars: {
@@ -45,6 +50,7 @@ export const textBtn = styleVariants({
     }),
   ],
   dark: [
+    baseButton,
     textBtnBase,
     style({
       vars: {
@@ -59,8 +65,8 @@ export const transferInput = style({
   fontSize: themeVars.fontSize["2xl"],
   textAlign: "right",
   width: "100%",
-  paddingLeft: "0",
-  paddingRight: "0",
+  paddingLeft: "0 !important",
+  paddingRight: "0 !important",
 });
 
 export const comboboxContainer = style({

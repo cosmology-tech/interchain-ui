@@ -1,8 +1,9 @@
-import {
+import type {
   AvailableItem,
   TransferItemProps,
 } from "../transfer-item/transfer-item.types";
-import { SwapPriceProps } from "../swap-price/swap-price.types";
+import type { BaseComponentProps } from "../../models/components.model";
+import type { SwapPriceProps } from "../swap-price/swap-price.types";
 
 export interface SwapItemProps extends TransferItemProps {}
 
@@ -13,18 +14,33 @@ export type SwapInfo = {
   toAmount: number;
 };
 
-export interface SwapTokenProps {
+export type SwapItem = {
+  label?: string;
+  options: Array<AvailableItem>;
+  selected: AvailableItem;
+  amount: number;
+  onItemSelected: (selectedItem: AvailableItem) => void;
+  onAmountChange: (selectedItem: AvailableItem, amount: number) => void;
+};
+
+export interface SwapTokenProps extends BaseComponentProps {
   swapPrice: {
     hasRoute: SwapPriceProps["hasRoute"];
     priceImpact: SwapPriceProps["priceImpact"];
     swapFee: SwapPriceProps["swapFee"];
+    // Route preview props
+    routeDisabled?: boolean;
+    minimumReceived?: number;
   };
-  /**
-   * Drop down list of available items
-   */
-  dropdownList: Array<AvailableItem>;
+  from: SwapItem;
+  to: SwapItem;
   toleranceLimits?: Array<number>;
-  onChange: (detail: SwapInfo) => void;
+  onToggleDirection: () => void;
   onSwap: (event?: any) => void;
   onToleranceChange: (toterancePercent: number) => void;
+  swapDisabled?: boolean;
+  // Labels
+  swapLabel?: string;
+  swapDisabledLabel?: string;
+  slippageLabel?: string;
 }

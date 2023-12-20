@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 export const borderless = style({
-  border: "0 !important",
+  border: "none !important",
   paddingTop: "0 !important",
   paddingBottom: "0 !important",
   selectors: {

@@ -3,7 +3,9 @@ import { getTransferList } from "../stub/assetData";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
+import Box from "../../src/ui/box";
 import SwapToken from "../../src/ui/swap-token";
+import { SwapTokenProps } from "../../src/ui/swap-token/swap-token.types";
 import BasicModal from "../../src/ui/basic-modal";
 import Button from "../../src/ui/button";
 
@@ -28,54 +30,14 @@ export const Primary: Story = {
         percentage: "0.2%",
         value: "< $0.01",
       },
+      routeDisabled: false,
+      minimumReceived: 250.4,
     },
-    // dropdownList: [
-    //   {
-    //     available: 57.61,
-    //     symbol: "OSMO",
-    //     denom: "Osmosis",
-    //     imgSrc:
-    //       "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
-    //     priceDisplayAmount: 0.4671,
-    //   },
-    //   {
-    //     available: 15.9576,
-    //     symbol: "ATOM",
-    //     denom: "Cosmos Hub",
-    //     imgSrc:
-    //       "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-    //     priceDisplayAmount: 8.3502,
-    //   },
-    //   {
-    //     available: 713.32,
-    //     symbol: "USDC",
-    //     denom: "Axelar",
-    //     imgSrc:
-    //       "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/usdc.png",
-    //     priceDisplayAmount: 1,
-    //   },
-    //   {
-    //     available: 89.66,
-    //     symbol: "USTC",
-    //     denom: "Terra Classic",
-    //     imgSrc:
-    //       "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
-    //     priceDisplayAmount: 0.0144,
-    //   },
-    //   {
-    //     available: 102.61,
-    //     symbol: "TORI",
-    //     denom: "Teritori",
-    //     imgSrc:
-    //       "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
-    //     priceDisplayAmount: 0.0104,
-    //   },
-    // ],
     onSwap: () => {
-      console.log("onSwap");
+      console.log("Swap");
     },
-    onChange: () => {
-      console.log("onChange");
+    onToggleDirection: () => {
+      console.log("ToggleDirection");
     },
     onToleranceChange: (percent) => {
       console.log("onToleranceChange", percent);
@@ -84,20 +46,47 @@ export const Primary: Story = {
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownList = useMemo(() => getTransferList(), []);
+    const [to, setTo] = useState<SwapTokenProps["to"]>({
+      label: "To",
+      options: dropdownList,
+      selected: dropdownList[0],
+      amount: 0,
+      onItemSelected: (selectedItem) => {
+        setTo((prev) => ({ ...prev, selected: selectedItem }));
+      },
+      onAmountChange: (selectedItem, amount) => {
+        setTo((prev) => ({ ...prev, amount }));
+      },
+    });
+
+    const [from, setFrom] = useState<SwapTokenProps["to"]>({
+      label: "To",
+      options: dropdownList,
+      selected: dropdownList[1],
+      amount: 0,
+      onItemSelected: (selectedItem) => {
+        setFrom((prev) => ({ ...prev, selected: selectedItem }));
+      },
+      onAmountChange: (selectedItem, amount) => {
+        setFrom((prev) => ({ ...prev, amount }));
+      },
+    });
 
     return (
-      <BasicModal
-        renderTrigger={(triggerProps) => (
-          <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-            Swap
-          </Button>
-        )}
-        isOpen={isOpen}
-        title="Swap"
-        onClose={() => setIsOpen(false)}
-      >
-        <SwapToken {...props} dropdownList={dropdownList} />
-      </BasicModal>
+      // <BasicModal
+      //   renderTrigger={(triggerProps) => (
+      //     <Button {...triggerProps} onClick={() => setIsOpen(true)}>
+      //       Swap
+      //     </Button>
+      //   )}
+      //   isOpen={isOpen}
+      //   title="Swap"
+      //   onClose={() => setIsOpen(false)}
+      // >
+      // </BasicModal>
+      <Box width="500px">
+        <SwapToken {...props} from={from} to={to} />
+      </Box>
     );
   },
 };

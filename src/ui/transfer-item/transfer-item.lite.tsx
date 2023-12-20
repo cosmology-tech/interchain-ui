@@ -165,9 +165,11 @@ export default function TransferItem(props: TransferItemProps) {
     >
       <Stack
         space="$0"
-        direction="vertical"
+        direction="horizontal"
         attributes={{
           minHeight: "$10",
+          justifyContent: "space-between",
+          alignItems: "center",
           paddingLeft: props.isSmall ? "$6" : "$9",
           paddingRight: props.isSmall ? "$4" : "$5",
         }}
@@ -232,31 +234,27 @@ export default function TransferItem(props: TransferItemProps) {
               }}
             >
               <Show when={props.halfBtn}>
-                <Button
-                  variant="unstyled"
+                <button
                   className={styles.textBtn[state.theme]}
-                  size="xs"
                   onClick={() => state.handleHalf()}
                 >
                   <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
                     {props.halfBtnLabel ?? "Half"}
                   </Box>
-                </Button>
+                </button>
               </Show>
 
               <Box width={props.isSmall ? "$2" : "$5"} />
 
               <Show when={props.maxBtn}>
-                <Button
-                  variant="unstyled"
+                <button
                   className={styles.textBtn[state.theme]}
-                  size="xs"
                   onClick={() => state.handleMax()}
                 >
                   <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
                     {props.maxBtnLabel ?? "Max"}
                   </Box>
-                </Button>
+                </button>
               </Show>
             </Stack>
           </Show>
