@@ -1,6 +1,5 @@
 import {
   useRef,
-  onUpdate,
   onMount,
   onUnMount,
   useStore,
@@ -8,9 +7,7 @@ import {
   useMetadata,
   For,
 } from "@builder.io/mitosis";
-import BigNumber from "bignumber.js";
 import anime from "animejs";
-import cloneDeep from "lodash/cloneDeep";
 import Stack from "../stack";
 import Text from "../text";
 import IconButton from "../icon-button";
@@ -35,24 +32,23 @@ useMetadata({
 
 useDefaultProps<Partial<SwapTokenProps>>({
   toleranceLimits: [1, 2.5, 3, 5],
+  slippageLabel: "Slippage tolerance",
+  swapDisabledLabel: "Insufficient balance",
+  swapLabel: "Swap",
 });
 
 export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
-  let isSwitchingRef = useRef(false);
   let toteranceRef = useRef(null);
   let cleanupRef = useRef<() => void>(null);
 
   let state = useStore<{
     theme: ThemeVariant;
     swapIcon: IconProps["name"];
-    swapDisabled: boolean;
     tolerance: number;
     isSetting: boolean;
     fromAmount: number;
     toAmount: number;
-    fromDollarValue: BigNumber;
-    minimumReceived: number;
     fromItem: AvailableItem;
     toItem: AvailableItem;
     fromList: Array<AvailableItem>;
@@ -60,11 +56,6 @@ export default function SwapToken(props: SwapTokenProps) {
     toggleIcon: (deg: number, icon: IconProps["name"]) => void;
     toggleToteranceStatus: () => void;
     setToterance: (per: number) => void;
-    exchange: () => void;
-    handleFromListItemSelected: (selectedItem: AvailableItem) => void;
-    handleToListItemSelected: (selectedItem: AvailableItem) => void;
-    handleFromAmountChange: (item: AvailableItem, value: number) => void;
-    handleToAmountChange: (item: AvailableItem, value: number) => void;
   }>({
     theme: "light",
     swapIcon: "arrowDownLine",
@@ -72,21 +63,6 @@ export default function SwapToken(props: SwapTokenProps) {
     isSetting: false,
     fromAmount: 0,
     toAmount: 0,
-    get swapDisabled() {
-      return new BigNumber(state.fromAmount).gt(state?.fromItem?.available);
-    },
-    get fromDollarValue() {
-      return new BigNumber(state.fromAmount).multipliedBy(
-        state.fromItem?.priceDisplayAmount
-      );
-    },
-    get minimumReceived() {
-      return new BigNumber(state.toAmount)
-        .multipliedBy(100 - state.tolerance)
-        .dividedBy(100)
-        .decimalPlaces(6)
-        .toNumber();
-    },
     fromItem: null,
     toItem: null,
     fromList: [],
@@ -123,94 +99,6 @@ export default function SwapToken(props: SwapTokenProps) {
       state.tolerance = per;
       state.toggleToteranceStatus();
     },
-    exchange() {
-      if (!new BigNumber(state.fromAmount).eq(state.toAmount)) {
-        isSwitchingRef = true;
-      }
-      const copyFrom: AvailableItem = cloneDeep(state.fromItem);
-      const copyTo: AvailableItem = cloneDeep(state.toItem);
-      const copyFromList: AvailableItem[] = cloneDeep(state.fromList);
-      const copyToList: AvailableItem[] = cloneDeep(state.toList);
-      const copyFromAmount = state.fromAmount;
-      const copyToAmount = state.toAmount;
-
-      state.fromItem = copyTo;
-      state.toItem = copyFrom;
-      state.fromList = copyToList;
-      state.toList = copyFromList;
-      state.fromAmount = copyToAmount;
-      state.toAmount = copyFromAmount;
-      props?.onChange?.({
-        fromItem: copyTo,
-        toItem: copyFrom,
-        fromAmount: copyToAmount,
-        toAmount: copyFromAmount,
-      });
-    },
-    handleFromListItemSelected(selectedItem) {
-      state.toList = props.dropdownList.filter(
-        (item) => item.symbol !== selectedItem.symbol
-      );
-      state.fromItem = selectedItem;
-      let newTo = new BigNumber(state.fromAmount)
-        .multipliedBy(selectedItem.priceDisplayAmount)
-        .dividedBy(state.toItem.priceDisplayAmount)
-        .decimalPlaces(6)
-        .toNumber();
-
-      state.toAmount = newTo;
-      props?.onChange?.({
-        fromItem: selectedItem,
-        toItem: state.toItem,
-        fromAmount: state.fromAmount,
-        toAmount: newTo,
-      });
-    },
-    handleToListItemSelected(selectedItem) {
-      state.fromList = props.dropdownList.filter(
-        (item) => item.symbol !== selectedItem.symbol
-      );
-      state.toItem = selectedItem;
-      let newTo = state.fromDollarValue
-        .dividedBy(selectedItem.priceDisplayAmount)
-        .decimalPlaces(6)
-        .toNumber();
-      state.toAmount = newTo;
-      props?.onChange?.({
-        fromItem: state.fromItem,
-        toItem: selectedItem,
-        fromAmount: state.fromAmount,
-        toAmount: newTo,
-      });
-    },
-    handleFromAmountChange(item: AvailableItem, value: number) {
-      if (isSwitchingRef) {
-        isSwitchingRef = false;
-        return;
-      }
-      state.fromAmount = value;
-      let newToAmount = new BigNumber(value || 0)
-        .multipliedBy(item.priceDisplayAmount)
-        .dividedBy(state.toItem.priceDisplayAmount)
-        .decimalPlaces(6)
-        .toNumber();
-      state.toAmount = newToAmount;
-      props?.onChange?.({
-        fromItem: item,
-        toItem: state.toItem,
-        fromAmount: value,
-        toAmount: newToAmount,
-      });
-    },
-    handleToAmountChange(item: AvailableItem, value: number) {
-      state.toAmount = value;
-      props?.onChange?.({
-        fromItem: state.fromItem,
-        toItem: item,
-        fromAmount: state.fromAmount,
-        toAmount: value,
-      });
-    },
   });
 
   onMount(() => {
@@ -220,17 +108,6 @@ export default function SwapToken(props: SwapTokenProps) {
       state.theme = newState.theme;
     });
   });
-
-  onUpdate(() => {
-    let initialFromList = cloneDeep(props.dropdownList);
-    initialFromList.splice(1, 1);
-    let initialToList = cloneDeep(props.dropdownList);
-    initialToList.splice(0, 1);
-    state.fromList = initialFromList;
-    state.toList = initialToList;
-    state.fromItem = initialFromList[0];
-    state.toItem = initialToList[0];
-  }, [props.dropdownList]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") cleanupRef();
@@ -242,15 +119,15 @@ export default function SwapToken(props: SwapTokenProps) {
         halfBtn
         maxBtn
         hasAvailable
-        title="From"
-        amount={state.fromAmount}
-        selectedItem={state.fromItem}
-        dropdownList={state.fromList}
+        title={props.from.label ?? "From"}
+        amount={props.from.amount}
+        selectedItem={props.from.selected}
+        dropdownList={props.from.options}
         onItemSelected={(selectedItem: AvailableItem) =>
-          state.handleFromListItemSelected(selectedItem)
+          props.from.onItemSelected(selectedItem)
         }
         onChange={(item: AvailableItem, value: number) =>
-          state.handleFromAmountChange(item, value)
+          props.from.onAmountChange(item, value)
         }
       />
 
@@ -264,7 +141,7 @@ export default function SwapToken(props: SwapTokenProps) {
         <Box position="relative" zIndex="1" ref={swapIconRef}>
           <button
             className={styles.swapIcon[state.theme]}
-            onClick={(e) => state.exchange()}
+            onClick={(e) => props.onToggleDirection()}
             onMouseEnter={(e) => state.toggleIcon(90, "arrowLeftRightLine")}
             onMouseLeave={(e) => state.toggleIcon(0, "arrowDownLine")}
           >
@@ -277,17 +154,18 @@ export default function SwapToken(props: SwapTokenProps) {
         halfBtn={false}
         maxBtn={false}
         disabled
-        title="To"
-        amount={state.toAmount}
-        selectedItem={state.toItem}
-        dropdownList={state.toList}
+        title={props.to.label ?? "To"}
+        amount={props.to.amount}
+        selectedItem={props.to.selected}
+        dropdownList={props.to.options}
         onItemSelected={(selectedItem: AvailableItem) =>
-          state.handleToListItemSelected(selectedItem)
+          props.to.onItemSelected(selectedItem)
         }
         onChange={(item: AvailableItem, value: number) =>
-          state.handleToAmountChange(item, value)
+          props.to.onAmountChange(item, value)
         }
       />
+
       <Stack
         attributes={{
           my: "$9",
@@ -296,7 +174,7 @@ export default function SwapToken(props: SwapTokenProps) {
           alignItems: "center",
         }}
       >
-        <Text color="$textSecondary">Slippage tolerance</Text>
+        <Text color="$textSecondary">{props.slippageLabel}</Text>
         <Stack
           className={styles.settingContainer}
           attributes={{
@@ -357,12 +235,12 @@ export default function SwapToken(props: SwapTokenProps) {
       </Stack>
 
       <SwapPrice
-        fromItem={state.fromItem}
-        toItem={state.toItem}
-        disabled={state.fromDollarValue.isLessThanOrEqualTo(0)}
-        minimumReceived={state.minimumReceived}
-        fromAmount={state.fromAmount}
-        toAmount={state.toAmount}
+        fromItem={props.from.selected}
+        toItem={props.to.selected}
+        disabled={props.swapPrice.routeDisabled}
+        minimumReceived={props.swapPrice.minimumReceived ?? 0}
+        fromAmount={props.from.amount}
+        toAmount={props.to.amount}
         hasRoute={props?.swapPrice?.hasRoute}
         priceImpact={props?.swapPrice?.priceImpact}
         swapFee={props?.swapPrice?.swapFee}
@@ -372,12 +250,11 @@ export default function SwapToken(props: SwapTokenProps) {
         <Button
           fluidWidth
           onClick={() => props?.onSwap?.()}
-          disabled={state.swapDisabled || new BigNumber(state.fromAmount).eq(0)}
+          disabled={props.swapDisabled}
           intent="tertiary"
           size="lg"
-          attributes={{ width: "$full" }}
         >
-          {`${state.swapDisabled ? "Insufficient balance" : "Swap"}`}
+          {`${props.swapDisabled ? props.swapDisabledLabel : props.swapLabel}`}
         </Button>
       </Box>
     </Box>
