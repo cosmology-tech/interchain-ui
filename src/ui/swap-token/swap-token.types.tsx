@@ -1,8 +1,9 @@
-import {
+import type {
   AvailableItem,
   TransferItemProps,
 } from "../transfer-item/transfer-item.types";
-import { SwapPriceProps } from "../swap-price/swap-price.types";
+import type { BaseComponentProps } from "../../models/components.model";
+import type { SwapPriceProps } from "../swap-price/swap-price.types";
 
 export interface SwapItemProps extends TransferItemProps {}
 
@@ -13,7 +14,7 @@ export type SwapInfo = {
   toAmount: number;
 };
 
-export interface SwapTokenProps {
+export interface SwapTokenProps extends BaseComponentProps {
   swapPrice: {
     hasRoute: SwapPriceProps["hasRoute"];
     priceImpact: SwapPriceProps["priceImpact"];

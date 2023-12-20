@@ -16,6 +16,7 @@ import Text from "../text";
 import IconButton from "../icon-button";
 import Box from "../box";
 import Button from "../button";
+import Icon from "../icon";
 import SwapPrice from "../swap-price";
 import { store } from "../../models/store";
 import TransferItem from "../transfer-item";
@@ -236,7 +237,7 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   return (
-    <Box className={styles.swapTokenContainer} paddingTop="$5">
+    <Box className={props.className} paddingTop="$5">
       <TransferItem
         halfBtn
         maxBtn
@@ -252,24 +253,26 @@ export default function SwapToken(props: SwapTokenProps) {
           state.handleFromAmountChange(item, value)
         }
       />
+
+      {/* Round switch button */}
       <Stack
         className={styles.switchContainer}
         attributes={{
           justifyContent: "center",
         }}
       >
-        <div className={styles.rel} ref={swapIconRef}>
-          <IconButton
+        <Box position="relative" zIndex="1" ref={swapIconRef}>
+          <button
             className={styles.swapIcon[state.theme]}
-            icon={state.swapIcon as IconProps["name"]}
-            isRound={true}
-            intent="text"
             onClick={(e) => state.exchange()}
-            onHoverStart={(e) => state.toggleIcon(90, "arrowLeftRightLine")}
-            onHoverEnd={(e) => state.toggleIcon(0, "arrowDownLine")}
-          />
-        </div>
+            onMouseEnter={(e) => state.toggleIcon(90, "arrowLeftRightLine")}
+            onMouseLeave={(e) => state.toggleIcon(0, "arrowDownLine")}
+          >
+            <Icon name={state.swapIcon as IconProps["name"]} />
+          </button>
+        </Box>
       </Stack>
+
       <TransferItem
         halfBtn={false}
         maxBtn={false}

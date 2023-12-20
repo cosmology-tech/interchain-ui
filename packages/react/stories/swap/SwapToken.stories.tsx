@@ -3,6 +3,7 @@ import { getTransferList } from "../stub/assetData";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
+import Box from "../../src/ui/box";
 import SwapToken from "../../src/ui/swap-token";
 import BasicModal from "../../src/ui/basic-modal";
 import Button from "../../src/ui/button";
@@ -86,18 +87,20 @@ export const Primary: Story = {
     const dropdownList = useMemo(() => getTransferList(), []);
 
     return (
-      <BasicModal
-        renderTrigger={(triggerProps) => (
-          <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-            Swap
-          </Button>
-        )}
-        isOpen={isOpen}
-        title="Swap"
-        onClose={() => setIsOpen(false)}
-      >
+      // <BasicModal
+      //   renderTrigger={(triggerProps) => (
+      //     <Button {...triggerProps} onClick={() => setIsOpen(true)}>
+      //       Swap
+      //     </Button>
+      //   )}
+      //   isOpen={isOpen}
+      //   title="Swap"
+      //   onClose={() => setIsOpen(false)}
+      // >
+      // </BasicModal>
+      <Box width="500px">
         <SwapToken {...props} dropdownList={dropdownList} />
-      </BasicModal>
+      </Box>
     );
   },
 };
