@@ -59,6 +59,7 @@ export default function BasicModal(props: BasicModalProps) {
     // @ts-expect-error
     <ScaffoldModal
       isOpen={props.isOpen}
+      root={props.modalRoot}
       closeOnClickaway={props.closeOnClickaway}
       onOpen={() => props.onOpen?.()}
       onClose={() => props.onClose?.()}

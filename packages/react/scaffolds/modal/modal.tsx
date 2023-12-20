@@ -116,6 +116,7 @@ export interface ModalProps {
   closeOnClickaway?: boolean;
   preventScroll?: boolean;
   role?: "dialog" | "alertdialog";
+  root?: HTMLElement | null | React.MutableRefObject<HTMLElement | null>;
   className?: string;
   contentStyles?: React.CSSProperties;
   contentClassName?: string;
@@ -134,6 +135,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     renderTrigger,
     header,
     initialFocusRef,
+    root,
     closeOnClickaway = true,
     preventScroll = true,
     role = `dialog`,
@@ -180,7 +182,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
       {typeof renderTrigger === "function" ? renderTrigger(triggerProps) : null}
 
       {dialog.open && (
-        <FloatingPortal>
+        <FloatingPortal root={root}>
           <FloatingOverlay
             className={styles.modalBackdrop}
             lockScroll={preventScroll}
