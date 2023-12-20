@@ -83,13 +83,13 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 inputSizes[size],
                 props.isDisabled ? inputIntent.disabled : inputIntent[intent],
                 props.inputClassName,
-                props.borderless && styles.borderless,
                 isDisabled && props.decrementButton
                   ? styles.withDecrementButton
                   : null,
                 isDisabled && props.incrementButton
                   ? styles.withIncrementButton
-                  : null
+                  : null,
+                props.borderless ? styles.borderless : null
               )}
             />
 
