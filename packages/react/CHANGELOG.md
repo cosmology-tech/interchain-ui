@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.17.1...@interchain-ui/react@1.18.0) (2023-12-20)
+
+### Bug Fixes
+
+- broken css on some apps ([81a3d93](https://github.com/cosmology-tech/interchain-ui/commit/81a3d935a9ee4e4841e09633c66e942b389f34f6))
+- styling ([6197654](https://github.com/cosmology-tech/interchain-ui/commit/6197654edc4557aa2a0d83838dc0769d477e469d))
+- **swap:** controlled props ([36ffbdf](https://github.com/cosmology-tech/interchain-ui/commit/36ffbdf3244b5cfee3b8064ccb25becb3e02234a))
+- ts error ([501e9c6](https://github.com/cosmology-tech/interchain-ui/commit/501e9c655a56b903719720a674f34dca20ed9fa7))
+
+### Features
+
+- add mounting root prop ([31b9fc5](https://github.com/cosmology-tech/interchain-ui/commit/31b9fc58b121ce1797c30d09fe4f98d7a01d412a))
+
 ## [1.17.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.17.0...@interchain-ui/react@1.17.1) (2023-12-18)
 
 ### Bug Fixes
