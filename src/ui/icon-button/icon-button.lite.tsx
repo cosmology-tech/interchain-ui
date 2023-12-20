@@ -14,14 +14,11 @@ useMetadata({
 export default function IconButton(props: IconButtonProps) {
   return (
     <Button
-      attributes={props.attributes}
-      className={clsx(
-        styles.variants({
-          round: props.isRound ? true : undefined,
-        }),
-        styles.container,
-        props.className
-      )}
+      attributes={{
+        ...props.attributes,
+        borderRadius: props.isRound ? "$full" : undefined,
+      }}
+      className={clsx(styles.container, props.className)}
       variant={props.variant}
       intent={props.intent}
       size={props.size}
