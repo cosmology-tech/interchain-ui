@@ -68,13 +68,14 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
       />
 
       <Button
+        fluidWidth
         intent="tertiary"
         size="lg"
-        attributes={{ marginBottom: "$10", width: "$full" }}
+        attributes={{ marginBottom: "$10" }}
       >
         List
       </Button>
-      <Button variant="unstyled" size="sm" attributes={{ width: "$full" }}>
+      <Button fluidWidth variant="unstyled" size="sm">
         Cancel
       </Button>
     </Box>

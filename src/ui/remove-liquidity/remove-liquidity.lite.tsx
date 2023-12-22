@@ -171,9 +171,9 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
       </Stack>
       <Box height="$18" />
       <Button
+        fluidWidth
         size="lg"
         intent="tertiary"
-        attributes={{ width: "$full" }}
         onClick={() => props.onRemoveLiquidity()}
         isLoading={props.isLoading}
       >

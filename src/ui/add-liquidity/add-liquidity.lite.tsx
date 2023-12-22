@@ -227,11 +227,12 @@ export default function AddLiquidity(props: AddLiquidityProps) {
           }}
         />
       </Box>
+
       <Button
+        fluidWidth
         size="lg"
         disabled={state.disabled}
         intent="tertiary"
-        attributes={{ width: "$full" }}
         onClick={() => props.onAddLiquidity()}
         isLoading={props.isLoading}
       >

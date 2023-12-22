@@ -67,6 +67,7 @@ export default function BondingMore(props: BondingMoreProps) {
           </Text>
         </Stack>
       </Stack>
+
       <Box marginBottom="$10" marginTop="$5">
         {/* @ts-expect-error */}
         <ScaffoldNumberField
@@ -76,11 +77,12 @@ export default function BondingMore(props: BondingMoreProps) {
           onChange={(value) => state.handleInputChange(value)}
         />
       </Box>
+
       <Button
+        fluidWidth
         intent="tertiary"
         size="lg"
         disabled={state.disabled}
-        attributes={{ width: "$full" }}
         onClick={() => props?.onBond?.()}
         isLoading={props.isLoading}
       >

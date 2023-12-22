@@ -25,14 +25,14 @@ export const Primary: Story = {
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
         symbol: "ATOM",
-        denom: "Cosmos Hub",
+        name: "Cosmos Hub",
         priceDisplayAmount: 8.35,
-        available: "15.868",
+        available: 15.868,
       },
       {
-        available: "57.61",
+        available: 1567.2,
         symbol: "OSMO",
-        denom: "Osmosis",
+        name: "Osmosis",
         imgSrc:
           "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
         priceDisplayAmount: 0.4671,
