@@ -32,14 +32,15 @@ useMetadata({
   },
 });
 
-export default function Button(props: ButtonProps) {
-  useDefaultProps({
-    size: "md",
-    intent: "primary",
-    variant: "solid",
-    spinnerPlacement: "start",
-  });
+useDefaultProps<Partial<ButtonProps>>({
+  as: "button",
+  size: "md",
+  intent: "primary",
+  variant: "solid",
+  spinnerPlacement: "start",
+});
 
+export default function Button(props: ButtonProps) {
   const state = useStore<{
     theme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
@@ -84,12 +85,13 @@ export default function Button(props: ButtonProps) {
 
   return (
     <Box
-      as="button"
+      as={props.as}
       ref={props.ref}
       {...props.attributes}
       className={clx(
         styles.buttonSize[props.size],
         recipe({
+          as: props.as,
           variant: props.variant,
           intent: props.intent,
           isDisabled: props.disabled || props.isLoading,

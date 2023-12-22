@@ -16,8 +16,10 @@ import {
   buttonHoverBgVar,
   buttonTextColorVar,
   buttonHoverTextColorVar,
+  baseAnchorButton,
 } from "./button.css";
 import { ComponentOverrideSchema } from "../../styles/override/override.types";
+import { ButtonProps } from "./button.types";
 
 export type ButtonSize = "xs" | "sm" | "md" | "lg";
 export type ButtonVariant =
@@ -68,11 +70,13 @@ export function getSize(size: ButtonSize): Sprinkles {
 }
 
 export function recipe({
+  as,
   variant,
   intent,
   isDisabled,
   theme,
 }: {
+  as: ButtonProps["as"];
   variant: ButtonVariant;
   intent: ButtonIntent;
   isDisabled: boolean;
@@ -89,7 +93,7 @@ export function recipe({
   };
 
   return clx([
-    baseButton,
+    as === "a" ? baseAnchorButton : baseButton,
     intentMap[intent][theme],
     intent === "tertiary" && variant === "outlined" ? null : variants[variant],
     isDisabled ? disabled : null,

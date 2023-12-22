@@ -4,6 +4,8 @@ import type { IconProps } from "../icon/icon.types";
 import type { ButtonVariant, ButtonIntent, ButtonSize } from "./button.helper";
 
 export interface ButtonProps extends BaseComponentProps {
+  as?: "button" | "a";
+  href?: string;
   variant?: ButtonVariant;
   intent?: ButtonIntent;
   size?: ButtonSize;

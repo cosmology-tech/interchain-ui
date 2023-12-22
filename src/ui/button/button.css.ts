@@ -30,6 +30,11 @@ export const baseButton = style({
   },
 });
 
+export const baseAnchorButton = style([
+  baseButton,
+  { display: "inline-flex", textDecoration: "none" },
+]);
+
 export const unstyledButton = style([
   baseButton,
   {
