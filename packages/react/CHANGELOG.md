@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.18.0...@interchain-ui/react@1.18.1) (2023-12-22)
+
+### Bug Fixes
+
+- button fullWidth issues ([8b5f905](https://github.com/cosmology-tech/interchain-ui/commit/8b5f9051727da2645a946cdeb69d1f2c57863a1b))
+
 # [1.18.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.17.1...@interchain-ui/react@1.18.0) (2023-12-20)
 
 ### Bug Fixes
