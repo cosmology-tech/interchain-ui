@@ -22,12 +22,14 @@ export const container = style({
 
 export const hoverStyle = style({
   cursor: "pointer",
+  padding: themeVars.space[1],
+  borderRadius: themeVars.radii.base,
   selectors: {
     "&:hover": {
-      backgroundColor: themeVars.colors.cardBg
-    }
+      backgroundColor: themeVars.colors.cardBg,
+    },
   },
-})
+});
 
 export const contentContainer = style({
   width: "712px",

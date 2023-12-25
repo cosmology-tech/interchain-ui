@@ -27,7 +27,9 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
       py="$10"
       backgroundColor="$cardBg"
       borderRadius="$lg"
-      minWidth="350px"
+      minWidth={{
+        tablet: "350px",
+      }}
     >
       <Stack
         space="$0"
@@ -35,7 +37,8 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
           justifyContent: "space-between",
         }}
       >
-        <Box>
+        {/* APR section */}
+        <Box flexShrink="0">
           <Text color="$textSecondary" fontWeight="$semibold">
             {props.title}
           </Text>
@@ -77,7 +80,15 @@ export default function BondingListItemSm(props: BondingListItemSmProps) {
             Unbond
           </Button>
         </Box>
-        <Stack direction="vertical" space="$0">
+
+        {/* Shares section */}
+        <Stack
+          direction="vertical"
+          space="$0"
+          attributes={{
+            flexShrink: "0",
+          }}
+        >
           <Stack
             space="0"
             attributes={{

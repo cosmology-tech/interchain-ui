@@ -8,7 +8,6 @@ export const container = style({
   "@media": {
     [`screen and (max-width: ${breakpoints.tablet}px)`]: {
       width: "100%",
-      minWidth: "400px",
     },
   },
 });
@@ -26,9 +25,4 @@ export const titleContainer = style({
 
 export const title = style({
   width: "calc(100% / 5)",
-});
-
-export const listContainer = style({
-  paddingTop: themeVars.space[6],
-  paddingBottom: themeVars.space[6],
 });
