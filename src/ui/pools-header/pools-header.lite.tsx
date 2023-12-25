@@ -61,17 +61,22 @@ export default function PoolsHeader(props: PoolsHeaderProps) {
         display="grid"
         gridTemplateAreas={{
           mobile: `
+            "a"
+            "b"
+            "c"
+          `,
+          mdMobile: `
             "a b"
             "c c"
           `,
-          desktop: `
+          tablet: `
             "a b c"
           `,
         }}
         gridTemplateColumns={{
-          mobile: "repeat(auto-fill, minmax(180px, 1fr))",
-          tablet: "repeat(2, 1fr)",
-          desktop: "repeat(3, 1fr)",
+          mobile: "1fr",
+          mdMobile: "repeat(auto-fill, minmax(180px, 1fr))",
+          tablet: "repeat(3, 1fr)",
         }}
       >
         <Box gridArea="a" className={styles.baseBox}>

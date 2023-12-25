@@ -110,7 +110,13 @@ export default function NftProfile(props: NftProfileProps) {
               attributes={{ alignItems: "center", flexWrap: "nowrap" }}
               space="$4"
             >
-              <Text fontSize="$xs" color="$textSecondary">
+              <Text
+                fontSize="$xs"
+                color="$textSecondary"
+                attributes={{
+                  flexShrink: "0",
+                }}
+              >
                 {item.label}
               </Text>
               <Text
