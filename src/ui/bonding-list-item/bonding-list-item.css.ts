@@ -1,10 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-export const item = style({
-  flex: 1,
+export const textItem = style({
+  display: "inline-flex",
+  justifyContent: "left",
+  alignItems: "center",
 });
 
-export const unbond = style({
-  cursor: "pointer",
-  userSelect: "none",
+export const numericItem = style({
+  display: "inline-flex",
+  justifyContent: "right",
+  alignItems: "center",
 });

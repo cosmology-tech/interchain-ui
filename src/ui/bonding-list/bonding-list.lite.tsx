@@ -13,7 +13,7 @@ useMetadata({
 
 export default function BondingList(props: BondingListProps) {
   return (
-    <Box>
+    <Box position="relative" overflowX="auto">
       <Stack direction="vertical" space="$10">
         <For each={props.list}>
           {(item: BondingListItemProps, index: number) => (

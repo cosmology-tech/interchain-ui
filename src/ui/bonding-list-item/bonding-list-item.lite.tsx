@@ -3,6 +3,7 @@ import Stack from "../stack";
 import BigNumber from "bignumber.js";
 import Button from "../button";
 import Text from "../text";
+import Box from "../box";
 import { store } from "../../models/store";
 import * as styles from "./bonding-list-item.css";
 import { BondingListItemProps } from "./bonding-list-item.types";
@@ -15,30 +16,39 @@ useMetadata({
 
 export default function BondingListItem(props: BondingListItemProps) {
   return (
-    <Stack
-      attributes={{
-        alignItems: "center",
-      }}
-    >
+    <Box display="grid" gridTemplateColumns="repeat(5, minmax(100px, 1fr))">
       <Text
-        className={styles.item}
+        className={styles.textItem}
         color="$textSecondary"
         fontWeight="$semibold"
       >
         {props.title}
       </Text>
 
-      <Text className={styles.item} color="$textSecondary" fontSize="$xs">
+      <Text
+        className={styles.numericItem}
+        color="$textSecondary"
+        fontSize="$xs"
+      >
         {new BigNumber(props.totalApr || 0).decimalPlaces(2).toString()}%
       </Text>
 
-      <Text className={styles.item} color="$textSecondary" fontSize="$xs">
+      <Text
+        className={styles.numericItem}
+        color="$textSecondary"
+        fontSize="$xs"
+      >
         ${store.getState().formatNumber({ value: props.amount || 0 })}
       </Text>
 
-      <Text className={styles.item} color="$textSecondary" fontSize="$xs">
+      <Text
+        className={styles.numericItem}
+        color="$textSecondary"
+        fontSize="$xs"
+      >
         {new BigNumber(props.superfluidApr || 0).decimalPlaces(2).toString()}%
       </Text>
+
       <Stack
         attributes={{
           width: "$25",
@@ -54,6 +64,6 @@ export default function BondingListItem(props: BondingListItemProps) {
           Unbond All
         </Button>
       </Stack>
-    </Stack>
+    </Box>
   );
 }

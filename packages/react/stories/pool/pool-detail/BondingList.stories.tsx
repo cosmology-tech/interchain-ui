@@ -47,9 +47,5 @@ export const Primary: Story = {
       },
     ],
   },
-  render: (props) => (
-    <div style={{ minWidth: 720 }}>
-      <BondingList list={props.list} />
-    </div>
-  ),
+  render: (props) => <BondingList list={props.list} />,
 };
