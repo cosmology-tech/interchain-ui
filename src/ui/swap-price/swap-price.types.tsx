@@ -1,4 +1,6 @@
-import { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { BaseComponentProps } from "../../models/components.model";
+import type { BoxProps } from "../box/box.types";
+import type { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export interface SwapPriceType {
   priceRate: string;
@@ -25,7 +27,15 @@ export type SwapPriceDetailRouteDetail = {
   tokenOut: SwapDetailCoin;
 };
 
-export interface SwapPriceProps {
+export interface SwapPriceProps extends BaseComponentProps {
+  // ==== Labels
+  title?: string;
+  priceImpactLabel?: string;
+  swapFeeLabel?: string;
+  expectedOutputLabel?: string;
+  minimumReceivedLabel?: string;
+  routeLabel?: string;
+  // ====
   hasRoute?: boolean;
   // price: SwapPriceType;
   priceImpact: string;
@@ -40,4 +50,5 @@ export interface SwapPriceProps {
   disabled?: boolean;
   fromAmount: number;
   toAmount: number;
+  attributes?: BoxProps;
 }
