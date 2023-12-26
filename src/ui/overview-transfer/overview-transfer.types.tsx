@@ -1,8 +1,10 @@
-import { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { BaseComponentProps } from "../../models/components.model";
+import type { AvailableItem } from "../transfer-item/transfer-item.types";
 
 export type TransferType = "withdraw" | "deposit";
 
-export interface OverviewTransferProps {
+export interface OverviewTransferProps extends BaseComponentProps {
+  inputLabel?: string;
   dropdownList: AvailableItem[];
   selectedItem?: AvailableItem;
   defaultSelected?: AvailableItem;

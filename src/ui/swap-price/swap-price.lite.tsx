@@ -1,6 +1,7 @@
 import {
   useRef,
   useStore,
+  useDefaultProps,
   Show,
   For,
   Fragment,
@@ -13,15 +14,25 @@ import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
 import IconButton from "../icon-button";
-import * as styles from "./swap-price.css";
-import type { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
 import { store } from "../../models/store";
+import * as styles from "./swap-price.css";
+
+import type { SwapPriceProps, SwapPriceDetailRoute } from "./swap-price.types";
 import type { AnimeInstance } from "animejs";
 
 useMetadata({
   rsc: {
     componentType: "client",
   },
+});
+
+useDefaultProps<Partial<SwapPriceProps>>({
+  title: "Price",
+  priceImpactLabel: "Price Impact",
+  swapFeeLabel: "Swap Fee",
+  expectedOutputLabel: "Expected Output",
+  minimumReceivedLabel: "Minimum received after slippage",
+  routeLabel: "Route",
 });
 
 export default function SwapPrice(props: SwapPriceProps) {
@@ -93,22 +104,49 @@ export default function SwapPrice(props: SwapPriceProps) {
   });
 
   return (
-    <Box>
+    <Box className={props.className}>
+      {/* Desktop accordion */}
       <Stack
         className={styles.swapPriceContainer}
         attributes={{
+          position: "relative",
           py: "$9",
+          flexWrap: "wrap",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Text color="$text">Price</Text>
-        <Stack
-          attributes={{
-            alignItems: "center",
+        <Text
+          fontSize={{
+            mobile: "$xs",
+            tablet: "$sm",
           }}
+          color="$text"
         >
-          <Text fontWeight="$semibold">
+          {props.title}
+        </Text>
+
+        <Box
+          display="flex"
+          alignItems="center"
+          flexWrap="wrap"
+          paddingRight={{
+            mobile: "$14",
+            mdMobile: "$19",
+          }}
+          rowGap="$0"
+          columnGap="$9"
+        >
+          <Text
+            fontSize={{
+              mobile: "$xs",
+              tablet: "$sm",
+            }}
+            fontWeight="$semibold"
+            attributes={{
+              flexShrink: "0",
+            }}
+          >
             {`1 ${props?.fromItem?.symbol} = ${new BigNumber(
               props?.fromItem?.priceDisplayAmount
             )
@@ -116,12 +154,30 @@ export default function SwapPrice(props: SwapPriceProps) {
               .decimalPlaces(6)
               .toString()} ${props?.toItem?.symbol}`}
           </Text>
+
           <Text
+            fontSize={{
+              mobile: "$xs",
+              tablet: "$sm",
+            }}
             color="$textSecondary"
-            attributes={{ marginLeft: "$9", marginRight: "$13" }}
           >
             {`~ $${props?.fromItem?.priceDisplayAmount}`}
           </Text>
+        </Box>
+
+        <Box
+          position={{
+            mobile: "absolute",
+          }}
+          top={{
+            mobile: "50%",
+          }}
+          right={{
+            mobile: "$0",
+          }}
+          transform="translateY(-50%)"
+        >
           <IconButton
             disabled={props.disabled}
             intent={state.isExpanded ? "tertiary" : "text"}
@@ -129,8 +185,9 @@ export default function SwapPrice(props: SwapPriceProps) {
             icon="arrowDownS"
             onClick={(e) => state.toggleExpand()}
           />
-        </Stack>
+        </Box>
       </Stack>
+
       <div ref={priceRef} className={styles.priceContainer}>
         <Stack direction="vertical" attributes={{ paddingBottom: "$14" }}>
           <Stack
@@ -140,7 +197,7 @@ export default function SwapPrice(props: SwapPriceProps) {
               alignItems: "center",
             }}
           >
-            <Text color="$textSecondary">Price Impact</Text>
+            <Text color="$textSecondary">{props.priceImpactLabel}</Text>
             <Text color="$textSecondary" fontWeight="$bold">
               {props.priceImpact}
             </Text>
@@ -153,7 +210,7 @@ export default function SwapPrice(props: SwapPriceProps) {
             }}
           >
             <Text color="$textSecondary">
-              Swap Fee ({props?.swapFee?.percentage})
+              {props.swapFeeLabel} ({props?.swapFee?.percentage})
             </Text>
             <Text color="$textSecondary" fontWeight="$bold">
               {`~ ${props?.swapFee?.value}`}
@@ -166,7 +223,7 @@ export default function SwapPrice(props: SwapPriceProps) {
               alignItems: "center",
             }}
           >
-            <Text color="$textSecondary">Expected Output</Text>
+            <Text color="$textSecondary">{props.expectedOutputLabel}</Text>
             <Text color="$textSecondary" fontWeight="$bold">
               {`~ ${store.getState().formatNumber({ value: props.toAmount })} ${
                 props?.toItem?.symbol
@@ -180,14 +237,14 @@ export default function SwapPrice(props: SwapPriceProps) {
               alignItems: "center",
             }}
           >
-            <Text color="$textSecondary">Minimum received after slippage</Text>
+            <Text color="$textSecondary">{props.minimumReceivedLabel}</Text>
             <Text color="$textSecondary" fontWeight="$bold">
               {`${props?.minimumReceived ?? 0} ${props?.toItem?.symbol}`}
             </Text>
           </Stack>
           <Show when={props?.hasRoute}>
             <Text color="$textSecondary" attributes={{ py: "$10" }}>
-              Route
+              {props.routeLabel}
             </Text>
             <Stack
               attributes={{
@@ -204,8 +261,8 @@ export default function SwapPrice(props: SwapPriceProps) {
                 />
               </Box>
               <Box className={styles.routeDivider} />
-              {/* Mapping routeDetail */}
 
+              {/* Mapping routeDetail */}
               <For each={state.routesPath}>
                 {(item: SwapPriceDetailRoute, index: number) => (
                   <Fragment key={item.poolId}>

@@ -21,6 +21,7 @@ export type SwapItem = {
   amount: number;
   onItemSelected: (selectedItem: AvailableItem) => void;
   onAmountChange: (selectedItem: AvailableItem, amount: number) => void;
+  onAmountInput?: (selectedItem: AvailableItem, rawValue: string) => void;
 };
 
 export interface SwapTokenProps extends BaseComponentProps {

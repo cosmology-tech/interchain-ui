@@ -18,7 +18,7 @@ export default function PoolList(props: PoolListProps) {
   });
 
   return (
-    <Box className={styles.container}>
+    <Box className={styles.container} p="$6">
       <Text color="$textSecondary" fontSize="$xl" fontWeight="$semibold">
         {props.title}
       </Text>
@@ -31,7 +31,8 @@ export default function PoolList(props: PoolListProps) {
           )}
         </For>
       </Stack>
-      <Box className={styles.listContainer}>
+
+      <Box overflowX="auto">
         <For each={props.list}>
           {(item, index) => (
             <PoolListItem

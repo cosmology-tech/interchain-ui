@@ -13,7 +13,6 @@ import cloneDeep from "lodash/cloneDeep";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
-import Button from "../button";
 import Box from "../box";
 
 import { store } from "../../models/store";
@@ -295,6 +294,11 @@ export default function TransferItem(props: TransferItemProps) {
                       borderless
                       isDisabled={!!props.disabled}
                       value={props.amount}
+                      onInput={(event) => {
+                        if (typeof props.onInput === "function") {
+                          props.onInput(state.currentItem, event.target.value);
+                        }
+                      }}
                       onChange={(value) => {
                         state.handleAmountInput(value);
                       }}

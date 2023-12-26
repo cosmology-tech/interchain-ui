@@ -31,3 +31,14 @@ export function isSSR(): boolean {
 
   return true;
 }
+
+export function closestBodyElement(node: HTMLElement) {
+  let parent = node.parentElement;
+  while (parent) {
+    if (parent.tagName === "BODY") {
+      return parent as HTMLIFrameElement;
+    }
+    parent = parent.parentElement;
+  }
+  return null;
+}

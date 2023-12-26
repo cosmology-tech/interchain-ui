@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { breakpoints } from '../../styles/tokens/breakpoints'
+import { breakpoints } from "../../styles/tokens/breakpoints";
 
 const base = style({
   paddingLeft: themeVars.space[8],
@@ -41,7 +41,7 @@ export const baseBox = style([
   base,
   {
     backgroundColor: themeVars.colors.cardBg,
-    width: '100%',
+    width: "100%",
   },
 ]);
 
@@ -50,16 +50,10 @@ export const rewardBox = style([
   {
     backgroundColor: themeVars.colors.rewardBg,
     color: themeVars.colors.rewardContent,
-    width: '100%',
+    width: "100%",
   },
 ]);
 
 export const osom = style({
   margin: "0 14px 3px 2px",
-});
-
-export const flex1 = style({
-  paddingRight: themeVars.space[5],
-  flex: 1,
-  overflow: "hidden",
 });

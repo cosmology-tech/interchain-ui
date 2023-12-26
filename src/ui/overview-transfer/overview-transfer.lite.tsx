@@ -16,8 +16,9 @@ import Icon from "../icon";
 import TransferItem from "../transfer-item";
 import * as styles from "./overview-transfer.css";
 import { store } from "../../models/store";
+
 import type { OverviewTransferProps } from "./overview-transfer.types";
-import { AvailableItem } from "../transfer-item/transfer-item.types";
+import type { AvailableItem } from "../transfer-item/transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 
 useMetadata({
@@ -29,6 +30,7 @@ useMetadata({
 useDefaultProps<Partial<OverviewTransferProps>>({
   transferLabel: "Transfer",
   cancelLabel: "Cancel",
+  inputLabel: "Select amount",
 });
 
 export default function OverviewTransfer(props: OverviewTransferProps) {
@@ -49,7 +51,6 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
   });
 
   let cleanupRef = useRef<() => void>(null);
-  let selectedItemRef = useRef<AvailableItem | null>(null);
 
   onMount(() => {
     state.theme = store.getState().theme;
@@ -80,6 +81,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
       <TransferItem
         maxBtn
         hasAvailable
+        title={props.inputLabel}
         defaultSelectedItem={props.defaultSelected}
         dropdownList={props.dropdownList}
         selectedItem={state.curSelectedItem}

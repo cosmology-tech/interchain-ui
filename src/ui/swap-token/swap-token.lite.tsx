@@ -129,6 +129,11 @@ export default function SwapToken(props: SwapTokenProps) {
         onChange={(item: AvailableItem, value: number) =>
           props.from.onAmountChange(item, value)
         }
+        onInput={(item: AvailableItem, value: string) => {
+          if (typeof props.from.onAmountInput === "function") {
+            props.from.onAmountInput(item, value);
+          }
+        }}
       />
 
       {/* Round switch button */}
@@ -164,6 +169,11 @@ export default function SwapToken(props: SwapTokenProps) {
         onChange={(item: AvailableItem, value: number) =>
           props.to.onAmountChange(item, value)
         }
+        onInput={(item: AvailableItem, value: string) => {
+          if (typeof props.to.onAmountInput === "function") {
+            props.to.onAmountInput(item, value);
+          }
+        }}
       />
 
       <Stack

@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { For, useMetadata } from "@builder.io/mitosis";
+import { For, useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
@@ -14,15 +14,21 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<BondingListSmProps>>({
+  title: "Bond your liquidity",
+  description:
+    "Bond your tokens to earn additional OSMO rewards to the swap fees.",
+  unbondedTitle: "Unbonded",
+  unbondedSharesTitle: "pool shares",
+});
+
 export default function BondingListSm(props: BondingListSmProps) {
   return (
     <Box width="$full">
       <Text fontSize="$xl" fontWeight="$semibold">
-        Bond your liquidity
+        {props.title}
       </Text>
-      <Text attributes={{ marginTop: "$2" }}>
-        Bond your tokens to earn additional OSMO rewards to the swap fees.
-      </Text>
+      <Text attributes={{ marginTop: "$2" }}>{props.description}</Text>
       <Text
         color="$textSecondary"
         fontWeight="$semibold"
@@ -30,14 +36,17 @@ export default function BondingListSm(props: BondingListSmProps) {
           marginTop: "$10",
         }}
       >
-        Unbonded
+        {props.unbondedTitle}
       </Text>
+
       <Text fontSize="$4xl" fontWeight="$semibold" attributes={{ my: "$2" }}>
         {store
           .getState()
           .formatNumber({ value: props.unbondedBalance, style: "currency" })}
       </Text>
+
       <Stack
+        space="$2"
         attributes={{
           marginBottom: "$9",
         }}
@@ -45,8 +54,9 @@ export default function BondingListSm(props: BondingListSmProps) {
         <Text fontWeight="$semibold">
           {new BigNumber(props.unbondedShares).decimalPlaces(4).toString()}
         </Text>
-        <Text>&nbsp; pool shares</Text>
+        <Text>{props.unbondedSharesTitle}</Text>
       </Stack>
+
       <Stack space="$10" direction="vertical">
         <For each={props.list}>
           {(item: BondingListItemSmProps, index: number) => (

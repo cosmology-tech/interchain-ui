@@ -50,6 +50,7 @@ export interface TransferItemProps extends BaseComponentProps {
    */
   title?: string;
   onChange?: (item: AvailableItem, value: number) => void;
+  onInput?: (item: AvailableItem, rawValue: string) => void;
   /**
    * Disabled status of input
    */

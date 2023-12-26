@@ -15,6 +15,7 @@ import CellWithTitle from "./cell-with-title.lite";
 
 import { store } from "../../models/store";
 import * as styles from "./pool-list-item.css";
+import { standardTransitionProperties } from "../shared/shared.css";
 
 import type { PoolListItemProps } from "./pool-list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
@@ -57,7 +58,7 @@ export default function PoolListItem(props: PoolListItemProps) {
   return (
     <Box
       alignItems="center"
-      className={clsx(styles.container, {
+      className={clsx(styles.container, standardTransitionProperties, {
         [styles.hoverStyle]: !!props.onClick,
       })}
       attributes={{

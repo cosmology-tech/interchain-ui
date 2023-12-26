@@ -52,6 +52,7 @@ export const Primary: Story = {
       selected: dropdownList[0],
       amount: 0,
       onItemSelected: (selectedItem) => {
+        console.log("To: onItemSelected", selectedItem);
         setTo((prev) => ({ ...prev, selected: selectedItem }));
       },
       onAmountChange: (selectedItem, amount) => {
@@ -65,6 +66,7 @@ export const Primary: Story = {
       selected: dropdownList[1],
       amount: 0,
       onItemSelected: (selectedItem) => {
+        console.log("From: onItemSelected", selectedItem);
         setFrom((prev) => ({ ...prev, selected: selectedItem }));
       },
       onAmountChange: (selectedItem, amount) => {
