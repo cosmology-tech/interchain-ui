@@ -85,6 +85,7 @@ export interface ChainSwapComboboxProps {
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
   className?: ClassValue;
+  rootNode?: HTMLElement;
   inputClassName?: string;
   attributes?: Sprinkles;
 }
@@ -206,6 +207,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   );
 
   React.useEffect(() => {
+    if (props.rootNode) {
+      return setMountRoot(props.rootNode);
+    }
+
     setMountRoot(closestBodyElement(containerRef.current));
   }, []);
 
