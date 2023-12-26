@@ -36,7 +36,6 @@ export const modalBackdrop = style({
   width: `100%`,
   height: `100%`,
   backgroundColor: `rgba(17, 20, 24, .7)`,
-  userSelect: "none",
 });
 
 export const modalContent = style({

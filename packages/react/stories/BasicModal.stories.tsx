@@ -23,6 +23,7 @@ export const Primary: Story = {
     return (
       <div>
         <BasicModal
+          closeOnClickaway
           renderTrigger={(triggerProps = {}) => (
             <Button {...triggerProps} onClick={() => setIsOpen(true)}>
               open
