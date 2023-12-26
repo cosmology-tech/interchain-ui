@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.18.2...@interchain-ui/react@1.18.3) (2023-12-26)
+
+### Bug Fixes
+
+- allow custom rootNode ([3bbea7c](https://github.com/cosmology-tech/interchain-ui/commit/3bbea7ce23d40f08b9aed03a927f2d35de099c5f))
+- dropdown options mounting to outer parent in iframe usage ([9b83055](https://github.com/cosmology-tech/interchain-ui/commit/9b83055635cd711c6ebe652bc7510b6efad6165d))
+- overflow container ([fd9c648](https://github.com/cosmology-tech/interchain-ui/commit/fd9c64896f6dcda911b1801564560f300eedf184))
+
 ## [1.18.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.18.1...@interchain-ui/react@1.18.2) (2023-12-22)
 
 **Note:** Version bump only for package @interchain-ui/react
