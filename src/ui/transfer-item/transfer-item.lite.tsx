@@ -294,6 +294,11 @@ export default function TransferItem(props: TransferItemProps) {
                       borderless
                       isDisabled={!!props.disabled}
                       value={props.amount}
+                      onInput={(event) => {
+                        if (typeof props.onInput === "function") {
+                          props.onInput(state.currentItem, event.target.value);
+                        }
+                      }}
                       onChange={(value) => {
                         state.handleAmountInput(value);
                       }}
