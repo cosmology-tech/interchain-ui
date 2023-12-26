@@ -46,7 +46,14 @@ export const Primary: Story = {
 
     return (
       <Stack space="$10">
-        <BasicModal
+        <OverviewTransfer
+          {...props}
+          selectedItem={selected}
+          fromChainLogoUrl={selected.imgSrc}
+          toChainLogoUrl={stride.imgSrc}
+          onChange={onChange}
+        />
+        {/* <BasicModal
           renderTrigger={(triggerProps) => (
             <Button {...triggerProps} onClick={() => setIsDepositOpen(true)}>
               Deposit
@@ -56,14 +63,8 @@ export const Primary: Story = {
           title="Deposit"
           onClose={() => setIsDepositOpen(false)}
         >
-          <OverviewTransfer
-            {...props}
-            selectedItem={selected}
-            fromChainLogoUrl={selected.imgSrc}
-            toChainLogoUrl={stride.imgSrc}
-            onChange={onChange}
-          />
-        </BasicModal>
+
+        </BasicModal> */}
         <BasicModal
           renderTrigger={(triggerProps) => (
             <Button {...triggerProps} onClick={() => setIsWithdrawOpen(true)}>

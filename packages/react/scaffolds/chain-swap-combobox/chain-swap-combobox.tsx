@@ -22,6 +22,8 @@ import { store } from "@/models/store";
 import Box from "@/ui/box";
 import ChainSwapInput from "@/ui/chain-swap-input";
 import ChainListItem from "@/ui/chain-list-item";
+import { closestBodyElement } from "@/helpers/platform";
+
 import { chainSwapListBox } from "./chain-swap-combobox.css";
 import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.types";
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
@@ -199,6 +201,14 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     }
   }, [open, selectedItem, inputValue]);
 
+  const [mountRoot, setMountRoot] = React.useState<HTMLElement | undefined>(
+    undefined
+  );
+
+  React.useEffect(() => {
+    setMountRoot(closestBodyElement(containerRef.current));
+  }, []);
+
   return (
     <Box
       pr="$9"
@@ -260,7 +270,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           initialFocus={-1}
           visuallyHiddenDismiss
         >
-          <FloatingPortal>
+          <FloatingPortal root={mountRoot}>
             <div
               {...getFloatingProps({
                 ref: refs.setFloating,

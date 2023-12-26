@@ -13,7 +13,6 @@ import cloneDeep from "lodash/cloneDeep";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
-import Button from "../button";
 import Box from "../box";
 
 import { store } from "../../models/store";
