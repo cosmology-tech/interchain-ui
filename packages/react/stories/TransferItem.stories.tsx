@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { getTransferList } from "./stub/assetData";
+import { useMockData } from "./stub/mock-data-client";
 
 import TransferItem from "../src/ui/transfer-item";
 
@@ -15,8 +15,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const dropdownList = getTransferList();
-
 /* This is primary TransferItem */
 export const Primary: Story = {
   args: {
@@ -26,12 +24,13 @@ export const Primary: Story = {
     hasAvailable: true,
   },
   render: (props) => {
+    const { assets } = useMockData();
     const [amountStaked, setAmountStaked] = React.useState<number>(0);
 
     return (
       <TransferItem
         {...props}
-        dropdownList={dropdownList}
+        dropdownList={assets}
         amount={amountStaked}
         onChange={(item, amount) => {
           setAmountStaked(amount);

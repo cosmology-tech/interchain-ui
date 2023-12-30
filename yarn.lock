@@ -2589,6 +2589,17 @@
     node-fetch "^2.3.0"
     tslib "^1.10.0"
 
+"@chain-registry/client@^1.18.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/client/-/client-1.18.0.tgz#f51671b131704be6bfe0866ff864719570c027bf"
+  integrity sha512-EFygnM3PR6KGJ0IACrwicyQs+/Vf7OAsFia1c1iQVFsisPccY+tPv/deMQrRJk/Km4X9sSSeDSq+WpBCW2HzXw==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@chain-registry/types" "^0.17.1"
+    "@chain-registry/utils" "^1.17.0"
+    bfs-path "^1.0.2"
+    cross-fetch "^3.1.5"
+
 "@chain-registry/osmosis@^1.21.0":
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/@chain-registry/osmosis/-/osmosis-1.21.0.tgz#d0e42750af192508696c262f3d4ba3da881a4fbf"
@@ -2597,17 +2608,17 @@
     "@babel/runtime" "^7.21.0"
     "@chain-registry/types" "^0.17.0"
 
-"@chain-registry/types@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.npmjs.org/@chain-registry/types/-/types-0.16.0.tgz"
-  integrity sha512-4j6vq2Vqn/nF+UBjvRPUVs6eM3+5rJ+dPmEWpd/OoNH3wTy1k6aoilcSTZRR//vGcI5EOVGsxhhJxUzo2qqweA==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-
 "@chain-registry/types@^0.17.0":
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.17.0.tgz#bbe9176a6d30a491259fab1fcdcee2b7edf6141f"
   integrity sha512-lavACU4oDxioUy8lZOFZN0Vrr2qR+Dg2yEh/mkrPfOldcioavREXJou0elDyyXwq4pGLC5YQ+IISCtQ4Du0bdw==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+
+"@chain-registry/types@^0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@chain-registry/types/-/types-0.17.1.tgz#0ac7bda6178d3917834578627f232a247fe5def8"
+  integrity sha512-O0CgrtJgIlqXvZm1CqDZe/7jZz068O/uuCIoyDXCegFHK03rdHacKcDGwEIUuI0MNUf8YV3jdE4xHQMSAX+79w==
   dependencies:
     "@babel/runtime" "^7.21.0"
 
@@ -2618,6 +2629,16 @@
   dependencies:
     "@babel/runtime" "^7.21.0"
     "@chain-registry/types" "^0.17.0"
+    bignumber.js "9.1.1"
+    sha.js "^2.4.11"
+
+"@chain-registry/utils@^1.17.0":
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/@chain-registry/utils/-/utils-1.17.0.tgz#f3072c2ca59bc81516f8fac0994ac05d9236a60a"
+  integrity sha512-MNIfpFM8rF1Gex+LhmuHgUElLbjz2vgmjI9qpRl9MMuQUSndu/NVhCDWcgvGNVKCD6woR6ohD9UIs9n0/Q91AA==
+  dependencies:
+    "@babel/runtime" "^7.21.0"
+    "@chain-registry/types" "^0.17.1"
     bignumber.js "9.1.1"
     sha.js "^2.4.11"
 
@@ -9005,6 +9026,11 @@ better-opn@^3.0.2:
   dependencies:
     open "^8.0.4"
 
+bfs-path@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/bfs-path/-/bfs-path-1.0.2.tgz#9b5fa4b8c4ad226597fc4d2ee15398bdcc644a07"
+  integrity sha512-KTKx2JJtAAAT7C/rJYDXXWA2VLPycAS4kwFktKsxUo0hj4UTtw/Gm5PJuY7Uf3xSlIQNo7HRCSWei2ivncVwbQ==
+
 big-integer@^1.6.44:
   version "1.6.51"
   resolved "https://registry.npmjs.org/big-integer/-/big-integer-1.6.51.tgz"
@@ -9323,14 +9349,6 @@ ccount@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-2.0.1.tgz#17a3bf82302e0870d6da43a01311a8bc02a3ecf5"
   integrity sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==
-
-chain-registry@^1.19.0:
-  version "1.19.0"
-  resolved "https://registry.npmjs.org/chain-registry/-/chain-registry-1.19.0.tgz"
-  integrity sha512-7Ax0cRurfS+I0Oru3Td8NqBY/2YRCv570XM555E5vu3ib3f/k5SELwxsSalTtQj+Furx6quEyKWuOjrNwPpcQg==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-    "@chain-registry/types" "^0.16.0"
 
 chalk@2.3.0:
   version "2.3.0"
@@ -10018,6 +10036,13 @@ cross-env@^7.0.3:
   integrity sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==
   dependencies:
     cross-spawn "^7.0.1"
+
+cross-fetch@^3.1.5:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.8.tgz#0327eba65fd68a7d119f8fb2bf9334a1a7956f82"
+  integrity sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==
+  dependencies:
+    node-fetch "^2.6.12"
 
 cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -15822,6 +15847,13 @@ node-fetch@^2.0.0, node-fetch@^2.3.0, node-fetch@^2.6.7:
   version "2.6.12"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.12.tgz"
   integrity sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==
+  dependencies:
+    whatwg-url "^5.0.0"
+
+node-fetch@^2.6.12:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
+  integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
 

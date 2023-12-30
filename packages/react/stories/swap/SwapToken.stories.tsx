@@ -1,13 +1,11 @@
 import React, { useMemo, useState } from "react";
-import { getTransferList } from "../stub/assetData";
+import { useMockData } from "../stub/mock-data-client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import SwapToken from "../../src/ui/swap-token";
 import { SwapTokenProps } from "../../src/ui/swap-token/swap-token.types";
-import BasicModal from "../../src/ui/basic-modal";
-import Button from "../../src/ui/button";
 
 const meta: Meta<typeof SwapToken> = {
   component: SwapToken,
@@ -44,48 +42,44 @@ export const Primary: Story = {
     },
   },
   render: (props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const dropdownList = useMemo(() => getTransferList(), []);
-    const [to, setTo] = useState<SwapTokenProps["to"]>({
-      label: "To",
-      options: dropdownList,
-      selected: dropdownList[0],
-      amount: 0,
-      onItemSelected: (selectedItem) => {
-        console.log("To: onItemSelected", selectedItem);
-        setTo((prev) => ({ ...prev, selected: selectedItem }));
-      },
-      onAmountChange: (selectedItem, amount) => {
-        setTo((prev) => ({ ...prev, amount }));
+    const [to, setTo] = useState<SwapTokenProps["to"] | null>(null);
+
+    const [from, setFrom] = useState<SwapTokenProps["to"] | null>(null);
+
+    const { assets, isReady } = useMockData({
+      onReady: (assets) => {
+        setFrom({
+          label: "From",
+          options: assets,
+          selected: assets[5],
+          amount: 0,
+          onItemSelected: (selectedItem) => {
+            console.log("From: onItemSelected", selectedItem);
+            setFrom((prev) => ({ ...prev, selected: selectedItem }));
+          },
+          onAmountChange: (selectedItem, amount) => {
+            setFrom((prev) => ({ ...prev, amount }));
+          },
+        });
+        setTo({
+          label: "To",
+          options: assets,
+          selected: assets[0],
+          amount: 0,
+          onItemSelected: (selectedItem) => {
+            console.log("To: onItemSelected", selectedItem);
+            setTo((prev) => ({ ...prev, selected: selectedItem }));
+          },
+          onAmountChange: (selectedItem, amount) => {
+            setTo((prev) => ({ ...prev, amount }));
+          },
+        });
       },
     });
 
-    const [from, setFrom] = useState<SwapTokenProps["to"]>({
-      label: "To",
-      options: dropdownList,
-      selected: dropdownList[1],
-      amount: 0,
-      onItemSelected: (selectedItem) => {
-        console.log("From: onItemSelected", selectedItem);
-        setFrom((prev) => ({ ...prev, selected: selectedItem }));
-      },
-      onAmountChange: (selectedItem, amount) => {
-        setFrom((prev) => ({ ...prev, amount }));
-      },
-    });
+    if (!isReady || !to || !from) return <div>Loading ...</div>;
 
     return (
-      // <BasicModal
-      //   renderTrigger={(triggerProps) => (
-      //     <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-      //       Swap
-      //     </Button>
-      //   )}
-      //   isOpen={isOpen}
-      //   title="Swap"
-      //   onClose={() => setIsOpen(false)}
-      // >
-      // </BasicModal>
       <Box width="500px">
         <SwapToken {...props} from={from} to={to} />
       </Box>
