@@ -18,12 +18,8 @@ const amountFormatter = new Intl.NumberFormat("en-US", {
 const options: ChainRegistryFetcherOptions = {
   urls: [
     "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/assetlist.json",
-    "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/chain.json",
     "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/assetlist.json",
-    "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/chain.json",
     "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/assetlist.json",
-    "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/chain.json",
-    "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/chain.json",
     "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/assetlist.json",
     "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/assetlist.json",
     "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/assetlist.json",
@@ -119,10 +115,17 @@ class MockDataClient {
   }
 
   getAssetList({
-    chainNames = ["cosmoshub", "stride", "stargaze", "juno", "secretnetwork"],
+    chainNames = [
+      "cosmoshub",
+      "stride",
+      "osmosis",
+      "stargaze",
+      "juno",
+      "secretnetwork",
+    ],
     filterFn = defaultFilterAsset,
     normalizeFn = defaultNormalizeAsset,
-    limit = 60,
+    limit = 100,
   }: GetAssetListOptions = {}) {
     // console.log("DEBUG getAssetList", this.registry.assetLists);
 
@@ -143,7 +146,7 @@ class MockDataClient {
   getComboboxAssetList({
     chainNames = ["cosmoshub", "stride", "stargaze", "juno", "secretnetwork"],
     filterFn = defaultFilterAsset,
-    limit = 60,
+    limit = 100,
   }: GetComboboxOptions = {}) {
     // console.log("DEBUG getAssetList", this.registry.assetLists);
 

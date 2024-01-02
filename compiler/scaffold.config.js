@@ -21,6 +21,15 @@ module.exports = {
       path: "../select",
     },
   },
+  slider: {
+    jsxMap: {
+      ScaffoldSlider: "Slider",
+    },
+    import: {
+      imports: { Slider: "default" },
+      path: "../slider",
+    },
+  },
   "select-option": {
     jsxMap: {
       ScaffoldSelectOption: "SelectOption",

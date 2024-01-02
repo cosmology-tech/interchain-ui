@@ -118,8 +118,11 @@ export interface ModalProps {
   role?: "dialog" | "alertdialog";
   root?: HTMLElement | null | React.MutableRefObject<HTMLElement | null>;
   className?: string;
+  // This is the themeClass created by using vanilla css createTheme function
+  themeClassName?: string;
   contentStyles?: React.CSSProperties;
   contentClassName?: string;
+  backdropClassName?: string;
   childrenClassName?: string;
 }
 
@@ -140,6 +143,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     preventScroll = true,
     role = `dialog`,
     className,
+    themeClassName,
+    backdropClassName,
     contentClassName,
     contentStyles,
     childrenClassName,
@@ -184,7 +189,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
       {dialog.open && (
         <FloatingPortal root={root}>
           <FloatingOverlay
-            className={styles.modalBackdrop}
+            className={clx(
+              themeClassName,
+              backdropClassName ? backdropClassName : styles.modalBackdrop
+            )}
             lockScroll={preventScroll}
             style={transitionStyles}
           >
@@ -196,7 +204,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                   aria-describedby={dialog.descriptionId}
                   {...dialog.getFloatingProps({
                     role: role,
-                    className: clx(themeClass, className),
+                    className: clx(
+                      // Make sure themeClass is overridable
+                      themeClassName ? themeClassName : themeClass,
+                      className
+                    ),
                     style: {
                       position: "relative",
                       zIndex: 999,

@@ -224,4 +224,11 @@ export { default as GovernanceProposalItem } from "./ui/governance/governance-pr
 export { default as GovernanceVoteBreakdown } from "./ui/governance/governance-vote-breakdown.lite";
 export { default as GovernanceResultCard } from "./ui/governance/governance-result-card.lite";
 
+// Mesh security
+export { default as MeshStakingSliderInfo } from "./ui/mesh-staking/mesh-staking-slider-info.lite";
+export { default as MeshButton } from "./ui/mesh-staking/mesh-button.lite";
+export { default as MeshTagButton } from "./ui/mesh-staking/mesh-tag-button.lite";
+export { default as MeshFooterInfoItem } from "./ui/mesh-staking/mesh-footer-info-item.lite";
+export { default as MeshModal } from "./ui/mesh-modal";
+
 // End Components
