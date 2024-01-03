@@ -4,9 +4,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Button from "../../src/ui/button";
 import BasicModal from "../../src/ui/basic-modal";
 import Stack from "../../src/ui/stack";
+import Box from "../../src/ui/box";
+import Skeleton from "../../src/ui/skeleton";
 import OverviewTransfer from "../../src/ui/overview-transfer";
 import type { AvailableItem } from "../../src/ui/transfer-item/transfer-item.types";
-import { getTransferList } from "../stub/assetData";
+import { useMockData } from "../stub/mock-data-client";
 
 const meta: Meta<typeof OverviewTransfer> = {
   component: OverviewTransfer,
@@ -19,12 +21,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const dropdownList = getTransferList();
-const stride = dropdownList.find((item) => item.name === "Stride");
-
 export const Primary: Story = {
   args: {
-    dropdownList: dropdownList,
     timeEstimateLabel: "~ 20 seconds",
     onTransfer() {
       console.log("onTransfer");
@@ -34,10 +32,18 @@ export const Primary: Story = {
     },
   },
   render: (props) => {
+    const [selected, setSelected] = useState<AvailableItem | null>(null);
+
+    const { isReady, assets } = useMockData({
+      onReady: (assets) => {
+        setSelected(assets[15]);
+      },
+    });
+
+    const stride = assets.find((item) => item.symbol === "STRD");
+
     const [isDepositOpen, setIsDepositOpen] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
-
-    const [selected, setSelected] = useState<AvailableItem>(dropdownList[1]);
 
     const onChange = (selectedItem, value) => {
       console.log("onChange", selectedItem, value);
@@ -56,13 +62,22 @@ export const Primary: Story = {
           title="Deposit"
           onClose={() => setIsDepositOpen(false)}
         >
-          <OverviewTransfer
-            {...props}
-            selectedItem={selected}
-            fromChainLogoUrl={selected.imgSrc}
-            toChainLogoUrl={stride.imgSrc}
-            onChange={onChange}
-          />
+          {isReady && selected != null ? (
+            <OverviewTransfer
+              {...props}
+              dropdownList={assets}
+              selectedItem={selected}
+              fromChainLogoUrl={selected?.imgSrc}
+              toChainLogoUrl={stride?.imgSrc ?? ""}
+              onChange={onChange}
+            />
+          ) : (
+            <Box display="flex" flexDirection="column" gap="$4">
+              <Skeleton borderRadius="$sm" width="$26" height="$10" />
+              <Skeleton borderRadius="$sm" width="$30" height="$10" />
+              <Skeleton borderRadius="$sm" width="$20" height="$10" />
+            </Box>
+          )}
         </BasicModal>
         <BasicModal
           renderTrigger={(triggerProps) => (
@@ -74,7 +89,22 @@ export const Primary: Story = {
           title="Withdraw"
           onClose={() => setIsWithdrawOpen(false)}
         >
-          <OverviewTransfer {...props} />
+          {isReady && selected != null ? (
+            <OverviewTransfer
+              {...props}
+              dropdownList={assets}
+              selectedItem={selected}
+              fromChainLogoUrl={selected?.imgSrc}
+              toChainLogoUrl={stride?.imgSrc ?? ""}
+              onChange={onChange}
+            />
+          ) : (
+            <Box display="flex" flexDirection="column" gap="$4">
+              <Skeleton borderRadius="$sm" width="$26" height="$10" />
+              <Skeleton borderRadius="$sm" width="$30" height="$10" />
+              <Skeleton borderRadius="$sm" width="$20" height="$10" />
+            </Box>
+          )}
         </BasicModal>
       </Stack>
     );

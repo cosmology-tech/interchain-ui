@@ -3,7 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import ChainSwapCombobox from "../../src/ui/chain-swap-combobox";
-import { getChainSwapComboboxOptions } from "../stub/chainSwapComboboxData";
+import { useMockData } from "../stub/mock-data-client";
+import { ChainSwapComboboxProps } from "../../src/ui/chain-swap-combobox/chain-swap-combobox";
 
 const meta: Meta<typeof ChainSwapCombobox> = {
   component: ChainSwapCombobox,
@@ -15,10 +16,23 @@ const meta: Meta<typeof ChainSwapCombobox> = {
 export default meta;
 
 function useChainSwapState() {
-  const options = React.useMemo(() => getChainSwapComboboxOptions(), []);
-  const [selected, setSelected] = React.useState(options[0]);
+  const [selected, setSelected] = React.useState<
+    ChainSwapComboboxProps["valueItem"] | null
+  >(null);
+
+  const { isReady, comboboxAssets } = useMockData({
+    onReady(assets, comboboxAssets) {
+      setSelected(comboboxAssets[5]);
+    },
+  });
+
+  const options = React.useMemo(
+    () => (isReady ? comboboxAssets : []),
+    [isReady, comboboxAssets]
+  );
 
   return {
+    isReady,
     selected,
     setSelected,
     options,
@@ -30,7 +44,11 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {},
   render: (props) => {
-    const { selected, setSelected, options } = useChainSwapState();
+    const { selected, setSelected, options, isReady } = useChainSwapState();
+
+    if (!isReady || !selected) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <ChainSwapCombobox
@@ -48,7 +66,11 @@ export const Primary: Story = {
 export const Small: Story = {
   args: {},
   render: (props) => {
-    const { selected, setSelected, options } = useChainSwapState();
+    const { selected, setSelected, options, isReady } = useChainSwapState();
+
+    if (!isReady || !selected) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <Box maxWidth="260px">

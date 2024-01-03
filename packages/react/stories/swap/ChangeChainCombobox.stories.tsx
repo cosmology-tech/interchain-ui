@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import ChangeChainCombobox from "../../src/ui/change-chain-combobox";
-import { getChainSwapComboboxOptions } from "../stub/chainSwapComboboxData";
+import { useMockData } from "../stub/mock-data-client";
 
 const meta: Meta<typeof ChangeChainCombobox> = {
   component: ChangeChainCombobox,
@@ -24,14 +24,20 @@ export const Primary: Story = {
       chainName: string;
     } | null>(null);
 
+    const { isReady, comboboxAssets } = useMockData();
+
     const options = React.useMemo(
       () =>
-        getChainSwapComboboxOptions().map((i) => ({
+        comboboxAssets.map((i) => ({
           iconUrl: i.iconUrl,
           chainName: i.tokenName,
         })),
-      []
+      [comboboxAssets, isReady]
     );
+
+    if (!isReady) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <Box maxWidth="350px">
