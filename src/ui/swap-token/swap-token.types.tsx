@@ -20,7 +20,7 @@ export type SwapItem = {
   selected: AvailableItem;
   amount: number;
   onItemSelected: (selectedItem: AvailableItem) => void;
-  onAmountChange: (selectedItem: AvailableItem, amount: number) => void;
+  onAmountChange?: (selectedItem: AvailableItem, amount: number) => void;
   onAmountInput?: (selectedItem: AvailableItem, rawValue: string) => void;
 };
 
