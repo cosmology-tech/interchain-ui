@@ -13,6 +13,7 @@ import Stack from "../stack";
 import Avatar from "../avatar";
 import Text from "../text";
 import Skeleton from "../skeleton";
+import Spinner from "../spinner";
 import { baseButton } from "../button/button.css";
 import { breakpoints } from "../../styles/tokens";
 import BigNumber from "bignumber.js";
@@ -38,9 +39,16 @@ export default function StakingDelegate(props: StakingDelegateProps) {
     // ==== UI states
     isMounted: boolean;
     width: number;
+    isValidNotionalValue: () => boolean;
   }>({
     isMounted: false,
     width: 0,
+    isValidNotionalValue() {
+      return (
+        props.inputNotionalValue &&
+        new BigNumber(props.inputNotionalValue).isGreaterThan(0)
+      );
+    },
   });
 
   onMount(() => {
@@ -175,10 +183,15 @@ export default function StakingDelegate(props: StakingDelegateProps) {
         {/* Number input */}
         <Box
           bg="$inputBg"
-          p={{
+          px={{
             mobile: "$6",
-            tablet: "$10",
+            tablet: "$8",
           }}
+          py={{
+            mobile: "$6",
+            tablet: "$9",
+          }}
+          maxHeight="100px"
           borderRadius="$lg"
           display="flex"
           gap={{
@@ -202,10 +215,13 @@ export default function StakingDelegate(props: StakingDelegateProps) {
               value={props.inputValue}
               minValue={toNumber(props.inputMinValue)}
               maxValue={toNumber(props.inputMaxValue)}
-              onChange={(value) => props.onValueChange(value)}
+              onChange={(value) => props.onValueChange?.(value)}
+              onInput={(rawValue) => props.onValueInput?.(rawValue)}
               formatOptions={{
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 4,
+                minimumFractionDigits:
+                  props.formatOptions?.minimumFractionDigits ?? 0,
+                maximumFractionDigits:
+                  props.formatOptions?.maximumFractionDigits ?? 6,
               }}
               inputClassName={
                 state.width >= breakpoints.mdMobile ? "" : styles.inputSm
@@ -224,17 +240,19 @@ export default function StakingDelegate(props: StakingDelegateProps) {
               {props.inputToken.tokenName}
             </Text>
 
-            <Text
-              color={
-                new BigNumber(props.inputNotionalValue).isEqualTo(0)
-                  ? "$textSecondary"
-                  : "$text"
+            <Show when={state.isValidNotionalValue()}>
+              <Text color="$text" fontSize="$sm" fontWeight="$normal">
+                ≈ ${props.inputNotionalValue}
+              </Text>
+            </Show>
+
+            <Show
+              when={
+                !state.isValidNotionalValue() && props.isLoadingNotionalValue
               }
-              fontSize="$sm"
-              fontWeight="$normal"
             >
-              ≈ ${props.inputNotionalValue}
-            </Text>
+              <Skeleton borderRadius="$sm" width="$10" height="$7" />
+            </Show>
           </Box>
         </Box>
 
@@ -255,20 +273,37 @@ export default function StakingDelegate(props: StakingDelegateProps) {
                   p="$4"
                   borderRadius="$base"
                   backgroundColor="$cardBg"
-                  cursor="pointer"
+                  cursor={item.isLoading ? "not-allowed" : "pointer"}
                   className={baseButton}
                   attributes={{
-                    onClick: () => item.onClick(),
+                    onClick: () => {
+                      if (item.isLoading) {
+                        return;
+                      }
+
+                      item.onClick();
+                    },
                   }}
                 >
-                  <Text
-                    as="span"
-                    fontSize="$sm"
-                    fontWeight="$semibold"
-                    color="$textSecondary"
+                  <Show
+                    when={!item.isLoading}
+                    else={
+                      <Spinner
+                        size="sm"
+                        color="$textPlaceholder"
+                        title="Loading"
+                      />
+                    }
                   >
-                    {item.label}
-                  </Text>
+                    <Text
+                      as="span"
+                      fontSize="$sm"
+                      fontWeight="$semibold"
+                      color="$textSecondary"
+                    >
+                      {item.label}
+                    </Text>
+                  </Show>
                 </Box>
               )}
             </For>

@@ -58,7 +58,7 @@ export const Primary: Story = {
           delegationItems={[
             {
               label: "Delegated amount",
-              tokenAmount: "100,000",
+              tokenAmount: "100,4558.444",
               tokenName: OSMO.symbol ?? "OSMO",
             },
             {
@@ -76,6 +76,8 @@ export const Primary: Story = {
           inputMinValue={MIN}
           inputValue={tokenAmount}
           inputNotionalValue={notionalValue}
+          // ==== Toggle this to see loading state
+          // isLoadingNotionalValue={true}
           onValueChange={(value) => {
             setTokenAmount(value);
             setNotionalValue(value * PRICE_PER_TOKEN);
@@ -99,6 +101,7 @@ export const Primary: Story = {
             },
             {
               label: "Max",
+              // isLoading: true,
               onClick: () => {
                 console.log("Max change");
                 setTokenAmount(MAX);
