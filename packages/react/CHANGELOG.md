@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.18.3...@interchain-ui/react@1.19.0) (2024-01-05)
+
+### Bug Fixes
+
+- add custom toast ([b777713](https://github.com/cosmology-tech/interchain-ui/commit/b777713533ca4b5393a4b6ec8a8416ac754bc8e6))
+- improve staking delegate ([a9724af](https://github.com/cosmology-tech/interchain-ui/commit/a9724af56873a2f1bca9d9ee3af8ce56dfcaf736))
+- **modal:** remove user select none style ([9fcfe97](https://github.com/cosmology-tech/interchain-ui/commit/9fcfe97dc73fe751c11f7366821851c6b8d30299))
+
+### Features
+
+- mesh UI staking select tokens ([f2ca05c](https://github.com/cosmology-tech/interchain-ui/commit/f2ca05cddff479b5de09210a6cb497d73c027a03))
+
 ## [1.18.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.18.2...@interchain-ui/react@1.18.3) (2023-12-26)
 
 ### Bug Fixes
