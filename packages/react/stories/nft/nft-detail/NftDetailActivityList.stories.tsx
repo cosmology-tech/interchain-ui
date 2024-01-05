@@ -19,13 +19,13 @@ export const Primary: Story = {
       {
         price: 200,
         event: "List",
-        from: "shane.stars",
+        from: "stargaze.stars",
         date: "12 days ago",
       },
       {
         price: 200,
         event: "List",
-        from: "shane.stars",
+        from: "stargaze.stars",
         to: "shane",
         date: "12 days ago",
       },

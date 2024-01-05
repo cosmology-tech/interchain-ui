@@ -19,7 +19,7 @@ export const Primary: Story = {
   args: {
     price: 200,
     // lastSale: 1000,
-    owner: "shane.stars",
+    owner: "stargaze.stars",
     topOffer: 5,
     floorPrice: 149,
     isNameVerified: true,

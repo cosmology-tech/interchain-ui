@@ -131,7 +131,7 @@ export const Primary: Story = {
         value: "12",
       },
     ],
-    name: "shane.stars",
+    name: "stargaze.stars",
     isVerified: true,
     onView() {
       console.log("onView");

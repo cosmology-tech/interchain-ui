@@ -29,7 +29,7 @@ export const Primary: Story = {
     mintPrice: "300",
     rarityOrder: 2864,
     tokensCount: 10000,
-    ownerName: "shane.stars",
+    ownerName: "stargaze.stars",
     price: 670,
     detailInfo: {
       price: 400,
@@ -106,7 +106,7 @@ export const MakeOffer: Story = {
     mintPrice: "300",
     rarityOrder: 2864,
     tokensCount: 10000,
-    ownerName: "shane.stars",
+    ownerName: "stargaze.stars",
     traits: [
       {
         name: "Accessories",
@@ -147,7 +147,7 @@ export const MakeOffer: Story = {
     detailInfo: {
       price: 200,
       lastSale: 1000,
-      owner: "shane.stars",
+      owner: "stargaze.stars",
       topOffer: 5,
       floorPrice: 149,
       isNameVerified: true,
@@ -163,13 +163,13 @@ export const MakeOffer: Story = {
         {
           price: 200,
           event: "List",
-          from: "shane.stars",
+          from: "stargaze.stars",
           date: "12 days ago",
         },
         {
           price: 200,
           event: "List",
-          from: "shane.stars",
+          from: "stargaze.stars",
           to: "shane",
           date: "12 days ago",
         },
@@ -199,7 +199,7 @@ export const BuyNow: Story = {
     mintPrice: "300",
     rarityOrder: 2864,
     tokensCount: 10000,
-    ownerName: "shane.stars",
+    ownerName: "stargaze.stars",
     traits: [
       {
         name: "Accessories",

@@ -17,7 +17,7 @@ export const Primary: Story = {
   args: {
     price: 200,
     event: "List",
-    from: "shane.stars",
+    from: "stargaze.stars",
     date: "12 days ago",
   },
 };
