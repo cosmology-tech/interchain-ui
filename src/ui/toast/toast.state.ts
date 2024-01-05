@@ -144,6 +144,14 @@ class Observer {
     return this.create({ ...data, type: "success", message });
   };
 
+  custom = (
+    type: ToastType,
+    message: string | Children,
+    data?: ExternalToast
+  ) => {
+    return this.create({ ...data, type: type, message });
+  };
+
   promise = <ToastData>(
     promise: PromiseLike<ToastData>,
     data?: PromiseData<ToastData>
@@ -212,4 +220,5 @@ export const toast = Object.assign(basicToast, {
   message: ToastState.message,
   promise: ToastState.promise,
   dismiss: ToastState.dismiss,
+  custom: ToastState.custom,
 });

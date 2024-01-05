@@ -221,7 +221,7 @@ export const toast = style({
       borderRadius: themeVars.radii.sm,
       boxShadow: shadowVar,
       width: widthVar,
-      fontSize: "13px",
+      fontSize: themeVars.fontSize.sm,
       display: "flex",
       alignItems: "center",
       gap: themeVars.space[3],

@@ -10,7 +10,13 @@ export type DelegationItem = {
 
 export type InputPartialChange = {
   label: string;
+  isLoading?: boolean;
   onClick: () => void;
+};
+
+export type FormatOptions = {
+  minimumFractionDigits: number;
+  maximumFractionDigits: number;
 };
 
 export interface StakingDelegateProps extends BaseComponentProps {
@@ -29,9 +35,12 @@ export interface StakingDelegateProps extends BaseComponentProps {
   inputValue?: number;
   inputNotionalValue?: number;
   onValueChange?: (value: number) => void;
+  onValueInput?: (rawValue: string) => void;
   inputPartials?: InputPartialChange[];
   inputMaxValue?: number;
   inputMinValue?: number;
+  isLoadingNotionalValue?: boolean;
+  formatOptions?: FormatOptions;
   attributes?: Omit<
     BoxProps,
     "attributes" | "as" | "className" | "children" | "style" | "ref"
