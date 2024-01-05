@@ -6,6 +6,7 @@ import Button from "../src/ui/button";
 import Toast from "../src/ui/toast";
 import Toaster from "../src/ui/toast/toaster";
 import { toast } from "../src/ui/toast/toast.state";
+import { ToastType } from "../src/ui/toast/toast.types";
 
 const meta: Meta<typeof Toast> = {
   component: Toast,
@@ -43,6 +44,8 @@ export const Primary: Story = {
     const [showAutoClose, setShowAutoClose] = React.useState(false);
     const [showDismiss, setShowDismiss] = React.useState(false);
     const [isFinally, setIsFinally] = React.useState(false);
+    const [customType, setCustomType] = React.useState<ToastType>("default");
+
     return (
       <Stack direction="vertical" space="$6">
         <Stack space="$6">
@@ -195,6 +198,21 @@ export const Primary: Story = {
             }
           >
             Render Toast With onAutoClose callback
+          </Button>
+        </div>
+
+        <div>
+          <Button
+            intent="secondary"
+            onClick={() => {
+              toast.custom(customType, "Complex toast");
+
+              setTimeout(() => {
+                setCustomType("success");
+              }, 1000);
+            }}
+          >
+            Complex
           </Button>
         </div>
 
