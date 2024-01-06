@@ -213,7 +213,7 @@ export default function TransferItem(props: TransferItemProps) {
                 fontWeight="$semibold"
                 fontSize={props.isSmall ? "$2xs" : "$sm"}
                 attributes={{
-                  marginRight: props.isSmall ? "$0" : "$9",
+                  marginRight: props.isSmall ? "$2" : "$9",
                   flexShrink: "0",
                 }}
               >
