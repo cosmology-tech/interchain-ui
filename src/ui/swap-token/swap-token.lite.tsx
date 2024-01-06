@@ -41,6 +41,8 @@ export default function SwapToken(props: SwapTokenProps) {
   const swapIconRef = useRef(null);
   let toteranceRef = useRef(null);
   let cleanupRef = useRef<() => void>(null);
+  let rootRef = useRef<HTMLDivElement | null>(null);
+  let resizeObserver = useRef<ResizeObserver | null>(null);
 
   let state = useStore<{
     theme: ThemeVariant;
@@ -53,6 +55,8 @@ export default function SwapToken(props: SwapTokenProps) {
     toItem: AvailableItem;
     fromList: Array<AvailableItem>;
     toList: Array<AvailableItem>;
+    width: number;
+    isSmallSize: () => boolean;
     toggleIcon: (deg: number, icon: IconProps["name"]) => void;
     toggleToteranceStatus: () => void;
     setToterance: (per: number) => void;
@@ -67,6 +71,7 @@ export default function SwapToken(props: SwapTokenProps) {
     toItem: null,
     fromList: [],
     toList: [],
+    width: 0,
     toggleIcon(deg, icon) {
       anime({
         targets: [swapIconRef],
@@ -95,6 +100,9 @@ export default function SwapToken(props: SwapTokenProps) {
       }
       state.isSetting = curSetting;
     },
+    isSmallSize() {
+      return state.width < 326;
+    },
     setToterance(per) {
       state.tolerance = per;
       state.toggleToteranceStatus();
@@ -104,8 +112,19 @@ export default function SwapToken(props: SwapTokenProps) {
   onMount(() => {
     state.theme = store.getState().theme;
 
+    resizeObserver = new ResizeObserver((entries) => {
+      const rootWidth = entries[0]?.borderBoxSize[0]?.inlineSize ?? 0;
+      state.width = rootWidth;
+    });
+
+    resizeObserver.observe(rootRef, { box: "border-box" });
+
     cleanupRef = store.subscribe((newState) => {
       state.theme = newState.theme;
+
+      if (rootRef instanceof Element) {
+        resizeObserver.unobserve(rootRef);
+      }
     });
   });
 
@@ -114,11 +133,17 @@ export default function SwapToken(props: SwapTokenProps) {
   });
 
   return (
-    <Box className={props.className} paddingTop="$5">
+    <Box
+      className={props.className}
+      ref={rootRef}
+      paddingTop="$5"
+      minWidth="250px"
+    >
       <TransferItem
         halfBtn
         maxBtn
         hasAvailable
+        isSmall={state.isSmallSize()}
         title={props.from.label ?? "From"}
         amount={props.from.amount}
         selectedItem={props.from.selected}
@@ -159,6 +184,7 @@ export default function SwapToken(props: SwapTokenProps) {
         halfBtn={false}
         maxBtn={false}
         disabled
+        isSmall={state.isSmallSize()}
         title={props.to.label ?? "To"}
         amount={props.to.amount}
         selectedItem={props.to.selected}
@@ -184,13 +210,20 @@ export default function SwapToken(props: SwapTokenProps) {
           alignItems: "center",
         }}
       >
-        <Text color="$textSecondary">{props.slippageLabel}</Text>
+        <Text
+          color="$textSecondary"
+          fontSize={state.isSmallSize() ? "$xs" : "$sm"}
+          className={styles.percentLabelContainer}
+        >
+          {props.slippageLabel}
+        </Text>
         <Stack
           className={styles.settingContainer}
           attributes={{
             position: "relative",
             justifyContent: "flex-end",
             alignItems: "center",
+            overflow: state.width < 400 ? "visible" : "hidden",
           }}
         >
           <Stack
@@ -211,10 +244,23 @@ export default function SwapToken(props: SwapTokenProps) {
             />
           </Stack>
 
-          <div ref={toteranceRef} className={styles.percentContainer}>
+          <div
+            ref={toteranceRef}
+            className={styles.percentContainer}
+            style={{
+              pointerEvents: state.isSetting ? "auto" : "none",
+              width: state.isSetting ? state.width : "auto",
+            }}
+          >
             <Stack
               attributes={{
                 alignItems: "center",
+                justifyContent: state.isSmallSize()
+                  ? "space-between"
+                  : "flex-end",
+                width: "100%",
+                backgroundColor:
+                  state.theme === "light" ? "$white" : "$gray700",
               }}
               space="$5"
             >
@@ -226,7 +272,7 @@ export default function SwapToken(props: SwapTokenProps) {
                       props?.onToleranceChange?.(percent);
                     }}
                     key={percent}
-                    size="sm"
+                    size={state.isSmallSize() ? "xs" : "sm"}
                     intent={state.tolerance === percent ? "tertiary" : "text"}
                   >
                     {percent}%

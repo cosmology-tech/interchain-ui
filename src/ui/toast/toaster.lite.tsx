@@ -187,99 +187,103 @@ export default function Toaster(props: ToasterProps) {
   }, [listRef]);
 
   return (
-    <Show when={state.toasts.length > 0}>
-      <section aria-label={`Notifications ${state.hotkeyLabel}`} tabIndex={-1}>
-        <ol
-          tabIndex={-1}
-          ref={listRef}
-          className={clx(
-            {
-              [lightThemeClass]: state.theme === "light",
-              [darkThemeClass]: state.theme === "dark",
-            },
-            toaster,
-            props.className
+    <section
+      aria-label={`Notifications ${state.hotkeyLabel}`}
+      tabIndex={-1}
+      style={{
+        visibility: state.toasts.length > 0 ? "visible" : "hidden",
+      }}
+    >
+      <ol
+        tabIndex={-1}
+        ref={listRef}
+        className={clx(
+          {
+            [lightThemeClass]: state.theme === "light",
+            [darkThemeClass]: state.theme === "dark",
+          },
+          toaster,
+          props.className
+        )}
+        data-interchain-toaster
+        data-theme={state.theme}
+        data-colorful={props.colorful}
+        data-y-position={state.positionTuple.y}
+        data-x-position={state.positionTuple.x}
+        style={{
+          ...assignInlineVars({
+            [frontToastHeightVar]: `${state.heights[0]?.height}px`,
+            [offsetVar]:
+              typeof props.offset === "number"
+                ? `${props.offset}px`
+                : props.offset || VIEWPORT_OFFSET,
+            [widthVar]: `${TOAST_WIDTH}px`,
+            [gapVar]: `${GAP}px`,
+          }),
+          ...props.style,
+        }}
+        onBlur={(event) => {
+          if (
+            isFocusWithinRef &&
+            !event.currentTarget.contains(event.relatedTarget as HTMLElement)
+          ) {
+            isFocusWithinRef = false;
+            if (lastFocusedElementRef) {
+              lastFocusedElementRef.focus({ preventScroll: true });
+              lastFocusedElementRef = null;
+            }
+          }
+        }}
+        onFocus={(event) => {
+          if (!isFocusWithinRef) {
+            isFocusWithinRef = true;
+            lastFocusedElementRef = event.relatedTarget as HTMLElement;
+          }
+        }}
+        onMouseEnter={() => {
+          state.expanded = true;
+        }}
+        onMouseMove={() => {
+          state.expanded = true;
+        }}
+        onMouseLeave={() => {
+          // Avoid setting expanded to false when interacting with a toast, e.g. swiping
+          if (!state.interacting) {
+            state.expanded = false;
+          }
+        }}
+        onPointerDown={() => {
+          state.interacting = true;
+        }}
+        onPointerUp={() => {
+          state.interacting = false;
+        }}
+      >
+        <For each={state.toasts}>
+          {(toast: Toast, index) => (
+            <ToastItem
+              key={toast.id}
+              index={index}
+              toast={toast}
+              duration={props.duration}
+              className={props.toastOptions?.className}
+              descriptionClassName={props.toastOptions?.descriptionClassName}
+              invert={props.invert}
+              visibleToasts={props.visibleToasts}
+              closeButton={props.closeButton}
+              interacting={state.interacting}
+              position={props.position}
+              style={props.toastOptions?.style}
+              removeToast={state.removeToast}
+              toasts={state.toasts}
+              heights={state.heights}
+              setHeights={state.updateHeights}
+              expandByDefault={props.expand}
+              expanded={state.expanded}
+            />
           )}
-          data-interchain-toaster
-          data-theme={state.theme}
-          data-colorful={props.colorful}
-          data-y-position={state.positionTuple.y}
-          data-x-position={state.positionTuple.x}
-          style={{
-            ...assignInlineVars({
-              [frontToastHeightVar]: `${state.heights[0]?.height}px`,
-              [offsetVar]:
-                typeof props.offset === "number"
-                  ? `${props.offset}px`
-                  : props.offset || VIEWPORT_OFFSET,
-              [widthVar]: `${TOAST_WIDTH}px`,
-              [gapVar]: `${GAP}px`,
-            }),
-            ...props.style,
-          }}
-          onBlur={(event) => {
-            if (
-              isFocusWithinRef &&
-              !event.currentTarget.contains(event.relatedTarget as HTMLElement)
-            ) {
-              isFocusWithinRef = false;
-              if (lastFocusedElementRef) {
-                lastFocusedElementRef.focus({ preventScroll: true });
-                lastFocusedElementRef = null;
-              }
-            }
-          }}
-          onFocus={(event) => {
-            if (!isFocusWithinRef) {
-              isFocusWithinRef = true;
-              lastFocusedElementRef = event.relatedTarget as HTMLElement;
-            }
-          }}
-          onMouseEnter={() => {
-            state.expanded = true;
-          }}
-          onMouseMove={() => {
-            state.expanded = true;
-          }}
-          onMouseLeave={() => {
-            // Avoid setting expanded to false when interacting with a toast, e.g. swiping
-            if (!state.interacting) {
-              state.expanded = false;
-            }
-          }}
-          onPointerDown={() => {
-            state.interacting = true;
-          }}
-          onPointerUp={() => {
-            state.interacting = false;
-          }}
-        >
-          <For each={state.toasts}>
-            {(toast: Toast, index) => (
-              <ToastItem
-                key={toast.id}
-                index={index}
-                toast={toast}
-                duration={props.duration}
-                className={props.toastOptions?.className}
-                descriptionClassName={props.toastOptions?.descriptionClassName}
-                invert={props.invert}
-                visibleToasts={props.visibleToasts}
-                closeButton={props.closeButton}
-                interacting={state.interacting}
-                position={props.position}
-                style={props.toastOptions?.style}
-                removeToast={state.removeToast}
-                toasts={state.toasts}
-                heights={state.heights}
-                setHeights={state.updateHeights}
-                expandByDefault={props.expand}
-                expanded={state.expanded}
-              />
-            )}
-          </For>
-        </ol>
-      </section>
-    </Show>
+        </For>
+      </ol>
+    </section>
   );
 }

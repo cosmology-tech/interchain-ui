@@ -16,19 +16,16 @@ import {
   FloatingList,
   FloatingPortal,
 } from "@floating-ui/react";
-import { create } from "zustand";
-import { store } from "@/models/store";
 
 import Box from "@/ui/box";
 import ChainSwapInput from "@/ui/chain-swap-input";
 import ChainListItem from "@/ui/chain-list-item";
 import { closestBodyElement } from "@/helpers/platform";
 
-import { chainSwapListBox } from "./chain-swap-combobox.css";
+import * as styles from "./chain-swap-combobox.css";
 import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.types";
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
-
-const useStore = create(store);
+import useTheme from "@/ui/hooks/use-theme";
 
 interface ItemProps {
   isActive: boolean;
@@ -91,10 +88,7 @@ export interface ChainSwapComboboxProps {
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
-  const themeStore = useStore((state) => ({
-    theme: state.theme,
-    themeClass: state.themeClass,
-  }));
+  const { theme, themeClass } = useTheme();
 
   const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [inputFocusing, setInputFocusing] = React.useState(false);
@@ -286,8 +280,10 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 },
               })}
               className={clx(
-                themeStore.themeClass,
-                chainSwapListBox[themeStore.theme]
+                themeClass,
+                props.size === "md"
+                  ? styles.chainSwapListBox[theme]
+                  : styles.chainSwapListBoxSm[theme]
               )}
             >
               <FloatingList elementsRef={listRef}>

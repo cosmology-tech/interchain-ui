@@ -166,6 +166,7 @@ export default function TransferItem(props: TransferItemProps) {
         space="$0"
         direction="horizontal"
         attributes={{
+          flexWrap: "wrap",
           minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
@@ -177,13 +178,14 @@ export default function TransferItem(props: TransferItemProps) {
           fontSize={props.isSmall ? "$xs" : "$sm"}
           color="$textSecondary"
           attributes={{
-            flex: 1,
+            flexGrow: 1,
+            flexShrink: 0,
           }}
         >
           {props.title}
         </Text>
 
-        <Box display="flex" flexWrap="wrap" gap={"$2"}>
+        <Box display="flex" flexWrap="wrap" gap="$2">
           {/* Available amount */}
           <Show when={props.hasAvailable}>
             <Stack
@@ -211,7 +213,7 @@ export default function TransferItem(props: TransferItemProps) {
                 fontWeight="$semibold"
                 fontSize={props.isSmall ? "$2xs" : "$sm"}
                 attributes={{
-                  marginRight: props.isSmall ? "$0" : "$9",
+                  marginRight: props.isSmall ? "$2" : "$9",
                   flexShrink: "0",
                 }}
               >
@@ -269,7 +271,7 @@ export default function TransferItem(props: TransferItemProps) {
           {/* @ts-expect-error */}
           <ScaffoldChainSwapCombobox
             className={styles.comboboxContainer}
-            size="md"
+            size={props.isSmall ? "sm" : "md"}
             defaultSelected={props.defaultSelectedItem ?? state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {
@@ -285,7 +287,9 @@ export default function TransferItem(props: TransferItemProps) {
                     display="flex"
                     justifyContent="flex-end"
                   >
-                    <Text fontSize="$2xl">{props.amount}</Text>
+                    <Text fontSize={props.isSmall ? "$lg" : "$2xl"}>
+                      {props.amount}
+                    </Text>
                   </Box>
                 ) : (
                   <Box>
@@ -296,7 +300,10 @@ export default function TransferItem(props: TransferItemProps) {
                       value={props.amount}
                       onInput={(event) => {
                         if (typeof props.onInput === "function") {
-                          props.onInput(state.currentItem, event.target.value);
+                          props.onInput(
+                            state.currentItem,
+                            (event.target as HTMLInputElement).value
+                          );
                         }
                       }}
                       onChange={(value) => {

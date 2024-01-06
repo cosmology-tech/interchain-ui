@@ -57,13 +57,23 @@ export const chainSwapInput = styleVariants({
   sm: [
     chainSwapInputBase,
     style({
-      maxWidth: "120px",
-      height: themeVars.space[8],
-      fontSize: themeVars.fontSize["2xs"],
-      fontWeight: themeVars.fontWeight.normal,
-      "@media": {
-        [`screen and (min-width: ${breakpoints.tablet}px)`]: {
-          fontSize: themeVars.fontSize["sm"],
+      maxWidth: "100px",
+      maxHeight: themeVars.space[11],
+      fontSize: themeVars.fontSize["lg"],
+      fontWeight: themeVars.fontWeight.semibold,
+      "@container": {
+        [`${transferItemRootContainer} (min-width: 350px)`]: {
+          maxWidth: "160px",
+        },
+      },
+      "@supports": {
+        [`not (container-type: inline-size)`]: {
+          "@media": {
+            [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
+              fontSize: themeVars.fontSize["2xl"],
+              maxWidth: "160px",
+            },
+          },
         },
       },
     }),
@@ -100,14 +110,8 @@ export const logoMd = style({
 });
 
 export const logoSm = style({
-  width: "16px",
-  height: "16px",
-  "@media": {
-    [`screen and (min-width: ${breakpoints.mdMobile}px)`]: {
-      width: "28px",
-      height: "28px",
-    },
-  },
+  width: "28px",
+  height: "28px",
 });
 
 const logoBase = style({

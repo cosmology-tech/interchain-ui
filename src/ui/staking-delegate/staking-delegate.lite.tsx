@@ -216,7 +216,9 @@ export default function StakingDelegate(props: StakingDelegateProps) {
               minValue={toNumber(props.inputMinValue)}
               maxValue={toNumber(props.inputMaxValue)}
               onChange={(value) => props.onValueChange?.(value)}
-              onInput={(rawValue) => props.onValueInput?.(rawValue)}
+              onInput={(event) =>
+                props.onValueInput?.((event.target as HTMLInputElement).value)
+              }
               formatOptions={{
                 minimumFractionDigits:
                   props.formatOptions?.minimumFractionDigits ?? 0,

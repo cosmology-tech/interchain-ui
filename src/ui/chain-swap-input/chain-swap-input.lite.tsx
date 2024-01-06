@@ -165,15 +165,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
               </Box>
             </Stack>
 
-            <Box
-              height="$11"
-              style={{
-                visibility:
-                  props.value && props.label && props.size === "md"
-                    ? "visible"
-                    : "hidden",
-              }}
-            >
+            <Box height="$11">
               <Text
                 as="p"
                 color="$text"
@@ -196,7 +188,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
         </Stack>
 
         {/* Numbers */}
-        <Box style={{ display: props.size === "md" ? "block" : "none" }}>
+        <Box display="block">
           {/* === Empty skeleton */}
           <Box
             display={!props.value ? "flex" : "none"}
