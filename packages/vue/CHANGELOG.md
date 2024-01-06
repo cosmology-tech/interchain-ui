@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.21](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.20...@interchain-ui/vue@1.2.21) (2024-01-06)
+
+### Bug Fixes
+
+- remove zustand warnings ([e3829f4](https://github.com/cosmology-tech/interchain-ui/commit/e3829f4052df16736cb54307e35563da2716a9ea))
+
 ## [1.2.20](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.19...@interchain-ui/vue@1.2.20) (2023-12-22)
 
 **Note:** Version bump only for package @interchain-ui/vue

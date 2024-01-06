@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.19.0...@interchain-ui/react@1.19.1) (2024-01-06)
+
+### Bug Fixes
+
+- remove zustand warnings ([e3829f4](https://github.com/cosmology-tech/interchain-ui/commit/e3829f4052df16736cb54307e35563da2716a9ea))
+- spacing ([4bf17e4](https://github.com/cosmology-tech/interchain-ui/commit/4bf17e4226addd8bdf8607281c325a3b63781c81))
+- **staking:** event type and value ([e1f14a9](https://github.com/cosmology-tech/interchain-ui/commit/e1f14a949d14f6ce433ecf27ef3e69f277cc184a))
+- **swap:** add small size styling ([80c2598](https://github.com/cosmology-tech/interchain-ui/commit/80c25980176e3a0eed44544769059cde91fa81a8))
+- **transfer-item:** prevent label from being squashed ([6a776d1](https://github.com/cosmology-tech/interchain-ui/commit/6a776d1b749d84045790c1731c941d703a918aac))
+
 # [1.19.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.18.3...@interchain-ui/react@1.19.0) (2024-01-05)
 
 ### Bug Fixes
