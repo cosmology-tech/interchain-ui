@@ -210,13 +210,20 @@ export default function SwapToken(props: SwapTokenProps) {
           alignItems: "center",
         }}
       >
-        <Text color="$textSecondary">{props.slippageLabel}</Text>
+        <Text
+          color="$textSecondary"
+          fontSize={state.isSmallSize() ? "$xs" : "$sm"}
+          className={styles.percentLabelContainer}
+        >
+          {props.slippageLabel}
+        </Text>
         <Stack
           className={styles.settingContainer}
           attributes={{
             position: "relative",
             justifyContent: "flex-end",
             alignItems: "center",
+            overflow: state.width < 400 ? "visible" : "hidden",
           }}
         >
           <Stack
@@ -237,10 +244,23 @@ export default function SwapToken(props: SwapTokenProps) {
             />
           </Stack>
 
-          <div ref={toteranceRef} className={styles.percentContainer}>
+          <div
+            ref={toteranceRef}
+            className={styles.percentContainer}
+            style={{
+              pointerEvents: state.isSetting ? "auto" : "none",
+              width: state.isSetting ? state.width : "auto",
+            }}
+          >
             <Stack
               attributes={{
                 alignItems: "center",
+                justifyContent: state.isSmallSize()
+                  ? "space-between"
+                  : "flex-end",
+                width: "100%",
+                backgroundColor:
+                  state.theme === "light" ? "$white" : "$gray700",
               }}
               space="$5"
             >
@@ -252,7 +272,7 @@ export default function SwapToken(props: SwapTokenProps) {
                       props?.onToleranceChange?.(percent);
                     }}
                     key={percent}
-                    size="sm"
+                    size={state.isSmallSize() ? "xs" : "sm"}
                     intent={state.tolerance === percent ? "tertiary" : "text"}
                   >
                     {percent}%

@@ -50,7 +50,10 @@ export const swapIcon = styleVariants({
 export const settingContainer = style({
   flex: 1,
   height: "100%",
-  overflow: "hidden",
+});
+
+export const percentLabelContainer = style({
+  zIndex: 0,
 });
 
 export const percentContainer = style({
@@ -58,4 +61,8 @@ export const percentContainer = style({
   top: "50%",
   transform: "translate(0, -50%)",
   right: "-400px",
+  width: "100%",
+  display: "flex",
+  justifyContent: "flex-end",
+  zIndex: 1,
 });
