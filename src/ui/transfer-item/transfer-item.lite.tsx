@@ -300,7 +300,10 @@ export default function TransferItem(props: TransferItemProps) {
                       value={props.amount}
                       onInput={(event) => {
                         if (typeof props.onInput === "function") {
-                          props.onInput(state.currentItem, event.target.value);
+                          props.onInput(
+                            state.currentItem,
+                            (event.target as HTMLInputElement).value
+                          );
                         }
                       }}
                       onChange={(value) => {
