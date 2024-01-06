@@ -1,21 +1,15 @@
 import * as React from "react";
-import { create } from "zustand";
-import { shallow } from "zustand/shallow";
+import { useStore } from "zustand";
 import { ModePreference, ThemeVariant } from "@/models/system.model";
-import { store } from "@/models/store";
-
-const useStore = create(store);
+import { store as interchainUIStore } from "@/models/store";
 
 const useInterchainStore = () => {
-  return useStore(
-    (state) => ({
-      theme: state.theme,
-      themeClass: state.themeClass,
-      themeClasses: state.themeClasses,
-      setThemeMode: state.setThemeMode,
-    }),
-    shallow
-  );
+  return useStore(interchainUIStore, (state) => ({
+    theme: state.theme,
+    themeClass: state.themeClass,
+    themeClasses: state.themeClasses,
+    setThemeMode: state.setThemeMode,
+  }));
 };
 
 type ThemeEvalMode = "force" | "normal";

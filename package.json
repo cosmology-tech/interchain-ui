@@ -107,7 +107,7 @@
     "clsx": "^1.2.1",
     "immer": "^9.0.21",
     "vue": "^3.2.47",
-    "zustand": "4.4.6"
+    "zustand": "^4.4.7"
   },
   "workspaces": {
     "packages": [
