@@ -24,7 +24,7 @@ import ChainSwapInput from "@/ui/chain-swap-input";
 import ChainListItem from "@/ui/chain-list-item";
 import { closestBodyElement } from "@/helpers/platform";
 
-import { chainSwapListBox } from "./chain-swap-combobox.css";
+import * as styles from "./chain-swap-combobox.css";
 import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.types";
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
 
@@ -287,7 +287,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
               })}
               className={clx(
                 themeStore.themeClass,
-                chainSwapListBox[themeStore.theme]
+                props.size === "md"
+                  ? styles.chainSwapListBox[themeStore.theme]
+                  : styles.chainSwapListBoxSm[themeStore.theme]
               )}
             >
               <FloatingList elementsRef={listRef}>

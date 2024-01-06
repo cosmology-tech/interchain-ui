@@ -46,6 +46,14 @@ export const Primary: Story = {
 
     const [from, setFrom] = useState<SwapTokenProps["to"] | null>(null);
 
+    const onToggleDirection = () => {
+      const prevTo = to;
+      const prevFrom = from;
+
+      setTo({ ...prevFrom, label: "To" });
+      setFrom({ ...prevTo, label: "From" });
+    };
+
     const { assets, isReady } = useMockData({
       onReady: (assets) => {
         setFrom({
@@ -80,9 +88,12 @@ export const Primary: Story = {
     if (!isReady || !to || !from) return <div>Loading ...</div>;
 
     return (
-      <Box display="flex" justifyContent="center">
-        <SwapToken {...props} from={from} to={to} />
-      </Box>
+      <SwapToken
+        {...props}
+        from={from}
+        to={to}
+        onToggleDirection={onToggleDirection}
+      />
     );
   },
 };

@@ -166,7 +166,7 @@ export default function TransferItem(props: TransferItemProps) {
         space="$0"
         direction="horizontal"
         attributes={{
-          flexWrap: "wrap-reverse",
+          flexWrap: "wrap",
           minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
@@ -185,7 +185,7 @@ export default function TransferItem(props: TransferItemProps) {
           {props.title}
         </Text>
 
-        <Box display="flex" flexWrap="wrap" gap={"$2"}>
+        <Box display="flex" flexWrap="wrap" gap="$2">
           {/* Available amount */}
           <Show when={props.hasAvailable}>
             <Stack
@@ -271,7 +271,7 @@ export default function TransferItem(props: TransferItemProps) {
           {/* @ts-expect-error */}
           <ScaffoldChainSwapCombobox
             className={styles.comboboxContainer}
-            size="md"
+            size={props.isSmall ? "sm" : "md"}
             defaultSelected={props.defaultSelectedItem ?? state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {
@@ -287,7 +287,9 @@ export default function TransferItem(props: TransferItemProps) {
                     display="flex"
                     justifyContent="flex-end"
                   >
-                    <Text fontSize="$2xl">{props.amount}</Text>
+                    <Text fontSize={props.isSmall ? "$lg" : "$2xl"}>
+                      {props.amount}
+                    </Text>
                   </Box>
                 ) : (
                   <Box>
