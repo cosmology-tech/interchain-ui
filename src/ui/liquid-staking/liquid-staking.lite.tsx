@@ -200,6 +200,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
             direction="horizontal"
             space={state.isSmallSize() ? "$2" : "$4"}
             attributes={{
+              flexWrap: "wrap",
               justifyContent: "space-between",
               alignItems: "center",
             }}
@@ -210,7 +211,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               fontWeight="$normal"
               color="$textSecondary"
               attributes={{
-                flexShrink: "1",
+                flexShrink: "0",
                 flexGrow: "0",
               }}
             >
@@ -223,7 +224,8 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               attributes={{
                 flexShrink: "0",
                 flexGrow: "1",
-                justifyContent: "flex-end",
+                justifyContent:
+                  state.width < 396 ? "space-between" : "flex-end",
                 alignItems: "center",
               }}
             >
