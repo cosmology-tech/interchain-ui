@@ -82,6 +82,9 @@ export const Primary: Story = {
             setTokenAmount(value);
             setNotionalValue(value * PRICE_PER_TOKEN);
           }}
+          onValueInput={(value) => {
+            console.log("value input", value);
+          }}
           inputPartials={[
             {
               label: "1/2",

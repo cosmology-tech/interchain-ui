@@ -26,7 +26,7 @@ useMetadata({
 });
 
 useDefaultProps<Partial<BasicModalProps>>({
-  closeOnClickaway: false,
+  closeOnClickaway: true,
 });
 
 export default function BasicModal(props: BasicModalProps) {
