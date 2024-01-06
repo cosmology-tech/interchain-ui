@@ -80,7 +80,7 @@ export const Primary: Story = {
     if (!isReady || !to || !from) return <div>Loading ...</div>;
 
     return (
-      <Box width="500px">
+      <Box display="flex" justifyContent="center">
         <SwapToken {...props} from={from} to={to} />
       </Box>
     );

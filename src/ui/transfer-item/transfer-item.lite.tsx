@@ -166,6 +166,7 @@ export default function TransferItem(props: TransferItemProps) {
         space="$0"
         direction="horizontal"
         attributes={{
+          flexWrap: "wrap-reverse",
           minHeight: "$10",
           justifyContent: "space-between",
           alignItems: "center",
@@ -177,7 +178,8 @@ export default function TransferItem(props: TransferItemProps) {
           fontSize={props.isSmall ? "$xs" : "$sm"}
           color="$textSecondary"
           attributes={{
-            flex: 1,
+            flexGrow: 1,
+            flexShrink: 0,
           }}
         >
           {props.title}
