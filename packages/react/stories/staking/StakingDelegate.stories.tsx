@@ -35,6 +35,7 @@ export const Primary: Story = {
 
     const [tokenAmount, setTokenAmount] = React.useState<number>(0);
     const [notionalValue, setNotionalValue] = React.useState<number>(0);
+    const [isMaxLoading, setIsMaxLoading] = React.useState<boolean>(false);
 
     return (
       <Box maxWidth="640px">
@@ -104,11 +105,17 @@ export const Primary: Story = {
             },
             {
               label: "Max",
-              // isLoading: true,
+              isLoading: isMaxLoading,
               onClick: () => {
                 console.log("Max change");
-                setTokenAmount(MAX);
-                setNotionalValue(MAX * PRICE_PER_TOKEN);
+                // Simulate getting max value
+                setIsMaxLoading(true);
+
+                setTimeout(() => {
+                  setIsMaxLoading(false);
+                  setTokenAmount(MAX);
+                  setNotionalValue(MAX * PRICE_PER_TOKEN);
+                }, 1000);
               },
             },
           ]}

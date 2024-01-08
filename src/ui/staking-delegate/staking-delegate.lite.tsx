@@ -287,25 +287,25 @@ export default function StakingDelegate(props: StakingDelegateProps) {
                     },
                   }}
                 >
-                  <Show
-                    when={!item.isLoading}
-                    else={
-                      <Spinner
-                        size="sm"
-                        color="$textPlaceholder"
-                        title="Loading"
-                      />
-                    }
+                  <Box display={item.isLoading ? "block" : "none"}>
+                    <Spinner
+                      size="sm"
+                      color="$textPlaceholder"
+                      title="Loading"
+                    />
+                  </Box>
+
+                  <Text
+                    as="span"
+                    fontSize="$sm"
+                    fontWeight="$semibold"
+                    color="$textSecondary"
+                    attributes={{
+                      display: item.isLoading ? "none" : "block",
+                    }}
                   >
-                    <Text
-                      as="span"
-                      fontSize="$sm"
-                      fontWeight="$semibold"
-                      color="$textSecondary"
-                    >
-                      {item.label}
-                    </Text>
-                  </Show>
+                    {item.label}
+                  </Text>
                 </Box>
               )}
             </For>
