@@ -29,6 +29,7 @@ export { default as ClipboardCopyText } from "./ui/clipboard-copy-text";
 export type { ClipboardCopyTextProps } from "./ui/clipboard-copy-text/clipboard-copy-text.types";
 export { default as ThemeProvider } from "./ui/theme-provider";
 export type { ThemeProviderProps } from "./ui/theme-provider/theme-provider.types";
+export { default as InterchainUIProvider } from "./ui/interchain-ui-provider";
 export { default as FadeIn } from "./ui/fade-in";
 export { default as PoolsHeader } from "./ui/pools-header";
 export type { PoolsHeaderProps } from "./ui/pools-header/pools-header.types";
@@ -222,6 +223,7 @@ export type { ChangeChainInputProps } from "./ui/change-chain-input/change-chain
 // Governance
 export { default as GovernanceProposalItem } from "./ui/governance/governance-proposal-item.lite";
 export { default as GovernanceVoteBreakdown } from "./ui/governance/governance-vote-breakdown.lite";
+export { default as GovernanceVoteForm } from "./ui/governance/governance-vote-form.lite";
 export { default as GovernanceResultCard } from "./ui/governance/governance-result-card.lite";
 
 // Mesh security
