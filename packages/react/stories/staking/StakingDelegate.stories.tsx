@@ -6,12 +6,8 @@ import { Asset as OsmosisAsset } from "@chain-registry/types";
 
 import Box from "../../src/ui/box";
 import Button from "../../src/ui/button";
-import Stack from "../../src/ui/stack";
 import Callout from "../../src/ui/callout";
 import StakingDelegate from "../../src/ui/staking-delegate";
-// import StakingAssetHeader from "../../src/ui/staking-asset-header";
-// import StakingClaimHeader from "../../src/ui/staking-claim-header";
-// import ValidatorList from "../../src/ui/validator-list";
 
 const meta: Meta = {
   title: "staking/StakingDelegate",

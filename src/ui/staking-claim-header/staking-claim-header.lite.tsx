@@ -1,4 +1,4 @@
-import { useMetadata } from "@builder.io/mitosis";
+import { useMetadata, useDefaultProps } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -12,6 +12,12 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<StakingClaimHeaderProps>>({
+  stakedLabel: "Staked",
+  claimRewardsLabel: "Claimable Rewards",
+  claimLabel: "Claim",
+});
+
 export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
   return (
     <Box
@@ -22,6 +28,8 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
         desktop: "repeat(2, minmax(310px, 1fr))",
       }}
       gap="$8"
+      className={props.className}
+      {...props.attributes}
     >
       <Stack
         direction="vertical"
@@ -36,7 +44,7 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
         <Stack space="$4">
           <Icon name="lock" color="$textSecondary" />
           <Text color="$textSecondary" fontWeight="$semibold">
-            Staked
+            {props.stakedLabel}
           </Text>
         </Stack>
         <Text
@@ -67,7 +75,7 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
           <Stack space="$4">
             <Icon name="bardFill" color="$rewardContent" />
             <Text color="$rewardContent" fontWeight="$semibold">
-              Claimable Rewards
+              {props.claimRewardsLabel}
             </Text>
           </Stack>
           <Text
@@ -82,8 +90,19 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
             {props.symbol}
           </Text>
         </Stack>
-        <Button intent="tertiary" onClick={() => props?.onClaim?.()}>
-          Claim
+
+        <Button
+          intent="tertiary"
+          disabled={props.isDisabled}
+          isLoading={props.isLoading}
+          onClick={() => {
+            if (props.isDisabled) return;
+            props?.onClaim?.();
+          }}
+        >
+          <Box as="span" minWidth="$19">
+            {props.claimLabel}
+          </Box>
         </Button>
       </Stack>
     </Box>

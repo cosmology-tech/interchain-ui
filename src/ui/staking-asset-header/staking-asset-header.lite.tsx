@@ -18,8 +18,27 @@ useDefaultProps<Partial<StakingAssetHeaderProps>>({
 
 export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
   return (
-    <Box display="flex" justifyContent="space-between" flexWrap="wrap" gap="$8">
-      <Stack attributes={{ flexBasis: "1/2", flexShrink: "0" }}>
+    <Box
+      display="flex"
+      justifyContent={{
+        mobile: "space-between",
+        tablet: "flex-start",
+      }}
+      flexWrap="wrap"
+      gap={{
+        mobile: "$8",
+        tablet: "140px",
+      }}
+      {...props.attributes}
+    >
+      <Stack
+        attributes={{
+          flexBasis: "1/2",
+          flexShrink: "0",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Box
           as="img"
           width="$16"
@@ -27,7 +46,7 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
           marginRight="$8"
           attributes={{
             src: props.imgSrc,
-            alt: "staking logo",
+            alt: `staking logo + ${props.symbol}`,
           }}
         />
 
@@ -37,10 +56,9 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
           </Text>
 
           <Stack
-            space="$5"
+            space="$4"
             attributes={{
-              marginTop: "$2",
-              marginBottom: "$3",
+              justifyContent: "center",
               alignItems: "center",
             }}
           >
@@ -54,6 +72,7 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
             >
               {props.totalAmount}
             </Text>
+
             <Text
               color="$textSecondary"
               fontWeight="$semibold"
@@ -64,25 +83,44 @@ export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
               {props.symbol}
             </Text>
           </Stack>
-          <Stack attributes={{ alignItems: "center" }}>
-            <Text fontSize="$xs" color="$rewardContent" fontWeight="$medium">
-              ≈ {formatCurrency(props.totalPrice)}
-            </Text>
-          </Stack>
+
+          <Text fontSize="$sm" fontWeight="$normal">
+            ≈{" "}
+            {formatCurrency(
+              props.totalPrice,
+              "en-US",
+              props.priceformatOptions
+            )}
+          </Text>
         </Stack>
       </Stack>
-      <Stack direction="vertical" space="$2" attributes={{ flexBasis: "1/2" }}>
+
+      <Stack direction="vertical" attributes={{ flexBasis: "1/2" }}>
         <Text color="$textSecondary" fontWeight="$semibold">
           {props.availableLabel}
         </Text>
-        <Stack space="$5" attributes={{ alignItems: "center" }}>
+
+        <Stack
+          space="$4"
+          attributes={{ alignItems: "center", justifyContent: "center" }}
+        >
           <Text fontSize="$3xl" fontWeight="$semibold">
             {props.available}
           </Text>
+
           <Text color="$textSecondary" fontWeight="$semibold">
             {props.symbol}
           </Text>
         </Stack>
+
+        <Text fontSize="$sm" fontWeight="$normal">
+          ≈{" "}
+          {formatCurrency(
+            props.availablePrice,
+            "en-US",
+            props.priceformatOptions
+          )}
+        </Text>
       </Stack>
     </Box>
   );

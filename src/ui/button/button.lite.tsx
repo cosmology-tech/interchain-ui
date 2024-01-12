@@ -109,43 +109,47 @@ export default function Button(props: ButtonProps) {
         ...props.domAttributes,
       }}
     >
-      <Show when={props.isLoading && props.spinnerPlacement === "start"}>
-        <Spinner
-          size={props.iconSize}
-          attributes={{
-            marginRight: !props.children ? "$0" : "$2",
-          }}
-        />
-      </Show>
-      <Show when={!!props.leftIcon}>
-        <Icon
-          name={props.leftIcon}
-          size={props.iconSize}
-          attributes={{
-            marginRight: !props.children ? "$0" : "$2",
-          }}
-        />
-      </Show>
+      <Spinner
+        size={props.iconSize}
+        attributes={{
+          display:
+            props.isLoading && props.spinnerPlacement === "start"
+              ? "inline-block"
+              : "none",
+        }}
+      />
 
-      {props.children}
+      <Icon
+        name={props.leftIcon}
+        size={props.iconSize}
+        attributes={{
+          display:
+            !!props.leftIcon && !props.isLoading ? "inline-block" : "none",
+          marginRight: !props.children ? "$0" : "$2",
+        }}
+      />
 
-      <Show when={!!props.rightIcon}>
-        <Icon
-          name={props.rightIcon}
-          size={props.iconSize}
-          attributes={{
-            marginLeft: !props.children ? "$0" : "$2",
-          }}
-        />
-      </Show>
-      <Show when={props.isLoading && props.spinnerPlacement === "end"}>
-        <Spinner
-          size={props.iconSize}
-          attributes={{
-            marginRight: !props.children ? "$0" : "$2",
-          }}
-        />
-      </Show>
+      <Show when={!props.isLoading}>{props.children}</Show>
+
+      <Icon
+        name={props.rightIcon}
+        size={props.iconSize}
+        attributes={{
+          display:
+            !!props.rightIcon && !props.isLoading ? "inline-block" : "none",
+          marginLeft: !props.children ? "$0" : "$2",
+        }}
+      />
+
+      <Spinner
+        size={props.iconSize}
+        attributes={{
+          display:
+            props.isLoading && props.spinnerPlacement === "end"
+              ? "inline-block"
+              : "none",
+        }}
+      />
     </Box>
   );
 }

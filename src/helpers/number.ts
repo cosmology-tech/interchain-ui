@@ -7,18 +7,30 @@ export function getCurrencyFormatter(
   return new Intl.NumberFormat(locale ?? "en-US", options);
 }
 
-export function formatCurrency(
+export function formatIntlNumber(
   value: number,
   locale?: string,
   options?: Intl.NumberFormatOptions
 ) {
   const formatter = new Intl.NumberFormat(locale ?? "en-US", {
     ...options,
-    style: options?.style ?? "currency",
+    style: options?.style ?? "decimal",
     currency: options?.currency ?? "USD",
+    minimumFractionDigits: options?.minimumFractionDigits ?? 0,
     maximumFractionDigits: options?.maximumFractionDigits ?? 4,
   });
   return formatter.format(value);
+}
+
+export function formatCurrency(
+  value: number,
+  locale?: string,
+  options?: Intl.NumberFormatOptions
+) {
+  return formatIntlNumber(value, locale, {
+    ...options,
+    style: "currency",
+  });
 }
 
 export function safelyFormatNumberWithFallback(
@@ -65,6 +77,9 @@ export function toNumber(value?: string | number, fallbackValue?: number) {
   return Number(value);
 }
 
-export function formatNumeric(value: string | number, precision = 6) {
-  return new BigNumber(value).decimalPlaces(precision).toString();
+export function formatNumeric(
+  value: string | number,
+  maximumFractionDigits = 6
+) {
+  return new BigNumber(value).decimalPlaces(maximumFractionDigits).toString();
 }

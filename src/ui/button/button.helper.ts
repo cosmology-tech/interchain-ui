@@ -41,24 +41,28 @@ export type ButtonIntent =
 const buttonSize: Record<ButtonSize, Sprinkles> = {
   xs: {
     px: "$4",
+    gap: "$2",
     fontSize: "$xs",
     height: "$10",
     minWidth: "$10",
   },
   sm: {
     px: "$6",
+    gap: "$2",
     fontSize: "$sm",
     height: "$12",
     minWidth: "$12",
   },
   md: {
     px: "$8",
+    gap: "$2",
     fontSize: "$md",
     height: "$14",
     minWidth: "$14",
   },
   lg: {
     px: "$10",
+    gap: "$2",
     fontSize: "$lg",
     height: "$15",
     minWidth: "$15",

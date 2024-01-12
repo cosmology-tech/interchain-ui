@@ -42,8 +42,8 @@ export const textFieldAddonSizes = styleVariants({
     style({
       paddingLeft: themeVars.space[8],
       paddingRight: themeVars.space[8],
-      paddingTop: themeVars.space[10],
-      paddingBottom: themeVars.space[10],
+      paddingTop: themeVars.space[4],
+      paddingBottom: themeVars.space[4],
     }),
   ],
 });

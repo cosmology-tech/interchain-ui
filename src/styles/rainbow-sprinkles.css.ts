@@ -25,6 +25,7 @@ const responsiveProperties = defineProperties({
   defaultCondition: "mobile",
   dynamicProperties: {
     display: true,
+    tableLayout: true,
     backgroundImage: true,
     backgroundSize: true,
     backgroundPosition: true,
