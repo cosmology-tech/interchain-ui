@@ -18,7 +18,18 @@ useDefaultProps<Partial<StakingAssetHeaderProps>>({
 
 export default function StakingAssetHeader(props: StakingAssetHeaderProps) {
   return (
-    <Box display="flex" justifyContent="space-between" flexWrap="wrap" gap="$8">
+    <Box
+      display="flex"
+      justifyContent={{
+        mobile: "space-between",
+        tablet: "flex-start",
+      }}
+      flexWrap="wrap"
+      gap={{
+        mobile: "$8",
+        tablet: "140px",
+      }}
+    >
       <Stack attributes={{ flexBasis: "1/2", flexShrink: "0" }}>
         <Box
           as="img"
