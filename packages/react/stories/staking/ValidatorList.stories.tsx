@@ -8,15 +8,12 @@ import Box from "../../src/ui/box";
 import Button from "../../src/ui/button";
 import Text from "../../src/ui/text";
 import Stack from "../../src/ui/stack";
-
-import StakingAssetHeader from "../../src/ui/staking-asset-header";
-import StakingClaimHeader from "../../src/ui/staking-claim-header";
 import ValidatorList from "../../src/ui/validator-list";
 import ValidatorNameCell from "../../src/ui/validator-list/validator-name-cell";
 import ValidatorTokenAmountCell from "../../src/ui/validator-list/validator-token-amount-cell";
 
 const meta: Meta = {
-  title: "staking/Staking",
+  title: "staking/ValidatorList",
   argTypes: {},
 };
 
@@ -28,7 +25,7 @@ const osmosisAssets: OsmosisAsset[] = [...assets.assets, ...asset_list.assets];
 
 const OSMO = getAssetByDenom(osmosisAssets, "uosmo");
 
-type SimpleValidatorData = {
+type ValidatorRowData = {
   validatorId?: string;
   validatorName: string;
   validatorImg: string;
@@ -37,34 +34,9 @@ type SimpleValidatorData = {
   tokenSymbol: string;
 };
 
-type ListingValidatorData = {
-  validatorId?: string;
-  validatorName: string;
-  validatorImg: string;
-  tokenSymbol: string;
-  votingPower: number;
-  commission: number;
-  apr: string;
-};
-
-export const Primary: Story = {
+export const VariantSolid: Story = {
   args: {
-    assetHeader: {
-      imgSrc: OSMO.logo_URIs?.png,
-      symbol: OSMO.symbol,
-      totalAmount: 232.2898,
-      totalPrice: 0.356784,
-      available: 89.333,
-      availablePrice: 33.456688,
-    },
-    claimHeader: {
-      stakedAmount: 232.2898,
-      rewardsAmount: 232.2898,
-      symbol: OSMO.symbol,
-      isLoading: false,
-      isDisabled: true,
-    },
-    selfValidators: [
+    data: [
       {
         validatorName: "Polkachu",
         validatorImg:
@@ -89,8 +61,94 @@ export const Primary: Story = {
         claimableRewards: 7500,
         tokenSymbol: OSMO.symbol,
       },
-    ] satisfies SimpleValidatorData[],
-    allValidators: [
+    ] satisfies ValidatorRowData[],
+  },
+  render: (props) => {
+    return (
+      <ValidatorList
+        columns={[
+          {
+            id: "validator",
+            label: "Validator",
+            width: "196px",
+            align: "left",
+            render: (rowData: ValidatorRowData) => (
+              <ValidatorNameCell
+                validatorName={rowData.validatorName}
+                validatorImg={rowData.validatorImg}
+              />
+            ),
+          },
+          {
+            id: "stakedAmount",
+            label: "Amount Staked",
+            width: "196px",
+            align: "right",
+            render: (rowData: ValidatorRowData) => (
+              <ValidatorTokenAmountCell
+                amount={rowData.stakedAmount}
+                symbol={rowData.tokenSymbol}
+                formatOptions={{
+                  maximumFractionDigits: 4,
+                }}
+              />
+            ),
+          },
+          {
+            id: "claimableRewards",
+            label: "Claimable Rewards",
+            width: "196px",
+            align: "right",
+            render: (rowData: ValidatorRowData) => (
+              <ValidatorTokenAmountCell
+                amount={rowData.claimableRewards}
+                symbol={rowData.tokenSymbol}
+                formatOptions={{
+                  maximumFractionDigits: 4,
+                }}
+              />
+            ),
+          },
+          {
+            id: "action",
+            width: "196px",
+            align: "right",
+            render: () => (
+              <Box
+                width="100%"
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Button variant="solid" intent="tertiary" size="sm">
+                  Manage
+                </Button>
+              </Box>
+            ),
+          },
+        ]}
+        data={props.data}
+        tableProps={{
+          minWidth: "800px",
+        }}
+      />
+    );
+  },
+};
+
+type ValidatorRowData2 = {
+  validatorId?: string;
+  validatorName: string;
+  validatorImg: string;
+  tokenSymbol: string;
+  votingPower: number;
+  commission: number;
+  apr: string;
+};
+
+export const VariantGhost: Story = {
+  args: {
+    data: [
       {
         validatorId: "1",
         validatorName: "Polkachu",
@@ -121,207 +179,96 @@ export const Primary: Story = {
         commission: 0.05,
         apr: "35.00%",
       },
-    ] satisfies ListingValidatorData[],
+    ] satisfies ValidatorRowData2[],
   },
   render: (props) => {
     return (
-      <Stack direction="vertical" attributes={{ maxWidth: "634px" }}>
-        <Text fontSize="$xl" fontWeight="$semibold">
-          Staking
-        </Text>
-
-        <Box
-          pt={{
-            mobile: "$10",
-            tablet: "$13",
-            desktop: "$13",
-          }}
-          pb={{
-            mobile: "$8",
-            tablet: "$12",
-            desktop: "$12",
-          }}
-        >
-          <StakingAssetHeader {...props.assetHeader} />
-        </Box>
-
-        <Box pb="$14">
-          <StakingClaimHeader {...props.claimHeader} />
-        </Box>
-
-        <Text
-          color="$textSecondary"
-          fontSize="$lg"
-          fontWeight="$semibold"
-          attributes={{ marginBottom: "$9" }}
-        >
-          Your Validators
-        </Text>
-
-        <ValidatorList
-          columns={[
-            {
-              id: "validator",
-              label: "Validator",
-              width: "196px",
-              align: "left",
-              render: (rowData: SimpleValidatorData) => (
-                <ValidatorNameCell
-                  validatorName={rowData.validatorName}
-                  validatorImg={rowData.validatorImg}
-                />
-              ),
-            },
-            {
-              id: "stakedAmount",
-              label: "Amount Staked",
-              width: "196px",
-              align: "right",
-              render: (rowData: SimpleValidatorData) => (
-                <ValidatorTokenAmountCell
-                  amount={rowData.stakedAmount}
-                  symbol={rowData.tokenSymbol}
-                  formatOptions={{
-                    maximumFractionDigits: 4,
-                  }}
-                />
-              ),
-            },
-            {
-              id: "claimableRewards",
-              label: "Claimable Rewards",
-              width: "196px",
-              align: "right",
-              render: (rowData: SimpleValidatorData) => (
-                <ValidatorTokenAmountCell
-                  amount={rowData.claimableRewards}
-                  symbol={rowData.tokenSymbol}
-                  formatOptions={{
-                    maximumFractionDigits: 4,
-                  }}
-                />
-              ),
-            },
-            {
-              id: "action",
-              width: "196px",
-              align: "right",
-              render: () => (
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="flex-end"
-                  alignItems="center"
+      <ValidatorList
+        variant="ghost"
+        columns={[
+          {
+            id: "validator",
+            label: "Validator",
+            width: "196px",
+            align: "left",
+            render: (rowData: ValidatorRowData2) => (
+              <ValidatorNameCell
+                size="sm"
+                validatorId={rowData.validatorId}
+                validatorName={rowData.validatorName}
+                validatorImg={rowData.validatorImg}
+              />
+            ),
+          },
+          {
+            id: "votingPower",
+            label: "Voting Power",
+            width: "196px",
+            align: "right",
+            render: (rowData: ValidatorRowData2) => (
+              <ValidatorTokenAmountCell
+                amount={rowData.votingPower}
+                formatOptions={{
+                  maximumFractionDigits: 4,
+                }}
+              />
+            ),
+          },
+          {
+            id: "commission",
+            label: "Commission",
+            width: "196px",
+            align: "right",
+            render: (rowData: ValidatorRowData2) => (
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+                gap="$2"
+              >
+                <Text
+                  fontWeight="$normal"
+                  fontSize="$xs"
+                  color="$textSecondary"
                 >
-                  <Button variant="solid" intent="tertiary" size="sm">
-                    Manage
-                  </Button>
-                </Box>
-              ),
-            },
-          ]}
-          data={props.selfValidators}
-          tableProps={{
-            minWidth: "800px",
-          }}
-        />
+                  {rowData.tokenSymbol}
+                </Text>
 
-        <Text
-          color="$textSecondary"
-          fontSize="$lg"
-          fontWeight="$semibold"
-          attributes={{ my: "$12" }}
-        >
-          All Validators
-        </Text>
-
-        <ValidatorList
-          variant="ghost"
-          columns={[
-            {
-              id: "validator",
-              label: "Validator",
-              width: "196px",
-              align: "left",
-              render: (rowData: ListingValidatorData) => (
-                <ValidatorNameCell
-                  size="sm"
-                  validatorId={rowData.validatorId}
-                  validatorName={rowData.validatorName}
-                  validatorImg={rowData.validatorImg}
-                />
-              ),
-            },
-            {
-              id: "votingPower",
-              label: "Voting Power",
-              width: "196px",
-              align: "right",
-              render: (rowData: ListingValidatorData) => (
-                <ValidatorTokenAmountCell
-                  amount={rowData.votingPower}
-                  formatOptions={{
-                    maximumFractionDigits: 4,
-                  }}
-                />
-              ),
-            },
-            {
-              id: "commission",
-              label: "Commission",
-              width: "196px",
-              align: "right",
-              render: (rowData: ListingValidatorData) => (
-                <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="flex-end"
-                  gap="$2"
-                >
-                  <Text
-                    fontWeight="$normal"
-                    fontSize="$xs"
-                    color="$textSecondary"
-                  >
-                    {rowData.tokenSymbol}
-                  </Text>
-
-                  <Text fontWeight="$semibold" fontSize="$xs">
-                    {rowData.commission}%
-                  </Text>
-                </Box>
-              ),
-            },
-            {
-              id: "apr",
-              label: "APR",
-              width: "196px",
-              align: "right",
-            },
-            {
-              id: "action",
-              width: "196px",
-              align: "right",
-              render: () => (
-                <Box
-                  width="100%"
-                  display="flex"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                >
-                  <Button variant="solid" intent="secondary" size="sm">
-                    Manage
-                  </Button>
-                </Box>
-              ),
-            },
-          ]}
-          data={props.allValidators}
-          tableProps={{
-            minWidth: "800px",
-          }}
-        />
-      </Stack>
+                <Text fontWeight="$semibold" fontSize="$xs">
+                  {rowData.commission}%
+                </Text>
+              </Box>
+            ),
+          },
+          {
+            id: "apr",
+            label: "APR",
+            width: "196px",
+            align: "right",
+          },
+          {
+            id: "action",
+            width: "196px",
+            align: "right",
+            render: () => (
+              <Box
+                width="100%"
+                display="flex"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Button variant="solid" intent="secondary" size="sm">
+                  Manage
+                </Button>
+              </Box>
+            ),
+          },
+        ]}
+        data={props.data}
+        tableProps={{
+          minWidth: "800px",
+        }}
+      />
     );
   },
 };

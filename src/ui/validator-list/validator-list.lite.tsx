@@ -1,9 +1,6 @@
 import { For, Show, useDefaultProps, useMetadata } from "@builder.io/mitosis";
-import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
-import ValidatorListItem from "../validator-list-item";
-import type { ValidatorListItemProps } from "../validator-list-item/validator-list-item.types";
 import type { ValidatorListProps } from "./validator-list.types";
 
 useMetadata({
@@ -13,10 +10,13 @@ useMetadata({
 });
 
 useDefaultProps<Partial<ValidatorListProps>>({
-  variant: "card",
+  variant: "solid",
+  gridLayout: "auto",
+  columns: [],
+  data: [],
 });
 
-export default function BondingList(props: ValidatorListProps) {
+export default function ValidatorList(props: ValidatorListProps) {
   return (
     <Box
       overflowX={{
@@ -24,56 +24,75 @@ export default function BondingList(props: ValidatorListProps) {
         tablet: "auto",
         desktop: "auto",
       }}
+      className={props.className}
     >
-      <Box minWidth="634px">
-        <Show when={props.variant === "card"}>
-          <Stack
-            attributes={{
-              marginBottom: "$7",
-              paddingRight: "$22",
-            }}
-          >
-            <For each={["Validator", "Amount staked", "Claimable rewards"]}>
-              {(item: string, index: number) => (
-                <Text
-                  key={item}
-                  color="$textSecondary"
-                  textAlign={index === 0 ? "left" : "right"}
-                  attributes={{
-                    flex: "1",
-                  }}
+      <Box
+        as="table"
+        padding={props.variant === "solid" ? "$10" : "$0"}
+        backgroundColor={props.variant === "solid" ? "$cardBg" : "$transparent"}
+        borderRadius="$lg"
+        tableLayout={props.gridLayout === "auto" ? "auto" : "fixed"}
+        {...props.tableProps}
+      >
+        <Box as="thead">
+          <Box as="tr">
+            <For each={props.columns}>
+              {(column) => (
+                <Box
+                  as="th"
+                  key={column.id}
+                  paddingX="$2"
+                  paddingY="$5"
+                  width={column.width}
+                  textAlign={column.align}
                 >
-                  {item}
-                </Text>
+                  <Text
+                    color={column.color ?? "$textSecondary"}
+                    textTransform={column.textTransform}
+                    fontWeight="$normal"
+                    fontSize="$sm"
+                  >
+                    {column.label}
+                  </Text>
+                </Box>
               )}
             </For>
-          </Stack>
-        </Show>
+          </Box>
+        </Box>
 
-        <Box
-          paddingBottom="$7"
-          paddingTop="$7"
-          paddingLeft="$7"
-          paddingRight="$9"
-          backgroundColor={
-            props.variant === "card" ? "$cardBg" : "$transparent"
-          }
-          borderRadius="$lg"
-        >
-          <Stack direction="vertical" space="$7">
-            <For each={props.list}>
-              {(item: ValidatorListItemProps, index: number) => (
-                <ValidatorListItem
-                  key={index}
-                  validatorName={item.validatorName}
-                  validatorImg={item.validatorImg}
-                  stakedAmount={item.stakedAmount}
-                  rewardsAmount={item.rewardsAmount}
-                  symbol={item.symbol}
-                />
-              )}
-            </For>
-          </Stack>
+        <Box as="tbody">
+          <For each={props.data}>
+            {(item) => (
+              <Box as="tr">
+                <For each={props.columns}>
+                  {(column, index) => (
+                    <Box
+                      as={index === 0 ? "td" : "td"}
+                      key={column.id}
+                      paddingX="$2"
+                      paddingY="$5"
+                      textAlign={column.align}
+                    >
+                      <Show
+                        when={!!column.render}
+                        else={
+                          <Text
+                            color={column.color}
+                            fontWeight="$semibold"
+                            fontSize="$xs"
+                          >
+                            {item[column.id]}
+                          </Text>
+                        }
+                      >
+                        {column.render(item, column)}
+                      </Show>
+                    </Box>
+                  )}
+                </For>
+              </Box>
+            )}
+          </For>
         </Box>
       </Box>
     </Box>

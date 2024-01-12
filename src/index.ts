@@ -179,8 +179,12 @@ export type { ConnectedWalletProps } from "./ui/connected-wallet/connected-walle
 export { default as Spinner } from "./ui/spinner";
 export { default as StakingAssetHeader } from "./ui/staking-asset-header";
 export { default as StakingClaimHeader } from "./ui/staking-claim-header";
-export { default as ValidatorListItem } from "./ui/validator-list-item";
+
+// ==== Validators
 export { default as ValidatorList } from "./ui/validator-list";
+export { default as ValidatorNameCell } from "./ui/validator-list/validator-name-cell.lite";
+export { default as ValidatorTokenAmountCell } from "./ui/validator-list/validator-token-amount-cell.lite";
+
 export { default as LiquidStaking } from "./ui/liquid-staking";
 export type { LiquidStakingProps } from "./ui/liquid-staking/liquid-staking.types";
 export { default as StakingDelegate } from "./ui/staking-delegate";
