@@ -110,14 +110,10 @@ export default function Button(props: ButtonProps) {
       }}
     >
       <Show when={props.isLoading && props.spinnerPlacement === "start"}>
-        <Spinner
-          size={props.iconSize}
-          attributes={{
-            marginRight: !props.children ? "$0" : "$2",
-          }}
-        />
+        <Spinner size={props.iconSize} />
       </Show>
-      <Show when={!!props.leftIcon}>
+
+      <Show when={!!props.leftIcon && !props.isLoading}>
         <Icon
           name={props.leftIcon}
           size={props.iconSize}
@@ -127,9 +123,9 @@ export default function Button(props: ButtonProps) {
         />
       </Show>
 
-      {props.children}
+      <Show when={!props.isLoading}>{props.children}</Show>
 
-      <Show when={!!props.rightIcon}>
+      <Show when={!!props.rightIcon && !props.isLoading}>
         <Icon
           name={props.rightIcon}
           size={props.iconSize}
@@ -138,13 +134,9 @@ export default function Button(props: ButtonProps) {
           }}
         />
       </Show>
+
       <Show when={props.isLoading && props.spinnerPlacement === "end"}>
-        <Spinner
-          size={props.iconSize}
-          attributes={{
-            marginRight: !props.children ? "$0" : "$2",
-          }}
-        />
+        <Spinner size={props.iconSize} />
       </Show>
     </Box>
   );

@@ -38,6 +38,8 @@ export const Primary: Story = {
       stakedAmount: 232.2898,
       rewardsAmount: 232.2898,
       symbol: OSMO.symbol,
+      isLoading: false,
+      isDisabled: true,
     },
     selfValidators: [
       {
