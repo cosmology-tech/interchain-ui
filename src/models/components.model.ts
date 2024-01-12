@@ -16,3 +16,8 @@ export type BaseState = {
 export type CSS = Partial<CSSStyleDeclaration> & {
   [key: string]: Partial<CSSStyleDeclaration> | string;
 };
+
+export type NumberFormatOptions = {
+  minimumFractionDigits: number;
+  maximumFractionDigits: number;
+};

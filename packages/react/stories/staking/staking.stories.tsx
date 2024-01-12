@@ -30,8 +30,9 @@ export const Primary: Story = {
       imgSrc: OSMO.logo_URIs?.png,
       symbol: OSMO.symbol,
       totalAmount: 232.2898,
-      totalPrice: 0.35,
+      totalPrice: 0.356784,
       available: 89.333,
+      availablePrice: 33.456688,
     },
     claimHeader: {
       stakedAmount: 232.2898,
