@@ -109,35 +109,47 @@ export default function Button(props: ButtonProps) {
         ...props.domAttributes,
       }}
     >
-      <Show when={props.isLoading && props.spinnerPlacement === "start"}>
-        <Spinner size={props.iconSize} />
-      </Show>
+      <Spinner
+        size={props.iconSize}
+        attributes={{
+          display:
+            props.isLoading && props.spinnerPlacement === "start"
+              ? "inline-block"
+              : "none",
+        }}
+      />
 
-      <Show when={!!props.leftIcon && !props.isLoading}>
-        <Icon
-          name={props.leftIcon}
-          size={props.iconSize}
-          attributes={{
-            marginRight: !props.children ? "$0" : "$2",
-          }}
-        />
-      </Show>
+      <Icon
+        name={props.leftIcon}
+        size={props.iconSize}
+        attributes={{
+          display:
+            !!props.leftIcon && !props.isLoading ? "inline-block" : "none",
+          marginRight: !props.children ? "$0" : "$2",
+        }}
+      />
 
       <Show when={!props.isLoading}>{props.children}</Show>
 
-      <Show when={!!props.rightIcon && !props.isLoading}>
-        <Icon
-          name={props.rightIcon}
-          size={props.iconSize}
-          attributes={{
-            marginLeft: !props.children ? "$0" : "$2",
-          }}
-        />
-      </Show>
+      <Icon
+        name={props.rightIcon}
+        size={props.iconSize}
+        attributes={{
+          display:
+            !!props.rightIcon && !props.isLoading ? "inline-block" : "none",
+          marginLeft: !props.children ? "$0" : "$2",
+        }}
+      />
 
-      <Show when={props.isLoading && props.spinnerPlacement === "end"}>
-        <Spinner size={props.iconSize} />
-      </Show>
+      <Spinner
+        size={props.iconSize}
+        attributes={{
+          display:
+            props.isLoading && props.spinnerPlacement === "end"
+              ? "inline-block"
+              : "none",
+        }}
+      />
     </Box>
   );
 }

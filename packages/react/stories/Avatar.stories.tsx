@@ -6,6 +6,8 @@ import AvatarBadge from "../src/ui/avatar/avatar-badge";
 import Box from "../src/ui/box";
 import Stack from "../src/ui/stack";
 
+const dogImage = `https://picsum.photos/id/237/200/200`;
+
 const meta: Meta<typeof Avatar> = {
   component: Avatar,
   title: "Avatar",
@@ -22,11 +24,7 @@ export const Primary: Story = {
   render: (props) => {
     return (
       <Stack direction="horizontal" space="$4">
-        <Avatar
-          name="Dan Abrahmov"
-          size="2xs"
-          src="https://bit.ly/dan-abramov"
-        />
+        <Avatar name="Puppy" size="2xs" src={dogImage} />
         <Avatar
           name="Koala Titi"
           size="xs"
@@ -35,16 +33,8 @@ export const Primary: Story = {
         <Avatar name="Abu Da" size="sm" src="https://bit.ly/hellasdasdasd" />
         <Avatar name="Baby G" size="md" src="https://bit.ly/hellasdasdasd" />
         <Avatar name="Baby G" size="lg" src="https://bit.ly/hellasdasdasd" />
-        <Avatar
-          name="Dan Abrahmov"
-          size="xl"
-          src="https://bit.ly/dan-abramov"
-        />
-        <Avatar
-          name="Dan Abrahmov"
-          size="2xl"
-          src="https://bit.ly/dan-abramov"
-        />
+        <Avatar name="Puppy" size="xl" src={dogImage} />
+        <Avatar name="Puppy" size="2xl" src={dogImage} />
       </Stack>
     );
   },
@@ -55,14 +45,14 @@ export const WithBadge: Story = {
   render: (props) => {
     return (
       <Stack direction="horizontal" space="$4">
-        <Avatar name="Dan Abrahmov" size="md" src="https://bit.ly/dan-abramov">
+        <Avatar name="Dan" size="md" src={dogImage}>
           <AvatarBadge
             attributes={{
               backgroundColor: "$green400",
             }}
           />
         </Avatar>
-        <Avatar name="Dan Abrahmov" size="md" src="https://bit.ly/dan-abramov">
+        <Avatar name="Dog" size="md" src={dogImage}>
           <AvatarBadge
             size="2em"
             attributes={{
@@ -75,8 +65,8 @@ export const WithBadge: Story = {
               height="100%"
               borderRadius="$full"
               attributes={{
-                alt: "Dan small",
-                src: "https://bit.ly/dan-abramov",
+                alt: "Dog small",
+                src: dogImage,
               }}
             />
           </AvatarBadge>

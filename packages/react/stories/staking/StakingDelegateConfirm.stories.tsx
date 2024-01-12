@@ -10,7 +10,7 @@ import Callout from "../../src/ui/callout";
 import StakingDelegate from "../../src/ui/staking-delegate";
 
 const meta: Meta = {
-  title: "staking/StakingDelegate",
+  title: "staking/StakingDelegateConfirm",
   argTypes: {},
 };
 

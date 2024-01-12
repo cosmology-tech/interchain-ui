@@ -1,4 +1,7 @@
-import type { BaseComponentProps } from "../../models/components.model";
+import type {
+  BaseComponentProps,
+  NumberFormatOptions,
+} from "../../models/components.model";
 import type { BoxProps } from "../box/box.types";
 
 export type DelegationItem = {
@@ -12,11 +15,6 @@ export type InputPartialChange = {
   label: string;
   isLoading?: boolean;
   onClick: () => void;
-};
-
-export type FormatOptions = {
-  minimumFractionDigits: number;
-  maximumFractionDigits: number;
 };
 
 export interface StakingDelegateProps extends BaseComponentProps {
@@ -40,7 +38,7 @@ export interface StakingDelegateProps extends BaseComponentProps {
   inputMaxValue?: number;
   inputMinValue?: number;
   isLoadingNotionalValue?: boolean;
-  formatOptions?: FormatOptions;
+  formatOptions?: NumberFormatOptions;
   attributes?: Omit<
     BoxProps,
     "attributes" | "as" | "className" | "children" | "style" | "ref"
