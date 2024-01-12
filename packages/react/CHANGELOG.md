@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.19.3...@interchain-ui/react@1.19.4) (2024-01-12)
+
+### Bug Fixes
+
+- **staking:** add loading and disabled state for button ([32fbc9f](https://github.com/cosmology-tech/interchain-ui/commit/32fbc9f3cd7d9fd21a82e035fdcf599dc31e2d9e))
+- **staking:** add redelegate example ([555f618](https://github.com/cosmology-tech/interchain-ui/commit/555f618a7ed031d07a87d47e8269c1c80d55296f))
+- **staking:** header text styles and format ([ca80ad6](https://github.com/cosmology-tech/interchain-ui/commit/ca80ad6765446e15b8c775b0692c235915d33570))
+- **staking:** more robust validator list component api ([2ef1a14](https://github.com/cosmology-tech/interchain-ui/commit/2ef1a1427b428b856f9656381366664fe5d0a1e6))
+
 ## [1.19.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.19.2...@interchain-ui/react@1.19.3) (2024-01-10)
 
 **Note:** Version bump only for package @interchain-ui/react
