@@ -222,6 +222,9 @@ export type { ChangeChainListItemProps } from "./ui/change-chain-list-item/chang
 export { default as ChangeChainInput } from "./ui/change-chain-input";
 export type { ChangeChainInputProps } from "./ui/change-chain-input/change-chain-input.types";
 
+// Marketing components
+export { default as Timeline } from "./ui/timeline";
+
 // Governance
 export { default as GovernanceProposalItem } from "./ui/governance/governance-proposal-item.lite";
 export { default as GovernanceVoteBreakdown } from "./ui/governance/governance-vote-breakdown.lite";
