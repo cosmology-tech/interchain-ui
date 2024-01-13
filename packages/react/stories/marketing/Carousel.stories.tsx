@@ -6,7 +6,7 @@ import Carousel from "../../src/ui/carousel";
 
 const meta: Meta<typeof Carousel> = {
   component: Carousel,
-  title: "web/Carousel",
+  title: "marketing/Carousel",
   tags: ["autodocs"],
   argTypes: {},
 };
