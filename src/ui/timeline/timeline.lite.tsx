@@ -68,7 +68,7 @@ export default function Timeline(props: TimelineProps) {
               </Text>
 
               <Text color="$text" fontWeight="$semibold" fontSize="$md">
-                {event.title} #{index}
+                {event.title}
               </Text>
 
               <Show when={event.description}>
