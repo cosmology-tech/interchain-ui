@@ -7,7 +7,7 @@ import { BreadcrumbLink } from "../../src/ui/breadcrumb/breadcrumb.types";
 
 const meta: Meta<typeof Breadcrumb> = {
   component: Breadcrumb,
-  title: "web/Breadcrumb",
+  title: "marketing/Breadcrumb",
   tags: ["autodocs"],
   argTypes: {},
 };

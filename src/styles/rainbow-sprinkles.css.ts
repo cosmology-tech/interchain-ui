@@ -38,6 +38,7 @@ const responsiveProperties = defineProperties({
     flexDirection: true,
     flexWrap: true,
     alignItems: true,
+    alignSelf: true,
     justifyContent: true,
     padding: allSpace,
     paddingLeft: allSpace,

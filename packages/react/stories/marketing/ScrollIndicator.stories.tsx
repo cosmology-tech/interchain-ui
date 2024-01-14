@@ -4,7 +4,7 @@ import ScrollIndicator from "../../src/ui/scroll-indicator";
 
 const meta: Meta<typeof ScrollIndicator> = {
   component: ScrollIndicator,
-  title: "web/ScrollIndicator",
+  title: "marketing/ScrollIndicator",
   tags: ["autodocs"],
   argTypes: {},
 };
