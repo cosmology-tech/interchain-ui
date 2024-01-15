@@ -37,6 +37,11 @@ export const chainSwapInput = styleVariants({
       maxHeight: themeVars.space[11],
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
+      selectors: {
+        "&:focus": {
+          fontSize: themeVars.fontSize["sm"],
+        },
+      },
       "@container": {
         [`${transferItemRootContainer} (min-width: 350px)`]: {
           maxWidth: "160px",
@@ -61,6 +66,11 @@ export const chainSwapInput = styleVariants({
       maxHeight: themeVars.space[11],
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
+      selectors: {
+        "&:focus": {
+          fontSize: themeVars.fontSize["sm"],
+        },
+      },
       "@container": {
         [`${transferItemRootContainer} (min-width: 350px)`]: {
           maxWidth: "160px",
