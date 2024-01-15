@@ -185,7 +185,6 @@ export { default as ValidatorTokenAmountCell } from "./ui/validator-list/validat
 
 export { default as LiquidStaking } from "./ui/liquid-staking";
 export type { LiquidStakingProps } from "./ui/liquid-staking/liquid-staking.types";
-export { default as StakingDelegate } from "./ui/staking-delegate";
 export type { SpinnerProps } from "./ui/spinner/spinner.types";
 export { default as Divider } from "./ui/divider";
 export type { DividerProps } from "./ui/divider/divider.types";
@@ -221,6 +220,11 @@ export { default as ChangeChainListItem } from "./ui/change-chain-list-item";
 export type { ChangeChainListItemProps } from "./ui/change-chain-list-item/change-chain-list-item.types";
 export { default as ChangeChainInput } from "./ui/change-chain-input";
 export type { ChangeChainInputProps } from "./ui/change-chain-input/change-chain-input.types";
+
+// Staking delegate
+export { default as StakingDelegate } from "./ui/staking-delegate";
+export { default as StakingDelegateCard } from "./ui/staking-delegate/staking-delegate-card.lite";
+export { default as StakingDelegateInput } from "./ui/staking-delegate/staking-delegate-input.lite";
 
 // Marketing components
 export { default as Timeline } from "./ui/timeline";
