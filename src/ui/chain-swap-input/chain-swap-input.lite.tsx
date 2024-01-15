@@ -110,7 +110,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
             }}
             width={props.size === "sm" ? "$full" : undefined}
             attributes={{
-              "data-part-id": "input-container",
+              "data-part-id": "chain-swap-input-container",
             }}
           >
             <Stack

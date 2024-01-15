@@ -26,18 +26,35 @@ export interface StakingDelegateProps extends BaseComponentProps {
   headerExtra?: BaseComponentProps["children"];
   delegationItems?: DelegationItem[];
   footer?: BaseComponentProps["children"];
+  inputProps?: StakingDelegateInputProps;
+  attributes?: Omit<
+    BoxProps,
+    "attributes" | "as" | "className" | "children" | "style" | "ref"
+  >;
+}
+
+export interface StakingDelegateCardProps
+  extends BaseComponentProps,
+    DelegationItem {
+  attributes?: Omit<
+    BoxProps,
+    "attributes" | "as" | "className" | "children" | "style" | "ref"
+  >;
+}
+
+export interface StakingDelegateInputProps extends BaseComponentProps {
+  value?: number;
+  notionalValue?: number;
   inputToken?: {
     tokenName: string;
     tokenIconUrl: string;
   };
-  inputValue?: number;
-  inputNotionalValue?: number;
+  maxValue?: number;
+  minValue?: number;
+  partials?: InputPartialChange[];
+  isLoadingNotionalValue?: boolean;
   onValueChange?: (value: number) => void;
   onValueInput?: (rawValue: string) => void;
-  inputPartials?: InputPartialChange[];
-  inputMaxValue?: number;
-  inputMinValue?: number;
-  isLoadingNotionalValue?: boolean;
   formatOptions?: NumberFormatOptions;
   attributes?: Omit<
     BoxProps,

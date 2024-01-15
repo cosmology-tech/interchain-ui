@@ -65,56 +65,58 @@ export const Primary: Story = {
               isLoading: true,
             },
           ]}
-          inputToken={{
-            tokenName: OSMO.symbol ?? "OSMO",
-            tokenIconUrl: OSMO.logo_URIs?.png ?? "",
-          }}
-          inputMaxValue={MAX}
-          inputMinValue={MIN}
-          inputValue={tokenAmount}
-          inputNotionalValue={notionalValue}
-          // ==== Toggle this to see loading state
-          // isLoadingNotionalValue={true}
-          onValueChange={(value) => {
-            setTokenAmount(value);
-            setNotionalValue(value * PRICE_PER_TOKEN);
-          }}
-          onValueInput={(value) => {
-            console.log("value input", value);
-          }}
-          inputPartials={[
-            {
-              label: "1/2",
-              onClick: () => {
-                console.log("1/2 change");
-                setTokenAmount(MAX / 2);
-                setNotionalValue((MAX / 2) * PRICE_PER_TOKEN);
-              },
+          inputProps={{
+            inputToken: {
+              tokenName: OSMO.symbol ?? "OSMO",
+              tokenIconUrl: OSMO.logo_URIs?.png ?? "",
             },
-            {
-              label: "1/3",
-              onClick: () => {
-                console.log("1/3 change");
-                setTokenAmount(MAX / 3);
-                setNotionalValue((MAX / 3) * PRICE_PER_TOKEN);
-              },
+            maxValue: MAX,
+            minValue: MIN,
+            value: tokenAmount,
+            notionalValue: notionalValue,
+            // ==== Toggle this to see loading state
+            // isLoadingNotionalValue={true}
+            onValueChange: (value) => {
+              setTokenAmount(value);
+              setNotionalValue(value * PRICE_PER_TOKEN);
             },
-            {
-              label: "Max",
-              isLoading: isMaxLoading,
-              onClick: () => {
-                console.log("Max change");
-                // Simulate getting max value
-                setIsMaxLoading(true);
+            onValueInput: (value) => {
+              console.log("value input", value);
+            },
+            partials: [
+              {
+                label: "1/2",
+                onClick: () => {
+                  console.log("1/2 change");
+                  setTokenAmount(MAX / 2);
+                  setNotionalValue((MAX / 2) * PRICE_PER_TOKEN);
+                },
+              },
+              {
+                label: "1/3",
+                onClick: () => {
+                  console.log("1/3 change");
+                  setTokenAmount(MAX / 3);
+                  setNotionalValue((MAX / 3) * PRICE_PER_TOKEN);
+                },
+              },
+              {
+                label: "Max",
+                isLoading: isMaxLoading,
+                onClick: () => {
+                  console.log("Max change");
+                  // Simulate getting max value
+                  setIsMaxLoading(true);
 
-                setTimeout(() => {
-                  setIsMaxLoading(false);
-                  setTokenAmount(MAX);
-                  setNotionalValue(MAX * PRICE_PER_TOKEN);
-                }, 1000);
+                  setTimeout(() => {
+                    setIsMaxLoading(false);
+                    setTokenAmount(MAX);
+                    setNotionalValue(MAX * PRICE_PER_TOKEN);
+                  }, 1000);
+                },
               },
-            },
-          ]}
+            ],
+          }}
           footer={
             <Button fluidWidth variant="solid" intent="tertiary">
               Delegate
