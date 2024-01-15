@@ -94,16 +94,24 @@ export default function Tooltip(props: TooltipProps) {
   return (
     <Box
       ref={anchorRef}
-      className={styles.tooltip}
+      position="relative"
       attributes={{
-        tabIndex: "1",
-        onMouseEnter: () => (state.hovered = true),
-        onFocus: () => (state.hovered = true),
-        onBlur: () => (state.hovered = false),
-        onMouseLeave: () => (state.hovered = false),
+        "data-part-id": "tooltip-container",
       }}
     >
-      {props?.children}
+      <Box
+        className={styles.tooltip}
+        attributes={{
+          tabIndex: "1",
+          onMouseEnter: () => (state.hovered = true),
+          onFocus: () => (state.hovered = true),
+          onBlur: () => (state.hovered = false),
+          onMouseLeave: () => (state.hovered = false),
+        }}
+      >
+        {props?.children}
+      </Box>
+
       <Box
         ref={floatingTargetRef}
         px="$5"
@@ -115,6 +123,7 @@ export default function Tooltip(props: TooltipProps) {
         left="0"
         top="0"
         zIndex="1"
+        visibility={state.hovered ? "visible" : "hidden"}
         className={standardTransitionProperties}
       >
         <Text color="$progressBg">{props.title}</Text>
