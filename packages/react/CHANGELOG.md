@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.19.4...@interchain-ui/react@1.20.0) (2024-01-15)
+
+### Bug Fixes
+
+- **staking:** extract input and card components ([703e41f](https://github.com/cosmology-tech/interchain-ui/commit/703e41fd89c19ecf8ba02633b89c8b91d0776459))
+
+### Features
+
+- add Timeline ([dfb09e5](https://github.com/cosmology-tech/interchain-ui/commit/dfb09e59ed539608e6cd668b4cb3f7bdde38ba88))
+
 ## [1.19.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.19.3...@interchain-ui/react@1.19.4) (2024-01-12)
 
 ### Bug Fixes
