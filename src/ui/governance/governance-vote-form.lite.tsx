@@ -104,7 +104,7 @@ export default function GovernanceVoteForm(props: GovernanceVoteFormProps) {
           defaultValue={props.defaultVote}
           isDisabled={state.getIsDisabled()}
           onChange={(selected: GovernanceVoteType) =>
-            state.handleVoteChange(selected)
+            state.handleVoteChange(selected as GovernanceVoteType)
           }
         >
           <Box
