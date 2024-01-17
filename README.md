@@ -55,15 +55,15 @@ We create components inside a single source of truth folder `<root>/src` with Li
 
 ## Compiler
 
-To know more about the inner workings of our compiler, check ![Compiler](./docs/compiler.md) to explore.
+To know more about the inner workings of our compiler, check [Compiler](./docs/compiler.md) to explore.
 
 ## Icons
 
-Check ![Icon guide](./docs/icons.md) to know how to add more icons
+Check [Icon guide](./docs/icons.md) to know how to add more icons
 
 ## Customizing theme
 
-Check ![Customizing guide](./docs/custom-theme.md) to know how to customize the default theme.
+Check [Customizing guide](./docs/custom-theme.md) to know how to customize the default theme.
 
 ## Related
 

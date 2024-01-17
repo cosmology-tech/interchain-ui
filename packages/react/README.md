@@ -42,7 +42,7 @@ There are some rules of thumbs and some tips for creating Mitosis components:
 
 ## Icon
 
-Check ![Icon guide](./docs/icons.md) to know how to add more icons
+Check [Icon guide](./docs/icons.md) to know how to add more icons
 
 ## Our Website
 
