@@ -18,7 +18,10 @@ import {
 } from "@floating-ui/react";
 
 import Box from "@/ui/box";
+import type { BoxProps } from "@/ui/box/box.types";
 import ChangeChainInput from "@/ui/change-chain-input";
+import ChangeChainInputBold from "@/ui/change-chain-input/change-chain-input-bold";
+
 import ChangeChainListItem from "@/ui/change-chain-list-item";
 import { changeChainListBox } from "./change-chain-combobox.css";
 import { listboxStyle } from "../select/select.css";
@@ -58,22 +61,24 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
 
 type ComboboxOption = Omit<ItemProps, "isActive" | "size">;
 
-export interface ChainSwapComboboxProps {
+export interface ChangeChainCombobox {
   id?: string;
+  appearance?: "bold" | "minimal";
   isLoading?: boolean;
   isClearable?: boolean;
   label?: string;
   maxHeight?: number;
-  size: ChangeChainListItemProps["size"];
+  size?: ChangeChainListItemProps["size"];
   options: Array<ComboboxOption>;
   filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption | null) => void;
   defaultOpen?: boolean;
   valueItem?: ComboboxOption;
+  containerProp?: BoxProps;
 }
 
-export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
+export default function ChangeChainCombobox(props: ChangeChainCombobox) {
   const { theme, themeClass } = useTheme();
 
   const [open, setOpen] = React.useState(!!props.defaultOpen);
@@ -163,11 +168,14 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     setInputValue(props?.valueItem?.chainName);
   }, [props.valueItem]);
 
+  const InputComp =
+    props.appearance === "bold" ? ChangeChainInputBold : ChangeChainInput;
+
   return (
-    <Box>
+    <Box {...props.containerProp}>
       <div ref={refs.setReference}>
-        <ChangeChainInput
-          size={props.size}
+        <InputComp
+          size={props.size ?? "sm"}
           label={props.label}
           value={showInputValue ? inputValue : ""}
           iconUrl={!selectedItem ? "" : selectedItem?.iconUrl}
@@ -244,6 +252,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
               style: {
                 ...floatingStyles,
                 ...(isMounted ? transitionStyles : {}),
+                visibility: items.length > 0 ? "visible" : "hidden",
                 overflowY: "auto",
               },
             })}
@@ -257,7 +266,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
               {items.map((item, index) => (
                 <Item
                   key={item.chainName}
-                  size={props.size}
+                  size={props.appearance === "bold" ? "md" : props.size}
                   isActive={activeIndex === index}
                   {...item}
                   {...getItemProps({
@@ -270,6 +279,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                       setShowInputValue(false);
                       setSelectedItem(item);
                       props.onItemSelected?.(item);
+                      console.log("selected CLICK", item);
                       refs.domReference.current?.focus();
                     },
                   })}

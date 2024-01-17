@@ -55,3 +55,44 @@ export const Primary: Story = {
     );
   },
 };
+
+export const Bold: Story = {
+  args: {},
+  render: (props) => {
+    const [selectedChain, setSelectedChain] = React.useState<{
+      iconUrl?: string;
+      chainName: string;
+    } | null>(null);
+
+    const { isReady, comboboxAssets } = useMockData();
+
+    const options = React.useMemo(
+      () =>
+        comboboxAssets.map((i) => ({
+          iconUrl: i.iconUrl,
+          chainName: i.tokenName,
+        })),
+      [comboboxAssets, isReady]
+    );
+
+    if (!isReady) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <Box maxWidth="350px">
+        <ChangeChainCombobox
+          appearance="bold"
+          maxHeight={350}
+          valueItem={selectedChain ? selectedChain : undefined}
+          size="sm"
+          onItemSelected={(item) => {
+            console.log("[Story] Selected Item", item);
+            setSelectedChain(item);
+          }}
+          options={options}
+        />
+      </Box>
+    );
+  },
+};
