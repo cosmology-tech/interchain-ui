@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.1...@interchain-ui/react@1.20.2) (2024-01-17)
+
+### Bug Fixes
+
+- add appearance bold for chain combobox ([3d3edb0](https://github.com/cosmology-tech/interchain-ui/commit/3d3edb0e8b733584ffca42e40336ac6fa315fadd))
+
 ## [1.20.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.0...@interchain-ui/react@1.20.1) (2024-01-15)
 
 **Note:** Version bump only for package @interchain-ui/react
