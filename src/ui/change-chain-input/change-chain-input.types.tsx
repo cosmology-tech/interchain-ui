@@ -1,4 +1,3 @@
-import type { BaseComponentProps } from "../../models/components.model";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { TextFieldProps } from "../text-field/text-field.types";
 
@@ -29,3 +28,5 @@ export interface ChangeChainInputProps
   onClear?: (event?: any) => void;
   onDropdownArrowClicked?: (event?: any) => void;
 }
+
+export interface ChangeChainInputBoldProps extends ChangeChainInputProps {}
