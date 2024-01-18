@@ -26,7 +26,8 @@ const content = (
     backgroundColor="lightblue"
     fontFamily="$body"
     display="grid"
-    placeItems="center"
+    alignItems="center"
+    justifyContent="center"
   >
     Popover content
   </Box>

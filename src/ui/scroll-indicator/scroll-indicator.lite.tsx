@@ -24,7 +24,8 @@ export default function ScrollIndicator(props: ScrollIndicatorProps) {
       borderRadius="$full"
       attributes={{ onClick: () => props.onClick() }}
       display="grid"
-      placeItems="center"
+      alignItems="center"
+      justifyContent="center"
       className={clx(styles.indicator, props.showShadow ? styles.shadow : null)}
       transform={`rotate(${props.direction === "left" ? 180 : 0}deg)`}
     >

@@ -20,7 +20,8 @@ const content = Array(10)
   .map((_, i) => (
     <Box
       display="grid"
-      placeItems="center"
+      alignItems="center"
+      justifyContent="center"
       width="200px"
       height={i % 2 === 0 ? "200px" : "150px"}
       fontSize="$8xl"
