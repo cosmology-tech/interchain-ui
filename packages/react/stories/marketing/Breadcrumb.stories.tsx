@@ -3,7 +3,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import Breadcrumb from "../../src/ui/breadcrumb";
-import { BreadcrumbLink } from "../../src/ui/breadcrumb/breadcrumb.types";
+import BreadcrumbItem from "../../src/ui/breadcrumb/breadcrumb-item";
+import {
+  BreadcrumbLink,
+  BreadcrumbItemProps,
+} from "../../src/ui/breadcrumb/breadcrumb.types";
 
 const meta: Meta<typeof Breadcrumb> = {
   component: Breadcrumb,
@@ -23,13 +27,22 @@ const links: BreadcrumbLink[] = [
 ];
 
 export const Default: Story = {
-  args: {
-    links,
-    primaryColor: "#453558",
-    onItemClick: (href) => {
-      if (!href) return;
-      alert(href);
-    },
+  render: () => {
+    return (
+      <Breadcrumb width="100%">
+        {links.map((link, index) => (
+          <BreadcrumbItem
+            key={link.href}
+            name={link.name}
+            href={link.href}
+            isLast={index === links.length - 1}
+            onClick={() => {
+              console.log("clicked", link.href);
+            }}
+          />
+        ))}
+      </Breadcrumb>
+    );
   },
 };
 
@@ -46,7 +59,70 @@ export const Responsive: Story = {
         borderColor="$black"
         borderStyle="$solid"
       >
-        <Breadcrumb links={links} onItemClick={() => {}} width="100%" />
+        <Breadcrumb width="100%">
+          {links.map((link, index) => (
+            <BreadcrumbItem
+              key={link.href}
+              name={link.name}
+              href={link.href}
+              isLast={index === links.length - 1}
+              onClick={() => {
+                console.log("clicked", link.href);
+              }}
+            />
+          ))}
+        </Breadcrumb>
+      </Box>
+    );
+  },
+};
+
+const LinkWrapper = ({ ...otherProps }: BreadcrumbItemProps) => {
+  return (
+    <p
+      style={{
+        border: "1px solid red",
+      }}
+    >
+      <BreadcrumbItem
+        key={otherProps.href}
+        name={otherProps.name}
+        href={otherProps.href}
+        isLast={otherProps.isLast}
+        onClick={() => {
+          console.log("clicked", otherProps.href);
+        }}
+      />
+    </p>
+  );
+};
+
+export const DecoratedLink: Story = {
+  render: () => {
+    return (
+      <Box
+        width="380px"
+        height="40px"
+        px="$4"
+        display="flex"
+        alignItems="center"
+        borderWidth="4px"
+        borderColor="$black"
+        borderStyle="$solid"
+      >
+        <Breadcrumb width="100%">
+          {links.map((link, index) => (
+            <LinkWrapper
+              key={link.href}
+              name={link.name}
+              href={link.href}
+              isLast={index === links.length - 1}
+              onClick={() => {
+                console.log("clicked", link.href);
+              }}
+            />
+          ))}
+        </Breadcrumb>
       </Box>
     );
   },

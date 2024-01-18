@@ -1,8 +1,8 @@
-import { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+import type { BaseComponentProps } from "../../models/components.model";
 
 export interface BreadcrumbProps {
-  links: BreadcrumbLink[];
-  onItemClick: (href: string) => void;
+  children: BaseComponentProps["children"];
   mt?: Sprinkles["mt"];
   mb?: Sprinkles["mb"];
   width?: Sprinkles["width"];
@@ -10,18 +10,23 @@ export interface BreadcrumbProps {
   gapRight?: Sprinkles["gap"];
   primaryColor?: Sprinkles["color"];
   secondaryColor?: Sprinkles["color"];
-  separator?: string;
 }
 
 export interface BreadcrumbLink {
   name: string;
   href: string;
+  download?: string | boolean;
+  linkRef?: string;
+  target?: "_self" | "_blank" | "_parent" | "_top";
+  type?: string;
+  onClick?: () => void;
 }
 
 export type BreadcrumbItemProps = Pick<
   BreadcrumbProps,
-  "onItemClick" | "gapLeft" | "separator" | "primaryColor" | "secondaryColor"
+  "gapLeft" | "primaryColor" | "secondaryColor"
 > &
   BreadcrumbLink & {
     isLast: boolean;
+    separator?: string;
   };

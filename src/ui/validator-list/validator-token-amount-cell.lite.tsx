@@ -1,4 +1,4 @@
-import { useMetadata, Show, useDefaultProps } from "@builder.io/mitosis";
+import { useMetadata, Show } from "@builder.io/mitosis";
 import Box from "../box";
 import Text from "../text";
 import BigNumber from "bignumber.js";
@@ -9,10 +9,6 @@ useMetadata({
   rsc: {
     componentType: "client",
   },
-});
-
-useDefaultProps<Partial<ValidatorTokenAmountCellProps>>({
-  size: "md",
 });
 
 export default function ValidatorTokenAmountCell(
@@ -27,7 +23,7 @@ export default function ValidatorTokenAmountCell(
       {...props.attributes}
       className={props.className}
     >
-      <Text fontWeight="$semibold" fontSize="$sm">
+      <Text fontWeight="$semibold" fontSize="$sm" wordBreak="keep-all">
         {formatIntlNumber(
           new BigNumber(props.amount).toNumber(),
           null,
@@ -36,7 +32,12 @@ export default function ValidatorTokenAmountCell(
       </Text>
 
       <Show when={!!props.symbol}>
-        <Text fontWeight="$normal" fontSize="$sm" color="$textSecondary">
+        <Text
+          fontWeight="$normal"
+          fontSize="$sm"
+          color="$textSecondary"
+          wordBreak="keep-all"
+        >
           {props.symbol}
         </Text>
       </Show>

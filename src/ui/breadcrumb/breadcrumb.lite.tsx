@@ -1,7 +1,6 @@
 import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 
 import Box from "../box";
-import BreadcrumbItem from "./breadcrumb-item.lite";
 import { BreadcrumbProps } from "./breadcrumb.types";
 
 useMetadata({
@@ -25,19 +24,7 @@ export default function Breadcrumb(props: BreadcrumbProps) {
       mt={props.mt}
       mb={props.mb}
     >
-      {props.links.map(({ name, href }, i) => (
-        <BreadcrumbItem
-          key={href}
-          name={name}
-          href={href}
-          isLast={i === props.links.length - 1}
-          onItemClick={props.onItemClick}
-          gapLeft={props.gapLeft}
-          primaryColor={props.primaryColor}
-          secondaryColor={props.secondaryColor}
-          separator={props.separator}
-        />
-      ))}
+      {props.children}
     </Box>
   );
 }
