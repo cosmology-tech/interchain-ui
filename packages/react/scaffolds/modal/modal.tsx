@@ -194,7 +194,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
               backdropClassName ? backdropClassName : styles.modalBackdrop
             )}
             lockScroll={preventScroll}
-            style={transitionStyles}
+            style={{
+              ...transitionStyles,
+              zIndex: 999,
+            }}
           >
             <FloatingFocusManager context={dialog.context}>
               <FadeIn isVisible={dialog.open}>
