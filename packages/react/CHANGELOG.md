@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.2...@interchain-ui/react@1.20.3) (2024-01-18)
+
+### Bug Fixes
+
+- **core:** make some box properties static to reduce ssr visual layout shift ([db6bc30](https://github.com/cosmology-tech/interchain-ui/commit/db6bc309beaac1a1978d947d474ffa60dbd3f66f))
+
 ## [1.20.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.1...@interchain-ui/react@1.20.2) (2024-01-17)
 
 ### Bug Fixes
