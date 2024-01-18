@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.3...@interchain-ui/react@1.20.4) (2024-01-18)
+
+### Bug Fixes
+
+- **modal:** ensure modal is top level ([a399c63](https://github.com/cosmology-tech/interchain-ui/commit/a399c6324b7932b815e8371afb255900cba6a750))
+
 ## [1.20.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.2...@interchain-ui/react@1.20.3) (2024-01-18)
 
 ### Bug Fixes
