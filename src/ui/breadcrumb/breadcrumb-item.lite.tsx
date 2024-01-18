@@ -16,7 +16,7 @@ useDefaultProps<Partial<BreadcrumbItemProps>>({
 export default function BreadcrumbItem(props: BreadcrumbItemProps) {
   return (
     <Box
-      as="a"
+      as={props.as ?? "a"}
       display="flex"
       alignItems="center"
       gap={props.gapLeft}

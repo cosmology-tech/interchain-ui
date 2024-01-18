@@ -14,7 +14,7 @@ export interface BreadcrumbProps {
 
 export interface BreadcrumbLink {
   name: string;
-  href: string;
+  href?: string;
   download?: string | boolean;
   linkRef?: string;
   target?: "_self" | "_blank" | "_parent" | "_top";
@@ -27,6 +27,7 @@ export type BreadcrumbItemProps = Pick<
   "gapLeft" | "primaryColor" | "secondaryColor"
 > &
   BreadcrumbLink & {
+    as?: string;
     isLast: boolean;
     separator?: string;
   };
