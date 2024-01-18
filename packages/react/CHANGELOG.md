@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.4...@interchain-ui/react@1.20.5) (2024-01-18)
+
+### Bug Fixes
+
+- **breadcrumb:** composable breadcrumb ([1864262](https://github.com/cosmology-tech/interchain-ui/commit/18642626fe756bd29b1d4aad8c4a89229bd72dde))
+
 ## [1.20.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.3...@interchain-ui/react@1.20.4) (2024-01-18)
 
 ### Bug Fixes
