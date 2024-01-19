@@ -1,6 +1,12 @@
 # Interchain UI Kit
 
+<p align="center" width="100%">
+    <img height="200" src="https://github.com/cosmology-tech/interchain-ui/assets/545047/d08ac5da-cba7-461b-b707-d0fe2e2205fd" />
+</p>
+
+<p align="center" width="100%">
 Interchain UI for VueJS
+</p>
 
 <p align="center" width="100%">
    <a href="https://www.npmjs.com/package/@interchain-ui/vue"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/interchain-ui?filename=packages%2Fvue%2Fpackage.json"/></a>
