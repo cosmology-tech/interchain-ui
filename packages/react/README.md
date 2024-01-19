@@ -1,7 +1,7 @@
 # Interchain UI Kit
 
 <p align="center" width="100%">
-    <img height="200" src="https://github.com/cosmology-tech/interchain-ui/assets/545047/d08ac5da-cba7-461b-b707-d0fe2e2205fd" />
+    <img height="250" src="https://github.com/cosmology-tech/interchain-ui/assets/545047/d08ac5da-cba7-461b-b707-d0fe2e2205fd" />
 </p>
 
 <p align="center" width="100%">
