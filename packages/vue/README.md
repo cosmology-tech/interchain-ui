@@ -9,7 +9,8 @@ Interchain UI for VueJS
 </p>
 
 <p align="center" width="100%">
-   <a href="https://www.npmjs.com/package/@interchain-ui/vue"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/interchain-ui?filename=packages%2Fvue%2Fpackage.json"/></a>
+  <a href="https://www.npmjs.com/package/@interchain-ui/vue"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/interchain-ui?filename=packages%2Fvue%2Fpackage.json"/></a>
+  <a href="https://github.com/cosmology-tech/interchain-ui/blob/main/LICENSE"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
   <a href="https://www.npmjs.com/package/@interchain-ui/vue">
     <img height="20" src="https://img.shields.io/npm/dt/@interchain-ui/vue" />
   </a>
