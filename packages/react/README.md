@@ -1,5 +1,14 @@
 # Interchain UI Kit
 
+Interchain UI for React
+
+<p align="center" width="100%">
+   <a href="https://www.npmjs.com/package/@interchain-ui/react"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/interchain-ui?filename=packages%2Freact%2Fpackage.json"/></a>
+  <a href="https://www.npmjs.com/package/@interchain-ui/react">
+    <img height="20" src="https://img.shields.io/npm/dt/@interchain-ui/react" />
+  </a>
+</p>
+
 ## 🎨 What is Interchain UI?
 
 Interchain UI is a foundation library for UI elements used in [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) and other packages. It provides developers with pre-built components and a foundation for creating user interfaces across different frameworks, such as VueJS, React, Angular, Svelte, SolidJS, and Web Components, enabling developers to customize UI elements and themes. This gives us the ability to code a component once, and it will compile to all framework targets.
