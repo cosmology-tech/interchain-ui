@@ -72,7 +72,7 @@ export const Primary: Story = {
           reward={reward}
           precision={2}
           bottomLink={{
-            href: "https://cosmology.tech/",
+            href: "https://cosmology.zone/",
             label: "Learn more",
           }}
           timeEstimateLabel="30 seconds"
