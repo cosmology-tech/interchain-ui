@@ -61,18 +61,18 @@ Check [Icon guide](./docs/icons.md) to know how to add more icons
 
 ## Our Website
 
-⚛️ https://cosmoskit.com/
+⚛️ https://cosmology.zone/products/interchain-ui
 
 ## Related
 
 Checkout these related projects:
 
-* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) for generated CosmWasm contract Typescript classes
+* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) Convert your CosmWasm smart contracts into dev-friendly TypeScript classes.
 * [@cosmology/telescope](https://github.com/cosmology-tech/telescope) Your Frontend Companion for Building with TypeScript with Cosmos SDK Modules.
 * [chain-registry](https://github.com/cosmology-tech/chain-registry) Get everything from token symbols, logos, and IBC denominations for all assets you want to support in your application.
 * [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) Experience the convenience of connecting with a variety of web3 wallets through a single, streamlined interface ⚛️
 * [create-cosmos-app](https://github.com/cosmology-tech/create-cosmos-app) set up a modern Cosmos app by running one command.
-* [starship](https://github.com/cosmology-tech/starship) a k8s-based unified development environment for Cosmos Ecosystem
+* [starship](https://github.com/cosmology-tech/starship) Unified Testing and Development for the Interchain.
 
 ## Credits
 
