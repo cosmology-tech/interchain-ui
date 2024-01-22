@@ -146,6 +146,7 @@ export default function SwapToken(props: SwapTokenProps) {
         isSmall={state.isSmallSize()}
         title={props.from.label ?? "From"}
         amount={props.from.amount}
+        filterFn={props.filterFn}
         selectedItem={props.from.selected}
         dropdownList={props.from.options}
         onItemSelected={(selectedItem: AvailableItem) =>
@@ -187,6 +188,7 @@ export default function SwapToken(props: SwapTokenProps) {
         isSmall={state.isSmallSize()}
         title={props.to.label ?? "To"}
         amount={props.to.amount}
+        filterFn={props.filterFn}
         selectedItem={props.to.selected}
         dropdownList={props.to.options}
         onItemSelected={(selectedItem: AvailableItem) =>

@@ -125,6 +125,7 @@
     "@vanilla-extract/parcel-transformer": "^1.0.0",
     "@vanilla-extract/vite-plugin": "^3.9.2",
     "@vitejs/plugin-react": "^4.1.0",
+    "match-sorter": "^6.3.3",
     "parcel": "^2.10.2",
     "parcel-optimizer-unlink-css": "^1.1.0",
     "parcel-resolver-ts-base-url": "^1.3.1",

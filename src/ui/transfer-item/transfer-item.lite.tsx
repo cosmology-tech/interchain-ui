@@ -272,6 +272,7 @@ export default function TransferItem(props: TransferItemProps) {
           <ScaffoldChainSwapCombobox
             className={styles.comboboxContainer}
             size={props.isSmall ? "sm" : "md"}
+            filterFn={props.filterFn}
             defaultSelected={props.defaultSelectedItem ?? state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {

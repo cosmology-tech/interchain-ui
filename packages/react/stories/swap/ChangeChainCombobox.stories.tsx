@@ -21,7 +21,8 @@ export const Primary: Story = {
   render: (props) => {
     const [selectedChain, setSelectedChain] = React.useState<{
       iconUrl?: string;
-      chainName: string;
+      label: string;
+      value: string;
     } | null>(null);
 
     const { isReady, comboboxAssets } = useMockData();
@@ -30,7 +31,8 @@ export const Primary: Story = {
       () =>
         comboboxAssets.map((i) => ({
           iconUrl: i.iconUrl,
-          chainName: i.tokenName,
+          label: i.tokenName,
+          value: i.tokenName,
         })),
       [comboboxAssets, isReady]
     );
@@ -61,7 +63,8 @@ export const Bold: Story = {
   render: (props) => {
     const [selectedChain, setSelectedChain] = React.useState<{
       iconUrl?: string;
-      chainName: string;
+      label: string;
+      value: string;
     } | null>(null);
 
     const { isReady, comboboxAssets } = useMockData();
@@ -70,7 +73,8 @@ export const Bold: Story = {
       () =>
         comboboxAssets.map((i) => ({
           iconUrl: i.iconUrl,
-          chainName: i.tokenName,
+          label: i.tokenName,
+          value: i.tokenName,
         })),
       [comboboxAssets, isReady]
     );

@@ -61,14 +61,14 @@ export default function ChangeChainListItem(props: ChangeChainListItemProps) {
         attributes={{ alignItems: "center" }}
       >
         <Avatar
-          name={props.chainName}
+          name={props.label}
           getInitials={(name) => name[0]}
           size={state.avatarSize()}
           src={props.iconUrl}
           fallbackMode="bg"
         />
         <Text fontSize="$lg" fontWeight="$normal" color="$text">
-          {props.chainName}
+          {props.label}
         </Text>
       </Stack>
     </ListItem>

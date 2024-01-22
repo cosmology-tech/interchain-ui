@@ -1,4 +1,5 @@
 import type { BaseComponentProps } from "../../models/components.model";
+import type { ChainListItemProps } from "../chain-list-item/chain-list-item.types";
 
 export type ComboboxListItemType = {
   iconUrl?: string;
@@ -68,4 +69,8 @@ export interface TransferItemProps extends BaseComponentProps {
   availableAsMax?: boolean;
   // Use the super tight spacing version for use as a widget
   isSmall?: boolean;
+  filterFn?: (
+    options: Array<ChainListItemProps>,
+    query: string
+  ) => Array<ChainListItemProps>;
 }

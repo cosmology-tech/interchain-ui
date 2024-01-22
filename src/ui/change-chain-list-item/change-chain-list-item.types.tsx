@@ -2,5 +2,5 @@ import type { ListItemProps } from "../list-item/list-item.types";
 
 export interface ChangeChainListItemProps extends ListItemProps {
   iconUrl?: string;
-  chainName: string;
+  label: string;
 }
