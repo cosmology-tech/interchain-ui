@@ -282,7 +282,6 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
                       setShowInputValue(false);
                       setSelectedItem(item);
                       props.onItemSelected?.(item);
-                      console.log("selected CLICK", item);
                       refs.domReference.current?.focus();
                     },
                   })}
