@@ -84,6 +84,81 @@ const MeshSlider = () => {
   );
 };
 
+const MeshStakingHeader = (props) => (
+  <Stack
+    direction="vertical"
+    space="$14"
+    attributes={{
+      width: "100%",
+    }}
+  >
+    <Box display="flex" gap="$8">
+      <Box
+        as="img"
+        width="50px"
+        height="50px"
+        attributes={{
+          src: props.asset?.imgSrc ?? "",
+          alt: "osmosis logo",
+        }}
+      />
+
+      <Stack direction="vertical">
+        <Stack
+          direction="horizontal"
+          space="$4"
+          attributes={{
+            justifyContent: "center",
+            alignItems: "baseline",
+          }}
+        >
+          <Text color="$text" fontSize="$3xl" fontWeight="$medium">
+            1,258.02
+          </Text>
+          <Text color="$textPlaceholder" fontSize="$sm" fontWeight="$light">
+            {props.asset?.symbol ?? "OSMO"}
+          </Text>
+        </Stack>
+
+        <Text color="$textSecondary" fontSize="$sm">
+          $671.39
+        </Text>
+      </Stack>
+    </Box>
+
+    <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Stack
+        space="$3"
+        attributes={{
+          alignItems: "center",
+        }}
+      >
+        <Text as="p" color="$textSecondary" fontSize="$md">
+          Select the amount to stake on each chain
+        </Text>
+
+        <Box as="span" color="$textSecondary">
+          <Icon name="informationLine" size="$md" color="inherit" />
+        </Box>
+      </Stack>
+
+      <Stack
+        space="$2"
+        attributes={{
+          alignItems: "center",
+        }}
+      >
+        <Text fontSize="$md" color="$textPlaceholder" fontWeight="$semibold">
+          1,258.02 OSMO
+        </Text>
+        <Text fontSize="$sm" color="$textPlaceholder" fontWeight="$light">
+          available
+        </Text>
+      </Stack>
+    </Box>
+  </Stack>
+);
+
 export const Primary: Story = {
   args: {},
   render: (props) => {
@@ -104,96 +179,7 @@ export const Primary: Story = {
             </Button>
           )}
           isOpen={isOpen}
-          title={
-            <Stack
-              direction="vertical"
-              space="$14"
-              attributes={{
-                width: "100%",
-              }}
-            >
-              <Box display="flex" gap="$8">
-                <Box
-                  as="img"
-                  width="50px"
-                  height="50px"
-                  attributes={{
-                    src: osmosis?.imgSrc ?? "",
-                    alt: "osmosis logo",
-                  }}
-                />
-
-                <Stack direction="vertical">
-                  <Stack
-                    direction="horizontal"
-                    space="$4"
-                    attributes={{
-                      justifyContent: "center",
-                      alignItems: "baseline",
-                    }}
-                  >
-                    <Text color="$text" fontSize="$3xl" fontWeight="$medium">
-                      1,258.02
-                    </Text>
-                    <Text
-                      color="$textPlaceholder"
-                      fontSize="$sm"
-                      fontWeight="$light"
-                    >
-                      {osmosis?.symbol ?? "OSMO"}
-                    </Text>
-                  </Stack>
-
-                  <Text color="$textSecondary" fontSize="$sm">
-                    $671.39
-                  </Text>
-                </Stack>
-              </Box>
-
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Stack
-                  space="$3"
-                  attributes={{
-                    alignItems: "center",
-                  }}
-                >
-                  <Text as="p" color="$textSecondary" fontSize="$md">
-                    Select the amount to stake on each chain
-                  </Text>
-
-                  <Box as="span" color="$textSecondary">
-                    <Icon name="informationLine" size="$md" color="inherit" />
-                  </Box>
-                </Stack>
-
-                <Stack
-                  space="$2"
-                  attributes={{
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    fontSize="$md"
-                    color="$textPlaceholder"
-                    fontWeight="$semibold"
-                  >
-                    1,258.02 OSMO
-                  </Text>
-                  <Text
-                    fontSize="$sm"
-                    color="$textPlaceholder"
-                    fontWeight="$light"
-                  >
-                    available
-                  </Text>
-                </Stack>
-              </Box>
-            </Stack>
-          }
+          title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
           <Box>

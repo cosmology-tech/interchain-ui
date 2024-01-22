@@ -15,6 +15,7 @@ export const ALL_ICON_NAMES = [
   "mobileWallet",
   "mobileWalletCircle",
   "restart",
+  "restartCircle",
   "arrowLeftSLine",
   "add",
   "subtract",
@@ -67,6 +68,8 @@ export const ALL_ICON_NAMES = [
   "externalLinkLine",
   "timeLine",
   "arrowDownload",
+  "plusRound",
+  "minusRound",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];

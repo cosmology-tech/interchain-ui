@@ -26,7 +26,7 @@ const options: ChainRegistryFetcherOptions = {
   ],
 };
 
-type DefaultNormalizedAsset = {
+export type DefaultNormalizedAsset = {
   available: number;
   priceDisplayAmount: number;
   symbol: string;
