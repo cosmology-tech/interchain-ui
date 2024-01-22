@@ -189,10 +189,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
       {dialog.open && (
         <FloatingPortal root={root}>
           <FloatingOverlay
-            className={clx(
-              themeClassName,
-              backdropClassName ? backdropClassName : styles.modalBackdrop
-            )}
+            className={clx(themeClassName)}
             lockScroll={preventScroll}
             style={{
               ...transitionStyles,
@@ -248,6 +245,14 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                     </div>
                   </div>
                 </div>
+
+                <div
+                  className={clx(
+                    themeClassName,
+                    backdropClassName ? backdropClassName : styles.modalBackdrop
+                  )}
+                  data-testid="modal-backdrop"
+                />
               </FadeIn>
             </FloatingFocusManager>
           </FloatingOverlay>

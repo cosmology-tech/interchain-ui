@@ -5,4 +5,4 @@ type StyleProps = Resolve<Sprinkles>;
 
 export type DividerProps = {
   orientation?: "horizontal" | "vertical";
-} & Partial<Pick<StyleProps, "mb" | "mt" | "width" | "height">>;
+} & Partial<StyleProps>;

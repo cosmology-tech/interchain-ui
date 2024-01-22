@@ -67,7 +67,7 @@ export default function ValidatorList(props: ValidatorListProps) {
                 <For each={props.columns}>
                   {(column, index) => (
                     <Box
-                      as={index === 0 ? "td" : "td"}
+                      as={index === 0 ? "th" : "td"}
                       key={column.id}
                       paddingX="$2"
                       paddingY="$5"

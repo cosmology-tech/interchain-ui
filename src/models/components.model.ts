@@ -31,5 +31,5 @@ export type GridColumn = {
   align?: "left" | "center" | "right";
   color?: Sprinkles["color"];
   textTransform?: Sprinkles["textTransform"];
-  render?: (value: any, column: GridColumn) => Children;
+  render?: (value: any, column: GridColumn, isPinned?: boolean) => Children;
 };

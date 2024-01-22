@@ -18,7 +18,7 @@ export const baseButton = style({
   verticalAlign: "middle",
   lineHeight: 1.2,
   transitionProperty:
-    "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
+    "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter",
   transitionDuration: "200ms",
   display: "flex",
   justifyContent: "center",

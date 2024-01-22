@@ -20,7 +20,7 @@ import MeshStakingSliderInfo from "../../src/ui/mesh-staking/mesh-staking-slider
 
 const meta: Meta<typeof MeshModal> = {
   component: MeshModal,
-  title: "mesh/MeshStakingModal",
+  title: "mesh/MeshUnstakeModal",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -43,6 +43,9 @@ const MeshSlider = () => {
       value={value}
       onChange={setValue}
       width="450px"
+      thumbTrackColor="$text"
+      previewPercent={20}
+      previewTrackColor="$textDanger"
       renderLabel={({ labelProps, outputProps, valuePercent }) => (
         <Box
           display="flex"
@@ -216,7 +219,29 @@ export const Primary: Story = {
               })}
             </Stack>
 
-            <Divider />
+            <Text
+              as="p"
+              fontSize="$sm"
+              color="$gray200"
+              attributes={{
+                margin: "0 auto",
+                maxWidth: "414px",
+              }}
+            >
+              <Box
+                as="span"
+                display="inline-block"
+                backgroundColor="$textDanger"
+                width="6px"
+                height="6px"
+                marginRight="$4"
+                borderRadius="$full"
+              />
+              Will be locked for the duration of the unbonding period. Tokens
+              become available when no longer bonded on any chain.
+            </Text>
+
+            <Divider marginTop="$12" />
 
             <Box
               display="flex"

@@ -23,6 +23,7 @@ export const labelContainer = style({
 });
 
 const sliderTrackBase = style({
+  position: "relative",
   selectors: {
     '&[data-disabled="true"]': {
       opacity: 0.4,
@@ -32,11 +33,21 @@ const sliderTrackBase = style({
 
 export const trackProgress = style({
   height: "6px",
-  backgroundColor: themeVars.colors.progressBg,
   borderRadius: "4px",
   position: "absolute",
   top: "50%",
   transform: "translateY(-50%)",
+  zIndex: 1,
+});
+
+export const trackPreviewProgress = style({
+  height: "4px",
+  position: "absolute",
+  top: "50%",
+  transform: "translateY(-50%)",
+  zIndex: 0,
+  borderLeft: `2px solid ${themeVars.colors.black}`,
+  borderRight: `4px solid ${themeVars.colors.black}`,
 });
 
 export const horizontalTrack = style([
@@ -56,6 +67,9 @@ export const horizontalTrack = style([
         width: "100%",
         top: "50%",
         transform: "translateY(-50%)",
+      },
+      "&[data-has-preview-track='true']:before": {
+        background: themeVars.colors.gray600,
       },
     },
   },
@@ -88,6 +102,7 @@ export const sliderThumb = style({
   borderRadius: "50%",
   background: "#151515",
   position: "relative",
+  zIndex: 2,
   selectors: {
     '&[data-dragging="true"]': {
       background: "dimgray",

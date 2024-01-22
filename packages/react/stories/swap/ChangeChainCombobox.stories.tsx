@@ -31,8 +31,8 @@ export const Primary: Story = {
       () =>
         comboboxAssets.map((i) => ({
           iconUrl: i.iconUrl,
-          label: i.tokenName,
           value: i.tokenName,
+          label: i.name,
         })),
       [comboboxAssets, isReady]
     );
@@ -46,7 +46,7 @@ export const Primary: Story = {
         <ChangeChainCombobox
           maxHeight={350}
           valueItem={selectedChain ? selectedChain : undefined}
-          size="sm"
+          size="md"
           onItemSelected={(item) => {
             console.log("[Story] Selected Item", item);
             setSelectedChain(item);
