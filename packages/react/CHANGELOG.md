@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.7...@interchain-ui/react@1.21.0) (2024-01-22)
+
+### Bug Fixes
+
+- **change-chain-combobox:** make item props more generic ([42a039f](https://github.com/cosmology-tech/interchain-ui/commit/42a039f77e5082c892999b5680d96baead47ddca))
+- pinned rows ([f356220](https://github.com/cosmology-tech/interchain-ui/commit/f3562202a64d2f9308bf291b1c74c70aa0a07cbd))
+
+### Features
+
+- mesh slider with preview backgrounds ([c542071](https://github.com/cosmology-tech/interchain-ui/commit/c542071712bd3ec52d91f84fb760835b9d2e4c04))
+- validator squad tables ([2ccd579](https://github.com/cosmology-tech/interchain-ui/commit/2ccd579ca1691ce15898164b51b3c45796fd120d))
+
 ## [1.20.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.6...@interchain-ui/react@1.20.7) (2024-01-22)
 
 ### Bug Fixes
