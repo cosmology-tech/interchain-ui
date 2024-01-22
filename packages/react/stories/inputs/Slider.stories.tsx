@@ -25,16 +25,28 @@ export const Default: Story = {
   render: (props) => {
     const TOTAL_TOKENS = 5422;
     const [value, setValue] = React.useState<number | number[]>(25);
+    const [value2, setValue2] = React.useState<number | number[]>(25);
+    const [value3, setValue3] = React.useState<number | number[]>(25);
 
     const onMax = () => {
       setValue(100);
     };
 
+    const onMax2 = () => {
+      setValue2(100);
+    };
+
+    const onMax3 = () => {
+      setValue3(100);
+    };
     return (
       <Box
         bg="rgb(16, 16, 18)"
         height="400px"
         padding="$10"
+        display="flex"
+        flexDirection="column"
+        gap="$10"
         className={meshThemeClass}
       >
         <Slider
@@ -81,6 +93,102 @@ export const Default: Story = {
           )}
         />
 
+        {/* With different preview track colors */}
+        <Slider
+          name="osmo"
+          value={value2}
+          onChange={setValue2}
+          width="300px"
+          thumbTrackColor="$text"
+          previewPercent={20}
+          previewTrackColor="$textDanger"
+          renderLabel={({ labelProps, outputProps, valuePercent }) => (
+            <Box
+              display="flex"
+              gap="$2"
+              alignItems="center"
+              justifyContent="space-between"
+              pb="$4"
+            >
+              <Box
+                display="flex"
+                gap="$2"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Box
+                  as="output"
+                  color="$text"
+                  fontSize="$md"
+                  attributes={outputProps}
+                >
+                  {`${formatNumeric(valuePercent * TOTAL_TOKENS, 2)}`}
+                </Box>
+
+                <Text
+                  as="label"
+                  color="$textPlaceholder"
+                  fontSize="$sm"
+                  fontWeight="$light"
+                  attributes={labelProps}
+                >
+                  OSMO
+                </Text>
+              </Box>
+
+              <MeshTagButton onClick={onMax2}>Max</MeshTagButton>
+            </Box>
+          )}
+        />
+
+        {/* With different preview track colors */}
+        <Slider
+          name="osmo"
+          value={value3}
+          onChange={setValue3}
+          width="300px"
+          thumbTrackColor="$text"
+          previewPercent={35}
+          previewTrackColor="$inputBorder"
+          renderLabel={({ labelProps, outputProps, valuePercent }) => (
+            <Box
+              display="flex"
+              gap="$2"
+              alignItems="center"
+              justifyContent="space-between"
+              pb="$4"
+            >
+              <Box
+                display="flex"
+                gap="$2"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Box
+                  as="output"
+                  color="$text"
+                  fontSize="$md"
+                  attributes={outputProps}
+                >
+                  {`${formatNumeric(valuePercent * TOTAL_TOKENS, 2)}`}
+                </Box>
+
+                <Text
+                  as="label"
+                  color="$textPlaceholder"
+                  fontSize="$sm"
+                  fontWeight="$light"
+                  attributes={labelProps}
+                >
+                  OSMO
+                </Text>
+              </Box>
+
+              <MeshTagButton onClick={onMax3}>Max</MeshTagButton>
+            </Box>
+          )}
+        />
+
         <Text
           color="$white"
           fontSize="$xs"
@@ -89,7 +197,7 @@ export const Default: Story = {
           }}
         >
           NOTE: this component theme is first designed to be used in a dark
-          background <br /> TBD: light theme
+          background (Mesh theme) <br /> TBD: light theme
         </Text>
       </Box>
     );

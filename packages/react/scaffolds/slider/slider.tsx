@@ -21,6 +21,9 @@ export interface SliderProps extends AriaSliderProps {
   name: string;
   fluidWidth?: boolean;
   width?: BoxProps["width"];
+  previewPercent?: number;
+  thumbTrackColor?: BoxProps["color"];
+  previewTrackColor?: BoxProps["color"];
   renderLabel?: ({
     labelProps,
     outputProps,
@@ -35,10 +38,31 @@ export interface SliderProps extends AriaSliderProps {
   formatOptions?: Parameters<typeof useNumberFormatter>[0];
 }
 
+function clampPreviewProgressPercent(
+  valuePercent: number,
+  previewPercent: number
+) {
+  const totalPercent = valuePercent + previewPercent;
+
+  if (totalPercent > 1) {
+    return 1 - valuePercent;
+  }
+
+  return totalPercent;
+}
+
 export default function Slider(props: SliderProps) {
   const trackRef = React.useRef(null);
   const numberFormatter = useNumberFormatter(props.formatOptions);
-  const state = useSliderState({ ...props, numberFormatter });
+
+  const state = useSliderState({
+    ...props,
+    numberFormatter,
+    defaultValue: 0,
+    minValue: 0,
+    maxValue: props.previewPercent ? 100 - props.previewPercent : 100,
+  });
+
   const { groupProps, trackProps, labelProps, outputProps } = useSlider(
     props,
     state,
@@ -85,15 +109,34 @@ export default function Slider(props: SliderProps) {
             : styles.verticalTrack
         )}
         {...{
+          "data-has-preview-track": !!(
+            props.previewPercent != null && props.previewTrackColor
+          ),
           "data-disabled": state.isDisabled ? "true" : "false",
         }}
       >
-        <div
+        <Box
           className={styles.trackProgress}
+          backgroundColor={props.thumbTrackColor ?? "$progressBg"}
           style={{
             width: `${state.getThumbPercent(0) * 100}%`,
           }}
         />
+
+        {props.previewPercent != null && props.previewTrackColor && (
+          <Box
+            className={styles.trackPreviewProgress}
+            backgroundColor={props.previewTrackColor}
+            style={{
+              width: `calc(${
+                clampPreviewProgressPercent(
+                  state.getThumbPercent(0),
+                  props.previewPercent / 100
+                ) * 100
+              }%)`,
+            }}
+          />
+        )}
 
         <Thumb index={0} state={state} trackRef={trackRef} name={props.name} />
       </div>
