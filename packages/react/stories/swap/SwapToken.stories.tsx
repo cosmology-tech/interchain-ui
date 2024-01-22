@@ -1,14 +1,12 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
+import { matchSorter } from "match-sorter";
 import { useMockData } from "../stub/mock-data-client";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import SwapToken from "../../src/ui/swap-token";
-import {
-  SwapTokenProps,
-  SwapItem,
-} from "../../src/ui/swap-token/swap-token.types";
+import { SwapTokenProps } from "../../src/ui/swap-token/swap-token.types";
 
 const meta: Meta<typeof SwapToken> = {
   component: SwapToken,
@@ -50,6 +48,12 @@ export const Primary: Story = {
     const [to, setTo] = useState<SwapTokenProps["to"] | null>(null);
 
     const [from, setFrom] = useState<SwapTokenProps["from"] | null>(null);
+
+    const filterFn: SwapTokenProps["filterFn"] = (items, query) => {
+      return matchSorter(items, query, {
+        keys: ["tokenName", "name"],
+      });
+    };
 
     const onToggleDirection = () => {
       const prevTo = to;
@@ -134,6 +138,7 @@ export const Primary: Story = {
         from={from}
         to={to}
         onToggleDirection={onToggleDirection}
+        filterFn={filterFn}
       />
     );
   },

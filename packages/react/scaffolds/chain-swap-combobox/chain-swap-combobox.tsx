@@ -69,13 +69,19 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
   );
 });
 
-type ComboboxOption = Omit<ItemProps, "isActive" | "size" | "isSelected">;
+export type ComboboxOption = Omit<
+  ItemProps,
+  "isActive" | "size" | "isSelected"
+>;
 
 export interface ChainSwapComboboxProps {
   size: ChainListItemProps["size"];
   maxHeight?: number;
   options: Array<ComboboxOption>;
-  filterFn?: (options: Array<ComboboxOption>) => Array<ComboboxOption>;
+  filterFn?: (
+    options: Array<ComboboxOption>,
+    query: string
+  ) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
   defaultOpen?: boolean;
@@ -179,7 +185,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
 
   const items =
     typeof props.filterFn === "function"
-      ? props.filterFn(props.options)
+      ? props.filterFn(props.options, inputValue)
       : defaultFilterOptions(props.options);
 
   React.useEffect(() => {

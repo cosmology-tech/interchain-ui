@@ -30,14 +30,15 @@ import type { ChangeChainListItemProps } from "@/ui/change-chain-list-item/chang
 
 interface ItemProps {
   isActive: boolean;
-  size: ChangeChainListItemProps["size"];
+  size?: ChangeChainListItemProps["size"];
   // ====
   iconUrl?: ChangeChainListItemProps["iconUrl"];
-  chainName: ChangeChainListItemProps["chainName"];
+  label: string;
+  value: string;
 }
 
 const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
-  const { isActive, size, iconUrl, chainName, ...rest } = props;
+  const { isActive, size, iconUrl, label, value, ...rest } = props;
   const id = useId();
 
   return (
@@ -53,7 +54,7 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
         isActive={isActive}
         size={size}
         iconUrl={iconUrl}
-        chainName={chainName}
+        label={label}
       />
     </div>
   );
@@ -84,7 +85,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
   const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [showInputValue, setShowInputValue] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
-    props.defaultSelected?.chainName ?? ""
+    props.defaultSelected?.label ?? ""
   );
   const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
     props.defaultSelected ?? null
@@ -148,8 +149,10 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
   }
 
   function defaultFilterOptions(options: Array<ComboboxOption>) {
-    return options.filter((item) =>
-      item?.chainName?.toLowerCase().startsWith(inputValue?.toLowerCase())
+    return options.filter(
+      (item) =>
+        item?.value?.toLowerCase().startsWith(inputValue?.toLowerCase()) ||
+        item?.label?.toLowerCase().startsWith(inputValue?.toLowerCase())
     );
   }
 
@@ -165,7 +168,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
     if (props.valueItem) {
       setSelectedItem(props?.valueItem);
     }
-    setInputValue(props?.valueItem?.chainName);
+    setInputValue(props?.valueItem?.label);
   }, [props.valueItem]);
 
   const InputComp =
@@ -179,7 +182,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
           label={props.label}
           value={showInputValue ? inputValue : ""}
           iconUrl={!selectedItem ? "" : selectedItem?.iconUrl}
-          chainName={!selectedItem ? "" : selectedItem?.chainName}
+          chainName={!selectedItem ? "" : selectedItem?.label}
           showSelectedItem={!showInputValue}
           isClearable={!!selectedItem || !!inputValue}
           onClear={() => {
@@ -212,7 +215,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
                 items[activeIndex]
               ) {
                 const selected = items[activeIndex];
-                setInputValue(selected.chainName);
+                setInputValue(selected.label);
                 setActiveIndex(null);
                 setSelectedItem(selected);
                 setShowInputValue(false);
@@ -265,7 +268,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
             <FloatingList elementsRef={listRef}>
               {items.map((item, index) => (
                 <Item
-                  key={item.chainName}
+                  key={item.value}
                   size={props.appearance === "bold" ? "md" : props.size}
                   isActive={activeIndex === index}
                   {...item}
@@ -274,7 +277,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
                       listRef.current[index] = node;
                     },
                     onClick() {
-                      setInputValue(item.chainName);
+                      setInputValue(item.label);
                       setOpen(false);
                       setShowInputValue(false);
                       setSelectedItem(item);
