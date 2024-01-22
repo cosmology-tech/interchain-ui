@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.6...@interchain-ui/react@1.20.7) (2024-01-22)
+
+### Bug Fixes
+
+- improve filterFn and swap components ([36a4e42](https://github.com/cosmology-tech/interchain-ui/commit/36a4e428accc74620147bd9522031f8d4e1d8c63))
+
 ## [1.20.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.5...@interchain-ui/react@1.20.6) (2024-01-22)
 
 ### Bug Fixes
