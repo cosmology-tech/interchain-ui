@@ -45,24 +45,41 @@ export default function MeshTable(props: MeshTableProps) {
     displayBottomShadow: false,
     pinnedRows: () => {
       if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
-        return props.data;
+        return [];
       }
 
-      return props.data.filter((row) => props.pinnedIds.includes(row.id));
+      return props.data.filter((row) =>
+        state.getLimitPinnedIds().includes(row.id)
+      );
     },
     unpinnedRows: () => {
       if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
         return props.data;
       }
 
-      return props.data.filter((row) => !props.pinnedIds.includes(row.id));
+      return props.data.filter(
+        (row) => !state.getLimitPinnedIds().includes(row.id)
+      );
+    },
+    getLimitPinnedIds: () => {
+      const limitPinnedIds = props.pinnedIds.slice(0, state.getMaxPinnedRows());
+      return limitPinnedIds;
+    },
+    getMaxPinnedRows: () => {
+      const DEFAULT_MAX_PINNED_ROWS = 3;
+      return props.maxPinnedRows ?? DEFAULT_MAX_PINNED_ROWS;
     },
     shouldPinHeader: () => {
-      const MAX_PINNED_ROWS = props.maxPinnedRows ?? 3;
+      if (
+        props.pinnedIds == null ||
+        (Array.isArray(props.pinnedIds) && (props.pinnedIds ?? []).length === 0)
+      ) {
+        return false;
+      }
 
       return (
-        state.pinnedRows().length > 0 &&
-        state.pinnedRows().length <= MAX_PINNED_ROWS
+        props.pinnedIds.length > 0 &&
+        state.pinnedRows().length <= state.getMaxPinnedRows()
       );
     },
   });
@@ -81,7 +98,7 @@ export default function MeshTable(props: MeshTableProps) {
             measureRef.clientHeight -
             measureRef.scrollTop
         );
-        console.log("delta", height);
+
         if (height < 1) {
           state.displayBottomShadow = false;
         } else {
@@ -141,7 +158,7 @@ export default function MeshTable(props: MeshTableProps) {
       borderColor={props.borderless ? undefined : "$divider"}
       borderWidth={props.borderless ? undefined : "1px"}
       borderStyle={props.borderless ? undefined : "$solid"}
-      maxHeight={state.pinnedRows().length > 0 ? "380px" : "0px"}
+      maxHeight={state.shouldPinHeader() ? "380px" : undefined}
       overflowY="auto"
       display="block"
       ref={measureRef}
@@ -149,9 +166,9 @@ export default function MeshTable(props: MeshTableProps) {
     >
       <Table {...props.tableProps} position="relative">
         <TableHead
-          position={state.pinnedRows().length > 0 ? "sticky" : "relative"}
-          top={state.pinnedRows().length > 0 ? "0px" : undefined}
-          zIndex={state.pinnedRows().length > 0 ? "$100" : undefined}
+          position={state.shouldPinHeader() ? "sticky" : "relative"}
+          top={state.shouldPinHeader() ? "0px" : undefined}
+          zIndex={state.shouldPinHeader() ? "$100" : undefined}
         >
           <TableRow backgroundColor="$cardBg">
             <For each={props.columns}>
@@ -173,7 +190,7 @@ export default function MeshTable(props: MeshTableProps) {
             </For>
           </TableRow>
 
-          <Show when={state.pinnedRows().length > 0}>
+          <Show when={state.shouldPinHeader()}>
             <For each={state.pinnedRows()}>
               {(pinnedRow, pinnedRowIndex) => (
                 <TableRow
@@ -189,11 +206,11 @@ export default function MeshTable(props: MeshTableProps) {
                         textAlign={column.align}
                         height={props.rowHeight}
                         backgroundColor="$cardBg"
-                        className={
-                          pinnedRowIndex === state.pinnedRows().length - 1
-                            ? styles.borderedTableCell
-                            : ""
-                        }
+                        className={clx({
+                          [styles.borderedTableCell]:
+                            state.shouldPinHeader() &&
+                            pinnedRowIndex === state.pinnedRows().length - 1,
+                        })}
                       >
                         <Show
                           when={!!column.render}
@@ -292,11 +309,13 @@ export default function MeshTable(props: MeshTableProps) {
         </TableBody>
       </Table>
 
-      <div
-        ref={shadowRef}
-        className={styles.bottomShadow}
-        data-is-visible={state.displayBottomShadow}
-      />
+      <Show when={state.shouldPinHeader()}>
+        <div
+          ref={shadowRef}
+          className={styles.bottomShadow}
+          data-is-visible={state.displayBottomShadow}
+        />
+      </Show>
     </Box>
   );
 }

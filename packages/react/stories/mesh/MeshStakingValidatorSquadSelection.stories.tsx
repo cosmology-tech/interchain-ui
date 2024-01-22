@@ -206,6 +206,7 @@ export const Primary: Story = {
                   borderless
                   rowHeight="$14"
                   pinnedIds={["row_0", "row_1", "row_2"]}
+                  maxPinnedRows={3}
                   columns={[
                     {
                       id: "validator",
