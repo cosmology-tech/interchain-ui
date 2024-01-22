@@ -276,6 +276,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 style: {
                   ...floatingStyles,
                   ...(isMounted ? transitionStyles : {}),
+                  zIndex: 999,
                   overflowY: "auto",
                 },
               })}
