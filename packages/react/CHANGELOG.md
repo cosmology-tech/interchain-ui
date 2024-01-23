@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.0...@interchain-ui/react@1.21.1) (2024-01-23)
+
+### Bug Fixes
+
+- **liquid-staking:** reset input field if current value is zero ([ccfb78f](https://github.com/cosmology-tech/interchain-ui/commit/ccfb78f30a62ff2841d01c92517736d6904d277f))
+
 # [1.21.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.20.7...@interchain-ui/react@1.21.0) (2024-01-22)
 
 ### Bug Fixes
