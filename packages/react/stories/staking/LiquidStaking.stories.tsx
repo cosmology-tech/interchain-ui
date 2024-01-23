@@ -70,7 +70,7 @@ export const Primary: Story = {
           stakeAmount={stakedAmount}
           stakeToken={stakeToken}
           reward={reward}
-          precision={2}
+          precision={6}
           bottomLink={{
             href: "https://cosmology.zone/",
             label: "Learn more",
@@ -113,6 +113,9 @@ export const Primary: Story = {
 
               return {
                 ...prevReward,
+                symbol: prevReward?.symbol ?? "",
+                imgSrc: prevReward?.imgSrc ?? "",
+                name: prevReward?.name ?? "",
                 rewardAmount: amt,
                 priceDisplayAmount: notional,
               };

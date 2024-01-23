@@ -28,6 +28,8 @@ export interface LiquidStakingProps extends BaseComponentProps {
   descriptionList?: Array<RewardDescriptionItem>;
   isSubmitDisabled?: boolean;
   onChange?: (stakeAmount: number) => void;
+  onBlur?: (stakeAmount: number) => void;
+  onFocus?: () => void;
   onSubmit: (event?: any) => void;
   // Half and max buttons
   halfButtonLabel?: string;

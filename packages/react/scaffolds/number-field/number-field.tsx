@@ -50,7 +50,29 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       inputProps,
       incrementButtonProps,
       decrementButtonProps,
-    } = useNumberField(props, state, inputRef);
+    } = useNumberField(
+      {
+        ...props,
+        onFocus(event) {
+          // Clears input if 0
+          if (Number(state.inputValue) === 0) {
+            state.setInputValue("");
+          }
+
+          props.onFocus?.(event);
+        },
+        onBlur(event) {
+          if (state.inputValue === "") {
+            // If not a number, reset to min value
+            state.setInputValue(`${state.minValue ?? "0"}`);
+          }
+
+          props.onBlur?.(event);
+        },
+      },
+      state,
+      inputRef
+    );
 
     return (
       <Box className={props?.className} {...props.attributes}>
