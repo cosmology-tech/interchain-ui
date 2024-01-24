@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.1...@interchain-ui/react@1.21.2) (2024-01-24)
+
+### Bug Fixes
+
+- **governance:** handle overflow edge cases ([9d2b1fe](https://github.com/cosmology-tech/interchain-ui/commit/9d2b1fe363ec7ac5156d7b8b5e1c5fe6af5a3756))
+- **governance:** showcase custom modal title ([3405cae](https://github.com/cosmology-tech/interchain-ui/commit/3405cae16b20f2b2b96b5802077707921cfc22a9))
+
 ## [1.21.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.0...@interchain-ui/react@1.21.1) (2024-01-23)
 
 ### Bug Fixes
