@@ -36,7 +36,20 @@ export const Primary: Story = {
             </Button>
           )}
           isOpen={isOpen}
-          title="#120 Signaling Proposal: Ion 🧿 DAO & Treasury"
+          title={
+            <Text
+              color="$text"
+              fontSize="$md"
+              fontWeight="$semibold"
+              attributes={{
+                paddingTop: "$6",
+                maxWidth: "400px",
+              }}
+            >
+              #120 Signaling Proposal: Ion 🧿 DAO & Treasury. Lorem, ipsum dolor
+              sit amet consectetur adipisicing elit. Necessitatibus
+            </Text>
+          }
           onClose={() => setIsOpen(false)}
         >
           <Box minWidth="640px">
