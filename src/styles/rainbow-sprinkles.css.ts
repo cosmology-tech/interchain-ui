@@ -77,6 +77,7 @@ const responsiveProperties = defineProperties({
     fontWeight: themeVars.fontWeight,
     whiteSpace: true,
     wordBreak: true,
+    overflowWrap: true,
     fill: true,
     overflow: true,
     overflowX: true,

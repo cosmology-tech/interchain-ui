@@ -11,7 +11,7 @@ export type GovernanceProposalItem = {
   status: GovernanceProposalStatus;
   statusLabel?: string;
   title: string | BaseComponentProps["children"];
-  id: string;
+  id?: string;
   endTimeLabel?: string;
   endTime: string;
   votes: GovernanceVoteStructure;

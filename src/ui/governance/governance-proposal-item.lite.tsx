@@ -60,8 +60,7 @@ export default function GovernanceProposalItem(
       borderColor="$inputBorder"
       borderStyle="$solid"
       borderWidth="$sm"
-      height={{
-        mobile: "auto",
+      minHeight={{
         tablet: "104px",
       }}
       px={{
@@ -91,6 +90,7 @@ export default function GovernanceProposalItem(
         }}
         gap="$10"
         height="100%"
+        minWidth="$0"
         attributes={{
           "data-part-id": "content",
         }}
@@ -104,6 +104,9 @@ export default function GovernanceProposalItem(
           }}
           flexShrink="0"
           width="84px"
+          attributes={{
+            "data-part-id": "checkboxes",
+          }}
         >
           <Show when={props.status === "pending"}>
             {/* @ts-expect-error */}
@@ -140,8 +143,8 @@ export default function GovernanceProposalItem(
               tablet: "auto",
               desktop: "auto",
             },
-            flexGrow: "1",
-            flexShrink: "0",
+            flex: 1,
+            overflow: "hidden",
             justifyContent: "flex-start",
             alignItems: {
               mobile: "flex-start",
@@ -226,12 +229,23 @@ export default function GovernanceProposalItem(
               width: "100%",
             }}
           >
-            <Text color="$text" fontSize="$sm" fontWeight="$normal">
+            <Text
+              as={typeof props.title === "string" ? "p" : "div"}
+              color="$text"
+              fontSize="$sm"
+              fontWeight="$normal"
+              attributes={{
+                whiteSpace: "pre-wrap",
+              }}
+            >
               {props.title}
             </Text>
-            <Text color="$textSecondary" fontSize="$xs" fontWeight="$normal">
-              {props.id}
-            </Text>
+
+            <Show when={props.id}>
+              <Text color="$textSecondary" fontSize="$xs" fontWeight="$normal">
+                {props.id}
+              </Text>
+            </Show>
 
             {/* Vote structure meter */}
             <Box
