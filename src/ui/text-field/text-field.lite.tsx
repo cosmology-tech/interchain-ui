@@ -108,7 +108,7 @@ export default function TextField(props: TextFieldProps) {
             props.inputClassName
           )}
           autocomplete={props.autoComplete}
-          autofocus={props.autoFocus}
+          autoFocus={props.autoFocus}
           disabled={props.disabled}
           type={validTypes[props.type]}
           value={props.value}

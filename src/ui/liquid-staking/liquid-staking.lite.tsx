@@ -378,7 +378,9 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   minValue={0}
                   maxValue={toNumber(props.stakeToken.available)}
                   onChange={(value) => state.handleStakeAmountChange(value)}
-                  onBlur={(value) => props.onBlur?.(value)}
+                  onBlur={(event) =>
+                    props.onBlur?.(event.target.value as number)
+                  }
                   formatOptions={{
                     minimumFractionDigits: 0,
                     maximumFractionDigits: props.precision,

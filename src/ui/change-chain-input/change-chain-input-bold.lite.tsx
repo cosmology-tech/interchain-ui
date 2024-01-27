@@ -129,7 +129,7 @@ export default function ChangeChainInputBold(props: ChangeChainInputBoldProps) {
               : styles.inputIntent[props.intent]
           )}
           autocomplete={props.autoComplete}
-          autofocus={props.autoFocus}
+          autoFocus={props.autoFocus}
           disabled={props.disabled}
           type={validTypes[props.type]}
           value={props.value}
