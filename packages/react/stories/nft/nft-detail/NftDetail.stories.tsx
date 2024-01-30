@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import NftDetail from "../../../src/ui/nft-detail";
 
+// @ts-ignore
 import badkid1 from "../../../static/nft/badkid-3543.jpeg";
 import type { NftDetailProps } from "../../../src/ui/nft-detail/nft-detail.types";
 
@@ -34,7 +35,7 @@ export const Primary: Story = {
     detailInfo: {
       price: 400,
       lastSale: 385,
-      owner: 100,
+      owner: "0x1002233",
       topOffer: 400,
       floorPrice: 400,
       isNameVerified: true,
@@ -165,6 +166,7 @@ export const MakeOffer: Story = {
           event: "List",
           from: "stargaze.stars",
           date: "12 days ago",
+          tokenName: "STARS",
         },
         {
           price: 200,
@@ -172,6 +174,7 @@ export const MakeOffer: Story = {
           from: "stargaze.stars",
           to: "shane",
           date: "12 days ago",
+          tokenName: "STARS",
         },
       ],
     },
