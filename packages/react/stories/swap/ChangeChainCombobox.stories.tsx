@@ -2,6 +2,7 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
+import Button from "../../src/ui/button";
 import ChangeChainCombobox from "../../src/ui/change-chain-combobox";
 import { useMockData } from "../stub/mock-data-client";
 
@@ -44,9 +45,8 @@ export const Primary: Story = {
     return (
       <Box maxWidth="350px">
         <ChangeChainCombobox
-          maxHeight={350}
           valueItem={selectedChain ? selectedChain : undefined}
-          size="md"
+          size="sm"
           onItemSelected={(item) => {
             console.log("[Story] Selected Item", item);
             setSelectedChain(item);

@@ -11,6 +11,7 @@ export interface ButtonProps extends BaseComponentProps {
   size?: ButtonSize;
   disabled?: boolean;
   fluidWidth?: boolean;
+  fluid?: boolean;
   iconSize?: IconProps["size"];
   leftIcon?: IconProps["name"];
   rightIcon?: IconProps["name"];
