@@ -21,6 +21,7 @@ export const Primary: Story = {
         event: "List",
         from: "stargaze.stars",
         date: "12 days ago",
+        tokenName: "STARS",
       },
       {
         price: 200,
@@ -28,6 +29,7 @@ export const Primary: Story = {
         from: "stargaze.stars",
         to: "shane",
         date: "12 days ago",
+        tokenName: "STARS",
       },
     ],
   },

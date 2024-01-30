@@ -19,5 +19,6 @@ export const Primary: Story = {
     event: "List",
     from: "stargaze.stars",
     date: "12 days ago",
+    tokenName: "STARS",
   },
 };

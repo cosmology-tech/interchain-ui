@@ -23,7 +23,7 @@ export default function NftDetailActivityList(
         fontWeight="$semibold"
         attributes={{ marginBottom: "$10" }}
       >
-        Activity
+        {props.title ?? "Activity"}
       </Text>
 
       <Box
@@ -44,6 +44,7 @@ export default function NftDetailActivityList(
                 from={item?.from}
                 to={item?.to}
                 date={item?.date}
+                tokenName={item.tokenName}
               />
             )}
           </For>

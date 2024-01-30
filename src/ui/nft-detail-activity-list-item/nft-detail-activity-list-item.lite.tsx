@@ -30,7 +30,7 @@ export default function NftDetailActivityListItem(
           <Text
             fontSize="$xs"
             color="$textSecondary"
-          >{`${props?.price} STAR`}</Text>
+          >{`${props?.price} ${props.tokenName}`}</Text>
         </Stack>
       </Box>
       <Box flex={1}>
@@ -40,7 +40,7 @@ export default function NftDetailActivityListItem(
             color="$textSecondary"
             attributes={{ marginRight: "$2" }}
           >
-            from
+            {props.fromLabel ?? "from"}
           </Text>
           <Text fontSize="$xs" fontWeight="$semibold">
             {props?.from}
@@ -54,7 +54,7 @@ export default function NftDetailActivityListItem(
             color="$textSecondary"
             attributes={{ marginRight: "$2" }}
           >
-            to
+            {props.toLabel ?? "from"}
           </Text>
           <Text fontSize="$xs" fontWeight="$semibold">
             {props?.to ?? "---"}
