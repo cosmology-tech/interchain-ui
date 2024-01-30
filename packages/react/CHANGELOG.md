@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.4...@interchain-ui/react@1.21.5) (2024-01-30)
+
+### Bug Fixes
+
+- **nft:** make tokenName mandatory prop ([bb8be14](https://github.com/cosmology-tech/interchain-ui/commit/bb8be14436c4411c936b3e50b3d9c69bf876af4f))
+- storybook fixture ([a8dc05c](https://github.com/cosmology-tech/interchain-ui/commit/a8dc05c0855f10039ddfdbc2e961a7877353998c))
+- storybook fixture ([367a406](https://github.com/cosmology-tech/interchain-ui/commit/367a4066ef538c0804b60dfa7d5ebfe20b77168b))
+
 ## [1.21.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.3...@interchain-ui/react@1.21.4) (2024-01-29)
 
 **Note:** Version bump only for package @interchain-ui/react
