@@ -98,6 +98,7 @@ export default function ConnectModalWalletButton(
                 attributes={{
                   alt: props.name,
                   src: props.logo,
+                  referrerPolicy: "no-referrer",
                 }}
                 width={props.variant === "square" ? "$16" : "$12"}
                 height={props.variant === "square" ? "$16" : "$12"}
