@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.6...@interchain-ui/react@1.21.7) (2024-01-31)
+
+### Bug Fixes
+
+- add search field functionality ([1573530](https://github.com/cosmology-tech/interchain-ui/commit/15735309cfc94b2a153a3e9c42723c23633768a4))
+- base combobox ([9678e39](https://github.com/cosmology-tech/interchain-ui/commit/9678e398d26a88253dcc9c7cb5dd5d4c38147ce1))
+- build ([997a8c8](https://github.com/cosmology-tech/interchain-ui/commit/997a8c8564c566f38dc95acc25d080c94f923785))
+
 ## [1.21.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.5...@interchain-ui/react@1.21.6) (2024-01-30)
 
 ### Bug Fixes
