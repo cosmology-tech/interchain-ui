@@ -109,6 +109,7 @@ const ChainOption = (props: Option & { iconUrl: string }) => {
 export const CustomComboboxItem: Story = {
   render: () => {
     const { isReady, comboboxAssets } = useMockData();
+    const [selectedKey, setSelectedKey] = React.useState<React.Key>();
 
     const options = React.useMemo(
       () =>
@@ -128,6 +129,26 @@ export const CustomComboboxItem: Story = {
       <Box display="flex" flexDirection="column" gap="$6">
         <Combobox
           label="Favorite Animal"
+          onSelectionChange={(item) => {
+            setSelectedKey(item ?? null);
+          }}
+          inputAddonStart={
+            selectedKey ? (
+              <Avatar
+                name={selectedKey as string}
+                getInitials={(name) => name[0]}
+                size="xs"
+                src={
+                  options.find((i) => i.value === selectedKey)?.iconUrl ??
+                  undefined
+                }
+                fallbackMode="bg"
+                attributes={{
+                  paddingX: "$4",
+                }}
+              />
+            ) : null
+          }
           styleProps={{
             width: "350px",
           }}

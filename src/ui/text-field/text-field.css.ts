@@ -1,4 +1,9 @@
-import { createVar, style, styleVariants } from "@vanilla-extract/css";
+import {
+  createVar,
+  style,
+  styleVariants,
+  ComplexStyleRule,
+} from "@vanilla-extract/css";
 import { baseTextStyles } from "../text/text.css";
 import { unstyledButton } from "../button/button.css";
 import { themeVars } from "../../styles/themes.css";
@@ -25,6 +30,22 @@ export const rootInputFocused = style({
   },
 });
 
+export const focusStyleRule: ComplexStyleRule = {
+  vars: {
+    [inputBorderVar]: themeVars.colors.inputBorderFocus,
+    [inputRingShadowVar]: `${themeVars.colors.inputBg} 0px 0px 0px 0px, ${themeVars.colors.textPlaceholder} 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
+  },
+  outline: `2px solid transparent`,
+  outlineOffset: "2px",
+  boxShadow: inputRingShadowVar,
+};
+
+export const hoverStyleRule: ComplexStyleRule = {
+  vars: {
+    [inputBorderVar]: themeVars.colors.text,
+  },
+};
+
 export const inputBorderAndShadow = style({
   borderStyle: "solid",
   borderWidth: "1px",
@@ -34,20 +55,8 @@ export const inputBorderAndShadow = style({
     [inputBorderVar]: themeVars.colors.inputBorder,
   },
   selectors: {
-    "&:hover": {
-      vars: {
-        [inputBorderVar]: themeVars.colors.text,
-      },
-    },
-    "&:focus-visible": {
-      vars: {
-        [inputBorderVar]: themeVars.colors.inputBorderFocus,
-        [inputRingShadowVar]: `${themeVars.colors.inputBg} 0px 0px 0px 0px, ${themeVars.colors.textPlaceholder} 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
-      },
-      outline: `2px solid transparent`,
-      outlineOffset: "2px",
-      boxShadow: inputRingShadowVar,
-    },
+    "&:hover": hoverStyleRule,
+    "&:focus-visible": focusStyleRule,
   },
 });
 
