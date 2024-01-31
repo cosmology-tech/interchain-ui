@@ -13,6 +13,7 @@ import {
   listItemActive,
   listItemSizes,
   listItemSelected,
+  listItemDisabled,
 } from "./list-item.css";
 import type { ListItemProps } from "./list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
@@ -57,6 +58,7 @@ export default function ComboboxItem(props: ListItemProps) {
         props.isActive ? listItemActive.active : listItemActive.inactive,
         listItemSizes[props.size],
         props.isSelected && listItemSelected,
+        props.isDisabled && listItemDisabled,
         props.className
       )}
       ref={props.itemRef}

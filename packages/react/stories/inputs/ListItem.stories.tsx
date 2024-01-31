@@ -19,13 +19,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Stack as="ul" space="2" direction="vertical">
-      <ListItem isActive>1 (Active)</ListItem>
-      <ListItem>2</ListItem>
-      <ListItem>3</ListItem>
-      <ListItem>4</ListItem>
-      <ListItem>5</ListItem>
-      <ListItem>6</ListItem>
-      <ListItem>7</ListItem>
+      <ListItem isActive>Item 1 (Active)</ListItem>
+      <ListItem>Item 2</ListItem>
+      <ListItem>Item 3</ListItem>
+      <ListItem>Item 4</ListItem>
+      <ListItem>Item 5</ListItem>
+      <ListItem>Item 6</ListItem>
+      <ListItem>Item 7</ListItem>
+      <ListItem isDisabled>Item 8 (disabled)</ListItem>
     </Stack>
   ),
 };

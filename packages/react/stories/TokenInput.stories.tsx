@@ -18,7 +18,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const osmosisAssets: OsmosisAsset[] = [...assets.assets, ...asset_list.assets];
-
 const OSMO = getAssetByDenom(osmosisAssets, "uosmo");
 
 /* This is primary TokenInput */

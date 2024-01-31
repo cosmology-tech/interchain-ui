@@ -19,6 +19,7 @@ export default function Icon(props: IconProps) {
       color={props.color}
       className={props.className}
       {...props.attributes}
+      {...props.domAttributes}
     >
       <Show when={!!props.title}>
         <title>{props.title}</title>

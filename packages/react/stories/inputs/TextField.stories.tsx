@@ -18,6 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     id: "amount",
+    size: "sm",
     label: "Select amount",
     placeholder: "Please enter amount",
   },

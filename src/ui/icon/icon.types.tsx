@@ -80,4 +80,5 @@ export interface IconProps extends BaseComponentProps {
   size?: Sprinkles["fontSize"];
   color?: Sprinkles["color"];
   attributes?: Sprinkles;
+  domAttributes?: any;
 }

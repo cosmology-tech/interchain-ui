@@ -21,6 +21,15 @@ module.exports = {
       path: "../select",
     },
   },
+  combobox: {
+    jsxMap: {
+      ScaffoldCombobox: "Combobox",
+    },
+    import: {
+      imports: { Combobox: "default" },
+      path: "../combobox",
+    },
+  },
   slider: {
     jsxMap: {
       ScaffoldSlider: "Slider",

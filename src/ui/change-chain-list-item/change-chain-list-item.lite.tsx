@@ -67,6 +67,7 @@ export default function ChangeChainListItem(props: ChangeChainListItemProps) {
           src={props.iconUrl}
           fallbackMode="bg"
         />
+
         <Text fontSize="$lg" fontWeight="$normal" color="$text">
           {props.label}
         </Text>
