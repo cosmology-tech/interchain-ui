@@ -20,6 +20,6 @@ export const Primary: Story = {
     size: "md",
     iconUrl:
       "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
-    chainName: "Atom",
+    label: "ATOM",
   },
 };

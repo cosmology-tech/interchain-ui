@@ -65,3 +65,12 @@ export const listItemSizes = styleVariants({
 export const listItemSelected = style({
   backgroundColor: themeVars.colors.menuItemBgActive,
 });
+
+export const listItemDisabled = style({
+  cursor: "not-allowed",
+  selectors: {
+    "&:hover": {
+      backgroundColor: `${themeVars.colors.menuItemBg} !important`,
+    },
+  },
+});

@@ -4,11 +4,7 @@ import { scrollBar } from "@/ui/shared/shared.css";
 
 export const listBoxWidthVar = createVar();
 
-const listBoxBase = style({
-  vars: {
-    [listBoxWidthVar]: "100%",
-  },
-  width: listBoxWidthVar,
+export const listBoxBase = style({
   overflow: "auto",
   outline: "2px solid transparent",
   outlineOffset: "2px",
@@ -20,7 +16,14 @@ const listBoxBase = style({
   backgroundColor: themeVars.colors.menuItemBg,
 });
 
-const listBoxBaseWithShadow = style([
+export const listBoxDimensions = style({
+  vars: {
+    [listBoxWidthVar]: "100%",
+  },
+  width: listBoxWidthVar,
+});
+
+export const listBoxBaseWithShadow = style([
   listBoxBase,
   {
     borderWidth: "1px",
@@ -33,6 +36,7 @@ const listBoxBaseWithShadow = style([
 export const listboxStyle = styleVariants({
   light: [
     listBoxBaseWithShadow,
+    listBoxDimensions,
     scrollBar.light,
     style({
       borderColor: "#D1D6DD",
@@ -40,6 +44,7 @@ export const listboxStyle = styleVariants({
   ],
   dark: [
     listBoxBaseWithShadow,
+    listBoxDimensions,
     scrollBar.dark,
     style({
       borderColor: "#434B55",
@@ -48,8 +53,8 @@ export const listboxStyle = styleVariants({
 });
 
 export const listboxStyleNoShadow = styleVariants({
-  light: [listBoxBase, scrollBar.light],
-  dark: [listBoxBase, scrollBar.dark],
+  light: [listBoxBase, listBoxDimensions, scrollBar.light],
+  dark: [listBoxBase, listBoxDimensions, scrollBar.dark],
 });
 
 export const selectRoot = style({
