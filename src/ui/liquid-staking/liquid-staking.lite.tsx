@@ -66,6 +66,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     // ==== UI states
     theme: ThemeVariant;
     isMounted: boolean;
+    isDirty: boolean;
     expanded: boolean;
     scrollOffset: number;
     isAccordionVisible: boolean;
@@ -74,6 +75,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
   }>({
     theme: "light",
     isMounted: false,
+    isDirty: false,
     scrollOffset: 0,
     expanded: false,
     stakeToken: null,
@@ -81,6 +83,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
     rewardAmount: 0,
     width: 0,
     handleToggleExpand() {
+      if (!state.isDirty) {
+        state.isDirty = true;
+      }
+
       if (state.expanded) {
         if (scrollRef) {
           scrollRef.scrollTop = 0;
@@ -645,9 +651,12 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         <div
           ref={scrollRef}
           className={clx(
-            state.expanded
-              ? styles.accordionPanel.expanded
-              : styles.accordionPanel.contracted,
+            {
+              [styles.accordionPanel.expanded]: state.expanded && state.isDirty,
+              [styles.accordionPanel.contracted]:
+                !state.expanded && state.isDirty,
+              [styles.accordionPanel.init]: !state.isDirty,
+            },
             scrollBar[state.theme]
           )}
           data-part-id="scroll-container"
@@ -743,7 +752,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         right={state.expanded ? "0" : "unset"}
         width="$full"
         py="$4"
-        px={state.expanded ? "$8" : "$0"}
+        px={state.expanded ? "$10" : "$0"}
         backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
         zIndex="$0"
         attributes={{

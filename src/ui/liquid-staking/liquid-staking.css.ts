@@ -8,7 +8,7 @@ import {
 import { themeVars } from "../../styles/themes.css";
 
 const EXPANDED_HEIGHT_PX = `458px`;
-const CONTRACTED_HEIGHT_PX = `32px`;
+const CONTRACTED_HEIGHT_PX = `36px`;
 export const liqStakingRootContainer = createContainer();
 
 const textButtonBgVar = createVar();
@@ -28,22 +28,25 @@ const expandVerticalReverse = keyframes({
   "100%": { height: CONTRACTED_HEIGHT_PX },
 });
 
-export const accordionBase = style({
-  position: "relative",
-});
-
 export const accordionPanel = styleVariants({
-  expanded: [
-    accordionBase,
+  init: [
     {
+      position: "relative",
+      height: CONTRACTED_HEIGHT_PX,
+      overflow: "hidden",
+    },
+  ],
+  expanded: [
+    {
+      position: "relative",
       height: EXPANDED_HEIGHT_PX,
       overflow: "auto",
       animation: `${expandVertical} 450ms cubic-bezier(0.22, 1, 0.36, 1)`,
     },
   ],
   contracted: [
-    accordionBase,
     {
+      position: "relative",
       height: CONTRACTED_HEIGHT_PX,
       opacity: 1,
       overflow: "hidden",
