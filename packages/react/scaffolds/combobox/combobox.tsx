@@ -113,12 +113,14 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
         flexDirection="column"
         position="relative"
         width={styleProps?.width ?? DEFAULT_WIDTH}
+        className={clx(themeClass, styleProps.className)}
       >
         {props.label && (
           <Box
             as="label"
             attributes={labelProps}
             display="block"
+            fontFamily="$body"
             fontSize="$sm"
             fontWeight="$medium"
             color="$textSecondary"
