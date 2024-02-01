@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.8](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.7...@interchain-ui/react@1.21.8) (2024-02-01)
+
+### Bug Fixes
+
+- explicitly specify font family ([e44e650](https://github.com/cosmology-tech/interchain-ui/commit/e44e65002beccc40769cdf0068fa3f9261b2e792))
+- reset browser styles ([176f511](https://github.com/cosmology-tech/interchain-ui/commit/176f511f14c33ab2c2261d42a93772a9331993ac))
+
 ## [1.21.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.6...@interchain-ui/react@1.21.7) (2024-01-31)
 
 ### Bug Fixes
