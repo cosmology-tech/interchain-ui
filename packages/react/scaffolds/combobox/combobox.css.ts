@@ -64,7 +64,14 @@ const baseInputStyles = style([
 ]);
 
 export const comboboxInput = styleVariants({
-  light: [baseInputStyles],
+  light: [
+    baseInputStyles,
+    style({
+      vars: {
+        [inputTextVar]: themeVars.colors.text,
+      },
+    }),
+  ],
   dark: [
     baseInputStyles,
     style({
