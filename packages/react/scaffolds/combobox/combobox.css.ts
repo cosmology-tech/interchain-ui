@@ -75,8 +75,10 @@ export const comboboxInput = styleVariants({
   ],
 });
 
-export const comboboxInputText = style({
+export const comboboxInputElement = style({
   color: inputTextVar,
+  boxShadow: "none !important",
+  appearance: "none",
 });
 
 export const comboboxPopover = style({

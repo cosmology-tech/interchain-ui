@@ -168,7 +168,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             width="$full"
             border="$none"
             backgroundColor="$transparent"
-            className={clx(styles.comboboxInputText, {
+            className={clx(styles.comboboxInputElement, {
               [inputSizes.sm]: size === "sm",
               [inputSizes.md]: size === "md",
             })}
