@@ -105,3 +105,7 @@ export const numberInputSm = style([
     fontSize: themeVars.fontSize["lg"],
   },
 ]);
+
+export const resetNumberInputBg = style({
+  background: "transparent !important",
+});

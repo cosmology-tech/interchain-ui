@@ -178,7 +178,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       {...props.domAttributes}
     >
       {/* Staked token */}
-      <Box bg="$inputBg" borderRadius="$md">
+      <Box bg="$menuItemBg" borderRadius="$md">
         <Stack
           direction="vertical"
           space="$6"
@@ -385,11 +385,12 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: props.precision,
                   }}
-                  inputClassName={
+                  inputClassName={clx(
+                    styles.resetNumberInputBg,
                     state.isSmallSize()
                       ? styles.numberInputSm
                       : styles.numberInputMd
-                  }
+                  )}
                 />
 
                 <Text
