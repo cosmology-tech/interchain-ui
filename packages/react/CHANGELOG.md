@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.10](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.9...@interchain-ui/react@1.21.10) (2024-02-01)
+
+### Bug Fixes
+
+- **combobox:** text input not visible in some cases ([f863d1d](https://github.com/cosmology-tech/interchain-ui/commit/f863d1d10956dbcb680b08aaa974b6baff25e199))
+
 ## [1.21.9](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.8...@interchain-ui/react@1.21.9) (2024-02-01)
 
 **Note:** Version bump only for package @interchain-ui/react
