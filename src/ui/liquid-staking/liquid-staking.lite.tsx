@@ -184,7 +184,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       {...props.domAttributes}
     >
       {/* Staked token */}
-      <Box bg="$menuItemBg" borderRadius="$md">
+      <Box bg="$cardBg" borderRadius="$md">
         <Stack
           direction="vertical"
           space="$6"
