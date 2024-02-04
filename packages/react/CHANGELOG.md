@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.15](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.14...@interchain-ui/react@1.21.15) (2024-02-04)
+
+### Bug Fixes
+
+- **combobox:** adjust radii for popover ([7846adf](https://github.com/cosmology-tech/interchain-ui/commit/7846adf8d14e8628eb55d3c28706f0c82d373a1f))
+
 ## [1.21.14](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.13...@interchain-ui/react@1.21.14) (2024-02-04)
 
 ### Bug Fixes
