@@ -26,5 +26,6 @@ export const Primary: Story = {
     totalAmount: 232.2898,
     totalPrice: 1013,
     available: 89.231,
+    availablePrice: 45,
   },
 };
