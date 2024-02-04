@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.14](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.13...@interchain-ui/react@1.21.14) (2024-02-04)
+
+### Bug Fixes
+
+- **combobox:** change menu item bg and add focus behavior for dropdown ([415ae44](https://github.com/cosmology-tech/interchain-ui/commit/415ae447423aeb3313d468b4af3d27d207506084))
+- **staking:** inconsistent bg due to input bg token change ([ffaae3f](https://github.com/cosmology-tech/interchain-ui/commit/ffaae3f0d7bab68a8e9d690f7c09d1c4ce4b87a4))
+- **transfer-item:** adjust colors ([d55a9b5](https://github.com/cosmology-tech/interchain-ui/commit/d55a9b5387ff8eba5756cfcdd8dfdae573e3f9c1))
+
 ## [1.21.13](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.12...@interchain-ui/react@1.21.13) (2024-02-01)
 
 **Note:** Version bump only for package @interchain-ui/react
