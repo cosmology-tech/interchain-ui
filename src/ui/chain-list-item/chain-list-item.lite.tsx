@@ -7,12 +7,13 @@ import {
   useMetadata,
   Show,
 } from "@builder.io/mitosis";
+import clx from "clsx";
 import ListItem from "../list-item";
 import Box from "../box";
 import Text from "../text";
 import Stack from "../stack";
 import { store } from "../../models/store";
-import { chainLogoSizes } from "./chain-list-item.css";
+import * as styles from "./chain-list-item.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ChainListItemProps } from "./chain-list-item.types";
 
@@ -55,7 +56,7 @@ export default function ChainListItem(props: ChainListItemProps) {
       isSelected={props.isSelected}
       size={props.size}
       attributes={props.attributes}
-      className={props.className}
+      className={clx(props.className, styles.listItem[state.theme])}
     >
       <Box
         height="$full"
@@ -73,7 +74,7 @@ export default function ChainListItem(props: ChainListItemProps) {
         >
           <img
             src={props.iconUrl}
-            className={chainLogoSizes[props.size]}
+            className={styles.chainLogoSizes[props.size]}
             alt={props.tokenName}
           />
           <Stack direction="vertical" space="$0">

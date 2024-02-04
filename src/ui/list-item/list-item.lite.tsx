@@ -61,6 +61,9 @@ export default function ComboboxItem(props: ListItemProps) {
         props.isDisabled && listItemDisabled,
         props.className
       )}
+      data-is-active={props.isActive}
+      data-is-selected={props.isSelected}
+      data-is-disabled={props.isDisabled}
       ref={props.itemRef}
     >
       {props.children}

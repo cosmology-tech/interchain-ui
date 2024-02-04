@@ -32,12 +32,19 @@ const spacingSm = style({
   },
 });
 
+export const listBoxBg = styleVariants({
+  light: {
+    backgroundColor: `${themeVars.colors.progressBg} !important`,
+  },
+  dark: {},
+});
+
 export const chainSwapListBox = styleVariants({
-  light: [listboxStyleNoShadow.light, spacingMd],
-  dark: [listboxStyleNoShadow.dark, spacingMd],
+  light: [listboxStyleNoShadow.light, spacingMd, listBoxBg.light],
+  dark: [listboxStyleNoShadow.dark, spacingMd, listBoxBg.dark],
 });
 
 export const chainSwapListBoxSm = styleVariants({
-  light: [listboxStyleNoShadow.light, spacingSm],
-  dark: [listboxStyleNoShadow.dark, spacingSm],
+  light: [listboxStyleNoShadow.light, spacingSm, listBoxBg.light],
+  dark: [listboxStyleNoShadow.dark, spacingSm, listBoxBg.dark],
 });

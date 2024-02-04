@@ -78,6 +78,9 @@ export default function StakingDelegateInput(props: StakingDelegateInputProps) {
     >
       <Box
         bg="$inputBg"
+        borderColor="$divider"
+        borderWidth="1px"
+        borderStyle="$solid"
         px={{
           mobile: "$6",
           tablet: "$8",
