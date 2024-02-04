@@ -24,6 +24,7 @@ const DEFAULT_WIDTH: BoxProps["width"] = "$29";
 
 interface ComboboxProps<T> extends ComboBoxProps<T> {
   defaultIsOpen?: boolean;
+  openOnFocus?: boolean;
   size?: "sm" | "md";
   styleProps?: BoxProps;
   inputAddonStart?: React.ReactNode;
@@ -34,6 +35,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
   const {
     size = "sm",
     defaultIsOpen = false,
+    openOnFocus = false,
     styleProps,
     inputAddonStart,
     inputAddonEnd,
@@ -61,6 +63,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
       ...comboboxProps,
       onFocus: () => {
         setIsFocused(true);
+        if (openOnFocus) state.open();
       },
       onBlur: () => {
         setIsFocused(false);
@@ -171,6 +174,8 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             className={clx(styles.comboboxInputElement, {
               [inputSizes.sm]: size === "sm",
               [inputSizes.md]: size === "md",
+              [styles.noStartPadding]: !!inputAddonStart,
+              [styles.noEndPadding]: !!inputAddonEnd,
             })}
           />
 
@@ -188,7 +193,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
 
           <Box
             as="button"
-            px="$5"
+            px="$4"
             visibility={state.inputValue !== "" ? "visible" : "hidden"}
             className={clx(unstyledButton)}
             ref={clearButtonRef}
@@ -196,7 +201,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
           >
             <Icon
               name="close"
-              color="$text"
+              color="$textSecondary"
               size={props.size === "sm" ? "$2xl" : "$6xl"}
               domAttributes={{
                 "aria-hidden": true,
@@ -208,12 +213,12 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             as="button"
             attributes={buttonProps}
             ref={buttonRef}
-            px="$5"
+            px="$4"
             className={clx(unstyledButton)}
           >
             <Icon
               name="arrowDownS"
-              color="$text"
+              color="$textSecondary"
               size={props.size === "sm" ? "$2xl" : "$6xl"}
               domAttributes={{
                 "aria-hidden": true,

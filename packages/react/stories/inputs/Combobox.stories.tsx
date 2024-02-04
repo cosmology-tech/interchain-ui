@@ -6,6 +6,7 @@ import Text from "../../src/ui/text";
 import Stack from "../../src/ui/stack";
 import Avatar from "../../src/ui/avatar";
 import Combobox from "../../src/ui/combobox";
+import Skeleton from "../../src/ui/skeleton";
 import { useMockData } from "../stub/mock-data-client";
 
 const meta: Meta<typeof Combobox> = {
@@ -72,6 +73,7 @@ export const Default: Story = {
     <Box display="flex" flexDirection="column" gap="$6">
       <Combobox
         label="Favorite Animal"
+        openOnFocus
         styleProps={{
           width: "350px",
         }}
@@ -125,28 +127,38 @@ export const CustomComboboxItem: Story = {
       return <div>Loading data...</div>;
     }
 
+    const avatarUrl =
+      options.find((i) => i.value === selectedKey)?.iconUrl ?? undefined;
+
     return (
       <Box display="flex" flexDirection="column" gap="$6">
         <Combobox
-          label="Favorite Animal"
+          label="Favorite Chain"
+          openOnFocus
           onSelectionChange={(item) => {
             setSelectedKey(item ?? null);
           }}
           inputAddonStart={
-            selectedKey ? (
+            selectedKey && avatarUrl ? (
               <Avatar
                 name={selectedKey as string}
                 getInitials={(name) => name[0]}
                 size="xs"
-                src={
-                  options.find((i) => i.value === selectedKey)?.iconUrl ??
-                  undefined
-                }
+                src={avatarUrl}
                 fallbackMode="bg"
                 attributes={{
                   paddingX: "$4",
                 }}
               />
+            ) : selectedKey ? (
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                px="$4"
+              >
+                <Skeleton width="24px" height="24px" borderRadius="$full" />
+              </Box>
             ) : null
           }
           styleProps={{

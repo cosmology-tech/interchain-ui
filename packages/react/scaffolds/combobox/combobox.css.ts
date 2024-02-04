@@ -5,7 +5,6 @@ import {
   inputBorderVar,
   inputBgVar,
   inputRingShadowVar,
-  inputTextVar,
 } from "@/ui/text-field/text-field.css";
 import { baseTextStyles } from "@/ui/text/text.css";
 import { listBoxBaseWithShadow } from "@/ui/select/select.css";
@@ -103,4 +102,12 @@ export const listboxStyle = styleVariants({
       borderColor: "#434B55",
     }),
   ],
+});
+
+export const noStartPadding = style({
+  paddingLeft: "0 !important",
+});
+
+export const noEndPadding = style({
+  paddingLeft: "0 !important",
 });
