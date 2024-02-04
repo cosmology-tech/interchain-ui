@@ -84,7 +84,7 @@ export const comboboxInputElement = style({
 });
 
 export const comboboxPopover = style({
-  paddingTop: themeVars.space[5],
+  borderRadius: themeVars.radii.lg,
 });
 
 export const listboxStyle = styleVariants({

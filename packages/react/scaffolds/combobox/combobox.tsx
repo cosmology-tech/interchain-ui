@@ -234,7 +234,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             state={state}
             isNonModal
             placement="bottom start"
-            className={themeClass}
+            className={clx(themeClass, styles.comboboxPopover)}
           >
             <Box pt="$5">
               <ListBox

@@ -37,7 +37,7 @@ export function Popover(props: PopoverProps) {
         borderWidth="1px"
         borderStyle="solid"
         borderColor="$divider"
-        borderRadius="$md"
+        borderRadius="$lg"
         marginTop="$4"
         className={className}
       >
