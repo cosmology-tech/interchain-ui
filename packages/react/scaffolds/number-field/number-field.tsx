@@ -75,7 +75,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     );
 
     return (
-      <Box className={props?.className} {...props.attributes}>
+      <Box className={props.className} {...props.attributes}>
         <Stack direction="vertical" space="$4">
           {label && <FieldLabel htmlFor={id} label={label} {...labelProps} />}
 
