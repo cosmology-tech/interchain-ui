@@ -52,7 +52,6 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
     ...rest
   } = props;
   const id = useId();
-
   return (
     <div ref={ref} role="option" id={id} aria-selected={isActive} {...rest}>
       <ChainListItem

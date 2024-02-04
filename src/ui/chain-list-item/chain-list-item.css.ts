@@ -1,5 +1,12 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
+
+const menuItemBgVar = createVar();
+// `#EEF2F8`,
+const menuItemBgHoveredVar = createVar();
+// `#DDE4ED`,
+const menuItemBgActiveVar = createVar();
+// `#D0D9E3`
 
 export const chainLogoBase = style({
   display: "block",
@@ -26,4 +33,29 @@ export const chainLogoSizes = styleVariants({
       height: "38px",
     }),
   ],
+});
+
+export const listItem = styleVariants({
+  light: [
+    {
+      vars: {
+        [menuItemBgVar]: "#EEF2F8",
+        [menuItemBgHoveredVar]: themeVars.colors.menuItemBgActive,
+        [menuItemBgActiveVar]: "#D0D9E3",
+      },
+      backgroundColor: `${menuItemBgVar} !important`,
+      selectors: {
+        "&:hover": {
+          backgroundColor: `${menuItemBgHoveredVar} !important`,
+        },
+        '&[data-is-active="true"]': {
+          backgroundColor: `${menuItemBgActiveVar} !important`,
+        },
+        '&[data-is-selected="true"][data-is-active="true"]': {
+          backgroundColor: `${menuItemBgActiveVar} !important`,
+        },
+      },
+    },
+  ],
+  dark: [],
 });
