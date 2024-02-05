@@ -5,6 +5,7 @@ import {
   createContainer,
   keyframes,
 } from "@vanilla-extract/css";
+import { baseButton } from "../button/button.css";
 import { themeVars } from "../../styles/themes.css";
 
 const EXPANDED_HEIGHT_PX = `458px`;
@@ -58,6 +59,7 @@ export const accordionPanel = styleVariants({
 const headerButtonBase = style({
   color: `${textButtonColorVar} !important`,
   backgroundColor: `${textButtonBgVar} !important`,
+  borderRadius: themeVars.radii.base,
   selectors: {
     "&:hover": {
       opacity: 0.89,
@@ -67,6 +69,7 @@ const headerButtonBase = style({
 
 export const headerButton = styleVariants({
   light: [
+    baseButton,
     headerButtonBase,
     style({
       vars: {
@@ -76,6 +79,7 @@ export const headerButton = styleVariants({
     }),
   ],
   dark: [
+    baseButton,
     headerButtonBase,
     style({
       vars: {

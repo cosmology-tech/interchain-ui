@@ -267,11 +267,12 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   flexShrink: "1",
                 }}
               >
-                <Button
-                  variant="unstyled"
+                <Box
+                  as="button"
                   className={styles.headerButton[state.theme]}
-                  size="xs"
-                  onClick={() => state.handleStakeHalf()}
+                  attributes={{
+                    onClick: () => state.handleStakeHalf(),
+                  }}
                 >
                   <Box
                     as="span"
@@ -279,13 +280,14 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   >
                     {props.halfButtonLabel}
                   </Box>
-                </Button>
+                </Box>
 
-                <Button
-                  variant="unstyled"
+                <Box
+                  as="button"
                   className={styles.headerButton[state.theme]}
-                  size="xs"
-                  onClick={() => state.handleStakeMax()}
+                  attributes={{
+                    onClick: () => state.handleStakeMax(),
+                  }}
                 >
                   <Box
                     as="span"
@@ -293,7 +295,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   >
                     {props.maxButtonLabel}
                   </Box>
-                </Button>
+                </Box>
               </Stack>
             </Stack>
           </Stack>
