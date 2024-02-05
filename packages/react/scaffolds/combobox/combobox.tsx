@@ -63,7 +63,10 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
       ...comboboxProps,
       onFocus: () => {
         setIsFocused(true);
-        if (openOnFocus) state.open();
+
+        if (openOnFocus) {
+          state.open();
+        }
       },
       onBlur: () => {
         setIsFocused(false);
@@ -169,7 +172,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             paddingX="$5"
             paddingY="$2"
             width="$full"
-            border="$none"
+            border="none"
             backgroundColor="$transparent"
             className={clx(styles.comboboxInputElement, {
               [inputSizes.sm]: size === "sm",
@@ -236,7 +239,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             placement="bottom start"
             className={clx(themeClass, styles.comboboxPopover)}
           >
-            <Box pt="$5">
+            <Box pt="$5" borderRadius="$lg" backgroundColor="$transparent">
               <ListBox
                 {...listBoxProps}
                 listBoxRef={listBoxRef}

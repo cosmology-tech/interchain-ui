@@ -52,7 +52,7 @@ export default function Avatar(props: AvatarProps) {
       display="inline-flex"
       borderWidth={props.showBorder ? "$sm" : undefined}
       borderColor={props.borderColor}
-      borderRadius={props.rounded ? "$full" : "$none"}
+      borderRadius={props.rounded ? "$full" : "none"}
       backgroundColor={props.backgroundColor}
       className={props.className}
       attributes={props.attributes}

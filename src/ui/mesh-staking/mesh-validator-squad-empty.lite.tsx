@@ -66,8 +66,8 @@ export default function MeshValidatorSquadEmpty(
             height="34px"
             px="$0"
             py="$0"
-            borderTopRightRadius="$none"
-            borderBottomRightRadius="$none"
+            borderTopRightRadius="none"
+            borderBottomRightRadius="none"
             colorScheme="secondary"
             onClick={() => props.onDecrease?.()}
           >
@@ -77,7 +77,7 @@ export default function MeshValidatorSquadEmpty(
           <MeshButton
             width="$11"
             height="34px"
-            borderRadius="$none"
+            borderRadius="none"
             px="$0"
             py="$0"
             colorScheme="secondary"
@@ -90,8 +90,8 @@ export default function MeshValidatorSquadEmpty(
             height="34px"
             px="$0"
             py="$0"
-            borderTopLeftRadius="$none"
-            borderBottomLeftRadius="$none"
+            borderTopLeftRadius="none"
+            borderBottomLeftRadius="none"
             colorScheme="secondary"
             onClick={() => props.onDecrease?.()}
           >

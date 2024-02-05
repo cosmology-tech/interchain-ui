@@ -8,13 +8,7 @@ import {
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
-import {
-  listItemBase,
-  listItemActive,
-  listItemSizes,
-  listItemSelected,
-  listItemDisabled,
-} from "./list-item.css";
+import { listItemBase, listItemSizes } from "./list-item.css";
 import type { ListItemProps } from "./list-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 
@@ -53,14 +47,7 @@ export default function ComboboxItem(props: ListItemProps) {
   return (
     <div
       {...props.attributes}
-      className={clx(
-        listItemBase,
-        props.isActive ? listItemActive.active : listItemActive.inactive,
-        listItemSizes[props.size],
-        props.isSelected && listItemSelected,
-        props.isDisabled && listItemDisabled,
-        props.className
-      )}
+      className={clx(listItemBase, listItemSizes[props.size], props.className)}
       data-is-active={props.isActive}
       data-is-selected={props.isSelected}
       data-is-disabled={props.isDisabled}

@@ -13,33 +13,29 @@ export const listItemBase = style([
     color: themeVars.colors.text,
     borderRadius: themeVars.radii.base,
     boxSizing: "border-box",
+    backgroundColor: themeVars.colors.menuItemBg,
+    selectors: {
+      "&:hover": {
+        backgroundColor: themeVars.colors.menuItemBgHovered,
+      },
+      '&[data-is-active="true"]': {
+        backgroundColor: themeVars.colors.background,
+      },
+      '&[data-is-active="true"]:hover': {
+        backgroundColor: themeVars.colors.menuItemBgActive,
+      },
+      '&[data-is-selected="true"]': {
+        backgroundColor: themeVars.colors.menuItemBgSelected,
+      },
+      '&[data-is-disabled="true"]': {
+        cursor: "not-allowed",
+      },
+      '&[data-is-disabled="true"]:hover': {
+        backgroundColor: `${themeVars.colors.menuItemBg} !important`,
+      },
+    },
   },
 ]);
-
-export const listItemActive = styleVariants({
-  active: [
-    listItemBase,
-    style({
-      backgroundColor: themeVars.colors.menuItemBgActive,
-      selectors: {
-        "&:hover": {
-          backgroundColor: themeVars.colors.menuItemBgActive,
-        },
-      },
-    }),
-  ],
-  inactive: [
-    listItemBase,
-    style({
-      backgroundColor: themeVars.colors.menuItemBg,
-      selectors: {
-        "&:hover": {
-          backgroundColor: themeVars.colors.menuItemBgHovered,
-        },
-      },
-    }),
-  ],
-});
 
 export const listItemSizes = styleVariants({
   md: [
@@ -60,17 +56,4 @@ export const listItemSizes = styleVariants({
       paddingRight: themeVars.space[6],
     }),
   ],
-});
-
-export const listItemSelected = style({
-  backgroundColor: themeVars.colors.menuItemBgActive,
-});
-
-export const listItemDisabled = style({
-  cursor: "not-allowed",
-  selectors: {
-    "&:hover": {
-      backgroundColor: `${themeVars.colors.menuItemBg} !important`,
-    },
-  },
 });

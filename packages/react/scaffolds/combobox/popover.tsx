@@ -32,7 +32,6 @@ export function Popover(props: PopoverProps) {
       <Box
         attributes={popoverProps}
         ref={popoverRef}
-        zIndex="$10"
         boxShadow="$lg"
         borderWidth="1px"
         borderStyle="solid"

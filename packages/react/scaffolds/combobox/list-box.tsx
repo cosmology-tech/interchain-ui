@@ -51,9 +51,9 @@ export function ListBox(props: ListBoxProps) {
     >
       {[...state.collection].map((item) =>
         item.type === "section" ? (
-          <ListBoxSection key={item.key} section={item} state={state} />
+          <ListBoxSection key={item.key} section={item as any} state={state} />
         ) : (
-          <Option key={item.key} item={item} state={state} />
+          <Option key={item.key} item={item as any} state={state} />
         )
       )}
     </Box>
