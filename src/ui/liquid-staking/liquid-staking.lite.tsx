@@ -384,9 +384,10 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   minValue={0}
                   maxValue={toNumber(props.stakeToken.available)}
                   onChange={(value) => state.handleStakeAmountChange(value)}
-                  onBlur={(event) =>
-                    props.onBlur?.(event.target.value as number)
-                  }
+                  onBlur={(event) => {
+                    const target = event.target as HTMLInputElement;
+                    props.onBlur?.(Number(target.value));
+                  }}
                   formatOptions={{
                     minimumFractionDigits: 0,
                     maximumFractionDigits: props.precision,
@@ -642,7 +643,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   0px 47.8px 48.5px -5px rgba(0, 0, 0, 0.034),
                   0px 200px 133px -5px rgba(0, 0, 0, 0.05)
               `
-                  : "$none"
+                  : "none"
               }
             />
           </Stack>
