@@ -68,6 +68,7 @@ export const themeContractTemplate = {
     progressBg: ``,
     progressValue: ``,
     progressCursor: ``,
+    trackBg: ``,
     divider: ``,
     menuItemBg: ``,
     menuItemBgSelected: ``,
@@ -291,6 +292,7 @@ export const lightThemeClass = createTheme(themeVars, {
     menuItemBgHovered: `#EEF2F8`,
     menuItemBgActive: `#DDE4ED`,
     skeletonBg: `#DDE4ED`,
+    trackBg: `#EBEFF5`,
     ...colors,
   },
 });
@@ -330,6 +332,7 @@ export const darkThemeClass = createTheme(themeVars, {
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
     skeletonBg: `#3B434D`,
+    trackBg: `#49525E`,
     ...colors,
   },
 });
@@ -371,6 +374,7 @@ export const meshThemeClass = createTheme(themeVars, {
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
     skeletonBg: `#3B434D`,
+    trackBg: `#49525E`,
     // Override colors
     gray50: "#F7FAFC",
     gray100: "#E1DBEB",

@@ -54,7 +54,7 @@ export default function GovernanceVoteBreakdown(
 
       {/* Meter */}
       <Box
-        backgroundColor="$inputBg"
+        backgroundColor="$trackBg"
         width="100%"
         height="$4"
         borderRadius="$base"
