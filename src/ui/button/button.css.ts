@@ -134,8 +134,8 @@ export const intentPrimary = styleVariants({
     style({
       vars: {
         [buttonTextColorVar]: themeVars.colors.white,
-        [buttonBgVar]: themeVars.colors.primary500,
-        [buttonHoverBgVar]: themeVars.colors.primary400,
+        [buttonBgVar]: themeVars.colors.primary,
+        [buttonHoverBgVar]: themeVars.colors.primary,
       },
     }),
     intentPrimaryBase,
@@ -144,8 +144,8 @@ export const intentPrimary = styleVariants({
     style({
       vars: {
         [buttonTextColorVar]: themeVars.colors.white,
-        [buttonBgVar]: themeVars.colors.primary500,
-        [buttonHoverBgVar]: themeVars.colors.primary400,
+        [buttonBgVar]: themeVars.colors.primary,
+        [buttonHoverBgVar]: themeVars.colors.primary,
       },
     }),
     intentPrimaryBase,

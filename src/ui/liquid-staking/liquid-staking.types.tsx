@@ -1,6 +1,7 @@
 import type { BaseComponentProps } from "../../models/components.model";
 import type { AvailableItem } from "../transfer-item/transfer-item.types";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+import type { ButtonProps } from "../button/button.types";
 
 export type LiquidStakingToken = AvailableItem;
 
@@ -31,6 +32,9 @@ export interface LiquidStakingProps extends BaseComponentProps {
   onBlur?: (stakeAmount: number) => void;
   onFocus?: () => void;
   onSubmit: (event?: any) => void;
+  // Main button
+  submitButtonLabel?: string;
+  submitButtonProps?: ButtonProps;
   // Half and max buttons
   halfButtonLabel?: string;
   maxButtonLabel?: string;
@@ -38,7 +42,6 @@ export interface LiquidStakingProps extends BaseComponentProps {
   onMax?: () => void;
   // ==== Labels
   timeEstimateLabel: string;
-  submitButtonLabel?: string;
   rewardLabel?: string;
   stakeLabel?: string;
   availableLabel?: string;

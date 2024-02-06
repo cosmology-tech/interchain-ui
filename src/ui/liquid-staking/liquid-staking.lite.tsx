@@ -769,10 +769,11 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
           <Show when={typeof props.renderSubmitButton !== "function"}>
             <Button
+              intent="tertiary"
+              {...props.submitButtonProps}
               fluidWidth
               onClick={(event) => props.onSubmit?.(event)}
               disabled={props.isSubmitDisabled}
-              intent="tertiary"
               size={state.isSmallSize() ? "sm" : "lg"}
             >
               <Box

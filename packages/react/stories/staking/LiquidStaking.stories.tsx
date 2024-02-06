@@ -312,6 +312,10 @@ export const CustomTheme: Story = {
               />
             </Stack>
           }
+          submitButtonProps={{
+            intent: "primary",
+            variant: "solid",
+          }}
           onSubmit={() => {
             alert(
               `Staked [${stakeToken?.symbol}]: amt ${stakedAmount} rward ${reward.rewardAmount}`
