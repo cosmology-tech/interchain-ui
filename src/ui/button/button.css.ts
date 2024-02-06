@@ -204,7 +204,7 @@ export const intentTertiary = styleVariants({
   light: [
     style({
       vars: {
-        [buttonTextColorVar]: themeVars.colors.white,
+        [buttonTextColorVar]: themeVars.colors.inputBg,
         [buttonBgVar]: themeVars.colors.text,
       },
     }),

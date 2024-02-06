@@ -177,7 +177,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       borderRadius="$md"
       p={state.isMounted ? (state.width < 350 ? "$4" : "$10") : "$10"}
       position="relative"
-      backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
+      backgroundColor={state.theme === "light" ? "$inputBg" : "$blackPrimary"}
       className={clx(props.className, styles.root)}
       ref={rootRef}
       {...props.attributes}
@@ -579,7 +579,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               zIndex: 1,
               overflowX: "clip",
               backgroundColor:
-                state.theme === "light" ? "$white" : "$blackPrimary",
+                state.theme === "light" ? "$inputBg" : "$blackPrimary",
               width: state.scrollOffset > 0 ? "100%" : "$fit",
               marginLeft: "auto",
             }}
@@ -632,7 +632,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
               backgroundColor={
                 state.scrollOffset > 0
                   ? state.theme === "light"
-                    ? "$white"
+                    ? "$inputBg"
                     : "$blackPrimary"
                   : "transparent"
               }
@@ -756,7 +756,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
         width="$full"
         py="$4"
         px={state.expanded ? "$10" : "$0"}
-        backgroundColor={state.theme === "light" ? "$white" : "$blackPrimary"}
+        backgroundColor={state.theme === "light" ? "$inputBg" : "$blackPrimary"}
         zIndex="$0"
         attributes={{
           "data-part-id": "footer",
