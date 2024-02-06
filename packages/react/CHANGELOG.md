@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.18](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.17...@interchain-ui/react@1.21.18) (2024-02-06)
+
+### Bug Fixes
+
+- storybook fixture ([689585c](https://github.com/cosmology-tech/interchain-ui/commit/689585c75ca095aae18a94202a6fe49d76bf1386))
+
 ## [1.21.17](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.16...@interchain-ui/react@1.21.17) (2024-02-05)
 
 **Note:** Version bump only for package @interchain-ui/react
