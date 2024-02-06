@@ -1,5 +1,5 @@
 import { assignInlineVars, setElementVars } from "@vanilla-extract/dynamic";
-import deepmerge from "@fastify/deepmerge";
+import merge from "lodash/merge";
 import type {
   OverridableProp,
   OverrideValue,
@@ -136,20 +136,15 @@ function groupByTheme(config: OverrideValue) {
   return result;
 }
 
-const merge = deepmerge({ all: true });
-
 export function assignThemeVars(
   customTheme: CustomThemeVars,
   colorMode: ThemeVariant
 ) {
   const schemeClass = colorMode === "light" ? lightThemeClass : darkThemeClass;
   const elements = document.getElementsByClassName(schemeClass);
+  const mergedVars = merge(commonVars, customTheme as ThemeContractValues);
 
   for (let el of elements) {
-    setElementVars(
-      el as HTMLElement,
-      themeVars,
-      merge(commonVars, customTheme as ThemeContractValues)
-    );
+    setElementVars(el as HTMLElement, themeVars, mergedVars);
   }
 }
