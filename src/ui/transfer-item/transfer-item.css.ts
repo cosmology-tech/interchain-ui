@@ -4,7 +4,7 @@ import {
   createVar,
   createContainer,
 } from "@vanilla-extract/css";
-import { buttonSize, baseButton } from "../button/button.css";
+import { baseButton } from "../button/button.css";
 import { themeVars } from "../../styles/themes.css";
 
 const textButtonBgVar = createVar();
@@ -74,6 +74,7 @@ export const comboboxContainer = style({
   minHeight: "86px",
   borderBottomLeftRadius: themeVars.radii.lg,
   borderBottomRightRadius: themeVars.radii.lg,
+  backgroundColor: "transparent",
 });
 
 export const smComboboxInput = style({
