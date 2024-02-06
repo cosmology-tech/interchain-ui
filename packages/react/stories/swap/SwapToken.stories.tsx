@@ -68,7 +68,8 @@ export const Primary: Story = {
         setFrom({
           label: "From",
           options: assets ?? [],
-          selected: assets[5],
+          selected:
+            assets.find((asset) => asset.symbol === "USDC") ?? assets[0],
           amount: 0,
           onItemSelected: (selectedItem) => {
             console.log("From: onItemSelected", selectedItem);
