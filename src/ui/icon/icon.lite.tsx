@@ -718,8 +718,8 @@ export default function Icon(props: IconProps) {
           x="0px"
           y="0px"
           viewBox="0 0 432 432"
+          enable-background="new 0 0 432 432"
           style={{
-            enableBackground: "new 0 0 432 432",
             backgroundColor: "black",
           }}
         >
