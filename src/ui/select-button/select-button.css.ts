@@ -19,7 +19,11 @@ const hideShadow = style({
 const buttonBase = style([
   unstyledButton,
   hideShadow,
-  style({ fontSize: themeVars.fontSize.sm, width: "100%" }),
+  style({
+    fontSize: themeVars.fontSize.sm,
+    width: "100%",
+    fontWeight: themeVars.fontWeight.normal,
+  }),
 ]);
 
 export const buttonStyles = styleVariants({
@@ -34,8 +38,8 @@ export const buttonRoot = rootInput;
 export const buttonIntent = inputRootIntent;
 
 export const arrowDropDown = style({
-  fontSize: "24px",
-  color: "inherit",
+  fontSize: themeVars.fontSize["3xl"],
+  color: themeVars.colors.textPlaceholder,
 });
 
 export const buttonContent = style({

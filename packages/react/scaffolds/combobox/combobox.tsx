@@ -159,6 +159,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
               display="flex"
               justifyContent="center"
               alignItems="center"
+              fontSize="$3xl"
             >
               {inputAddonStart}
             </Box>
@@ -194,40 +195,45 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             </Box>
           )}
 
-          <Box
-            as="button"
-            px="$4"
-            visibility={state.inputValue !== "" ? "visible" : "hidden"}
-            className={clx(unstyledButton)}
+          <button
             ref={clearButtonRef}
-            attributes={clearButtonAriaProps}
+            {...clearButtonAriaProps}
+            className={styles.comboboxInlineButton}
+            data-bg="true"
+            data-size={size}
+            data-hidden={!state.inputValue}
           >
             <Icon
               name="close"
-              color="$textSecondary"
-              size={props.size === "sm" ? "$2xl" : "$6xl"}
+              color="$textPlaceholder"
+              size="inherit"
+              attributes={{
+                zIndex: "$10",
+              }}
               domAttributes={{
                 "aria-hidden": true,
               }}
             />
-          </Box>
+          </button>
 
-          <Box
-            as="button"
-            attributes={buttonProps}
+          <button
+            {...buttonProps}
             ref={buttonRef}
-            px="$4"
-            className={clx(unstyledButton)}
+            className={styles.comboboxInlineButton}
+            data-size={size}
           >
             <Icon
               name="arrowDownS"
-              color="$textSecondary"
-              size={props.size === "sm" ? "$2xl" : "$6xl"}
+              color="$textPlaceholder"
+              size="inherit"
+              attributes={{
+                zIndex: "$10",
+              }}
               domAttributes={{
                 "aria-hidden": true,
               }}
             />
-          </Box>
+          </button>
         </Box>
 
         {state.isOpen && (

@@ -141,7 +141,7 @@ export const inputSizes = styleVariants({
   ],
   md: [
     style({
-      height: themeVars.space[16],
+      height: themeVars.space[15],
       paddingLeft: themeVars.space[10],
       paddingRight: themeVars.space[10],
       paddingTop: themeVars.space[8],

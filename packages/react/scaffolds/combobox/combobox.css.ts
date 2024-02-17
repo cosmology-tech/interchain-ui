@@ -8,6 +8,7 @@ import {
 } from "@/ui/text-field/text-field.css";
 import { baseTextStyles } from "@/ui/text/text.css";
 import { listBoxBaseWithShadow } from "@/ui/select/select.css";
+import { unstyledButton } from "@/ui/button/button.css";
 
 export const inputBorderAndShadow = style({
   borderStyle: "solid",
@@ -111,3 +112,53 @@ export const noStartPadding = style({
 export const noEndPadding = style({
   paddingLeft: "0 !important",
 });
+
+export const comboboxInlineButton = style([
+  unstyledButton,
+  {
+    transitionProperty: "background-color,color",
+    transitionDuration: "200ms",
+    paddingLeft: themeVars.space[4],
+    paddingRight: themeVars.space[4],
+    flexShrink: 0,
+    position: "relative",
+    selectors: {
+      '&[data-hidden="true"]': {
+        visibility: "hidden",
+      },
+      '&[data-hidden="false"]': {
+        visibility: "visible",
+      },
+      '&[data-size="sm"]': {
+        fontSize: themeVars.fontSize["4xl"],
+        width: themeVars.space[13],
+      },
+      '&[data-size="md"]': {
+        fontSize: themeVars.fontSize["4xl"],
+        width: themeVars.space[14],
+      },
+      '&[data-bg="true"]:hover:before': {
+        position: "absolute",
+        zIndex: 0,
+        transitionProperty: "background-color,color",
+        transitionDuration: "200ms",
+        content: '""',
+        top: "50%",
+        bottom: 0,
+        left: "50%",
+        right: 0,
+        transform: "translate(-50%, -50%)",
+        borderRadius: "100%",
+        backgroundColor: themeVars.colors.menuItemBgHovered,
+      },
+      '&[data-bg="true"][data-size="sm"]:hover:before': {
+        height: themeVars.space[12],
+        width: themeVars.space[12],
+      },
+      '&[data-bg="true"][data-size="md"]:hover:before': {
+        height: themeVars.space[13],
+        width: themeVars.space[13],
+      },
+    },
+  },
+]);

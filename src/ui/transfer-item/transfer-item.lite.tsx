@@ -273,6 +273,7 @@ export default function TransferItem(props: TransferItemProps) {
             className={styles.comboboxContainer}
             size={props.isSmall ? "sm" : "md"}
             filterFn={props.filterFn}
+            placeholder={props.placeholder}
             defaultSelected={props.defaultSelectedItem ?? state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {
@@ -297,6 +298,7 @@ export default function TransferItem(props: TransferItemProps) {
                     {/* @ts-ignore */}
                     <NumberField
                       borderless
+                      size="sm"
                       isDisabled={!!props.disabled}
                       value={props.amount}
                       onInput={(event) => {

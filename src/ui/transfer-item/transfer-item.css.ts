@@ -65,6 +65,7 @@ export const transferInput = style({
   fontSize: themeVars.fontSize["2xl"],
   textAlign: "right",
   width: "100%",
+  height: "auto !important",
   backgroundColor: "transparent !important",
   paddingLeft: "0 !important",
   paddingRight: "0 !important",
