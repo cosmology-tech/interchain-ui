@@ -86,6 +86,7 @@ export interface ChainSwapComboboxProps {
   defaultOpen?: boolean;
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
+  placeholder?: string;
   className?: ClassValue;
   rootNode?: HTMLElement;
   inputClassName?: string;
@@ -98,8 +99,9 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [inputFocusing, setInputFocusing] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
-    props.defaultSelected?.tokenName ?? ""
+    props.placeholder ?? props.defaultSelected?.tokenName ?? ""
   );
+
   const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
     props.defaultSelected ?? null
   );
@@ -231,6 +233,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
             setOpen((isPrevOpen) => !isPrevOpen);
           }}
           endAddon={props.endAddon}
+          placeholder={props.placeholder}
           {...selectedItem}
           label={selectedItem?.name ?? null}
           inputClassName={props.inputClassName}

@@ -30,6 +30,7 @@ export const Primary: Story = {
     return (
       <TransferItem
         {...props}
+        placeholder="Select chain"
         dropdownList={assets}
         amount={amountStaked}
         onChange={(item, amount) => {

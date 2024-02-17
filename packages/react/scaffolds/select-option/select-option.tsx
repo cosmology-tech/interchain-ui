@@ -36,6 +36,7 @@ export default function SelectOption(props: SelectOptionProps) {
         display: "block",
         background: "transparent",
         textAlign: "left",
+        fontWeight: "normal",
       }}
       {...getItemProps({
         onClick: () =>

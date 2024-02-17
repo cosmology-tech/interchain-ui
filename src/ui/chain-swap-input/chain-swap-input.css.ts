@@ -15,6 +15,7 @@ export const chainSwapInputBase = style({
   height: "auto",
   backgroundColor: "transparent",
   fontFamily: themeVars.font.body,
+  flexShrink: 0,
   transitionProperty:
     "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
   transitionDuration: "200ms",
@@ -34,7 +35,7 @@ export const chainSwapInput = styleVariants({
     chainSwapInputBase,
     style({
       maxWidth: "100px",
-      maxHeight: themeVars.space[11],
+      height: themeVars.space[11],
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
       selectors: {
@@ -63,7 +64,7 @@ export const chainSwapInput = styleVariants({
     chainSwapInputBase,
     style({
       maxWidth: "100px",
-      maxHeight: themeVars.space[11],
+      height: themeVars.space[11],
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
       selectors: {

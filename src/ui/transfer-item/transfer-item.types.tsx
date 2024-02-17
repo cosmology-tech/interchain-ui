@@ -50,6 +50,7 @@ export interface TransferItemProps extends BaseComponentProps {
    * Title of the transfer-item
    */
   title?: string;
+  placeholder?: string;
   onChange?: (item: AvailableItem, value: number) => void;
   onInput?: (item: AvailableItem, rawValue: string) => void;
   /**
