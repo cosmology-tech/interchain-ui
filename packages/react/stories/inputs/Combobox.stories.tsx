@@ -91,12 +91,12 @@ const ChainOption = (props: Option & { iconUrl: string }) => {
     <Stack
       direction="horizontal"
       space="$4"
-      attributes={{ alignItems: "center" }}
+      attributes={{ alignItems: "center", height: "100%" }}
     >
       <Avatar
         name={props.label}
         getInitials={(name) => name[0]}
-        size="xs"
+        size="sm"
         src={props.iconUrl}
         fallbackMode="bg"
       />
@@ -134,6 +134,7 @@ export const CustomComboboxItem: Story = {
       <Box display="flex" flexDirection="column" gap="$6">
         <Combobox
           label="Favorite Chain"
+          size="md"
           openOnFocus
           onSelectionChange={(item) => {
             setSelectedKey(item ?? null);
@@ -143,7 +144,7 @@ export const CustomComboboxItem: Story = {
               <Avatar
                 name={selectedKey as string}
                 getInitials={(name) => name[0]}
-                size="xs"
+                size="sm"
                 src={avatarUrl}
                 fallbackMode="bg"
                 attributes={{
