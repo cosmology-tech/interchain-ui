@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.19](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.18...@interchain-ui/react@1.21.19) (2024-02-21)
+
+### Bug Fixes
+
+- **combobox:** improve font sizes and colors ([2e7f8d2](https://github.com/cosmology-tech/interchain-ui/commit/2e7f8d2c927f81680b39465973ccce4e45d805ea))
+- improve select and dropdown components ([33af160](https://github.com/cosmology-tech/interchain-ui/commit/33af1609118170cf7034467075e3451cdd0cefda))
+- **liquid-stake:** main button color ([fefa184](https://github.com/cosmology-tech/interchain-ui/commit/fefa184a51e642589738718a0c63fee15f9982b4))
+- **liquid-staking:** allow custom theme ([ec9378e](https://github.com/cosmology-tech/interchain-ui/commit/ec9378eb4d49a447da87f4c95cbad2b2303eb152))
+
 ## [1.21.18](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.17...@interchain-ui/react@1.21.18) (2024-02-06)
 
 ### Bug Fixes
