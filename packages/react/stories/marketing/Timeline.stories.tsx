@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Box from "../../src/ui/box";
 import Timeline from "../../src/ui/timeline";
+import Avatar from "../../src/ui/avatar";
 
 const meta: Meta<typeof Timeline> = {
   component: Timeline,
@@ -47,6 +48,24 @@ export const Default: Story = {
             {
               timestamp: "June 2022",
               title: "Launch of $CHAD token on the Osmosis swap platform",
+            },
+            {
+              timestamp: "June 2023",
+              customContent: (
+                <Box
+                  display="flex"
+                  gap="$8"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <span>Custom content render</span>
+                  <Avatar
+                    name="Abu Da"
+                    size="sm"
+                    src="https://picsum.photos/id/237/200/200"
+                  />
+                </Box>
+              ),
             },
           ]}
         />
