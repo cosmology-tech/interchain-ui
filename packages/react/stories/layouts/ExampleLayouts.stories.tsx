@@ -21,18 +21,13 @@ import type { GridColumn } from "../../src/index";
 
 const heroImage = `https://picsum.photos/id/237/1000/1000`;
 
-const meta: Meta<typeof Box> = {
-  component: Box,
-  title: "Layouts",
-  tags: ["autodocs"],
-  argTypes: {},
+const meta: Meta = {
+  title: "Layouts/Examples",
 };
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const TwoColumnHeroSection: Story = {
+export const TwoColumnHeroSection = {
   args: {},
   render: (props) => {
     return (
@@ -117,7 +112,7 @@ export const TwoColumnHeroSection: Story = {
   },
 };
 
-export const TwoColumnCTAHeroSection: Story = {
+export const TwoColumnCTAHeroSection = {
   args: {},
   render: (props) => {
     return (
@@ -248,7 +243,7 @@ const table1 = {
   ] as Table1RowDataDef[],
 };
 
-export const DataTableWithSections: Story = {
+export const DataTableWithSections = {
   args: {},
   render: (props) => {
     return (
