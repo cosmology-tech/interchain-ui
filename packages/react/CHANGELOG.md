@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.19...@interchain-ui/react@1.22.0) (2024-02-23)
+
+### Features
+
+- **timeline:** support custom event render ([d77c6f3](https://github.com/cosmology-tech/interchain-ui/commit/d77c6f3a34258508c2d6115ee7e74f8ddc77c121))
+
 ## [1.21.19](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.18...@interchain-ui/react@1.21.19) (2024-02-21)
 
 ### Bug Fixes
