@@ -7,6 +7,7 @@ export type {
   NumberFormatProps,
   NumberFormatter,
 } from "./models/system.model";
+export type { GridColumn } from "./models/components.model";
 export type { Sprinkles } from "./styles/rainbow-sprinkles.css";
 
 export { skeleton as skeletonClass } from "./ui/shared/shared.css";

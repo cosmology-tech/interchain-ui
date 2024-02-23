@@ -188,6 +188,7 @@ const interactiveProperties = defineProperties({
     borderRightColor: themeVars.colors,
     borderRightStyle: true,
     borderRightWidth: true,
+    borderCollapse: true,
     boxShadow: themeVars.boxShadow,
     transform: true,
     transition: true,

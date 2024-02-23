@@ -1,4 +1,4 @@
-import { useDefaultProps, Show, For, useMetadata } from "@builder.io/mitosis";
+import { Show, For, useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
 import Text from "../text";
@@ -56,27 +56,32 @@ export default function Timeline(props: TimelineProps) {
                 "data-testid": "event-content",
               }}
             >
-              <Text
-                color="$textSecondary"
-                fontWeight="$normal"
-                fontSize="$sm"
-                attributes={{
-                  paddingBottom: "$4",
-                }}
-              >
-                {event.timestamp}
-              </Text>
-
-              <Text color="$text" fontWeight="$semibold" fontSize="$md">
-                {event.title}
-              </Text>
-
-              <Show when={event.description}>
-                <Text color="$text" fontWeight="$normal" fontSize="$sm">
-                  {event.description}
+              <Show when={!event.customContent}>
+                <Text
+                  color="$textSecondary"
+                  fontWeight="$normal"
+                  fontSize="$sm"
+                  attributes={{
+                    paddingBottom: "$4",
+                  }}
+                >
+                  {event.timestamp}
                 </Text>
+
+                <Text color="$text" fontWeight="$semibold" fontSize="$md">
+                  {event.title}
+                </Text>
+
+                <Show when={event.description}>
+                  <Text color="$text" fontWeight="$normal" fontSize="$sm">
+                    {event.description}
+                  </Text>
+                </Show>
               </Show>
 
+              <Show when={event.customContent}>
+                <div>{event.customContent}</div>
+              </Show>
               <div
                 className={styles.eventCircle}
                 data-direction={index % 2 === 0 ? "right" : "left"}
