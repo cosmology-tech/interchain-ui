@@ -1,8 +1,20 @@
-import { useMetadata, useDefaultProps, Show } from "@builder.io/mitosis";
+import {
+  useMetadata,
+  useStore,
+  useDefaultProps,
+  useRef,
+  Show,
+  onMount,
+  onUnMount,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import clx from "clsx";
+import { store } from "../../models/store";
 import { baseButton } from "../button/button.css";
-import { meshThemeClass } from "../../styles/themes.css";
+import {
+  meshDarkThemeClass,
+  meshLightThemeClass,
+} from "../../styles/themes.css";
 import type { MeshButtonProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -17,6 +29,47 @@ useDefaultProps<Partial<MeshButtonProps>>({
 });
 
 export default function MeshButton(props: MeshButtonProps) {
+  const state = useStore({
+    theme: "light",
+    getSolidBg: () => {
+      if (state.theme === "dark") {
+        return props.colorScheme === "primary"
+          ? {
+              base: "$text",
+              hover: "$textPlaceholder",
+            }
+          : {
+              base: "$body",
+              hover: "$body",
+            };
+      }
+
+      return props.colorScheme === "primary"
+        ? {
+            base: "$text",
+            hover: "$textPlaceholder",
+          }
+        : {
+            base: "$black",
+            hover: "$body",
+          };
+    },
+  });
+
+  let cleanupRef = useRef<(() => void) | null>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <>
       <Show when={props.variant === "solid"}>
@@ -25,18 +78,16 @@ export default function MeshButton(props: MeshButtonProps) {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          bg={
+          bg={state.getSolidBg()}
+          color={
             props.colorScheme === "primary"
-              ? {
-                  base: "$text",
-                  hover: "$textPlaceholder",
-                }
-              : {
-                  base: "$body",
-                  hover: "$body",
-                }
+              ? state.theme === "light"
+                ? "$white"
+                : "$accentText"
+              : state.theme === "light"
+              ? "$white"
+              : "$text"
           }
-          color={props.colorScheme === "primary" ? "$accentText" : "$text"}
           fontSize="$sm"
           fontWeight="$medium"
           py={props.px ?? "$5"}
@@ -46,7 +97,14 @@ export default function MeshButton(props: MeshButtonProps) {
           width={props.width}
           {...props}
           {...props.attributes}
-          className={clx(meshThemeClass, baseButton, props.className)}
+          className={clx(
+            {
+              [meshLightThemeClass]: state.theme === "light",
+              [meshDarkThemeClass]: state.theme === "dark",
+            },
+            baseButton,
+            props.className
+          )}
           attributes={{
             ...props.domAttributes,
             onClick: (event) => props.onClick?.(event),
@@ -66,9 +124,14 @@ export default function MeshButton(props: MeshButtonProps) {
           color={
             props.color
               ? props.color
-              : {
+              : state.theme === "dark"
+              ? {
                   base: "$textSecondary",
                   hover: "$gray100",
+                }
+              : {
+                  base: "$text",
+                  hover: "$textSecondary",
                 }
           }
           fontSize="$sm"
@@ -80,7 +143,14 @@ export default function MeshButton(props: MeshButtonProps) {
           width={props.width}
           {...props}
           {...props.attributes}
-          className={clx(meshThemeClass, baseButton, props.className)}
+          className={clx(
+            {
+              [meshLightThemeClass]: state.theme === "light",
+              [meshDarkThemeClass]: state.theme === "dark",
+            },
+            baseButton,
+            props.className
+          )}
           attributes={{
             ...props.domAttributes,
             onClick: (event) => props.onClick?.(event),

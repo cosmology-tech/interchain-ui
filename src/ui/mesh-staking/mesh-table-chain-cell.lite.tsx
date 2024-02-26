@@ -1,4 +1,14 @@
-import { useMetadata, useDefaultProps, Show } from "@builder.io/mitosis";
+import {
+  useMetadata,
+  useStore,
+  useRef,
+  onMount,
+  onUnMount,
+  Show,
+  useDefaultProps,
+} from "@builder.io/mitosis";
+import { store } from "../../models/store";
+
 import Box from "../box";
 import Text from "../text";
 import Stack from "../stack";
@@ -15,6 +25,24 @@ useDefaultProps<Partial<MeshTableChainCellProps>>({
 });
 
 export default function MeshTableChainCell(props: MeshTableChainCellProps) {
+  const state = useStore({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<(() => void) | null>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Show
       when={props.size === "sm"}
@@ -37,7 +65,10 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
             }}
           />
 
-          <Text fontWeight="$medium" color="$textPlaceholder">
+          <Text
+            fontWeight="$medium"
+            color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
+          >
             {props.name}
           </Text>
         </Stack>
@@ -61,7 +92,10 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
           }}
         />
 
-        <Text fontWeight="$medium" color="$textPlaceholder">
+        <Text
+          fontWeight="$medium"
+          color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
+        >
           {props.name}
         </Text>
       </Stack>

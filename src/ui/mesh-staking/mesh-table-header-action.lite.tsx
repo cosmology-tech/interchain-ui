@@ -1,4 +1,13 @@
-import { useMetadata, Show, useDefaultProps } from "@builder.io/mitosis";
+import {
+  useMetadata,
+  useStore,
+  useDefaultProps,
+  useRef,
+  Show,
+  onMount,
+  onUnMount,
+} from "@builder.io/mitosis";
+import { store } from "../../models/store";
 import Box from "../box";
 import Text from "../text";
 import Icon from "../icon";
@@ -22,6 +31,24 @@ useDefaultProps<Partial<MeshTableHeaderActionProps>>({
 export default function MeshTableHeaderAction(
   props: MeshTableHeaderActionProps
 ) {
+  const state = useStore({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<(() => void) | null>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Box display="flex" gap="$7">
       <Box
@@ -82,11 +109,19 @@ export default function MeshTableHeaderAction(
           }}
         />
 
-        <Text fontSize="$md" fontWeight="$medium" color="$white">
+        <Text
+          fontSize="$md"
+          fontWeight="$medium"
+          color={state.theme === "dark" ? "$white" : "$text"}
+        >
           {props.tokenAmount}
         </Text>
 
-        <Text fontSize="$sm" fontWeight="$light" color="$textPlaceholder">
+        <Text
+          fontSize="$sm"
+          fontWeight="$light"
+          color={state.theme === "dark" ? "$textPlaceholder" : "$textSecondary"}
+        >
           {props.tokenName}
         </Text>
       </Stack>

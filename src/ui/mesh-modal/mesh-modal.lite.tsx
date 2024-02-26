@@ -13,6 +13,7 @@ import { store } from "../../models/store";
 import Stack from "../stack";
 import Text from "../text";
 import Icon from "../icon";
+import MeshButton from "../mesh-staking/mesh-button.lite";
 import {
   modalHeader,
   modalContent,
@@ -20,7 +21,10 @@ import {
   modalCloseButton,
   modalBackdropBg,
 } from "./mesh-modal.css";
-import { meshThemeClass } from "../../styles/themes.css";
+import {
+  meshDarkThemeClass,
+  meshLightThemeClass,
+} from "../../styles/themes.css";
 
 import type { ThemeVariant } from "../../models/system.model";
 import type { MeshModalProps } from "./mesh-modal.types";
@@ -73,8 +77,12 @@ export default function MeshModal(props: MeshModalProps) {
       onClose={() => props.onClose?.()}
       preventScroll={true}
       renderTrigger={props.renderTrigger}
-      themeClassName={meshThemeClass}
-      backdropClassName={modalBackdropBg}
+      themeClassName={
+        state.theme === "dark" ? meshDarkThemeClass : meshLightThemeClass
+      }
+      backdropClassName={
+        state.theme === "light" ? modalBackdropBg.light : modalBackdropBg.dark
+      }
       header={
         <Stack
           className={modalHeader}
@@ -99,15 +107,17 @@ export default function MeshModal(props: MeshModalProps) {
               onClose: props.onClose,
             })
           ) : (
-            <button
-              type="button"
+            <MeshButton
+              width="$11"
+              height="$11"
+              colorScheme="secondary"
               className={modalCloseButton}
               onClick={(e) => {
                 props.onClose?.(e);
               }}
             >
-              <Icon name="closeFilled" size="$3xl" />
-            </button>
+              <Icon name="closeFilled" size="$3xl" color="inherit" />
+            </MeshButton>
           )}
         </Stack>
       }

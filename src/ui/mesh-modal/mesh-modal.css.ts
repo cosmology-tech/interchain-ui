@@ -1,4 +1,4 @@
-import { style, createVar } from "@vanilla-extract/css";
+import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 import { baseButton } from "../button/button.css";
 
@@ -37,17 +37,31 @@ export const modalContent = style([
   },
 ]);
 
-export const modalBackdropBg = style({
-  position: `fixed`,
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-  width: `100%`,
-  height: `100%`,
-  opacity: 0.99,
-  backgroundColor: themeVars.colors.gray900,
-  backdropFilter: "blur(7px) opacity(10%)",
+export const modalBackdropBg = styleVariants({
+  light: {
+    position: `fixed`,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: `100%`,
+    height: `100%`,
+    opacity: 0.99,
+    backgroundColor: themeVars.colors.gray600,
+    backdropFilter: "blur(7px) opacity(10%)",
+  },
+  dark: {
+    position: `fixed`,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: `100%`,
+    height: `100%`,
+    opacity: 0.99,
+    backgroundColor: themeVars.colors.gray900,
+    backdropFilter: "blur(7px) opacity(10%)",
+  },
 });
 
 export const modalChildren = style([
@@ -73,9 +87,7 @@ export const modalCloseButton = style([
     position: "absolute",
     top: themeVars.space["14"],
     right: themeVars.space["14"],
-    color: "#DAD5E3",
     paddingLeft: "0 !important",
     paddingRight: "0 !important",
-    background: "transparent",
   },
 ]);

@@ -5,9 +5,9 @@ import Box from "../../src/ui/box";
 import Text from "../../src/ui/text";
 import Slider from "../../src/ui/slider";
 import MeshTagButton from "../../src/ui/mesh-staking/mesh-tag-button";
-import { meshThemeClass } from "../../src/styles/themes.css";
 import { formatNumeric } from "../../src/helpers/number";
-import { baseButton } from "../../src/ui/button/button.css";
+import useTheme from "../../src/ui/hooks/use-theme";
+import useColorModeValue from "../../src/ui/hooks/use-color-mode-value";
 
 const meta: Meta<typeof Slider> = {
   component: Slider,
@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {},
   render: (props) => {
+    const { theme } = useTheme();
     const TOTAL_TOKENS = 5422;
     const [value, setValue] = React.useState<number | number[]>(25);
     const [value2, setValue2] = React.useState<number | number[]>(25);
@@ -41,13 +42,12 @@ export const Default: Story = {
     };
     return (
       <Box
-        bg="rgb(16, 16, 18)"
+        bg={theme === "dark" ? "rgb(16, 16, 18)" : "$white"}
         height="400px"
         padding="$10"
         display="flex"
         flexDirection="column"
         gap="$10"
-        className={meshThemeClass}
       >
         <Slider
           name="osmosis"
@@ -79,7 +79,7 @@ export const Default: Story = {
 
                 <Text
                   as="label"
-                  color="$textPlaceholder"
+                  color={useColorModeValue("$text", "$textPlaceholder")}
                   fontSize="$sm"
                   fontWeight="$light"
                   attributes={labelProps}
@@ -127,7 +127,7 @@ export const Default: Story = {
 
                 <Text
                   as="label"
-                  color="$textPlaceholder"
+                  color={useColorModeValue("$text", "$textPlaceholder")}
                   fontSize="$sm"
                   fontWeight="$light"
                   attributes={labelProps}
@@ -175,7 +175,7 @@ export const Default: Story = {
 
                 <Text
                   as="label"
-                  color="$textPlaceholder"
+                  color={useColorModeValue("$text", "$textPlaceholder")}
                   fontSize="$sm"
                   fontWeight="$light"
                   attributes={labelProps}
@@ -188,17 +188,6 @@ export const Default: Story = {
             </Box>
           )}
         />
-
-        <Text
-          color="$white"
-          fontSize="$xs"
-          attributes={{
-            mt: "$10",
-          }}
-        >
-          NOTE: this component theme is first designed to be used in a dark
-          background (Mesh theme) <br /> TBD: light theme
-        </Text>
       </Box>
     );
   },

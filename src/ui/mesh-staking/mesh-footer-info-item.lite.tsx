@@ -1,8 +1,20 @@
-import { useMetadata, Show } from "@builder.io/mitosis";
+import {
+  useMetadata,
+  useStore,
+  useRef,
+  Show,
+  onMount,
+  onUnMount,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import Text from "../text";
 import clx from "clsx";
-import { meshThemeClass } from "../../styles/themes.css";
+import { store } from "../../models/store";
+import {
+  meshDarkThemeClass,
+  meshLightThemeClass,
+} from "../../styles/themes.css";
+import type { ThemeVariant } from "../../models/system.model";
 import type { MeshFooterInfoItemProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -12,6 +24,24 @@ useMetadata({
 });
 
 export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<(() => void) | null>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Box
       display="flex"
@@ -19,7 +49,13 @@ export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
       gap="$2"
       justifyContent="center"
       alignItems="center"
-      className={clx(meshThemeClass, props.className)}
+      className={clx(
+        {
+          [meshLightThemeClass]: state.theme === "light",
+          [meshDarkThemeClass]: state.theme === "dark",
+        },
+        props.className
+      )}
     >
       <Text fontSize="$3xl" color="$text" fontWeight="$medium">
         {props.title}
