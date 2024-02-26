@@ -10,6 +10,7 @@ import Slider from "../../src/ui/slider";
 import Divider from "../../src/ui/divider";
 import { useMockData } from "../stub/mock-data-client";
 import { formatNumeric } from "../../src/helpers/number";
+import useColorModeValue from "../../src/ui/hooks/use-color-mode-value";
 
 // ==== Mesh components
 import MeshButton from "../../src/ui/mesh-staking/mesh-button";
@@ -68,7 +69,7 @@ const MeshSlider = () => {
 
             <Text
               as="label"
-              color="$textPlaceholder"
+              color={useColorModeValue("$textSecondary", "$textPlaceholder")}
               fontSize="$sm"
               fontWeight="$light"
               attributes={labelProps}
@@ -115,7 +116,11 @@ const MeshStakingHeader = (props) => (
           <Text color="$text" fontSize="$3xl" fontWeight="$medium">
             1,258.02
           </Text>
-          <Text color="$textPlaceholder" fontSize="$sm" fontWeight="$light">
+          <Text
+            color={useColorModeValue("$textSecondary", "$textPlaceholder")}
+            fontSize="$sm"
+            fontWeight={"$light"}
+          >
             {props.asset?.symbol ?? "OSMO"}
           </Text>
         </Stack>
@@ -148,10 +153,18 @@ const MeshStakingHeader = (props) => (
           alignItems: "center",
         }}
       >
-        <Text fontSize="$md" color="$textPlaceholder" fontWeight="$semibold">
+        <Text
+          fontSize="$md"
+          color={useColorModeValue("$text", "$textPlaceholder")}
+          fontWeight="$semibold"
+        >
           1,258.02 OSMO
         </Text>
-        <Text fontSize="$sm" color="$textPlaceholder" fontWeight="$light">
+        <Text
+          fontSize="$sm"
+          color={useColorModeValue("$text", "$textPlaceholder")}
+          fontWeight="$light"
+        >
           available
         </Text>
       </Stack>

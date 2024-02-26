@@ -1,5 +1,7 @@
 import { themeVars } from "@/styles/themes.css";
-import { style } from "@vanilla-extract/css";
+import { style, createVar } from "@vanilla-extract/css";
+
+const thumbColorVar = createVar();
 
 export const slider = style({
   display: "flex",
@@ -100,10 +102,18 @@ export const sliderThumb = style({
   width: "20px",
   height: "20px",
   borderRadius: "50%",
-  background: "#151515",
+  background: thumbColorVar,
   position: "relative",
   zIndex: 2,
+  vars: {
+    [thumbColorVar]: "#151515",
+  },
   selectors: {
+    '&[data-theme="light"]': {
+      vars: {
+        [thumbColorVar]: themeVars.colors.inputBg,
+      },
+    },
     '&[data-dragging="true"]': {
       background: "dimgray",
     },
@@ -122,7 +132,7 @@ export const sliderThumb = style({
       borderRadius: "50%",
       display: "block",
       position: "absolute",
-      background: "#151515",
+      background: thumbColorVar,
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",

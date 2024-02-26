@@ -12,7 +12,8 @@ import {
   AriaSliderThumbProps,
   AriaSliderProps,
 } from "react-aria";
-import { meshThemeClass } from "@/styles/themes.css";
+import useTheme from "@/ui/hooks/use-theme";
+import { meshLightThemeClass, meshDarkThemeClass } from "@/styles/themes.css";
 import Box from "@/ui/box";
 import { BoxProps } from "@/ui/box/box.types";
 import * as styles from "./slider.css";
@@ -52,6 +53,7 @@ function clampPreviewProgressPercent(
 }
 
 export default function Slider(props: SliderProps) {
+  const { theme } = useTheme();
   const trackRef = React.useRef(null);
   const numberFormatter = useNumberFormatter(props.formatOptions);
 
@@ -77,7 +79,10 @@ export default function Slider(props: SliderProps) {
         ...groupProps,
       }}
       className={clx(
-        meshThemeClass,
+        {
+          [meshLightThemeClass]: theme === "light",
+          [meshDarkThemeClass]: theme === "dark",
+        },
         styles.slider,
         state.orientation === "horizontal"
           ? styles.sliderHorizontal
@@ -152,6 +157,8 @@ export interface SliderThumbProps extends AriaSliderThumbProps {
 
 function Thumb(props: SliderThumbProps) {
   const { state, trackRef, index, name } = props;
+  const { theme } = useTheme();
+
   const inputRef = React.useRef(null);
   const { thumbProps, inputProps, isDragging } = useSliderThumb(
     {
@@ -164,11 +171,13 @@ function Thumb(props: SliderThumbProps) {
   );
 
   const { focusProps, isFocusVisible } = useFocusRing();
+
   return (
     <div
       {...thumbProps}
       className={clx(styles.sliderThumb)}
       {...{
+        "data-theme": theme,
         "data-dragging": isDragging ? "true" : "false",
         "data-focused": isFocusVisible ? "true" : "false",
         "data-direction": state.orientation,

@@ -1,9 +1,20 @@
-import { useMetadata } from "@builder.io/mitosis";
+import {
+  useMetadata,
+  useStore,
+  useRef,
+  onMount,
+  onUnMount,
+} from "@builder.io/mitosis";
 import clx from "clsx";
-import { meshThemeClass } from "../../styles/themes.css";
+import {
+  meshDarkThemeClass,
+  meshLightThemeClass,
+} from "../../styles/themes.css";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
+import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
 import type { MeshStakingSliderInfoProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -15,12 +26,36 @@ useMetadata({
 export default function MeshStakingSliderInfo(
   props: MeshStakingSliderInfoProps
 ) {
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<(() => void) | null>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Box
       display="flex"
       gap="$8"
       alignItems="center"
-      className={clx(meshThemeClass, props.className)}
+      className={clx(
+        {
+          [meshLightThemeClass]: state.theme === "light",
+          [meshDarkThemeClass]: state.theme === "dark",
+        },
+        props.className
+      )}
     >
       <Box
         as="img"
@@ -33,9 +68,14 @@ export default function MeshStakingSliderInfo(
       />
 
       <Stack direction="vertical" space="$1">
-        <Text fontSize="$sm" color="$textPlaceholder" fontWeight="$medium">
+        <Text
+          fontSize="$sm"
+          color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
+          fontWeight="$medium"
+        >
           {props.tokenName}
         </Text>
+
         <Text
           fontSize="$sm"
           fontWeight="$normal"

@@ -1,8 +1,20 @@
-import { useMetadata, useDefaultProps } from "@builder.io/mitosis";
+import {
+  useMetadata,
+  useStore,
+  useRef,
+  onMount,
+  useDefaultProps,
+  onUnMount,
+} from "@builder.io/mitosis";
 import Box from "../box";
 import clx from "clsx";
 import { baseButton } from "../button/button.css";
-import { meshThemeClass } from "../../styles/themes.css";
+import {
+  meshDarkThemeClass,
+  meshLightThemeClass,
+} from "../../styles/themes.css";
+import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
 import type { MeshTabProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -16,6 +28,24 @@ useDefaultProps<Partial<MeshTabProps>>({
 });
 
 export default function MeshTab(props: MeshTabProps) {
+  const state = useStore<{ theme: ThemeVariant }>({
+    theme: "light",
+  });
+
+  let cleanupRef = useRef<(() => void) | null>(null);
+
+  onMount(() => {
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
+  });
+
   return (
     <Box
       position="relative"
@@ -29,7 +59,7 @@ export default function MeshTab(props: MeshTabProps) {
         justifyContent="center"
         alignItems="center"
         bg="transparent"
-        color="$textPlaceholder"
+        color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
         fontSize="$sm"
         fontWeight="$medium"
         py="$8"
@@ -38,7 +68,14 @@ export default function MeshTab(props: MeshTabProps) {
         filter={props.isActive ? undefined : "grayscale(60%) opacity(40%)"}
         {...props}
         {...props.attributes}
-        className={clx(meshThemeClass, baseButton, props.className)}
+        className={clx(
+          {
+            [meshLightThemeClass]: state.theme === "light",
+            [meshDarkThemeClass]: state.theme === "dark",
+          },
+          baseButton,
+          props.className
+        )}
         attributes={{
           ...props.domAttributes,
           onClick: (event) => props.onClick?.(event),

@@ -18,13 +18,14 @@ import TableRow from "../table/table-row.lite";
 import TableCell from "../table/table-cell.lite";
 import TableColumnHeaderCell from "../table/table-column-header-cell.lite";
 import TableRowHeaderCell from "../table/table-row-header-cell.lite";
-import { meshThemeClass } from "../../styles/themes.css";
 import {
-  standardTransitionProperties,
-  bottomShadow,
-} from "../shared/shared.css";
+  meshDarkThemeClass,
+  meshLightThemeClass,
+} from "../../styles/themes.css";
+import { standardTransitionProperties } from "../shared/shared.css";
 import * as styles from "./mesh-staking.css";
 
+import { store } from "../../models/store";
 import anime from "animejs";
 import type { AnimeInstance } from "animejs";
 import type { MeshTableProps } from "./mesh-staking.types";
@@ -42,6 +43,7 @@ export default function MeshTable(props: MeshTableProps) {
   let cleanupRef = useRef<() => void>(null);
 
   const state = useStore({
+    theme: "light",
     displayBottomShadow: false,
     pinnedRows: () => {
       if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
@@ -85,6 +87,12 @@ export default function MeshTable(props: MeshTableProps) {
   });
 
   onMount(() => {
+    state.theme = store.getState().theme;
+
+    let cleanupStore = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+
     if (measureRef) {
       if (measureRef.clientHeight >= 380) {
         state.displayBottomShadow = true;
@@ -109,6 +117,10 @@ export default function MeshTable(props: MeshTableProps) {
       measureRef.addEventListener("scroll", scrollHandler);
 
       cleanupRef = () => {
+        if (cleanupStore) {
+          cleanupStore();
+        }
+
         if (measureRef) {
           measureRef.removeEventListener("scroll", scrollHandler);
         }
@@ -147,7 +159,14 @@ export default function MeshTable(props: MeshTableProps) {
 
   return (
     <Box
-      className={clx(meshThemeClass, props.className, styles.scrollBar)}
+      className={clx(
+        {
+          [meshLightThemeClass]: state.theme === "light",
+          [meshDarkThemeClass]: state.theme === "dark",
+        },
+        props.className,
+        styles.scrollBar
+      )}
       width="100%"
       position="relative"
       backgroundColor="$cardBg"
@@ -312,7 +331,10 @@ export default function MeshTable(props: MeshTableProps) {
       <Show when={state.shouldPinHeader()}>
         <div
           ref={shadowRef}
-          className={styles.bottomShadow}
+          className={clx({
+            [styles.bottomShadow.light]: state.theme === "light",
+            [styles.bottomShadow.dark]: state.theme === "dark",
+          })}
           data-is-visible={state.displayBottomShadow}
         />
       </Show>

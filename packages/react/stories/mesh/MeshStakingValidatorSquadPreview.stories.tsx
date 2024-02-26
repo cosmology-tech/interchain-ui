@@ -8,6 +8,7 @@ import Button from "../../src/ui/button";
 import Text from "../../src/ui/text";
 import Divider from "../../src/ui/divider";
 import { useMockData, DefaultNormalizedAsset } from "../stub/mock-data-client";
+import useColorModeValue from "../../src/ui/hooks/use-color-mode-value";
 import { formatNumeric } from "../../src/helpers/number";
 // @ts-ignore
 import akashImage from "../../static/validators/akash.png";
@@ -215,8 +216,8 @@ export const Primary: Story = {
         {
           id: "row1",
           chain: {
-            name: levana?.name ?? "",
-            logo: levana?.imgSrc ?? "",
+            name: juno?.name ?? "",
+            logo: juno?.imgSrc ?? "",
           },
           unbondFor: "27 days",
         },
@@ -300,7 +301,7 @@ export const Primary: Story = {
                         <Text
                           fontSize="$sm"
                           fontWeight="$normal"
-                          color="$textPlaceholder"
+                          color={useColorModeValue("$text", "$textPlaceholder")}
                         >
                           {rowData.unbondingPeriod}
                         </Text>
@@ -315,7 +316,7 @@ export const Primary: Story = {
                         <Text
                           fontSize="$sm"
                           fontWeight="$normal"
-                          color="$textPlaceholder"
+                          color={useColorModeValue("$text", "$textPlaceholder")}
                         >
                           {rowData.commission}
                         </Text>
@@ -377,7 +378,7 @@ export const Primary: Story = {
                         <Text
                           fontSize="$sm"
                           fontWeight="$normal"
-                          color="$textPlaceholder"
+                          color={useColorModeValue("$text", "$textPlaceholder")}
                         >
                           {rowData.unbondFor}
                         </Text>
