@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.0...@interchain-ui/react@1.22.1) (2024-02-28)
+
+### Bug Fixes
+
+- **mesh-ui:** tweak the light mode tokens ([7165893](https://github.com/cosmology-tech/interchain-ui/commit/7165893559641ea5ef3c95472093e6dc560851f6))
+
 # [1.22.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.21.19...@interchain-ui/react@1.22.0) (2024-02-23)
 
 ### Features
