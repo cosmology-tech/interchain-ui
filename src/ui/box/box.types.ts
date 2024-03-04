@@ -5,10 +5,11 @@ import type { Resolve } from "../../helpers/types";
 export type BoxProps = Resolve<Sprinkles> & {
   as?: any;
   className?: ClassValue;
+  class?: ClassValue;
   children?: any;
   attributes?: any;
-  style?: any;
-  ref?: any;
+  rawCSS?: any;
+  boxRef?: any;
 };
 
 export const DEFAULT_VALUES = {

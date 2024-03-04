@@ -385,8 +385,8 @@ export default function Toast(props: ToastProps) {
             : `${state.initialHeight}px`,
           [swipeAmountVar]: `${state.swipeAmount}`,
         }),
-        ...props.style,
-        ...props.toast.style,
+        ...props.css,
+        ...props.toast.css,
       }}
       onPointerDown={state.handleOnPointerDown}
       onPointerUp={state.handleOnPointerUp}

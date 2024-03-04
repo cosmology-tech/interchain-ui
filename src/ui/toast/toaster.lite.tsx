@@ -220,7 +220,7 @@ export default function Toaster(props: ToasterProps) {
             [widthVar]: `${TOAST_WIDTH}px`,
             [gapVar]: `${GAP}px`,
           }),
-          ...props.style,
+          ...props.rawCSS,
         }}
         onBlur={(event) => {
           if (
@@ -273,7 +273,7 @@ export default function Toaster(props: ToasterProps) {
               closeButton={props.closeButton}
               interacting={state.interacting}
               position={props.position}
-              style={props.toastOptions?.style}
+              rawCSS={props.toastOptions?.rawCSS}
               removeToast={state.removeToast}
               toasts={state.toasts}
               heights={state.heights}

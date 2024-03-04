@@ -135,7 +135,7 @@ export default function SwapToken(props: SwapTokenProps) {
   return (
     <Box
       className={props.className}
-      ref={rootRef}
+      boxRef={rootRef}
       paddingTop="$5"
       minWidth="250px"
     >
@@ -169,7 +169,7 @@ export default function SwapToken(props: SwapTokenProps) {
           justifyContent: "center",
         }}
       >
-        <Box position="relative" zIndex="1" ref={swapIconRef}>
+        <Box position="relative" zIndex="1" boxRef={swapIconRef}>
           <button
             className={styles.swapIcon[state.theme]}
             onClick={(e) => props.onToggleDirection()}

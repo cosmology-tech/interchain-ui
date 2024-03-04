@@ -99,9 +99,7 @@ export default function NftMint(props: NftMintProps) {
             maxHeight="$27"
             borderRadius="$md"
             backgroundColor="$cardBg"
-            style={{
-              objectFit: "contain",
-            }}
+            objectFit="contain"
             attributes={{
               alt: props.description,
               src: props.imgSrc,

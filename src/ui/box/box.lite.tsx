@@ -32,6 +32,7 @@ export default function Box(props: BoxProps) {
       const sprinklesObj = rainbowSprinkles({
         ...omit(props, ["attributes", "as", "boxRef"]),
         ...props.attributes,
+        ...props.css,
       });
 
       return {
@@ -47,7 +48,7 @@ export default function Box(props: BoxProps) {
       className={state.boxStyles().className}
       style={state.boxStyles().style}
       {...state._passThroughProps}
-      ref={props.ref}
+      ref={props.boxRef}
     >
       {props.children}
     </props.as>

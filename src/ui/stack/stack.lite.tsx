@@ -19,7 +19,7 @@ export default function Stack(props: StackProps) {
     <Box
       as={props.as}
       {...props.attributes}
-      ref={props.boxRef}
+      boxRef={props.boxRef}
       display="flex"
       flexDirection={props.direction === "horizontal" ? "row" : "column"}
       gap={props.space}

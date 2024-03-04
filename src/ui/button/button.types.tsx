@@ -18,7 +18,7 @@ export interface ButtonProps extends BaseComponentProps {
   onClick?: (event: any) => void;
   onHoverStart?: (event: any) => void;
   onHoverEnd?: (event: any) => void;
-  ref?: any;
+  buttonRef?: any;
   attributes?: Sprinkles;
   domAttributes?: any;
   isLoading?: boolean;

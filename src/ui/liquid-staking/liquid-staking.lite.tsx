@@ -179,7 +179,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
       position="relative"
       backgroundColor={state.theme === "light" ? "$inputBg" : "$blackPrimary"}
       className={clx(props.className, styles.root)}
-      ref={rootRef}
+      boxRef={rootRef}
       {...props.attributes}
       {...props.domAttributes}
     >

@@ -127,7 +127,7 @@ export default function Carousel(props: CarouselProps) {
         height="100%"
         overflow="hidden"
         gap={props.gap}
-        ref={state.assignRef}
+        boxRef={state.assignRef}
         className={styles.innerContainer}
       >
         <For each={props.children}>

@@ -41,7 +41,7 @@ export default function AvatarName(props: AvatarNameProps) {
         "aria-label": props.name,
       }}
       className={avatarName}
-      ref={props.ref}
+      boxRef={props.ref}
     >
       <Show when={!!props.name && props.showInitials}>
         {state.initials(props.name)}
