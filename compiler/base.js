@@ -18,6 +18,21 @@ const { fixReactTypeIssues } = require("./plugins/react.plugin");
 
 const cache = new Cache();
 
+// Only allow these components for each target, if null = allow all
+const compileAllowList = {
+  react: null,
+  vue: [
+    "avatar",
+    "animate-layout",
+    "box",
+    "text",
+    "button",
+    "callout",
+    "stack",
+    "center",
+  ],
+};
+
 const DEFAULT_OPTIONS = {
   elements: "src/**/*.lite.tsx",
   dest: "packages",
@@ -34,21 +49,6 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
-function pascalName(str) {
-  return startCase(str).replace(/\s/g, "");
-}
-
-function getScaffoldsDirs(rootPath) {
-  return {
-    inDir: `${rootPath}/scaffolds`,
-    outDir: `${rootPath}/src/ui`,
-  };
-}
-
-function removeLiteExtension(fileContent) {
-  return fileContent.replace(/\.lite/g, "");
-}
-
 async function compile(rawOptions) {
   const { watcherEvents, ...defaultOptions } = rawOptions;
 
@@ -58,16 +58,33 @@ async function compile(rawOptions) {
   };
 
   const cliConfig = commandLineArgs(optionDefinitions);
-  options.elements = cliConfig.elements
+
+  const globLiteTsxFiles = (file) =>
+    glob.sync(`src/**/${file}/${file}.lite.tsx`);
+
+  // String or array of strings of glob patterns
+  const elementsFilter = cliConfig.elements
     ? cliConfig.elements
-        .map((file) => glob.sync(`src/**/${file}/${file}.lite.tsx`))
-        .flat()
     : options.elements;
+
+  options.elements = elementsFilter;
   options.isDev = !!cliConfig.dev;
 
   const files = cliConfig.elements
     ? options.elements
     : glob.sync(options.elements);
+
+  const filteredGlobbedFiles = compileAllowList[options.target]
+    ? files.filter((file) => {
+        return compileAllowList[options.target]
+          .map(
+            (allowedElement) =>
+              `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
+          )
+          .some((allowed) => allowed === file);
+      })
+    : files;
+
   const outPath = `${options.dest}/${options.target}`;
 
   function copyNonMitosisLiteFiles(isFirstRun = false, scaffoldsExist = false) {
@@ -82,15 +99,15 @@ async function compile(rawOptions) {
     const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.lite.tsx`);
     unnecessaryFiles.forEach((element) => fs.removeSync(element));
 
-    const distFiles = glob.sync(`${outPath}/src/**/*.{ts,tsx}`);
+    // Output file to <package>/src
+    const targetSrcFiles = glob.sync(`${outPath}/src/**/*.{ts,tsx}`);
 
-    distFiles.forEach((element) => {
+    targetSrcFiles.forEach((element) => {
       const data = fs.readFileSync(element, "utf8");
 
       let result = removeLiteExtension(
-        data
-          // Fix alias
-          .replace(/\~\//g, "../../")
+        // Fix alias
+        data.replace(/\~\//g, "../../")
       );
 
       if (options.target === "react") {
@@ -102,10 +119,26 @@ async function compile(rawOptions) {
 
     let fileExports = "$2";
 
-    // Export only the elements we want in case flag --elements is provided
-    if (cliConfig.elements) {
-      fileExports = options.elements
+    // Export only the elements we want with matching filters:
+    // - CLI flag --elements
+    // - allowList
+    const doesTargetHaveAllowList = compileAllowList[options.target] != null;
+
+    if (cliConfig.elements || doesTargetHaveAllowList) {
+      const filterWithAllowList = (elements) => {
+        const elementsToFilter = doesTargetHaveAllowList
+          ? compileAllowList[options.target].map(
+              (allowedElement) =>
+                `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
+            )
+          : toArray(elements);
+
+        return elementsToFilter;
+      };
+
+      fileExports = filterWithAllowList(options.elements)
         .map((fileName) => {
+          console.log("[export] ", fileName);
           const file = path.parse(fileName);
           const name = file.name.replace(".lite", "");
           return `export { default as ${pascalName(
@@ -116,6 +149,7 @@ async function compile(rawOptions) {
     }
 
     const indexData = fs.readFileSync(`${outPath}/src/index.ts`, "utf8");
+
     let indexResult = indexData
       // Export only needed components
       .replace(
@@ -283,7 +317,8 @@ async function compile(rawOptions) {
 
   const spinner = ora(`>> Compiling [${options.target}]`).start();
 
-  for (const fileName of files) {
+  for (const fileName of filteredGlobbedFiles) {
+    // console.log("\n[Mitosis compile] ", fileName);
     const isFirstCompilation =
       !fs.existsSync(`${outPath}/src`) || options.isDev;
     const file = path.parse(fileName);
@@ -339,3 +374,22 @@ async function compile(rawOptions) {
 module.exports = {
   compile,
 };
+
+function pascalName(str) {
+  return startCase(str).replace(/\s/g, "");
+}
+
+function getScaffoldsDirs(rootPath) {
+  return {
+    inDir: `${rootPath}/scaffolds`,
+    outDir: `${rootPath}/src/ui`,
+  };
+}
+
+function removeLiteExtension(fileContent) {
+  return fileContent.replace(/\.lite/g, "");
+}
+
+function toArray(maybeArray) {
+  return Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+}

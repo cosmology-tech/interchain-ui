@@ -45,7 +45,7 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
 
   return (
     <Box
-      ref={props.ref}
+      boxRef={props.ref}
       display="flex"
       position="absolute"
       alignItems="center"

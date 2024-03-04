@@ -213,7 +213,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
           </Box>
 
           <Box
-            style={{
+            rawCSS={{
               display:
                 props.value &&
                 props.notionalValue &&
@@ -244,7 +244,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
           </Box>
 
           <Box
-            style={{
+            rawCSS={{
               display: props.endAddon && !!props.value ? "block" : "none",
             }}
           >

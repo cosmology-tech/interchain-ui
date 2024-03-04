@@ -220,7 +220,7 @@ export default function ConnectModalWalletButton(
           buttonTextStyle[state.theme],
           buttonTextVariants({ variant: props.variant })
         )}
-        style={{
+        rawCSS={{
           ...state.overrideManager?.applyOverrides(buttonLabelOverrides.name),
           width: props.variant === "square" ? "calc(80%)" : "auto",
         }}

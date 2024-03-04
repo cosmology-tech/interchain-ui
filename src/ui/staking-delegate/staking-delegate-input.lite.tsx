@@ -73,7 +73,7 @@ export default function StakingDelegateInput(props: StakingDelegateInputProps) {
       display="flex"
       flexDirection="column"
       gap="$6"
-      ref={rootRef}
+      boxRef={rootRef}
       {...props.attributes}
     >
       <Box

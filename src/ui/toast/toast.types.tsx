@@ -48,7 +48,7 @@ export interface Toast {
   onDismiss?: (toast: Toast) => void;
   onAutoClose?: (toast: Toast) => void;
   promise?: PromiseLike;
-  style?: any;
+  rawCSS?: any;
   className?: string;
   descriptionClassName?: string;
 }
@@ -68,7 +68,7 @@ export interface ToastProps extends BaseComponentProps {
   expandByDefault: boolean;
   closeButton: boolean;
   interacting: boolean;
-  style?: any;
+  rawCSS?: any;
   duration?: number;
   className?: string;
   descriptionClassName?: string;
@@ -82,7 +82,7 @@ export interface ToastHeight {
 interface ToastOptions {
   className?: string;
   descriptionClassName?: string;
-  style?: any;
+  rawCSS?: any;
 }
 
 export interface ToasterProps extends BaseComponentProps {
@@ -95,7 +95,7 @@ export interface ToasterProps extends BaseComponentProps {
   visibleToasts?: number;
   closeButton?: boolean;
   toastOptions?: ToastOptions;
-  style?: any;
+  rawCSS?: any;
   offset?: string | number;
 }
 

@@ -151,7 +151,7 @@ export default function Tabs(props: TabsProps) {
           desktop: "unset",
         }}
         backgroundColor="$progressBg"
-        ref={tabListRef}
+        boxRef={tabListRef}
         attributes={{
           role: "tablist",
         }}

@@ -180,7 +180,7 @@ export default function MeshTable(props: MeshTableProps) {
       maxHeight={state.shouldPinHeader() ? "380px" : undefined}
       overflowY="auto"
       display="block"
-      ref={measureRef}
+      boxRef={measureRef}
       {...props.containerProps}
     >
       <Table {...props.tableProps} position="relative">

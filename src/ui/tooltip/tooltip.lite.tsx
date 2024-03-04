@@ -93,7 +93,7 @@ export default function Tooltip(props: TooltipProps) {
 
   return (
     <Box
-      ref={anchorRef}
+      boxRef={anchorRef}
       position="relative"
       attributes={{
         "data-part-id": "tooltip-container",
@@ -113,7 +113,7 @@ export default function Tooltip(props: TooltipProps) {
       </Box>
 
       <Box
-        ref={floatingTargetRef}
+        boxRef={floatingTargetRef}
         px="$5"
         py="$3"
         backgroundColor="$text"
@@ -129,7 +129,7 @@ export default function Tooltip(props: TooltipProps) {
         <Text color="$progressBg">{props.title}</Text>
 
         <Box
-          ref={arrowRef}
+          boxRef={arrowRef}
           position="absolute"
           transform="rotate(45deg)"
           width="$5"

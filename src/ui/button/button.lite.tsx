@@ -86,7 +86,7 @@ export default function Button(props: ButtonProps) {
   return (
     <Box
       as={props.as}
-      ref={props.ref}
+      boxRef={props.buttonRef}
       {...props.attributes}
       className={clx(
         styles.buttonSize[props.size],
