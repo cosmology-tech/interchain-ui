@@ -18,21 +18,6 @@ const { fixReactTypeIssues } = require("./plugins/react.plugin");
 
 const cache = new Cache();
 
-// Only allow these components for each target, if null = allow all
-const compileAllowList = {
-  react: null,
-  vue: [
-    "avatar",
-    "animate-layout",
-    "box",
-    "text",
-    "button",
-    "callout",
-    "stack",
-    "center",
-  ],
-};
-
 const DEFAULT_OPTIONS = {
   elements: "src/**/*.lite.tsx",
   dest: "packages",
@@ -74,9 +59,9 @@ async function compile(rawOptions) {
     ? options.elements
     : glob.sync(options.elements);
 
-  const filteredGlobbedFiles = compileAllowList[options.target]
+  const filteredGlobbedFiles = scaffoldConfig.compileAllowList[options.target]
     ? files.filter((file) => {
-        return compileAllowList[options.target]
+        return scaffoldConfig.compileAllowList[options.target]
           .map(
             (allowedElement) =>
               `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
@@ -122,12 +107,13 @@ async function compile(rawOptions) {
     // Export only the elements we want with matching filters:
     // - CLI flag --elements
     // - allowList
-    const doesTargetHaveAllowList = compileAllowList[options.target] != null;
+    const doesTargetHaveAllowList =
+      scaffoldConfig.compileAllowList[options.target] != null;
 
     if (cliConfig.elements || doesTargetHaveAllowList) {
       const filterWithAllowList = (elements) => {
         const elementsToFilter = doesTargetHaveAllowList
-          ? compileAllowList[options.target].map(
+          ? scaffoldConfig.compileAllowList[options.target].map(
               (allowedElement) =>
                 `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
             )
@@ -178,6 +164,11 @@ async function compile(rawOptions) {
       );
     }
 
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      "\n===================== [index.ts] ===================== \n" +
+        indexResult
+    );
     fs.writeFileSync(`${outPath}/src/index.ts`, indexResult, "utf8");
   }
 
@@ -260,7 +251,7 @@ async function compile(rawOptions) {
     };
   }
 
-  async function addReactSpecificCode() {
+  async function addReactRSCPatch() {
     const targetRootPath = path.resolve(
       cwd(),
       `packages/${options.target}/src`
@@ -364,7 +355,7 @@ async function compile(rawOptions) {
   }
 
   if (options.target === "react") {
-    addReactSpecificCode();
+    addReactRSCPatch();
   }
 
   spinner.succeed();

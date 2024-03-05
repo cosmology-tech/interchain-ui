@@ -1,4 +1,4 @@
-import { useMetadata, useStore, useDefaultProps } from "@builder.io/mitosis";
+import { useDefaultProps, useMetadata, useStore } from "@builder.io/mitosis";
 import clsx from "clsx";
 import omit from "lodash/omit";
 import { rainbowSprinkles } from "../../styles/rainbow-sprinkles.css";
@@ -18,7 +18,7 @@ export default function Box(props: BoxProps) {
   });
 
   const state = useStore<{
-    boxStyles: () => {
+    boxStyles: {
       className: string;
       style: Record<string, unknown>;
       passThroughProps: Record<string, unknown>;
@@ -26,13 +26,13 @@ export default function Box(props: BoxProps) {
     _passThroughProps: Record<string, unknown>;
   }>({
     get _passThroughProps() {
-      return state.boxStyles().passThroughProps;
+      return state.boxStyles.passThroughProps;
     },
-    boxStyles() {
+    get boxStyles() {
       const sprinklesObj = rainbowSprinkles({
         ...omit(props, ["attributes", "as", "boxRef"]),
         ...props.attributes,
-        ...props.css,
+        ...props.rawCSS,
       });
 
       return {
@@ -45,8 +45,8 @@ export default function Box(props: BoxProps) {
 
   return (
     <props.as
-      className={state.boxStyles().className}
-      style={state.boxStyles().style}
+      className={state.boxStyles.className}
+      style={state.boxStyles.style}
       {...state._passThroughProps}
       ref={props.boxRef}
     >

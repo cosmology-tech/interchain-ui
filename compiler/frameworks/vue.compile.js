@@ -16,15 +16,25 @@ function customReplaceVue(props) {
   if (isFirstCompilation) {
     const data = fs.readFileSync(`${outPath}/src/index.ts`, "utf8");
 
-    // .vue extension already added, don't process
-    // TODO: add a map to check for duplicated work
-    // if (data.indexOf(".vue") !== -1) return data;
+    // NOTE: debug only
+    console.log(
+      "\x1b[34m%s\x1b[0m",
+      "\n ============== before =========== \n" + data
+    );
 
     const result = data
       // Add .vue to index
-      .replace(/(export)(.*)\/ui\/(.+)";/g, `$1$2/ui/$3/$3.vue";`)
+      .replace(
+        /(export)(.*)\/ui\/(?!.*(\.css|\.css\.ts)")(.+)";/g,
+        `$1$2/ui/$3/$3.vue";`
+      )
       .replace(/(extensions)\/(.*)\.vue/g, "$1/$2")
       .replace(/\/helpers\.vue/g, "");
+
+    console.log(
+      "\x1b[33m%s\x1b[0m",
+      "\n ============== after =========== \n" + result
+    );
 
     fs.writeFileSync(`${outPath}/src/index.ts`, result, "utf8");
 
@@ -43,79 +53,11 @@ function customReplaceVue(props) {
 
   const data = fs.readFileSync(outFile, "utf8");
 
-  const allTheNeededTypes = glob
-    .sync([`src/models/**/*.model.ts`, `src/**/${name}.model.ts`])
-    .reverse()
-    .map((src) => fs.readFileSync(src, "utf8"))
-    .join("\n")
-    // Remove type imports, should be injected
-    .replace(/import type .*/g, "");
-
-  // First try to fix the problem with watchers and names
-  const watchRegex =
-    /watch\(\s*\(\)\s*=>\s*\[(.*)\],\s*\(\[(.*)\]\s*\) ?=>\s*{([\s\S]*?)},\n/g;
-
-  let match;
   let result = data;
-  while ((match = watchRegex.exec(data)) !== null) {
-    let callbackRegex = match[3].trim();
-    let parametersRegex = match[2].trim();
-    const parameters = parametersRegex.split(/\s*,\s*/);
 
-    parameters.forEach((parameter) => {
-      parametersRegex = parametersRegex.replace(
-        new RegExp(parameter, "g"),
-        `___${parameter}`
-      );
-      callbackRegex = callbackRegex.replace(
-        new RegExp(`props\\.${parameter}`, "g"),
-        parameter
-      );
-      callbackRegex = callbackRegex.replace(
-        new RegExp(`${parameter}\\.value`, "g"),
-        `${parameter}`
-      );
-      callbackRegex = callbackRegex.replace(
-        new RegExp(parameter, "g"),
-        `___${parameter}`
-      );
-    });
-
-    result = result
-      .replace(match[3], callbackRegex)
-      .replace(
-        new RegExp(`(watch.*)(\\s.*)?(\\s.*\\(\\[)(${match[2].trim()})(\\])`),
-        `$1$2$3${parametersRegex}$5`
-      );
-  }
-
-  result = result
-    // Inject needed types to this file as cannot be imported in vue https://vuejs.org/guide/typescript/composition-api.html
-    .replace(
-      /(<script setup)/g,
-      `<script lang="ts">${allTheNeededTypes}</script>\n$1`
-    )
-    // Type defineProps and Inject types as cannot be imported in vue https://vuejs.org/guide/typescript/composition-api.html
-    .replace(
-      /(const props = defineProps)\(\[(.|\n)*\]\);/gm,
-      `$1<${pascalName}Props>();`
-    )
-    // Enable children
-    .replace(/this\.children/, "this.$slots.default()")
-    // Add ? to .value variables
-    // .replace(/\.value/g, '?.value')
-    // Replace classname for class
-    .replace(/\.className/g, ".class")
-    //Fix using value in computed properties and classes
-    // .replace(/classes\.(?!value)(.*`)/g, 'classes.value.$1')
-    // remove ? from left hand assigments
-    // .replace(/\?\.value =/g, '.value =')
-    // Replace vue html .values for refs
-    .replace(/\.value \}\}/g, "}}")
-    // Enable Typescript
-    .replace(/script setup/g, 'script setup lang="ts"')
-    // TODO: Temporal meanwhile we find another why but this is stable
-    .replace(/getData\(\);/g, "getData.bind(this)();");
+  result =
+    // Mitosis don't understand the destructure of someFn({...props}) yet, so it outputs `props.props`, we only need `props`
+    result.replace(/props\.props/g, "props");
 
   fs.writeFileSync(outFile, result, "utf8");
 }
