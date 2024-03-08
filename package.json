@@ -26,14 +26,13 @@
     "lerna": "lerna run",
     "pub:beta": "lerna publish --no-private --preid beta",
     "clear": "npm run clear:pcache & npm run clear:builds && npm run clear:artifacts & npm run clear:node_modules",
-    "clear:artifacts": "rm -rf ./packages/*/src",
-    "clear:builds": "rm -rf ./packages/*/dist",
+    "clear:artifacts": "find ./packages -name src -type d | grep -vE '.*-example.*' | xargs rm -rf",
+    "clear:builds": "find ./packages -name dist -type d | grep -vE '.*-example.*' | xargs rm -rf",
     "clear:pcache": "rm -rf ./.parcel-cache",
     "clear:node_modules": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules",
     "lint": "run-p lint:**",
     "lint:scripts": "eslint --fix \"./src/**/*.tsx\"",
-    "build": "lerna run compile",
-    "postinstall": "patch-package"
+    "build": "lerna run compile"
   },
   "devDependencies": {
     "@babel/core": "^7.22.11",
@@ -45,8 +44,8 @@
     "@builder.io/mitosis-cli": "0.0.96",
     "@builder.io/qwik": "^0.100.0",
     "@formkit/auto-animate": "^0.8.1",
-    "@parcel/packager-ts": "^2.10.2",
-    "@parcel/watcher": "^2.3.0",
+    "@parcel/packager-ts": "^2.12.0",
+    "@parcel/watcher": "^2.4.1",
     "@react-aria/i18n": "^3.8.4",
     "@react-aria/numberfield": "^3.9.1",
     "@react-aria/utils": "^3.21.1",
@@ -89,7 +88,7 @@
     "rimraf": "^5.0.0",
     "type-fest": "^4.2.0",
     "typescript": "^5.1.6",
-    "vite": "^4.5.0",
+    "vite": "^5.1.4",
     "vue": "^3.2.47",
     "vue-tsc": "^1.4.4"
   },

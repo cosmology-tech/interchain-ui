@@ -11,12 +11,14 @@ const ora = require("ora");
 const compileCommand = require("@builder.io/mitosis-cli/dist/commands/compile");
 const camelCase = require("lodash/camelCase");
 const startCase = require("lodash/startCase");
-const scaffoldConfig = require("./scaffold.config.js");
+const scaffolds = require("./scaffold.config.js");
 const { cwd } = require("process");
 const { Cache } = require("./cache.js");
 const { fixReactTypeIssues } = require("./plugins/react.plugin");
 
 const cache = new Cache();
+
+const { scaffoldConfig, compileAllowList } = scaffolds;
 
 const DEFAULT_OPTIONS = {
   elements: "src/**/*.lite.tsx",
@@ -44,8 +46,8 @@ async function compile(rawOptions) {
 
   const cliConfig = commandLineArgs(optionDefinitions);
 
-  const globLiteTsxFiles = (file) =>
-    glob.sync(`src/**/${file}/${file}.lite.tsx`);
+  // const globLiteTsxFiles = (file) =>
+  //   glob.sync(`src/**/${file}/${file}.lite.tsx`);
 
   // String or array of strings of glob patterns
   const elementsFilter = cliConfig.elements
@@ -59,9 +61,9 @@ async function compile(rawOptions) {
     ? options.elements
     : glob.sync(options.elements);
 
-  const filteredGlobbedFiles = scaffoldConfig.compileAllowList[options.target]
+  const filteredGlobbedFiles = compileAllowList[options.target]
     ? files.filter((file) => {
-        return scaffoldConfig.compileAllowList[options.target]
+        return compileAllowList[options.target]
           .map(
             (allowedElement) =>
               `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
@@ -107,13 +109,12 @@ async function compile(rawOptions) {
     // Export only the elements we want with matching filters:
     // - CLI flag --elements
     // - allowList
-    const doesTargetHaveAllowList =
-      scaffoldConfig.compileAllowList[options.target] != null;
+    const doesTargetHaveAllowList = compileAllowList[options.target] != null;
 
     if (cliConfig.elements || doesTargetHaveAllowList) {
       const filterWithAllowList = (elements) => {
         const elementsToFilter = doesTargetHaveAllowList
-          ? scaffoldConfig.compileAllowList[options.target].map(
+          ? compileAllowList[options.target].map(
               (allowedElement) =>
                 `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
             )
@@ -164,11 +165,6 @@ async function compile(rawOptions) {
       );
     }
 
-    console.log(
-      "\x1b[33m%s\x1b[0m",
-      "\n===================== [index.ts] ===================== \n" +
-        indexResult
-    );
     fs.writeFileSync(`${outPath}/src/index.ts`, indexResult, "utf8");
   }
 

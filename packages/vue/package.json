@@ -24,6 +24,7 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^9.0.19",
     "type-fest": "^4.2.0",
+    "vue-final-modal": "^4.5.4",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
@@ -54,7 +55,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.6",
-    "vite": "^4.1.4"
+    "vite": "^5.1.4"
   },
   "peerDependencies": {
     "vue": "^3.x"

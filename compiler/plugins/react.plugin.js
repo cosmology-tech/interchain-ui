@@ -1,4 +1,6 @@
-const scaffoldConfig = require("../scaffold.config");
+// @ts-check
+const scaffolds = require("../scaffold.config.js");
+const scaffoldConfig = scaffolds.scaffoldConfig;
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}
@@ -42,6 +44,7 @@ module.exports = function reactCompilerPlugin() {
   };
 };
 
+// @ts-expect-error
 module.exports.fixReactTypeIssues = fixReactTypeIssues;
 
 function changeJsxTag(component, scaffoldName) {
@@ -50,7 +53,7 @@ function changeJsxTag(component, scaffoldName) {
   // Check if the node has a name property that contains "Scaffold"
   if (component.name && isScaffoldJSXTag(component.name)) {
     // Replace scaffold jsx tag in the name property
-    component.name = scaffoldMeta.jsxMap[child.name];
+    component.name = scaffoldMeta.jsxMap[component.name];
   }
 
   // Check if the node has a children property

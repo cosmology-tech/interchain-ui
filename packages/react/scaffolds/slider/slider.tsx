@@ -1,21 +1,21 @@
-import * as React from "react";
 import clx from "clsx";
-import { useSliderState, SliderState } from "react-stately";
+import * as React from "react";
+import { SliderState, useSliderState } from "react-stately";
 
+import { meshDarkThemeClass, meshLightThemeClass } from "@/styles/themes.css";
+import Box from "@/ui/box";
+import { BoxProps } from "@/ui/box/box.types";
+import useTheme from "@/ui/hooks/use-theme";
 import {
+  AriaSliderProps,
+  AriaSliderThumbProps,
+  VisuallyHidden,
   mergeProps,
   useFocusRing,
   useNumberFormatter,
   useSlider,
   useSliderThumb,
-  VisuallyHidden,
-  AriaSliderThumbProps,
-  AriaSliderProps,
 } from "react-aria";
-import useTheme from "@/ui/hooks/use-theme";
-import { meshLightThemeClass, meshDarkThemeClass } from "@/styles/themes.css";
-import Box from "@/ui/box";
-import { BoxProps } from "@/ui/box/box.types";
 import * as styles from "./slider.css";
 
 export interface SliderProps extends AriaSliderProps {
@@ -123,7 +123,7 @@ export default function Slider(props: SliderProps) {
         <Box
           className={styles.trackProgress}
           backgroundColor={props.thumbTrackColor ?? "$progressBg"}
-          style={{
+          rawCSS={{
             width: `${state.getThumbPercent(0) * 100}%`,
           }}
         />
@@ -132,7 +132,7 @@ export default function Slider(props: SliderProps) {
           <Box
             className={styles.trackPreviewProgress}
             backgroundColor={props.previewTrackColor}
-            style={{
+            rawCSS={{
               width: `calc(${
                 clampPreviewProgressPercent(
                   state.getThumbPercent(0),
