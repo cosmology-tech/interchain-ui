@@ -48,7 +48,7 @@ const { compileReact } = require("./frameworks/react.compile");
               const srcDir = path.resolve(process.cwd(), "src");
               const scaffoldDir = path.resolve(
                 process.cwd(),
-                "packages/react/scaffolds"
+                "packages/react/scaffolds",
               );
 
               const onChange = lodash.debounce((err, _events) => {
@@ -70,7 +70,7 @@ const { compileReact } = require("./frameworks/react.compile");
 
                 if (err) {
                   spinner.fail(
-                    `Error watching src/ for changes ${err?.message}.`
+                    `Error watching src/ for changes ${err?.message}.`,
                   );
                   return;
                 }
@@ -84,7 +84,7 @@ const { compileReact } = require("./frameworks/react.compile");
                 scaffoldDir,
                 (err, _events) => {
                   onChange(err, _events);
-                }
+                },
               );
 
               return Promise.all([watchSrc, watchScaffold]).then(
@@ -99,7 +99,7 @@ const { compileReact } = require("./frameworks/react.compile");
                       }
                     });
                   };
-                }
+                },
               );
             },
             options: {

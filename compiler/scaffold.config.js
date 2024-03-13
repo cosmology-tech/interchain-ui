@@ -136,7 +136,6 @@ module.exports.scaffoldConfig = {
 module.exports.compileAllowList = {
   react: null,
   vue: [
-    "avatar",
     "animate-layout",
     "box",
     "text",

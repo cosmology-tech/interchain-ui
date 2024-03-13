@@ -2,8 +2,10 @@
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useWorkspaces": true,
   "conventionalCommits": true,
-  "npmClient": "yarn",
-  "packages": ["packages/*"],
+  "npmClient": "npm",
+  "packages": [
+    "packages/*"
+  ],
   "version": "independent",
   "registry": "https://registry.npmjs.org",
   "command": {
@@ -16,7 +18,12 @@
       "allowBranch": "main",
       "message": "chore(release): publish",
       "conventionalCommits": true,
-      "ignoreChanges": ["*.md", "stats.html", ".spec.ts", ".stories.ts"]
+      "ignoreChanges": [
+        "*.md",
+        "stats.html",
+        ".spec.ts",
+        ".stories.ts"
+      ]
     }
   }
 }

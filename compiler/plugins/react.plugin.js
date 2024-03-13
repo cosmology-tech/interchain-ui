@@ -97,7 +97,7 @@ function fixReactTypeIssues(codeStr) {
       // Fix content editable
       .replace(
         /contentEditable\=(.*)/g,
-        "contentEditable=$1\nsuppressContentEditableWarning={true}"
+        "contentEditable=$1\nsuppressContentEditableWarning={true}",
       )
       // Fix some svg attributes not correctly compiled
       .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)

@@ -66,7 +66,7 @@ async function compile(rawOptions) {
         return compileAllowList[options.target]
           .map(
             (allowedElement) =>
-              `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
+              `src/ui/${allowedElement}/${allowedElement}.lite.tsx`,
           )
           .some((allowed) => allowed === file);
       })
@@ -82,6 +82,19 @@ async function compile(rawOptions) {
     // Move src to all the package folder
     fs.copySync("src", `${outPath}/src`);
 
+    // For Vue, we need to add .vue to the export statement
+    if (options.target === "vue") {
+      const reExportIndexFiles = glob.sync(`${outPath}/src/ui/**/index.ts`);
+
+      reExportIndexFiles.forEach((indexFile) => {
+        const data = fs.readFileSync(indexFile, "utf8");
+        const result = addVueExtension(data);
+        fs.writeFileSync(indexFile, result, "utf8");
+      });
+
+      copyFiles(`${outPath}/typings`, `${outPath}/src`);
+    }
+
     // Remove unnecessary files moved
     const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.lite.tsx`);
     unnecessaryFiles.forEach((element) => fs.removeSync(element));
@@ -94,7 +107,7 @@ async function compile(rawOptions) {
 
       let result = removeLiteExtension(
         // Fix alias
-        data.replace(/\~\//g, "../../")
+        data.replace(/\~\//g, "../../"),
       );
 
       if (options.target === "react") {
@@ -116,7 +129,7 @@ async function compile(rawOptions) {
         const elementsToFilter = doesTargetHaveAllowList
           ? compileAllowList[options.target].map(
               (allowedElement) =>
-                `src/ui/${allowedElement}/${allowedElement}.lite.tsx`
+                `src/ui/${allowedElement}/${allowedElement}.lite.tsx`,
             )
           : toArray(elements);
 
@@ -125,11 +138,10 @@ async function compile(rawOptions) {
 
       fileExports = filterWithAllowList(options.elements)
         .map((fileName) => {
-          console.log("[export] ", fileName);
           const file = path.parse(fileName);
           const name = file.name.replace(".lite", "");
           return `export { default as ${pascalName(
-            name
+            name,
           )} } from './${file.dir.replace("src/", "")}';`;
         })
         .join("\n");
@@ -141,7 +153,7 @@ async function compile(rawOptions) {
       // Export only needed components
       .replace(
         /(\/\/ Init Components)(.+?)(\/\/ End Components)/s,
-        `$1\n${fileExports}\n$3`
+        `$1\n${fileExports}\n$3`,
       )
       .replace(/Platform.Default/g, `Platform.${pascalName(options.target)}`);
 
@@ -155,13 +167,13 @@ async function compile(rawOptions) {
       const scaffoldImports = scaffoldNames
         .map(
           (item) =>
-            `export { default as ${item.Comp} } from './ui/${item.name}';`
+            `export { default as ${item.Comp} } from './ui/${item.name}';`,
         )
         .join("\n");
 
       indexResult = indexResult.replace(
         /(\/\/ Init Components)(.+?)(\/\/ End Components)/s,
-        `$1$2${scaffoldImports}\n$3`
+        `$1$2${scaffoldImports}\n$3`,
       );
     }
 
@@ -189,7 +201,7 @@ async function compile(rawOptions) {
     const targetPath = path.join(
       outPath,
       parsedPath.dir.slice(parsedPath.dir.indexOf("src")),
-      parsedPath.base
+      parsedPath.base,
     );
 
     if (event.type === "create" || event.type === "update") {
@@ -250,7 +262,7 @@ async function compile(rawOptions) {
   async function addReactRSCPatch() {
     const targetRootPath = path.resolve(
       cwd(),
-      `packages/${options.target}/src`
+      `packages/${options.target}/src`,
     );
     const indexPath = path.resolve(targetRootPath, "index.ts");
     const hooksPath = path.resolve(targetRootPath, "ui", "hooks");
@@ -269,7 +281,7 @@ async function compile(rawOptions) {
         const hooksExports = hookNamesByFolder
           .map(
             (item) =>
-              `export { default as ${item.hookName} } from './ui/hooks/${item.folder}';`
+              `export { default as ${item.hookName} } from './ui/hooks/${item.folder}';`,
           )
           .filter((exportLine) => {
             // Don't include exports if it's already there
@@ -305,7 +317,6 @@ async function compile(rawOptions) {
   const spinner = ora(`>> Compiling [${options.target}]`).start();
 
   for (const fileName of filteredGlobbedFiles) {
-    // console.log("\n[Mitosis compile] ", fileName);
     const isFirstCompilation =
       !fs.existsSync(`${outPath}/src`) || options.isDev;
     const file = path.parse(fileName);
@@ -379,4 +390,34 @@ function removeLiteExtension(fileContent) {
 
 function toArray(maybeArray) {
   return Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+}
+
+function addVueExtension(inputString) {
+  return inputString.replace(/(\.[^"';\s]+)("|')/g, "$1.vue$2");
+}
+
+async function copyFiles(srcDir, destDir) {
+  try {
+    // Ensure the destination directory exists, if not create it
+    await fs.mkdir(destDir, { recursive: true });
+
+    // Read all the files from the source directory
+    const files = await fs.readdir(srcDir);
+
+    for (const file of files) {
+      // Construct full file paths for both the source and destination
+      const srcFile = path.join(srcDir, file);
+      const destFile = path.join(destDir, file);
+
+      // Check if the source is indeed a file and not a directory
+      const stat = await fs.stat(srcFile);
+      if (stat.isFile()) {
+        // Copy each file to the destination directory
+        await fs.copyFile(srcFile, destFile);
+      }
+    }
+    // console.log("Files copied successfully.");
+  } catch (error) {
+    console.error("Error copying files:", error);
+  }
 }
