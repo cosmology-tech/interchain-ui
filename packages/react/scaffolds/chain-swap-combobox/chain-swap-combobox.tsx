@@ -1,5 +1,5 @@
 import * as React from "react";
-import clx, { ClassValue } from "clsx";
+import clx from "clsx";
 import {
   autoUpdate,
   size,
@@ -79,7 +79,7 @@ export interface ChainSwapComboboxProps {
   options: Array<ComboboxOption>;
   filterFn?: (
     options: Array<ComboboxOption>,
-    query: string
+    query: string,
   ) => Array<ComboboxOption>;
   defaultSelected?: ComboboxOption;
   onItemSelected?: (selected: ComboboxOption) => void;
@@ -87,7 +87,7 @@ export interface ChainSwapComboboxProps {
   endAddon?: React.ReactNode | undefined;
   valueItem: ComboboxOption;
   placeholder?: string;
-  className?: ClassValue;
+  className?: string;
   rootNode?: HTMLElement;
   inputClassName?: string;
   attributes?: Sprinkles;
@@ -99,11 +99,11 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [inputFocusing, setInputFocusing] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
-    props.placeholder ?? props.defaultSelected?.tokenName ?? ""
+    props.placeholder ?? props.defaultSelected?.tokenName ?? "",
   );
 
   const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
-    props.defaultSelected ?? null
+    props.defaultSelected ?? null,
   );
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
@@ -153,7 +153,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, focus, dismiss, listNav]
+    [role, focus, dismiss, listNav],
   );
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -174,7 +174,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       return options;
     }
     return options.filter((item) =>
-      item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase())
+      item?.tokenName?.toLowerCase().startsWith(inputValue?.toLowerCase()),
     );
   }
 
@@ -204,7 +204,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
   }, [open, selectedItem, inputValue]);
 
   const [mountRoot, setMountRoot] = React.useState<HTMLElement | undefined>(
-    undefined
+    undefined,
   );
 
   React.useEffect(() => {
@@ -292,7 +292,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
                 themeClass,
                 props.size === "md"
                   ? styles.chainSwapListBox[theme]
-                  : styles.chainSwapListBoxSm[theme]
+                  : styles.chainSwapListBoxSm[theme],
               )}
             >
               <FloatingList elementsRef={listRef}>

@@ -13,7 +13,7 @@ module.exports = {
       plugins: [reactPlugin],
     },
     vue3: {
-      typescript: true,
+      typescript: false,
       api: "composition",
     },
   },

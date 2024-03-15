@@ -1,7 +1,7 @@
 import React from "react";
-import { usePopover } from "./use-popover";
+import type { UsePopoverReturnValue } from "./popover.types";
 
-type PopoverContextType = ReturnType<typeof usePopover> | null;
+export type PopoverContextType = UsePopoverReturnValue | null;
 
 export const PopoverContext = React.createContext<PopoverContextType>(null);
 

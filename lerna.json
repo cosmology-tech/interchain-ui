@@ -1,8 +1,7 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "useWorkspaces": true,
   "conventionalCommits": true,
-  "npmClient": "npm",
+  "npmClient": "pnpm",
   "packages": [
     "packages/*"
   ],

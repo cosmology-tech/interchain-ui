@@ -25,10 +25,10 @@
     "story:react": "lerna run --scope @interchain-ui/react-example --stream dev",
     "lerna": "lerna run",
     "pub:beta": "lerna publish --no-private --preid beta",
-    "clear": "npm run clear:pcache & npm run clear:builds && npm run clear:artifacts & npm run clear:node_modules",
+    "clear": "pnpm run clear:cache & pnpm run clear:builds && pnpm run clear:artifacts & pnpm run clear:node_modules",
     "clear:artifacts": "find ./packages -name src -type d | grep -vE '.*-example.*' | xargs rm -rf",
     "clear:builds": "find ./packages -name dist -type d | grep -vE '.*-example.*' | xargs rm -rf",
-    "clear:pcache": "rm -rf ./.parcel-cache",
+    "clear:cache": "rm -rf ./.parcel-cache",
     "clear:node_modules": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules",
     "lint": "run-p lint:**",
     "lint:scripts": "eslint --fix \"./src/**/*.tsx\"",
@@ -40,10 +40,11 @@
     "@babel/preset-env": "^7.22.14",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.11",
-    "@builder.io/eslint-plugin-mitosis": "^0.0.14",
-    "@builder.io/mitosis-cli": "0.0.96",
+    "@builder.io/eslint-plugin-mitosis": "^0.0.15",
+    "@builder.io/mitosis-cli": "0.1.5",
     "@formkit/auto-animate": "^0.8.1",
     "@parcel/packager-ts": "^2.12.0",
+    "@parcel/transformer-typescript-types": "^2.12.0",
     "@parcel/transformer-vue": "2.12.0",
     "@parcel/watcher": "^2.4.1",
     "@react-aria/i18n": "^3.8.4",
@@ -73,7 +74,7 @@
     "glob": "^10.2.5",
     "gluegun": "^5.1.2",
     "husky": "^9.0.11",
-    "lerna": "^6.6.1",
+    "lerna": "^8.1.2",
     "lerna-changelog": "^2.2.0",
     "listr2": "^5.0.8",
     "lodash": "^4.17.21",
@@ -105,15 +106,11 @@
     "@vanilla-extract/css-utils": "^0.1.3",
     "@vanilla-extract/recipes": "^0.5.1",
     "animejs": "^3.2.1",
+    "bignumber.js": "^9.1.1",
     "clsx": "^2.1.0",
     "immer": "^10.0.4",
     "vue": "^3.4.21",
     "zustand": "^4.4.7"
-  },
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
   },
   "changelog": {
     "labels": {

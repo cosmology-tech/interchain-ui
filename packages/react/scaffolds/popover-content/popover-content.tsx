@@ -41,7 +41,7 @@ const PopoverContent = ({
         transform: "scaleY(0.85)",
       },
       ...transitionStyles,
-    }
+    },
   );
 
   if (!isMounted) return null;

@@ -1,7 +1,7 @@
 import { useMetadata } from "@builder.io/mitosis";
 import ThemeProvider from "../theme-provider";
 import Toaster from "../toast/toaster.lite";
-import { InterchainUIProviderProps } from "./interchain-ui-provider.types";
+import type { InterchainUIProviderProps } from "./interchain-ui-provider.types";
 
 useMetadata({
   rsc: {

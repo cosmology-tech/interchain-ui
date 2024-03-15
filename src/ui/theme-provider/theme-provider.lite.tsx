@@ -35,9 +35,17 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     isLight: boolean;
     isMounted: boolean;
     preferredMode: ThemeVariant | null;
+    storeState: ReturnType<typeof store.getState>;
+    theme: string;
   }>({
     preferredMode: null,
     isMounted: false,
+    get storeState() {
+      return store.getState();
+    },
+    get theme() {
+      return state.storeState.theme;
+    },
     get lightQuery() {
       if (isSSR()) return null;
       return window?.matchMedia?.(mediaQueryColorScheme(`light`));
@@ -58,22 +66,23 @@ export default function ThemeProvider(props: ThemeProviderProps) {
   onUpdate(() => {
     if (!state.preferredMode || !state.isMounted) return;
 
-    const themeMode = store.getState().themeMode;
+    const themeMode = state.storeState.themeMode;
 
     if (themeMode === "system") {
-      return store.getState().setThemeMode(themeMode);
+      return state.storeState.setThemeMode(themeMode);
     }
-  }, [state.preferredMode, store.getState().theme, state.isMounted]);
+  }, [state.preferredMode, state.theme, state.isMounted]);
 
   // Handle custom themes
   onUpdate(() => {
-    const themeDefs = props.themeDefs ?? [];
+    const finalThemeDefs = props.themeDefs ?? [];
     const isValidThemeDefs =
-      Array.isArray(props.themeDefs) && themeDefs.length > 0;
+      Array.isArray(props.themeDefs) && finalThemeDefs.length > 0;
+
     if (!isValidThemeDefs) return;
 
-    if (!isEqual(store.getState().themeDefs, themeDefs)) {
-      store.getState().setThemeDefs(themeDefs);
+    if (!isEqual(state.storeState.themeDefs, finalThemeDefs)) {
+      state.storeState.setThemeDefs(finalThemeDefs);
     }
   }, [props.themeDefs]);
 
@@ -81,20 +90,20 @@ export default function ThemeProvider(props: ThemeProviderProps) {
   onUpdate(() => {
     if (!props.customTheme) return;
 
-    store.getState().setCustomTheme(props.customTheme);
+    state.storeState.setCustomTheme(props.customTheme);
   }, [props.customTheme]);
 
   onUpdate(() => {
-    const overrideStyleManager = store.getState().overrideStyleManager;
+    const overrideStyleManager = state.storeState.overrideStyleManager;
     overrideStyleManager.update(props.overrides, null);
   }, [props.overrides]);
 
   onUpdate(() => {
-    const prevAccent = store.getState().themeAccent;
-    const currentColorMode = store.getState().theme;
+    const prevAccent = state.storeState.themeAccent;
+    const currentColorMode = state.storeState.theme;
 
     if (prevAccent !== props.accent) {
-      store.getState().setThemeAccent(props.accent ?? "blue");
+      state.storeState.setThemeAccent(props.accent ?? "blue");
 
       assignThemeVars(
         {
@@ -105,7 +114,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
             accentText: getAccentText(currentColorMode ?? "light"),
           },
         },
-        currentColorMode
+        currentColorMode,
       );
     }
   }, [props.accent]);

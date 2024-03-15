@@ -23,6 +23,6 @@
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "^14.1.2",
-    "typescript": "latest"
+    "typescript": "^5.4.2"
   }
 }

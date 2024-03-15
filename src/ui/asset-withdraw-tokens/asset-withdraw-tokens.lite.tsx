@@ -191,7 +191,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               className={clsx(
                 rootInput,
                 inputBorderAndShadow,
-                standardTransitionProperties
+                standardTransitionProperties,
               )}
             >
               <Box
@@ -254,7 +254,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               className={clsx(
                 rootInput,
                 inputBorderAndShadow,
-                standardTransitionProperties
+                standardTransitionProperties,
               )}
             >
               <Box
@@ -299,7 +299,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 styles.transferMask[state.theme],
                 {
                   [styles.addressBackgroundReverse]: state.reverseAnimation,
-                }
+                },
               )}
             />
 
@@ -535,10 +535,10 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
           attributes={{
             "data-part-id": "sm-panel",
           }}
-          className={{
+          className={clsx({
             [styles.smPanelShow]: state.smAddressVisible,
             [styles.smPanelHide]: !state.smAddressVisible,
-          }}
+          })}
         >
           <Box
             attributes={{
@@ -562,7 +562,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               value={props.fromAddress}
               inputClassName={clsx(
                 styles.addressInput,
-                styles.fromAddressInput
+                styles.fromAddressInput,
               )}
               attributes={{
                 marginBottom: "$11",

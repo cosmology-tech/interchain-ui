@@ -12,21 +12,23 @@ import {
   useDismiss,
   useRole,
 } from "@floating-ui/react";
-import { useMemo, useRef, useState } from "react";
-import { PopoverOptions } from "./popover.types";
+import * as React from "react";
+import type { UsePopoverReturnValue } from "./popover.types";
 
-export const usePopover = ({
-  modal = false,
-  triggerType = "hover",
-  isOpen: controlledOpen,
-  setIsOpen: setControlledOpen,
-  initialOpen = false,
-  placement = "bottom",
-  offset = 5,
-}: PopoverOptions) => {
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
+export const usePopover = (props: UsePopoverReturnValue) => {
+  const {
+    modal = false,
+    triggerType = "hover",
+    placement = "top",
+    isOpen: controlledOpen,
+    setIsOpen: setControlledOpen,
+    initialOpen = false,
+    offset,
+  } = props;
 
-  const arrowRef = useRef(null);
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(initialOpen);
+
+  const arrowRef = React.useRef<SVGSVGElement>(null);
   const isOpen = controlledOpen ?? uncontrolledOpen;
   const setIsOpen = setControlledOpen ?? setUncontrolledOpen;
 
@@ -69,7 +71,7 @@ export const usePopover = ({
 
   const interactions = useInteractions([role, hover, click, dismiss]);
 
-  return useMemo(
+  return React.useMemo(
     () => ({
       isOpen,
       setIsOpen,
@@ -78,6 +80,6 @@ export const usePopover = ({
       ...data,
       ...interactions,
     }),
-    [isOpen, setIsOpen, arrowRef, modal, data, interactions]
+    [isOpen, setIsOpen, arrowRef, modal, data, interactions],
   );
 };
