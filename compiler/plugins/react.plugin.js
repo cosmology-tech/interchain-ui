@@ -38,7 +38,13 @@ module.exports = function reactCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return fixReactTypeIssues(codeStr);
+        return [fixReactTypeIssues, fixIncorrectRefName].reduce(
+          (acc, transform) => {
+            acc = transform(codeStr);
+            return acc;
+          },
+          codeStr,
+        );
       },
     },
   };
@@ -109,4 +115,18 @@ function fixReactTypeIssues(codeStr) {
       .replace(/(fill-rule)="(.*)"/g, `fillRule="$2"`)
       .replace(/(srcset)={(.*)}/g, `srcSet={$2}`)
   );
+}
+
+function fixIncorrectRefName(codeStr) {
+  const re = /boxRef=\{([^{}]+)\.current\}/g;
+  const isBoxComponent = codeStr.includes(
+    `const Box = forwardRef<BoxProps["boxRef"]>`,
+  );
+
+  // If the component is a Box component, we need to change the actual ref passed with props.boxRef or boxRef (forwardedRef)
+  if (isBoxComponent) {
+    return codeStr.replace(`ref={boxRef}`, `ref={props.boxRef ?? boxRef}`);
+  }
+
+  return codeStr.replace(re, "boxRef={$1}");
 }

@@ -233,7 +233,6 @@ async function compile(rawOptions) {
 
     let to =
       options.target === "webcomponents" ? "webcomponent" : options.target;
-    to = to === "vue" ? "vue3" : to;
 
     await compileCommand.run({
       parameters: {

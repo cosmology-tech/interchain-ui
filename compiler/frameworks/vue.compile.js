@@ -54,9 +54,11 @@ function customReplaceVue(props) {
 
   const transforms = [
     patchPropsDestructuring,
-    addPathAliasToHelperTypeImports,
-    addPathAliasToRelativeTypeImports,
-    (fileData) => inlineTypes(fileData, name, pascalName),
+    // TODO: work on TS output later
+    // Need to parse + follow imports and resolve + inline types in the .vue files
+    // addPathAliasToHelperTypeImports,
+    // addPathAliasToRelativeTypeImports,
+    // (fileData) => inlineTypes(fileData, name, pascalName),
   ];
 
   result = transforms.reduce((acc, transform) => {
