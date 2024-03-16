@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@floating-ui/core':
+        specifier: ^1.6.0
+        version: 1.6.0
+      '@floating-ui/dom':
+        specifier: ^1.5.3
+        version: 1.6.3
       '@vanilla-extract/css':
         specifier: ^1.14.1
         version: 1.14.1
@@ -183,9 +189,18 @@ importers:
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
+      process:
+        specifier: ^0.11.10
+        version: 0.11.10
       rainbow-sprinkles:
         specifier: ^0.17.1
         version: 0.17.1(@vanilla-extract/css@1.14.1)(@vanilla-extract/dynamic@2.1.0)
+      react:
+        specifier: ^18.x
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.x
+        version: 18.2.0(react@18.2.0)
       replace:
         specifier: ^1.2.2
         version: 1.2.2
@@ -440,9 +455,6 @@ importers:
       vite-plugin-replace:
         specifier: ^0.1.1
         version: 0.1.1(vite@5.1.6)
-      vite-tsconfig-paths:
-        specifier: ^4.2.1
-        version: 4.3.2(typescript@5.4.2)(vite@5.1.6)
 
   packages/react-example:
     dependencies:
@@ -486,6 +498,9 @@ importers:
 
   packages/vue:
     dependencies:
+      '@floating-ui/dom':
+        specifier: ^1.5.3
+        version: 1.6.3
       '@formkit/auto-animate':
         specifier: ^0.8.1
         version: 0.8.1
@@ -622,9 +637,6 @@ importers:
       vite-plugin-dts:
         specifier: ^3.7.3
         version: 3.7.3(@types/node@20.11.28)(typescript@5.4.2)(vite@5.1.6)
-      vite-tsconfig-paths:
-        specifier: ^4.3.1
-        version: 4.3.2(typescript@5.4.2)(vite@5.1.6)
       vue-tsc:
         specifier: ^2.0.6
         version: 2.0.6(typescript@5.4.2)
@@ -13713,10 +13725,6 @@ packages:
       slash: 3.0.0
     dev: true
 
-  /globrex@0.1.2:
-    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-    dev: true
-
   /gluegun@5.1.6(debug@4.3.4):
     resolution: {integrity: sha512-9zbi4EQWIVvSOftJWquWzr9gLX2kaDgPkNR5dYWbM53eVvCI3iKuxLlnKoHC0v4uPoq+Kr/+F569tjoFbA4DSA==}
     hasBin: true
@@ -20597,19 +20605,6 @@ packages:
     resolution: {integrity: sha512-LD+wFR/RNckk1DrKV0LTH4KIT9wRqnnOjtEf77ovhKcVi8gf83Uf6U7OdywEua6KD9SbHadUdfolayfIUiPxzw==}
     dev: true
 
-  /tsconfck@3.0.3(typescript@5.4.2):
-    resolution: {integrity: sha512-4t0noZX9t6GcPTfBAbIbbIU4pfpCwh0ueq3S4O/5qXI1VwK1outmxhe9dOiEWqMz3MW2LKgDTpqWV+37IWuVbA==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      typescript: 5.4.2
-    dev: true
-
   /tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
     dependencies:
@@ -21386,23 +21381,6 @@ packages:
       vite: ^2
     dependencies:
       vite: 5.1.6(@types/node@20.11.28)
-    dev: true
-
-  /vite-tsconfig-paths@4.3.2(typescript@5.4.2)(vite@5.1.6):
-    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
-    peerDependencies:
-      vite: '*'
-    peerDependenciesMeta:
-      vite:
-        optional: true
-    dependencies:
-      debug: 4.3.4
-      globrex: 0.1.2
-      tsconfck: 3.0.3(typescript@5.4.2)
-      vite: 5.1.6(@types/node@20.11.28)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
     dev: true
 
   /vite@5.1.6(@types/node@20.11.28):

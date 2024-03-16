@@ -8,7 +8,7 @@ import {
 } from "@builder.io/mitosis";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Box from "../box";
-import AvatarImage from "./avatar-image.lite";
+import AvatarImage from "../avatar-image";
 import { store } from "../../models/store";
 import { avatarSize } from "./avatar.helper";
 import { avatarSizeVar, avatar } from "./avatar.css";

@@ -32,11 +32,11 @@ yarn add @interchain-ui/vue
 
 ## Setup and scripts for development
 
-- `yarn && yarn bootstrap` to bootstrap the repo
-- `yarn dev` to watch the repo for changes and then recompile
-- `yarn compile` to compile from mitosis components to other packages, you can give it a flag `-p` or `--platforms` .ie `yarn compile -p react vue`
-- `yarn c:react` or `yarn c:vue` to compile specifically to react or vue
-- `yarn clean` to clean `.node_modules` or `yarn clean:assets` to clean build/compile output
+- `pnpm install` to bootstrap the repo
+- `pnpm run dev` to watch the repo for changes and then recompile
+- `pnpm run compile` to compile from mitosis components to other packages, you can give it a flag `-p` or `--platforms` .ie `pnpm run compile -p react vue`
+- `pnpm run c:react` or `pnpm run c:vue` to compile specifically to react or vue
+- `pnpm run clean` to clean `.node_modules` or `pnpm run clean:assets` to clean build/compile output
 
 ## Overview and structure
 

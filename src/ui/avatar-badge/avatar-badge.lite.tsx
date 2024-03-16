@@ -9,8 +9,8 @@ import {
 import clx from "clsx";
 import Box from "../box";
 import { store } from "../../models/store";
-import { avatarBadge, avatarBadgePlacement } from "./avatar.css";
-import type { AvatarBadgeProps } from "./avatar.types";
+import { avatarBadge, avatarBadgePlacement } from "../avatar/avatar.css";
+import type { AvatarBadgeProps } from "../avatar/avatar.types";
 
 useMetadata({
   rsc: {
@@ -45,7 +45,7 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
 
   return (
     <Box
-      boxRef={props.ref}
+      boxRef={props.boxRef}
       display="flex"
       position="absolute"
       alignItems="center"
@@ -58,7 +58,7 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
       className={clx(
         avatarBadge[state.theme],
         avatarBadgePlacement[props.placement],
-        props.className
+        props.className,
       )}
     >
       {props.children}

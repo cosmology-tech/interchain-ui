@@ -7,9 +7,9 @@ import {
   useMetadata,
 } from "@builder.io/mitosis";
 import cls from "clsx";
-import AvatarName from "./avatar-name.lite";
-import { avatarImg } from "./avatar.css";
-import type { AvatarImageProps } from "./avatar.types";
+import AvatarName from "../avatar-name";
+import { avatarImg } from "../avatar/avatar.css";
+import type { AvatarImageProps } from "../avatar/avatar.types";
 
 useMetadata({
   rsc: {

@@ -1,9 +1,17 @@
 import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
+const aliases = ["ui", "styles", "models", "helpers"];
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [tsconfigPaths({ root: "./" }), react(), vanillaExtractPlugin()],
+  plugins: [react(), vanillaExtractPlugin()],
+  resolve: {
+    alias: aliases.map((alias) => ({
+      find: `@/${alias}`,
+      replacement: path.resolve(__dirname, `src/${alias}`),
+    })),
+  },
 });

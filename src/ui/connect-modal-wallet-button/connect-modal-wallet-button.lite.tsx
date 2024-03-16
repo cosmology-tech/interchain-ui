@@ -20,9 +20,8 @@ import {
 import { store } from "../../models/store";
 import Box from "../box";
 import Avatar from "../avatar";
-import AvatarBadge from "../avatar/avatar-badge.lite";
+import AvatarBadge from "../avatar-badge";
 import Icon from "../icon";
-import { fullWidthHeight } from "../shared/shared.css";
 import {
   buttonOverrides,
   buttonLabelOverrides,
@@ -41,7 +40,7 @@ useMetadata({
 });
 
 export default function ConnectModalWalletButton(
-  props: ConnectModalWalletButtonProps
+  props: ConnectModalWalletButtonProps,
 ) {
   const state = useStore<{
     theme: ThemeVariant;
@@ -73,7 +72,7 @@ export default function ConnectModalWalletButton(
         connectButtonStyle[state.theme],
         connectButtonVariants({
           variant: props.variant,
-        })
+        }),
       )}
       style={state.overrideManager?.applyOverrides(buttonOverrides.name)}
       title={props.name}
@@ -87,7 +86,7 @@ export default function ConnectModalWalletButton(
           className={clx(
             logoVariants({
               variant: props.variant,
-            })
+            }),
           )}
         >
           <Box position="relative">
@@ -192,7 +191,7 @@ export default function ConnectModalWalletButton(
             <span
               className={subLogoSquare[state.theme]}
               style={state.overrideManager?.applyOverrides(
-                buttonSublogoOverrides.name
+                buttonSublogoOverrides.name,
               )}
             >
               <Show when={props.subLogo === "walletConnect"}>
@@ -218,7 +217,7 @@ export default function ConnectModalWalletButton(
       <Box
         className={clx(
           buttonTextStyle[state.theme],
-          buttonTextVariants({ variant: props.variant })
+          buttonTextVariants({ variant: props.variant }),
         )}
         rawCSS={{
           ...state.overrideManager?.applyOverrides(buttonLabelOverrides.name),

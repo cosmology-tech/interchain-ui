@@ -142,8 +142,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.6.16",
     "type-fest": "^4.2.0",
-    "vite-plugin-replace": "^0.1.1",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-plugin-replace": "^0.1.1"
   },
   "gitHead": "bdcf939cbdcf307d7c1c97d7b26ef293c2beaf01"
 }
