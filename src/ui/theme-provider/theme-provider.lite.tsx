@@ -72,7 +72,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   // System mode: change based on user preference
   onUpdate(() => {
-    if (!state.isReady()) return;
+    if (!state.isReady) return;
 
     const themeMode = state.storeState.themeMode;
 

@@ -1,6 +1,7 @@
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+import type { Resolve } from "../../helpers/types";
 
-export type BoxProps = Sprinkles & {
+export type BoxProps = Resolve<Sprinkles> & {
   as?: any;
   className?: string;
   class?: string;

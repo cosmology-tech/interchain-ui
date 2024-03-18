@@ -18,10 +18,6 @@ import TableRow from "../table/table-row.lite";
 import TableCell from "../table/table-cell.lite";
 import TableColumnHeaderCell from "../table/table-column-header-cell.lite";
 import TableRowHeaderCell from "../table/table-row-header-cell.lite";
-import {
-  meshDarkThemeClass,
-  meshLightThemeClass,
-} from "../../styles/themes.css";
 import { standardTransitionProperties } from "../shared/shared.css";
 import * as styles from "./mesh-staking.css";
 
@@ -51,7 +47,7 @@ export default function MeshTable(props: MeshTableProps) {
       }
 
       return props.data.filter((row) =>
-        state.getLimitPinnedIds().includes(row.id)
+        state.getLimitPinnedIds().includes(row.id),
       );
     },
     unpinnedRows: () => {
@@ -60,7 +56,7 @@ export default function MeshTable(props: MeshTableProps) {
       }
 
       return props.data.filter(
-        (row) => !state.getLimitPinnedIds().includes(row.id)
+        (row) => !state.getLimitPinnedIds().includes(row.id),
       );
     },
     getLimitPinnedIds: () => {
@@ -104,7 +100,7 @@ export default function MeshTable(props: MeshTableProps) {
         const height = Math.abs(
           measureRef.scrollHeight -
             measureRef.clientHeight -
-            measureRef.scrollTop
+            measureRef.scrollTop,
         );
 
         if (height < 1) {
@@ -159,14 +155,7 @@ export default function MeshTable(props: MeshTableProps) {
 
   return (
     <Box
-      className={clx(
-        {
-          [meshLightThemeClass]: state.theme === "light",
-          [meshDarkThemeClass]: state.theme === "dark",
-        },
-        props.className,
-        styles.scrollBar
-      )}
+      className={clx(props.className, styles.scrollBar)}
       width="100%"
       position="relative"
       backgroundColor="$cardBg"

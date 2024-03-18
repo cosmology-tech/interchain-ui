@@ -249,6 +249,7 @@ export { default as GovernanceVoteForm } from "./ui/governance/governance-vote-f
 export { default as GovernanceResultCard } from "./ui/governance/governance-result-card.lite";
 
 // Mesh security
+export { default as MeshProvider } from "./ui/mesh-staking/mesh-provider.lite";
 export { default as MeshStakingSliderInfo } from "./ui/mesh-staking/mesh-staking-slider-info.lite";
 export { default as MeshButton } from "./ui/mesh-staking/mesh-button.lite";
 export { default as MeshTagButton } from "./ui/mesh-staking/mesh-tag-button.lite";

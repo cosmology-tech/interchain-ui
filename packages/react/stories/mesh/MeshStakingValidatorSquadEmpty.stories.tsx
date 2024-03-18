@@ -6,7 +6,6 @@ import Icon from "../../src/ui/icon";
 import Stack from "../../src/ui/stack";
 import Button from "../../src/ui/button";
 import Text from "../../src/ui/text";
-import Slider from "../../src/ui/slider";
 import Divider from "../../src/ui/divider";
 import { useMockData, DefaultNormalizedAsset } from "../stub/mock-data-client";
 import { formatNumeric } from "../../src/helpers/number";
@@ -18,8 +17,8 @@ import cosmologyImage from "../../static/validators/cosmology.svg";
 // ==== Mesh components
 import MeshButton from "../../src/ui/mesh-staking/mesh-button";
 import MeshTab from "../../src/ui/mesh-staking/mesh-tab";
-import MeshTagButton from "../../src/ui/mesh-staking/mesh-tag-button";
 import MeshModal from "../../src/ui/mesh-modal";
+import MeshProvider from "../../src/ui/mesh-staking/mesh-provider";
 import MeshValidatorSquadEmpty from "../../src/ui/mesh-staking/mesh-validator-squad-empty";
 
 const meta: Meta<typeof MeshModal> = {
@@ -40,7 +39,10 @@ const validatorThumbnails = [
   akashImage,
 ];
 
-const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
+const Header = (props: {
+  assets: DefaultNormalizedAsset[];
+  isDefaultTheme?: boolean;
+}) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   return (
@@ -59,15 +61,28 @@ const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
           alignItems: "center",
         }}
       >
-        <MeshButton
-          width="$11"
-          height="$11"
-          px="$0"
-          py="$0"
-          colorScheme="secondary"
-        >
-          <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
-        </MeshButton>
+        {props.isDefaultTheme ? (
+          <Button
+            variant="ghost"
+            intent="secondary"
+            size="sm"
+            leftIcon="arrowLeftSLine"
+            iconSize="$2xl"
+            attributes={{
+              px: "$0",
+            }}
+          />
+        ) : (
+          <MeshButton
+            width="$11"
+            height="$11"
+            px="$0"
+            py="$0"
+            colorScheme="secondary"
+          >
+            <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
+          </MeshButton>
+        )}
 
         <Text
           as="h2"
@@ -134,7 +149,7 @@ const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
   );
 };
 
-export const Primary: Story = {
+export const InterchainUITheme: Story = {
   args: {},
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -144,7 +159,108 @@ export const Primary: Story = {
     const levana = assets.find((asset) => asset.symbol === "LVN");
     const stargaze = assets.find((asset) => asset.symbol === "STARS");
     const headerAssets = [osmosis, juno, stargaze].filter(
-      Boolean
+      Boolean,
+    ) as DefaultNormalizedAsset[];
+
+    const [count, setCount] = useState(4);
+
+    return (
+      <div>
+        <Box backgroundColor="$cardBg" p="$12" borderRadius="$md">
+          <Header isDefaultTheme assets={headerAssets} />
+
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            pt="$10"
+          >
+            <MeshValidatorSquadEmpty
+              count={count}
+              thumbnailSrcs={validatorThumbnails}
+            />
+
+            <Stack
+              direction="vertical"
+              space="$4"
+              attributes={{
+                paddingBottom: "$10",
+              }}
+            >
+              <Button variant="ghost" intent="secondary">
+                Select random validators
+              </Button>
+
+              <Button>Select manually</Button>
+            </Stack>
+          </Box>
+        </Box>
+      </div>
+    );
+  },
+};
+
+export const MeshUICustomTheme: Story = {
+  args: {},
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const { isReady, assets } = useMockData();
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+    const headerAssets = [osmosis, juno, stargaze].filter(
+      Boolean,
+    ) as DefaultNormalizedAsset[];
+
+    const [count, setCount] = useState(4);
+
+    return (
+      <MeshProvider>
+        <Box backgroundColor="$cardBg" p="$12" borderRadius="$md">
+          <Header assets={headerAssets} />
+
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            pt="$10"
+          >
+            <MeshValidatorSquadEmpty
+              count={count}
+              thumbnailSrcs={validatorThumbnails}
+            />
+
+            <Stack
+              direction="vertical"
+              space="$0"
+              attributes={{
+                paddingBottom: "$10",
+              }}
+            >
+              <MeshButton width="264px">Select random validators</MeshButton>
+              <MeshButton variant="text">Select manually</MeshButton>
+            </Stack>
+          </Box>
+        </Box>
+      </MeshProvider>
+    );
+  },
+};
+
+export const ModalView: Story = {
+  args: {},
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const { isReady, assets } = useMockData();
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+    const headerAssets = [osmosis, juno, stargaze].filter(
+      Boolean,
     ) as DefaultNormalizedAsset[];
 
     const [count, setCount] = useState(4);
@@ -152,11 +268,18 @@ export const Primary: Story = {
     return (
       <div>
         <MeshModal
-          renderTrigger={(triggerProps = {}) => (
-            <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-              open
-            </Button>
-          )}
+          renderTrigger={(triggerProps = {}) => {
+            const { ref, ...buttonProps } = triggerProps;
+            return (
+              <Button
+                buttonRef={ref}
+                {...buttonProps}
+                onClick={() => setIsOpen(true)}
+              >
+                open
+              </Button>
+            );
+          }}
           isOpen={isOpen}
           title={<Header assets={headerAssets} />}
           onClose={() => setIsOpen(false)}

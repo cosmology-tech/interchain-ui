@@ -326,7 +326,7 @@ export const darkThemeClass = createTheme(themeVars, {
     inputDangerBg: "#E17171",
     inputDisabledBg: "#A7B4C2",
     inputDisabledText: "#697584",
-    progressBg: `#1D2024`,
+    progressBg: "#16191c",
     progressValue: `#A7B4C2`,
     progressCursor: `#EEF2F8`,
     divider: colors.gray500,

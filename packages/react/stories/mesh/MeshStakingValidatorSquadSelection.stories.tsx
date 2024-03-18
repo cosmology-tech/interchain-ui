@@ -19,6 +19,7 @@ import MeshTab from "../../src/ui/mesh-staking/mesh-tab";
 import MeshModal from "../../src/ui/mesh-modal";
 import MeshTable from "../../src/ui/mesh-staking/mesh-table";
 import MeshTableChainCell from "../../src/ui/mesh-staking/mesh-table-chain-cell";
+import MeshProvider from "../../src/ui/mesh-staking/mesh-provider";
 
 const meta: Meta<typeof MeshModal> = {
   component: MeshModal,
@@ -38,7 +39,10 @@ const validatorThumbnails = [
   akashImage,
 ];
 
-const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
+const Header = (props: {
+  assets: DefaultNormalizedAsset[];
+  isDefaultTheme?: boolean;
+}) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   return (
@@ -57,15 +61,28 @@ const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
           alignItems: "center",
         }}
       >
-        <MeshButton
-          width="$11"
-          height="$11"
-          px="$0"
-          py="$0"
-          colorScheme="secondary"
-        >
-          <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
-        </MeshButton>
+        {props.isDefaultTheme ? (
+          <Button
+            variant="ghost"
+            intent="secondary"
+            size="sm"
+            leftIcon="arrowLeftSLine"
+            iconSize="$2xl"
+            attributes={{
+              px: "$0",
+            }}
+          />
+        ) : (
+          <MeshButton
+            width="$11"
+            height="$11"
+            px="$0"
+            py="$0"
+            colorScheme="secondary"
+          >
+            <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
+          </MeshButton>
+        )}
 
         <Text
           as="h2"
@@ -123,13 +140,6 @@ const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
           </MeshTab>
         ))}
       </Stack>
-
-      <Divider
-        position="absolute"
-        bottom="0"
-        transform="translateX(-40px)"
-        zIndex={0}
-      />
     </Stack>
   );
 };
@@ -145,17 +155,17 @@ type MeshTableValidatorRow = {
   commission: string;
 };
 
-export const Primary: Story = {
+export const InterchainUITheme: Story = {
   args: {},
   render: (props) => {
-    const [isOpen, setIsOpen] = useState(false);
     const { isReady, assets } = useMockData();
     const osmosis = assets.find((asset) => asset.symbol === "OSMO");
     const juno = assets.find((asset) => asset.symbol === "JUNO");
     const levana = assets.find((asset) => asset.symbol === "LVN");
     const stargaze = assets.find((asset) => asset.symbol === "STARS");
+
     const headerAssets = [osmosis, juno, stargaze].filter(
-      Boolean
+      Boolean,
     ) as DefaultNormalizedAsset[];
 
     const rowsData: MeshTableValidatorRow[] = useMemo(
@@ -169,19 +179,315 @@ export const Primary: Story = {
           votingPower: "5.6%",
           commission: "5.6%",
         })),
-      []
+      [],
+    );
+
+    return (
+      <Box
+        overflow="hidden"
+        backgroundColor="$cardBg"
+        p="$12"
+        borderRadius="$lg"
+      >
+        <Header isDefaultTheme assets={headerAssets} />
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          pt="$10"
+          maxWidth="100%"
+        >
+          {/* Stake section */}
+          <Box
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            gap="$10"
+            marginTop="40px"
+            marginBottom="42px"
+          >
+            <MeshTable
+              borderless
+              rowHeight="$14"
+              pinnedIds={["row_0", "row_1", "row_2"]}
+              maxPinnedRows={2}
+              columns={[
+                {
+                  id: "validator",
+                  label: "Validator",
+                  align: "left",
+                  width: "300px",
+                  render: (rowData: MeshTableValidatorRow) => (
+                    <MeshTableChainCell
+                      name={rowData.validator.name}
+                      imgSrc={rowData.validator.logo}
+                    />
+                  ),
+                },
+                {
+                  id: "votingPower",
+                  label: "Voting Power",
+                  align: "left",
+                  width: "200px",
+                },
+                {
+                  id: "commission",
+                  label: "Commission",
+                  width: "200px",
+                  align: "left",
+                },
+                {
+                  id: "action",
+                  width: "100px",
+                  align: "right",
+                  render: (
+                    rowData: MeshTableValidatorRow,
+                    column,
+                    isPinned,
+                  ) => (
+                    <Box
+                      width="100%"
+                      display="flex"
+                      justifyContent="flex-end"
+                      alignItems="center"
+                    >
+                      {isPinned ? (
+                        <MeshButton variant="text">Remove</MeshButton>
+                      ) : (
+                        <MeshButton variant="text" color="$textSuccess">
+                          Select
+                        </MeshButton>
+                      )}
+                    </Box>
+                  ),
+                },
+              ]}
+              data={rowsData}
+              containerProps={{
+                overflowX: "auto",
+                maxWidth: "100%",
+              }}
+              tableProps={{
+                width: {
+                  mobile: "790px",
+                  tablet: "100%",
+                },
+              }}
+            />
+          </Box>
+
+          <Stack
+            direction="vertical"
+            space="$0"
+            attributes={{
+              paddingBottom: "$10",
+            }}
+          >
+            <MeshButton width="264px">Next</MeshButton>
+            <MeshButton variant="text">Pick random</MeshButton>
+          </Stack>
+        </Box>
+      </Box>
+    );
+  },
+};
+
+export const MeshUICustomTheme: Story = {
+  args: {},
+  render: (props) => {
+    const { isReady, assets } = useMockData();
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+
+    const headerAssets = [osmosis, juno, stargaze].filter(
+      Boolean,
+    ) as DefaultNormalizedAsset[];
+
+    const rowsData: MeshTableValidatorRow[] = useMemo(
+      () =>
+        [...Array(20).keys()].map((index) => ({
+          id: `row_${index}`,
+          validator: {
+            name: `Validator ${index + 1}`,
+            logo: validatorThumbnails[1] ?? "",
+          },
+          votingPower: "5.6%",
+          commission: "5.6%",
+        })),
+      [],
+    );
+
+    return (
+      <MeshProvider>
+        <Box
+          overflow="hidden"
+          backgroundColor="$cardBg"
+          p="$12"
+          borderRadius="$lg"
+        >
+          <Header assets={headerAssets} />
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            pt="$10"
+            maxWidth="100%"
+          >
+            {/* Stake section */}
+            <Box
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              gap="$10"
+              marginTop="40px"
+              marginBottom="42px"
+            >
+              <MeshTable
+                borderless
+                rowHeight="$14"
+                pinnedIds={["row_0", "row_1", "row_2"]}
+                maxPinnedRows={2}
+                columns={[
+                  {
+                    id: "validator",
+                    label: "Validator",
+                    align: "left",
+                    width: "300px",
+                    render: (rowData: MeshTableValidatorRow) => (
+                      <MeshTableChainCell
+                        name={rowData.validator.name}
+                        imgSrc={rowData.validator.logo}
+                      />
+                    ),
+                  },
+                  {
+                    id: "votingPower",
+                    label: "Voting Power",
+                    align: "left",
+                    width: "200px",
+                  },
+                  {
+                    id: "commission",
+                    label: "Commission",
+                    width: "200px",
+                    align: "left",
+                  },
+                  {
+                    id: "action",
+                    width: "100px",
+                    align: "right",
+                    render: (
+                      rowData: MeshTableValidatorRow,
+                      column,
+                      isPinned,
+                    ) => (
+                      <Box
+                        width="100%"
+                        display="flex"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                      >
+                        {isPinned ? (
+                          <MeshButton variant="text">Remove</MeshButton>
+                        ) : (
+                          <MeshButton variant="text" color="$textSuccess">
+                            Select
+                          </MeshButton>
+                        )}
+                      </Box>
+                    ),
+                  },
+                ]}
+                data={rowsData}
+                containerProps={{
+                  overflowX: "auto",
+                  maxWidth: "100%",
+                }}
+                tableProps={{
+                  width: {
+                    mobile: "790px",
+                    tablet: "100%",
+                  },
+                }}
+              />
+            </Box>
+
+            <Stack
+              direction="vertical"
+              space="$0"
+              attributes={{
+                paddingBottom: "$10",
+              }}
+            >
+              <MeshButton width="264px">Next</MeshButton>
+              <MeshButton variant="text">Pick random</MeshButton>
+            </Stack>
+          </Box>
+        </Box>
+      </MeshProvider>
+    );
+  },
+};
+
+export const ModalView: Story = {
+  args: {},
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const { isReady, assets } = useMockData();
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+    const headerAssets = [osmosis, juno, stargaze].filter(
+      Boolean,
+    ) as DefaultNormalizedAsset[];
+
+    const rowsData: MeshTableValidatorRow[] = useMemo(
+      () =>
+        [...Array(20).keys()].map((index) => ({
+          id: `row_${index}`,
+          validator: {
+            name: `Validator ${index + 1}`,
+            logo: validatorThumbnails[1] ?? "",
+          },
+          votingPower: "5.6%",
+          commission: "5.6%",
+        })),
+      [],
     );
 
     return (
       <div>
         <MeshModal
-          renderTrigger={(triggerProps = {}) => (
-            <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-              open
-            </Button>
-          )}
+          renderTrigger={(triggerProps = {}) => {
+            const { ref, ...buttonProps } = triggerProps;
+            return (
+              <Button
+                buttonRef={ref}
+                {...buttonProps}
+                onClick={() => setIsOpen(true)}
+              >
+                open
+              </Button>
+            );
+          }}
           isOpen={isOpen}
-          title={<Header assets={headerAssets} />}
+          title={
+            <>
+              <Header assets={headerAssets} />
+
+              <Divider
+                position="absolute"
+                bottom="0"
+                transform="translateX(-40px)"
+                zIndex={0}
+              />
+            </>
+          }
           onClose={() => setIsOpen(false)}
         >
           <Box overflow="hidden">
@@ -239,7 +545,7 @@ export const Primary: Story = {
                       render: (
                         rowData: MeshTableValidatorRow,
                         column,
-                        isPinned
+                        isPinned,
                       ) => (
                         <Box
                           width="100%"

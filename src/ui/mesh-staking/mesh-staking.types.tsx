@@ -5,6 +5,8 @@ import type {
 import type { BoxProps } from "../box/box.types";
 import type { ButtonProps } from "../button/button.types";
 
+export interface MeshProviderProps extends BaseComponentProps {}
+
 export interface MeshStakingProps extends BaseComponentProps {}
 
 type BaseButtonProps = Omit<

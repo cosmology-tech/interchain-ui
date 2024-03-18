@@ -18,10 +18,11 @@ import MeshTagButton from "../../src/ui/mesh-staking/mesh-tag-button";
 import MeshModal from "../../src/ui/mesh-modal";
 import MeshFooterInfoItem from "../../src/ui/mesh-staking/mesh-footer-info-item";
 import MeshStakingSliderInfo from "../../src/ui/mesh-staking/mesh-staking-slider-info";
+import MeshProvider from "../../src/ui/mesh-staking/mesh-provider";
 
 const meta: Meta<typeof MeshModal> = {
   component: MeshModal,
-  title: "mesh/MeshUnstakeModal",
+  title: "mesh/MeshUnstake",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -43,7 +44,10 @@ const MeshSlider = () => {
       name="osmosis"
       value={value}
       onChange={setValue}
-      width="450px"
+      width={{
+        mobile: "100%",
+        tablet: "500px",
+      }}
       thumbTrackColor="$text"
       previewPercent={20}
       previewTrackColor="$textDanger"
@@ -134,7 +138,12 @@ const MeshStakingHeader = (props) => (
       </Stack>
     </Box>
 
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      flexWrap="wrap"
+    >
       <Stack
         space="$3"
         attributes={{
@@ -171,7 +180,252 @@ const MeshStakingHeader = (props) => (
   </Stack>
 );
 
-export const Primary: Story = {
+export const InterchainUITheme: Story = {
+  args: {},
+  render: (props) => {
+    const { isReady, assets } = useMockData();
+    console.log("all assets", assets);
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+
+    return (
+      <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
+        <MeshStakingHeader asset={osmosis} />
+        <Stack
+          direction="vertical"
+          space="$14"
+          attributes={{
+            paddingTop: "44px",
+            paddingBottom: "38px",
+          }}
+        >
+          {[osmosis, juno, stargaze, levana].map((asset, index) => {
+            if (!asset) return null;
+            return (
+              <Stack
+                space="$14"
+                attributes={{
+                  rowGap: {
+                    mobile: "$6",
+                  },
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <MeshStakingSliderInfo
+                  key={asset.name}
+                  tokenName={asset.name}
+                  tokenImgSrc={asset.imgSrc}
+                  tokenSymbol={asset.symbol}
+                  tokenAPR="12.25% APR"
+                  isActive={(index + 1) % 2 === 0}
+                />
+
+                <MeshSlider />
+              </Stack>
+            );
+          })}
+        </Stack>
+
+        <Text
+          as="p"
+          fontSize="$sm"
+          color="$gray200"
+          attributes={{
+            margin: "0 auto",
+            maxWidth: "414px",
+          }}
+        >
+          <Box
+            as="span"
+            display="inline-block"
+            backgroundColor="$textDanger"
+            width="6px"
+            height="6px"
+            marginRight="$4"
+            borderRadius="$full"
+          />
+          Will be locked for the duration of the unbonding period. Tokens become
+          available when no longer bonded on any chain.
+        </Text>
+
+        <Divider marginTop="$12" />
+
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          pt="$10"
+        >
+          <Box
+            display="grid"
+            textAlign="center"
+            pb="$10"
+            gap={{
+              mobile: "$4",
+              mdMobile: "$10",
+              tablet: "$21",
+            }}
+            gridTemplateColumns={{
+              mobile: "1fr",
+              mdMobile: "repeat(3, 1fr)",
+            }}
+          >
+            <MeshFooterInfoItem
+              title="43.4%"
+              description="APR"
+              subDescription="+43.4%"
+            />
+            <MeshFooterInfoItem
+              title="$32.25"
+              description="Daily reward"
+              subDescription="+$32.25"
+            />
+            <MeshFooterInfoItem title="27 days" description="Unbonding time" />
+          </Box>
+
+          <Button>
+            <Text
+              as="span"
+              color="inherit"
+              attributes={{
+                width: "264px",
+              }}
+            >
+              Next
+            </Text>
+          </Button>
+        </Box>
+      </Box>
+    );
+  },
+};
+
+export const MeshUICustomTheme: Story = {
+  args: {},
+  render: (props) => {
+    const { isReady, assets } = useMockData();
+    console.log("all assets", assets);
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+
+    return (
+      <MeshProvider>
+        <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
+          <MeshStakingHeader asset={osmosis} />
+          <Stack
+            direction="vertical"
+            space="$14"
+            attributes={{
+              paddingTop: "44px",
+              paddingBottom: "38px",
+            }}
+          >
+            {[osmosis, juno, stargaze, levana].map((asset, index) => {
+              if (!asset) return null;
+              return (
+                <Stack
+                  space="$14"
+                  attributes={{
+                    rowGap: {
+                      mobile: "$6",
+                    },
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <MeshStakingSliderInfo
+                    key={asset.name}
+                    tokenName={asset.name}
+                    tokenImgSrc={asset.imgSrc}
+                    tokenSymbol={asset.symbol}
+                    tokenAPR="12.25% APR"
+                    isActive={(index + 1) % 2 === 0}
+                  />
+
+                  <MeshSlider />
+                </Stack>
+              );
+            })}
+          </Stack>
+
+          <Text
+            as="p"
+            fontSize="$sm"
+            color="$gray200"
+            attributes={{
+              margin: "0 auto",
+              maxWidth: "414px",
+            }}
+          >
+            <Box
+              as="span"
+              display="inline-block"
+              backgroundColor="$textDanger"
+              width="6px"
+              height="6px"
+              marginRight="$4"
+              borderRadius="$full"
+            />
+            Will be locked for the duration of the unbonding period. Tokens
+            become available when no longer bonded on any chain.
+          </Text>
+
+          <Divider marginTop="$12" />
+
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            pt="$10"
+          >
+            <Box
+              display="grid"
+              textAlign="center"
+              pb="$10"
+              gap={{
+                mobile: "$4",
+                mdMobile: "$10",
+                tablet: "$21",
+              }}
+              gridTemplateColumns={{
+                mobile: "1fr",
+                mdMobile: "repeat(3, 1fr)",
+              }}
+            >
+              <MeshFooterInfoItem
+                title="43.4%"
+                description="APR"
+                subDescription="+43.4%"
+              />
+              <MeshFooterInfoItem
+                title="$32.25"
+                description="Daily reward"
+                subDescription="+$32.25"
+              />
+              <MeshFooterInfoItem
+                title="27 days"
+                description="Unbonding time"
+              />
+            </Box>
+
+            <MeshButton width="264px">Next</MeshButton>
+          </Box>
+        </Box>
+      </MeshProvider>
+    );
+  },
+};
+
+export const ModalView: Story = {
   args: {},
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -185,11 +439,18 @@ export const Primary: Story = {
     return (
       <div>
         <MeshModal
-          renderTrigger={(triggerProps = {}) => (
-            <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-              open
-            </Button>
-          )}
+          renderTrigger={(triggerProps = {}) => {
+            const { ref, ...buttonProps } = triggerProps;
+            return (
+              <Button
+                buttonRef={ref}
+                {...buttonProps}
+                onClick={() => setIsOpen(true)}
+              >
+                open
+              </Button>
+            );
+          }}
           isOpen={isOpen}
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}

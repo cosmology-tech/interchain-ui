@@ -11,10 +11,6 @@ import Box from "../box";
 import clx from "clsx";
 import { store } from "../../models/store";
 import { baseButton } from "../button/button.css";
-import {
-  meshDarkThemeClass,
-  meshLightThemeClass,
-} from "../../styles/themes.css";
 import type { MeshButtonProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -39,8 +35,8 @@ export default function MeshButton(props: MeshButtonProps) {
               hover: "$textPlaceholder",
             }
           : {
-              base: "$body",
-              hover: "$body",
+              base: "$textInverse",
+              hover: "$textInverse",
             };
       }
 
@@ -53,6 +49,15 @@ export default function MeshButton(props: MeshButtonProps) {
             base: "$black",
             hover: "$body",
           };
+    },
+    getTextColor: () => {
+      return props.colorScheme === "primary"
+        ? state.theme === "light"
+          ? "$white"
+          : "$accentText"
+        : state.theme === "light"
+          ? "$white"
+          : "$text";
     },
   });
 
@@ -79,15 +84,7 @@ export default function MeshButton(props: MeshButtonProps) {
           justifyContent="center"
           alignItems="center"
           bg={state.getSolidBg()}
-          color={
-            props.colorScheme === "primary"
-              ? state.theme === "light"
-                ? "$white"
-                : "$accentText"
-              : state.theme === "light"
-              ? "$white"
-              : "$text"
-          }
+          color={state.getTextColor()}
           fontSize="$sm"
           fontWeight="$medium"
           py={props.px ?? "$5"}
@@ -97,14 +94,7 @@ export default function MeshButton(props: MeshButtonProps) {
           width={props.width}
           {...props}
           {...props.attributes}
-          className={clx(
-            {
-              [meshLightThemeClass]: state.theme === "light",
-              [meshDarkThemeClass]: state.theme === "dark",
-            },
-            baseButton,
-            props.className
-          )}
+          className={clx(baseButton, props.className)}
           attributes={{
             ...props.domAttributes,
             onClick: (event) => props.onClick?.(event),
@@ -125,14 +115,14 @@ export default function MeshButton(props: MeshButtonProps) {
             props.color
               ? props.color
               : state.theme === "dark"
-              ? {
-                  base: "$textSecondary",
-                  hover: "$gray100",
-                }
-              : {
-                  base: "$text",
-                  hover: "$textSecondary",
-                }
+                ? {
+                    base: "$textSecondary",
+                    hover: "$gray100",
+                  }
+                : {
+                    base: "$text",
+                    hover: "$textSecondary",
+                  }
           }
           fontSize="$sm"
           fontWeight="$normal"
@@ -143,14 +133,7 @@ export default function MeshButton(props: MeshButtonProps) {
           width={props.width}
           {...props}
           {...props.attributes}
-          className={clx(
-            {
-              [meshLightThemeClass]: state.theme === "light",
-              [meshDarkThemeClass]: state.theme === "dark",
-            },
-            baseButton,
-            props.className
-          )}
+          className={clx(baseButton, props.className)}
           attributes={{
             ...props.domAttributes,
             onClick: (event) => props.onClick?.(event),

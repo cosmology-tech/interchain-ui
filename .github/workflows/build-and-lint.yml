@@ -22,14 +22,18 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup node
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 20
-          cache: pnpm
-          check-latest: true
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
 
       - name: Install
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Build and lint
         run: pnpm mitosis:react && pnpm b:react
