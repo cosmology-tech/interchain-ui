@@ -1,6 +1,6 @@
 // This is a made-up thing from us used for scaffolds, not from Mitosis CLI
 // put it here to centralize config
-module.exports = {
+module.exports.scaffoldConfig = {
   modal: {
     // {from, to}
     // Maps from <Scaffold<something> /> to <something /> JSX tag name
@@ -129,4 +129,50 @@ module.exports = {
       path: "../governance-radio-group",
     },
   },
+};
+
+// Only allow these components for each target, if null = allow all
+// This is kinda like feature flag for components
+module.exports.compileAllowList = {
+  react: null,
+  vue: [
+    // "avatar",
+    // "avatar-badge",
+    // "avatar-image",
+    // "avatar-name",
+    "box",
+    "theme-provider",
+    // "tooltip",
+    // "animate-layout",
+    // "text",
+    // "button",
+    // "callout",
+    // "stack",
+    // "center",
+    // "container",
+    // "divider",
+    // "fade-in",
+    // "field-label",
+    // "icon",
+    // "icon-button",
+    // "link",
+    // "qrcode",
+    // "reveal",
+    // "skeleton",
+    // "spinner",
+    // "breadcrumb",
+    // "clipboard-copy-text",
+    // "connect-modal",
+    // "connect-modal-head",
+    // "connect-modal-install-button",
+    // "connect-modal-qrcode",
+    // "connect-modal-qrcode-error",
+    // "connect-modal-qrcode-skeleton",
+    // "connect-modal-status",
+    // "connect-modal-wallet-button",
+    // "connect-modal-wallet-list",
+    // "interchain-ui-provider",
+    // "basic-modal",
+    // "toast",
+  ],
 };

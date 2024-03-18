@@ -5,8 +5,8 @@ import {
   useMetadata,
 } from "@builder.io/mitosis";
 import Box from "../box";
-import { avatarName } from "./avatar.css";
-import type { AvatarNameProps } from "./avatar.types";
+import { avatarName } from "../avatar/avatar.css";
+import type { AvatarNameProps } from "../avatar/avatar.types";
 
 useMetadata({
   rsc: {
@@ -41,7 +41,7 @@ export default function AvatarName(props: AvatarNameProps) {
         "aria-label": props.name,
       }}
       className={avatarName}
-      boxRef={props.ref}
+      boxRef={props.boxRef}
     >
       <Show when={!!props.name && props.showInitials}>
         {state.initials(props.name)}

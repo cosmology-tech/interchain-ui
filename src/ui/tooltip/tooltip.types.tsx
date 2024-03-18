@@ -1,6 +1,10 @@
-import { Placement } from "@floating-ui/core";
-export interface TooltipProps {
-  title: any;
+import type { Placement } from "@floating-ui/core";
+import type { BaseComponentProps } from "../../models/components.model";
+
+export interface TooltipProps extends BaseComponentProps {
+  title: BaseComponentProps["children"];
   placement?: Placement;
-  children: any;
+  offset?: number;
+  surroundPadding?: number;
+  children: BaseComponentProps["children"];
 }

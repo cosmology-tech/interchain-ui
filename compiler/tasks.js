@@ -50,7 +50,7 @@ const shouldSkipBundling = process.env.NO_BUILD === "true";
               },
             },
           ],
-          { concurrent: true }
+          { concurrent: true },
         );
       },
     },
@@ -68,12 +68,12 @@ const shouldSkipBundling = process.env.NO_BUILD === "true";
                   cliConfig.elements
                     ? `--elements ${cliConfig.elements.join(" ")}`
                     : ""
-                }`
+                }`,
               ).catch((error) => {
                 throw new Error(`Error compiling ${platform} ${error.message}`);
               }),
           })),
-          { concurrent: true }
+          { concurrent: true },
         );
       },
     },

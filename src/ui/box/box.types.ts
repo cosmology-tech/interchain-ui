@@ -1,11 +1,9 @@
-import type { ClassValue } from "clsx";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
-import type { Resolve } from "../../helpers/types";
 
-export type BoxProps = Resolve<Sprinkles> & {
+export type BoxProps = Sprinkles & {
   as?: any;
-  className?: ClassValue;
-  class?: ClassValue;
+  className?: string;
+  class?: string;
   children?: any;
   attributes?: any;
   rawCSS?: any;

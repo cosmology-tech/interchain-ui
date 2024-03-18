@@ -1,4 +1,6 @@
-const scaffoldConfig = require("../scaffold.config");
+// @ts-check
+const scaffolds = require("../scaffold.config.js");
+const scaffoldConfig = scaffolds.scaffoldConfig;
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}
@@ -36,12 +38,19 @@ module.exports = function reactCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return fixReactTypeIssues(codeStr);
+        return [fixReactTypeIssues, fixIncorrectRefName].reduce(
+          (acc, transform) => {
+            acc = transform(codeStr);
+            return acc;
+          },
+          codeStr,
+        );
       },
     },
   };
 };
 
+// @ts-expect-error
 module.exports.fixReactTypeIssues = fixReactTypeIssues;
 
 function changeJsxTag(component, scaffoldName) {
@@ -50,7 +59,7 @@ function changeJsxTag(component, scaffoldName) {
   // Check if the node has a name property that contains "Scaffold"
   if (component.name && isScaffoldJSXTag(component.name)) {
     // Replace scaffold jsx tag in the name property
-    component.name = scaffoldMeta.jsxMap[child.name];
+    component.name = scaffoldMeta.jsxMap[component.name];
   }
 
   // Check if the node has a children property
@@ -94,7 +103,7 @@ function fixReactTypeIssues(codeStr) {
       // Fix content editable
       .replace(
         /contentEditable\=(.*)/g,
-        "contentEditable=$1\nsuppressContentEditableWarning={true}"
+        "contentEditable=$1\nsuppressContentEditableWarning={true}",
       )
       // Fix some svg attributes not correctly compiled
       .replace(/(shape-rendering)="(.*)"/g, `shapeRendering="$2"`)
@@ -106,4 +115,18 @@ function fixReactTypeIssues(codeStr) {
       .replace(/(fill-rule)="(.*)"/g, `fillRule="$2"`)
       .replace(/(srcset)={(.*)}/g, `srcSet={$2}`)
   );
+}
+
+function fixIncorrectRefName(codeStr) {
+  const re = /boxRef=\{([^{}]+)\.current\}/g;
+  const isBoxComponent = codeStr.includes(
+    `const Box = forwardRef<BoxProps["boxRef"]>`,
+  );
+
+  // If the component is a Box component, we need to change the actual ref passed with props.boxRef or boxRef (forwardedRef)
+  if (isBoxComponent) {
+    return codeStr.replace(`ref={boxRef}`, `ref={props.boxRef ?? boxRef}`);
+  }
+
+  return codeStr.replace(re, "boxRef={$1}");
 }

@@ -1,20 +1,20 @@
-import React, { forwardRef, cloneElement } from "react";
-import clx from "clsx";
 import FadeIn from "@/ui/fade-in";
-import useTheme from "../hooks/use-theme";
 import {
-  useFloating,
-  useClick,
-  useDismiss,
-  useRole,
-  useInteractions,
-  useMergeRefs,
-  useTransitionStyles,
-  FloatingPortal,
   FloatingFocusManager,
   FloatingOverlay,
+  FloatingPortal,
+  useClick,
+  useDismiss,
+  useFloating,
   useId,
+  useInteractions,
+  useMergeRefs,
+  useRole,
+  useTransitionStyles,
 } from "@floating-ui/react";
+import clx from "clsx";
+import React, { cloneElement, forwardRef } from "react";
+import useTheme from "../hooks/use-theme";
 import * as styles from "./modal.css";
 
 interface DialogOptions {

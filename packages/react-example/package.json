@@ -1,6 +1,7 @@
 {
   "name": "@interchain-ui/react-example",
   "private": true,
+  "description": "React playground to test the @interchain-ui/react package",
   "version": "0.1.4",
   "type": "module",
   "scripts": {
@@ -10,18 +11,18 @@
   },
   "dependencies": {
     "@interchain-ui/react": "^1.1.11",
-    "clsx": "^1.2.1",
-    "immer": "^9.0.19",
+    "clsx": "^2.1.0",
+    "immer": "^10.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.9.0",
+    "react-icons": "^5.0.1",
     "react-select": "^5.7.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.1.0",
-    "typescript": "^5.1.6",
-    "vite": "^4.5.0"
+    "typescript": "^5.4.2",
+    "vite": "^5.1.4"
   }
 }

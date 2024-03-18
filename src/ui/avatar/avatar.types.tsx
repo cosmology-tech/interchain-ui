@@ -26,7 +26,7 @@ export interface AvatarNameProps extends BaseComponentProps {
   name: string;
   getInitials?: (name: string) => string;
   children?: any;
-  ref?: any;
+  boxRef?: any;
   showInitials?: boolean;
   attributes?: Sprinkles;
 }
@@ -43,7 +43,7 @@ export type AvatarSize =
 
 export interface AvatarProps
   extends AvatarImageProps,
-    Omit<AvatarNameProps, "ref"> {
+    Omit<AvatarNameProps, "boxRef"> {
   size?: AvatarSize;
   rounded?: boolean;
   showBorder?: boolean;
@@ -59,7 +59,7 @@ export type AvatarBadgePlacement =
   | "bottom-right";
 
 export interface AvatarBadgeProps extends BaseComponentProps {
-  ref?: any;
+  boxRef?: any;
   attributes?: any;
   size?: string;
   placement?: AvatarBadgePlacement;

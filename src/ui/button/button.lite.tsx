@@ -12,7 +12,7 @@ import clx from "clsx";
 import Icon from "../icon";
 import Box from "../box";
 import Spinner from "../spinner";
-import { store } from "../../models/store";
+import { store, UIState } from "../../models/store";
 import { recipe, buttonOverrides } from "./button.helper";
 import { isDefaultAccent, getAccentHover } from "../../helpers/style";
 import { themeVars } from "../../styles/themes.css";
@@ -42,21 +42,35 @@ useDefaultProps<Partial<ButtonProps>>({
 
 export default function Button(props: ButtonProps) {
   const state = useStore<{
-    theme: ThemeVariant;
-    overrideManager: OverrideStyleManager | null;
+    _theme: ThemeVariant;
+    _themeAccent: UIState["themeAccent"];
+    _overrideManager: OverrideStyleManager | null;
     getVars: () => UnknownRecord;
+    getStoreState: () => any;
   }>({
-    overrideManager: null,
-    theme: "light",
+    _overrideManager: null,
+    _theme: "light",
+    _themeAccent: null,
+    getStoreState() {
+      // This seems weird but it's a workaround for one minor bug from mitosis
+      // If we have any variables in any function scope that has the same name as the store state, mitosis understands that it's the same variable
+      // and will attempt to transform those unwanted/unrelated variables into the ones in the state.<variable>
+      // So we need to name these values differently (e.g. _keyA: valueA) or inverse
+      return {
+        theme: store.getState().theme,
+        themeAccent: store.getState().themeAccent,
+        overrideStyleManager: store.getState().overrideStyleManager,
+      };
+    },
     getVars() {
-      const isDefaultAppearance =
-        isDefaultAccent(state.themeAccent) && state.themeAccent === "blue";
+      const accent = state._themeAccent;
+      const isDefaultAppearance = isDefaultAccent(accent) && accent === "blue";
 
       // Only allow accent customization for 'primary' Intent
       const isPrimaryIntent = props.intent === "primary";
 
       return isDefaultAppearance || !isPrimaryIntent
-        ? state.overrideManager?.applyOverrides(buttonOverrides.name)
+        ? state._overrideManager?.applyOverrides(buttonOverrides.name)
         : assignInlineVars({
             [styles.buttonBgVar]: themeVars.colors.accent,
             [styles.buttonTextColorVar]: themeVars.colors.accentText,
@@ -68,14 +82,16 @@ export default function Button(props: ButtonProps) {
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
-    state.themeAccent = store.getState().themeAccent;
-    state.overrideManager = store.getState().overrideStyleManager;
+    const uiStore = state.getStoreState();
+
+    state._theme = uiStore[0];
+    state._themeAccent = uiStore[1];
+    state._overrideManager = uiStore[2];
 
     cleanupRef = store.subscribe((newState, prevState) => {
-      state.theme = newState.theme;
-      state.themeAccent = newState.themeAccent;
-      state.overrideManager = newState.overrideStyleManager;
+      state._theme = newState.theme;
+      state._themeAccent = newState.themeAccent;
+      state._overrideManager = newState.overrideStyleManager;
     });
   });
 
@@ -95,11 +111,11 @@ export default function Button(props: ButtonProps) {
           variant: props.variant,
           intent: props.intent,
           isDisabled: props.disabled || props.isLoading,
-          theme: state.theme as ThemeVariant,
+          theme: state._theme as ThemeVariant,
         }),
         props.fluidWidth ? fullWidth : null,
         props.fluid ? fullWidthHeight : null,
-        props.className
+        props.className,
       )}
       attributes={{
         onClick: (event) => props.onClick?.(event),

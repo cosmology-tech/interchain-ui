@@ -1,0 +1,42 @@
+{
+  "name": "vue-example",
+  "private": true,
+  "description": "Vue 3 playground to test the @interchain-ui/vue package",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@iconify/vue": "^4.1.1",
+    "vue": "^3.4.21",
+    "vue-final-modal": "^4.5.4",
+    "@interchain-ui/vue": "link:../vue"
+  },
+  "devDependencies": {
+    "@formkit/auto-animate": "^0.8.1",
+    "@vanilla-extract/css": "^1.14.1",
+    "@vanilla-extract/dynamic": "^2.1.0",
+    "@vanilla-extract/recipes": "^0.5.1",
+    "@vanilla-extract/vite-plugin": "^4.0.4",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "animejs": "^3.2.1",
+    "autoprefixer": "^10.4.16",
+    "bignumber.js": "^9.1.1",
+    "client-only": "^0.0.1",
+    "clsx": "^2.1.0",
+    "copy-to-clipboard": "^3.3.3",
+    "immer": "^10.0.4",
+    "lodash": "^4.17.21",
+    "postcss": "^8.4.31",
+    "rainbow-sprinkles": "^0.17.1",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.4",
+    "vite-plugin-checker": "^0.6.4",
+    "vue-tsc": "^1.8.22",
+    "zustand": "^4.4.7"
+  }
+}

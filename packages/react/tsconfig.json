@@ -20,5 +20,12 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["src", "scaffolds"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "scaffolds/**/*.ts",
+    "scaffolds/**/*.d.ts",
+    "scaffolds/**/*.tsx"
+  ]
 }

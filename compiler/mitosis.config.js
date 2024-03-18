@@ -4,6 +4,7 @@ const reactPlugin = require("./plugins/react.plugin");
  * @type {import('@builder.io/mitosis').MitosisConfig}
  */
 module.exports = {
+  targets: ["vue", "react"],
   options: {
     react: {
       typescript: true,
@@ -12,8 +13,8 @@ module.exports = {
       plugins: [reactPlugin],
     },
     vue: {
-      typescript: true,
-      api: "options",
+      typescript: false,
+      api: "composition",
     },
   },
 };

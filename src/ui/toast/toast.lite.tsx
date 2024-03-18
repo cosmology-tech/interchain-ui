@@ -1,43 +1,43 @@
 import {
   Show,
-  useRef,
-  useStore,
-  onUpdate,
   onMount,
   onUnMount,
+  onUpdate,
   useMetadata,
+  useRef,
+  useStore,
 } from "@builder.io/mitosis";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clx from "clsx";
+import { store } from "../../models/store";
+import Icon from "../icon";
+import type { IconName } from "../icon/icon.types";
 import {
-  TOAST_LIFETIME,
   GAP,
   SWIPE_TRESHOLD,
   TIME_BEFORE_UNMOUNT,
+  TOAST_LIFETIME,
 } from "./toast.constants";
-import Icon from "../icon";
 import {
   // ==== css vars
   indexVar,
-  toastsBeforeVar,
-  zIndexVar,
   initialHeightVar,
   offsetVar,
   swipeAmountVar,
   // ==== classes
   toast,
-  toastDescription,
-  toastTitle,
-  toastIcon,
-  toastContent,
-  toastCancelButton,
   toastButton,
+  toastCancelButton,
   toastCloseButton,
+  toastContent,
+  toastDescription,
+  toastIcon,
   toastSpinner,
+  toastTitle,
+  toastsBeforeVar,
+  zIndexVar,
 } from "./toast.css";
-import { store } from "../../models/store";
 import type { ToastHeight, ToastProps } from "./toast.types";
-import type { IconName } from "../icon/icon.types";
 
 useMetadata({
   rsc: {
@@ -385,8 +385,8 @@ export default function Toast(props: ToastProps) {
             : `${state.initialHeight}px`,
           [swipeAmountVar]: `${state.swipeAmount}`,
         }),
-        ...props.css,
-        ...props.toast.css,
+        ...props.rawCSS,
+        ...props.toast.rawCSS,
       }}
       onPointerDown={state.handleOnPointerDown}
       onPointerUp={state.handleOnPointerUp}

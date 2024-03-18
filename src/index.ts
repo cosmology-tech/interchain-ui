@@ -9,7 +9,7 @@ export type {
 } from "./models/system.model";
 export type { GridColumn } from "./models/components.model";
 export type { Sprinkles } from "./styles/rainbow-sprinkles.css";
-
+export { store } from "./models/store";
 export { skeleton as skeletonClass } from "./ui/shared/shared.css";
 
 // Init Components
@@ -216,7 +216,9 @@ export type {
   ToastPosition,
 } from "./ui/toast/toast.types";
 export { default as Avatar } from "./ui/avatar";
-export { default as AvatarBadge } from "./ui/avatar/avatar-badge.lite";
+export { default as AvatarBadge } from "./ui/avatar-badge";
+export { default as AvatarImage } from "./ui/avatar-image";
+export { default as AvatarName } from "./ui/avatar-name";
 export type { AvatarProps, AvatarBadgeProps } from "./ui/avatar/avatar.types";
 export { default as ChangeChainListItem } from "./ui/change-chain-list-item";
 export type { ChangeChainListItemProps } from "./ui/change-chain-list-item/change-chain-list-item.types";

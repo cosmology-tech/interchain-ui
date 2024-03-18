@@ -24,12 +24,12 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: yarn
+          node-version: 20
+          cache: pnpm
           check-latest: true
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build and lint
-        run: yarn mitosis:react && yarn b:react
+        run: pnpm mitosis:react && pnpm b:react

@@ -2,7 +2,8 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Tooltip from "../src/ui/tooltip";
-import Icon from "../src/ui/icon";
+import Button from "../src/ui/button";
+import Text from "../src/ui/text";
 import Stack from "../src/ui/stack";
 
 const meta: Meta<typeof Tooltip> = {
@@ -18,14 +19,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    title: "Hover text",
-    placement: "top",
+    title: <Text color="$textInverse">Hurray!</Text>,
+    placement: "bottom",
   },
   render: (props) => {
     return (
       <Stack justify="center" attributes={{ p: "8" }}>
         <Tooltip {...props}>
-          <Icon name="informationLine" size="xl" />
+          <Button>Hover me my friend</Button>
         </Tooltip>
       </Stack>
     );

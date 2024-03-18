@@ -1,10 +1,9 @@
-import type { ClassValue } from "clsx";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BaseComponentProps } from "../../models/components.model";
 
 export interface StackProps extends Omit<BaseComponentProps, "className"> {
   as?: any;
-  className?: ClassValue;
+  className?: string;
   boxRef?: any;
   children?: any;
   forwardedRef?: any;

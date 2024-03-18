@@ -1,6 +1,6 @@
+import Text from "@/ui/text";
 import { useRadioGroup, VisuallyHidden } from "react-aria";
 import { useRadioGroupState } from "react-stately";
-import Text from "@/ui/text";
 import { RadioContext } from "./governance-radio-group.context";
 import type { GovernanceRadioGroupProps } from "./governance-radio-group.types";
 
@@ -25,7 +25,7 @@ export default function GovernanceRadioGroup(props: GovernanceRadioGroupProps) {
       )}
       {errorMessage && state.isInvalid && (
         <Text domAttributes={errorMessageProps} fontSize="$xs" color="$red300">
-          {errorMessage}
+          {errorMessage as React.ReactNode}
         </Text>
       )}
     </div>
