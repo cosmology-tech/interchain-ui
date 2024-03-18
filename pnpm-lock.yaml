@@ -536,16 +536,16 @@ importers:
         version: 4.5.2(@types/react@18.2.66)(immer@10.0.4)(react@18.2.0)
     devDependencies:
       '@parcel/compressor-brotli':
-        specifier: ^2.10.2
+        specifier: ^2.12.0
         version: 2.12.0(@parcel/core@2.12.0)(@swc/helpers@0.5.6)
       '@parcel/compressor-gzip':
-        specifier: ^2.10.2
+        specifier: ^2.12.0
         version: 2.12.0(@parcel/core@2.12.0)(@swc/helpers@0.5.6)
       '@parcel/transformer-typescript-tsc':
-        specifier: ^2.10.2
+        specifier: ^2.12.0
         version: 2.12.0(@parcel/core@2.12.0)(@swc/helpers@0.5.6)(typescript@5.4.2)
       '@parcel/transformer-typescript-types':
-        specifier: ^2.10.2
+        specifier: ^2.12.0
         version: 2.12.0(@parcel/core@2.12.0)(@swc/helpers@0.5.6)(typescript@5.4.2)
       '@rushstack/eslint-patch':
         specifier: ^1.2.0
