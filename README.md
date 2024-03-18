@@ -53,11 +53,14 @@ To see how to use with react, see our react documentation
 
 ## Developing
 
-- `yarn && yarn bootstrap` to bootstrap the repo
-- `yarn dev` to watch the repo for changes and then recompile
-- `yarn compile` to compile from mitosis components to other packages, you can give it a flag `-p` or `--platforms` .ie `yarn compile -p react vue`
-- `yarn c:react` or `yarn c:vue` to compile specifically to react or vue
-- `yarn clean` to clean `.node_modules` or `yarn clean:assets` to clean build/compile output
+We are using Lerna + PNPM to bootstrap the monorepo. First make sure you install PNPM locally first, then run these commands:
+
+- `pnpm install` to bootstrap the repo
+- `pnpm run dev` to watch the repo for changes and then recompile
+- `pnpm run compile` to compile from mitosis components to other packages, you can give it a flag `-p` or `--platforms` .ie `pnpm run compile -p react vue`
+- `pnpm run c:react` or `pnpm run c:vue` to compile specifically to react or vue
+- `pnpm run clear` to clean `.node_modules` or `pnpm run clear:assets` to clean build/compile output
+- `pnpm run clear:cache` to clean cache folder used by bundlers
 
 ## Overview and structure
 
