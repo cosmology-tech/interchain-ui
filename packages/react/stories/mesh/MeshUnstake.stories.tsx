@@ -44,7 +44,10 @@ const MeshSlider = () => {
       name="osmosis"
       value={value}
       onChange={setValue}
-      width="450px"
+      width={{
+        mobile: "100%",
+        tablet: "500px",
+      }}
       thumbTrackColor="$text"
       previewPercent={20}
       previewTrackColor="$textDanger"
@@ -188,7 +191,7 @@ export const InterchainUITheme: Story = {
     const stargaze = assets.find((asset) => asset.symbol === "STARS");
 
     return (
-      <Box bg="$cardBg" p="$12" borderRadius="$lg">
+      <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
         <MeshStakingHeader asset={osmosis} />
         <Stack
           direction="vertical"
@@ -314,7 +317,7 @@ export const MeshUICustomTheme: Story = {
 
     return (
       <MeshProvider>
-        <Box bg="$cardBg" p="$12" borderRadius="$lg">
+        <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
           <MeshStakingHeader asset={osmosis} />
           <Stack
             direction="vertical"
