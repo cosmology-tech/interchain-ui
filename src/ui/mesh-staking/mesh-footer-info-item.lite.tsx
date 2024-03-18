@@ -10,10 +10,6 @@ import Box from "../box";
 import Text from "../text";
 import clx from "clsx";
 import { store } from "../../models/store";
-import {
-  meshDarkThemeClass,
-  meshLightThemeClass,
-} from "../../styles/themes.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { MeshFooterInfoItemProps } from "./mesh-staking.types";
 
@@ -49,13 +45,7 @@ export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
       gap="$2"
       justifyContent="center"
       alignItems="center"
-      className={clx(
-        {
-          [meshLightThemeClass]: state.theme === "light",
-          [meshDarkThemeClass]: state.theme === "dark",
-        },
-        props.className
-      )}
+      className={clx(props.className)}
     >
       <Text fontSize="$3xl" color="$text" fontWeight="$medium">
         {props.title}

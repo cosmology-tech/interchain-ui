@@ -2,7 +2,7 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Avatar from "../src/ui/avatar";
-import AvatarBadge from "../src/ui/avatar/avatar-badge";
+import AvatarBadge from "../src/ui/avatar-badge";
 import Box from "../src/ui/box";
 import Stack from "../src/ui/stack";
 

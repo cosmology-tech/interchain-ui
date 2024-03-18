@@ -24,6 +24,7 @@ import MeshTableChainCell from "../../src/ui/mesh-staking/mesh-table-chain-cell"
 import MeshTableAPRCell from "../../src/ui/mesh-staking/mesh-table-apr-cell";
 import MeshTableValidatorsCell from "../../src/ui/mesh-staking/mesh-table-validators-cell";
 import MeshTableHeaderAction from "../../src/ui/mesh-staking/mesh-table-header-action";
+import MeshProvider from "../../src/ui/mesh-staking/mesh-provider";
 
 const meta: Meta<typeof MeshModal> = {
   component: MeshModal,
@@ -43,7 +44,10 @@ const validatorThumbnails = [
   akashImage,
 ];
 
-const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
+const Header = (props: {
+  assets: DefaultNormalizedAsset[];
+  isDefaultTheme?: boolean;
+}) => {
   const [activeTab, setActiveTab] = useState<number>(0);
 
   return (
@@ -62,15 +66,28 @@ const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
           alignItems: "center",
         }}
       >
-        <MeshButton
-          width="$11"
-          height="$11"
-          px="$0"
-          py="$0"
-          colorScheme="secondary"
-        >
-          <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
-        </MeshButton>
+        {props.isDefaultTheme ? (
+          <Button
+            variant="ghost"
+            intent="secondary"
+            size="sm"
+            leftIcon="arrowLeftSLine"
+            iconSize="$2xl"
+            attributes={{
+              px: "$0",
+            }}
+          />
+        ) : (
+          <MeshButton
+            width="$11"
+            height="$11"
+            px="$0"
+            py="$0"
+            colorScheme="secondary"
+          >
+            <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
+          </MeshButton>
+        )}
 
         <Text
           as="h2"
@@ -126,13 +143,6 @@ const Header = (props: { assets: DefaultNormalizedAsset[] }) => {
           </MeshTab>
         ))}
       </Stack>
-
-      <Divider
-        position="absolute"
-        bottom="0"
-        transform="translateX(-40px)"
-        zIndex={0}
-      />
     </Stack>
   );
 };
@@ -162,17 +172,16 @@ type MeshTableUnstakeRow = {
   unbondFor: string;
 };
 
-export const Primary: Story = {
+export const InterchainUITheme: Story = {
   args: {},
   render: (props) => {
-    const [isOpen, setIsOpen] = useState(false);
     const { isReady, assets } = useMockData();
     const osmosis = assets.find((asset) => asset.symbol === "OSMO");
     const juno = assets.find((asset) => asset.symbol === "JUNO");
     const levana = assets.find((asset) => asset.symbol === "LVN");
     const stargaze = assets.find((asset) => asset.symbol === "STARS");
     const headerAssets = [osmosis, juno, stargaze].filter(
-      Boolean
+      Boolean,
     ) as DefaultNormalizedAsset[];
 
     const dataStake: MeshTableStakeRow[] = useMemo(
@@ -208,7 +217,7 @@ export const Primary: Story = {
           ],
         },
       ],
-      [osmosis, juno]
+      [osmosis, juno],
     );
 
     const dataUnstake: MeshTableUnstakeRow[] = useMemo(
@@ -230,19 +239,557 @@ export const Primary: Story = {
           unbondFor: "8 days",
         },
       ],
-      [levana, stargaze]
+      [levana, stargaze],
+    );
+
+    return (
+      <Box
+        borderRadius="$lg"
+        p="$12"
+        backgroundColor="$cardBg"
+        overflow="hidden"
+      >
+        <Header isDefaultTheme assets={headerAssets} />
+
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          pt="$10"
+          maxWidth="100%"
+        >
+          {/* Stake section */}
+          <Box
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            gap="$10"
+            marginBottom="42px"
+          >
+            <MeshTableHeaderAction
+              type="stake"
+              tokenName="OSMO"
+              tokenImgSrc={osmosis?.imgSrc ?? ""}
+              tokenAmount="834.15"
+            />
+
+            <MeshTable
+              columns={[
+                {
+                  id: "chainName",
+                  label: "Chain",
+                  align: "left",
+                  width: "160px",
+                  render: (rowData: MeshTableStakeRow) => (
+                    <MeshTableChainCell
+                      name={rowData.chain.name}
+                      imgSrc={rowData.chain.logo}
+                    />
+                  ),
+                },
+                {
+                  id: "apr",
+                  label: "APR",
+                  align: "left",
+                  width: "80px",
+                  render: (rowData: MeshTableStakeRow) => (
+                    <MeshTableAPRCell value={rowData.apr} />
+                  ),
+                },
+                {
+                  id: "unbondingPeriod",
+                  label: "Unbonding Period",
+                  width: "160px",
+                  align: "left",
+                  render: (rowData: MeshTableStakeRow) => (
+                    <Text
+                      fontSize="$sm"
+                      fontWeight="$normal"
+                      color={useColorModeValue("$text", "$textPlaceholder")}
+                    >
+                      {rowData.unbondingPeriod}
+                    </Text>
+                  ),
+                },
+                {
+                  id: "commission",
+                  label: "Commission",
+                  width: "160px",
+                  align: "left",
+                  render: (rowData: MeshTableStakeRow) => (
+                    <Text
+                      fontSize="$sm"
+                      fontWeight="$normal"
+                      color={useColorModeValue("$text", "$textPlaceholder")}
+                    >
+                      {rowData.commission}
+                    </Text>
+                  ),
+                },
+                {
+                  id: "validatorSquad",
+                  label: "Validator Squad",
+                  align: "left",
+                  render: (rowData: MeshTableStakeRow) => (
+                    <MeshTableValidatorsCell
+                      validators={rowData.validatorSquad}
+                    />
+                  ),
+                },
+              ]}
+              data={dataStake}
+              containerProps={{
+                overflowX: "auto",
+                maxWidth: "100%",
+              }}
+              tableProps={{
+                width: {
+                  mobile: "790px",
+                  tablet: "100%",
+                },
+              }}
+            />
+          </Box>
+
+          {/* Unstake section */}
+          <Box
+            width="100%"
+            display="flex"
+            flexDirection="column"
+            gap="$10"
+            marginBottom="40px"
+          >
+            <MeshTableHeaderAction
+              type="unstake"
+              tokenName="OSMO"
+              tokenImgSrc={osmosis?.imgSrc ?? ""}
+              tokenAmount="215.15"
+            />
+
+            <MeshTable
+              columns={[
+                {
+                  id: "chainName",
+                  label: "Chain",
+                  align: "left",
+                  width: "160px",
+                  render: (rowData: MeshTableUnstakeRow) => (
+                    <MeshTableChainCell
+                      name={rowData.chain.name}
+                      imgSrc={rowData.chain.logo}
+                    />
+                  ),
+                },
+                {
+                  id: "unbondFor",
+                  label: "Will unbond for",
+                  width: "160px",
+                  align: "left",
+                  render: (rowData: MeshTableUnstakeRow) => (
+                    <Text
+                      fontSize="$sm"
+                      fontWeight="$normal"
+                      color={useColorModeValue("$text", "$textPlaceholder")}
+                    >
+                      {rowData.unbondFor}
+                    </Text>
+                  ),
+                },
+              ]}
+              data={dataUnstake}
+              containerProps={{
+                overflowX: "auto",
+                maxWidth: "100%",
+              }}
+              tableProps={{
+                width: {
+                  mobile: "600px",
+                  tablet: "100%",
+                },
+              }}
+            />
+          </Box>
+
+          <Stack
+            direction="vertical"
+            space="$0"
+            attributes={{
+              paddingBottom: "$10",
+            }}
+          >
+            <Button>
+              <Text
+                as="span"
+                color="inherit"
+                attributes={{
+                  minWidth: "364px",
+                }}
+              >
+                Confirm
+              </Text>
+            </Button>
+          </Stack>
+        </Box>
+      </Box>
+    );
+  },
+};
+
+export const MeshUICustomTheme: Story = {
+  args: {},
+  render: (props) => {
+    const { isReady, assets } = useMockData();
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+    const headerAssets = [osmosis, juno, stargaze].filter(
+      Boolean,
+    ) as DefaultNormalizedAsset[];
+
+    const dataStake: MeshTableStakeRow[] = useMemo(
+      () => [
+        {
+          id: "row1",
+          chain: {
+            name: osmosis?.name ?? "",
+            logo: osmosis?.imgSrc ?? "",
+          },
+          apr: "12.25%",
+          unbondingPeriod: "27 days",
+          commission: "7.25%",
+          validatorSquad: [
+            { name: "val1", imgSrc: validatorThumbnails[0] },
+            { name: "val2", imgSrc: validatorThumbnails[1] },
+          ],
+        },
+        {
+          id: "row2",
+          chain: {
+            name: juno?.name ?? "",
+            logo: juno?.imgSrc ?? "",
+          },
+          apr: "8.3%",
+          unbondingPeriod: "14 days",
+          commission: "6.3%",
+          validatorSquad: [
+            { name: "val1", imgSrc: validatorThumbnails[0] },
+            { name: "val2", imgSrc: validatorThumbnails[1] },
+            { name: "val3", imgSrc: validatorThumbnails[2] },
+            { name: "val4", imgSrc: validatorThumbnails[3] },
+          ],
+        },
+      ],
+      [osmosis, juno],
+    );
+
+    const dataUnstake: MeshTableUnstakeRow[] = useMemo(
+      () => [
+        {
+          id: "row1",
+          chain: {
+            name: juno?.name ?? "",
+            logo: juno?.imgSrc ?? "",
+          },
+          unbondFor: "27 days",
+        },
+        {
+          id: "row2",
+          chain: {
+            name: stargaze?.name ?? "",
+            logo: stargaze?.imgSrc ?? "",
+          },
+          unbondFor: "8 days",
+        },
+      ],
+      [levana, stargaze],
+    );
+
+    return (
+      <MeshProvider>
+        <Box
+          borderRadius="$lg"
+          p="$12"
+          backgroundColor="$cardBg"
+          overflow="hidden"
+        >
+          <Header assets={headerAssets} />
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            pt="$10"
+            maxWidth="100%"
+          >
+            {/* Stake section */}
+            <Box
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              gap="$10"
+              marginBottom="42px"
+            >
+              <MeshTableHeaderAction
+                type="stake"
+                tokenName="OSMO"
+                tokenImgSrc={osmosis?.imgSrc ?? ""}
+                tokenAmount="834.15"
+              />
+
+              <MeshTable
+                columns={[
+                  {
+                    id: "chainName",
+                    label: "Chain",
+                    align: "left",
+                    width: "160px",
+                    render: (rowData: MeshTableStakeRow) => (
+                      <MeshTableChainCell
+                        name={rowData.chain.name}
+                        imgSrc={rowData.chain.logo}
+                      />
+                    ),
+                  },
+                  {
+                    id: "apr",
+                    label: "APR",
+                    align: "left",
+                    width: "80px",
+                    render: (rowData: MeshTableStakeRow) => (
+                      <MeshTableAPRCell value={rowData.apr} />
+                    ),
+                  },
+                  {
+                    id: "unbondingPeriod",
+                    label: "Unbonding Period",
+                    width: "160px",
+                    align: "left",
+                    render: (rowData: MeshTableStakeRow) => (
+                      <Text
+                        fontSize="$sm"
+                        fontWeight="$normal"
+                        color={useColorModeValue("$text", "$textPlaceholder")}
+                      >
+                        {rowData.unbondingPeriod}
+                      </Text>
+                    ),
+                  },
+                  {
+                    id: "commission",
+                    label: "Commission",
+                    width: "160px",
+                    align: "left",
+                    render: (rowData: MeshTableStakeRow) => (
+                      <Text
+                        fontSize="$sm"
+                        fontWeight="$normal"
+                        color={useColorModeValue("$text", "$textPlaceholder")}
+                      >
+                        {rowData.commission}
+                      </Text>
+                    ),
+                  },
+                  {
+                    id: "validatorSquad",
+                    label: "Validator Squad",
+                    align: "left",
+                    render: (rowData: MeshTableStakeRow) => (
+                      <MeshTableValidatorsCell
+                        validators={rowData.validatorSquad}
+                      />
+                    ),
+                  },
+                ]}
+                data={dataStake}
+                containerProps={{
+                  overflowX: "auto",
+                  maxWidth: "100%",
+                }}
+                tableProps={{
+                  width: {
+                    mobile: "790px",
+                    tablet: "100%",
+                  },
+                }}
+              />
+            </Box>
+
+            {/* Unstake section */}
+            <Box
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              gap="$10"
+              marginBottom="40px"
+            >
+              <MeshTableHeaderAction
+                type="unstake"
+                tokenName="OSMO"
+                tokenImgSrc={osmosis?.imgSrc ?? ""}
+                tokenAmount="215.15"
+              />
+
+              <MeshTable
+                columns={[
+                  {
+                    id: "chainName",
+                    label: "Chain",
+                    align: "left",
+                    width: "160px",
+                    render: (rowData: MeshTableUnstakeRow) => (
+                      <MeshTableChainCell
+                        name={rowData.chain.name}
+                        imgSrc={rowData.chain.logo}
+                      />
+                    ),
+                  },
+                  {
+                    id: "unbondFor",
+                    label: "Will unbond for",
+                    width: "160px",
+                    align: "left",
+                    render: (rowData: MeshTableUnstakeRow) => (
+                      <Text
+                        fontSize="$sm"
+                        fontWeight="$normal"
+                        color={useColorModeValue("$text", "$textPlaceholder")}
+                      >
+                        {rowData.unbondFor}
+                      </Text>
+                    ),
+                  },
+                ]}
+                data={dataUnstake}
+                containerProps={{
+                  overflowX: "auto",
+                  maxWidth: "100%",
+                }}
+                tableProps={{
+                  width: {
+                    mobile: "600px",
+                    tablet: "100%",
+                  },
+                }}
+              />
+            </Box>
+
+            <Stack
+              direction="vertical"
+              space="$0"
+              attributes={{
+                paddingBottom: "$10",
+              }}
+            >
+              <MeshButton width="264px">Confirm</MeshButton>
+            </Stack>
+          </Box>
+        </Box>
+      </MeshProvider>
+    );
+  },
+};
+
+export const ModalView: Story = {
+  args: {},
+  render: (props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const { isReady, assets } = useMockData();
+    const osmosis = assets.find((asset) => asset.symbol === "OSMO");
+    const juno = assets.find((asset) => asset.symbol === "JUNO");
+    const levana = assets.find((asset) => asset.symbol === "LVN");
+    const stargaze = assets.find((asset) => asset.symbol === "STARS");
+    const headerAssets = [osmosis, juno, stargaze].filter(
+      Boolean,
+    ) as DefaultNormalizedAsset[];
+
+    const dataStake: MeshTableStakeRow[] = useMemo(
+      () => [
+        {
+          id: "row1",
+          chain: {
+            name: osmosis?.name ?? "",
+            logo: osmosis?.imgSrc ?? "",
+          },
+          apr: "12.25%",
+          unbondingPeriod: "27 days",
+          commission: "7.25%",
+          validatorSquad: [
+            { name: "val1", imgSrc: validatorThumbnails[0] },
+            { name: "val2", imgSrc: validatorThumbnails[1] },
+          ],
+        },
+        {
+          id: "row2",
+          chain: {
+            name: juno?.name ?? "",
+            logo: juno?.imgSrc ?? "",
+          },
+          apr: "8.3%",
+          unbondingPeriod: "14 days",
+          commission: "6.3%",
+          validatorSquad: [
+            { name: "val1", imgSrc: validatorThumbnails[0] },
+            { name: "val2", imgSrc: validatorThumbnails[1] },
+            { name: "val3", imgSrc: validatorThumbnails[2] },
+            { name: "val4", imgSrc: validatorThumbnails[3] },
+          ],
+        },
+      ],
+      [osmosis, juno],
+    );
+
+    const dataUnstake: MeshTableUnstakeRow[] = useMemo(
+      () => [
+        {
+          id: "row1",
+          chain: {
+            name: juno?.name ?? "",
+            logo: juno?.imgSrc ?? "",
+          },
+          unbondFor: "27 days",
+        },
+        {
+          id: "row2",
+          chain: {
+            name: stargaze?.name ?? "",
+            logo: stargaze?.imgSrc ?? "",
+          },
+          unbondFor: "8 days",
+        },
+      ],
+      [levana, stargaze],
     );
 
     return (
       <div>
         <MeshModal
-          renderTrigger={(triggerProps = {}) => (
-            <Button {...triggerProps} onClick={() => setIsOpen(true)}>
-              open
-            </Button>
-          )}
+          renderTrigger={(triggerProps = {}) => {
+            const { ref, ...buttonProps } = triggerProps;
+            return (
+              <Button
+                buttonRef={ref}
+                {...buttonProps}
+                onClick={() => setIsOpen(true)}
+              >
+                open
+              </Button>
+            );
+          }}
           isOpen={isOpen}
-          title={<Header assets={headerAssets} />}
+          title={
+            <>
+              <Header assets={headerAssets} />
+
+              <Divider
+                position="absolute"
+                bottom="0"
+                transform="translateX(-40px)"
+                zIndex={0}
+              />
+            </>
+          }
           onClose={() => setIsOpen(false)}
         >
           <Box overflow="hidden">

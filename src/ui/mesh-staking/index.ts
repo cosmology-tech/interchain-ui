@@ -1,1 +1,1 @@
-export { default } from "./mesh-staking.lite";
+export { default } from "./mesh-provider.lite";

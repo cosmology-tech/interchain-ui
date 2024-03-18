@@ -9,10 +9,6 @@ import {
 import Box from "../box";
 import clx from "clsx";
 import { baseButton } from "../button/button.css";
-import {
-  meshDarkThemeClass,
-  meshLightThemeClass,
-} from "../../styles/themes.css";
 import { store } from "../../models/store";
 import type { ThemeVariant } from "../../models/system.model";
 import type { MeshTabProps } from "./mesh-staking.types";
@@ -68,14 +64,7 @@ export default function MeshTab(props: MeshTabProps) {
         filter={props.isActive ? undefined : "grayscale(60%) opacity(40%)"}
         {...props}
         {...props.attributes}
-        className={clx(
-          {
-            [meshLightThemeClass]: state.theme === "light",
-            [meshDarkThemeClass]: state.theme === "dark",
-          },
-          baseButton,
-          props.className
-        )}
+        className={clx(baseButton, props.className)}
         attributes={{
           ...props.domAttributes,
           onClick: (event) => props.onClick?.(event),

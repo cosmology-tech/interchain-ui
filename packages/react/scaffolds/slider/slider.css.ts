@@ -106,7 +106,7 @@ export const sliderThumb = style({
   position: "relative",
   zIndex: 2,
   vars: {
-    [thumbColorVar]: "#151515",
+    [thumbColorVar]: themeVars.colors.menuItemBg,
   },
   selectors: {
     '&[data-theme="light"]': {

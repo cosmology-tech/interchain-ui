@@ -42,7 +42,7 @@ export const Default: Story = {
     };
     return (
       <Box
-        bg={theme === "dark" ? "rgb(16, 16, 18)" : "$white"}
+        bg={theme === "dark" ? "$black" : "$white"}
         height="400px"
         padding="$10"
         display="flex"

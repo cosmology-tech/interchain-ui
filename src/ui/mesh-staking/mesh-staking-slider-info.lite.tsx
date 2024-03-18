@@ -5,11 +5,6 @@ import {
   onMount,
   onUnMount,
 } from "@builder.io/mitosis";
-import clx from "clsx";
-import {
-  meshDarkThemeClass,
-  meshLightThemeClass,
-} from "../../styles/themes.css";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
@@ -24,7 +19,7 @@ useMetadata({
 });
 
 export default function MeshStakingSliderInfo(
-  props: MeshStakingSliderInfoProps
+  props: MeshStakingSliderInfoProps,
 ) {
   const state = useStore<{ theme: ThemeVariant }>({
     theme: "light",
@@ -49,13 +44,7 @@ export default function MeshStakingSliderInfo(
       display="flex"
       gap="$8"
       alignItems="center"
-      className={clx(
-        {
-          [meshLightThemeClass]: state.theme === "light",
-          [meshDarkThemeClass]: state.theme === "dark",
-        },
-        props.className
-      )}
+      className={props.className}
     >
       <Box
         as="img"

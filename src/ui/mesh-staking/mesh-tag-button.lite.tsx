@@ -1,5 +1,4 @@
 import {
-  Show,
   useStore,
   onMount,
   onUnMount,
@@ -9,10 +8,6 @@ import {
 import Box from "../box";
 import clx from "clsx";
 import { baseButton } from "../button/button.css";
-import {
-  meshDarkThemeClass,
-  meshLightThemeClass,
-} from "../../styles/themes.css";
 import type { MeshTagButtonProps } from "./mesh-staking.types";
 
 import { store } from "../../models/store";
@@ -68,14 +63,7 @@ export default function MeshTagButton(props: MeshTagButtonProps) {
       height="$11"
       {...props}
       {...props.attributes}
-      className={clx(
-        {
-          [meshLightThemeClass]: state.theme === "light",
-          [meshDarkThemeClass]: state.theme === "dark",
-        },
-        baseButton,
-        props.className
-      )}
+      className={clx(baseButton, props.className)}
       attributes={{
         ...props.domAttributes,
         onClick: (event) => props.onClick?.(event),

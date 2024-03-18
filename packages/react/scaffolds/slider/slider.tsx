@@ -2,7 +2,6 @@ import clx from "clsx";
 import * as React from "react";
 import { SliderState, useSliderState } from "react-stately";
 
-import { meshDarkThemeClass, meshLightThemeClass } from "@/styles/themes.css";
 import Box from "@/ui/box";
 import { BoxProps } from "@/ui/box/box.types";
 import useTheme from "@/ui/hooks/use-theme";
@@ -41,7 +40,7 @@ export interface SliderProps extends AriaSliderProps {
 
 function clampPreviewProgressPercent(
   valuePercent: number,
-  previewPercent: number
+  previewPercent: number,
 ) {
   const totalPercent = valuePercent + previewPercent;
 
@@ -68,7 +67,7 @@ export default function Slider(props: SliderProps) {
   const { groupProps, trackProps, labelProps, outputProps } = useSlider(
     props,
     state,
-    trackRef
+    trackRef,
   );
 
   return (
@@ -79,14 +78,10 @@ export default function Slider(props: SliderProps) {
         ...groupProps,
       }}
       className={clx(
-        {
-          [meshLightThemeClass]: theme === "light",
-          [meshDarkThemeClass]: theme === "dark",
-        },
         styles.slider,
         state.orientation === "horizontal"
           ? styles.sliderHorizontal
-          : styles.sliderVertical
+          : styles.sliderVertical,
       )}
     >
       {props.label && (
@@ -111,7 +106,7 @@ export default function Slider(props: SliderProps) {
         className={clx(
           state.orientation === "horizontal"
             ? styles.horizontalTrack
-            : styles.verticalTrack
+            : styles.verticalTrack,
         )}
         {...{
           "data-has-preview-track": !!(
@@ -136,7 +131,7 @@ export default function Slider(props: SliderProps) {
               width: `calc(${
                 clampPreviewProgressPercent(
                   state.getThumbPercent(0),
-                  props.previewPercent / 100
+                  props.previewPercent / 100,
                 ) * 100
               }%)`,
             }}
@@ -167,7 +162,7 @@ function Thumb(props: SliderThumbProps) {
       inputRef,
       name,
     },
-    state
+    state,
   );
 
   const { focusProps, isFocusVisible } = useFocusRing();
