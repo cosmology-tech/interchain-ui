@@ -96,9 +96,11 @@ export function recipe({
     text: intentText,
   };
 
+  const intentClass = intentMap[intent];
+
   return clx([
     as === "a" ? baseAnchorButton : baseButton,
-    intentMap[intent][theme],
+    intentClass ? intentClass[theme] : null,
     intent === "tertiary" && variant === "outlined" ? null : variants[variant],
     isDisabled ? disabled : null,
   ]);

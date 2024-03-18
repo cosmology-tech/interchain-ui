@@ -61,8 +61,8 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15(eslint@8.57.0)
       '@builder.io/mitosis-cli':
-        specifier: 0.1.5
-        version: 0.1.5(postcss@8.4.35)
+        specifier: 0.1.6
+        version: 0.1.6(postcss@8.4.35)
       '@formkit/auto-animate':
         specifier: ^0.8.1
         version: 0.8.1
@@ -647,7 +647,7 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1(vue@3.4.21)
       '@interchain-ui/vue':
-        specifier: ^1.2.31
+        specifier: link:../vue
         version: link:../vue
       vue:
         specifier: ^3.4.21
@@ -715,10 +715,10 @@ importers:
         version: 5.1.6(@types/node@20.11.28)
       vite-plugin-checker:
         specifier: ^0.6.4
-        version: 0.6.4(eslint@8.57.0)(typescript@5.4.2)(vite@5.1.6)(vue-tsc@2.0.6)
+        version: 0.6.4(eslint@8.57.0)(typescript@5.4.2)(vite@5.1.6)(vue-tsc@1.8.27)
       vue-tsc:
-        specifier: ^2.0.6
-        version: 2.0.6(typescript@5.4.2)
+        specifier: ^1.8.22
+        version: 1.8.27(typescript@5.4.2)
       zustand:
         specifier: ^4.4.7
         version: 4.5.2(@types/react@18.2.66)(immer@10.0.4)(react@18.2.0)
@@ -2367,12 +2367,12 @@ packages:
       ts-pattern: 3.3.5
     dev: true
 
-  /@builder.io/mitosis-cli@0.1.5(postcss@8.4.35):
-    resolution: {integrity: sha512-duzDe5CRvvOHgMvKP189FElGwZ+KSa4Q/7lu6/imCpPLs/DmDlTKMB0TQbNCn6Ptj5VMpnNP6Jrgs7CHRiqrpQ==}
+  /@builder.io/mitosis-cli@0.1.6(postcss@8.4.35):
+    resolution: {integrity: sha512-W6mE7IQh1VvE4u4bCM0zgaHKNkaZ2MoCldbQUEWulHmKNuxYxgeli39i1Ba2CpzK8igd9AEOe6h3EZJQOxcDGA==}
     hasBin: true
     dependencies:
       '@babel/core': 7.24.0
-      '@builder.io/mitosis': 0.1.5(postcss@8.4.35)
+      '@builder.io/mitosis': 0.1.6(postcss@8.4.35)
       '@vue/compiler-sfc': 3.4.21
       babel-preset-solid: 1.8.15(@babel/core@7.24.0)
       chalk: 4.1.2
@@ -2409,8 +2409,8 @@ packages:
       - supports-color
     dev: true
 
-  /@builder.io/mitosis@0.1.5(postcss@8.4.35):
-    resolution: {integrity: sha512-6GAu3jy1R8yn/ZMmqXszM/F21PllAAZP7t/yRzIKp82rfGDmxkLq4rU69OZicU+08AkCdUH4CSGdBWaZdpgOHA==}
+  /@builder.io/mitosis@0.1.6(postcss@8.4.35):
+    resolution: {integrity: sha512-2iXaw+4h7wzynAztRwYcN1J/2778MsRBSDMb2yRne3dpDmsV5/B2cGbA9tbhDs3J/KlAFZXDNA2FPzT16105ew==}
     dependencies:
       '@angular/compiler': 11.2.14
       '@babel/core': 7.14.5
@@ -21297,6 +21297,58 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: true
+
+  /vite-plugin-checker@0.6.4(eslint@8.57.0)(typescript@5.4.2)(vite@5.1.6)(vue-tsc@1.8.27):
+    resolution: {integrity: sha512-2zKHH5oxr+ye43nReRbC2fny1nyARwhxdm0uNYp/ERy4YvU9iZpNOsueoi/luXw5gnpqRSvjcEPxXbS153O2wA==}
+    engines: {node: '>=14.16'}
+    peerDependencies:
+      eslint: '>=7'
+      meow: ^9.0.0
+      optionator: ^0.9.1
+      stylelint: '>=13'
+      typescript: '*'
+      vite: '>=2.0.0'
+      vls: '*'
+      vti: '*'
+      vue-tsc: '>=1.3.9'
+    peerDependenciesMeta:
+      eslint:
+        optional: true
+      meow:
+        optional: true
+      optionator:
+        optional: true
+      stylelint:
+        optional: true
+      typescript:
+        optional: true
+      vls:
+        optional: true
+      vti:
+        optional: true
+      vue-tsc:
+        optional: true
+    dependencies:
+      '@babel/code-frame': 7.23.5
+      ansi-escapes: 4.3.2
+      chalk: 4.1.2
+      chokidar: 3.6.0
+      commander: 8.3.0
+      eslint: 8.57.0
+      fast-glob: 3.3.2
+      fs-extra: 11.2.0
+      npm-run-path: 4.0.1
+      semver: 7.6.0
+      strip-ansi: 6.0.1
+      tiny-invariant: 1.3.3
+      typescript: 5.4.2
+      vite: 5.1.6(@types/node@20.11.28)
+      vscode-languageclient: 7.0.0
+      vscode-languageserver: 7.0.0
+      vscode-languageserver-textdocument: 1.0.11
+      vscode-uri: 3.0.8
+      vue-tsc: 1.8.27(typescript@5.4.2)
     dev: true
 
   /vite-plugin-checker@0.6.4(eslint@8.57.0)(typescript@5.4.2)(vite@5.1.6)(vue-tsc@2.0.6):

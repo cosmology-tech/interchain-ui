@@ -4,7 +4,6 @@ import vue from "@vitejs/plugin-vue";
 import dts from "vite-plugin-dts";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
-console.log("dirname", __dirname);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vanillaExtractPlugin(), vue(), dts()],

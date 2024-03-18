@@ -9,7 +9,7 @@ export type {
 } from "./models/system.model";
 export type { GridColumn } from "./models/components.model";
 export type { Sprinkles } from "./styles/rainbow-sprinkles.css";
-
+export { store } from "./models/store";
 export { skeleton as skeletonClass } from "./ui/shared/shared.css";
 
 // Init Components

@@ -415,7 +415,6 @@ async function copyFiles(srcDir, destDir) {
         await fs.copyFile(srcFile, destFile);
       }
     }
-    // console.log("Files copied successfully.");
   } catch (error) {
     console.error("Error copying files:", error);
   }

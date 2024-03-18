@@ -6,17 +6,20 @@
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/vue#readme",
   "license": "SEE LICENSE IN LICENSE",
-  "source": "src/index.ts",
-  "main": "./dist/interchain-ui-kit-vue.umd.cjs",
-  "module": "./dist/interchain-ui-kit-vue.js",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/interchain-ui-vue.umd.cjs",
+  "module": "./dist/interchain-ui-vue.js",
   "exports": {
     ".": {
-      "import": "./dist/interchain-ui-kit-vue.js",
-      "require": "./dist/interchain-ui-kit-vue.umd.cjs"
+      "import": "./dist/interchain-ui-vue.js",
+      "require": "./dist/interchain-ui-vue.umd.cjs",
+      "types": "./dist/index.d.ts"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
   },
-  "types": "./dist/index.d.ts",
   "sideEffects": false,
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
@@ -34,10 +37,10 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@parcel/compressor-brotli": "^2.10.2",
-    "@parcel/compressor-gzip": "^2.10.2",
-    "@parcel/transformer-typescript-tsc": "^2.10.2",
-    "@parcel/transformer-typescript-types": "^2.10.2",
+    "@parcel/compressor-brotli": "^2.12.0",
+    "@parcel/compressor-gzip": "^2.12.0",
+    "@parcel/transformer-typescript-tsc": "^2.12.0",
+    "@parcel/transformer-typescript-types": "^2.12.0",
     "@rushstack/eslint-patch": "^1.2.0",
     "@storybook/addon-essentials": "^7.6.6",
     "@storybook/addon-interactions": "^7.6.6",

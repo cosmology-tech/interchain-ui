@@ -29,7 +29,12 @@ function customReplaceVue(props) {
         `$1$2/ui/$3/$3.vue";`,
       )
       .replace(/(extensions)\/(.*)\.vue/g, "$1/$2")
-      .replace(/\/helpers\.vue/g, "");
+      .replace(/\/helpers\.vue/g, "")
+      // Add .vue and a subpath to each export
+      .replace(
+        /(export { default as (\w+) } from '\.\/ui\/)([^';]+)';/g,
+        `$1$3/$3.vue';`,
+      );
 
     log.warn("\n ============== after edit index.ts =========== \n" + result);
 

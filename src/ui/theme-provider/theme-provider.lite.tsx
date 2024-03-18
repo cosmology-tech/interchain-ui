@@ -32,14 +32,22 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     lightQuery: any;
     darkQuery: any;
     isDark: boolean;
+    isReady: boolean;
     isLight: boolean;
     isMounted: boolean;
     preferredMode: ThemeVariant | null;
     storeState: ReturnType<typeof store.getState>;
     theme: string;
+    themeClass: string;
   }>({
     preferredMode: null,
     isMounted: false,
+    get isReady() {
+      return state.preferredMode && state.isMounted;
+    },
+    get themeClass() {
+      return store.getState().themeClass;
+    },
     get storeState() {
       return store.getState();
     },
@@ -64,7 +72,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   // System mode: change based on user preference
   onUpdate(() => {
-    if (!state.preferredMode || !state.isMounted) return;
+    if (!state.isReady()) return;
 
     const themeMode = state.storeState.themeMode;
 
@@ -95,6 +103,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   onUpdate(() => {
     const overrideStyleManager = state.storeState.overrideStyleManager;
+    if (!overrideStyleManager) return;
     overrideStyleManager.update(props.overrides, null);
   }, [props.overrides]);
 
@@ -108,9 +117,9 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       assignThemeVars(
         {
           colors: {
-            // @ts-expect-error
+            // @ts-ignore
             accent: getAccent(props.accent, currentColorMode ?? "light"),
-            // @ts-expect-error
+            // @ts-ignore
             accentText: getAccentText(currentColorMode ?? "light"),
           },
         },
@@ -134,12 +143,19 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       }
     };
 
-    state.darkQuery!.addEventListener("change", darkListener);
-    state.lightQuery!.addEventListener("change", lightListener);
+    if (state.darkQuery && state.lightQuery) {
+      if (
+        typeof state.darkQuery.addEventListener === "function" &&
+        typeof state.lightQuery.addEventListener === "function"
+      ) {
+        state.darkQuery?.addEventListener("change", darkListener);
+        state.lightQuery?.addEventListener("change", lightListener);
+      }
+    }
 
     cleanupRef = () => {
-      state.darkQuery!.removeEventListener(`change`, darkListener);
-      state.lightQuery!.removeEventListener(`change`, lightListener);
+      state.darkQuery?.removeEventListener("change", darkListener);
+      state.lightQuery?.removeEventListener("change", lightListener);
     };
   });
 
@@ -157,6 +173,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       style={{
         visibility: state.isMounted ? "visible" : "hidden",
       }}
+      className={state.themeClass}
     >
       {props.children}
     </div>

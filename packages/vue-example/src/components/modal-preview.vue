@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ModalsContainer, useModal } from 'vue-final-modal';
+import { Box } from '@interchain-ui/vue'
 import ModalView from './modal/modal.vue';
-import Button from './v-button.vue';
+import VButton from './v-button.vue';
 
 const { open, close } = useModal({
   component: ModalView,
@@ -17,12 +18,26 @@ const { open, close } = useModal({
   <div class="flex w-[100vw] h-[100vh]">
     <div class="flex flex-col gap-4 text-center mx-auto my-0 pt-[300px]">
       <p>Vite + Vue + @interchain-ui/vue demo</p>
+      <!--
+      <SimpleText textColor="lightblue" tag="h2">
+        hello from interchain
+      </SimpleText> -->
 
-      <Button @click="open">
+      <Box color="$blue400">
+        Hello Boxy box
+      </Box>
+
+      <VButton @click="open">
         <span class="flex justify-center items-center">
           Open Modal
         </span>
-      </Button>
+      </VButton>
+
+      <VButton @click="close">
+        <span class="flex justify-center items-center">
+          Close Modal
+        </span>
+      </VButton>
     </div>
   </div>
 

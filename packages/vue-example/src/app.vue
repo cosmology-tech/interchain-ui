@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import ModalPreview from './components/modal-preview.vue'
+import { ThemeProvider } from '@interchain-ui/vue'
 </script>
 
 <template>
-  <ModalPreview msg="Vite + Vue + @interchain-ui/vue demo" />
+  <ThemeProvider>
+    <ModalPreview msg="Vite + Vue + @interchain-ui/vue demo" />
+  </ThemeProvider>
 </template>
 
 <style scoped>
@@ -13,9 +16,11 @@ import ModalPreview from './components/modal-preview.vue'
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
