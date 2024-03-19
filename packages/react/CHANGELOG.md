@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.1...@interchain-ui/react@1.22.2) (2024-03-19)
+
+### Bug Fixes
+
+- improve vue build and bundle ([#171](https://github.com/cosmology-tech/interchain-ui/issues/171)) ([f7543de](https://github.com/cosmology-tech/interchain-ui/commit/f7543de1201fcf2fc7f5f96b75f3603709f678ad))
+- vue build ([40f4219](https://github.com/cosmology-tech/interchain-ui/commit/40f4219067fd5588c21ae61d8141960f35be9689))
+- widths ([49cd066](https://github.com/cosmology-tech/interchain-ui/commit/49cd066fffde4cf62f7da3e2ca3dca152acff706))
+
 ## [1.22.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.0...@interchain-ui/react@1.22.1) (2024-02-28)
 
 ### Bug Fixes
