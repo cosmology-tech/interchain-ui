@@ -29,6 +29,6 @@ function getCssImports() {
 
   return [
     /require\(".\/interchain-ui-kit-(.*).cjs.css"\);/g,
-    /import(\s*)".\/interchain-ui-kit-(.*).cjs.css";/g,
+    /import(\s*)".\/interchain-ui-kit-(.*).esm.css";/g,
   ];
 }
