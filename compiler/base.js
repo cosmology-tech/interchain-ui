@@ -110,10 +110,6 @@ async function compile(rawOptions) {
         data.replace(/\~\//g, "../../"),
       );
 
-      if (options.target === "react") {
-        result = fixReactTypeIssues(result);
-      }
-
       fs.writeFileSync(element, result, "utf8");
     });
 

@@ -12,7 +12,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/interchain-ui-kit-react.esm.js",
+      "module": "./dist/interchain-ui-kit-react.esm.js",
+      "import": "./dist/interchain-ui-kit-react.cjs.mjs",
       "require": "./dist/interchain-ui-kit-react.cjs.js"
     },
     "./styles": {
@@ -112,11 +113,13 @@
     "@chain-registry/types": "^0.18.1",
     "@chain-registry/utils": "^1.14.0",
     "@parcel/config-default": "^2.12.0",
+    "@parcel/core": "^2.12.0",
     "@parcel/optimizer-swc": "^2.12.0",
     "@parcel/optimizer-terser": "^2.12.0",
     "@parcel/reporter-bundle-analyzer": "^2.12.0",
     "@parcel/resolver-default": "^2.12.0",
     "@parcel/transformer-css": "^2.12.0",
+    "@parcel/transformer-js": "^2.12.0",
     "@parcel/transformer-react-refresh-wrap": "^2.12.0",
     "@parcel/transformer-typescript-tsc": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
@@ -129,7 +132,7 @@
     "@storybook/react": "^7.6.16",
     "@storybook/react-vite": "^7.6.16",
     "@storybook/testing-library": "^0.2.2",
-    "@types/react": "^18.2.34",
+    "@types/react": "latest",
     "@vanilla-extract/parcel-transformer": "^1.0.4",
     "@vanilla-extract/vite-plugin": "^4.0.4",
     "@vitejs/plugin-react": "^4.1.0",
@@ -138,8 +141,8 @@
     "parcel-optimizer-unlink-css": "^1.1.0",
     "parcel-resolver-ts-base-url": "^1.3.1",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.x",
+    "react-dom": "^18.x",
     "storybook": "^7.6.16",
     "type-fest": "^4.2.0",
     "vite-plugin-replace": "^0.1.1"
