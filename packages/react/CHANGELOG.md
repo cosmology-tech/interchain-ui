@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.3...@interchain-ui/react@1.22.4) (2024-03-20)
+
+### Bug Fixes
+
+- **compiler:** type issues with forwardRef ([b4cb197](https://github.com/cosmology-tech/interchain-ui/commit/b4cb197f6461cf97fc28d1c467362996e456ad32))
+- remove unnecessary exports ([00ab86e](https://github.com/cosmology-tech/interchain-ui/commit/00ab86e4279c1194828f336d5ace23156faed745))
+
 ## [1.22.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.2...@interchain-ui/react@1.22.3) (2024-03-19)
 
 **Note:** Version bump only for package @interchain-ui/react
