@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@types/node": "latest",
-    "@types/react": "^18.2.62",
+    "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "^14.1.2",

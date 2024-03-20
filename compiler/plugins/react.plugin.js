@@ -1,6 +1,7 @@
 // @ts-check
 const scaffolds = require("../scaffold.config.js");
 const scaffoldConfig = scaffolds.scaffoldConfig;
+const log = require("../log.js");
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}
@@ -93,10 +94,10 @@ function componentHasChildren(component) {
 }
 
 function fixReactTypeIssues(codeStr) {
+  const s1 = transformForwardRef(codeStr);
+
   return (
-    codeStr
-      // Fix forwardRef<TRef, TProps> not putting the second generic parameter TProps in output code
-      .replace(/forwardRef<(.*)\["(.*)"\]>\(/g, `forwardRef<$1["$2"], $1>(`)
+    s1
       // Fix typescript types for children prop
       .replace(/children\?:\sany/g, "children?: React.ReactNode")
       .replace(/Children\s=\sany/g, "Children = React.ReactNode")
@@ -115,6 +116,32 @@ function fixReactTypeIssues(codeStr) {
       .replace(/(fill-rule)="(.*)"/g, `fillRule="$2"`)
       .replace(/(srcset)={(.*)}/g, `srcSet={$2}`)
   );
+}
+
+function transformForwardRef(codeStr) {
+  // First part: Transform the forwardRef part
+  const transformedForwardRef = codeStr.replace(
+    /forwardRef<\s*([A-Za-z]+)Props\s*\[\s*"(\w+)Ref"\s*\]\s*>/g,
+    (match, componentName, ref) => {
+      return `forwardRef<any, ${componentName}Props>`;
+    },
+  );
+
+  // Second part: Transform the function signature to use the correct ref case
+  const transformedFunctionSignature = transformedForwardRef.replace(
+    /function\s+([A-Za-z]+)\s*\(\s*props\s*:\s*\1Props\s*,\s*(\w+)\s*\)/g,
+    (match, componentName, refParam) => {
+      // Ensure the parameter ends with 'Ref' and construct the type key
+      const refParamWithRef = refParam.endsWith("Ref")
+        ? refParam
+        : `${refParam}Ref`;
+      const propKey =
+        refParamWithRef.charAt(0).toLowerCase() + refParamWithRef.slice(1);
+      return `function ${componentName}(props: ${componentName}Props, ${refParamWithRef}: ${componentName}Props["${propKey}"])`;
+    },
+  );
+
+  return transformedFunctionSignature;
 }
 
 function fixIncorrectRefName(codeStr) {
