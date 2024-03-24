@@ -11,9 +11,10 @@
   "module": "./dist/interchain-ui-vue.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
+      "module": "./dist/interchain-ui-vue.js",
       "import": "./dist/interchain-ui-vue.js",
-      "require": "./dist/interchain-ui-vue.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/interchain-ui-vue.umd.cjs"
     },
     "./style.css": {
       "import": "./dist/style.css",
@@ -34,7 +35,7 @@
     "type-fest": "^4.2.0",
     "vue": "^3.4.21",
     "vue-final-modal": "^4.5.4",
-    "zustand": "^4.4.7"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@parcel/compressor-brotli": "^2.12.0",
@@ -68,7 +69,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^7.6.6",
     "typescript": "^5.4.2",
-    "vite": "^5.1.4",
+    "vite": "^5.2.2",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-dts": "^3.7.3",
     "vue-tsc": "^2.0.6"

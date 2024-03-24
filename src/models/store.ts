@@ -82,7 +82,7 @@ export const store = createStore(
       setThemeMode: (newThemeMode: ModePreference) =>
         set((state) => {
           const resolveSystemMode = (
-            themeMode: ModePreference
+            themeMode: ModePreference,
           ): [ThemeVariant, string] => {
             if (themeMode === "system") {
               if (isPreferDarkMode()) {
@@ -121,7 +121,7 @@ export const store = createStore(
 
           if (customTheme !== null) {
             const customThemeObj = currentState.themeDefs.find(
-              (item) => item.name === customTheme
+              (item) => item.name === customTheme,
             );
 
             if (customThemeObj) {
@@ -140,7 +140,7 @@ export const store = createStore(
         });
         return safelyFormatNumberWithFallback(
           formatter,
-          new BigNumber(props.value)
+          new BigNumber(props.value),
         );
       },
       setFormatNumberFn: (fn: NumberFormatter) =>
@@ -155,13 +155,18 @@ export const store = createStore(
     })),
     {
       name: STORAGE_NAME,
+      // NOTE: this is a workaround for SSR frameworks like Next.js
+      // We need to call store.persist.rehydrate() ourselves
+      // More details: https://github.com/pmndrs/zustand/issues/938#issuecomment-1752885433
+      skipHydration: true,
       onRehydrateStorage: () => (state) => {
         state.setHasHydrated(true);
+        state.setThemeMode(state.themeMode);
       },
       // Only choose to persist theme preference, ignore other state
       partialize: (state) => ({
         themeMode: state.themeMode,
       }),
-    }
-  )
+    },
+  ),
 );

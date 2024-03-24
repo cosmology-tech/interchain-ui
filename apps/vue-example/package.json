@@ -13,7 +13,7 @@
     "@iconify/vue": "^4.1.1",
     "vue": "^3.4.21",
     "vue-final-modal": "^4.5.4",
-    "@interchain-ui/vue": "link:../vue"
+    "@interchain-ui/vue": "link:../../packages/vue"
   },
   "devDependencies": {
     "@formkit/auto-animate": "^0.8.1",
@@ -34,9 +34,9 @@
     "rainbow-sprinkles": "^0.17.1",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.4.2",
-    "vite": "^5.1.4",
+    "vite": "^5.2.2",
     "vite-plugin-checker": "^0.6.4",
     "vue-tsc": "^1.8.22",
-    "zustand": "^4.4.7"
+    "zustand": "^4.5.2"
   }
 }

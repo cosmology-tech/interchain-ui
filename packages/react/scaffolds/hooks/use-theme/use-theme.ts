@@ -1,32 +1,55 @@
 import * as React from "react";
-import { useStore } from "zustand";
+
 import { ModePreference, ThemeVariant } from "@/models/system.model";
 import { store as interchainUIStore } from "@/models/store";
+import { StoreApi, useStore } from "zustand";
 
-const useInterchainStore = () => {
-  return useStore(interchainUIStore, (state) => ({
-    theme: state.theme,
-    themeClass: state.themeClass,
-    themeClasses: state.themeClasses,
-    setThemeMode: state.setThemeMode,
-  }));
+// Store helper
+// More details: https://docs.pmnd.rs/zustand/guides/auto-generating-selectors#vanilla-store
+
+type WithSelectors<S> = S extends { getState: () => infer T }
+  ? S & { use: { [K in keyof T]: () => T[K] } }
+  : never;
+
+const createSelectors = <S extends StoreApi<object>>(_store: S) => {
+  const store = _store as WithSelectors<typeof _store>;
+  store.use = {};
+  for (const k of Object.keys(store.getState())) {
+    (store.use as any)[k] = () =>
+      useStore(_store, (s) => s[k as keyof typeof s]);
+  }
+
+  return store;
 };
+
+const useInterchainStore = createSelectors(interchainUIStore);
 
 type ThemeEvalMode = "force" | "normal";
 
 export default function useTheme() {
-  const { theme, setThemeMode, themeClass, themeClasses } =
-    useInterchainStore();
+  const [hasHydrated, setHasHydrated] = React.useState(false);
+
+  const theme = useInterchainStore.use.theme();
+  const setThemeMode = useInterchainStore.use.setThemeMode();
+  const themeClass = useInterchainStore.use.themeClass();
+  const themeClasses = useInterchainStore.use.themeClasses();
+
+  // Rehydrate the store on page load
+  React.useEffect(() => {
+    useInterchainStore.persist.rehydrate();
+    setHasHydrated(true);
+  }, []);
+
   const [themeEvalMode, setThemeEvalMode] =
     React.useState<ThemeEvalMode>("normal");
 
-  const setTheme = React.useCallback((mode: ModePreference) => {
+  const setTheme = (mode: ModePreference) => {
     setThemeMode(mode);
-  }, []);
+  };
 
-  const toggleColorMode = React.useCallback(() => {
+  const toggleColorMode = () => {
     setThemeMode(theme === "light" ? "dark" : "light");
-  }, []);
+  };
 
   const themeEvalRef = React.useRef<HTMLElement | null>(null);
   const forcedModeRef = React.useRef<ThemeVariant | null>(null);
@@ -72,6 +95,7 @@ export default function useTheme() {
   }, []);
 
   return {
+    hasHydrated,
     theme,
     themeClass:
       themeEvalMode === "force"

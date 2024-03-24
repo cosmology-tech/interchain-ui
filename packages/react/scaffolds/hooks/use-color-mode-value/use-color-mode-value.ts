@@ -18,12 +18,12 @@ import useTheme from "../use-theme";
 
 export default function useColorModeValue<TValue extends string>(
   lightValue: TValue,
-  darkValue: TValue
+  darkValue: TValue,
 ) {
   const { colorMode } = useTheme();
 
   return React.useMemo(
-    () => (colorMode === "light" ? lightValue : darkValue) as any,
-    [colorMode, lightValue, darkValue]
+    () => (colorMode === "light" ? lightValue : darkValue) as TValue,
+    [colorMode, lightValue, darkValue],
   );
 }
