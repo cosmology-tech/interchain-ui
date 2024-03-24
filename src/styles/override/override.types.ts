@@ -1,6 +1,7 @@
 import { createVar } from "@vanilla-extract/css";
 import { themeContractTemplate } from "../../styles/themes.css";
 import type { LiteralUnion, PartialDeep } from "type-fest";
+import type { DeepStringConstructor } from "../../helpers/types";
 
 export type CssVar = ReturnType<typeof createVar>;
 
@@ -39,7 +40,7 @@ export type OverrideValue = Partial<
 >;
 
 export type OverrideValueByVariant<
-  TVariant extends LiteralUnion<"default", string>
+  TVariant extends LiteralUnion<"default", string>,
 > = Record<TVariant, OverrideValue>;
 
 // This is provided for user to provide concrete values to override a component
@@ -53,7 +54,9 @@ export type ComponentOverrideSchema = {
   overrides: Array<[CssVar, OverridableProp]>;
 };
 
-export type CustomThemeVars = PartialDeep<typeof themeContractTemplate>;
+export type CustomThemeVars = PartialDeep<
+  DeepStringConstructor<typeof themeContractTemplate>
+>;
 
 // Theme contract customization
 export type SingleThemeDef = {
