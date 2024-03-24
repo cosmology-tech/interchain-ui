@@ -4,8 +4,6 @@ import { ModePreference, ThemeVariant } from "@/models/system.model";
 import { store as interchainUIStore } from "@/models/store";
 import { StoreApi, useStore } from "zustand";
 
-const noop = () => {};
-
 // Store helper
 // More details: https://docs.pmnd.rs/zustand/guides/auto-generating-selectors#vanilla-store
 
@@ -42,8 +40,6 @@ export default function useTheme() {
     setHasHydrated(true);
   }, []);
 
-  console.log("[useTheme] rerender", { theme });
-
   const [themeEvalMode, setThemeEvalMode] =
     React.useState<ThemeEvalMode>("normal");
 
@@ -52,7 +48,6 @@ export default function useTheme() {
   };
 
   const toggleColorMode = () => {
-    console.log("toggleColorMode", theme, theme === "light" ? "dark" : "light");
     setThemeMode(theme === "light" ? "dark" : "light");
   };
 
@@ -100,6 +95,7 @@ export default function useTheme() {
   }, []);
 
   return {
+    hasHydrated,
     theme,
     themeClass:
       themeEvalMode === "force"
