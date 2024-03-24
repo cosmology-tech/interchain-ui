@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.4...@interchain-ui/react@1.22.5) (2024-03-24)
+
+### Bug Fixes
+
+- **theme:** SSR issues ([5f46055](https://github.com/cosmology-tech/interchain-ui/commit/5f46055a5d6ee3022c5ad411b7cf09f2742b7289))
+
 ## [1.22.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.3...@interchain-ui/react@1.22.4) (2024-03-20)
 
 ### Bug Fixes
