@@ -262,4 +262,7 @@ export { default as MeshTableChainCell } from "./ui/mesh-staking/mesh-table-chai
 export { default as MeshTableAPRCell } from "./ui/mesh-staking/mesh-table-chain-cell.lite";
 export { default as MeshTableHeaderAction } from "./ui/mesh-staking/mesh-table-header-action.lite";
 
+// Noble
+export { default as NobleProvider } from "./ui/noble/noble-provider.lite";
+
 // End Components
