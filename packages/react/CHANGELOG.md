@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.6...@interchain-ui/react@1.22.7) (2024-03-31)
+
+### Bug Fixes
+
+- **theme:** deprecate forceThemeMode and rename to themeMode, fix nested theme switch bugs ([64957f3](https://github.com/cosmology-tech/interchain-ui/commit/64957f3865df2cbeb8ec79d3213451e83917e673))
+
 ## [1.22.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.5...@interchain-ui/react@1.22.6) (2024-03-25)
 
 **Note:** Version bump only for package @interchain-ui/react
