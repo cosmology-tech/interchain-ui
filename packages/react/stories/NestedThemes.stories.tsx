@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const NestedTheme: Story = {
   args: {},
   render: (props) => {
-    const { getThemeRef, themeClass } = useTheme();
+    const { getThemeRef } = useTheme();
 
     return (
       <Box
@@ -36,8 +36,9 @@ export const NestedTheme: Story = {
         alignItems="center"
       >
         <Text>Outer</Text>
-        <ThemeProvider forceColorMode="light">
-          <div ref={getThemeRef} className={themeClass}>
+
+        <ThemeProvider themeMode="light">
+          <div ref={getThemeRef}>
             <Box
               p="$6"
               bg="$background"
@@ -47,8 +48,8 @@ export const NestedTheme: Story = {
               borderColor="$red300"
             >
               <Text>
-                Inner (This Box won't change bg color because it's forced to
-                light mode)
+                Inner (This Box won't change bg color because its controlled
+                themeMode is light mode)
               </Text>
             </Box>
           </div>
