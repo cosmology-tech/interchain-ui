@@ -12,7 +12,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true
