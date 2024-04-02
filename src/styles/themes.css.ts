@@ -408,7 +408,7 @@ export const meshDarkThemeClass = createTheme(themeVars, {
     text: "#DAD5E3",
     textInverse: `#2C3137`,
     textSecondary: "#85858E",
-    textDanger: colors.red700,
+    textDanger: "#E35B5B",
     textWarning: colors.orange200,
     textPlaceholder: `#E2E2E2`,
     textSuccess: "#C0EEA4",

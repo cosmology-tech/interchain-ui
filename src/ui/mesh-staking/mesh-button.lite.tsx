@@ -35,8 +35,8 @@ export default function MeshButton(props: MeshButtonProps) {
               hover: "$textPlaceholder",
             }
           : {
-              base: "$textInverse",
-              hover: "$textInverse",
+              base: "$body",
+              hover: "$body",
             };
       }
 
@@ -46,8 +46,8 @@ export default function MeshButton(props: MeshButtonProps) {
             hover: "$textPlaceholder",
           }
         : {
-            base: "$black",
-            hover: "$body",
+            base: "$background",
+            hover: "$background",
           };
     },
     getTextColor: () => {
@@ -56,7 +56,7 @@ export default function MeshButton(props: MeshButtonProps) {
           ? "$white"
           : "$accentText"
         : state.theme === "light"
-          ? "$white"
+          ? "$text"
           : "$text";
     },
   });
