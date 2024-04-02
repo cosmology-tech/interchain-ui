@@ -50,7 +50,9 @@ const Header = (props: {
       direction="vertical"
       space="$14"
       attributes={{
-        width: "100%",
+        position: "relative",
+        // Parent width + x padding
+        width: "calc(100% + 64px)",
       }}
     >
       <Stack
@@ -142,7 +144,7 @@ const Header = (props: {
       <Divider
         position="absolute"
         bottom="0"
-        transform="translateX(-40px)"
+        transform="translateX(-32px)"
         zIndex={0}
       />
     </Stack>

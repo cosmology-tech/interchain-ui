@@ -329,7 +329,7 @@ export const darkThemeClass = createTheme(themeVars, {
     progressBg: "#16191c",
     progressValue: `#A7B4C2`,
     progressCursor: `#EEF2F8`,
-    divider: colors.gray500,
+    divider: colors.whiteAlpha200,
     menuItemBg: `#1D2024`,
     menuItemBgSelected: `#2e3339`,
     menuItemBgHovered: `#25292E`,
