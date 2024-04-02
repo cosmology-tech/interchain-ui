@@ -43,7 +43,7 @@ export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
       display="flex"
       flexDirection="column"
       gap="$2"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       className={clx(props.className)}
     >
