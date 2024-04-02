@@ -99,8 +99,8 @@ export const verticalTrack = style([
 ]);
 
 export const sliderThumb = style({
-  width: "24px",
-  height: "24px",
+  width: "26px",
+  height: "26px",
   borderRadius: "50%",
   background: thumbColorVar,
   position: "relative",
