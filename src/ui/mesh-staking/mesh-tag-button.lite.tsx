@@ -61,6 +61,7 @@ export default function MeshTagButton(props: MeshTagButtonProps) {
       px="$6"
       borderRadius="$md"
       height="$11"
+      width="44px"
       {...props}
       {...props.attributes}
       className={clx(baseButton, props.className)}
