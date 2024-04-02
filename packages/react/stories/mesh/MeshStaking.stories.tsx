@@ -463,7 +463,7 @@ export const ModalView: Story = {
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box>
+          <Box overflow="hidden" maxWidth="752px">
             <Stack
               direction="vertical"
               space="$14"

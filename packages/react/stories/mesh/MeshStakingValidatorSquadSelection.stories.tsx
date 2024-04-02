@@ -490,7 +490,7 @@ export const ModalView: Story = {
           }
           onClose={() => setIsOpen(false)}
         >
-          <Box overflow="hidden">
+          <Box overflow="hidden" maxWidth="752px">
             <Box
               display="flex"
               flexDirection="column"
