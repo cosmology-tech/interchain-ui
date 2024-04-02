@@ -110,6 +110,7 @@ export default function MeshModal(props: MeshModalProps) {
             <MeshButton
               width="$11"
               height="$11"
+              variant="text"
               colorScheme="secondary"
               className={modalCloseButton}
               onClick={(e) => {

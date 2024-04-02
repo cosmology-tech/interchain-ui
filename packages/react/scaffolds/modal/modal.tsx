@@ -1,4 +1,3 @@
-import FadeIn from "@/ui/fade-in";
 import {
   FloatingFocusManager,
   FloatingOverlay,
@@ -100,7 +99,7 @@ function useDialog({
       setLabelId,
       setDescriptionId,
     }),
-    [open, setOpen, interactions, data, labelId, descriptionId]
+    [open, setOpen, interactions, data, labelId, descriptionId],
   );
 }
 
@@ -197,7 +196,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
             }}
           >
             <FloatingFocusManager context={dialog.context}>
-              <FadeIn isVisible={dialog.open}>
+              <div>
                 <div
                   ref={dialogRef}
                   aria-labelledby={dialog.labelId}
@@ -207,7 +206,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                     className: clx(
                       // Make sure themeClass is overridable
                       themeClassName ? themeClassName : themeClass,
-                      className
+                      className,
                     ),
                     style: {
                       position: "relative",
@@ -249,11 +248,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                 <div
                   className={clx(
                     themeClassName,
-                    backdropClassName ? backdropClassName : styles.modalBackdrop
+                    backdropClassName
+                      ? backdropClassName
+                      : styles.modalBackdrop,
                   )}
                   data-testid="modal-backdrop"
                 />
-              </FadeIn>
+              </div>
             </FloatingFocusManager>
           </FloatingOverlay>
         </FloatingPortal>
