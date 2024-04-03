@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.9](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.8...@interchain-ui/react@1.22.9) (2024-04-03)
+
+### Bug Fixes
+
+- adjust max widths ([3faba8b](https://github.com/cosmology-tech/interchain-ui/commit/3faba8b7d805b084c4cbc4d89a3205cca623e7ab))
+- **mesh-ui:** adjust button sizes ([2689a91](https://github.com/cosmology-tech/interchain-ui/commit/2689a91ffb4b5cbe89989731baba7cbdd93d15df))
+- **mesh-ui:** adjust maxWidth for modals ([add045a](https://github.com/cosmology-tech/interchain-ui/commit/add045abf403e4dd3055992157d81c006a0e9f96))
+- **mesh-ui:** adjust styles for mesh staking validator squad preview ([1692589](https://github.com/cosmology-tech/interchain-ui/commit/16925897c932b29acafd9f6a4a1219cbd76917db))
+- **mesh-ui:** data table improvement ([e3ad7cc](https://github.com/cosmology-tech/interchain-ui/commit/e3ad7cc277534571788aa1403f200aacf6bcf7ce))
+- **mesh-ui:** improve staking ([2b660d5](https://github.com/cosmology-tech/interchain-ui/commit/2b660d59f0b97cc8eb3a2c41d3d07fe450766fc7))
+- **mesh-ui:** table styles improve ([e7f5a17](https://github.com/cosmology-tech/interchain-ui/commit/e7f5a17a62ff3504d554a620fbca63af388fe2af))
+- **mesh-ui:** validator squad empty ([532973d](https://github.com/cosmology-tech/interchain-ui/commit/532973d77d7c4d42110e617de9cd426ad25dc8b7))
+- **slider:** increase thumb size ([3d52136](https://github.com/cosmology-tech/interchain-ui/commit/3d52136b829b00d7670a0e28d5f7bdd88109ad2a))
+- **story:** data sometimes not available due to limit ([08216bf](https://github.com/cosmology-tech/interchain-ui/commit/08216bffd9c192c1390b30b00a6bca3a35ce3f4f))
+
 ## [1.22.8](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.7...@interchain-ui/react@1.22.8) (2024-04-01)
 
 **Note:** Version bump only for package @interchain-ui/react
