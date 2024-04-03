@@ -65,7 +65,6 @@ export default function ThemeProvider(props: ThemeProviderProps) {
           return finalThemeMode === "dark" ? darkThemeClass : lightThemeClass;
         }
 
-        console.log("controlled provider", props.themeMode);
         return props.themeMode === "dark" ? darkThemeClass : lightThemeClass;
       }
 

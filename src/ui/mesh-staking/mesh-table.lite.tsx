@@ -110,13 +110,6 @@ export default function MeshTable(props: MeshTableProps) {
           pinnedTableMeasureRef.scrollHeight >
           pinnedTableMeasureRef.clientHeight;
 
-        console.log("Scroll", {
-          scrollHeight: measureRef.scrollHeight,
-          clientHeight: measureRef.clientHeight,
-          scrollTop: measureRef.scrollTop,
-          isScrollable1,
-        });
-
         if (!isScrollable1) {
           return (state.displayPinnedTableBottomShadow = false);
         }
