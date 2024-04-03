@@ -110,6 +110,7 @@ export default function MeshModal(props: MeshModalProps) {
             <MeshButton
               width="$11"
               height="$11"
+              variant="text"
               colorScheme="secondary"
               className={modalCloseButton}
               onClick={(e) => {
@@ -123,7 +124,9 @@ export default function MeshModal(props: MeshModalProps) {
       }
       className={props.modalContainerClassName}
       contentClassName={clsx(modalContent, props?.modalContentClassName)}
-      childrenClassName={modalChildren}
+      childrenClassName={clsx(
+        props.modalChildrenClassName ? null : modalChildren,
+      )}
     >
       <div ref={parentRef}>{props.children}</div>
       {/* @ts-expect-error */}

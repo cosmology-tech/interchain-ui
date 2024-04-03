@@ -29,7 +29,7 @@ useDefaultProps<Partial<MeshTableHeaderActionProps>>({
 });
 
 export default function MeshTableHeaderAction(
-  props: MeshTableHeaderActionProps
+  props: MeshTableHeaderActionProps,
 ) {
   const state = useStore({
     theme: "light",
@@ -63,6 +63,7 @@ export default function MeshTableHeaderAction(
           <Text
             color="$textSuccess"
             fontSize="$md"
+            fontWeight="$normal"
             attributes={{
               display: "flex",
               justifyContent: "center",
@@ -79,6 +80,7 @@ export default function MeshTableHeaderAction(
           <Text
             color="$textDanger"
             fontSize="$md"
+            fontWeight="$normal"
             attributes={{
               display: "flex",
               justifyContent: "center",

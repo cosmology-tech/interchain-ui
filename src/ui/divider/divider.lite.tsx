@@ -17,7 +17,7 @@ export default function Divider(props: DividerProps) {
     <Box
       width={props?.orientation === "horizontal" ? "100%" : "1px"}
       height={props?.orientation === "horizontal" ? "1px" : "100%"}
-      backgroundColor="$inputBorder"
+      backgroundColor="$divider"
       {...props}
     />
   );

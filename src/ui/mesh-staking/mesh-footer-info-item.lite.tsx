@@ -43,7 +43,7 @@ export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
       display="flex"
       flexDirection="column"
       gap="$2"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       className={clx(props.className)}
     >
@@ -56,7 +56,11 @@ export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
       </Text>
 
       <Show when={props.subDescription}>
-        <Text fontSize="$xs" color="$textSuccess">
+        <Text
+          fontSize="$xs"
+          color="$textSuccess"
+          {...props.subDescriptionProps}
+        >
           {props.subDescription}
         </Text>
       </Show>

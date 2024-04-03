@@ -8,7 +8,8 @@ import {
   useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
-import IconButton from "../icon-button";
+import Button from "../button";
+import Icon from "../icon";
 import { store } from "../../models/store";
 import * as styles from "./connect-modal-head.css";
 import { connectModalHeadTitleOverrides } from "./connect-modal-head.helper";
@@ -56,16 +57,16 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
     <div className={clx(styles.modalHeader, props.className)}>
       <Show when={props.hasBackButton}>
         <div className={styles.modalBackButton}>
-          <IconButton
-            icon="arrowLeftSLine"
-            intent="secondary"
+          <Button
             variant="ghost"
+            intent="secondary"
             size="sm"
-            iconSize="$2xl"
             onClick={(e) => {
               props.onBack?.(e);
             }}
-          />
+          >
+            <Icon name="arrowLeftSLine" size="$2xl" color="$text" />
+          </Button>
         </div>
       </Show>
 
@@ -73,7 +74,7 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
         id={props.id}
         className={styles.modalHeaderText[state.theme]}
         style={state.overrideManager?.applyOverrides(
-          connectModalHeadTitleOverrides.name
+          connectModalHeadTitleOverrides.name,
         )}
         {...props.titleProps}
       >
@@ -82,15 +83,15 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
 
       <Show when={props.hasCloseButton}>
         <div className={styles.modalCloseButton}>
-          <IconButton
-            icon="closeFilled"
-            intent="secondary"
+          <Button
             variant="ghost"
+            intent="secondary"
             size="sm"
-            iconSize="$2xl"
             domAttributes={props.closeButtonProps}
             onClick={(e) => props.closeButtonProps?.onClick?.(e)}
-          />
+          >
+            <Icon name="closeFilled" size="$2xl" color="$text" />
+          </Button>
         </div>
       </Show>
     </div>

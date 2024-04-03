@@ -76,6 +76,7 @@ export const themeContractTemplate = {
     menuItemBgHovered: ``,
     menuItemBgActive: ``,
     skeletonBg: ``,
+    overflowShadowBg: ``,
     ...colors,
   },
   font: {
@@ -295,6 +296,8 @@ export const lightThemeClass = createTheme(themeVars, {
     menuItemBgActive: `#DDE4ED`,
     skeletonBg: `#DDE4ED`,
     trackBg: `#EBEFF5`,
+    overflowShadowBg:
+      "linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.85) 24%, rgba(255,255,255,0.75) 32%, rgba(255,255,255,0.65) 48%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 95%)",
     ...colors,
   },
 });
@@ -329,13 +332,15 @@ export const darkThemeClass = createTheme(themeVars, {
     progressBg: "#16191c",
     progressValue: `#A7B4C2`,
     progressCursor: `#EEF2F8`,
-    divider: colors.gray500,
+    divider: colors.whiteAlpha200,
     menuItemBg: `#1D2024`,
     menuItemBgSelected: `#2e3339`,
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
     skeletonBg: `#3B434D`,
     trackBg: `#49525E`,
+    overflowShadowBg:
+      "linear-gradient(to bottom, rgba(29, 32, 36, 0), rgba(29, 32, 36, 0.6))",
     ...colors,
   },
 });
@@ -379,6 +384,8 @@ export const meshLightThemeClass = createTheme(themeVars, {
     menuItemBgActive: `#DDE4ED`,
     skeletonBg: `#DDE4ED`,
     trackBg: `#EBEFF5`,
+    overflowShadowBg:
+      "linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.85) 24%, rgba(255,255,255,0.75) 32%, rgba(255,255,255,0.65) 48%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 95%)",
     // Override colors
     gray50: "#F7FAFC",
     gray100: "#E1DBEB",
@@ -408,7 +415,7 @@ export const meshDarkThemeClass = createTheme(themeVars, {
     text: "#DAD5E3",
     textInverse: `#2C3137`,
     textSecondary: "#85858E",
-    textDanger: colors.red700,
+    textDanger: "#E35B5B",
     textWarning: colors.orange200,
     textPlaceholder: `#E2E2E2`,
     textSuccess: "#C0EEA4",
@@ -432,6 +439,8 @@ export const meshDarkThemeClass = createTheme(themeVars, {
     menuItemBgActive: `#2C3137`,
     skeletonBg: `#3B434D`,
     trackBg: `#49525E`,
+    overflowShadowBg:
+      "linear-gradient(0deg, rgba(17,17,19,1) 5%, rgba(9,9,121,0) 35%)",
     // Override colors
     gray50: "#F7FAFC",
     gray100: "#E1DBEB",

@@ -48,7 +48,7 @@ export const modalBackdropBg = styleVariants({
     height: `100%`,
     opacity: 0.99,
     backgroundColor: themeVars.colors.gray600,
-    backdropFilter: "blur(7px) opacity(10%)",
+    backdropFilter: "blur(20px) opacity(20%)",
   },
   dark: {
     position: `fixed`,
@@ -59,16 +59,16 @@ export const modalBackdropBg = styleVariants({
     width: `100%`,
     height: `100%`,
     opacity: 0.99,
-    backgroundColor: themeVars.colors.gray900,
-    backdropFilter: "blur(7px) opacity(10%)",
+    backgroundColor: "rgba(17, 17, 19, 0.8)",
+    backdropFilter: "blur(20px) opacity(20%)",
   },
 });
 
 export const modalChildren = style([
   {
     minWidth: themeVars.space.containerSm,
-    paddingLeft: themeVars.space["14"],
-    paddingRight: themeVars.space["14"],
+    paddingLeft: themeVars.space["11"],
+    paddingRight: themeVars.space["11"],
     paddingBottom: themeVars.space["12"],
   },
 ]);

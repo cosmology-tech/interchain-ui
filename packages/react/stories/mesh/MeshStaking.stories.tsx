@@ -31,6 +31,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const MAX_CONTAINER_WIDTH = "752px";
+
 const MeshSlider = () => {
   const TOTAL_TOKENS = 5422;
   const [value, setValue] = React.useState<number | number[]>(25);
@@ -182,12 +184,39 @@ const MeshStakingHeader = (props) => (
   </Stack>
 );
 
+// Just a mock data generator for the story
+const useStakingState = () => {
+  const [stakingState, setStakingState] = useState<
+    Record<string, { amountStaked: number }>
+  >({
+    OSMO: {
+      amountStaked: 0,
+    },
+    JUNO: {
+      amountStaked: 12345,
+    },
+    LVN: {
+      amountStaked: 55434.1,
+    },
+    STARS: {
+      amountStaked: 0,
+    },
+  });
+
+  return [stakingState, setStakingState] as const;
+};
+
 export const InterchainUITheme: Story = {
   args: {},
   render: (props) => {
     const { isReady, assets } = useMockData();
+    const [stakingState] = useStakingState();
+    // console.log("all assets", assets);
 
-    console.log("all assets", assets);
+    if (!isReady) {
+      return <Text>Loading...</Text>;
+    }
+
     const osmosis = assets.find((asset) => asset.symbol === "OSMO");
     const juno = assets.find((asset) => asset.symbol === "JUNO");
     const levana = assets.find((asset) => asset.symbol === "LVN");
@@ -198,7 +227,7 @@ export const InterchainUITheme: Story = {
         borderRadius="$lg"
         p="$10"
         backgroundColor="$cardBg"
-        maxWidth="$containerMd"
+        maxWidth={MAX_CONTAINER_WIDTH}
       >
         <MeshStakingHeader asset={osmosis} />
 
@@ -230,7 +259,7 @@ export const InterchainUITheme: Story = {
                   tokenImgSrc={asset.imgSrc}
                   tokenSymbol={asset.symbol}
                   tokenAPR="12.25% APR"
-                  isActive={(index + 1) % 2 === 0}
+                  isActive={stakingState[asset.symbol].amountStaked > 0}
                 />
 
                 <MeshSlider />
@@ -295,10 +324,13 @@ export const InterchainUITheme: Story = {
 export const MeshUICustomTheme: Story = {
   args: {},
   render: (props) => {
-    const [isOpen, setIsOpen] = useState(false);
     const { isReady, assets } = useMockData();
 
-    console.log("all assets", assets);
+    // console.log("all assets", assets);
+    if (!isReady) {
+      return <Text>Loading...</Text>;
+    }
+
     const osmosis = assets.find((asset) => asset.symbol === "OSMO");
     const juno = assets.find((asset) => asset.symbol === "JUNO");
     const levana = assets.find((asset) => asset.symbol === "LVN");
@@ -310,7 +342,7 @@ export const MeshUICustomTheme: Story = {
           borderRadius="$lg"
           p="$10"
           backgroundColor="$cardBg"
-          maxWidth="$containerMd"
+          maxWidth={MAX_CONTAINER_WIDTH}
         >
           <MeshStakingHeader asset={osmosis} />
 
@@ -403,7 +435,12 @@ export const ModalView: Story = {
   render: (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const { isReady, assets } = useMockData();
-    console.log("all assets", assets);
+
+    // console.log("all assets", assets);
+    if (!isReady) {
+      return <Text>Loading...</Text>;
+    }
+
     const osmosis = assets.find((asset) => asset.symbol === "OSMO");
     const juno = assets.find((asset) => asset.symbol === "JUNO");
     const levana = assets.find((asset) => asset.symbol === "LVN");
@@ -428,7 +465,7 @@ export const ModalView: Story = {
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box>
+          <Box maxWidth={MAX_CONTAINER_WIDTH}>
             <Stack
               direction="vertical"
               space="$14"
@@ -498,6 +535,14 @@ export const ModalView: Story = {
             </Box>
           </Box>
         </MeshModal>
+
+        <Text
+          attributes={{
+            mt: "$10",
+          }}
+        >
+          Some other text to test transparent modal background
+        </Text>
       </div>
     );
   },

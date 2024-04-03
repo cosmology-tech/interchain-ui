@@ -6,7 +6,6 @@ import Icon from "../../src/ui/icon";
 import Stack from "../../src/ui/stack";
 import Button from "../../src/ui/button";
 import Text from "../../src/ui/text";
-import Divider from "../../src/ui/divider";
 import { useMockData, DefaultNormalizedAsset } from "../stub/mock-data-client";
 import useColorModeValue from "../../src/ui/hooks/use-color-mode-value";
 import { formatNumeric } from "../../src/helpers/number";
@@ -44,12 +43,12 @@ const validatorThumbnails = [
   akashImage,
 ];
 
+const MAX_CONTAINER_WIDTH = "752px";
+
 const Header = (props: {
   assets: DefaultNormalizedAsset[];
   isDefaultTheme?: boolean;
 }) => {
-  const [activeTab, setActiveTab] = useState<number>(0);
-
   return (
     <Stack
       direction="vertical"
@@ -98,50 +97,6 @@ const Header = (props: {
         >
           Confirm Changes
         </Text>
-      </Stack>
-
-      <Stack
-        direction="horizontal"
-        space="$8"
-        attributes={{
-          zIndex: 1,
-        }}
-      >
-        {props.assets.map((asset, index) => (
-          <MeshTab
-            key={asset.name}
-            isActive={index === activeTab}
-            onClick={() => setActiveTab(index)}
-          >
-            <Stack
-              direction="horizontal"
-              space="$4"
-              attributes={{
-                alignItems: "center",
-              }}
-            >
-              <Box
-                as="img"
-                width="20px"
-                height="20px"
-                attributes={{
-                  src: asset?.imgSrc ?? "",
-                  alt: asset.name,
-                }}
-              />
-
-              <Text
-                as="p"
-                fontSize="$sm"
-                fontWeight="$normal"
-                color="inherit"
-                lineHeight="$lg"
-              >
-                {asset.name}
-              </Text>
-            </Stack>
-          </MeshTab>
-        ))}
       </Stack>
     </Stack>
   );
@@ -242,11 +197,16 @@ export const InterchainUITheme: Story = {
       [levana, stargaze],
     );
 
+    if (!isReady) {
+      return <Text>Loading data ...</Text>;
+    }
+
     return (
       <Box
         borderRadius="$lg"
         p="$12"
         backgroundColor="$cardBg"
+        maxWidth={MAX_CONTAINER_WIDTH}
         overflow="hidden"
       >
         <Header isDefaultTheme assets={headerAssets} />
@@ -283,6 +243,7 @@ export const InterchainUITheme: Story = {
                   width: "160px",
                   render: (rowData: MeshTableStakeRow) => (
                     <MeshTableChainCell
+                      size="xs"
                       name={rowData.chain.name}
                       imgSrc={rowData.chain.logo}
                     />
@@ -376,6 +337,7 @@ export const InterchainUITheme: Story = {
                   width: "160px",
                   render: (rowData: MeshTableUnstakeRow) => (
                     <MeshTableChainCell
+                      size="xs"
                       name={rowData.chain.name}
                       imgSrc={rowData.chain.logo}
                     />
@@ -411,13 +373,7 @@ export const InterchainUITheme: Story = {
             />
           </Box>
 
-          <Stack
-            direction="vertical"
-            space="$0"
-            attributes={{
-              paddingBottom: "$10",
-            }}
-          >
+          <Stack direction="vertical" space="$0">
             <Button>
               <Text
                 as="span"
@@ -506,12 +462,17 @@ export const MeshUICustomTheme: Story = {
       [levana, stargaze],
     );
 
+    if (!isReady) {
+      return <Text>Loading data ...</Text>;
+    }
+
     return (
       <MeshProvider>
         <Box
           borderRadius="$lg"
           p="$12"
           backgroundColor="$cardBg"
+          maxWidth={MAX_CONTAINER_WIDTH}
           overflow="hidden"
         >
           <Header assets={headerAssets} />
@@ -547,6 +508,7 @@ export const MeshUICustomTheme: Story = {
                     width: "160px",
                     render: (rowData: MeshTableStakeRow) => (
                       <MeshTableChainCell
+                        size="sm"
                         name={rowData.chain.name}
                         imgSrc={rowData.chain.logo}
                       />
@@ -640,6 +602,7 @@ export const MeshUICustomTheme: Story = {
                     width: "160px",
                     render: (rowData: MeshTableUnstakeRow) => (
                       <MeshTableChainCell
+                        size="sm"
                         name={rowData.chain.name}
                         imgSrc={rowData.chain.logo}
                       />
@@ -675,13 +638,7 @@ export const MeshUICustomTheme: Story = {
               />
             </Box>
 
-            <Stack
-              direction="vertical"
-              space="$0"
-              attributes={{
-                paddingBottom: "$10",
-              }}
-            >
+            <Stack direction="vertical" space="$0">
               <MeshButton width="264px">Confirm</MeshButton>
             </Stack>
           </Box>
@@ -762,6 +719,10 @@ export const ModalView: Story = {
       [levana, stargaze],
     );
 
+    if (!isReady) {
+      return <Text>Loading data ...</Text>;
+    }
+
     return (
       <div>
         <MeshModal
@@ -778,21 +739,10 @@ export const ModalView: Story = {
             );
           }}
           isOpen={isOpen}
-          title={
-            <>
-              <Header assets={headerAssets} />
-
-              <Divider
-                position="absolute"
-                bottom="0"
-                transform="translateX(-40px)"
-                zIndex={0}
-              />
-            </>
-          }
+          title={<Header assets={headerAssets} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box overflow="hidden">
+          <Box maxWidth={MAX_CONTAINER_WIDTH}>
             <Box
               display="flex"
               flexDirection="column"
@@ -825,6 +775,7 @@ export const ModalView: Story = {
                       width: "160px",
                       render: (rowData: MeshTableStakeRow) => (
                         <MeshTableChainCell
+                          size="sm"
                           name={rowData.chain.name}
                           imgSrc={rowData.chain.logo}
                         />
@@ -911,6 +862,7 @@ export const ModalView: Story = {
                       width: "160px",
                       render: (rowData: MeshTableUnstakeRow) => (
                         <MeshTableChainCell
+                          size="sm"
                           name={rowData.chain.name}
                           imgSrc={rowData.chain.logo}
                         />
@@ -943,13 +895,7 @@ export const ModalView: Story = {
                 />
               </Box>
 
-              <Stack
-                direction="vertical"
-                space="$0"
-                attributes={{
-                  paddingBottom: "$10",
-                }}
-              >
+              <Stack direction="vertical" space="$0">
                 <MeshButton width="264px">Confirm</MeshButton>
               </Stack>
             </Box>
