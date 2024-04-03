@@ -20,6 +20,8 @@ import MeshFooterInfoItem from "../../src/ui/mesh-staking/mesh-footer-info-item"
 import MeshStakingSliderInfo from "../../src/ui/mesh-staking/mesh-staking-slider-info";
 import MeshProvider from "../../src/ui/mesh-staking/mesh-provider";
 
+const MAX_CONTAINER_WIDTH = "752px";
+
 const meta: Meta<typeof MeshModal> = {
   component: MeshModal,
   title: "mesh/MeshUnstake",
@@ -191,7 +193,12 @@ export const InterchainUITheme: Story = {
     const stargaze = assets.find((asset) => asset.symbol === "STARS");
 
     return (
-      <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
+      <Box
+        bg="$cardBg"
+        p="$12"
+        borderRadius="$lg"
+        maxWidth={MAX_CONTAINER_WIDTH}
+      >
         <MeshStakingHeader asset={osmosis} />
         <Stack
           direction="vertical"
@@ -325,7 +332,12 @@ export const MeshUICustomTheme: Story = {
 
     return (
       <MeshProvider>
-        <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
+        <Box
+          bg="$cardBg"
+          p="$12"
+          borderRadius="$lg"
+          maxWidth={MAX_CONTAINER_WIDTH}
+        >
           <MeshStakingHeader asset={osmosis} />
           <Stack
             direction="vertical"
@@ -469,7 +481,7 @@ export const ModalView: Story = {
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box maxWidth="752px">
+          <Box maxWidth={MAX_CONTAINER_WIDTH}>
             <Stack
               direction="vertical"
               space="$14"

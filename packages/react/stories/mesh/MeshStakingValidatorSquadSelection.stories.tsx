@@ -39,6 +39,8 @@ const validatorThumbnails = [
   akashImage,
 ];
 
+const MAX_CONTAINER_WIDTH = "752px";
+
 const Header = (props: {
   assets: DefaultNormalizedAsset[];
   isDefaultTheme?: boolean;
@@ -248,6 +250,7 @@ export const InterchainUITheme: Story = {
         backgroundColor="$cardBg"
         p="$12"
         borderRadius="$lg"
+        maxWidth={MAX_CONTAINER_WIDTH}
       >
         <Header isDefaultTheme assets={headerAssets} />
 
@@ -457,6 +460,7 @@ export const MeshUICustomTheme: Story = {
           overflow="hidden"
           backgroundColor="$cardBg"
           p="$12"
+          maxWidth={MAX_CONTAINER_WIDTH}
           borderRadius="$lg"
         >
           <Header assets={headerAssets} />
@@ -682,7 +686,7 @@ export const ModalView: Story = {
           }
           onClose={() => setIsOpen(false)}
         >
-          <Box maxWidth="752px">
+          <Box maxWidth={MAX_CONTAINER_WIDTH}>
             <Box
               display="flex"
               flexDirection="column"

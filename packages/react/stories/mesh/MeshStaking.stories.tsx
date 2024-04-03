@@ -31,6 +31,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const MAX_CONTAINER_WIDTH = "752px";
+
 const MeshSlider = () => {
   const TOTAL_TOKENS = 5422;
   const [value, setValue] = React.useState<number | number[]>(25);
@@ -225,7 +227,7 @@ export const InterchainUITheme: Story = {
         borderRadius="$lg"
         p="$10"
         backgroundColor="$cardBg"
-        maxWidth="$containerMd"
+        maxWidth={MAX_CONTAINER_WIDTH}
       >
         <MeshStakingHeader asset={osmosis} />
 
@@ -340,7 +342,7 @@ export const MeshUICustomTheme: Story = {
           borderRadius="$lg"
           p="$10"
           backgroundColor="$cardBg"
-          maxWidth="$containerMd"
+          maxWidth={MAX_CONTAINER_WIDTH}
         >
           <MeshStakingHeader asset={osmosis} />
 
@@ -463,7 +465,7 @@ export const ModalView: Story = {
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box maxWidth="752px">
+          <Box maxWidth={MAX_CONTAINER_WIDTH}>
             <Stack
               direction="vertical"
               space="$14"
