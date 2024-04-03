@@ -91,7 +91,7 @@ export interface MeshTableHeaderActionProps extends BaseComponentProps {
 
 // ==== Mesh table cells
 export interface MeshTableChainCellProps extends BaseComponentProps {
-  size?: "sm" | "md";
+  size?: "xs" | "sm" | "md";
   name: string;
   imgSrc: string;
 }

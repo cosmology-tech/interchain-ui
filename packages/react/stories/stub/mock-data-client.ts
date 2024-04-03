@@ -107,9 +107,7 @@ class MockDataClient {
     }
 
     try {
-      const fetchResults = await this.registry.fetchUrls();
-      console.log("fetchResults", fetchResults);
-
+      await this.registry.fetchUrls();
       this._isInitialized = true;
     } catch (err) {
       console.log("MockDataClient: Failed to fetch urls", err);

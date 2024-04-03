@@ -1,21 +1,42 @@
 import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
-export const tableRow = style({});
-
-export const tableCell = style({
+export const tableRow = style({
   selectors: {
-    [`${tableRow} &:first-child`]: {
-      borderTopLeftRadius: themeVars.radii.sm,
-      borderBottomLeftRadius: themeVars.radii.sm,
-    },
-    [`${tableRow} &:last-child`]: {
-      borderTopRightRadius: themeVars.radii.sm,
-      borderBottomRightRadius: themeVars.radii.sm,
+    "&:hover": {
+      backgroundColor: "rgba(218, 213, 227, 0.1)",
     },
   },
 });
 
+export const tableCell = style({
+  height: themeVars.space["14"],
+  selectors: {
+    [`${tableRow} &:first-child`]: {
+      borderTopLeftRadius: themeVars.radii["base"],
+      borderBottomLeftRadius: themeVars.radii["base"],
+    },
+    [`${tableRow} &:last-child`]: {
+      borderTopRightRadius: themeVars.radii["base"],
+      borderBottomRightRadius: themeVars.radii["base"],
+    },
+  },
+});
+
+export const tableBody = style({
+  selectors: {
+    "&:before": {
+      content: '""',
+      display: "block",
+      height: themeVars.space["9"],
+    },
+    "&:after": {
+      content: '""',
+      display: "block",
+      height: themeVars.space["9"],
+    },
+  },
+});
 export const borderedTableCell = style({
   position: "relative",
   height: "calc(40px + 1px)",
@@ -31,6 +52,14 @@ export const borderedTableCell = style({
       backgroundColor: themeVars.colors.divider,
     },
   },
+});
+
+export const firstRowCell = style({
+  paddingTop: themeVars.space["4"],
+});
+
+export const lastRowCell = style({
+  paddingBottom: themeVars.space["9"],
 });
 
 export const scrollBarThumbBgVar = createVar();

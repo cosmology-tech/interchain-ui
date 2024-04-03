@@ -50,7 +50,9 @@ const Header = (props: {
       direction="vertical"
       space="$14"
       attributes={{
-        width: "100%",
+        position: "relative",
+        // Parent width + x padding
+        width: "calc(100% + 64px)",
       }}
     >
       <Stack
@@ -140,6 +142,13 @@ const Header = (props: {
           </MeshTab>
         ))}
       </Stack>
+
+      <Divider
+        position="absolute"
+        bottom="0"
+        transform="translateX(-32px)"
+        zIndex={0}
+      />
     </Stack>
   );
 };
@@ -147,6 +156,7 @@ const Header = (props: {
 // ==== Define your row data type
 type MeshTableValidatorRow = {
   id: string;
+  isSelected: boolean;
   validator: {
     name: string;
     logo: string;
@@ -172,6 +182,7 @@ export const InterchainUITheme: Story = {
       () =>
         [...Array(20).keys()].map((index) => ({
           id: `row_${index}`,
+          isSelected: false,
           validator: {
             name: `Validator ${index + 1}`,
             logo: validatorThumbnails[1] ?? "",
@@ -190,12 +201,12 @@ export const InterchainUITheme: Story = {
         borderRadius="$lg"
       >
         <Header isDefaultTheme assets={headerAssets} />
+
         <Box
           display="flex"
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-          pt="$10"
           maxWidth="100%"
         >
           {/* Stake section */}
@@ -219,10 +230,13 @@ export const InterchainUITheme: Story = {
                   align: "left",
                   width: "300px",
                   render: (rowData: MeshTableValidatorRow) => (
-                    <MeshTableChainCell
-                      name={rowData.validator.name}
-                      imgSrc={rowData.validator.logo}
-                    />
+                    <Box pl="$6">
+                      <MeshTableChainCell
+                        size="xs"
+                        name={rowData.validator.name}
+                        imgSrc={rowData.validator.logo}
+                      />
+                    </Box>
                   ),
                 },
                 {
@@ -293,6 +307,11 @@ export const InterchainUITheme: Story = {
   },
 };
 
+const defaultPinnedRowIds = Array.from(
+  { length: 20 },
+  (_, index) => `row_${index}`,
+);
+
 export const MeshUICustomTheme: Story = {
   args: {},
   render: (props) => {
@@ -306,19 +325,69 @@ export const MeshUICustomTheme: Story = {
       Boolean,
     ) as DefaultNormalizedAsset[];
 
-    const rowsData: MeshTableValidatorRow[] = useMemo(
-      () =>
-        [...Array(20).keys()].map((index) => ({
-          id: `row_${index}`,
-          validator: {
-            name: `Validator ${index + 1}`,
-            logo: validatorThumbnails[1] ?? "",
-          },
-          votingPower: "5.6%",
-          commission: "5.6%",
-        })),
-      [],
+    const [rowsData, setRowsData] = useState<MeshTableValidatorRow[]>(() =>
+      [...Array(40).keys()].map((index) => ({
+        id: `row_${index}`,
+        isSelected: false,
+        validator: {
+          name: `Validator ${index + 1}`,
+          logo: validatorThumbnails[1] ?? "",
+        },
+        votingPower: "5.6%",
+        commission: "5.6%",
+      })),
     );
+
+    const [pinnedRowIds, setPinnedRowIds] =
+      React.useState<string[]>(defaultPinnedRowIds);
+
+    const selectRow = (rowId: string) => {
+      const row = rowsData.find((row) => row.id === rowId);
+
+      if (row) {
+        setRowsData((prevRowsData) => {
+          const updatedRowsData = prevRowsData.map((prevRow) => {
+            if (prevRow.id === row.id) {
+              return {
+                ...prevRow,
+                isSelected: true,
+              };
+            }
+            return prevRow;
+          });
+
+          return updatedRowsData;
+        });
+
+        setPinnedRowIds((prev) => {
+          return Array.from(new Set([...prev, rowId]));
+        });
+      }
+    };
+
+    const unselectRow = (rowId: string) => {
+      const row = rowsData.find((row) => row.id === rowId);
+
+      if (row) {
+        setRowsData((prevRowsData) => {
+          const updatedRowsData = prevRowsData.map((prevRow) => {
+            if (prevRow.id === row.id) {
+              return {
+                ...prevRow,
+                isSelected: false,
+              };
+            }
+            return prevRow;
+          });
+
+          return updatedRowsData;
+        });
+
+        setPinnedRowIds((prev) => {
+          return prev.filter((id) => id !== rowId);
+        });
+      }
+    };
 
     return (
       <MeshProvider>
@@ -334,7 +403,6 @@ export const MeshUICustomTheme: Story = {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            pt="$10"
             maxWidth="100%"
           >
             {/* Stake section */}
@@ -349,8 +417,8 @@ export const MeshUICustomTheme: Story = {
               <MeshTable
                 borderless
                 rowHeight="$14"
-                pinnedIds={["row_0", "row_1", "row_2"]}
-                maxPinnedRows={2}
+                pinnedIds={pinnedRowIds}
+                maxPinnedRows={4}
                 columns={[
                   {
                     id: "validator",
@@ -358,10 +426,13 @@ export const MeshUICustomTheme: Story = {
                     align: "left",
                     width: "300px",
                     render: (rowData: MeshTableValidatorRow) => (
-                      <MeshTableChainCell
-                        name={rowData.validator.name}
-                        imgSrc={rowData.validator.logo}
-                      />
+                      <Box pl="$6">
+                        <MeshTableChainCell
+                          size="xs"
+                          name={rowData.validator.name}
+                          imgSrc={rowData.validator.logo}
+                        />
+                      </Box>
                     ),
                   },
                   {
@@ -392,9 +463,18 @@ export const MeshUICustomTheme: Story = {
                         alignItems="center"
                       >
                         {isPinned ? (
-                          <MeshButton variant="text">Remove</MeshButton>
+                          <MeshButton
+                            variant="text"
+                            onClick={() => unselectRow(rowData.id)}
+                          >
+                            Remove
+                          </MeshButton>
                         ) : (
-                          <MeshButton variant="text" color="$textSuccess">
+                          <MeshButton
+                            variant="text"
+                            color="$textSuccess"
+                            onClick={() => selectRow(rowData.id)}
+                          >
                             Select
                           </MeshButton>
                         )}
@@ -446,19 +526,69 @@ export const ModalView: Story = {
       Boolean,
     ) as DefaultNormalizedAsset[];
 
-    const rowsData: MeshTableValidatorRow[] = useMemo(
-      () =>
-        [...Array(20).keys()].map((index) => ({
-          id: `row_${index}`,
-          validator: {
-            name: `Validator ${index + 1}`,
-            logo: validatorThumbnails[1] ?? "",
-          },
-          votingPower: "5.6%",
-          commission: "5.6%",
-        })),
-      [],
+    const [rowsData, setRowsData] = useState<MeshTableValidatorRow[]>(() =>
+      [...Array(40).keys()].map((index) => ({
+        id: `row_${index}`,
+        isSelected: false,
+        validator: {
+          name: `Validator ${index + 1}`,
+          logo: validatorThumbnails[1] ?? "",
+        },
+        votingPower: "5.6%",
+        commission: "5.6%",
+      })),
     );
+
+    const [pinnedRowIds, setPinnedRowIds] =
+      React.useState<string[]>(defaultPinnedRowIds);
+
+    const selectRow = (rowId: string) => {
+      const row = rowsData.find((row) => row.id === rowId);
+
+      if (row) {
+        setRowsData((prevRowsData) => {
+          const updatedRowsData = prevRowsData.map((prevRow) => {
+            if (prevRow.id === row.id) {
+              return {
+                ...prevRow,
+                isSelected: true,
+              };
+            }
+            return prevRow;
+          });
+
+          return updatedRowsData;
+        });
+
+        setPinnedRowIds((prev) => {
+          return Array.from(new Set([...prev, rowId]));
+        });
+      }
+    };
+
+    const unselectRow = (rowId: string) => {
+      const row = rowsData.find((row) => row.id === rowId);
+
+      if (row) {
+        setRowsData((prevRowsData) => {
+          const updatedRowsData = prevRowsData.map((prevRow) => {
+            if (prevRow.id === row.id) {
+              return {
+                ...prevRow,
+                isSelected: false,
+              };
+            }
+            return prevRow;
+          });
+
+          return updatedRowsData;
+        });
+
+        setPinnedRowIds((prev) => {
+          return prev.filter((id) => id !== rowId);
+        });
+      }
+    };
 
     return (
       <div>
@@ -496,7 +626,6 @@ export const ModalView: Story = {
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
-              pt="$10"
               maxWidth="100%"
             >
               {/* Stake section */}
@@ -511,8 +640,8 @@ export const ModalView: Story = {
                 <MeshTable
                   borderless
                   rowHeight="$14"
-                  pinnedIds={["row_0", "row_1", "row_2"]}
-                  maxPinnedRows={2}
+                  pinnedIds={pinnedRowIds}
+                  maxPinnedRows={4}
                   columns={[
                     {
                       id: "validator",
@@ -520,10 +649,13 @@ export const ModalView: Story = {
                       align: "left",
                       width: "300px",
                       render: (rowData: MeshTableValidatorRow) => (
-                        <MeshTableChainCell
-                          name={rowData.validator.name}
-                          imgSrc={rowData.validator.logo}
-                        />
+                        <Box pl="$6">
+                          <MeshTableChainCell
+                            size="xs"
+                            name={rowData.validator.name}
+                            imgSrc={rowData.validator.logo}
+                          />
+                        </Box>
                       ),
                     },
                     {
@@ -554,9 +686,18 @@ export const ModalView: Story = {
                           alignItems="center"
                         >
                           {isPinned ? (
-                            <MeshButton variant="text">Remove</MeshButton>
+                            <MeshButton
+                              variant="text"
+                              onClick={() => unselectRow(rowData.id)}
+                            >
+                              Remove
+                            </MeshButton>
                           ) : (
-                            <MeshButton variant="text" color="$textSuccess">
+                            <MeshButton
+                              variant="text"
+                              color="$textSuccess"
+                              onClick={() => selectRow(rowData.id)}
+                            >
                               Select
                             </MeshButton>
                           )}
