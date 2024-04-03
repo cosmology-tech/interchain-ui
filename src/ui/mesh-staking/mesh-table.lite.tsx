@@ -106,11 +106,11 @@ export default function MeshTable(props: MeshTableProps) {
 
     if (pinnedTableMeasureRef) {
       const scrollHandler2 = () => {
-        const isScrollable1 =
+        const isScrollable2 =
           pinnedTableMeasureRef.scrollHeight >
           pinnedTableMeasureRef.clientHeight;
 
-        if (!isScrollable1) {
+        if (!isScrollable2) {
           return (state.displayPinnedTableBottomShadow = false);
         }
 
@@ -487,6 +487,9 @@ export default function MeshTable(props: MeshTableProps) {
         <Box
           boxRef={shadowRef}
           position="absolute"
+          display={
+            !props.pinnedIds || props.pinnedIds.length === 0 ? "none" : "block"
+          }
           width="$full"
           bottom="$0"
           className={standardTransitionProperties}

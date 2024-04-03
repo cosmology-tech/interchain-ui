@@ -53,8 +53,7 @@ const Header = (props: {
       space="$14"
       attributes={{
         position: "relative",
-        // Parent width + x padding
-        width: "calc(100% + 64px)",
+        width: "100%",
       }}
     >
       <Stack
@@ -146,7 +145,7 @@ const Header = (props: {
       <Divider
         position="absolute"
         bottom="0"
-        transform="translateX(-32px)"
+        transform="scaleX(1.2)"
         zIndex={0}
       />
     </Stack>
@@ -170,7 +169,12 @@ export const InterchainUITheme: Story = {
 
     return (
       <Box maxWidth={MAX_CONTAINER_WIDTH}>
-        <Box backgroundColor="$cardBg" p="$12" borderRadius="$md">
+        <Box
+          overflow="hidden"
+          backgroundColor="$cardBg"
+          p="$12"
+          borderRadius="$md"
+        >
           <Header isDefaultTheme assets={headerAssets} />
 
           <Box
@@ -223,7 +227,12 @@ export const MeshUICustomTheme: Story = {
     return (
       <MeshProvider>
         <Box maxWidth={MAX_CONTAINER_WIDTH}>
-          <Box backgroundColor="$cardBg" p="$12" borderRadius="$md">
+          <Box
+            overflow="hidden"
+            backgroundColor="$cardBg"
+            p="$12"
+            borderRadius="$md"
+          >
             <Header assets={headerAssets} />
 
             <Box

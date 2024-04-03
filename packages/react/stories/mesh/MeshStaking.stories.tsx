@@ -68,6 +68,7 @@ const MeshSlider = () => {
               as="output"
               color="$text"
               fontSize="$md"
+              fontFamily="$body"
               attributes={outputProps}
             >
               {`${formatNumeric(valuePercent * TOTAL_TOKENS, 2)}`}
@@ -78,6 +79,7 @@ const MeshSlider = () => {
               color={useColorModeValue("$textSecondary", "$textPlaceholder")}
               fontSize="$sm"
               fontWeight="$light"
+              fontFamily="$body"
               attributes={labelProps}
             >
               OSMO
