@@ -17,7 +17,7 @@ useMetadata({
 });
 
 export default function MeshTableValidatorsCell(
-  props: MeshTableValidatorsCellProps
+  props: MeshTableValidatorsCellProps,
 ) {
   const state = useStore({
     theme: "light",
@@ -46,7 +46,10 @@ export default function MeshTableValidatorsCell(
             key={validator.name + index}
             display="inline-block"
             overflow="hidden"
-            width="24px"
+            width="26px"
+            height="24px"
+            flexShrink={0}
+            flexGrow={0}
             borderRadius="$full"
             backgroundColor="$white"
             borderColor={state.theme === "dark" ? "$black" : "$gray100"}
