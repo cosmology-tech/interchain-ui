@@ -178,20 +178,69 @@ export const InterchainUITheme: Story = {
       Boolean,
     ) as DefaultNormalizedAsset[];
 
-    const rowsData: MeshTableValidatorRow[] = useMemo(
-      () =>
-        [...Array(20).keys()].map((index) => ({
-          id: `row_${index}`,
-          isSelected: false,
-          validator: {
-            name: `Validator ${index + 1}`,
-            logo: validatorThumbnails[1] ?? "",
-          },
-          votingPower: "5.6%",
-          commission: "5.6%",
-        })),
-      [],
+    const [rowsData, setRowsData] = useState<MeshTableValidatorRow[]>(() =>
+      [...Array(40).keys()].map((index) => ({
+        id: `row_${index}`,
+        isSelected: false,
+        validator: {
+          name: `Validator ${index + 1}`,
+          logo: validatorThumbnails[1] ?? "",
+        },
+        votingPower: "5.6%",
+        commission: "5.6%",
+      })),
     );
+
+    const [pinnedRowIds, setPinnedRowIds] =
+      React.useState<string[]>(defaultPinnedRowIds);
+
+    const selectRow = (rowId: string) => {
+      const row = rowsData.find((row) => row.id === rowId);
+
+      if (row) {
+        setRowsData((prevRowsData) => {
+          const updatedRowsData = prevRowsData.map((prevRow) => {
+            if (prevRow.id === row.id) {
+              return {
+                ...prevRow,
+                isSelected: true,
+              };
+            }
+            return prevRow;
+          });
+
+          return updatedRowsData;
+        });
+
+        setPinnedRowIds((prev) => {
+          return Array.from(new Set([...prev, rowId]));
+        });
+      }
+    };
+
+    const unselectRow = (rowId: string) => {
+      const row = rowsData.find((row) => row.id === rowId);
+
+      if (row) {
+        setRowsData((prevRowsData) => {
+          const updatedRowsData = prevRowsData.map((prevRow) => {
+            if (prevRow.id === row.id) {
+              return {
+                ...prevRow,
+                isSelected: false,
+              };
+            }
+            return prevRow;
+          });
+
+          return updatedRowsData;
+        });
+
+        setPinnedRowIds((prev) => {
+          return prev.filter((id) => id !== rowId);
+        });
+      }
+    };
 
     return (
       <Box
@@ -221,8 +270,8 @@ export const InterchainUITheme: Story = {
             <MeshTable
               borderless
               rowHeight="$14"
-              pinnedIds={["row_0", "row_1", "row_2"]}
-              maxPinnedRows={2}
+              pinnedIds={pinnedRowIds}
+              maxPinnedRows={4}
               columns={[
                 {
                   id: "validator",
@@ -293,13 +342,26 @@ export const InterchainUITheme: Story = {
 
           <Stack
             direction="vertical"
-            space="$0"
+            space="$6"
             attributes={{
               paddingBottom: "$10",
             }}
           >
-            <MeshButton width="264px">Next</MeshButton>
-            <MeshButton variant="text">Pick random</MeshButton>
+            <Button size="md">
+              <Text
+                color="inherit"
+                as="span"
+                attributes={{
+                  width: "264px",
+                }}
+              >
+                Next
+              </Text>
+            </Button>
+
+            <Button size="md" variant="ghost" intent="secondary">
+              Pick random
+            </Button>
           </Stack>
         </Box>
       </Box>
@@ -620,7 +682,7 @@ export const ModalView: Story = {
           }
           onClose={() => setIsOpen(false)}
         >
-          <Box overflow="hidden" maxWidth="752px">
+          <Box maxWidth="752px">
             <Box
               display="flex"
               flexDirection="column"

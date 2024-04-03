@@ -50,7 +50,7 @@ export default function MeshTable(props: MeshTableProps) {
     displayBottomShadow: false,
     displayPinnedTableBottomShadow: false,
     pinnedRows: [],
-    unpinnedRows: [],
+    unpinnedRows: props.data ?? [],
     shouldSplitPinnedTable: () => {
       const DEFAULT_SPLIT_THRESHOLD = 4;
       const threshold = props.maxPinnedRows ?? DEFAULT_SPLIT_THRESHOLD;
@@ -76,73 +76,76 @@ export default function MeshTable(props: MeshTableProps) {
       state.theme = newState.theme;
     });
 
+    let cleanupRef1 = () => {};
+    let cleanupRef2 = () => {};
+
     if (measureRef) {
-      if (measureRef.clientHeight >= 380) {
-        state.displayBottomShadow = true;
-      } else {
-        state.displayBottomShadow = false;
-      }
+      const scrollHandler1 = () => {
+        const isScrollable1 = measureRef.scrollHeight > measureRef.clientHeight;
 
-      const scrollHandler = () => {
-        const height = Math.abs(
-          measureRef.scrollHeight -
-            measureRef.clientHeight -
-            measureRef.scrollTop,
-        );
+        if (!isScrollable1) {
+          return (state.displayBottomShadow = false);
+        }
 
-        if (height < 1) {
+        if (measureRef.scrollTop === 0) {
           state.displayBottomShadow = false;
         } else {
           state.displayBottomShadow = true;
         }
       };
 
-      measureRef.addEventListener("scroll", scrollHandler);
+      scrollHandler1();
+      measureRef.addEventListener("scroll", scrollHandler1);
 
-      cleanupRef = () => {
-        if (cleanupStore) {
-          cleanupStore();
-        }
-
+      cleanupRef1 = () => {
         if (measureRef) {
-          measureRef.removeEventListener("scroll", scrollHandler);
+          measureRef.removeEventListener("scroll", scrollHandler1);
         }
       };
     }
 
     if (pinnedTableMeasureRef) {
-      if (pinnedTableMeasureRef.clientHeight >= 380) {
-        state.displayPinnedTableBottomShadow = true;
-      } else {
-        state.displayPinnedTableBottomShadow = false;
-      }
+      const scrollHandler2 = () => {
+        const isScrollable1 =
+          pinnedTableMeasureRef.scrollHeight >
+          pinnedTableMeasureRef.clientHeight;
 
-      const scrollHandler = () => {
-        const height = Math.abs(
-          pinnedTableMeasureRef.scrollHeight -
-            pinnedTableMeasureRef.clientHeight -
-            pinnedTableMeasureRef.scrollTop,
-        );
+        console.log("Scroll", {
+          scrollHeight: measureRef.scrollHeight,
+          clientHeight: measureRef.clientHeight,
+          scrollTop: measureRef.scrollTop,
+          isScrollable1,
+        });
 
-        if (height < 1) {
+        if (!isScrollable1) {
+          return (state.displayPinnedTableBottomShadow = false);
+        }
+
+        if (pinnedTableMeasureRef.scrollTop === 0) {
           state.displayPinnedTableBottomShadow = false;
         } else {
           state.displayPinnedTableBottomShadow = true;
         }
       };
 
-      pinnedTableMeasureRef.addEventListener("scroll", scrollHandler);
+      scrollHandler2();
+      pinnedTableMeasureRef.addEventListener("scroll", scrollHandler2);
 
-      cleanupRef = () => {
-        if (cleanupStore) {
-          cleanupStore();
-        }
-
+      cleanupRef2 = () => {
         if (pinnedTableMeasureRef) {
-          pinnedTableMeasureRef.removeEventListener("scroll", scrollHandler);
+          pinnedTableMeasureRef.removeEventListener("scroll", scrollHandler2);
         }
       };
     }
+
+    cleanupRef = () => {
+      if (cleanupStore) {
+        cleanupStore();
+      }
+
+      cleanupRef1();
+      cleanupRef2();
+    };
   });
 
   onUnMount(() => {
@@ -150,6 +153,8 @@ export default function MeshTable(props: MeshTableProps) {
   });
 
   onUpdate(() => {
+    if (!props.pinnedIds) return;
+
     let newPinnedRows = [];
     let newUnpinnedRows = [];
 
@@ -174,39 +179,16 @@ export default function MeshTable(props: MeshTableProps) {
   }, [props.data, props.pinnedIds]);
 
   onUpdate(() => {
-    if (!pinnedTableShadowRef) return;
-
-    // Animation not init yet
-    if (pinnedTableShadowRef && !pinnedTableAnimationRef) {
-      pinnedTableAnimationRef = anime({
-        targets: pinnedTableShadowRef,
-        opacity: [0, 1],
-        height: [0, 36],
-        delay: 50,
-        duration: 250,
-        direction: `alternate`,
-        loop: false,
-        autoplay: false,
-        easing: `easeInOutSine`,
-      });
-    }
-
-    if (state.displayPinnedTableBottomShadow) {
-      pinnedTableAnimationRef?.restart();
-    } else {
-      pinnedTableAnimationRef?.reverse();
-    }
-  }, [state.displayPinnedTableBottomShadow, pinnedTableShadowRef]);
-
-  onUpdate(() => {
     if (!shadowRef) return;
 
-    // Animation not init yet
-    if (shadowRef && !animationRef) {
-      animationRef = anime({
-        targets: shadowRef,
-        opacity: [0, 1],
-        height: [0, 36],
+    const playAnimation = (isShown: boolean, elementRef: any) => {
+      const opacity = isShown ? [0, 1] : [1, 0];
+      const height = isShown ? [0, 45] : [45, 0];
+
+      anime({
+        targets: elementRef,
+        opacity: opacity,
+        height: height,
         delay: 50,
         duration: 250,
         direction: `alternate`,
@@ -214,14 +196,19 @@ export default function MeshTable(props: MeshTableProps) {
         autoplay: false,
         easing: `easeInOutSine`,
       });
-    }
+    };
 
-    if (state.displayBottomShadow) {
-      animationRef?.restart();
-    } else {
-      animationRef?.reverse();
-    }
-  }, [state.displayBottomShadow, shadowRef]);
+    playAnimation(state.displayBottomShadow, shadowRef);
+
+    if (!pinnedTableShadowRef) return;
+
+    playAnimation(state.displayPinnedTableBottomShadow, pinnedTableShadowRef);
+  }, [
+    state.displayBottomShadow,
+    shadowRef,
+    state.displayPinnedTableBottomShadow,
+    pinnedTableShadowRef,
+  ]);
 
   return (
     <Box
@@ -240,6 +227,7 @@ export default function MeshTable(props: MeshTableProps) {
     >
       <Box
         position="relative"
+        className={clx(styles.scrollBar)}
         display={state.shouldSplitPinnedTable() ? "block" : "none"}
         maxHeight={state.shouldSplitPinnedTable() ? "214px" : undefined}
         boxRef={pinnedTableMeasureRef}
@@ -317,14 +305,18 @@ export default function MeshTable(props: MeshTableProps) {
           </TableHead>
         </Table>
 
-        <div
-          ref={pinnedTableShadowRef}
-          className={clx({
-            [styles.bottomShadow.light]: state.theme === "light",
-            [styles.bottomShadow.dark]: state.theme === "dark",
-          })}
-          data-is-visible={state.displayBottomShadow}
-        />
+        <Box
+          boxRef={pinnedTableShadowRef}
+          position="absolute"
+          width="$full"
+          bottom="$0"
+          className={standardTransitionProperties}
+        >
+          <div
+            className={styles.bottomShadow}
+            data-is-visible={state.displayPinnedTableBottomShadow}
+          />
+        </Box>
       </Box>
 
       <Show when={state.shouldSplitPinnedTable()}>
@@ -335,6 +327,7 @@ export default function MeshTable(props: MeshTableProps) {
 
       <Box
         boxRef={measureRef}
+        className={clx(styles.scrollBar)}
         position="relative"
         maxHeight={state.shouldPinHeader() ? "312px" : undefined}
         overflowY="auto"
@@ -498,16 +491,18 @@ export default function MeshTable(props: MeshTableProps) {
           </TableBody>
         </Table>
 
-        <Show when={state.shouldPinHeader()}>
+        <Box
+          boxRef={shadowRef}
+          position="absolute"
+          width="$full"
+          bottom="$0"
+          className={standardTransitionProperties}
+        >
           <div
-            ref={shadowRef}
-            className={clx({
-              [styles.bottomShadow.light]: state.theme === "light",
-              [styles.bottomShadow.dark]: state.theme === "dark",
-            })}
+            className={styles.bottomShadow}
             data-is-visible={state.displayBottomShadow}
           />
-        </Show>
+        </Box>
       </Box>
     </Box>
   );

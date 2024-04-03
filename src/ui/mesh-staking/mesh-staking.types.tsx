@@ -3,6 +3,7 @@ import type {
   GridColumn,
 } from "../../models/components.model";
 import type { BoxProps } from "../box/box.types";
+import type { TextProps } from "../text/text.types";
 import type { ButtonProps } from "../button/button.types";
 
 export interface MeshProviderProps extends BaseComponentProps {}
@@ -55,6 +56,7 @@ export interface MeshFooterInfoItemProps extends BaseComponentProps {
   title: string;
   description: string;
   subDescription?: string;
+  subDescriptionProps?: TextProps;
 }
 
 export interface MeshValidatorSquadEmptyProps extends BaseComponentProps {

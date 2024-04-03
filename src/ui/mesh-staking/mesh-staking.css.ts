@@ -1,10 +1,10 @@
-import { style, createVar, styleVariants } from "@vanilla-extract/css";
+import { style, createVar } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
 export const tableRow = style({
   selectors: {
     "&:hover": {
-      backgroundColor: "rgba(218, 213, 227, 0.1)",
+      backgroundColor: `rgb(from ${themeVars.colors.text} r g b / 0.1)`,
     },
   },
 });
@@ -91,35 +91,24 @@ export const scrollBar = style([
   },
 ]);
 
-const listBottomShadowBgVar = createVar();
-
-const bottomShadowBase = style({
-  height: "36px",
-  position: "absolute",
-  left: 0,
-  bottom: 0,
+export const bottomShadow = style({
+  height: "45px",
+  position: "relative",
   width: "100%",
-  background: listBottomShadowBgVar,
+  backgroundColor: `rgb(from ${themeVars.colors.cardBg} r g b / 0.75)`,
+  backdropFilter: "blur(1px)",
+  opacity: 0.99,
   zIndex: 10,
-});
-
-export const bottomShadow = styleVariants({
-  light: [
-    bottomShadowBase,
-    {
-      vars: {
-        [listBottomShadowBgVar]:
-          "linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.85) 24%, rgba(255,255,255,0.75) 32%, rgba(255,255,255,0.65) 48%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 95%)",
-      },
+  selectors: {
+    "&:after": {
+      content: '""',
+      position: "absolute",
+      width: "100%",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "45px",
+      background: themeVars.colors.overflowShadowBg,
     },
-  ],
-  dark: [
-    bottomShadowBase,
-    {
-      vars: {
-        [listBottomShadowBgVar]:
-          "linear-gradient(0deg, rgba(17,17,19,1) 5%, rgba(9,9,121,0) 35%)",
-      },
-    },
-  ],
+  },
 });

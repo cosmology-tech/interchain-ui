@@ -56,7 +56,11 @@ export default function MeshFooterInfoItem(props: MeshFooterInfoItemProps) {
       </Text>
 
       <Show when={props.subDescription}>
-        <Text fontSize="$xs" color="$textSuccess">
+        <Text
+          fontSize="$xs"
+          color="$textSuccess"
+          {...props.subDescriptionProps}
+        >
           {props.subDescription}
         </Text>
       </Show>

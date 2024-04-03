@@ -286,7 +286,7 @@ export const ModalView: Story = {
           title={<Header assets={headerAssets} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box overflow="hidden" maxWidth="752px">
+          <Box maxWidth="752px">
             <Box
               display="flex"
               flexDirection="column"

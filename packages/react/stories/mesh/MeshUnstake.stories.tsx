@@ -233,6 +233,7 @@ export const InterchainUITheme: Story = {
         <Text
           as="p"
           fontSize="$sm"
+          fontWeight="$light"
           color="$gray200"
           attributes={{
             margin: "0 auto",
@@ -279,12 +280,19 @@ export const InterchainUITheme: Story = {
               title="43.4%"
               description="APR"
               subDescription="+43.4%"
+              subDescriptionProps={{
+                color: "$textSecondary",
+              }}
             />
             <MeshFooterInfoItem
               title="$32.25"
               description="Daily reward"
               subDescription="+$32.25"
+              subDescriptionProps={{
+                color: "$textSecondary",
+              }}
             />
+
             <MeshFooterInfoItem title="27 days" description="Unbonding time" />
           </Box>
 
@@ -405,11 +413,17 @@ export const MeshUICustomTheme: Story = {
                 title="43.4%"
                 description="APR"
                 subDescription="+43.4%"
+                subDescriptionProps={{
+                  color: "$textSecondary",
+                }}
               />
               <MeshFooterInfoItem
                 title="$32.25"
                 description="Daily reward"
                 subDescription="+$32.25"
+                subDescriptionProps={{
+                  color: "$textSecondary",
+                }}
               />
               <MeshFooterInfoItem
                 title="27 days"
@@ -455,7 +469,7 @@ export const ModalView: Story = {
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box>
+          <Box maxWidth="752px">
             <Stack
               direction="vertical"
               space="$14"
@@ -531,11 +545,17 @@ export const ModalView: Story = {
                   title="43.4%"
                   description="APR"
                   subDescription="+43.4%"
+                  subDescriptionProps={{
+                    color: "$textSecondary",
+                  }}
                 />
                 <MeshFooterInfoItem
                   title="$32.25"
                   description="Daily reward"
                   subDescription="+$32.25"
+                  subDescriptionProps={{
+                    color: "$textSecondary",
+                  }}
                 />
                 <MeshFooterInfoItem
                   title="27 days"

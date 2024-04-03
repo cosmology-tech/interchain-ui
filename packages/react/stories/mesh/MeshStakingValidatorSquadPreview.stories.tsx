@@ -240,7 +240,7 @@ export const InterchainUITheme: Story = {
                   width: "160px",
                   render: (rowData: MeshTableStakeRow) => (
                     <MeshTableChainCell
-                      size="sm"
+                      size="xs"
                       name={rowData.chain.name}
                       imgSrc={rowData.chain.logo}
                     />
@@ -334,6 +334,7 @@ export const InterchainUITheme: Story = {
                   width: "160px",
                   render: (rowData: MeshTableUnstakeRow) => (
                     <MeshTableChainCell
+                      size="xs"
                       name={rowData.chain.name}
                       imgSrc={rowData.chain.logo}
                     />
@@ -597,6 +598,7 @@ export const MeshUICustomTheme: Story = {
                     width: "160px",
                     render: (rowData: MeshTableUnstakeRow) => (
                       <MeshTableChainCell
+                        size="sm"
                         name={rowData.chain.name}
                         imgSrc={rowData.chain.logo}
                       />
@@ -736,7 +738,7 @@ export const ModalView: Story = {
           title={<Header assets={headerAssets} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box overflow="hidden" maxWidth="752px">
+          <Box maxWidth="752px">
             <Box
               display="flex"
               flexDirection="column"
@@ -856,6 +858,7 @@ export const ModalView: Story = {
                       width: "160px",
                       render: (rowData: MeshTableUnstakeRow) => (
                         <MeshTableChainCell
+                          size="sm"
                           name={rowData.chain.name}
                           imgSrc={rowData.chain.logo}
                         />
