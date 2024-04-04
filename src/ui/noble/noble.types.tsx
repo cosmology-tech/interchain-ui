@@ -1,5 +1,6 @@
 import type { BaseComponentProps } from "../../models/components.model";
-import { BoxProps } from "../box/box.types";
+import type { BoxProps } from "../box/box.types";
+import type { ButtonProps } from "../button/button.types";
 
 export interface NobleProviderProps extends BaseComponentProps {}
 
@@ -22,4 +23,23 @@ export interface NobleTxProgressBarProps extends BaseComponentProps {
 export interface NobleTxStepItemProps extends BaseComponentProps {
   step: string;
   status: "completed" | "processing" | "pending";
+}
+
+type BaseButtonProps = Omit<
+  ButtonProps,
+  "variant" | "intent" | "size" | "isLoading" | "spinnerPlacement"
+>;
+
+export type NobleButtonVariant = "text" | "solid";
+export type NobleButtonSize = "sm" | "lg";
+
+export interface NobleButtonProps extends BaseButtonProps {
+  color?: BoxProps["color"];
+  width?: BoxProps["width"];
+  height?: BoxProps["height"];
+  variant?: NobleButtonVariant;
+  size?: NobleButtonSize;
+  fontSize?: BoxProps["fontSize"];
+  fontWeight?: BoxProps["fontWeight"];
+  lineHeight?: BoxProps["lineHeight"];
 }
