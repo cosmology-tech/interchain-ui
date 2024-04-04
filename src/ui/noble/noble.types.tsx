@@ -15,7 +15,11 @@ export interface NobleTxProgressBarProps extends BaseComponentProps {
   progress: number;
   width?: BoxProps["width"];
   mx?: BoxProps["mx"];
-  my?: BoxProps["my"];
   mt?: BoxProps["mt"];
   mb?: BoxProps["mb"];
+}
+
+export interface NobleTxStepItemProps extends BaseComponentProps {
+  step: string;
+  status: "completed" | "processing" | "pending";
 }

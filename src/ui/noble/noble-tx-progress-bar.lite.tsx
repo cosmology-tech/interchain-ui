@@ -21,7 +21,6 @@ useMetadata({
 useDefaultProps<Partial<NobleTxProgressBarProps>>({
   width: "$full",
   mx: "$0",
-  my: "$0",
   mt: "$0",
   mb: "$0",
 });
@@ -69,7 +68,6 @@ export default function NobleTxProgressBar(props: NobleTxProgressBarProps) {
     <Box
       width={props.width}
       mx={props.mx}
-      my={props.my}
       mt={props.mt}
       mb={props.mb}
       height="$6"
