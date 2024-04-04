@@ -14,8 +14,9 @@ export interface ThemeProviderProps extends BaseComponentProps {
   accent?: Accent;
   // TODO: rename all ThemeVariant related public API to use colorMode
   defaultTheme?: UIState["theme"];
-  // Force color mode regardless of what locally saved mode is
-  forceColorMode?: UIState["theme"];
+  // Controlled prop themeMode, this will override the themeMode in the store
+  // and will not be persisted in localstorage
+  themeMode?: UIState["themeMode"];
   overrides?: ComponentOverrideMap;
   children?: any;
   themeDefs?: Array<ThemeDef>;

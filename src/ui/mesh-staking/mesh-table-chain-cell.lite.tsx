@@ -44,9 +44,65 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
   });
 
   return (
-    <Show
-      when={props.size === "sm"}
-      else={
+    <>
+      <Show when={props.size === "xs"}>
+        <Stack
+          direction="horizontal"
+          space="$8"
+          attributes={{
+            alignItems: "center",
+            minWidth: "$28",
+          }}
+        >
+          <Box
+            as="img"
+            width="$10"
+            height="$10"
+            attributes={{
+              src: props.imgSrc,
+              alt: props.name,
+            }}
+          />
+
+          <Text
+            fontSize="$sm"
+            fontWeight="$medium"
+            color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
+          >
+            {props.name}
+          </Text>
+        </Stack>
+      </Show>
+
+      <Show when={props.size === "sm"}>
+        <Stack
+          direction="horizontal"
+          space="$8"
+          attributes={{
+            alignItems: "center",
+            minWidth: "$28",
+          }}
+        >
+          <Box
+            as="img"
+            width="$12"
+            height="$12"
+            attributes={{
+              src: props.imgSrc,
+              alt: props.name,
+            }}
+          />
+
+          <Text
+            fontWeight="$medium"
+            color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
+          >
+            {props.name}
+          </Text>
+        </Stack>
+      </Show>
+
+      <Show when={props.size === "md"}>
         <Stack
           direction="horizontal"
           space="$8"
@@ -72,33 +128,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
             {props.name}
           </Text>
         </Stack>
-      }
-    >
-      <Stack
-        direction="horizontal"
-        space="$8"
-        attributes={{
-          alignItems: "center",
-          minWidth: "$28",
-        }}
-      >
-        <Box
-          as="img"
-          width="$12"
-          height="$12"
-          attributes={{
-            src: props.imgSrc,
-            alt: props.name,
-          }}
-        />
-
-        <Text
-          fontWeight="$medium"
-          color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
-        >
-          {props.name}
-        </Text>
-      </Stack>
-    </Show>
+      </Show>
+    </>
   );
 }

@@ -99,8 +99,8 @@ export const verticalTrack = style([
 ]);
 
 export const sliderThumb = style({
-  width: "20px",
-  height: "20px",
+  width: themeVars.space["11"],
+  height: themeVars.space["11"],
   borderRadius: "50%",
   background: thumbColorVar,
   position: "relative",
@@ -136,8 +136,8 @@ export const sliderThumb = style({
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
-      width: "8px",
-      height: "8px",
+      width: "10px",
+      height: "10px",
     },
     // Thumb outer circle
     "&:before": {
@@ -149,8 +149,8 @@ export const sliderThumb = style({
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
-      width: "14px",
-      height: "14px",
+      width: "18px",
+      height: "18px",
     },
   },
 });

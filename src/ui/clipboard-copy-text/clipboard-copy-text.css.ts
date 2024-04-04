@@ -13,6 +13,7 @@ const containerStyleBase = style({
   justifyContent: "center",
   borderWidth: "1px",
   borderStyle: "solid",
+  gap: themeVars.space[4],
   paddingInlineStart: themeVars.space[4],
   paddingInlineEnd: themeVars.space[4],
   paddingTop: themeVars.space[1],

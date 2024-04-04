@@ -20,6 +20,8 @@ import MeshFooterInfoItem from "../../src/ui/mesh-staking/mesh-footer-info-item"
 import MeshStakingSliderInfo from "../../src/ui/mesh-staking/mesh-staking-slider-info";
 import MeshProvider from "../../src/ui/mesh-staking/mesh-provider";
 
+const MAX_CONTAINER_WIDTH = "752px";
+
 const meta: Meta<typeof MeshModal> = {
   component: MeshModal,
   title: "mesh/MeshUnstake",
@@ -191,7 +193,12 @@ export const InterchainUITheme: Story = {
     const stargaze = assets.find((asset) => asset.symbol === "STARS");
 
     return (
-      <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
+      <Box
+        bg="$cardBg"
+        p="$12"
+        borderRadius="$lg"
+        maxWidth={MAX_CONTAINER_WIDTH}
+      >
         <MeshStakingHeader asset={osmosis} />
         <Stack
           direction="vertical"
@@ -233,6 +240,7 @@ export const InterchainUITheme: Story = {
         <Text
           as="p"
           fontSize="$sm"
+          fontWeight="$light"
           color="$gray200"
           attributes={{
             margin: "0 auto",
@@ -279,12 +287,19 @@ export const InterchainUITheme: Story = {
               title="43.4%"
               description="APR"
               subDescription="+43.4%"
+              subDescriptionProps={{
+                color: "$textSecondary",
+              }}
             />
             <MeshFooterInfoItem
               title="$32.25"
               description="Daily reward"
               subDescription="+$32.25"
+              subDescriptionProps={{
+                color: "$textSecondary",
+              }}
             />
+
             <MeshFooterInfoItem title="27 days" description="Unbonding time" />
           </Box>
 
@@ -317,7 +332,12 @@ export const MeshUICustomTheme: Story = {
 
     return (
       <MeshProvider>
-        <Box bg="$cardBg" p="$12" borderRadius="$lg" maxWidth="$containerMd">
+        <Box
+          bg="$cardBg"
+          p="$12"
+          borderRadius="$lg"
+          maxWidth={MAX_CONTAINER_WIDTH}
+        >
           <MeshStakingHeader asset={osmosis} />
           <Stack
             direction="vertical"
@@ -405,11 +425,17 @@ export const MeshUICustomTheme: Story = {
                 title="43.4%"
                 description="APR"
                 subDescription="+43.4%"
+                subDescriptionProps={{
+                  color: "$textSecondary",
+                }}
               />
               <MeshFooterInfoItem
                 title="$32.25"
                 description="Daily reward"
                 subDescription="+$32.25"
+                subDescriptionProps={{
+                  color: "$textSecondary",
+                }}
               />
               <MeshFooterInfoItem
                 title="27 days"
@@ -455,7 +481,7 @@ export const ModalView: Story = {
           title={<MeshStakingHeader asset={osmosis} />}
           onClose={() => setIsOpen(false)}
         >
-          <Box>
+          <Box maxWidth={MAX_CONTAINER_WIDTH}>
             <Stack
               direction="vertical"
               space="$14"
@@ -531,11 +557,17 @@ export const ModalView: Story = {
                   title="43.4%"
                   description="APR"
                   subDescription="+43.4%"
+                  subDescriptionProps={{
+                    color: "$textSecondary",
+                  }}
                 />
                 <MeshFooterInfoItem
                   title="$32.25"
                   description="Daily reward"
                   subDescription="+$32.25"
+                  subDescriptionProps={{
+                    color: "$textSecondary",
+                  }}
                 />
                 <MeshFooterInfoItem
                   title="27 days"

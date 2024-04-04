@@ -47,10 +47,10 @@ type GetAssetListOptions = {
   chainNames?: string[];
   filterFn?: (
     assetList: ChainRegistryFetcher["assetLists"][number],
-    chainNames: string[]
+    chainNames: string[],
   ) => boolean;
   normalizeFn?: (
-    asset: ChainRegistryFetcher["assetLists"][number]
+    asset: ChainRegistryFetcher["assetLists"][number],
   ) => DefaultNormalizedAsset[];
   limit?: number;
 };
@@ -59,23 +59,23 @@ type GetComboboxOptions = {
   chainNames?: string[];
   filterFn?: (
     assetList: ChainRegistryFetcher["assetLists"][number],
-    chainNames: string[]
+    chainNames: string[],
   ) => boolean;
   normalizeFn?: (
-    asset: ChainRegistryFetcher["assetLists"][number]
+    asset: ChainRegistryFetcher["assetLists"][number],
   ) => ComboboxOptionAsset[];
   limit?: number;
 };
 
 const defaultFilterAsset = (
   assetList: ChainRegistryFetcher["assetLists"][number],
-  chainNames: string[]
+  chainNames: string[],
 ) => {
   return chainNames.includes(assetList.chain_name);
 };
 
 const defaultNormalizeAsset = (
-  assetList: ChainRegistryFetcher["assetLists"][number]
+  assetList: ChainRegistryFetcher["assetLists"][number],
 ) => {
   return assetList.assets.map(
     (item, index) =>
@@ -87,7 +87,7 @@ const defaultNormalizeAsset = (
         address: item.address,
         imgSrc:
           item.logo_URIs?.jpeg || item.logo_URIs?.png || item.logo_URIs?.svg,
-      } as DefaultNormalizedAsset)
+      }) as DefaultNormalizedAsset,
   );
 };
 
@@ -125,19 +125,24 @@ class MockDataClient {
     ],
     filterFn = defaultFilterAsset,
     normalizeFn = defaultNormalizeAsset,
-    limit = 100,
+    limit = 1000,
   }: GetAssetListOptions = {}) {
     // console.log("DEBUG getAssetList", this.registry.assetLists);
 
+    if (!this._isInitialized) {
+      console.log("[MockDataClient] Not initialized yet");
+      return [];
+    }
+
     const filteredAssetList = this.registry.assetLists.filter((assetList) =>
-      filterFn(assetList, chainNames)
+      filterFn(assetList, chainNames),
     );
 
     const flattenedAssets = uniqBy(
       filteredAssetList.reduce((acc, assetList) => {
         return [...acc, ...normalizeFn(assetList)];
       }, [] as DefaultNormalizedAsset[]),
-      "symbol"
+      "symbol",
     ).slice(0, limit);
 
     return flattenedAssets;
@@ -146,16 +151,16 @@ class MockDataClient {
   getComboboxAssetList({
     chainNames = ["cosmoshub", "stride", "stargaze", "juno", "secretnetwork"],
     filterFn = defaultFilterAsset,
-    limit = 100,
+    limit = 1000,
   }: GetComboboxOptions = {}) {
     // console.log("DEBUG getAssetList", this.registry.assetLists);
 
     const filteredAssetList = this.registry.assetLists.filter((assetList) =>
-      filterFn(assetList, chainNames)
+      filterFn(assetList, chainNames),
     );
 
     const normalizeFn = (
-      assetList: ChainRegistryFetcher["assetLists"][number]
+      assetList: ChainRegistryFetcher["assetLists"][number],
     ) => {
       return assetList.assets.map(
         (item) =>
@@ -168,7 +173,7 @@ class MockDataClient {
               item.logo_URIs?.jpeg ||
               item.logo_URIs?.png ||
               item.logo_URIs?.svg,
-          } as ComboboxOptionAsset)
+          }) as ComboboxOptionAsset,
       );
     };
 
@@ -176,7 +181,7 @@ class MockDataClient {
       filteredAssetList.reduce((acc, assetList) => {
         return [...acc, ...normalizeFn(assetList)];
       }, [] as ComboboxOptionAsset[]),
-      "tokenName"
+      "tokenName",
     ).slice(0, limit);
 
     return flattenedAssets;
@@ -190,24 +195,34 @@ export const useMockData = ({
 }: {
   onReady?: (
     assets: DefaultNormalizedAsset[],
-    comboboxAssets: ComboboxOptionAsset[]
+    comboboxAssets: ComboboxOptionAsset[],
   ) => void;
 } = {}) => {
   const [isReady, setIsReady] = React.useState(false);
+  const [assetList, setAssetList] = React.useState<DefaultNormalizedAsset[]>(
+    [],
+  );
+
+  const [comboboxAssetList, setComboboxAssetList] = React.useState<
+    DefaultNormalizedAsset[]
+  >([]);
 
   React.useEffect(() => {
     mockDataClient.onMount().then(() => {
+      const assetListResult = mockDataClient.getAssetList();
+      const comboboxAssetsResult = mockDataClient.getComboboxAssetList();
+
+      setAssetList(assetListResult);
+      setComboboxAssetList(comboboxAssetsResult);
+
       setIsReady(true);
-      onReady?.(
-        mockDataClient.getAssetList(),
-        mockDataClient.getComboboxAssetList()
-      );
+      onReady?.(assetListResult, comboboxAssetsResult);
     });
   }, []);
 
   return {
-    isReady,
-    assets: isReady ? mockDataClient.getAssetList() : [],
-    comboboxAssets: isReady ? mockDataClient.getComboboxAssetList() : [],
+    isReady: isReady && assetList.length > 0 && comboboxAssetList.length > 0,
+    assets: assetList,
+    comboboxAssets: comboboxAssetList,
   };
 };

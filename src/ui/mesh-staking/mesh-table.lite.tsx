@@ -10,6 +10,7 @@ import {
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import Box from "../box";
+import Divider from "../divider";
 import Text from "../text";
 import Table from "../table/table.lite";
 import TableHead from "../table/table-head.lite";
@@ -35,37 +36,26 @@ useMetadata({
 export default function MeshTable(props: MeshTableProps) {
   const measureRef = useRef<HTMLDivElement>(null);
   const shadowRef = useRef<HTMLDivElement>(null);
+
+  const pinnedTableMeasureRef = useRef<HTMLDivElement>(null);
+  const pinnedTableShadowRef = useRef<HTMLDivElement>(null);
+
   let animationRef = useRef<AnimeInstance | null>(null);
+  let pinnedTableAnimationRef = useRef<AnimeInstance | null>(null);
+
   let cleanupRef = useRef<() => void>(null);
 
   const state = useStore({
     theme: "light",
     displayBottomShadow: false,
-    pinnedRows: () => {
-      if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
-        return [];
-      }
+    displayPinnedTableBottomShadow: false,
+    pinnedRows: [],
+    unpinnedRows: props.data ?? [],
+    shouldSplitPinnedTable: () => {
+      const DEFAULT_SPLIT_THRESHOLD = 4;
+      const threshold = props.maxPinnedRows ?? DEFAULT_SPLIT_THRESHOLD;
 
-      return props.data.filter((row) =>
-        state.getLimitPinnedIds().includes(row.id),
-      );
-    },
-    unpinnedRows: () => {
-      if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
-        return props.data;
-      }
-
-      return props.data.filter(
-        (row) => !state.getLimitPinnedIds().includes(row.id),
-      );
-    },
-    getLimitPinnedIds: () => {
-      const limitPinnedIds = props.pinnedIds.slice(0, state.getMaxPinnedRows());
-      return limitPinnedIds;
-    },
-    getMaxPinnedRows: () => {
-      const DEFAULT_MAX_PINNED_ROWS = 3;
-      return props.maxPinnedRows ?? DEFAULT_MAX_PINNED_ROWS;
+      return state.pinnedRows.length > 0 && state.pinnedRows.length > threshold;
     },
     shouldPinHeader: () => {
       if (
@@ -75,10 +65,7 @@ export default function MeshTable(props: MeshTableProps) {
         return false;
       }
 
-      return (
-        props.pinnedIds.length > 0 &&
-        state.pinnedRows().length <= state.getMaxPinnedRows()
-      );
+      return props.pinnedIds.length > 0 && state.pinnedRows.length > 0;
     },
   });
 
@@ -89,39 +76,69 @@ export default function MeshTable(props: MeshTableProps) {
       state.theme = newState.theme;
     });
 
+    let cleanupRef1 = () => {};
+    let cleanupRef2 = () => {};
+
     if (measureRef) {
-      if (measureRef.clientHeight >= 380) {
-        state.displayBottomShadow = true;
-      } else {
-        state.displayBottomShadow = false;
-      }
+      const scrollHandler1 = () => {
+        const isScrollable1 = measureRef.scrollHeight > measureRef.clientHeight;
 
-      const scrollHandler = () => {
-        const height = Math.abs(
-          measureRef.scrollHeight -
-            measureRef.clientHeight -
-            measureRef.scrollTop,
-        );
+        if (!isScrollable1) {
+          return (state.displayBottomShadow = false);
+        }
 
-        if (height < 1) {
+        if (measureRef.scrollTop === 0) {
           state.displayBottomShadow = false;
         } else {
           state.displayBottomShadow = true;
         }
       };
 
-      measureRef.addEventListener("scroll", scrollHandler);
+      scrollHandler1();
+      measureRef.addEventListener("scroll", scrollHandler1);
 
-      cleanupRef = () => {
-        if (cleanupStore) {
-          cleanupStore();
-        }
-
+      cleanupRef1 = () => {
         if (measureRef) {
-          measureRef.removeEventListener("scroll", scrollHandler);
+          measureRef.removeEventListener("scroll", scrollHandler1);
         }
       };
     }
+
+    if (pinnedTableMeasureRef) {
+      const scrollHandler2 = () => {
+        const isScrollable2 =
+          pinnedTableMeasureRef.scrollHeight >
+          pinnedTableMeasureRef.clientHeight;
+
+        if (!isScrollable2) {
+          return (state.displayPinnedTableBottomShadow = false);
+        }
+
+        if (pinnedTableMeasureRef.scrollTop === 0) {
+          state.displayPinnedTableBottomShadow = false;
+        } else {
+          state.displayPinnedTableBottomShadow = true;
+        }
+      };
+
+      scrollHandler2();
+      pinnedTableMeasureRef.addEventListener("scroll", scrollHandler2);
+
+      cleanupRef2 = () => {
+        if (pinnedTableMeasureRef) {
+          pinnedTableMeasureRef.removeEventListener("scroll", scrollHandler2);
+        }
+      };
+    }
+
+    cleanupRef = () => {
+      if (cleanupStore) {
+        cleanupStore();
+      }
+
+      cleanupRef1();
+      cleanupRef2();
+    };
   });
 
   onUnMount(() => {
@@ -129,14 +146,42 @@ export default function MeshTable(props: MeshTableProps) {
   });
 
   onUpdate(() => {
+    if (!props.pinnedIds) return;
+
+    let newPinnedRows = [];
+    let newUnpinnedRows = [];
+
+    if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
+      state.pinnedRows = [];
+    } else {
+      newPinnedRows = props.data.filter((row) =>
+        props.pinnedIds.includes(row.id),
+      );
+    }
+
+    if (!props.pinnedIds || (props.pinnedIds ?? []).length === 0) {
+      state.unpinnedRows = props.data;
+    } else {
+      newUnpinnedRows = props.data.filter(
+        (row) => !props.pinnedIds.includes(row.id),
+      );
+    }
+
+    state.pinnedRows = newPinnedRows;
+    state.unpinnedRows = newUnpinnedRows;
+  }, [props.data, props.pinnedIds]);
+
+  onUpdate(() => {
     if (!shadowRef) return;
 
-    // Animation not init yet
-    if (shadowRef && !animationRef) {
-      animationRef = anime({
-        targets: shadowRef,
-        opacity: [0, 1],
-        height: [0, 36],
+    const playAnimation = (isShown: boolean, elementRef: any) => {
+      const opacity = isShown ? [0, 1] : [1, 0];
+      const height = isShown ? [0, 45] : [45, 0];
+
+      anime({
+        targets: elementRef,
+        opacity: opacity,
+        height: height,
         delay: 50,
         duration: 250,
         direction: `alternate`,
@@ -144,14 +189,19 @@ export default function MeshTable(props: MeshTableProps) {
         autoplay: false,
         easing: `easeInOutSine`,
       });
-    }
+    };
 
-    if (state.displayBottomShadow) {
-      animationRef?.restart();
-    } else {
-      animationRef?.reverse();
-    }
-  }, [state.displayBottomShadow, shadowRef]);
+    playAnimation(state.displayBottomShadow, shadowRef);
+
+    if (!pinnedTableShadowRef) return;
+
+    playAnimation(state.displayPinnedTableBottomShadow, pinnedTableShadowRef);
+  }, [
+    state.displayBottomShadow,
+    shadowRef,
+    state.displayPinnedTableBottomShadow,
+    pinnedTableShadowRef,
+  ]);
 
   return (
     <Box
@@ -166,45 +216,49 @@ export default function MeshTable(props: MeshTableProps) {
       borderColor={props.borderless ? undefined : "$divider"}
       borderWidth={props.borderless ? undefined : "1px"}
       borderStyle={props.borderless ? undefined : "$solid"}
-      maxHeight={state.shouldPinHeader() ? "380px" : undefined}
-      overflowY="auto"
-      display="block"
-      boxRef={measureRef}
       {...props.containerProps}
     >
-      <Table {...props.tableProps} position="relative">
-        <TableHead
-          position={state.shouldPinHeader() ? "sticky" : "relative"}
-          top={state.shouldPinHeader() ? "0px" : undefined}
-          zIndex={state.shouldPinHeader() ? "$100" : undefined}
-        >
-          <TableRow backgroundColor="$cardBg">
-            <For each={props.columns}>
-              {(column) => (
-                <TableColumnHeaderCell
-                  key={column.id}
-                  width={column.width}
-                  textAlign={column.align}
-                >
-                  <Text
-                    fontSize="$sm"
-                    fontWeight="$normal"
-                    color="$textSecondary"
+      <Box
+        position="relative"
+        className={clx(styles.scrollBar)}
+        display={state.shouldSplitPinnedTable() ? "block" : "none"}
+        maxHeight={state.shouldSplitPinnedTable() ? "214px" : undefined}
+        boxRef={pinnedTableMeasureRef}
+        overflowY="auto"
+      >
+        <Table {...props.tableProps} position="relative">
+          <TableHead position="relative">
+            <TableRow backgroundColor="$cardBg">
+              <For each={props.columns}>
+                {(column, colIndex) => (
+                  <TableColumnHeaderCell
+                    key={column.id}
+                    position="sticky"
+                    top="$0"
+                    backgroundColor="$cardBg"
+                    zIndex="$100"
+                    width={column.width}
+                    textAlign={column.align}
+                    paddingX={colIndex === 0 ? "$6" : "$2"}
                   >
-                    {column.label}
-                  </Text>
-                </TableColumnHeaderCell>
-              )}
-            </For>
-          </TableRow>
+                    <Text
+                      fontSize="$sm"
+                      fontWeight="$normal"
+                      color="$textSecondary"
+                    >
+                      {column.label}
+                    </Text>
+                  </TableColumnHeaderCell>
+                )}
+              </For>
+            </TableRow>
 
-          <Show when={state.shouldPinHeader()}>
-            <For each={state.pinnedRows()}>
+            <For each={state.pinnedRows}>
               {(pinnedRow, pinnedRowIndex) => (
                 <TableRow
                   key={pinnedRow.id}
-                  backgroundColor="$cardBg"
                   zIndex="$100"
+                  className={clx(standardTransitionProperties, styles.tableRow)}
                 >
                   <For each={props.columns}>
                     {(column) => (
@@ -214,10 +268,11 @@ export default function MeshTable(props: MeshTableProps) {
                         textAlign={column.align}
                         height={props.rowHeight}
                         backgroundColor="$cardBg"
+                        paddingY="$0"
                         className={clx({
-                          [styles.borderedTableCell]:
-                            state.shouldPinHeader() &&
-                            pinnedRowIndex === state.pinnedRows().length - 1,
+                          [styles.firstRowCell]: pinnedRowIndex === 0,
+                          [styles.lastRowCell]:
+                            pinnedRowIndex === state.pinnedRows.length - 1,
                         })}
                       >
                         <Show
@@ -240,93 +295,211 @@ export default function MeshTable(props: MeshTableProps) {
                 </TableRow>
               )}
             </For>
-          </Show>
-        </TableHead>
+          </TableHead>
+        </Table>
 
-        <TableBody
-          overflowY={state.shouldPinHeader() ? "auto" : undefined}
-          zIndex={state.shouldPinHeader() ? "$10" : undefined}
-          position="relative"
+        <Box
+          boxRef={pinnedTableShadowRef}
+          position="absolute"
+          width="$full"
+          bottom="$0"
+          className={standardTransitionProperties}
         >
-          <For each={state.unpinnedRows()}>
-            {(row) => (
-              <TableRow
-                backgroundColor={{
-                  hover: "rgba(218, 213, 227, 0.10)",
-                }}
-                className={clx(standardTransitionProperties, styles.tableRow)}
-              >
-                <For each={props.columns}>
-                  {(column, index) => (
-                    <>
-                      <Show when={index === 0}>
-                        <TableRowHeaderCell
-                          key={`${row.id + column.id}`}
-                          width={column.width}
-                          height={props.rowHeight}
-                          textAlign={column.align}
-                          className={styles.tableCell}
-                        >
-                          <Show
-                            when={!!column.render}
-                            else={
-                              <Text
-                                color={column.color ?? "$textPlaceholder"}
-                                fontWeight="$normal"
-                                fontSize="$xs"
-                              >
-                                {row[column.id]}
-                              </Text>
-                            }
-                          >
-                            {column.render(row, column)}
-                          </Show>
-                        </TableRowHeaderCell>
-                      </Show>
+          <div
+            className={styles.bottomShadow}
+            data-is-visible={state.displayPinnedTableBottomShadow}
+          />
+        </Box>
+      </Box>
 
-                      <Show when={index > 0}>
-                        <TableCell
-                          key={`${row.id + column.id}`}
-                          width={column.width}
-                          textAlign={column.align}
-                          height={props.rowHeight}
-                          className={styles.tableCell}
-                        >
-                          <Show
-                            when={!!column.render}
-                            else={
-                              <Text
-                                color={column.color ?? "$textPlaceholder"}
-                                fontWeight="$normal"
-                                fontSize="$xs"
-                              >
-                                {row[column.id]}
-                              </Text>
-                            }
-                          >
-                            {column.render(row, column)}
-                          </Show>
-                        </TableCell>
-                      </Show>
-                    </>
+      <Show when={state.shouldSplitPinnedTable()}>
+        <Box paddingX="$6">
+          <Divider />
+        </Box>
+      </Show>
+
+      <Box
+        boxRef={measureRef}
+        className={clx(styles.scrollBar)}
+        position="relative"
+        maxHeight={state.shouldPinHeader() ? "312px" : undefined}
+        overflowY="auto"
+        display="block"
+      >
+        <Table {...props.tableProps} position="relative">
+          <TableHead
+            position={state.shouldPinHeader() ? "sticky" : "relative"}
+            top={state.shouldPinHeader() ? "0px" : undefined}
+            zIndex={state.shouldPinHeader() ? "$100" : undefined}
+          >
+            <Show when={!state.shouldSplitPinnedTable()}>
+              <TableRow backgroundColor="$cardBg">
+                <For each={props.columns}>
+                  {(column, colIndex) => (
+                    <TableColumnHeaderCell
+                      key={column.id}
+                      width={column.width}
+                      textAlign={column.align}
+                      paddingX={colIndex === 0 ? "$6" : "$2"}
+                    >
+                      <Text
+                        fontSize="$sm"
+                        fontWeight="$normal"
+                        color="$textSecondary"
+                      >
+                        {column.label}
+                      </Text>
+                    </TableColumnHeaderCell>
                   )}
                 </For>
               </TableRow>
-            )}
-          </For>
-        </TableBody>
-      </Table>
+            </Show>
 
-      <Show when={state.shouldPinHeader()}>
-        <div
-          ref={shadowRef}
-          className={clx({
-            [styles.bottomShadow.light]: state.theme === "light",
-            [styles.bottomShadow.dark]: state.theme === "dark",
-          })}
-          data-is-visible={state.displayBottomShadow}
-        />
-      </Show>
+            <Show
+              when={state.shouldPinHeader() && !state.shouldSplitPinnedTable()}
+            >
+              <For each={state.pinnedRows}>
+                {(pinnedRow, pinnedRowIndex) => (
+                  <TableRow
+                    key={pinnedRow.id}
+                    zIndex="$100"
+                    className={clx(
+                      standardTransitionProperties,
+                      styles.tableRow,
+                    )}
+                  >
+                    <For each={props.columns}>
+                      {(column) => (
+                        <TableColumnHeaderCell
+                          key={column.id}
+                          width={column.width}
+                          textAlign={column.align}
+                          height={props.rowHeight}
+                          backgroundColor="$cardBg"
+                          paddingY="$0"
+                          className={clx({
+                            [styles.firstRowCell]: pinnedRowIndex === 0,
+                            [styles.lastRowCell]:
+                              pinnedRowIndex === state.pinnedRows.length - 1,
+                            [styles.borderedTableCell]:
+                              state.shouldPinHeader() &&
+                              pinnedRowIndex === state.pinnedRows.length - 1,
+                          })}
+                        >
+                          <Show
+                            when={!!column.render}
+                            else={
+                              <Text
+                                color={column.color ?? "$textPlaceholder"}
+                                fontWeight="$normal"
+                                fontSize="$xs"
+                              >
+                                {pinnedRow[column.id]}
+                              </Text>
+                            }
+                          >
+                            {column.render(pinnedRow, column, true)}
+                          </Show>
+                        </TableColumnHeaderCell>
+                      )}
+                    </For>
+                  </TableRow>
+                )}
+              </For>
+            </Show>
+          </TableHead>
+
+          <TableBody
+            overflowY={state.shouldPinHeader() ? "auto" : undefined}
+            zIndex={state.shouldPinHeader() ? "$10" : undefined}
+            position="relative"
+            className={styles.tableBody}
+          >
+            <For each={state.unpinnedRows}>
+              {(row) => (
+                <TableRow
+                  key={row.id}
+                  className={clx(standardTransitionProperties, styles.tableRow)}
+                >
+                  <For each={props.columns}>
+                    {(column, index) => (
+                      <>
+                        <Show when={index === 0}>
+                          <TableRowHeaderCell
+                            key={`${row.id + column.id}`}
+                            width={column.width}
+                            height={props.rowHeight}
+                            textAlign={column.align}
+                            paddingY="$0"
+                            className={styles.tableCell}
+                          >
+                            <Show
+                              when={!!column.render}
+                              else={
+                                <Text
+                                  color={column.color ?? "$textPlaceholder"}
+                                  fontWeight="$normal"
+                                  fontSize="$xs"
+                                >
+                                  {row[column.id]}
+                                </Text>
+                              }
+                            >
+                              {column.render(row, column)}
+                            </Show>
+                          </TableRowHeaderCell>
+                        </Show>
+
+                        <Show when={index > 0}>
+                          <TableCell
+                            key={`${row.id + column.id}`}
+                            width={column.width}
+                            textAlign={column.align}
+                            height={props.rowHeight}
+                            paddingY="$0"
+                            className={styles.tableCell}
+                          >
+                            <Show
+                              when={!!column.render}
+                              else={
+                                <Text
+                                  color={column.color ?? "$textPlaceholder"}
+                                  fontWeight="$normal"
+                                  fontSize="$xs"
+                                >
+                                  {row[column.id]}
+                                </Text>
+                              }
+                            >
+                              {column.render(row, column)}
+                            </Show>
+                          </TableCell>
+                        </Show>
+                      </>
+                    )}
+                  </For>
+                </TableRow>
+              )}
+            </For>
+          </TableBody>
+        </Table>
+
+        <Box
+          boxRef={shadowRef}
+          position="absolute"
+          display={
+            !props.pinnedIds || props.pinnedIds.length === 0 ? "none" : "block"
+          }
+          width="$full"
+          bottom="$0"
+          className={standardTransitionProperties}
+        >
+          <div
+            className={styles.bottomShadow}
+            data-is-visible={state.displayBottomShadow}
+          />
+        </Box>
+      </Box>
     </Box>
   );
 }

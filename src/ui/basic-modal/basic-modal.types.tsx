@@ -13,4 +13,5 @@ export interface BasicModalProps extends BaseComponentProps {
   className?: string;
   modalContainerClassName?: string;
   modalContentClassName?: string;
+  modalChildrenClassName?: string;
 }

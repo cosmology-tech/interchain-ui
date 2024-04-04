@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Box,
   Button,
@@ -27,7 +28,7 @@ export const Layout = ({ children }: LayoutProps) => {
     <ThemeProvider
       themeDefs={[cosmologyLightTheme, cosmologyDarkTheme]}
       customTheme={CustomTheme[theme]}
-      forceColorMode={theme}
+      themeMode={theme}
       overrides={overrides}
     >
       <Box
