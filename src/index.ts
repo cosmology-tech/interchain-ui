@@ -265,5 +265,6 @@ export { default as MeshTableHeaderAction } from "./ui/mesh-staking/mesh-table-h
 // Noble
 export { default as NobleProvider } from "./ui/noble/noble-provider.lite";
 export { default as NobleTxDirectionCard } from "./ui/noble/noble-tx-direction-card.lite";
+export { default as NobleTxProgressBar } from "./ui/noble/noble-tx-progress-bar.lite";
 
 // End Components
