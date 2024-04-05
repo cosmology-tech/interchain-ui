@@ -89,7 +89,10 @@ const Header = (props: {
 
         <Text
           as="h2"
-          fontSize="$3xl"
+          fontSize={{
+            mobile: "$md",
+            tablet: "$3xl",
+          }}
           fontWeight="$medium"
           color="$text"
           lineHeight="$lg"
@@ -102,6 +105,7 @@ const Header = (props: {
         direction="horizontal"
         space="$8"
         attributes={{
+          overflow: "auto",
           zIndex: 1,
         }}
       >
@@ -172,7 +176,10 @@ export const InterchainUITheme: Story = {
         <Box
           overflow="hidden"
           backgroundColor="$cardBg"
-          p="$12"
+          p={{
+            mobile: "$8",
+            tablet: "$12",
+          }}
           borderRadius="$md"
         >
           <Header isDefaultTheme assets={headerAssets} />

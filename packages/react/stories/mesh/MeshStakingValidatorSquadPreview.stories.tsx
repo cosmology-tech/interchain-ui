@@ -90,7 +90,10 @@ const Header = (props: {
 
         <Text
           as="h2"
-          fontSize="$3xl"
+          fontSize={{
+            mobile: "$md",
+            tablet: "$3xl",
+          }}
           fontWeight="$medium"
           color="$text"
           lineHeight="$lg"
@@ -204,7 +207,10 @@ export const InterchainUITheme: Story = {
     return (
       <Box
         borderRadius="$lg"
-        p="$12"
+        p={{
+          mobile: "$8",
+          tablet: "$12",
+        }}
         backgroundColor="$cardBg"
         maxWidth={MAX_CONTAINER_WIDTH}
         overflow="hidden"
@@ -226,6 +232,7 @@ export const InterchainUITheme: Story = {
             flexDirection="column"
             gap="$10"
             marginBottom="42px"
+            overflow="auto"
           >
             <MeshTableHeaderAction
               type="stake"
@@ -320,6 +327,7 @@ export const InterchainUITheme: Story = {
             flexDirection="column"
             gap="$10"
             marginBottom="40px"
+            overflow="auto"
           >
             <MeshTableHeaderAction
               type="unstake"
@@ -379,7 +387,10 @@ export const InterchainUITheme: Story = {
                 as="span"
                 color="inherit"
                 attributes={{
-                  minWidth: "364px",
+                  minWidth: {
+                    mobile: "120px",
+                    mdMobile: "364px",
+                  },
                 }}
               >
                 Confirm
@@ -639,7 +650,14 @@ export const MeshUICustomTheme: Story = {
             </Box>
 
             <Stack direction="vertical" space="$0">
-              <MeshButton width="264px">Confirm</MeshButton>
+              <MeshButton
+                width={{
+                  mobile: "120px",
+                  mdMobile: "264px",
+                }}
+              >
+                Confirm
+              </MeshButton>
             </Stack>
           </Box>
         </Box>

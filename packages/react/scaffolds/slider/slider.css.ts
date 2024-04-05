@@ -11,10 +11,6 @@ export const sliderHorizontal = style({
   flexDirection: "column",
 });
 
-export const sliderHorizontalDefaultWidth = style({
-  width: "300px",
-});
-
 export const sliderVertical = style({
   height: "150px",
 });

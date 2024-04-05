@@ -46,6 +46,7 @@ const MeshSlider = () => {
       name="osmosis"
       value={value}
       onChange={setValue}
+      fluidWidth
       width={{
         mobile: "100%",
         tablet: "500px",
@@ -145,21 +146,26 @@ const MeshStakingHeader = (props) => (
       alignItems="center"
       flexWrap="wrap"
     >
-      <Stack
-        space="$3"
+      <Text
+        as="p"
+        color="$textSecondary"
+        fontSize="$md"
         attributes={{
-          flexWrap: "wrap",
+          display: "flex",
           alignItems: "center",
+          gap: "$2",
         }}
       >
-        <Text as="p" color="$textSecondary" fontSize="$md">
-          Select the amount to stake on each chain
-        </Text>
-
-        <Box as="span" color="$textSecondary">
+        <span>Select the amount to stake on each chain</span>
+        <Box
+          as="span"
+          color="$textSecondary"
+          display="inline-block"
+          flexShrink={0}
+        >
           <Icon name="informationLine" size="$md" color="inherit" />
         </Box>
-      </Stack>
+      </Text>
 
       <Stack
         space="$2"
@@ -311,7 +317,10 @@ export const InterchainUITheme: Story = {
               color="inherit"
               as="span"
               attributes={{
-                width: "264px",
+                width: {
+                  mobile: "120px",
+                  mdMobile: "264px",
+                },
               }}
             >
               Next
@@ -424,7 +433,14 @@ export const MeshUICustomTheme: Story = {
               />
             </Box>
 
-            <MeshButton width="264px">Next</MeshButton>
+            <MeshButton
+              width={{
+                mobile: "120px",
+                mdMobile: "264px",
+              }}
+            >
+              Next
+            </MeshButton>
           </Box>
         </Box>
       </MeshProvider>

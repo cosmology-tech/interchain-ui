@@ -46,6 +46,7 @@ const MeshSlider = () => {
       name="osmosis"
       value={value}
       onChange={setValue}
+      fluidWidth
       width={{
         mobile: "100%",
         tablet: "500px",
@@ -70,7 +71,10 @@ const MeshSlider = () => {
             <Box
               as="output"
               color="$text"
-              fontSize="$md"
+              fontSize={{
+                mobile: "$sm",
+                mdMobile: "$md",
+              }}
               attributes={outputProps}
             >
               {`${formatNumeric(valuePercent * TOTAL_TOKENS, 2)}`}
@@ -122,12 +126,23 @@ const MeshStakingHeader = (props) => (
             alignItems: "baseline",
           }}
         >
-          <Text color="$text" fontSize="$3xl" fontWeight="$medium">
+          <Text
+            color="$text"
+            fontSize={{
+              mobile: "$md",
+              mdMobile: "$3xl",
+            }}
+            fontWeight="$medium"
+          >
             1,258.02
           </Text>
+
           <Text
             color={useColorModeValue("$textSecondary", "$textPlaceholder")}
-            fontSize="$sm"
+            fontSize={{
+              mobile: "$xs",
+              mdMobile: "$sm",
+            }}
             fontWeight="$light"
           >
             {props.asset?.symbol ?? "OSMO"}
@@ -168,12 +183,16 @@ const MeshStakingHeader = (props) => (
         }}
       >
         <Text
-          fontSize="$md"
+          fontSize={{
+            mobile: "$sm",
+            mdMobile: "$md",
+          }}
           color={useColorModeValue("$textSecondary", "$textPlaceholder")}
           fontWeight="$semibold"
         >
           1,258.02 OSMO
         </Text>
+
         <Text fontSize="$sm" color="$textPlaceholder" fontWeight="$light">
           available
         </Text>
@@ -308,7 +327,10 @@ export const InterchainUITheme: Story = {
               as="span"
               color="inherit"
               attributes={{
-                width: "264px",
+                width: {
+                  mobile: "120px",
+                  mdMobile: "264px",
+                },
               }}
             >
               Next
@@ -443,7 +465,14 @@ export const MeshUICustomTheme: Story = {
               />
             </Box>
 
-            <MeshButton width="264px">Next</MeshButton>
+            <MeshButton
+              width={{
+                mobile: "120px",
+                mdMobile: "264px",
+              }}
+            >
+              Next
+            </MeshButton>
           </Box>
         </Box>
       </MeshProvider>
@@ -575,7 +604,14 @@ export const ModalView: Story = {
                 />
               </Stack>
 
-              <MeshButton width="264px">Next</MeshButton>
+              <MeshButton
+                width={{
+                  mobile: "120px",
+                  mdMobile: "264px",
+                }}
+              >
+                Next
+              </MeshButton>
             </Box>
           </Box>
         </MeshModal>

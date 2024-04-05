@@ -52,7 +52,6 @@ function clampPreviewProgressPercent(
 }
 
 export default function Slider(props: SliderProps) {
-  const { theme } = useTheme();
   const trackRef = React.useRef(null);
   const numberFormatter = useNumberFormatter(props.formatOptions);
 
