@@ -46,39 +46,35 @@ export default function NobleTxDirectionCard(props: NobleTxDirectionCardProps) {
 
   return (
     <Box>
-      <Text
-        color="$textSecondary"
-        lineHeight="$short"
-        attributes={{ mb: "$1" }}
-      >
+      <Text color="$textSecondary" fontSize="$sm" lineHeight="1.4">
         {props.direction}
       </Text>
       <Text
         color="$text"
-        fontWeight="$semibold"
         fontSize="$xl"
-        lineHeight="$short"
-        attributes={{ mb: "$1" }}
+        fontWeight="$semibold"
+        lineHeight="1.4"
+        attributes={{ mb: "$2" }}
       >
         {props.chainName}
       </Text>
-      <Box display="flex" alignItems="center" gap="$4">
+      <Box display="flex" alignItems="center" gap="$5">
         <Box
           as="img"
-          width="$8"
-          height="$8"
+          width="18px"
+          height="18px"
           attributes={{
             src: props.logoUrl,
             alt: props.chainName,
           }}
         />
-        <Text color="$textSecondary" fontSize="$sm">
+        <Text color="$textSecondary" fontSize="$xs">
           {state.truncate(props.address)}
         </Text>
 
         <Show
           when={!state.copied}
-          else={<Icon name="checkLine" size="$lg" color="$textSuccess" />}
+          else={<Icon name="checkLine" size="$md" color="$textSuccess" />}
         >
           <Box attributes={{ onClick: state.onCopy }} cursor="pointer">
             <Icon name="copy" color="$textSecondary" size="$md" />
