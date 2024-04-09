@@ -261,5 +261,5 @@ export { default as MeshTable } from "./ui/mesh-staking/mesh-table.lite";
 export { default as MeshTableChainCell } from "./ui/mesh-staking/mesh-table-chain-cell.lite";
 export { default as MeshTableAPRCell } from "./ui/mesh-staking/mesh-table-chain-cell.lite";
 export { default as MeshTableHeaderAction } from "./ui/mesh-staking/mesh-table-header-action.lite";
-
+export { default as MeshTableValidatorsCell } from "./ui/mesh-staking/mesh-table-validators-cell.lite";
 // End Components
