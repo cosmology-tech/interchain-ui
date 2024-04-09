@@ -191,6 +191,8 @@ export { default as Divider } from "./ui/divider";
 export type { DividerProps } from "./ui/divider/divider.types";
 export { default as Carousel } from "./ui/carousel";
 export type { CarouselProps } from "./ui/carousel/carousel.types";
+export { default as Accordion } from "./ui/accordion";
+export type { AccordionProps } from "./ui/accordion/accordion.types";
 export { default as Breadcrumb } from "./ui/breadcrumb";
 export { default as BreadcrumbItem } from "./ui/breadcrumb/breadcrumb-item.lite";
 export type {
