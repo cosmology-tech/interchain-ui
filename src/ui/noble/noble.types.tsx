@@ -43,3 +43,19 @@ export interface NobleButtonProps extends BaseButtonProps {
   fontWeight?: BoxProps["fontWeight"];
   lineHeight?: BoxProps["lineHeight"];
 }
+
+export type NobleTxStatus = "processing" | "successful";
+
+export interface NobleTxHistoryOverviewItemProps {
+  amount: string;
+  status: NobleTxStatus;
+  sourceChainLogoSrc: string;
+  destinationChainLogoSrc: string;
+  mainLogoSrc?: string;
+  amountUnit?: string;
+  isExpanded?: boolean;
+  customStatus?: {
+    text: string;
+    color: BoxProps["color"];
+  };
+}

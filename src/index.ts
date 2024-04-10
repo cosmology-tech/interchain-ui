@@ -270,5 +270,6 @@ export { default as NobleTxDirectionCard } from "./ui/noble/noble-tx-direction-c
 export { default as NobleTxProgressBar } from "./ui/noble/noble-tx-progress-bar.lite";
 export { default as NobleTxStepItem } from "./ui/noble/noble-tx-step-item.lite";
 export { default as NobleButton } from "./ui/noble/noble-button.lite";
+export { default as NobleTxHistoryOverviewItem } from "./ui/noble/noble-tx-history-overview-item.lite";
 
 // End Components
