@@ -574,10 +574,10 @@ importers:
         specifier: ^15.8.1
         version: 15.8.1
       react:
-        specifier: ^18.x
+        specifier: ^18
         version: 18.2.0
       react-dom:
-        specifier: ^18.x
+        specifier: ^18
         version: 18.2.0(react@18.2.0)
       storybook:
         specifier: ^7.6.16
@@ -10039,7 +10039,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.4.21(typescript@5.4.2)
-      vue-component-type-helpers: 2.0.7
+      vue-component-type-helpers: 2.0.11
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -28893,10 +28893,10 @@ packages:
       }
     dev: true
 
-  /vue-component-type-helpers@2.0.7:
+  /vue-component-type-helpers@2.0.11:
     resolution:
       {
-        integrity: sha512-7e12Evdll7JcTIocojgnCgwocX4WzIYStGClBQ+QuWPinZo/vQolv2EMq4a3lg16TKfwWafLimG77bxb56UauA==,
+        integrity: sha512-8aluKz5oVC8PvVQAYgyIefOlqzKVmAOTCx2imbrFBVLbF7mnJvyMsE2A7rqX/4f4uT6ee9o8u3GcoRpUWc0xsw==,
       }
     dev: true
 
