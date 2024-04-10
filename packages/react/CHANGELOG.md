@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.12](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.11...@interchain-ui/react@1.22.12) (2024-04-10)
+
+### Bug Fixes
+
+- **mesh-ui:** fix responsive in stories ([34ede44](https://github.com/cosmology-tech/interchain-ui/commit/34ede440a4827423fe0727c1c241f663cfcbb396))
+
 ## [1.22.11](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.10...@interchain-ui/react@1.22.11) (2024-04-03)
 
 **Note:** Version bump only for package @interchain-ui/react
