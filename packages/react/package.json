@@ -30,12 +30,14 @@
     "main": {
       "optimize": true,
       "includeNodeModules": [
+        "client-only",
         "@formkit/auto-animate"
       ]
     },
     "module": {
       "optimize": true,
       "includeNodeModules": [
+        "client-only",
         "@formkit/auto-animate"
       ]
     },
@@ -141,8 +143,8 @@
     "parcel-optimizer-unlink-css": "^1.1.0",
     "parcel-resolver-ts-base-url": "^1.3.1",
     "prop-types": "^15.8.1",
-    "react": "^18.x",
-    "react-dom": "^18.x",
+    "react": "^18",
+    "react-dom": "^18",
     "storybook": "^7.6.16",
     "type-fest": "^4.2.0",
     "vite-plugin-replace": "^0.1.1"
