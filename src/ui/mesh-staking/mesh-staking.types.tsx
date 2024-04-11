@@ -2,11 +2,14 @@ import type {
   BaseComponentProps,
   GridColumn,
 } from "../../models/components.model";
+import type { ThemeProviderProps } from "../theme-provider/theme-provider.types";
 import type { BoxProps } from "../box/box.types";
 import type { TextProps } from "../text/text.types";
 import type { ButtonProps } from "../button/button.types";
 
-export interface MeshProviderProps extends BaseComponentProps {}
+export interface MeshProviderProps extends BaseComponentProps {
+  themeMode?: ThemeProviderProps["themeMode"];
+}
 
 export interface MeshStakingProps extends BaseComponentProps {}
 
@@ -50,6 +53,7 @@ export interface MeshStakingSliderInfoProps extends BaseComponentProps {
   tokenImgSrc: string;
   tokenAPR: string;
   isActive?: boolean;
+  attributes?: BoxProps;
 }
 
 export interface MeshFooterInfoItemProps extends BaseComponentProps {
@@ -57,6 +61,7 @@ export interface MeshFooterInfoItemProps extends BaseComponentProps {
   description: string;
   subDescription?: string;
   subDescriptionProps?: TextProps;
+  attributes?: BoxProps;
 }
 
 export interface MeshValidatorSquadEmptyProps extends BaseComponentProps {
@@ -89,6 +94,7 @@ export interface MeshTableHeaderActionProps extends BaseComponentProps {
   tokenImgSrc: string;
   tokenAmount: string;
   onClick?: () => void;
+  attributes?: BoxProps;
 }
 
 // ==== Mesh table cells
@@ -96,10 +102,12 @@ export interface MeshTableChainCellProps extends BaseComponentProps {
   size?: "xs" | "sm" | "md";
   name: string;
   imgSrc: string;
+  attributes?: BoxProps;
 }
 
 export interface MeshTableAPRCellProps extends BaseComponentProps {
   value: string;
+  attributes?: BoxProps;
 }
 
 export interface MeshTableValidatorsCellProps extends BaseComponentProps {
@@ -107,4 +115,5 @@ export interface MeshTableValidatorsCellProps extends BaseComponentProps {
     name: string;
     imgSrc: string;
   }>;
+  attributes?: BoxProps;
 }

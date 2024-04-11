@@ -50,7 +50,7 @@ export default function MeshTableHeaderAction(
   });
 
   return (
-    <Box display="flex" gap="$7" flexWrap="wrap">
+    <Box display="flex" gap="$7" flexWrap="wrap" attributes={props.attributes}>
       <Box
         as="button"
         className={baseButton}

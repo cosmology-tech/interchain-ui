@@ -38,7 +38,7 @@ export default function MeshTableValidatorsCell(
   });
 
   return (
-    <Box display="flex" position="relative">
+    <Box display="flex" position="relative" attributes={props.attributes}>
       <For each={props.validators}>
         {(validator, index) => (
           <Box

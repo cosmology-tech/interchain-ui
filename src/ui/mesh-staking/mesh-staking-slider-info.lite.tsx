@@ -43,7 +43,10 @@ export default function MeshStakingSliderInfo(
     <Box
       display="flex"
       gap="$8"
+      flexShrink={0}
+      maxWidth="$23"
       alignItems="center"
+      attributes={props.attributes}
       className={props.className}
     >
       <Box

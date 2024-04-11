@@ -52,6 +52,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
           attributes={{
             alignItems: "center",
             minWidth: "$28",
+            ...props.attributes,
           }}
         >
           <Box
@@ -81,6 +82,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
           attributes={{
             alignItems: "center",
             minWidth: "$28",
+            ...props.attributes,
           }}
         >
           <Box
@@ -109,6 +111,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
           attributes={{
             alignItems: "center",
             minWidth: "$28",
+            ...props.attributes,
           }}
         >
           <Box
