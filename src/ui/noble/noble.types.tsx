@@ -59,3 +59,12 @@ export interface NobleTxHistoryOverviewItemProps {
     color: BoxProps["color"];
   };
 }
+
+export interface NoblePageTitleBarProps {
+  title: string;
+  showBackButton?: boolean;
+  onBackButtonClick?: (event: any) => void;
+  mt?: BoxProps["mt"];
+  mb?: BoxProps["mb"];
+  mx?: BoxProps["mx"];
+}
