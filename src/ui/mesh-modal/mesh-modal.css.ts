@@ -66,7 +66,7 @@ export const modalBackdropBg = styleVariants({
 
 export const modalChildren = style([
   {
-    minWidth: themeVars.space.containerSm,
+    minWidth: `min(calc(100dvw - 2 * ${themeVars.space["11"]}), ${themeVars.space.containerSm})`,
     paddingLeft: themeVars.space["11"],
     paddingRight: themeVars.space["11"],
     paddingBottom: themeVars.space["12"],
