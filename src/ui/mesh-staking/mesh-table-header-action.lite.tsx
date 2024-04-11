@@ -50,11 +50,12 @@ export default function MeshTableHeaderAction(
   });
 
   return (
-    <Box display="flex" gap="$7">
+    <Box display="flex" gap="$7" flexWrap="wrap">
       <Box
         as="button"
         className={baseButton}
         backgroundColor="transparent"
+        flexShrink={0}
         attributes={{
           onClick: () => props.onClick?.(),
         }}

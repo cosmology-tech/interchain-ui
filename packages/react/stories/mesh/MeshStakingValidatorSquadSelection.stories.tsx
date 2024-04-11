@@ -53,8 +53,11 @@ const Header = (props: {
       space="$14"
       attributes={{
         position: "relative",
-        // Parent width + x padding
-        width: "calc(100% + 64px)",
+        width: {
+          mobile: "100%",
+          // Parent width + x padding
+          tablet: "calc(100% + 64px)",
+        },
       }}
     >
       <Stack
@@ -89,22 +92,41 @@ const Header = (props: {
         )}
 
         <Text
-          as="h2"
-          fontSize="$3xl"
+          as="p"
+          fontSize={{
+            mobile: "$md",
+            tablet: "$3xl",
+          }}
           fontWeight="$medium"
           color="$text"
           lineHeight="$lg"
+          attributes={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "$4",
+          }}
         >
-          Create validator squad
-        </Text>
+          <span>Create validator squad</span>
 
-        <Icon name="informationLine" size="$xl" color="$textSecondary" />
+          <Box as="span" display="inline-block">
+            <Icon
+              name="informationLine"
+              size={{
+                mobile: "$md",
+                tablet: "$xl",
+              }}
+              color="$textSecondary"
+            />
+          </Box>
+        </Text>
       </Stack>
 
       <Stack
         direction="horizontal"
         space="$8"
         attributes={{
+          overflow: "auto",
           zIndex: 1,
         }}
       >
@@ -148,7 +170,9 @@ const Header = (props: {
       <Divider
         position="absolute"
         bottom="0"
-        transform="translateX(-32px)"
+        transform={{
+          tablet: "translateX(-32px)",
+        }}
         zIndex={0}
       />
     </Stack>
@@ -248,7 +272,10 @@ export const InterchainUITheme: Story = {
       <Box
         overflow="hidden"
         backgroundColor="$cardBg"
-        p="$12"
+        p={{
+          mobile: "$8",
+          tablet: "$12",
+        }}
         borderRadius="$lg"
         maxWidth={MAX_CONTAINER_WIDTH}
       >
@@ -355,7 +382,10 @@ export const InterchainUITheme: Story = {
                 color="inherit"
                 as="span"
                 attributes={{
-                  width: "264px",
+                  width: {
+                    mobile: "120px",
+                    mdMobile: "264px",
+                  },
                 }}
               >
                 Next
@@ -459,7 +489,10 @@ export const MeshUICustomTheme: Story = {
         <Box
           overflow="hidden"
           backgroundColor="$cardBg"
-          p="$12"
+          p={{
+            mobile: "$8",
+            tablet: "$12",
+          }}
           maxWidth={MAX_CONTAINER_WIDTH}
           borderRadius="$lg"
         >
@@ -569,8 +602,23 @@ export const MeshUICustomTheme: Story = {
                 paddingBottom: "$10",
               }}
             >
-              <MeshButton width="264px">Next</MeshButton>
-              <MeshButton variant="text">Pick random</MeshButton>
+              <MeshButton
+                width={{
+                  mobile: "120px",
+                  mdMobile: "264px",
+                }}
+              >
+                Next
+              </MeshButton>
+              <MeshButton
+                variant="text"
+                width={{
+                  mobile: "120px",
+                  mdMobile: "264px",
+                }}
+              >
+                Pick random
+              </MeshButton>
             </Stack>
           </Box>
         </Box>

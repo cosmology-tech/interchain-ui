@@ -261,8 +261,9 @@ export { default as MeshValidatorSquadEmpty } from "./ui/mesh-staking/mesh-valid
 export { default as MeshModal } from "./ui/mesh-modal";
 export { default as MeshTable } from "./ui/mesh-staking/mesh-table.lite";
 export { default as MeshTableChainCell } from "./ui/mesh-staking/mesh-table-chain-cell.lite";
-export { default as MeshTableAPRCell } from "./ui/mesh-staking/mesh-table-chain-cell.lite";
+export { default as MeshTableAPRCell } from "./ui/mesh-staking/mesh-table-apr-cell.lite";
 export { default as MeshTableHeaderAction } from "./ui/mesh-staking/mesh-table-header-action.lite";
+export { default as MeshTableValidatorsCell } from "./ui/mesh-staking/mesh-table-validators-cell.lite";
 
 // Noble
 export { default as NobleProvider } from "./ui/noble/noble-provider.lite";
