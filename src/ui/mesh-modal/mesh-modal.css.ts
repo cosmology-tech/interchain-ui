@@ -1,6 +1,6 @@
 import { style, createVar, styleVariants } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
-import { baseButton } from "../button/button.css";
+import { themeLayer } from "../../styles/layers.css";
 
 export const connectModalShadowVar = createVar();
 export const connectModalBgVar = createVar();
@@ -81,13 +81,13 @@ export const modalHeader = style({
   paddingBottom: "0",
 });
 
-export const modalCloseButton = style([
-  baseButton,
-  {
-    position: "absolute",
-    top: themeVars.space["14"],
-    right: themeVars.space["14"],
-    paddingLeft: "0 !important",
-    paddingRight: "0 !important",
+export const modalCloseButton = style({
+  "@layer": {
+    [themeLayer]: {
+      position: "absolute",
+      top: themeVars.space["14"],
+      right: themeVars.space["14"],
+      padding: "0",
+    },
   },
-]);
+});
