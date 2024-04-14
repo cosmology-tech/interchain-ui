@@ -47,10 +47,6 @@ const MeshSlider = () => {
       value={value}
       onChange={setValue}
       fluidWidth
-      width={{
-        mobile: "100%",
-        tablet: "500px",
-      }}
       thumbTrackColor="$text"
       previewPercent={20}
       previewTrackColor="$textDanger"
@@ -521,16 +517,21 @@ export const ModalView: Story = {
             >
               {[osmosis, juno, stargaze, levana].map((asset, index) => {
                 if (!asset) return null;
+
                 return (
                   <Stack
+                    key={asset.name}
                     space="$14"
                     attributes={{
                       justifyContent: "space-between",
                       alignItems: "center",
+                      flexWrap: {
+                        mobile: "wrap",
+                        mdMobile: "nowrap",
+                      },
                     }}
                   >
                     <MeshStakingSliderInfo
-                      key={asset.name}
                       tokenName={asset.name}
                       tokenImgSrc={asset.imgSrc}
                       tokenSymbol={asset.symbol}
@@ -575,11 +576,18 @@ export const ModalView: Story = {
               alignItems="center"
               pt="$10"
             >
-              <Stack
-                direction="horizontal"
-                space="$21"
-                attributes={{
-                  paddingBottom: "$10",
+              <Box
+                display="grid"
+                textAlign="center"
+                pb="$10"
+                gap={{
+                  mobile: "$4",
+                  mdMobile: "$10",
+                  tablet: "$21",
+                }}
+                gridTemplateColumns={{
+                  mobile: "1fr",
+                  mdMobile: "repeat(3, 1fr)",
                 }}
               >
                 <MeshFooterInfoItem
@@ -602,7 +610,7 @@ export const ModalView: Story = {
                   title="27 days"
                   description="Unbonding time"
                 />
-              </Stack>
+              </Box>
 
               <MeshButton
                 width={{

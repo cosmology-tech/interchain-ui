@@ -75,6 +75,32 @@ export const themeContractTemplate = {
     menuItemBgSelected: ``,
     menuItemBgHovered: ``,
     menuItemBgActive: ``,
+    // ==== TagButton
+    tagButtonText: ``,
+    tagButtonBg: ``,
+    tagButtonBgHovered: ``,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: ``,
+    meshButtonSolidPrimaryBgHovered: ``,
+    meshButtonSolidPrimaryText: ``,
+    meshButtonSolidSecondaryBg: ``,
+    meshButtonSolidSecondaryBgHovered: ``,
+    meshButtonSolidSecondaryText: ``,
+    meshButtonGhostText: ``,
+    meshButtonGhostTextHovered: ``,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: ``,
+    meshStakingSliderInfoSecondaryText: ``,
+    meshStakingSliderInfoSecondaryTextActive: ``,
+    // ==== MeshTab
+    meshTabText: ``,
+    // ==== MeshTableCell
+    meshTableCellText: ``,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: ``,
+    meshTableHeaderActionSecondaryText: ``,
+    meshTableCellBorder: ``,
+    // ====
     skeletonBg: ``,
     overflowShadowBg: ``,
     ...colors,
@@ -294,6 +320,30 @@ export const lightThemeClass = createTheme(themeVars, {
     menuItemBgSelected: `#dce4f0`,
     menuItemBgHovered: `#EEF2F8`,
     menuItemBgActive: `#DDE4ED`,
+    // ==== TagButton
+    tagButtonText: `#2C3137`,
+    tagButtonBg: `#dce4f0`,
+    tagButtonBgHovered: `#EEF2F8`,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: `#2C3137`,
+    meshButtonSolidPrimaryBgHovered: `#A2AEBB`,
+    meshButtonSolidPrimaryText: colors.white,
+    meshButtonSolidSecondaryBg: colors.gray100,
+    meshButtonSolidSecondaryBgHovered: colors.gray100,
+    meshButtonSolidSecondaryText: `#2C3137`,
+    meshButtonGhostText: ``,
+    meshButtonGhostTextHovered: ``,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: ``,
+    meshStakingSliderInfoSecondaryText: ``,
+    meshStakingSliderInfoSecondaryTextActive: ``,
+    // ==== MeshTab
+    meshTabText: ``,
+    meshTableCellText: ``,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: ``,
+    meshTableHeaderActionSecondaryText: ``,
+    meshTableCellBorder: ``,
     skeletonBg: `#DDE4ED`,
     trackBg: `#EBEFF5`,
     overflowShadowBg:
@@ -324,7 +374,7 @@ export const darkThemeClass = createTheme(themeVars, {
     cardBg: "#1D2024",
     inputBorder: "#434B55",
     inputBorderFocus: "#697584",
-    inputBg: "#1D2024",
+    inputBg: "#0f172a",
     inputDangerBorder: "#FFD0D0",
     inputDangerBg: "#E17171",
     inputDisabledBg: "#A7B4C2",
@@ -337,6 +387,29 @@ export const darkThemeClass = createTheme(themeVars, {
     menuItemBgSelected: `#2e3339`,
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
+    // ==== TagButton
+    tagButtonText: `#DAD5E3`,
+    tagButtonBg: `#202023`,
+    tagButtonBgHovered: `#27272B`,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: `#DAD5E3`,
+    meshButtonSolidPrimaryBgHovered: `#E2E2E2`,
+    meshButtonSolidPrimaryText: `#0E0E0F`,
+    meshButtonSolidSecondaryBg: `#1E1E1F`,
+    meshButtonSolidSecondaryBgHovered: `#1E1E1F`,
+    meshButtonSolidSecondaryText: `#DAD5E3`,
+    meshButtonGhostText: ``,
+    meshButtonGhostTextHovered: ``,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: ``,
+    meshStakingSliderInfoSecondaryText: ``,
+    meshStakingSliderInfoSecondaryTextActive: ``,
+    meshTabText: ``,
+    meshTableCellText: ``,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: ``,
+    meshTableHeaderActionSecondaryText: ``,
+    meshTableCellBorder: ``,
     skeletonBg: `#3B434D`,
     trackBg: `#49525E`,
     overflowShadowBg:
@@ -382,6 +455,30 @@ export const meshLightThemeClass = createTheme(themeVars, {
     menuItemBgSelected: `#dce4f0`,
     menuItemBgHovered: `#EEF2F8`,
     menuItemBgActive: `#DDE4ED`,
+    tagButtonText: `#2C3137`,
+    tagButtonBg: `#dce4f0`,
+    tagButtonBgHovered: `#EEF2F8`,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: `#2C3137`,
+    meshButtonSolidPrimaryBgHovered: `#A2AEBB`,
+    meshButtonSolidPrimaryText: colors.white,
+    meshButtonSolidSecondaryBg: colors.gray100,
+    meshButtonSolidSecondaryBgHovered: colors.gray100,
+    meshButtonSolidSecondaryText: `#2C3137`,
+    meshButtonGhostText: `#2C3137`,
+    meshButtonGhostTextHovered: `#697584`,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: `#2C3137`,
+    meshStakingSliderInfoSecondaryText: `#697584`,
+    meshStakingSliderInfoSecondaryTextActive: colors.green400,
+    // ==== MeshTab
+    meshTabText: `#2C3137`,
+    meshTableCellText: `#2C3137`,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: `#2C3137`,
+    meshTableHeaderActionSecondaryText: `#697584`,
+    meshTableCellBorder: `#E1DBEB`,
+    // ====
     skeletonBg: `#DDE4ED`,
     trackBg: `#EBEFF5`,
     overflowShadowBg:
@@ -437,6 +534,30 @@ export const meshDarkThemeClass = createTheme(themeVars, {
     menuItemBgSelected: `#2e3339`,
     menuItemBgHovered: `#25292E`,
     menuItemBgActive: `#2C3137`,
+    tagButtonText: `#DAD5E3`,
+    tagButtonBg: `#202023`,
+    tagButtonBgHovered: `#27272B`,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: `#DAD5E3`,
+    meshButtonSolidPrimaryBgHovered: `#E2E2E2`,
+    meshButtonSolidPrimaryText: `#0E0E0F`,
+    meshButtonSolidSecondaryBg: `#1E1E1F`,
+    meshButtonSolidSecondaryBgHovered: `#1E1E1F`,
+    meshButtonSolidSecondaryText: `#DAD5E3`,
+    meshButtonGhostText: `#85858E`,
+    meshButtonGhostTextHovered: `#E1DBEB`,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: `#E2E2E2`,
+    meshStakingSliderInfoSecondaryText: `#85858E`,
+    meshStakingSliderInfoSecondaryTextActive: `#C0EEA4`,
+    // ==== MeshTab
+    meshTabText: `#E2E2E2`,
+    meshTableCellText: `#E2E2E2`,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: colors.white,
+    meshTableHeaderActionSecondaryText: `#E2E2E2`,
+    meshTableCellBorder: `#131313`,
+    // ====
     skeletonBg: `#3B434D`,
     trackBg: `#49525E`,
     overflowShadowBg:

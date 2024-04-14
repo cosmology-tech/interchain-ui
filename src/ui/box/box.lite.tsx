@@ -37,7 +37,10 @@ export default function Box(props: BoxProps) {
       return {
         className: clsx(sprinklesObj.className, props.className),
         style: sprinklesObj.style,
-        passThroughProps: sprinklesObj.otherProps,
+        passThroughProps: omit(sprinklesObj.otherProps, [
+          "rawCSS",
+          "colorScheme",
+        ]),
       };
     },
   });

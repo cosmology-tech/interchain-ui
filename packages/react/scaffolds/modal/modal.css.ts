@@ -60,5 +60,5 @@ globalStyle(
   `${modalContainer} *, ${modalContainer} *::before, ${modalContainer} *::after`,
   {
     boxSizing: `border-box`,
-  }
+  },
 );

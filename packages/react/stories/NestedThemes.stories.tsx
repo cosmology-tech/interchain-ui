@@ -38,21 +38,19 @@ export const NestedTheme: Story = {
         <Text>Outer</Text>
 
         <ThemeProvider themeMode="light">
-          <div ref={getThemeRef}>
-            <Box
-              p="$6"
-              bg="$background"
-              width="100%"
-              height="100%"
-              borderStyle="$dashed"
-              borderColor="$red300"
-            >
-              <Text>
-                Inner (This Box won't change bg color because its controlled
-                themeMode is light mode)
-              </Text>
-            </Box>
-          </div>
+          <Box
+            p="$6"
+            bg="$background"
+            width="100%"
+            height="100%"
+            borderStyle="$dashed"
+            borderColor="$red300"
+          >
+            <Text>
+              Inner (This Box won't change bg color because its controlled
+              themeMode is light mode)
+            </Text>
+          </Box>
         </ThemeProvider>
       </Box>
     );

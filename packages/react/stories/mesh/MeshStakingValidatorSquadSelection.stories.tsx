@@ -734,109 +734,112 @@ export const ModalView: Story = {
           }
           onClose={() => setIsOpen(false)}
         >
-          <Box maxWidth={MAX_CONTAINER_WIDTH}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            maxWidth="100%"
+          >
+            {/* Stake section */}
             <Box
+              width="$full"
               display="flex"
               flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-              maxWidth="100%"
+              gap="$10"
+              marginTop="40px"
+              marginBottom="42px"
+              overflow="auto"
             >
-              {/* Stake section */}
-              <Box
-                width="100%"
-                display="flex"
-                flexDirection="column"
-                gap="$10"
-                marginTop="40px"
-                marginBottom="42px"
-              >
-                <MeshTable
-                  borderless
-                  rowHeight="$14"
-                  pinnedIds={pinnedRowIds}
-                  maxPinnedRows={4}
-                  columns={[
-                    {
-                      id: "validator",
-                      label: "Validator",
-                      align: "left",
-                      width: "300px",
-                      render: (rowData: MeshTableValidatorRow) => (
-                        <Box pl="$6">
-                          <MeshTableChainCell
-                            size="xs"
-                            name={rowData.validator.name}
-                            imgSrc={rowData.validator.logo}
-                          />
-                        </Box>
-                      ),
-                    },
-                    {
-                      id: "votingPower",
-                      label: "Voting Power",
-                      align: "left",
-                      width: "200px",
-                    },
-                    {
-                      id: "commission",
-                      label: "Commission",
-                      width: "200px",
-                      align: "left",
-                    },
-                    {
-                      id: "action",
-                      width: "100px",
-                      align: "right",
-                      render: (
-                        rowData: MeshTableValidatorRow,
-                        column,
-                        isPinned,
-                      ) => (
-                        <Box
-                          width="100%"
-                          display="flex"
-                          justifyContent="flex-end"
-                          alignItems="center"
-                        >
-                          {isPinned ? (
-                            <MeshButton
-                              variant="text"
-                              onClick={() => unselectRow(rowData.id)}
-                            >
-                              Remove
-                            </MeshButton>
-                          ) : (
-                            <MeshButton
-                              variant="text"
-                              color="$textSuccess"
-                              onClick={() => selectRow(rowData.id)}
-                            >
-                              Select
-                            </MeshButton>
-                          )}
-                        </Box>
-                      ),
-                    },
-                  ]}
-                  data={rowsData}
-                  containerProps={{
-                    maxWidth: "792px",
-                  }}
-                />
-              </Box>
-
-              <Stack
-                direction="vertical"
-                space="$0"
-                attributes={{
-                  paddingBottom: "$10",
+              <MeshTable
+                borderless
+                rowHeight="$14"
+                pinnedIds={pinnedRowIds}
+                maxPinnedRows={4}
+                columns={[
+                  {
+                    id: "validator",
+                    label: "Validator",
+                    align: "left",
+                    width: "300px",
+                    render: (rowData: MeshTableValidatorRow) => (
+                      <Box pl="$6">
+                        <MeshTableChainCell
+                          size="xs"
+                          name={rowData.validator.name}
+                          imgSrc={rowData.validator.logo}
+                        />
+                      </Box>
+                    ),
+                  },
+                  {
+                    id: "votingPower",
+                    label: "Voting Power",
+                    align: "left",
+                    width: "200px",
+                  },
+                  {
+                    id: "commission",
+                    label: "Commission",
+                    width: "200px",
+                    align: "left",
+                  },
+                  {
+                    id: "action",
+                    width: "100px",
+                    align: "right",
+                    render: (
+                      rowData: MeshTableValidatorRow,
+                      column,
+                      isPinned,
+                    ) => (
+                      <Box
+                        width="100%"
+                        display="flex"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                      >
+                        {isPinned ? (
+                          <MeshButton
+                            variant="text"
+                            onClick={() => unselectRow(rowData.id)}
+                          >
+                            Remove
+                          </MeshButton>
+                        ) : (
+                          <MeshButton
+                            variant="text"
+                            color="$textSuccess"
+                            onClick={() => selectRow(rowData.id)}
+                          >
+                            Select
+                          </MeshButton>
+                        )}
+                      </Box>
+                    ),
+                  },
+                ]}
+                data={rowsData}
+                containerProps={{
+                  width: {
+                    mobile: MAX_CONTAINER_WIDTH,
+                    tablet: "auto",
+                  },
+                  maxWidth: "792px",
                 }}
-              >
-                <MeshButton width="264px">Next</MeshButton>
-                <MeshButton variant="text">Pick random</MeshButton>
-              </Stack>
+              />
             </Box>
+
+            <Stack
+              direction="vertical"
+              space="$0"
+              attributes={{
+                paddingBottom: "$10",
+              }}
+            >
+              <MeshButton width="264px">Next</MeshButton>
+              <MeshButton variant="text">Pick random</MeshButton>
+            </Stack>
           </Box>
         </MeshModal>
       </div>

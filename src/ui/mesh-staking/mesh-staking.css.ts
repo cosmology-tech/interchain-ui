@@ -62,6 +62,28 @@ export const lastRowCell = style({
   paddingBottom: themeVars.space["9"],
 });
 
+export const bottomShadow = style({
+  height: "45px",
+  position: "relative",
+  width: "100%",
+  backgroundColor: `rgb(from ${themeVars.colors.cardBg} r g b / 0.75)`,
+  backdropFilter: "blur(1px)",
+  opacity: 0.99,
+  zIndex: 10,
+  selectors: {
+    "&:after": {
+      content: '""',
+      position: "absolute",
+      width: "100%",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: "45px",
+      background: themeVars.colors.overflowShadowBg,
+    },
+  },
+});
+
 export const scrollBarThumbBgVar = createVar();
 
 const scrollBarBase = style({
@@ -90,25 +112,3 @@ export const scrollBar = style([
     },
   },
 ]);
-
-export const bottomShadow = style({
-  height: "45px",
-  position: "relative",
-  width: "100%",
-  backgroundColor: `rgb(from ${themeVars.colors.cardBg} r g b / 0.75)`,
-  backdropFilter: "blur(1px)",
-  opacity: 0.99,
-  zIndex: 10,
-  selectors: {
-    "&:after": {
-      content: '""',
-      position: "absolute",
-      width: "100%",
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: "45px",
-      background: themeVars.colors.overflowShadowBg,
-    },
-  },
-});

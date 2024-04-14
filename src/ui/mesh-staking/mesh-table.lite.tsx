@@ -24,7 +24,6 @@ import * as styles from "./mesh-staking.css";
 
 import { store } from "../../models/store";
 import anime from "animejs";
-import type { AnimeInstance } from "animejs";
 import type { MeshTableProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -40,13 +39,10 @@ export default function MeshTable(props: MeshTableProps) {
   const pinnedTableMeasureRef = useRef<HTMLDivElement>(null);
   const pinnedTableShadowRef = useRef<HTMLDivElement>(null);
 
-  let animationRef = useRef<AnimeInstance | null>(null);
-  let pinnedTableAnimationRef = useRef<AnimeInstance | null>(null);
-
   let cleanupRef = useRef<() => void>(null);
 
   const state = useStore({
-    theme: "light",
+    theme: "dark",
     displayBottomShadow: false,
     displayPinnedTableBottomShadow: false,
     pinnedRows: [],

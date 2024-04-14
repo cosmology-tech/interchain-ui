@@ -10,7 +10,12 @@ useMetadata({
 
 export default function MeshTableAPRCell(props: MeshTableAPRCellProps) {
   return (
-    <Text fontSize="$sm" fontWeight="$medium" color="$textSuccess">
+    <Text
+      fontSize="$sm"
+      fontWeight="$medium"
+      color="$textSuccess"
+      attributes={props.attributes}
+    >
       {props.value}
     </Text>
   );
