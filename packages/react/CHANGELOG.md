@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.16](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.15...@interchain-ui/react@1.22.16) (2024-04-14)
+
+### Bug Fixes
+
+- **mesh-ui:** remove local theme state ([a243d86](https://github.com/cosmology-tech/interchain-ui/commit/a243d86046f6e383badd52748000bf47001412bc))
+- **mesh:** pass through attributes, fix story style issues ([5142ab0](https://github.com/cosmology-tech/interchain-ui/commit/5142ab097073c4931a8712ec91656ea0bfcb34fa))
+- **modal:** use dynamic device width ([d46e1a5](https://github.com/cosmology-tech/interchain-ui/commit/d46e1a54409d8f19961a1333b3484f1579cd5e6a))
+
 ## [1.22.15](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.14...@interchain-ui/react@1.22.15) (2024-04-11)
 
 **Note:** Version bump only for package @interchain-ui/react
