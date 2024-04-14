@@ -7,7 +7,6 @@ import {
 } from "@builder.io/mitosis";
 import clx from "clsx";
 import { store } from "../../models/store";
-import { ThemeVariant } from "../../models/system.model";
 import {
   meshDarkThemeClass,
   meshLightThemeClass,
@@ -22,15 +21,23 @@ useMetadata({
 });
 
 export default function MeshProvider(props: MeshProviderProps) {
-  const state = useStore<{
-    theme: ThemeVariant;
-  }>({
+  const state = useStore({
     theme: "light",
+    get isControlled() {
+      return props.themeMode != null;
+    },
+    get providerThemeMode() {
+      if (state.isControlled) return props.themeMode;
+      return state.theme;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
+    // Controlled theme mode
+    if (state.isControlled) return;
+
     state.theme = store.getState().theme;
 
     cleanupRef = store.subscribe((newState) => {
@@ -45,8 +52,8 @@ export default function MeshProvider(props: MeshProviderProps) {
   return (
     <div
       className={clx({
-        [meshLightThemeClass]: state.theme === "light",
-        [meshDarkThemeClass]: state.theme === "dark",
+        [meshLightThemeClass]: state.providerThemeMode === "light",
+        [meshDarkThemeClass]: state.providerThemeMode === "dark",
       })}
     >
       {props.children}

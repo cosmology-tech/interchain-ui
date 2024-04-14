@@ -1,12 +1,4 @@
-import {
-  useMetadata,
-  useStore,
-  useRef,
-  onMount,
-  onUnMount,
-  For,
-} from "@builder.io/mitosis";
-import { store } from "../../models/store";
+import { useMetadata, For } from "@builder.io/mitosis";
 import Box from "../box";
 import type { MeshTableValidatorsCellProps } from "./mesh-staking.types";
 
@@ -19,24 +11,6 @@ useMetadata({
 export default function MeshTableValidatorsCell(
   props: MeshTableValidatorsCellProps,
 ) {
-  const state = useStore({
-    theme: "light",
-  });
-
-  let cleanupRef = useRef<(() => void) | null>(null);
-
-  onMount(() => {
-    state.theme = store.getState().theme;
-
-    cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
-    });
-  });
-
-  onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
-  });
-
   return (
     <Box display="flex" position="relative" attributes={props.attributes}>
       <For each={props.validators}>
@@ -52,7 +26,7 @@ export default function MeshTableValidatorsCell(
             flexGrow={0}
             borderRadius="$full"
             backgroundColor="$white"
-            borderColor={state.theme === "dark" ? "$black" : "$gray100"}
+            borderColor="$meshTableCellBorder"
             borderWidth="1px"
             borderStyle="solid"
             marginLeft={index === 0 ? undefined : "-8px"}

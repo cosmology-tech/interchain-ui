@@ -499,6 +499,10 @@ export const ModalView: Story = {
                     space="$14"
                     attributes={{
                       justifyContent: "space-between",
+                      flexWrap: {
+                        mobile: "wrap",
+                        mdMobile: "nowrap",
+                      },
                       alignItems: "center",
                     }}
                   >
@@ -526,11 +530,18 @@ export const ModalView: Story = {
               alignItems="center"
               pt="$10"
             >
-              <Stack
-                direction="horizontal"
-                space="$21"
-                attributes={{
-                  paddingBottom: "$10",
+              <Box
+                display="grid"
+                textAlign="center"
+                pb="$10"
+                gap={{
+                  mobile: "$4",
+                  mdMobile: "$10",
+                  tablet: "$21",
+                }}
+                gridTemplateColumns={{
+                  mobile: "1fr",
+                  mdMobile: "repeat(3, 1fr)",
                 }}
               >
                 <MeshFooterInfoItem
@@ -547,7 +558,7 @@ export const ModalView: Story = {
                   title="27 days"
                   description="Unbonding time"
                 />
-              </Stack>
+              </Box>
 
               <MeshButton width="264px">Next</MeshButton>
             </Box>

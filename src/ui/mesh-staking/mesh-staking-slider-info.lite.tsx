@@ -1,15 +1,7 @@
-import {
-  useMetadata,
-  useStore,
-  useRef,
-  onMount,
-  onUnMount,
-} from "@builder.io/mitosis";
+import { useMetadata } from "@builder.io/mitosis";
 import Box from "../box";
 import Stack from "../stack";
 import Text from "../text";
-import { store } from "../../models/store";
-import type { ThemeVariant } from "../../models/system.model";
 import type { MeshStakingSliderInfoProps } from "./mesh-staking.types";
 
 useMetadata({
@@ -21,24 +13,6 @@ useMetadata({
 export default function MeshStakingSliderInfo(
   props: MeshStakingSliderInfoProps,
 ) {
-  const state = useStore<{ theme: ThemeVariant }>({
-    theme: "light",
-  });
-
-  let cleanupRef = useRef<(() => void) | null>(null);
-
-  onMount(() => {
-    state.theme = store.getState().theme;
-
-    cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
-    });
-  });
-
-  onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
-  });
-
   return (
     <Box
       display="flex"
@@ -62,7 +36,7 @@ export default function MeshStakingSliderInfo(
       <Stack direction="vertical" space="$1">
         <Text
           fontSize="$sm"
-          color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
+          color="$meshStakingSliderInfoPrimaryText"
           fontWeight="$medium"
         >
           {props.tokenName}
@@ -71,7 +45,11 @@ export default function MeshStakingSliderInfo(
         <Text
           fontSize="$sm"
           fontWeight="$normal"
-          color={props.isActive ? "$textSuccess" : "$textSecondary"}
+          color={
+            props.isActive
+              ? "$meshStakingSliderInfoSecondaryTextActive"
+              : "$meshStakingSliderInfoSecondaryText"
+          }
         >
           {props.tokenAPR}
         </Text>

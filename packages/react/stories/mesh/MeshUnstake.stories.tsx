@@ -525,6 +525,10 @@ export const ModalView: Story = {
                     attributes={{
                       justifyContent: "space-between",
                       alignItems: "center",
+                      flexWrap: {
+                        mobile: "wrap",
+                        mdMobile: "nowrap",
+                      },
                     }}
                   >
                     <MeshStakingSliderInfo

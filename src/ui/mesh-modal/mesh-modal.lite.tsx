@@ -26,7 +26,6 @@ import {
   meshLightThemeClass,
 } from "../../styles/themes.css";
 
-import type { ThemeVariant } from "../../models/system.model";
 import type { MeshModalProps } from "./mesh-modal.types";
 
 useMetadata({
@@ -42,14 +41,24 @@ useDefaultProps<Partial<MeshModalProps>>({
 });
 
 export default function MeshModal(props: MeshModalProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
+  const state = useStore({
     theme: "light",
+    get isControlled() {
+      return props.themeMode != null;
+    },
+    get modalThemeMode() {
+      if (state.isControlled) return props.themeMode;
+      return state.theme;
+    },
   });
 
   let cleanupRef = useRef<(() => void) | null>(null);
   const parentRef = useRef<HTMLDivElement>();
 
   onMount(() => {
+    // Controlled theme mode
+    if (state.isControlled) return;
+
     state.theme = store.getState().theme;
 
     cleanupRef = store.subscribe((newState) => {
@@ -78,10 +87,14 @@ export default function MeshModal(props: MeshModalProps) {
       preventScroll={true}
       renderTrigger={props.renderTrigger}
       themeClassName={
-        state.theme === "dark" ? meshDarkThemeClass : meshLightThemeClass
+        state.modalThemeMode === "dark"
+          ? meshDarkThemeClass
+          : meshLightThemeClass
       }
       backdropClassName={
-        state.theme === "light" ? modalBackdropBg.light : modalBackdropBg.dark
+        state.modalThemeMode === "light"
+          ? modalBackdropBg.light
+          : modalBackdropBg.dark
       }
       header={
         <Stack

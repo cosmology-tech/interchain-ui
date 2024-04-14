@@ -1,13 +1,4 @@
-import {
-  useMetadata,
-  useStore,
-  useRef,
-  onMount,
-  onUnMount,
-  Show,
-  useDefaultProps,
-} from "@builder.io/mitosis";
-import { store } from "../../models/store";
+import { useMetadata, Show, useDefaultProps } from "@builder.io/mitosis";
 
 import Box from "../box";
 import Text from "../text";
@@ -25,24 +16,6 @@ useDefaultProps<Partial<MeshTableChainCellProps>>({
 });
 
 export default function MeshTableChainCell(props: MeshTableChainCellProps) {
-  const state = useStore({
-    theme: "light",
-  });
-
-  let cleanupRef = useRef<(() => void) | null>(null);
-
-  onMount(() => {
-    state.theme = store.getState().theme;
-
-    cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
-    });
-  });
-
-  onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
-  });
-
   return (
     <>
       <Show when={props.size === "xs"}>
@@ -65,11 +38,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
             }}
           />
 
-          <Text
-            fontSize="$sm"
-            fontWeight="$medium"
-            color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
-          >
+          <Text fontSize="$sm" fontWeight="$medium" color="$meshTableCellText">
             {props.name}
           </Text>
         </Stack>
@@ -95,10 +64,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
             }}
           />
 
-          <Text
-            fontWeight="$medium"
-            color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
-          >
+          <Text fontWeight="$medium" color="$meshTableCellText">
             {props.name}
           </Text>
         </Stack>
@@ -124,10 +90,7 @@ export default function MeshTableChainCell(props: MeshTableChainCellProps) {
             }}
           />
 
-          <Text
-            fontWeight="$medium"
-            color={state.theme === "dark" ? "$textPlaceholder" : "$text"}
-          >
+          <Text fontWeight="$medium" color="$meshTableCellText">
             {props.name}
           </Text>
         </Stack>

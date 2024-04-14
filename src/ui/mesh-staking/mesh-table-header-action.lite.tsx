@@ -1,13 +1,4 @@
-import {
-  useMetadata,
-  useStore,
-  useDefaultProps,
-  useRef,
-  Show,
-  onMount,
-  onUnMount,
-} from "@builder.io/mitosis";
-import { store } from "../../models/store";
+import { useMetadata, useDefaultProps, Show } from "@builder.io/mitosis";
 import Box from "../box";
 import Text from "../text";
 import Icon from "../icon";
@@ -31,24 +22,6 @@ useDefaultProps<Partial<MeshTableHeaderActionProps>>({
 export default function MeshTableHeaderAction(
   props: MeshTableHeaderActionProps,
 ) {
-  const state = useStore({
-    theme: "light",
-  });
-
-  let cleanupRef = useRef<(() => void) | null>(null);
-
-  onMount(() => {
-    state.theme = store.getState().theme;
-
-    cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
-    });
-  });
-
-  onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
-  });
-
   return (
     <Box display="flex" gap="$7" flexWrap="wrap" attributes={props.attributes}>
       <Box
@@ -115,7 +88,7 @@ export default function MeshTableHeaderAction(
         <Text
           fontSize="$md"
           fontWeight="$medium"
-          color={state.theme === "dark" ? "$white" : "$text"}
+          color="$meshTableHeaderActionText"
         >
           {props.tokenAmount}
         </Text>
@@ -123,7 +96,7 @@ export default function MeshTableHeaderAction(
         <Text
           fontSize="$sm"
           fontWeight="$light"
-          color={state.theme === "dark" ? "$textPlaceholder" : "$textSecondary"}
+          color="$meshTableHeaderActionSecondaryText"
         >
           {props.tokenName}
         </Text>
