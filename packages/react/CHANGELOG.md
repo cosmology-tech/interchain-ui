@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.19](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.18...@interchain-ui/react@1.22.19) (2024-04-15)
+
+**Note:** Version bump only for package @interchain-ui/react
+
 ## [1.22.18](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.17...@interchain-ui/react@1.22.18) (2024-04-15)
 
 ### Bug Fixes
