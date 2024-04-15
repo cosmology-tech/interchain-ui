@@ -191,6 +191,8 @@ export { default as Divider } from "./ui/divider";
 export type { DividerProps } from "./ui/divider/divider.types";
 export { default as Carousel } from "./ui/carousel";
 export type { CarouselProps } from "./ui/carousel/carousel.types";
+export { default as Accordion } from "./ui/accordion";
+export type { AccordionProps } from "./ui/accordion/accordion.types";
 export { default as Breadcrumb } from "./ui/breadcrumb";
 export { default as BreadcrumbItem } from "./ui/breadcrumb/breadcrumb-item.lite";
 export type {
@@ -262,4 +264,14 @@ export { default as MeshTableChainCell } from "./ui/mesh-staking/mesh-table-chai
 export { default as MeshTableAPRCell } from "./ui/mesh-staking/mesh-table-apr-cell.lite";
 export { default as MeshTableHeaderAction } from "./ui/mesh-staking/mesh-table-header-action.lite";
 export { default as MeshTableValidatorsCell } from "./ui/mesh-staking/mesh-table-validators-cell.lite";
+
+// Noble
+export { default as NobleProvider } from "./ui/noble/noble-provider.lite";
+export { default as NobleTxDirectionCard } from "./ui/noble/noble-tx-direction-card.lite";
+export { default as NobleTxProgressBar } from "./ui/noble/noble-tx-progress-bar.lite";
+export { default as NobleTxStepItem } from "./ui/noble/noble-tx-step-item.lite";
+export { default as NobleButton } from "./ui/noble/noble-button.lite";
+export { default as NoblePageTitleBar } from "./ui/noble/noble-page-title-bar.lite";
+export { default as NobleTxHistoryOverviewItem } from "./ui/noble/noble-tx-history-overview-item.lite";
+
 // End Components
