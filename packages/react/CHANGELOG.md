@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.18](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.17...@interchain-ui/react@1.22.18) (2024-04-15)
+
+### Bug Fixes
+
+- slider max ([217e723](https://github.com/cosmology-tech/interchain-ui/commit/217e7232d9dccde3246d9bf6509c87d5fbc97cb8))
+
 ## [1.22.17](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.16...@interchain-ui/react@1.22.17) (2024-04-15)
 
 ### Bug Fixes
