@@ -60,7 +60,7 @@ export default function Slider(props: SliderProps) {
     numberFormatter,
     defaultValue: 0,
     minValue: 0,
-    maxValue: props.previewPercent ? 100 - props.previewPercent : 100,
+    maxValue: 100,
   });
 
   const { groupProps, trackProps, labelProps, outputProps } = useSlider(
