@@ -20,15 +20,35 @@ Interchain UI for React
 
 Interchain UI is a foundation library for UI elements used in [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) and other packages. It provides developers with pre-built components and a foundation for creating user interfaces across different frameworks, such as VueJS, React, Angular, Svelte, SolidJS, and Web Components, enabling developers to customize UI elements and themes. This gives us the ability to code a component once, and it will compile to all framework targets.
 
-## Setup
+## Usage
 
+First install using your favorite package manager
 ```bash
-# If you use react
+npm i @interchain-ui/react
+
 yarn add @interchain-ui/react
 
-# If you use vue
-yarn add @interchain-ui/vue
+pnpm add @interchain-ui/react
 ```
+
+Then in your root route/layout, import `ThemeProvider` and CSS
+
+```TSX
+// layout.tsx
+import { ThemeProvider } from '@interchain-ui/react';
+import '@interchain-ui/react/styles';
+
+export function RootLayout(props: LayoutProps) {
+  return (
+    <ThemeProvider>
+      {props.children}
+    </ThemeProvider>
+  )
+}
+```
+
+After these steps are done, you can import and use `@interchain-ui/react` components.
+
 
 ## Setup and scripts for development
 
@@ -37,24 +57,6 @@ yarn add @interchain-ui/vue
 - `pnpm run compile` to compile from mitosis components to other packages, you can give it a flag `-p` or `--platforms` .ie `yarn compile -p react vue`
 - `pnpm run c:react` or `pnpm run c:vue` to compile specifically to react or vue
 - `pnpm run clean` to clean `.node_modules` or `pnpm run clean:assets` to clean build/compile output
-
-## Overview and structure
-
-![Overview](../../docs//overview-ui-kit.png)
-We create components inside a single source of truth folder `<root>/src` with Mitosis lite JSX format, then through our compiler, it's going to compile our components and build it in sub packages' `src` and `dist`.
-
-When we publish packages, we are actually publishing the sub packages generated from `<root>/src`, which are `packages/react` and `packages/vue`, not the `<root>/src` itself.
-
-The compiler is a wrapper over `@builder.io/mitosis` CLI with some extra source code handling logic and some nice CLI add-ons like arguments handling...etc.
-
-There are some rules of thumbs and some tips for creating Mitosis components:
-
-- File names must end with `*.lite.tsx`
-- Style sheets must be in `*.css.ts` files, this is because we use a styling solution called `vanilla-extract` to have a CSS-in-JS API across all frameworks.
-- For a component, you must use default export, not named export. This is a limitation of Mitosis
-- There are more rules and limitations, please read more about Mitosis [here](https://github.com/BuilderIO/mitosis/tree/main/docs)
-- To quickly test to see the compilation result from one Mitosis to any framework source code, please use
-[mitosis sandbox](https://mitosis.builder.io/). It's similar to TS playground but for Mitosis testing purpose.
 
 ## Icon
 
