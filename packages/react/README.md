@@ -40,7 +40,7 @@ yarn add @interchain-ui/vue
 
 ## Overview and structure
 
-![Overview](./docs/overview-ui-kit.png)
+![Overview](../../docs//overview-ui-kit.png)
 We create components inside a single source of truth folder `<root>/src` with Mitosis lite JSX format, then through our compiler, it's going to compile our components and build it in sub packages' `src` and `dist`.
 
 When we publish packages, we are actually publishing the sub packages generated from `<root>/src`, which are `packages/react` and `packages/vue`, not the `<root>/src` itself.
