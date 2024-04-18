@@ -70,6 +70,7 @@ export const ALL_ICON_NAMES = [
   "plusRound",
   "minusRound",
   "xCircle",
+  "magnifier",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];

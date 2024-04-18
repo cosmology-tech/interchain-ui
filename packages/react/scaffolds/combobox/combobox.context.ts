@@ -5,5 +5,5 @@ export interface ComboboxContextValue {
 }
 
 export const ComboboxContext = React.createContext<ComboboxContextValue>(
-  {} as ComboboxContextValue
+  {} as ComboboxContextValue,
 );

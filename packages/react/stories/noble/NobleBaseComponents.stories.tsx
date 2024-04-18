@@ -13,13 +13,92 @@ import NobleButton from "../../src/ui/noble/noble-button";
 import NobleTokenAvatar from "../../src/ui/noble/noble-token-avatar";
 import NobleSelectTokenButton from "../../src/ui/noble/noble-select-token-button";
 import NobleSelectWalletButton from "../../src/ui/noble/noble-select-wallet-button";
+import NobleSelectNetworkButton from "../../src/ui/noble/noble-select-network-button";
 import NobleInput from "../../src/ui/noble/noble-input";
+import NobleTxChainRoute from "../../src/ui/noble/noble-tx-chain-route";
+import NobleTxEstimate from "../../src/ui/noble/noble-tx-estimate";
+import NobleChainCombobox from "../../src/ui/noble-chain-combobox";
+
 import NobleTxProgressBar from "../../src/ui/noble/noble-tx-progress-bar";
 import NobleTxDirectionCard from "../../src/ui/noble/noble-tx-direction-card";
 import NobleTxStepItem from "../../src/ui/noble/noble-tx-step-item";
 import NobleTxHistoryOverviewItem from "../../src/ui/noble/noble-tx-history-overview-item";
 import NoblePageTitleBar from "../../src/ui/noble/noble-page-title-bar";
 import type { NobleTxStatus } from "../../src/ui/noble/noble.types";
+
+// Chains
+// @ts-ignore
+import ARB_LOGO_URL from "../../static/networks/Arbitrum.png";
+// @ts-ignore
+import TIA_LOGO_URL from "../../static/networks/Celestia.png";
+// @ts-ignore
+import COSMOS_LOGO_URL from "../../static/networks/Cosmos.png";
+// @ts-ignore
+import DYDX_LOGO_URL from "../../static/networks/dYdX.png";
+// @ts-ignore
+import MANTLE_LOGO_URL from "../../static/networks/Mantle.png";
+// @ts-ignore
+import ETH_LOGO_URL from "../../static/networks/Ethereum.png";
+// @ts-ignore
+import NOBLE_LOGO_URL from "../../static/networks/Noble.png";
+// @ts-ignore
+import OP_LOGO_URL from "../../static/networks/Optimism.png";
+// @ts-ignore
+import MATIC_LOGO_URL from "../../static/networks/Polygon.png";
+
+type ChainOption = {
+  label: string;
+  value: string;
+  logoUrl: string;
+};
+
+const chainOptions: ChainOption[] = [
+  {
+    label: "Arbitrum",
+    value: "arbitrum",
+    logoUrl: ARB_LOGO_URL,
+  },
+  {
+    label: "Celestia",
+    value: "celestia",
+    logoUrl: TIA_LOGO_URL,
+  },
+  {
+    label: "Cosmos Hub",
+    value: "cosmos",
+    logoUrl: COSMOS_LOGO_URL,
+  },
+  {
+    label: "dYdX",
+    value: "dydx",
+    logoUrl: DYDX_LOGO_URL,
+  },
+  {
+    label: "Mantle",
+    value: "mantle",
+    logoUrl: MANTLE_LOGO_URL,
+  },
+  {
+    label: "Ethereum",
+    value: "eth",
+    logoUrl: ETH_LOGO_URL,
+  },
+  {
+    label: "Noble",
+    value: "noble",
+    logoUrl: NOBLE_LOGO_URL,
+  },
+  {
+    label: "Optimism",
+    value: "op",
+    logoUrl: OP_LOGO_URL,
+  },
+  {
+    label: "Polygon",
+    value: "polygon",
+    logoUrl: MATIC_LOGO_URL,
+  },
+];
 
 const meta: Meta<typeof NobleProvider> = {
   component: NobleProvider,
@@ -120,6 +199,56 @@ export const Primary: Story = {
               title="USDC"
               subTitle="Connect (disabled)"
               disabled
+            />
+          </Box>
+
+          <Box display="flex" gap="$4" flexDirection="column" maxWidth="466px">
+            <Text>NobleSelectNetworkButton</Text>
+
+            <NobleSelectNetworkButton
+              logoUrl={OSMO_LOGO_URL}
+              title="OSMOSIS"
+              subTitle="osmo1yvejj22t78s2vfk7slty2d7fs5lkc8rnmszznw"
+              actionLabel="Change"
+              size="lg"
+            />
+          </Box>
+
+          <Box display="flex" gap="$4" flexDirection="column" maxWidth="466px">
+            <Text>NobleTxChainRoute</Text>
+
+            <NobleTxChainRoute
+              srcChainLogoUrl={ETH_LOGO_URL}
+              srcChainLogoAlt="ETH"
+              destChainLogoUrl={NOBLE_LOGO_URL}
+              destChainLogoAlt="NOBLE"
+            />
+
+            <NobleTxChainRoute
+              srcChainLogoUrl={ETH_LOGO_URL}
+              srcChainLogoAlt="ETH"
+              destChainLogoUrl={OP_LOGO_URL}
+              destChainLogoAlt="OP"
+            />
+
+            <NobleTxChainRoute
+              srcChainLogoUrl={MATIC_LOGO_URL}
+              srcChainLogoAlt="ETH"
+              destChainLogoUrl={OP_LOGO_URL}
+              destChainLogoAlt="OP"
+            />
+          </Box>
+
+          <Box display="flex" gap="$4" flexDirection="column" maxWidth="466px">
+            <Text>NobleTxEstimate</Text>
+
+            <NobleTxEstimate
+              srcChainLogoUrl={MATIC_LOGO_URL}
+              srcChainLogoAlt="ETH"
+              destChainLogoUrl={OP_LOGO_URL}
+              destChainLogoAlt="OP"
+              timeEstimateLabel="≈ 15 minutes"
+              feeEstimateLabel="$0.12 Fee"
             />
           </Box>
 
@@ -264,6 +393,48 @@ export const Primary: Story = {
                 </Box>
               }
             />
+          </Box>
+
+          <Box display="flex" gap="$4" flexDirection="column" maxWidth="466px">
+            <Text>NobleChainCombobox</Text>
+
+            <NobleChainCombobox
+              styleProps={{
+                width: "100%",
+              }}
+            >
+              {chainOptions.map((option) => (
+                <NobleChainCombobox.Item
+                  key={option.value}
+                  textValue={option.label}
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    gap="13px"
+                  >
+                    <Box
+                      as="img"
+                      borderRadius="$full"
+                      width="26px"
+                      height="26px"
+                      attributes={{
+                        src: option.logoUrl,
+                        alt: option.label,
+                      }}
+                    />
+                    <Text
+                      fontSize="$sm"
+                      fontWeight="$normal"
+                      color="$textSecondary"
+                    >
+                      {option.label}
+                    </Text>
+                  </Box>
+                </NobleChainCombobox.Item>
+              ))}
+            </NobleChainCombobox>
           </Box>
         </Box>
       </NobleProvider>

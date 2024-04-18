@@ -70,6 +70,16 @@ export interface NobleSelectTokenButtonProps extends BaseButtonProps {
   token: DisplayToken;
 }
 
+export interface NobleSelectNetworkButtonProps extends BaseButtonProps {
+  width?: BoxProps["width"];
+  height?: BoxProps["height"];
+  size?: NobleButtonSize;
+  logoUrl: string;
+  title: string;
+  subTitle: string;
+  actionLabel: string;
+}
+
 export interface NobleSelectWalletButtonProps extends BaseButtonProps {
   logoUrl: string;
   logoAlt?: string;
@@ -112,4 +122,19 @@ export interface NobleInputProps
   intent?: "success" | "error";
   inputTextAlign?: BoxProps["textAlign"];
   inputContainerProps?: BoxProps;
+}
+
+export interface NobleTxChainRouteProps {
+  srcChainLogoUrl: string;
+  srcChainLogoAlt?: string;
+  destChainLogoUrl: string;
+  destChainLogoAlt?: string;
+  containerProps?: BoxProps;
+}
+
+export interface NobleTxEstimateProps
+  extends Omit<NobleTxChainRouteProps, "containerProps"> {
+  timeEstimateLabel: string;
+  feeEstimateLabel: string;
+  containerProps?: BoxProps;
 }

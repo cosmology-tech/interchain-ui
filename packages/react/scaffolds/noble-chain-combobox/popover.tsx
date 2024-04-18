@@ -3,6 +3,7 @@ import type { OverlayTriggerState } from "react-stately";
 import type { AriaPopoverProps } from "@react-aria/overlays";
 import { usePopover, DismissButton, Overlay } from "@react-aria/overlays";
 import Box from "@/ui/box";
+import NobleProvider from "@/ui/noble/noble-provider";
 
 interface PopoverProps extends Omit<AriaPopoverProps, "popoverRef"> {
   children: React.ReactNode;
@@ -25,27 +26,28 @@ export function Popover(props: PopoverProps) {
 
   return (
     <Overlay>
-      {!isNonModal && (
-        <Box attributes={underlayProps} position="fixed" inset="0" />
-      )}
+      <NobleProvider>
+        {!isNonModal && (
+          <Box attributes={underlayProps} position="fixed" inset="0" />
+        )}
 
-      <Box
-        attributes={popoverProps}
-        ref={popoverRef}
-        boxShadow="$lg"
-        borderWidth="1px"
-        borderStyle="solid"
-        borderColor="$divider"
-        borderRadius="$lg"
-        marginTop="$4"
-        className={className}
-      >
-        {!isNonModal && <DismissButton onDismiss={state.close} />}
+        <Box
+          attributes={popoverProps}
+          boxRef={popoverRef}
+          boxShadow="$lg"
+          borderWidth="1px"
+          borderStyle="solid"
+          borderColor="$inputBorder"
+          borderRadius="$lg"
+          className={className}
+        >
+          {!isNonModal && <DismissButton onDismiss={state.close} />}
 
-        {children}
+          {children}
 
-        <DismissButton onDismiss={state.close} />
-      </Box>
+          <DismissButton onDismiss={state.close} />
+        </Box>
+      </NobleProvider>
     </Overlay>
   );
 }

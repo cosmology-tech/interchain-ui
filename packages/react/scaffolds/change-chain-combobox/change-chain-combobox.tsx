@@ -85,10 +85,10 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
   const [open, setOpen] = React.useState(!!props.defaultOpen);
   const [showInputValue, setShowInputValue] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
-    props.defaultSelected?.label ?? ""
+    props.defaultSelected?.label ?? "",
   );
   const [selectedItem, setSelectedItem] = React.useState<ComboboxOption | null>(
-    props.defaultSelected ?? null
+    props.defaultSelected ?? null,
   );
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
@@ -132,7 +132,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, focus, dismiss, listNav]
+    [role, focus, dismiss, listNav],
   );
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -152,7 +152,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
     return options.filter(
       (item) =>
         item?.value?.toLowerCase().startsWith(inputValue?.toLowerCase()) ||
-        item?.label?.toLowerCase().startsWith(inputValue?.toLowerCase())
+        item?.label?.toLowerCase().startsWith(inputValue?.toLowerCase()),
     );
   }
 
@@ -262,7 +262,7 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
             className={clx(
               themeClass,
               changeChainListBox[theme],
-              listboxStyle[theme]
+              listboxStyle[theme],
             )}
           >
             <FloatingList elementsRef={listRef}>
