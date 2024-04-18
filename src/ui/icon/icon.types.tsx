@@ -20,7 +20,6 @@ export const ALL_ICON_NAMES = [
   "add",
   "subtract",
   "arrowRightLine",
-  "timeLine",
   "jaggedCheck",
   "priceTagLine",
   "sendLine",
@@ -70,6 +69,8 @@ export const ALL_ICON_NAMES = [
   "arrowDownload",
   "plusRound",
   "minusRound",
+  "xCircle",
+  "magnifier",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];

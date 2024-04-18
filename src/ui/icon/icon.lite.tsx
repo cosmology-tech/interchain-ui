@@ -899,6 +899,29 @@ export default function Icon(props: IconProps) {
         </symbol>
       </Show>
 
+      <Show when={props.name === "xCircle"}>
+        <symbol
+          id="xCircle"
+          stroke="currentColor"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 256 256"
+        >
+          <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm37.66,130.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+        </symbol>
+      </Show>
+
+      <Show when={props.name === "magnifier"}>
+        <symbol id="magnifier" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M14.501 14.501L10.6031 10.6031M10.6031 10.6031C11.6581 9.54815 12.2507 8.11732 12.2507 6.62537C12.2507 5.13343 11.6581 3.7026 10.6031 2.64763C9.54815 1.59267 8.11732 1 6.62537 1C5.13343 1 3.7026 1.59267 2.64763 2.64763C1.59267 3.7026 1 5.13343 1 6.62537C1 8.11732 1.59267 9.54815 2.64763 10.6031C3.7026 11.6581 5.13343 12.2507 6.62537 12.2507C8.11732 12.2507 9.54815 11.6581 10.6031 10.6031Z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </symbol>
+      </Show>
       {/* @ts-expect-error */}
       <use href={`#${props.name}`} />
     </Box>

@@ -20,7 +20,7 @@ export function Popover(props: PopoverProps) {
       ...props,
       popoverRef,
     },
-    state
+    state,
   );
 
   return (

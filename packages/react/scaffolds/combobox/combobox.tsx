@@ -76,7 +76,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
       listBoxRef,
       popoverRef,
     },
-    state
+    state,
   );
 
   const { buttonProps } = useButton(triggerProps, buttonRef);
@@ -92,13 +92,13 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
   const { clearButtonProps } = useSearchField(
     searchProps,
     searchState,
-    inputRef
+    inputRef,
   );
   const clearButtonRef = React.useRef(null);
 
   const { buttonProps: clearButtonAriaProps } = useButton(
     clearButtonProps,
-    clearButtonRef
+    clearButtonRef,
   );
 
   React.useEffect(() => {

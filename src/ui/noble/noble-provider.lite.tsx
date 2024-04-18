@@ -24,8 +24,17 @@ useMetadata({
 export default function NobleProvider(props: NobleProviderProps) {
   const state = useStore<{
     theme: ThemeVariant;
+    isControlled: boolean;
+    providerThemeMode: ThemeVariant;
   }>({
     theme: "light",
+    get isControlled() {
+      return props.themeMode != null;
+    },
+    get providerThemeMode() {
+      if (state.isControlled) return props.themeMode;
+      return state.theme;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);

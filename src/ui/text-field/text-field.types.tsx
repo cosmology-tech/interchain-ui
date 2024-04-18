@@ -22,6 +22,7 @@ export type FieldBaseProps = {
   labelId?: string;
   name?: string | undefined;
   disabled?: boolean;
+  readonly?: boolean;
   autoComplete?: string | undefined;
   description?: string | undefined;
   message?: Children;

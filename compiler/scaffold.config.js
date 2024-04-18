@@ -129,6 +129,15 @@ module.exports.scaffoldConfig = {
       path: "../governance-radio-group",
     },
   },
+  "noble-chain-combobox": {
+    jsxMap: {
+      ScaffoldNobleChainCombobox: "NobleChainCombobox",
+    },
+    import: {
+      imports: { NobleChainCombobox: "default" },
+      path: "../noble-chain-combobox",
+    },
+  },
 };
 
 // Only allow these components for each target, if null = allow all

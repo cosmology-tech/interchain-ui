@@ -120,7 +120,7 @@ export const CustomComboboxItem: Story = {
           label: i.tokenName,
           value: i.tokenName,
         })),
-      [comboboxAssets, isReady]
+      [comboboxAssets, isReady],
     );
 
     if (!isReady) {
