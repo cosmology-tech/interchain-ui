@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.19...@interchain-ui/react@1.23.0) (2024-04-18)
+
+### Bug Fixes
+
+- improve ([93d4482](https://github.com/cosmology-tech/interchain-ui/commit/93d448209f0c1d6fe8fae4ed776a81767cf7000c))
+- improve ([58a8451](https://github.com/cosmology-tech/interchain-ui/commit/58a84511f4fe135b45ed86a8e079f1f4fc45a9a3))
+
+### Features
+
+- add Accordion component ([575d474](https://github.com/cosmology-tech/interchain-ui/commit/575d4740bb109a35678134b93f089d33ab62efce))
+- add NobleButton ([341ab13](https://github.com/cosmology-tech/interchain-ui/commit/341ab13820d71d5e4e228a1b05f62bdd243a4d64))
+- add NobleTxDirectionCard ([689a8d6](https://github.com/cosmology-tech/interchain-ui/commit/689a8d6d1d1f07c878e6f190d4c607829a8b6358))
+- add NobleTxProgressBar ([20e4a38](https://github.com/cosmology-tech/interchain-ui/commit/20e4a38666f33bdff49fa44af7b4c84b6dce4695))
+- add NobleTxStepItem ([5d417e3](https://github.com/cosmology-tech/interchain-ui/commit/5d417e31c6d821247ccc5931393175a7164ef136))
+- add transaction history story ([49a7c61](https://github.com/cosmology-tech/interchain-ui/commit/49a7c61e95808d862244eb5e9f93d557a64e2de0))
+- add transaction successful story ([fdd5ac3](https://github.com/cosmology-tech/interchain-ui/commit/fdd5ac372e77ab8710932598e055d22700c92b09))
+
 ## [1.22.19](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.22.18...@interchain-ui/react@1.22.19) (2024-04-15)
 
 **Note:** Version bump only for package @interchain-ui/react
