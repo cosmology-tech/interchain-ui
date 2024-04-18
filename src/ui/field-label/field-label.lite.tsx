@@ -32,7 +32,7 @@ export default function FieldLabel(props: FieldLabelProps) {
                   <span
                     className={clx(
                       fieldlabelStyle,
-                      fieldLabelSizes[props.size]
+                      fieldLabelSizes[props.size],
                     )}
                   >
                     {props.label}

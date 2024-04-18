@@ -13,7 +13,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-/* This is Default FieldLabel */
 export const Default: Story = {
   args: {
     id: "field1-label",

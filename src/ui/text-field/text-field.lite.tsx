@@ -93,7 +93,7 @@ export default function TextField(props: TextFieldProps) {
           props.disabled
             ? inputRootIntent.disabled
             : inputRootIntent[props.intent],
-          props.inputContainer
+          props.inputContainer,
         )}
       >
         <Show when={props.startAddon}>{props.startAddon}</Show>
@@ -105,10 +105,11 @@ export default function TextField(props: TextFieldProps) {
             inputStyles[state.theme],
             inputSizes[props.size],
             props.disabled ? inputIntent.disabled : inputIntent[props.intent],
-            props.inputClassName
+            props.inputClassName,
           )}
           autocomplete={props.autoComplete}
           autoFocus={props.autoFocus}
+          readOnly={props.readonly}
           disabled={props.disabled}
           type={validTypes[props.type]}
           value={props.value}

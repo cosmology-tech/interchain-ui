@@ -596,9 +596,9 @@ export const nobleLightThemeClass = createTheme(themeVars, {
     textPlaceholder: `#A2AEBB`,
     rewardBg: `#E5FFE4`,
     rewardContent: `#36BB35`,
-    cardBg: `#FFF`,
-    inputBorder: `#D1D6DD`,
-    inputBorderFocus: `#D1D6DD`,
+    cardBg: `#ffffff`,
+    inputBorder: `#D5D5E8`,
+    inputBorderFocus: `#AAAABF`,
     inputBg: `#ffffff`,
     inputDangerBorder: `#FF8080`,
     inputDangerBg: `#FFDBDB`,
@@ -614,6 +614,30 @@ export const nobleLightThemeClass = createTheme(themeVars, {
     menuItemBgActive: `#DDE4ED`,
     skeletonBg: `#DDE4ED`,
     trackBg: `#EBEFF5`,
+    tagButtonText: `#2C3137`,
+    tagButtonBg: `#dce4f0`,
+    tagButtonBgHovered: `#EEF2F8`,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: `#2C3137`,
+    meshButtonSolidPrimaryBgHovered: `#A2AEBB`,
+    meshButtonSolidPrimaryText: colors.white,
+    meshButtonSolidSecondaryBg: colors.gray100,
+    meshButtonSolidSecondaryBgHovered: colors.gray100,
+    meshButtonSolidSecondaryText: `#2C3137`,
+    meshButtonGhostText: `#2C3137`,
+    meshButtonGhostTextHovered: `#697584`,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: `#2C3137`,
+    meshStakingSliderInfoSecondaryText: `#697584`,
+    meshStakingSliderInfoSecondaryTextActive: colors.green400,
+    // ==== MeshTab
+    meshTabText: `#2C3137`,
+    meshTableCellText: `#2C3137`,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: `#2C3137`,
+    meshTableHeaderActionSecondaryText: `#697584`,
+    meshTableCellBorder: `#E1DBEB`,
+    // ====
     overflowShadowBg:
       "linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.85) 24%, rgba(255,255,255,0.75) 32%, rgba(255,255,255,0.65) 48%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 95%)",
     // Override colors
@@ -661,9 +685,9 @@ export const nobleDarkThemeClass = createTheme(themeVars, {
     rewardBg: `#2F4139`,
     rewardContent: `#AEFFAB`,
     cardBg: `#0F1331`,
-    inputBorder: `#434B55`,
-    inputBorderFocus: `#697584`,
-    inputBg: `#1D2024`,
+    inputBorder: `#1E2457`,
+    inputBorderFocus: `#3C4992`,
+    inputBg: `#0F1331`,
     inputDangerBorder: `#FFD0D0`,
     inputDangerBg: `#E17171`,
     inputDisabledBg: `#A7B4C2`,
@@ -678,6 +702,30 @@ export const nobleDarkThemeClass = createTheme(themeVars, {
     menuItemBgActive: `#2C3137`,
     skeletonBg: `#3B434D`,
     trackBg: `#49525E`,
+    tagButtonText: `#DAD5E3`,
+    tagButtonBg: `#202023`,
+    tagButtonBgHovered: `#27272B`,
+    // ==== MeshButton
+    meshButtonSolidPrimaryBg: `#DAD5E3`,
+    meshButtonSolidPrimaryBgHovered: `#E2E2E2`,
+    meshButtonSolidPrimaryText: `#0E0E0F`,
+    meshButtonSolidSecondaryBg: `#1E1E1F`,
+    meshButtonSolidSecondaryBgHovered: `#1E1E1F`,
+    meshButtonSolidSecondaryText: `#DAD5E3`,
+    meshButtonGhostText: `#85858E`,
+    meshButtonGhostTextHovered: `#E1DBEB`,
+    // ==== MeshStakingSliderInfo
+    meshStakingSliderInfoPrimaryText: `#E2E2E2`,
+    meshStakingSliderInfoSecondaryText: `#85858E`,
+    meshStakingSliderInfoSecondaryTextActive: `#C0EEA4`,
+    // ==== MeshTab
+    meshTabText: `#E2E2E2`,
+    meshTableCellText: `#E2E2E2`,
+    // ==== MeshTableHeaderAction
+    meshTableHeaderActionText: colors.white,
+    meshTableHeaderActionSecondaryText: `#E2E2E2`,
+    meshTableCellBorder: `#131313`,
+    // ====
     overflowShadowBg:
       "linear-gradient(to bottom, rgba(29, 32, 36, 0), rgba(29, 32, 36, 0.6))",
     // Override colors

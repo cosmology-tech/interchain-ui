@@ -42,7 +42,7 @@ export default function Accordion(props: AccordionProps) {
 
   return (
     <Box width={props.width}>
-      <Box attributes={{ onClick: state.onToggle }}>
+      <div onClick={state.onToggle}>
         <Show when={typeof props.renderTrigger === "function"}>
           {/* @ts-ignore */}
           {props.renderTrigger({ isExpanded: state.isExpanded })}
@@ -50,7 +50,8 @@ export default function Accordion(props: AccordionProps) {
         <Show when={typeof props.renderTrigger !== "function"}>
           {props.renderTrigger}
         </Show>
-      </Box>
+      </div>
+
       <Box
         overflow="hidden"
         transition={props.transition}

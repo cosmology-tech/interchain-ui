@@ -45,6 +45,9 @@ export default function NobleTxHistoryOverviewItem(
       };
       return props?.customStatus?.color ?? statusColorMap[props.status];
     },
+    get chevronColor() {
+      return state.theme === "light" ? "$gray400" : "$blue500";
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -72,14 +75,17 @@ export default function NobleTxHistoryOverviewItem(
       <Box display="flex" alignItems="center" gap="$9">
         <Box
           as="img"
-          attributes={{ src: props.mainLogoSrc }}
+          attributes={{ src: props.mainLogoSrc, alt: "main logo" }}
           width="$13"
           height="$13"
         />
         <Box display="flex" alignItems="center" gap="5px">
           <Box
             as="img"
-            attributes={{ src: props.sourceChainLogoSrc }}
+            attributes={{
+              src: props.sourceChainLogoSrc,
+              alt: "from chain logo",
+            }}
             width="$9"
             height="$9"
           />
@@ -100,7 +106,10 @@ export default function NobleTxHistoryOverviewItem(
           </svg>
           <Box
             as="img"
-            attributes={{ src: props.destinationChainLogoSrc }}
+            attributes={{
+              src: props.destinationChainLogoSrc,
+              alt: "to chain logo",
+            }}
             width="$9"
             height="$9"
           />
@@ -120,9 +129,10 @@ export default function NobleTxHistoryOverviewItem(
             {state.statusText}
           </Text>
         </Box>
+
         <Icon
           name="arrowDropDown"
-          color={state.theme === "light" ? "$gray400" : "$blue500"}
+          color={state.chevronColor}
           size="$4xl"
           attributes={{
             transform: `rotate(${props.isExpanded ? 180 : 0}deg)`,

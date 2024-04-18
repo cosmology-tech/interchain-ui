@@ -162,8 +162,8 @@ const responsiveProperties = defineProperties({
 const interactiveProperties = defineProperties({
   conditions: {
     base: {},
-    hover: { selector: "&:hover" },
-    active: { selector: "&:active" },
+    hover: { selector: "&:hover:not([disabled])" },
+    active: { selector: "&:active:not([disabled])" },
   },
   defaultCondition: "base",
   dynamicProperties: {
@@ -212,7 +212,7 @@ const interactiveProperties = defineProperties({
 
 export const rainbowSprinkles = createRainbowSprinkles(
   responsiveProperties,
-  interactiveProperties
+  interactiveProperties,
 );
 
 export type Sprinkles = Parameters<typeof rainbowSprinkles>[0];
