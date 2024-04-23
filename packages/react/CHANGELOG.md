@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.1...@interchain-ui/react@1.23.2) (2024-04-23)
+
+### Bug Fixes
+
+- **noble:** combobox should only render listbox ([1b32999](https://github.com/cosmology-tech/interchain-ui/commit/1b32999144c817b3b8f1a175afbe44ce52039cdf))
+
 ## [1.23.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.0...@interchain-ui/react@1.23.1) (2024-04-18)
 
 **Note:** Version bump only for package @interchain-ui/react
