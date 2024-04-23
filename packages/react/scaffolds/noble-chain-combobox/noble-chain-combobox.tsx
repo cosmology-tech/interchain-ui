@@ -13,7 +13,6 @@ import Icon from "@/ui/icon";
 import Box from "@/ui/box";
 import type { BoxProps } from "@/ui/box/box.types";
 import { ListBox } from "./list-box";
-import { Popover } from "./popover";
 import * as styles from "./noble-chain-combobox.css";
 
 const DEFAULT_WIDTH: BoxProps["width"] = "$29";
@@ -61,7 +60,12 @@ function useMeasure() {
 export default function NobleChainCombobox<T extends object>(
   props: ComboboxProps<T>,
 ) {
-  const { styleProps, defaultIsOpen = true, ...comboboxProps } = props;
+  const {
+    styleProps,
+    defaultIsOpen = true,
+    label = "Select chain",
+    ...comboboxProps
+  } = props;
   const { contains } = useFilter({ sensitivity: "base" });
   const state = useComboBoxState({ ...comboboxProps, defaultFilter: contains });
 
@@ -72,20 +76,14 @@ export default function NobleChainCombobox<T extends object>(
   const listBoxRef = React.useRef(null);
   const popoverRef = React.useRef(null);
 
-  const {
-    buttonProps: triggerProps,
-    inputProps,
-    listBoxProps,
-    labelProps,
-  } = useComboBox(
+  const { inputProps, listBoxProps, labelProps } = useComboBox(
     {
       ...comboboxProps,
+      label,
       onFocus: () => {
-        console.log("focus");
         setIsFocused(true);
       },
       onBlur: () => {
-        console.log("blur");
         setIsFocused(false);
       },
       inputRef,
@@ -98,7 +96,7 @@ export default function NobleChainCombobox<T extends object>(
 
   // Get props for the clear button from useSearchField
   const searchProps = {
-    label: props.label,
+    label: props.label ?? "Select chain",
     value: state.inputValue,
     onChange: (v: string) => state.setInputValue(v),
   };
@@ -109,6 +107,7 @@ export default function NobleChainCombobox<T extends object>(
 
   useSearchField(searchProps, searchState, inputRef);
 
+  // Keep the listbox open
   React.useEffect(() => {
     if (defaultIsOpen) {
       state.open();
@@ -124,6 +123,10 @@ export default function NobleChainCombobox<T extends object>(
       width={styleProps?.width ?? DEFAULT_WIDTH}
       className={clx(styleProps.className)}
     >
+      <label {...labelProps} className={styles.label}>
+        {props.label}
+      </label>
+
       <div ref={measureRef}>
         <Box
           position="relative"
@@ -170,16 +173,7 @@ export default function NobleChainCombobox<T extends object>(
         </Box>
       </div>
 
-      <Popover
-        popoverRef={popoverRef}
-        triggerRef={containerRef}
-        state={state}
-        isNonModal
-        placement="bottom start"
-        className={clx(styles.comboboxPopover, {
-          [`${styles.hide}`]: !state.isOpen,
-        })}
-      >
+      {state.isOpen && (
         <ListBox
           {...listBoxProps}
           listBoxRef={listBoxRef}
@@ -188,7 +182,7 @@ export default function NobleChainCombobox<T extends object>(
             width: dimensions.width ? `${dimensions.width}px` : DEFAULT_WIDTH,
           }}
         />
-      </Popover>
+      )}
     </Box>
   );
 }

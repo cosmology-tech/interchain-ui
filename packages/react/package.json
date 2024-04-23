@@ -106,7 +106,7 @@
     "sb:seo": "node ./storybook-seo/seo.js",
     "sb:deploy": "AWS_PROFILE=webinc aws s3 sync storybook-static/ s3://storybook.cosmology.zone",
     "sb:invalidate": "AWS_PROFILE=webinc aws cloudfront create-invalidation --distribution-id E30W90TP7JYGCN --paths \"/*\"",
-    "sb:deploy:all": "npm run build-storybook && npm run sb:postbuild && npm run sb:deploy && ./storybook-seo/prepare.sh"
+    "sb:deploy:all": "npm run build-storybook && npm run sb:postbuild && npm run sb:deploy && ./storybook-seo/prepare.sh && npm run sb:invalidate"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.1",
