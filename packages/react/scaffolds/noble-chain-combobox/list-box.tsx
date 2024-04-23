@@ -43,6 +43,7 @@ export function ListBox(props: ListBoxProps) {
       width="$full"
       overflow="auto"
       outline="none"
+      backgroundColor="$inputBg"
       borderWidth="1px"
       borderStyle="solid"
       borderColor="$inputBorder"

@@ -34,8 +34,16 @@ export default function NobleButton(props: NobleButtonProps) {
   const state = useStore({
     theme: "light",
     get buttonProps() {
-      const { leftIcon, rightIcon, iconSize, variant, size, ...otherProps } =
-        props;
+      const {
+        leftIcon,
+        rightIcon,
+        iconSize,
+        variant,
+        size,
+        isActive,
+        ...otherProps
+      } = props;
+
       return otherProps;
     },
     get variantStyles() {
@@ -179,6 +187,7 @@ export default function NobleButton(props: NobleButtonProps) {
   return (
     <Box
       as="button"
+      fontFamily="$body"
       {...state.variantStyles}
       {...state.buttonProps}
       {...props.attributes}

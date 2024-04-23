@@ -25,11 +25,12 @@ useDefaultProps<Partial<AccordionProps>>({
 export default function Accordion(props: AccordionProps) {
   const state = useStore({
     isExpanded: props.isExpanded,
-    onToggle() {
-      if (props.onToggle) {
+    toggleExpanded() {
+      if (typeof props.onToggle === "function") {
         props.onToggle();
         return;
       }
+
       state.isExpanded = !state.isExpanded;
     },
   });
@@ -42,7 +43,7 @@ export default function Accordion(props: AccordionProps) {
 
   return (
     <Box width={props.width}>
-      <div onClick={state.onToggle}>
+      <div onClick={() => state.toggleExpanded()}>
         <Show when={typeof props.renderTrigger === "function"}>
           {/* @ts-ignore */}
           {props.renderTrigger({ isExpanded: state.isExpanded })}

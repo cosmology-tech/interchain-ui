@@ -395,10 +395,17 @@ export const Primary: Story = {
             />
           </Box>
 
-          <Box display="flex" gap="$4" flexDirection="column" maxWidth="466px">
+          <Box
+            display="flex"
+            gap="$4"
+            flexDirection="column"
+            maxWidth="466px"
+            paddingBottom="250px"
+          >
             <Text>NobleChainCombobox</Text>
 
             <NobleChainCombobox
+              defaultIsOpen
               styleProps={{
                 width: "100%",
               }}
