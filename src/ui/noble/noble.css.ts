@@ -41,6 +41,7 @@ export const inputBase = style({
   outline: "none",
   position: "relative",
   appearance: "none",
+  fontFamily: themeVars.font.body,
   transitionProperty:
     "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
   transitionDuration: "200ms",
