@@ -25,7 +25,7 @@
     "story:react": "lerna run --scope @interchain-ui/react-example --stream dev",
     "lerna": "lerna run",
     "pub:beta": "lerna publish --no-private --preid beta",
-    "prepare": "pnpm run clear:cache && pnpm run clear:builds && pnpm run c:react",
+    "prepublishOnly": "pnpm run clear:cache && pnpm run clear:builds && pnpm run c:react",
     "clear": "pnpm run clear:cache & pnpm run clear:builds && pnpm run clear:artifacts & pnpm run clear:node_modules",
     "clear:artifacts": "find ./packages -name src -type d | grep -vE '.*-example.*' | xargs rm -rf",
     "clear:builds": "find ./packages -name dist -type d | grep -vE '.*-example.*' | xargs rm -rf",
