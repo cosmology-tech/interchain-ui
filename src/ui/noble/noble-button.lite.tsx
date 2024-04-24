@@ -151,6 +151,13 @@ export default function NobleButton(props: NobleButtonProps) {
           borderRadius: "$base",
           fontSize: "$sm",
         },
+        md: {
+          height: "70px",
+          px: "$10",
+          py: "$10",
+          borderRadius: "$base",
+          fontSize: "$md",
+        },
         lg: {
           height: "$17",
           width: "$full",

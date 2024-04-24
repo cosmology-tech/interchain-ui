@@ -1,4 +1,4 @@
-import { style, styleVariants, keyframes } from "@vanilla-extract/css";
+import { style, keyframes } from "@vanilla-extract/css";
 import { themeVars } from "../../styles/themes.css";
 
 const rotate = keyframes({
@@ -20,7 +20,6 @@ export const walletImgContainer = style({
   selectors: {
     "&[data-disabled='true']::after": {
       position: "absolute",
-      borderRadius: "100%",
       content: '""',
       top: 0,
       bottom: 0,

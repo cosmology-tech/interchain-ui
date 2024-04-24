@@ -35,7 +35,7 @@ type BaseButtonProps = Omit<
 >;
 
 export type NobleButtonVariant = "text" | "solid" | "outlined" | "tag";
-export type NobleButtonSize = "xs" | "sm" | "lg" | "xl";
+export type NobleButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 export interface NobleButtonProps extends BaseButtonProps {
   color?: BoxProps["color"];
