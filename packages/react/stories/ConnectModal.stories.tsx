@@ -7,6 +7,7 @@ import ConnectModal from "../src/ui/connect-modal";
 import ConnectModalQRCode from "../src/ui/connect-modal-qrcode";
 import ConnectModalHead from "../src/ui/connect-modal-head";
 import ConnectModalWalletList from "../src/ui/connect-modal-wallet-list";
+import ConnectModalStatus from "../src/ui/connect-modal-status";
 import { WalletPluginSystem } from "../src/ui/connect-modal-wallet-list";
 import { wallets, qrCodeProps } from "./stub/connectWalletData";
 
@@ -90,6 +91,27 @@ export const Primary: Story = {
           )}
         </ConnectModal>
       </Box>
+    );
+  },
+};
+
+export const ConnectModalStatusView: Story = {
+  args: {},
+  render: () => {
+    return (
+      <ConnectModalStatus
+        status="Connected"
+        connectedInfo={{
+          avatar: "https://picsum.photos/id/237/200/200",
+          name: "Hello name",
+          address: "0x1234567890",
+        }}
+        wallet={{
+          logo: "https://picsum.photos/id/237/200/200",
+          name: "Hello name",
+          mobileDisabled: true,
+        }}
+      />
     );
   },
 };

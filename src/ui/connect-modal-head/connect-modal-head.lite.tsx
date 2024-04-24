@@ -61,11 +61,12 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             variant="ghost"
             intent="secondary"
             size="sm"
+            className={styles.headerButton}
             onClick={(e) => {
               props.onBack?.(e);
             }}
           >
-            <Icon name="arrowLeftSLine" size="$2xl" color="$text" />
+            <Icon name="arrowLeftSLine" size="$2xl" color="inherit" />
           </Button>
         </div>
       </Show>
@@ -87,10 +88,11 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
             variant="ghost"
             intent="secondary"
             size="sm"
+            className={styles.headerButton}
             domAttributes={props.closeButtonProps}
             onClick={(e) => props.closeButtonProps?.onClick?.(e)}
           >
-            <Icon name="closeFilled" size="$2xl" color="$text" />
+            <Icon name="closeFilled" size="$2xl" color="inherit" />
           </Button>
         </div>
       </Show>

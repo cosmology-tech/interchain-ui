@@ -109,9 +109,9 @@ export default function Button(props: ButtonProps) {
         recipe({
           as: props.as,
           variant: props.variant,
-          intent: props.intent,
+          intent: props.intent ?? "primary",
           isDisabled: props.disabled || props.isLoading,
-          theme: state._theme as ThemeVariant,
+          theme: state.getStoreState().theme,
         }),
         props.fluidWidth ? fullWidth : null,
         props.fluid ? fullWidthHeight : null,
@@ -122,6 +122,7 @@ export default function Button(props: ButtonProps) {
         onMouseEnter: (event) => props.onHoverStart?.(event),
         onMouseLeave: (event) => props.onHoverEnd?.(event),
         disabled: props.disabled,
+        style: state.getVars(),
         ...props.domAttributes,
       }}
     >

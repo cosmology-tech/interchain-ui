@@ -96,14 +96,17 @@ export function recipe({
     text: intentText,
   };
 
-  const intentClass = intentMap[intent];
+  const intentVariants = intentMap[intent];
+  const intentClass = intentVariants
+    ? intentVariants[theme]
+    : intentPrimary[theme];
 
-  return clx([
+  return clx(
     as === "a" ? baseAnchorButton : baseButton,
-    intentClass ? intentClass[theme] : null,
+    intentClass,
     intent === "tertiary" && variant === "outlined" ? null : variants[variant],
     isDisabled ? disabled : null,
-  ]);
+  );
 }
 
 export const buttonOverrides: ComponentOverrideSchema = {

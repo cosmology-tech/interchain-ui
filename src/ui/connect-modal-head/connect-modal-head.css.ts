@@ -63,3 +63,10 @@ export const modalCloseButton = style({
   marginTop: themeVars.space[2],
   marginRight: themeVars.space[8],
 });
+
+export const headerButton = style({
+  width: "32px",
+  height: "32px",
+  paddingLeft: "0 !important",
+  paddingRight: "0 !important",
+});
