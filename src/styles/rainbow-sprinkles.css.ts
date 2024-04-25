@@ -109,6 +109,8 @@ const responsiveProperties = defineProperties({
     insetInlineStart: true,
     insetInlineEnd: true,
     transform: true,
+    appearance: true,
+    userSelect: true,
   },
   staticProperties: {
     display: [
@@ -163,11 +165,13 @@ const interactiveProperties = defineProperties({
   conditions: {
     base: {},
     hover: { selector: "&:hover:not([disabled])" },
+    focus: { selector: "&:focus:not([disabled])" },
     active: { selector: "&:active:not([disabled])" },
   },
   defaultCondition: "base",
   dynamicProperties: {
     color: themeVars.colors,
+    outline: true,
     visibility: true,
     filter: true,
     fill: themeVars.colors,
@@ -192,6 +196,8 @@ const interactiveProperties = defineProperties({
     boxShadow: themeVars.boxShadow,
     transform: true,
     transition: true,
+    transitionProperty: true,
+    transitionDuration: true,
     animation: true,
     textDecoration: true,
     zIndex: themeVars.zIndex,
