@@ -11,7 +11,7 @@ import clx from "clsx";
 import Box from "../box";
 import Icon from "../icon";
 import { store } from "../../models/store";
-import { baseButton } from "../button/button.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type {
   NobleButtonProps,
   NobleButtonVariant,
@@ -45,6 +45,25 @@ export default function NobleButton(props: NobleButtonProps) {
       } = props;
 
       return otherProps;
+    },
+    get baseButtonStyles(): Sprinkles {
+      return {
+        fontFamily: "$body",
+        cursor: "pointer",
+        appearance: "none",
+        border: "none",
+        position: "relative",
+        userSelect: "none",
+        whiteSpace: "nowrap",
+        verticalAlign: "middle",
+        lineHeight: 1.2,
+        transitionProperty:
+          "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter",
+        transitionDuration: "200ms",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      };
     },
     get variantStyles() {
       const variantStylesMap: Record<NobleButtonVariant, BoxProps> = {
@@ -101,7 +120,10 @@ export default function NobleButton(props: NobleButtonProps) {
         },
       };
 
-      return variantStylesMap[props.variant];
+      return {
+        ...state.baseButtonStyles,
+        ...variantStylesMap[props.variant],
+      };
     },
     getDisabledStyles() {
       const isLightTheme = state.theme === "light";
@@ -198,7 +220,7 @@ export default function NobleButton(props: NobleButtonProps) {
       {...state.variantStyles}
       {...state.buttonProps}
       {...props.attributes}
-      className={clx(baseButton, props.className)}
+      className={props.className}
       attributes={{
         ...props.domAttributes,
         onClick: props.disabled ? undefined : (event) => props.onClick?.(event),
