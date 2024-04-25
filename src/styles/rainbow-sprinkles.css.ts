@@ -79,7 +79,6 @@ const responsiveProperties = defineProperties({
     wordBreak: true,
     overflowWrap: true,
     fill: true,
-    outline: true,
     overflow: true,
     overflowX: true,
     overflowY: true,

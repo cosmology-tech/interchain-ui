@@ -46,25 +46,6 @@ export default function NobleButton(props: NobleButtonProps) {
 
       return otherProps;
     },
-    get baseButtonStyles(): Sprinkles {
-      return {
-        fontFamily: "$body",
-        cursor: "pointer",
-        appearance: "none",
-        border: "none",
-        position: "relative",
-        userSelect: "none",
-        whiteSpace: "nowrap",
-        verticalAlign: "middle",
-        lineHeight: 1.2,
-        transitionProperty:
-          "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter",
-        transitionDuration: "200ms",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      };
-    },
     get variantStyles() {
       const variantStylesMap: Record<NobleButtonVariant, BoxProps> = {
         solid: {
@@ -120,10 +101,7 @@ export default function NobleButton(props: NobleButtonProps) {
         },
       };
 
-      return {
-        ...state.baseButtonStyles,
-        ...variantStylesMap[props.variant],
-      };
+      return variantStylesMap[props.variant];
     },
     getDisabledStyles() {
       const isLightTheme = state.theme === "light";
@@ -216,7 +194,20 @@ export default function NobleButton(props: NobleButtonProps) {
   return (
     <Box
       as="button"
+      position="relative"
       fontFamily="$body"
+      cursor="pointer"
+      appearance="none"
+      border="none"
+      userSelect="none"
+      whiteSpace="nowrap"
+      verticalAlign="middle"
+      lineHeight="1.2"
+      transitionProperty="background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter"
+      transitionDuration="200ms"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
       {...state.variantStyles}
       {...state.buttonProps}
       {...props.attributes}
