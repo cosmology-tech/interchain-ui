@@ -135,6 +135,10 @@ export const Primary: Story = {
               variant: outlined, size: xl
             </NobleButton>
 
+            <NobleButton variant="solid" size="lg">
+              variant: outlined, size: lg
+            </NobleButton>
+
             <Stack space="$4">
               <NobleButton variant="tag" size="xs">
                 125

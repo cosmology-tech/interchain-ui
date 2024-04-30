@@ -67,14 +67,20 @@ export default function NobleChainCombobox<T extends object>(
     ...comboboxProps
   } = props;
   const { contains } = useFilter({ sensitivity: "base" });
-  const state = useComboBoxState({ ...comboboxProps, defaultFilter: contains });
+  const state = useComboBoxState({
+    ...comboboxProps,
+    defaultFilter: contains,
+    allowsEmptyCollection: true,
+  });
 
   const [isFocused, setIsFocused] = React.useState<boolean>(false);
   const containerRef = React.useRef(null);
   const buttonRef = React.useRef(null);
   const inputRef = React.useRef(null);
   const listBoxRef = React.useRef(null);
-  const popoverRef = React.useRef(null);
+  const [popoverRef] = React.useState<HTMLDivElement>(
+    document.createElement("div"),
+  );
 
   const { inputProps, listBoxProps, labelProps } = useComboBox(
     {
@@ -89,7 +95,7 @@ export default function NobleChainCombobox<T extends object>(
       inputRef,
       buttonRef,
       listBoxRef,
-      popoverRef,
+      popoverRef: { current: popoverRef },
     },
     state,
   );
