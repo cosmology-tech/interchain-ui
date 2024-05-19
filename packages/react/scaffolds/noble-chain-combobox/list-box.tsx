@@ -113,7 +113,7 @@ function Option({ item, state }: OptionProps) {
         fontSize="$sm"
         fontWeight="$normal"
         bg={isSelected ? "$inputBorder" : isFocused ? "$body" : "$inputBg"}
-        cursor={isDisabled ? "not-allowed" : "default"}
+        cursor={isDisabled ? "not-allowed" : "pointer"}
       >
         {item.rendered}
       </Box>
