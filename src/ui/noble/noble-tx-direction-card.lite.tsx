@@ -61,6 +61,7 @@ export default function NobleTxDirectionCard(props: NobleTxDirectionCardProps) {
       <Box display="flex" alignItems="center" gap="$5">
         <Box
           as="img"
+          borderRadius="$full"
           width="18px"
           height="18px"
           attributes={{

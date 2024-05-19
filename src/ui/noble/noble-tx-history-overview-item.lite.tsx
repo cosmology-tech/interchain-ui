@@ -66,7 +66,6 @@ export default function NobleTxHistoryOverviewItem(
 
   return (
     <Box
-      width="466px"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
@@ -75,6 +74,7 @@ export default function NobleTxHistoryOverviewItem(
       <Box display="flex" alignItems="center" gap="$9">
         <Box
           as="img"
+          borderRadius="$full"
           attributes={{ src: props.mainLogoSrc, alt: "main logo" }}
           width="$13"
           height="$13"
@@ -82,6 +82,7 @@ export default function NobleTxHistoryOverviewItem(
         <Box display="flex" alignItems="center" gap="5px">
           <Box
             as="img"
+            borderRadius="$full"
             attributes={{
               src: props.sourceChainLogoSrc,
               alt: "from chain logo",
@@ -106,6 +107,7 @@ export default function NobleTxHistoryOverviewItem(
           </svg>
           <Box
             as="img"
+            borderRadius="$full"
             attributes={{
               src: props.destinationChainLogoSrc,
               alt: "to chain logo",

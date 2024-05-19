@@ -9,7 +9,6 @@ import {
 import Box from "../box";
 import Text from "../text";
 import NobleButton from "./noble-button.lite";
-import NobleTokenAvatar from "./noble-token-avatar.lite";
 import { store } from "../../models/store";
 import type { NobleSelectNetworkButtonProps } from "./noble.types";
 
@@ -56,6 +55,7 @@ export default function NobleSelectNetworkButton(
           as="img"
           width="26px"
           height="26px"
+          borderRadius="$full"
           attributes={{
             src: props.logoUrl,
             alt: props.title,

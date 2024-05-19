@@ -4,6 +4,7 @@ import {
   useRef,
   onMount,
   onUnMount,
+  useDefaultProps,
 } from "@builder.io/mitosis";
 
 import Box from "../box";
@@ -14,6 +15,10 @@ useMetadata({
   rsc: {
     componentType: "client",
   },
+});
+
+useDefaultProps<Partial<NobleTokenAvatarProps>>({
+  isRound: true,
 });
 
 export default function NobleTokenAvatar(props: NobleTokenAvatarProps) {
@@ -48,6 +53,7 @@ export default function NobleTokenAvatar(props: NobleTokenAvatarProps) {
         as="img"
         width="$15"
         height="$15"
+        borderRadius={props.isRound ? "$full" : undefined}
         attributes={{
           src: props.mainLogoUrl,
           alt: props.mainLogoAlt ?? "Token logo",
