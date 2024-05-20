@@ -40,7 +40,7 @@ export function ListBox(props: ListBoxProps) {
     <Box
       as="ul"
       attributes={listBoxProps}
-      ref={listBoxRef}
+      boxRef={listBoxRef}
       width="$full"
       overflow="auto"
       outline="none"

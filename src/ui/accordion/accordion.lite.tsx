@@ -58,7 +58,7 @@ export default function Accordion(props: AccordionProps) {
         transition={props.transition}
         opacity={state.isExpanded ? 1 : 0}
         height={`${state.isExpanded ? contentRef?.scrollHeight : 0}px`}
-        ref={contentRef}
+        boxRef={contentRef}
       >
         {props.renderContent}
       </Box>

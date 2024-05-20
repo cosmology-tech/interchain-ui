@@ -47,8 +47,8 @@ export default function GovernanceRadio(props: GovernanceRadioProps) {
         isFocusVisible
           ? "$blue400"
           : isDisabled
-          ? "transparent"
-          : "$inputBorder"
+            ? "transparent"
+            : "$inputBorder"
       }
       flex={{
         mobile: "1",
@@ -72,8 +72,8 @@ export default function GovernanceRadio(props: GovernanceRadioProps) {
             isDisabled
               ? styles.radioCircleDisabled
               : isSelected
-              ? styles.radioCircleSelected
-              : styles.radioCircleDefault
+                ? styles.radioCircleSelected
+                : styles.radioCircleDefault,
           )}
         />
       </svg>

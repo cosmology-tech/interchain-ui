@@ -74,7 +74,7 @@ export default function NobleTxProgressBar(props: NobleTxProgressBarProps) {
       borderRadius="$md"
       bg="$progressBg"
       position="relative"
-      ref={progressTrackRef}
+      boxRef={progressTrackRef}
     >
       <Box
         width={`${state.barWidth}px`}

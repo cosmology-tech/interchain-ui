@@ -71,7 +71,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         },
       },
       state,
-      inputRef
+      inputRef,
     );
 
     return (
@@ -87,7 +87,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               props.isDisabled
                 ? inputRootIntent.disabled
                 : inputRootIntent[props.intent],
-              props.inputContainer
+              props.inputContainer,
             )}
           >
             {props.canDecrement && React.isValidElement(props.decrementButton)
@@ -97,7 +97,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             <Box
               as="input"
               attributes={inputProps}
-              ref={handleRef}
+              boxRef={handleRef}
               textAlign={props.textAlign}
               fontSize={props.fontSize}
               className={clx(
@@ -111,7 +111,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 isDisabled && props.incrementButton
                   ? styles.withIncrementButton
                   : null,
-                props.borderless ? styles.borderless : null
+                props.borderless ? styles.borderless : null,
               )}
             />
 
@@ -122,7 +122,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         </Stack>
       </Box>
     );
-  }
+  },
 );
 
 export default NumberInput;

@@ -221,7 +221,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       pl="$9"
       py="$7"
       backgroundColor="$menuItemBg"
-      ref={containerRef}
+      boxRef={containerRef}
       {...props.attributes}
       className={props.className}
     >

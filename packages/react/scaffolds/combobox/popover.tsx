@@ -31,11 +31,8 @@ export function Popover(props: PopoverProps) {
 
       <Box
         attributes={popoverProps}
-        ref={popoverRef}
+        boxRef={popoverRef}
         boxShadow="$lg"
-        borderWidth="1px"
-        borderStyle="solid"
-        borderColor="$divider"
         borderRadius="$lg"
         marginTop="$4"
         className={className}
