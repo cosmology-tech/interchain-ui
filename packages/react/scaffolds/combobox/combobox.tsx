@@ -147,7 +147,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
           borderStyle="solid"
           borderColor={state.isFocused ? "$inputBorderFocus" : "$inputBorder"}
           className={clx(styles.comboboxInput[theme])}
-          ref={containerRef}
+          boxRef={containerRef}
           attributes={{
             "data-focused": isFocused,
           }}
@@ -168,7 +168,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
           <Box
             as="input"
             attributes={inputProps}
-            ref={inputRef}
+            boxRef={inputRef}
             outline="none"
             paddingX="$5"
             paddingY="$2"
@@ -245,16 +245,14 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             placement="bottom start"
             className={clx(themeClass, styles.comboboxPopover)}
           >
-            <Box pt="$5" borderRadius="$lg" backgroundColor="$transparent">
-              <ListBox
-                {...listBoxProps}
-                listBoxRef={listBoxRef}
-                state={state}
-                styleProps={{
-                  width: styleProps?.width ?? DEFAULT_WIDTH,
-                }}
-              />
-            </Box>
+            <ListBox
+              {...listBoxProps}
+              listBoxRef={listBoxRef}
+              state={state}
+              styleProps={{
+                width: styleProps?.width ?? DEFAULT_WIDTH,
+              }}
+            />
           </Popover>
         )}
       </Box>
