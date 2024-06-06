@@ -1,0 +1,64 @@
+{
+  "name": "@interchain-ui/react-no-ssr",
+  "version": "0.0.1",
+  "description": "A simple component to skip rendering children on the server.",
+  "author": "yyyyaaa <phatghaa@gmail.com>",
+  "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/react-no-ssr#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "source": "src/index.ts",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "parcel build",
+    "dev": "parcel dev",
+    "test": "vitest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "check": "tsc --noEmit",
+    "ci": "yarn build && yarn test && yarn lint && yarn check"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmology-tech/interchain-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cosmology-tech/interchain-ui/issues"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.0.3",
+    "@eslint/js": "^9.4.0",
+    "@parcel/config-default": "^2.12.0",
+    "@parcel/core": "^2.12.0",
+    "@parcel/transformer-js": "^2.12.0",
+    "@parcel/transformer-react-refresh-wrap": "^2.12.0",
+    "@parcel/transformer-typescript-tsc": "^2.12.0",
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "9.x",
+    "eslint-plugin-react": "^7.34.2",
+    "globals": "^15.3.0",
+    "jsdom": "^24.1.0",
+    "parcel": "^2.12.0",
+    "tshy": "^1.14.0",
+    "typescript": ">=3.0.0",
+    "typescript-eslint": "^7.12.0",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
