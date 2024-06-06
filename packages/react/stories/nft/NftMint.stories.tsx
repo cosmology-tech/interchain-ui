@@ -48,7 +48,7 @@ export const Primary: Story = {
         new BigNumber(value)
           .multipliedBy(PRICE_PER_TOKEN)
           .precision(2)
-          .toNumber()
+          .toNumber(),
       );
     };
 

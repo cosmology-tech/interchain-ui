@@ -28,7 +28,7 @@ function useChainSwapState() {
 
   const options = React.useMemo(
     () => (isReady ? comboboxAssets : []),
-    [isReady, comboboxAssets]
+    [isReady, comboboxAssets],
   );
 
   return {

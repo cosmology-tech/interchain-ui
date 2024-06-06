@@ -35,7 +35,7 @@ export const Primary: Story = {
           value: i.tokenName,
           label: i.name,
         })),
-      [comboboxAssets, isReady]
+      [comboboxAssets, isReady],
     );
 
     if (!isReady) {
@@ -76,7 +76,7 @@ export const Bold: Story = {
           label: i.tokenName,
           value: i.tokenName,
         })),
-      [comboboxAssets, isReady]
+      [comboboxAssets, isReady],
     );
 
     if (!isReady) {

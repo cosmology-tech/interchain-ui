@@ -6,23 +6,26 @@ import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
   stories: ["../stories/**/*mdx", "../stories/**/*.stories.@(jsx|ts|tsx)"],
+
   addons: [
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-viewport"),
+    "@chromatic-com/storybook",
   ],
+
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
-  docs: {
-    autodocs: "tag",
-  },
+
+  docs: {},
+
   core: {},
-  features: {
-    buildStoriesJson: true,
-  },
+
+  features: {},
+
   async viteFinal(config, { configType }) {
     // return the customized config
     if (configType === "PRODUCTION") {
@@ -45,6 +48,10 @@ const config: StorybookConfig = {
     }
 
     return config;
+  },
+
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
   },
 };
 

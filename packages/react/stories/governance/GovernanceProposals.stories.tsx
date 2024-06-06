@@ -151,7 +151,7 @@ const PrimaryExample = () => {
         />
       </Box>
     ),
-    [proposalListData, pendingProposalListData, tabId]
+    [proposalListData, pendingProposalListData, tabId],
   );
 
   const tabs = React.useMemo(
@@ -173,7 +173,7 @@ const PrimaryExample = () => {
         content: proposalsRender,
       },
     ],
-    [proposalsRender]
+    [proposalsRender],
   );
 
   return (
