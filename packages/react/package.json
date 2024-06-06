@@ -140,7 +140,7 @@
     "@vitejs/plugin-react": "^4.1.0",
     "match-sorter": "^6.3.3",
     "parcel": "^2.12.0",
-    "parcel-optimizer-unlink-css": "^1.1.0",
+    "parcel-optimizer-unlink-css": "link:../../packages/parcel-optimizer-unlink-css",
     "parcel-resolver-ts-base-url": "^1.3.1",
     "prop-types": "^15.8.1",
     "react": "^18",
