@@ -21,11 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cosmology-tech/ui-kit.git"
+    "url": "git+https://github.com/cosmology-tech/interchain-ui.git"
   },
   "scripts": {},
   "bugs": {
-    "url": "https://github.com/cosmology-tech/ui-kit/issues"
+    "url": "https://github.com/cosmology-tech/interchain-ui/issues"
   },
   "dependencies": {
     "@parcel/plugin": "^2.12.0",

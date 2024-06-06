@@ -34,7 +34,7 @@ export const Primary: Story = {
     >(null);
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"] | null>(
-      null
+      null,
     );
 
     const { isReady, assets } = useMockData({
@@ -143,7 +143,7 @@ export const Primary: Story = {
           }
           onSubmit={() => {
             alert(
-              `Staked [${stakeToken?.symbol}]: amt ${stakedAmount} rward ${reward.rewardAmount}`
+              `Staked [${stakeToken?.symbol}]: amt ${stakedAmount} rward ${reward.rewardAmount}`,
             );
           }}
         />
@@ -204,7 +204,7 @@ export const CustomTheme: Story = {
     >(null);
 
     const [reward, setReward] = useState<LiquidStakingProps["reward"] | null>(
-      null
+      null,
     );
 
     const { isReady, assets } = useMockData({
@@ -318,7 +318,7 @@ export const CustomTheme: Story = {
             }}
             onSubmit={() => {
               alert(
-                `Staked [${stakeToken?.symbol}]: amt ${stakedAmount} rward ${reward.rewardAmount}`
+                `Staked [${stakeToken?.symbol}]: amt ${stakedAmount} rward ${reward.rewardAmount}`,
               );
             }}
           />
