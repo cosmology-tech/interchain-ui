@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.14](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.13...@interchain-ui/react@1.23.14) (2024-06-06)
+
+### Bug Fixes
+
+- use locally linked css optimizer plugin ([757860c](https://github.com/cosmology-tech/interchain-ui/commit/757860c3b307e587974cc1bb6ecfa9f8af99a2d0))
+
 ## [1.23.13](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.12...@interchain-ui/react@1.23.13) (2024-05-19)
 
 **Note:** Version bump only for package @interchain-ui/react
