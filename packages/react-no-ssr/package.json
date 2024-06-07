@@ -26,6 +26,7 @@
     "ci": "yarn build && yarn test && yarn lint && yarn check"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "repository": {
@@ -61,5 +62,6 @@
   "peerDependencies": {
     "react": "^18.x",
     "react-dom": "^18.x"
-  }
+  },
+  "gitHead": "bf66300d7fe3621b4de7ccbd4ef7593c8a84867d"
 }

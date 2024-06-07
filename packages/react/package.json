@@ -141,7 +141,7 @@
     "@vitejs/plugin-react": "^4.1.0",
     "match-sorter": "^6.3.3",
     "parcel": "^2.12.0",
-    "parcel-optimizer-unlink-css": "link:../../packages/parcel-optimizer-unlink-css",
+    "parcel-optimizer-unlink-css": "^1.1.0",
     "parcel-resolver-ts-base-url": "^1.3.1",
     "prop-types": "^15.8.1",
     "react": "^18",
@@ -151,5 +151,5 @@
     "type-fest": "^4.2.0",
     "vite-plugin-replace": "^0.1.1"
   },
-  "gitHead": "3687914dbc88dac6a3421df5ebb0abd1087f0da3"
+  "gitHead": "bf66300d7fe3621b4de7ccbd4ef7593c8a84867d"
 }
