@@ -20,7 +20,7 @@
     "@vanilla-extract/css": "^1.14.1",
     "@vanilla-extract/dynamic": "^2.1.0",
     "@vanilla-extract/recipes": "^0.5.1",
-    "@vanilla-extract/vite-plugin": "^4.0.4",
+    "@vanilla-extract/vite-plugin": "^4.0.10",
     "@vitejs/plugin-vue": "^5.0.4",
     "animejs": "^3.2.1",
     "autoprefixer": "^10.4.16",

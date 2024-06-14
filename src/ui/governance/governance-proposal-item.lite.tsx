@@ -27,7 +27,7 @@ useDefaultProps<Partial<GovernanceProposalItemProps>>({
 });
 
 export default function GovernanceProposalItem(
-  props: GovernanceProposalItemProps
+  props: GovernanceProposalItemProps,
 ) {
   const state = useStore({
     getStatusLabel: () => {
@@ -264,7 +264,10 @@ export default function GovernanceProposalItem(
                 borderTopLeftRadius="4px"
                 borderBottomLeftRadius="4px"
               >
-                <Tooltip title="Yes" placement="bottom">
+                <Tooltip
+                  title={<Text color="$textInverse">Yes</Text>}
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
@@ -273,7 +276,10 @@ export default function GovernanceProposalItem(
                 backgroundColor="#486A94"
                 width={state.getWidthFor("abstain")}
               >
-                <Tooltip title="Abstain" placement="bottom">
+                <Tooltip
+                  title={<Text color="$textInverse">Abstain</Text>}
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
@@ -283,7 +289,10 @@ export default function GovernanceProposalItem(
                 backgroundColor="$red600"
                 width={state.getWidthFor("no")}
               >
-                <Tooltip title="No" placement="bottom">
+                <Tooltip
+                  title={<Text color="$textInverse">Abstain</Text>}
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
@@ -295,7 +304,10 @@ export default function GovernanceProposalItem(
                 borderTopRightRadius="4px"
                 borderBottomRightRadius="4px"
               >
-                <Tooltip title="No with veto" placement="bottom">
+                <Tooltip
+                  title={<Text color="$textInverse">No With Veto</Text>}
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>

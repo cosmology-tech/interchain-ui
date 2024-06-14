@@ -7,11 +7,13 @@ export type TabProps = {
 };
 
 export interface TabsProps extends BaseComponentProps {
+  tabVariant: "pill" | "underlined";
   defaultActiveTab?: number;
   activeTab?: number;
   // Whether or not to mount/unmount tab children on activeTab change, isLazy = true means unmount
   isLazy?: boolean;
   onActiveTabChange?: (tabId: number) => void;
   tabs: TabProps[];
-  attributes?: BoxProps;
+  tabContentAttributes?: BoxProps;
+  tabsContainerAttributes?: BoxProps;
 }

@@ -1,6 +1,7 @@
 import {
   For,
   Show,
+  useDefaultProps,
   useMetadata,
   useStore,
   useRef,
@@ -27,6 +28,10 @@ useMetadata({
   rsc: {
     componentType: "client",
   },
+});
+
+useDefaultProps<Partial<TabsProps>>({
+  tabVariant: "pill",
 });
 
 export default function Tabs(props: TabsProps) {
@@ -87,7 +92,7 @@ export default function Tabs(props: TabsProps) {
       if (!tabListRef) return;
 
       const nextTab = tabListRef.querySelector(
-        `[role="tab"][data-tab-key="tab-${activeTab}"]`
+        `[role="tab"][data-tab-key="tab-${activeTab}"]`,
       ) as HTMLElement;
 
       state.width = nextTab?.offsetWidth ?? 0;
@@ -131,7 +136,7 @@ export default function Tabs(props: TabsProps) {
   });
 
   return (
-    <Box className={props.className} {...props.attributes}>
+    <>
       <Box
         className={clsx(styles.tabsHorizontal, scrollBar[state.theme])}
         bg={state.getBgColor()}
@@ -154,18 +159,23 @@ export default function Tabs(props: TabsProps) {
         boxRef={tabListRef}
         attributes={{
           role: "tablist",
+          ...props.tabsContainerAttributes,
         }}
       >
         {/* Tab selection background */}
-        <Box
-          className={styles.tabSelection}
-          backgroundColor={state.theme === "light" ? "$accentText" : "#F5F7FB"}
-          width={`${state.width}px`}
-          transform={state.transform}
-          attributes={{
-            "data-part-id": "tab-selection",
-          }}
-        />
+        <Show when={props.tabVariant === "pill"}>
+          <Box
+            className={styles.tabSelection}
+            backgroundColor={
+              state.theme === "light" ? "$accentText" : "#F5F7FB"
+            }
+            width={`${state.width}px`}
+            transform={state.transform}
+            attributes={{
+              "data-part-id": "tab-selection",
+            }}
+          />
+        </Show>
 
         <For each={props?.tabs}>
           {(tab: TabProps, index: number) => (
@@ -226,33 +236,33 @@ export default function Tabs(props: TabsProps) {
         </For>
       </Box>
 
-      <Box className="tab-content">
-        <Box
-          attributes={{
-            role: "tabpanel",
-            "aria-labelledby": `btn-${state.getActiveTabId()}`,
-            "data-tab-panel-key": `tabpanel-${state.getActiveTabId()}`,
-          }}
-        >
-          <Show when={props.isLazy}>{state.findActiveTabContent()}</Show>
-          <Show when={!props.isLazy}>
-            <For each={props.tabs}>
-              {(_tabItem, index) => (
-                <Box
-                  key={index}
-                  opacity={state.getActiveTabId() === index ? 1 : 0}
-                  transition={standardTransitionProperties}
-                  className={
-                    state.getActiveTabId() === index ? "" : visuallyHidden
-                  }
-                >
-                  {state.getTabContentFor(index)}
-                </Box>
-              )}
-            </For>
-          </Show>
-        </Box>
+      <Box
+        className="tab-content"
+        attributes={{
+          role: "tabpanel",
+          "aria-labelledby": `btn-${state.getActiveTabId()}`,
+          "data-tab-panel-key": `tabpanel-${state.getActiveTabId()}`,
+          ...props.tabContentAttributes,
+        }}
+      >
+        <Show when={props.isLazy}>{state.findActiveTabContent()}</Show>
+        <Show when={!props.isLazy}>
+          <For each={props.tabs}>
+            {(_tabItem, index) => (
+              <Box
+                key={index}
+                opacity={state.getActiveTabId() === index ? 1 : 0}
+                transition={standardTransitionProperties}
+                className={
+                  state.getActiveTabId() === index ? "" : visuallyHidden
+                }
+              >
+                {state.getTabContentFor(index)}
+              </Box>
+            )}
+          </For>
+        </Show>
       </Box>
-    </Box>
+    </>
   );
 }
