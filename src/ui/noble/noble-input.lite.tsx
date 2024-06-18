@@ -92,12 +92,16 @@ export default function NobleInput(props: NobleInputProps) {
       className={props.className}
     >
       <Box {...props.labelContainerProps}>
-        <Show when={props.label}>
+        <Show when={props.label && typeof props.label === "string"}>
           <FieldLabel
             id={props.labelId ?? `${props.id}-label`}
             htmlFor={props.id}
             label={props.label}
           />
+        </Show>
+
+        <Show when={props.label && typeof props.label !== "string"}>
+          {props.label}
         </Show>
 
         <Show when={props.labelExtra}>{props.labelExtra}</Show>
