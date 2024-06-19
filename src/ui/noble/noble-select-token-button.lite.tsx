@@ -45,7 +45,13 @@ export default function NobleSelectTokenButton(
   });
 
   return (
-    <NobleButton {...state.buttonProps} variant="outlined" size="xl">
+    <NobleButton
+      {...state.buttonProps}
+      variant="outlined"
+      borderless={props.borderless}
+      isActive={props.isActive}
+      size="xl"
+    >
       <Box display="flex" gap="$8" flex="1">
         <NobleTokenAvatar {...props.token} />
 

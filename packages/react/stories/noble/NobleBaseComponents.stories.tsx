@@ -136,7 +136,7 @@ export const Primary: Story = {
             </NobleButton>
 
             <NobleButton variant="solid" size="lg">
-              variant: outlined, size: lg
+              variant: solid, size: lg
             </NobleButton>
 
             <Stack space="$4">
@@ -183,6 +183,22 @@ export const Primary: Story = {
                 network: "On Ethereum",
                 tokenAmount: "1,052.51",
                 notionalValue: "≈ $1,052",
+              }}
+            />
+
+            <NobleSelectTokenButton
+              size="xl"
+              borderless
+              isActive
+              token={{
+                mainLogoUrl: USDC_LOGO_URL,
+                mainLogoAlt: "USDC",
+                subLogoUrl: OSMO_LOGO_URL,
+                subLogoAlt: "USDC",
+                symbol: "USDC",
+                network: "On Ethereum",
+                tokenAmount: "--",
+                notionalValue: "≈ $0.00",
               }}
             />
           </Box>

@@ -47,6 +47,7 @@ export interface NobleButtonProps extends BaseButtonProps {
   fontWeight?: BoxProps["fontWeight"];
   lineHeight?: BoxProps["lineHeight"];
   isActive?: boolean;
+  borderless?: boolean;
 }
 
 export interface NobleTokenAvatarProps {
@@ -68,6 +69,8 @@ export interface NobleSelectTokenButtonProps extends BaseButtonProps {
   width?: BoxProps["width"];
   height?: BoxProps["height"];
   size?: NobleButtonSize;
+  borderless?: boolean;
+  isActive?: boolean;
   token: DisplayToken;
 }
 

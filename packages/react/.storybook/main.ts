@@ -1,5 +1,5 @@
 import { dirname, join } from "path";
-import { mergeConfig, splitVendorChunkPlugin } from "vite";
+import { mergeConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import type { StorybookConfig } from "@storybook/react-vite";
@@ -26,32 +26,10 @@ const config: StorybookConfig = {
 
   features: {},
 
-  async viteFinal(config, { configType }) {
-    // return the customized config
-    if (configType === "PRODUCTION") {
-      return mergeConfig(config, {
-        // customize the Vite config here
-        plugins: [react(), splitVendorChunkPlugin(), vanillaExtractPlugin()],
-        build: {
-          rollupOptions: {
-            output: {
-              manualChunks(id: string) {
-                // creating a chunk for mock data
-                if (id.includes("stub/")) {
-                  return "stub";
-                }
-              },
-            },
-          },
-        },
-      });
-    }
-
-    return config;
-  },
-
   typescript: {
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: false,
+    // This makes HMR very slow/hanging, turn this off until further notice
+    // reactDocgen: "react-docgen-typescript",
   },
 };
 

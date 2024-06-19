@@ -6,12 +6,10 @@ import {
   onMount,
   onUnMount,
 } from "@builder.io/mitosis";
-import clx from "clsx";
 
 import Box from "../box";
 import Icon from "../icon";
 import { store } from "../../models/store";
-import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type {
   NobleButtonProps,
   NobleButtonVariant,
@@ -50,6 +48,7 @@ export default function NobleButton(props: NobleButtonProps) {
       const variantStylesMap: Record<NobleButtonVariant, BoxProps> = {
         solid: {
           bg: { base: "$primary", hover: "$blue700" },
+          fontWeight: "$semibold",
           color: "$white",
           ...state.getSizeStyles(props.size),
           ...state.getDisabledStyles(),
@@ -63,9 +62,16 @@ export default function NobleButton(props: NobleButtonProps) {
         },
         outlined: {
           color: "$text",
-          bg: "$cardBg",
+          bg: props.isActive
+            ? state.theme === "light"
+              ? "$gray800"
+              : "$blue300"
+            : {
+                base: "$cardBg",
+                hover: "$body",
+              },
           borderRadius: "$lg",
-          borderWidth: "1px",
+          borderWidth: props.borderless ? "$none" : "1px",
           borderStyle: "$solid",
           borderColor: "$progressBg",
           fontSize: "$md",
