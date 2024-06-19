@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.18](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.17...@interchain-ui/react@1.23.18) (2024-06-19)
+
+### Bug Fixes
+
+- new design for noble button ([1a1697c](https://github.com/cosmology-tech/interchain-ui/commit/1a1697c817f940d6767b6c970dc73d1ad395ad84))
+
 ## [1.23.17](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.16...@interchain-ui/react@1.23.17) (2024-06-18)
 
 **Note:** Version bump only for package @interchain-ui/react
