@@ -34,7 +34,7 @@
     "rainbow-sprinkles": "^0.17.1",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.4.2",
-    "vite": "^5.2.2",
+    "vite": "^5.3.1",
     "vite-plugin-checker": "^0.6.4",
     "vue-tsc": "^1.8.22",
     "zustand": "^4.5.2"
