@@ -52,6 +52,7 @@ export default function Box(props: BoxProps) {
       className={state.boxStyles.className}
       style={{
         ...state.boxStyles.style,
+        ...props.attributes?.style,
         ...props.rawCSS,
       }}
       {...state.finalPassThroughProps}
