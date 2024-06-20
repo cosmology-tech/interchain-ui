@@ -276,6 +276,18 @@ export const Primary: Story = {
             <Text>NobleInput</Text>
 
             <NobleInput
+              id="source-token-amount"
+              size="sm"
+              label="Select amount"
+              placeholder="Enter amount"
+              value={inputValue}
+              onChange={(e) => {
+                console.log("Change: ", e.target.value);
+                setInputValue(e.target.value);
+              }}
+            />
+
+            <NobleInput
               id="token-amount"
               size="md"
               label="Select amount"
@@ -376,6 +388,7 @@ export const Primary: Story = {
               inputContainerProps={{
                 // Space for the button
                 paddingRight: "150px",
+                // borderColor: "transparent",
               }}
               endAddon={
                 <Box position="absolute" right="$4" top="$4">

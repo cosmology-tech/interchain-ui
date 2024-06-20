@@ -13,11 +13,19 @@ interface PopoverProps extends Omit<AriaPopoverProps, "popoverRef"> {
 
 export function Popover(props: PopoverProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const { popoverRef = ref, state, children, className, isNonModal } = props;
+  const {
+    popoverRef = ref,
+    triggerRef,
+    state,
+    children,
+    className,
+    isNonModal,
+  } = props;
 
   const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
+      triggerRef,
       popoverRef,
     },
     state,
@@ -31,13 +39,8 @@ export function Popover(props: PopoverProps) {
 
       <Box
         attributes={popoverProps}
-        ref={popoverRef}
+        boxRef={popoverRef}
         boxShadow="$lg"
-        borderWidth="1px"
-        borderStyle="solid"
-        borderColor="$divider"
-        borderRadius="$lg"
-        marginTop="$4"
         className={className}
       >
         {!isNonModal && <DismissButton onDismiss={state.close} />}
