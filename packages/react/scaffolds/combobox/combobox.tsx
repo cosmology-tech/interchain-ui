@@ -13,7 +13,6 @@ import Icon from "@/ui/icon";
 import Box from "@/ui/box";
 import useTheme from "@/ui/hooks/use-theme";
 import type { BoxProps } from "@/ui/box/box.types";
-import { unstyledButton } from "@/ui/button/button.css";
 import { inputSizes } from "@/ui/text-field/text-field.css";
 import { ComboboxContext } from "./combobox.context";
 import { ListBox } from "./list-box";
@@ -36,7 +35,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
     size = "sm",
     defaultIsOpen = false,
     openOnFocus = false,
-    styleProps,
+    styleProps = {},
     inputAddonStart,
     inputAddonEnd,
     ...comboboxProps
@@ -138,6 +137,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
         )}
 
         <Box
+          boxRef={containerRef}
           position="relative"
           display="flex"
           borderRadius="$md"
@@ -147,7 +147,6 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
           borderStyle="solid"
           borderColor={state.isFocused ? "$inputBorderFocus" : "$inputBorder"}
           className={clx(styles.comboboxInput[theme])}
-          ref={containerRef}
           attributes={{
             "data-focused": isFocused,
           }}
@@ -168,7 +167,7 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
           <Box
             as="input"
             attributes={inputProps}
-            ref={inputRef}
+            boxRef={inputRef}
             outline="none"
             paddingX="$5"
             paddingY="$2"
