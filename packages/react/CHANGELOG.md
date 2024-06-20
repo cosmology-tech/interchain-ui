@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.19](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.18...@interchain-ui/react@1.23.19) (2024-06-20)
+
+### Bug Fixes
+
+- **combobox:** listbox is not anchored to container ([d2bfc4e](https://github.com/cosmology-tech/interchain-ui/commit/d2bfc4e908616b64c8e60edbb0decde9ce9a7030))
+
 ## [1.23.18](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.17...@interchain-ui/react@1.23.18) (2024-06-19)
 
 ### Bug Fixes
