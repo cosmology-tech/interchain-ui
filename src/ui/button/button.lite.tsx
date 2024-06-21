@@ -122,7 +122,7 @@ export default function Button(props: ButtonProps) {
         onMouseEnter: (event) => props.onHoverStart?.(event),
         onMouseLeave: (event) => props.onHoverEnd?.(event),
         disabled: props.disabled,
-        style: state.getVars(),
+        // style: state.getVars(),
         ...props.domAttributes,
       }}
     >
