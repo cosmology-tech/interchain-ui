@@ -91,15 +91,15 @@ const shouldSkipBundling = process.env.NO_BUILD === "true";
             ? platforms
             : `{${cliConfig.platforms.join(",")}}`;
 
-        const filters = `--scope=@interchain-ui/${platformGlob}`;
+        const filters = `--filter "@interchain-ui/${platformGlob}"`;
 
-        const buildCmd = `lerna run --stream ${filters} build`;
+        const buildCmd = `pnpm run --stream ${filters} build`;
 
         try {
           await exec(buildCmd);
 
           if (shouldMinify) {
-            const minifyCssCmd = `lerna run --stream ${filters} minifyCss`;
+            const minifyCssCmd = `pnpm run --stream ${filters} minifyCss`;
             await exec(minifyCssCmd);
           }
         } catch (error) {
