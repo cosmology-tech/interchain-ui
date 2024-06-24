@@ -24,6 +24,6 @@ export type UseInteractionsValue = ReturnType<typeof useInteractions>;
 export type UseFloatingValue = ReturnType<typeof useFloating>;
 
 export type UsePopoverReturnValue = PopoverOptions & {
-  arrowRef: React.RefObject<SVGSVGElement>;
+  arrowRef?: React.RefObject<SVGSVGElement>;
 } & UseFloatingValue &
   UseInteractionsValue;
