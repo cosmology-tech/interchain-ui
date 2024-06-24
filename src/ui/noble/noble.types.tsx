@@ -56,6 +56,7 @@ export interface NobleTokenAvatarProps {
   subLogoUrl: string;
   subLogoAlt?: string;
   isRound?: boolean;
+  isLoadingSubLogo?: boolean;
 }
 
 type DisplayToken = {
