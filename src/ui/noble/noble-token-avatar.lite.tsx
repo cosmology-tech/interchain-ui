@@ -4,6 +4,7 @@ import {
   useRef,
   onMount,
   onUnMount,
+  Show,
   useDefaultProps,
 } from "@builder.io/mitosis";
 
@@ -60,23 +61,41 @@ export default function NobleTokenAvatar(props: NobleTokenAvatarProps) {
         }}
       />
 
-      <Box
-        as="img"
-        width="$9"
-        height="$9"
-        position="absolute"
-        bottom="-4px"
-        right="-2px"
-        borderRadius="$full"
-        borderWidth="2px"
-        borderStyle="solid"
-        borderColor="$cardBg"
-        bg="$cardBg"
-        attributes={{
-          src: props.subLogoUrl,
-          alt: props.subLogoAlt ?? "Token logo",
-        }}
-      />
+      <Show
+        when={props.isLoadingSubLogo}
+        else={
+          <Box
+            as="img"
+            width="$9"
+            height="$9"
+            position="absolute"
+            bottom="-4px"
+            right="-2px"
+            borderRadius="$full"
+            borderWidth="2px"
+            borderStyle="solid"
+            borderColor="$cardBg"
+            bg="$cardBg"
+            attributes={{
+              src: props.subLogoUrl,
+              alt: props.subLogoAlt ?? "Token logo",
+            }}
+          />
+        }
+      >
+        <Box
+          width="$9"
+          height="$9"
+          position="absolute"
+          bottom="-4px"
+          right="-2px"
+          borderRadius="$full"
+          borderWidth="2px"
+          borderStyle="solid"
+          borderColor="$cardBg"
+          bg={state.theme === "light" ? "$gray800" : "$blue500"}
+        />
+      </Show>
     </Box>
   );
 }

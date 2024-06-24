@@ -167,6 +167,14 @@ export const Primary: Story = {
               subLogoUrl={OSMO_LOGO_URL}
               subLogoAlt="USDC"
             />
+
+            <NobleTokenAvatar
+              isLoadingSubLogo
+              mainLogoUrl={USDC_LOGO_URL}
+              mainLogoAlt="USDC"
+              subLogoUrl={OSMO_LOGO_URL}
+              subLogoAlt="USDC"
+            />
           </Box>
 
           <Box display="flex" gap="$4" flexDirection="column" maxWidth="466px">
