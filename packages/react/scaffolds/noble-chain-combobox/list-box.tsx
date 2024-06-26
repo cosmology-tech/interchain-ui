@@ -49,6 +49,7 @@ export function ListBox(props: ListBoxProps) {
       borderColor="$inputBorder"
       paddingX="$0"
       paddingY="$6"
+      opacity={state.collection.size === 0 ? "0" : "1"}
       {...props.styleProps}
       className={clx(listboxStyle[theme], props.styleProps.className)}
     >
