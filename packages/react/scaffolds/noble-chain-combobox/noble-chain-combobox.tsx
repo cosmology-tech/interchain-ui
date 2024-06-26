@@ -120,6 +120,12 @@ export default function NobleChainCombobox<T extends object>(
     }
   }, []);
 
+  const inputBorderBottomRadius = state.isOpen
+    ? state.collection.size === 0
+      ? "8px"
+      : "$none"
+    : "8px";
+
   return (
     <Box
       {...styleProps}
@@ -145,8 +151,8 @@ export default function NobleChainCombobox<T extends object>(
           borderStyle="solid"
           borderColor="$inputBorder"
           borderRadius="8px"
-          borderBottomLeftRadius={state.isOpen ? "$none" : "8px"}
-          borderBottomRightRadius={state.isOpen ? "$none" : "8px"}
+          borderBottomLeftRadius={inputBorderBottomRadius}
+          borderBottomRightRadius={inputBorderBottomRadius}
           boxRef={containerRef}
           attributes={{
             "data-focused": isFocused,
