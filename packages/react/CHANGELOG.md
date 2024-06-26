@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.24](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.23...@interchain-ui/react@1.23.24) (2024-06-26)
+
+### Bug Fixes
+
+- combobox should not show empty list when collection is empty ([456a908](https://github.com/cosmology-tech/interchain-ui/commit/456a9081573849373ffa868dd77922387a196eba))
+
 ## [1.23.23](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.22...@interchain-ui/react@1.23.23) (2024-06-24)
 
 ### Bug Fixes
