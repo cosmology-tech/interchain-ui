@@ -12,6 +12,7 @@ export interface NumberInputProps {
   decrementButton?: ReactNode;
   canIncrement?: boolean;
   canDecrement?: boolean;
+  clampValueOnBlur?: boolean;
   // ==== Form field props
   id?: string;
   isDisabled?: boolean;
@@ -30,7 +31,7 @@ export interface NumberInputProps {
   // ==== Style props
   textAlign?: Sprinkles["textAlign"];
   fontSize?: Sprinkles["fontSize"];
-  attributes?: any;
+  attributes?: Sprinkles & React.HTMLAttributes<HTMLDivElement>;
   size?: "sm" | "md" | "lg";
   placeholder?: string | undefined;
   intent?: "default" | "error";

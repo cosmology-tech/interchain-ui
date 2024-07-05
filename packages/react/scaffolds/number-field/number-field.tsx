@@ -1,4 +1,4 @@
-import React, { useState, useId, forwardRef } from "react";
+import React, { useState, useEffect, useId, forwardRef } from "react";
 import { useNumberFieldState } from "react-stately";
 import { useNumberField, useLocale } from "react-aria";
 import { mergeRefs } from "@react-aria/utils";
@@ -27,19 +27,32 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       isDisabled,
       size = "sm",
       intent = "default",
+      clampValueOnBlur = true,
     } = props;
 
     const { theme } = useTheme();
     const { locale } = useLocale();
+    const [internalValue, setInternalValue] = useState<number | null>(
+      props.defaultValue ?? null,
+    );
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
     const state = useNumberFieldState({
       ...props,
       locale,
+      onChange: (value) => {
+        setInternalValue(value);
+      },
       onFocusChange(focused) {
         setIsFocused(focused);
       },
     });
+
+    useEffect(() => {
+      if (props.value !== undefined) {
+        setInternalValue(props.value);
+      }
+    }, [props.value]);
 
     const inputRef = React.useRef(null);
     const handleRef = mergeRefs(inputRef, forwardedRef);
@@ -50,29 +63,61 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       inputProps,
       incrementButtonProps,
       decrementButtonProps,
-    } = useNumberField(
-      {
-        ...props,
-        onFocus(event) {
-          // Clears input if 0
-          if (Number(state.inputValue) === 0) {
-            state.setInputValue("");
-          }
+    } = useNumberField(props, state, inputRef);
 
-          props.onFocus?.(event);
-        },
-        onBlur(event) {
-          if (state.inputValue === "") {
-            // If not a number, reset to min value
-            state.setInputValue(`${state.minValue ?? "0"}`);
-          }
+    const formatValue = (value: number | null): string => {
+      if (value === null) return "";
+      return new Intl.NumberFormat(locale, {
+        style: "decimal",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 20,
+      }).format(value);
+    };
 
-          props.onBlur?.(event);
-        },
-      },
-      state,
-      inputRef
-    );
+    const parseValue = (value: string): number | null => {
+      if (value === "") {
+        // Since it's a number field, returns a number if the input is empty
+        return props.minValue ?? 0;
+      }
+
+      // Remove all non-numeric characters except decimal point and minus sign
+      const numericValue = value.replace(/[^\d.-]/g, "");
+      return parseFloat(numericValue);
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      let newValue = internalValue;
+
+      if (clampValueOnBlur && internalValue !== null) {
+        const { minValue, maxValue } = props;
+
+        if (typeof minValue === "number" && newValue < minValue) {
+          newValue = minValue;
+        } else if (typeof maxValue === "number" && newValue > maxValue) {
+          newValue = maxValue;
+        }
+
+        if (newValue !== internalValue) {
+          setInternalValue(newValue);
+          state.setNumberValue(newValue);
+          props.onChange?.(newValue);
+        }
+      }
+
+      // Apply formatting on blur
+      if (inputRef.current) {
+        state.setInputValue(formatValue(newValue));
+        inputRef.current.value = formatValue(newValue);
+      }
+
+      inputProps.onBlur?.(e);
+    };
+
+    const inputValue = props.clampValueOnBlur
+      ? state.inputValue
+      : internalValue !== null
+        ? formatValue(internalValue)
+        : "0";
 
     return (
       <Box className={props.className} {...props.attributes}>
@@ -87,7 +132,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               props.isDisabled
                 ? inputRootIntent.disabled
                 : inputRootIntent[props.intent],
-              props.inputContainer
+              props.inputContainer,
             )}
           >
             {props.canDecrement && React.isValidElement(props.decrementButton)
@@ -96,8 +141,21 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
             <Box
               as="input"
-              attributes={inputProps}
-              ref={handleRef}
+              attributes={{
+                ...inputProps,
+                value: inputValue,
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                  const parsedValue = parseValue(e.target.value);
+                  setInternalValue(parsedValue);
+
+                  inputRef.current.value = formatValue(parsedValue);
+                  state.setInputValue(formatValue(parsedValue));
+                  state.setNumberValue(parsedValue);
+                  props.onChange?.(parsedValue);
+                },
+                onBlur: handleBlur,
+              }}
+              boxRef={handleRef}
               textAlign={props.textAlign}
               fontSize={props.fontSize}
               className={clx(
@@ -111,7 +169,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 isDisabled && props.incrementButton
                   ? styles.withIncrementButton
                   : null,
-                props.borderless ? styles.borderless : null
+                props.borderless ? styles.borderless : null,
               )}
             />
 
@@ -122,7 +180,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         </Stack>
       </Box>
     );
-  }
+  },
 );
 
 export default NumberInput;
