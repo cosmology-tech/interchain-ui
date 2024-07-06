@@ -21,14 +21,14 @@ export const Primary: Story = {
 
     return (
       <NumberField
-        id="my-num-input"
+        id="my-num-input1"
         label="My Amount"
         minValue={0}
         maxValue={2000}
         textAlign="right"
         value={value}
         onChange={(value) => {
-          console.log("[sb] Change", value);
+          console.log("[sb1] Change", value);
           setValue(value);
         }}
       />
@@ -43,15 +43,13 @@ export const DisabledClampValueOnBlur: Story = {
 
     return (
       <NumberField
-        id="my-num-input"
+        id="my-num-input2"
         label="My Amount"
         textAlign="right"
         value={value}
         clampValueOnBlur={false}
-        minValue={0}
-        maxValue={100000}
         onChange={(value) => {
-          console.log("[sb] Change", value);
+          console.log("[sb2] Change", value);
           setValue(value);
         }}
       />

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useId, forwardRef } from "react";
+import React, { useState, useEffect, useId, forwardRef, useMemo } from "react";
 import { useNumberFieldState } from "react-stately";
-import { useNumberField, useLocale } from "react-aria";
+import { useNumberField, useLocale, AriaNumberFieldProps } from "react-aria";
 import { mergeRefs } from "@react-aria/utils";
 
 import clx from "clsx";
@@ -19,6 +19,20 @@ import useTheme from "../hooks/use-theme";
 import * as styles from "./number-field.css";
 import type { NumberInputProps } from "./number-field.types";
 
+function usePrevious<T>(value: T): T {
+  const ref = React.useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
+const defaultFormatOptions: AriaNumberFieldProps["formatOptions"] = {
+  style: "decimal",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 20,
+};
+
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (props, forwardedRef) => {
     const {
@@ -28,21 +42,26 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       size = "sm",
       intent = "default",
       clampValueOnBlur = true,
+      formatOptions = defaultFormatOptions,
     } = props;
 
     const { theme } = useTheme();
     const { locale } = useLocale();
     const [internalValue, setInternalValue] = useState<number | null>(
-      props.defaultValue ?? null,
+      () => props.value ?? props.defaultValue ?? null,
+    );
+    const lastValidValue = usePrevious(internalValue);
+
+    const [strValue, setStrValue] = useState<string>(() =>
+      (props.value && props.defaultValue) == null
+        ? ""
+        : String(props.value ?? props.defaultValue),
     );
     const [isFocused, setIsFocused] = useState<boolean>(false);
 
     const state = useNumberFieldState({
       ...props,
       locale,
-      onChange: (value) => {
-        setInternalValue(value);
-      },
       onFocusChange(focused) {
         setIsFocused(focused);
       },
@@ -67,17 +86,12 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     const formatValue = (value: number | null): string => {
       if (value === null) return "";
-      return new Intl.NumberFormat(locale, {
-        style: "decimal",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 20,
-      }).format(value);
+      return new Intl.NumberFormat(locale, formatOptions).format(value);
     };
 
     const parseValue = (value: string): number | null => {
       if (value === "") {
-        // Since it's a number field, returns a number if the input is empty
-        return props.minValue ?? 0;
+        return null;
       }
 
       // Remove all non-numeric characters except decimal point and minus sign
@@ -85,39 +99,107 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       return parseFloat(numericValue);
     };
 
+    const applyFormatting = (val: number) => {
+      if (inputRef.current) {
+        state.setInputValue(formatValue(val));
+        inputRef.current.value = formatValue(val);
+      }
+    };
+
+    const updateValue = (val: number) => {
+      setInternalValue(val);
+      setStrValue(formatValue(val));
+      state.setNumberValue(val);
+      props.onChange?.(val);
+    };
+
+    const getClampedValue = (val: number) => {
+      const {
+        minValue = Number.NEGATIVE_INFINITY,
+        maxValue = Number.POSITIVE_INFINITY,
+      } = props;
+
+      if (typeof val !== "number") {
+        val = 0;
+      }
+
+      return Math.min(Math.max(val, minValue), maxValue);
+    };
+
+    const isNotNumeric = (valStr: string) => {
+      return isNaN(parseValue(valStr) ?? undefined);
+    };
+
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
       let newValue = internalValue;
 
-      if (clampValueOnBlur && internalValue !== null) {
-        const { minValue, maxValue } = props;
-
-        if (typeof minValue === "number" && newValue < minValue) {
-          newValue = minValue;
-        } else if (typeof maxValue === "number" && newValue > maxValue) {
-          newValue = maxValue;
-        }
-
-        if (newValue !== internalValue) {
-          setInternalValue(newValue);
-          state.setNumberValue(newValue);
-          props.onChange?.(newValue);
-        }
+      // Default mode, fallback to react-aria logic
+      if (clampValueOnBlur) {
+        newValue = state.numberValue;
+        applyFormatting(newValue);
+        inputProps.onBlur?.(e);
+        return;
       }
 
-      // Apply formatting on blur
-      if (inputRef.current) {
-        state.setInputValue(formatValue(newValue));
-        inputRef.current.value = formatValue(newValue);
-      }
+      if (!clampValueOnBlur) {
+        // Snap back to the last valid numeric value
+        // if the input is empty or invalid
+        if (isNotNumeric(strValue)) {
+          newValue = getClampedValue(0);
 
-      inputProps.onBlur?.(e);
+          if (newValue !== lastValidValue) {
+            updateValue(newValue);
+          }
+          applyFormatting(newValue);
+          inputProps.onBlur?.(e);
+          return;
+        } else {
+          newValue = getClampedValue(parseValue(strValue));
+          if (newValue !== lastValidValue) {
+            updateValue(newValue);
+          }
+          applyFormatting(newValue);
+          inputProps.onBlur?.(e);
+        }
+      }
     };
 
-    const inputValue = props.clampValueOnBlur
-      ? state.inputValue
-      : internalValue !== null
-        ? formatValue(internalValue)
-        : "0";
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const parsedValue = parseValue(e.target.value);
+      const isNotNumeric = isNaN(parsedValue ?? undefined);
+
+      // String representation of the value, always update
+      setStrValue(e.target.value);
+
+      // If the value is incomplete/invalid, don't update the state
+      // wait til it's valid and update onBlur
+      if (isNotNumeric) {
+        return;
+      }
+
+      if (parsedValue == null) {
+        setInternalValue(props.minValue ?? 0);
+      } else {
+        setInternalValue(parsedValue);
+      }
+
+      state.setInputValue(formatValue(parsedValue));
+      state.setNumberValue(parsedValue);
+      props.onChange?.(parsedValue ?? props.minValue ?? 0);
+    };
+
+    const inputValue = useMemo(() => {
+      if (clampValueOnBlur) {
+        return state.inputValue;
+      } else if (internalValue !== null) {
+        if (isNotNumeric(strValue)) {
+          return strValue;
+        }
+        return formatValue(internalValue);
+      } else {
+        return strValue;
+      }
+    }, [state.inputValue, formatValue, internalValue, strValue]);
 
     return (
       <Box className={props.className} {...props.attributes}>
@@ -144,16 +226,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               attributes={{
                 ...inputProps,
                 value: inputValue,
-                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                  const parsedValue = parseValue(e.target.value);
-                  setInternalValue(parsedValue);
-
-                  inputRef.current.value = formatValue(parsedValue);
-                  state.setInputValue(formatValue(parsedValue));
-                  state.setNumberValue(parsedValue);
-                  props.onChange?.(parsedValue);
-                },
-                onBlur: handleBlur,
+                onChange: clampValueOnBlur ? inputProps.onChange : handleChange,
+                onBlur: clampValueOnBlur ? inputProps.onBlur : handleBlur,
               }}
               boxRef={handleRef}
               textAlign={props.textAlign}
