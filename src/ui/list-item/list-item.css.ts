@@ -29,6 +29,7 @@ export const listItemBase = style([
       },
       '&[data-is-disabled="true"]': {
         cursor: "not-allowed",
+        color: themeVars.colors.textMuted,
       },
       '&[data-is-disabled="true"]:hover': {
         backgroundColor: `${themeVars.colors.menuItemBg} !important`,

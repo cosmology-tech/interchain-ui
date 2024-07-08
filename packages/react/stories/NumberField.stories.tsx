@@ -21,17 +21,35 @@ export const Primary: Story = {
 
     return (
       <NumberField
-        id="my-num-input"
+        id="my-num-input1"
         label="My Amount"
         minValue={0}
         maxValue={2000}
         textAlign="right"
         value={value}
-        onInput={(event) => {
-          console.log("Input", event.target.value);
-        }}
         onChange={(value) => {
-          console.log("Change", value);
+          console.log("[sb1] Change", value);
+          setValue(value);
+        }}
+      />
+    );
+  },
+};
+
+export const DisabledClampValueOnBlur: Story = {
+  args: {},
+  render: () => {
+    const [value, setValue] = React.useState(0);
+
+    return (
+      <NumberField
+        id="my-num-input2"
+        label="My Amount"
+        textAlign="right"
+        value={value}
+        clampValueOnBlur={false}
+        onChange={(value) => {
+          console.log("[sb2] Change", value);
           setValue(value);
         }}
       />
