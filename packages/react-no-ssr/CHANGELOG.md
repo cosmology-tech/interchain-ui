@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react-no-ssr@0.1.6...@interchain-ui/react-no-ssr@0.1.7) (2024-07-08)
+
+**Note:** Version bump only for package @interchain-ui/react-no-ssr
+
 ## [0.1.6](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react-no-ssr@0.1.5...@interchain-ui/react-no-ssr@0.1.6) (2024-06-21)
 
 ### Bug Fixes
