@@ -69,7 +69,7 @@ function useMeasure() {
     {
       width: number;
       height: number;
-    }
+    },
   ];
 }
 
@@ -77,6 +77,7 @@ export interface SelectProps {
   id?: string | undefined;
   fullWidth?: boolean;
   width?: number | string;
+  optionsWidth?: number | string;
   size?: "sm" | "md" | "lg";
   label?: React.ReactNode;
   placeholder?: string;
@@ -98,7 +99,7 @@ export default function Select(props: SelectProps) {
   const [selectedItem, setSelectedItem] = React.useState<Item | null>(null);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const isControlled = React.useRef<boolean>(
-    typeof props.selectedIndex !== "undefined"
+    typeof props.selectedIndex !== "undefined",
   );
 
   const { refs, floatingStyles, context } = useFloating({
@@ -138,7 +139,7 @@ export default function Select(props: SelectProps) {
         label: optionLabel,
       });
     },
-    [elementsRef, handleSelect]
+    [elementsRef, handleSelect],
   );
 
   React.useEffect(() => {
@@ -180,7 +181,7 @@ export default function Select(props: SelectProps) {
   const role = useRole(context, { role: "listbox" });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [listNav, typeahead, click, dismiss, role]
+    [listNav, typeahead, click, dismiss, role],
   );
 
   const selectContext: SelectContextValue = React.useMemo(
@@ -190,7 +191,7 @@ export default function Select(props: SelectProps) {
       getItemProps,
       handleSelect,
     }),
-    [activeIndex, selectedItem, getItemProps, handleSelect]
+    [activeIndex, selectedItem, getItemProps, handleSelect],
   );
 
   return (
@@ -199,7 +200,7 @@ export default function Select(props: SelectProps) {
       className={clx(
         selectRoot,
         props.fullWidth ? selectFullWidth : null,
-        props.className
+        props.className,
       )}
     >
       {props.label ? (
@@ -249,7 +250,9 @@ export default function Select(props: SelectProps) {
                   ref={wrapperRef}
                   className={clx(listboxStyle[theme], themeClass)}
                   style={assignInlineVars({
-                    [listBoxWidthVar]: `max(${measureRect.width}px, ${DEFAULT_LIST_WIDTH}px)`,
+                    [listBoxWidthVar]: props.optionsWidth
+                      ? `${props.optionsWidth}px`
+                      : `max(${measureRect.width}px, ${DEFAULT_LIST_WIDTH}px)`,
                   })}
                   {...getFloatingProps({
                     onKeyDown(e) {

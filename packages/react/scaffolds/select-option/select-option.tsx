@@ -8,6 +8,7 @@ import { SelectContext } from "../select/select.context";
 export interface SelectOptionProps {
   optionKey: string;
   label: string;
+  isDisabled?: boolean;
   children?: React.ReactNode;
   className?: string;
 }
@@ -29,6 +30,7 @@ export default function SelectOption(props: SelectOptionProps) {
       aria-selected={isActive && isSelected}
       data-select-key={props.optionKey}
       data-select-label={props.label}
+      disabled={props.isDisabled}
       tabIndex={isActive ? 0 : -1}
       className={clx(baseButton, props.className)}
       style={{
@@ -47,7 +49,9 @@ export default function SelectOption(props: SelectOptionProps) {
           }),
       })}
     >
-      <ListItem isActive={isActive}>{props.children ?? props.label}</ListItem>
+      <ListItem isDisabled={props.isDisabled} isActive={isActive}>
+        {props.children ?? props.label}
+      </ListItem>
     </button>
   );
 }

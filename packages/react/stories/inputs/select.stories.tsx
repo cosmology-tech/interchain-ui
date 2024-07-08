@@ -22,17 +22,18 @@ export const Default: Story = {
     <Box width="30" height="700px">
       <Select
         width={300}
-        defaultSelectedItem={{
-          key: "Dog",
-          label: "Dog",
-          index: 2,
-        }}
+        optionsWidth={500}
+        // defaultSelectedItem={{
+        //   key: "Dog",
+        //   label: "Dog",
+        //   index: 2,
+        // }}
         label="Favorite Animal"
       >
         <SelectOption optionKey="Red Panda" label="Red Panda">
           Red Panda
         </SelectOption>
-        <SelectOption optionKey="Cat" label="Cat">
+        <SelectOption optionKey="Cat" label="Cat" isDisabled>
           Cat
         </SelectOption>
         <SelectOption optionKey="Dog" label="Dog">
