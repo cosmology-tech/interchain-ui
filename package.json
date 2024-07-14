@@ -63,6 +63,7 @@
     "@react-stately/numberfield": "^3.9.3",
     "@swc/helpers": "^0.5.11",
     "@types/animejs": "^3.1.12",
+    "@types/culori": "^2.1.1",
     "@types/node": "^20.14.9",
     "@types/react": "latest",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
@@ -108,6 +109,7 @@
     "vue-tsc": "^2.0.26"
   },
   "dependencies": {
+    "@builder.io/mitosis": "^0.3.9",
     "@floating-ui/core": "^1.6.4",
     "@floating-ui/dom": "^1.6.7",
     "@types/lodash": "^4.17.7",
@@ -117,6 +119,7 @@
     "animejs": "^3.2.2",
     "bignumber.js": "^9.1.2",
     "clsx": "^2.1.1",
+    "culori": "^4.0.1",
     "immer": "^10.1.1",
     "vue": "^3.4.31",
     "zustand": "^4.5.4"
