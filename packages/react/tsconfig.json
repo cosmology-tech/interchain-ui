@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "strict": false,
-    "types": ["node", "react"],
+    "types": ["vite/client", "node", "react"],
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
