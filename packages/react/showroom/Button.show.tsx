@@ -24,7 +24,9 @@ export const DefaultButton: Story<{
     >
       {props.label}
     </Button>
-    <Box as="pre" py="$10">
+
+    <Box as="pre" py="$10" color="$text">
+      <br />
       {JSON.stringify(props, null, 2)}
     </Box>
   </Box>
@@ -34,23 +36,23 @@ DefaultButton.args = {
   label: "Hello world",
   disabled: false,
   size: "md",
-  variant: "solid",
-  intent: "primary",
+  variant: "primary",
+  intent: "none",
 };
 
 DefaultButton.argTypes = {
   variant: {
-    options: ["solid", "outlined", "link", "ghost", "unstyled"],
-    control: { type: "select" },
-    defaultValue: "solid",
-  },
-  intent: {
-    options: ["primary", "secondary", "text", "warning", "success", "danger"],
+    options: ["primary", "secondary", "unstyled"] as ButtonVariant[],
     control: { type: "select" },
     defaultValue: "primary",
   },
+  intent: {
+    options: ["none", "warning", "success", "danger"] as ButtonIntent[],
+    control: { type: "select" },
+    defaultValue: "none",
+  },
   size: {
-    options: ["xs", "sm", "md", "lg"],
+    options: ["xs", "sm", "md", "lg"] as ButtonSize[],
     control: { type: "select" },
     defaultValue: "md",
   },

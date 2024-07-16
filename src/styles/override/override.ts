@@ -18,7 +18,6 @@ import {
 import type { ThemeContractValues } from "../../styles/themes.css";
 
 // ====
-import { buttonOverrides } from "../../ui/button/button.helper";
 import { clipboardCopyTextOverrides } from "../../ui/clipboard-copy-text/clipboard-copy-text.helper";
 import { connectModalOverrides } from "../../ui/connect-modal/connect-modal.helper";
 import { connectModalHeadTitleOverrides } from "../../ui/connect-modal-head/connect-modal-head.helper";
@@ -42,7 +41,6 @@ import {
 // to be able to override styles
 const overrideSchemas: Record<OverridableComponents, ComponentOverrideSchema> =
   {
-    button: buttonOverrides,
     "clipboard-copy-text": clipboardCopyTextOverrides,
     "connect-modal": connectModalOverrides,
     "connect-modal-head-title": connectModalHeadTitleOverrides,
