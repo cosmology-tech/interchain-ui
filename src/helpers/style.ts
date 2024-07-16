@@ -1,5 +1,4 @@
 import { globalStyle, GlobalStyleRule } from "@vanilla-extract/css";
-import { CSSVarFunction } from "@vanilla-extract/private";
 import { Writable } from "type-fest";
 import { store } from "../models/store";
 import {
@@ -19,7 +18,7 @@ const hexToRgb = (hex: string) => {
   const channels = hex
     .replace(
       /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
-      (m, r, g, b) => "#" + r + r + g + g + b + b
+      (m, r, g, b) => "#" + r + r + g + g + b + b,
     )
     .substring(1)
     .match(/.{2}/g)
@@ -27,7 +26,7 @@ const hexToRgb = (hex: string) => {
   return `rgb(${channels[0]}, ${channels[1]}, ${channels[2]})`;
 };
 
-export const rgb = (color: string, alpha?: CSSVarFunction | string) => {
+export const rgb = (color: string, alpha?: string) => {
   const rgbColor = color.includes("rgb") ? color : hexToRgb(color);
   // 'rgb(x, y, z)' -> 'x, y, z'
   const partial = rgbColor.replace("rgb(", "").replace(")", "");
@@ -63,7 +62,7 @@ const isValidThemeMode = (mode: ModePreference) => {
 // Resolve theme mode by priority:
 // props.defaultProps > saved theme > system theme
 export const resolveThemeMode = (
-  defaultThemeMode?: ModePreference
+  defaultThemeMode?: ModePreference,
 ): ModePreference => {
   const hasHydrated = store.getState()._hasHydrated;
 
@@ -100,9 +99,21 @@ export const isPreferDarkMode = () =>
 export function childSelectors(
   styleVariantsSelector: string,
   selector: string,
-  rule: GlobalStyleRule
+  rule: GlobalStyleRule,
 ) {
   const allSelectors = Array.from(new Set(styleVariantsSelector.split(" ")));
   const targetSelector = allSelectors[allSelectors.length - 1];
   globalStyle(`${targetSelector} ${selector}`, rule);
+}
+
+export function generateEmptyStringObject<T>(obj: T): {
+  [K in keyof T]: string;
+} {
+  return Object.keys(obj).reduce(
+    (acc, key) => {
+      acc[key as keyof T] = "";
+      return acc;
+    },
+    {} as { [K in keyof T]: string },
+  );
 }
