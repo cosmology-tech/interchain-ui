@@ -118,5 +118,6 @@
       "enhancement": "Enhancement",
       "chore": "Chore"
     }
-  }
+  },
+  "packageManager": "pnpm@9.5.0"
 }

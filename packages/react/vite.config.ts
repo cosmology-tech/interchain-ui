@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import path from "node:path";
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 const aliases = ["ui", "styles", "models", "helpers"];
