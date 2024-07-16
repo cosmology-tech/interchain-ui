@@ -109,3 +109,15 @@ export function childSelectors(
   const targetSelector = allSelectors[allSelectors.length - 1];
   globalStyle(`${targetSelector} ${selector}`, rule);
 }
+
+export function generateEmptyStringObject<T>(obj: T): {
+  [K in keyof T]: string;
+} {
+  return Object.keys(obj).reduce(
+    (acc, key) => {
+      acc[key as keyof T] = "";
+      return acc;
+    },
+    {} as { [K in keyof T]: string },
+  );
+}
