@@ -19496,6 +19496,10 @@ packages:
       "@rsbuild/core":
         optional: true
 
+  run-applescript@7.0.0:
+    resolution: {integrity: sha512-9by4Ij99JUr/MCFBUkDKLWK3G9HVXmabKz9U5MlIAIuvuzkiOicRYs8XJLxX+xahD+mLiiCYDqF9dKAgtzKP1A==}
+    engines: {node: '>=18'}
+
   run-async@2.4.1:
     resolution:
       {
@@ -39531,6 +39535,8 @@ snapshots:
       html-minifier-terser: 7.2.0
     optionalDependencies:
       "@rsbuild/core": 0.6.15
+
+  run-applescript@7.0.0: {}
 
   run-async@2.4.1: {}
 
