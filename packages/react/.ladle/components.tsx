@@ -18,6 +18,7 @@ export const Provider: GlobalProvider = ({
         justifyContent="flex-end"
         alignItems="center"
         color="$text"
+        paddingBottom="$6"
       >
         <Text as="h1">Theme: {globalState.theme}</Text>
 
