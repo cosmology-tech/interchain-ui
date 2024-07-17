@@ -28,7 +28,7 @@ export default function TextFieldAddon(props: TextFieldAddonProps) {
         textFieldAddonSizes[props.size],
         textFieldAddonPositions[props.position],
         props.divider ? textFieldAddonDivider[props.position] : null,
-        props.className
+        props.className,
       )}
     >
       {props.children}

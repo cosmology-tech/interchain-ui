@@ -2,11 +2,7 @@ import { style, createVar, ComplexStyleRule } from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { ThemeVariant } from "../../models/system.model";
 import { themeVars } from "../../styles/themes.css";
-import {
-  ButtonIntent,
-  ButtonVariant,
-  ButtonSize,
-} from "../../ui/button/button.types";
+import { ButtonIntent, ButtonVariant, ButtonSize } from "./button.types";
 import {
   buttonVariants,
   buttonIntents,
@@ -258,18 +254,18 @@ const getVariantStyleKey = (
   variant: ButtonVariant,
   property: ButtonVariantProperty,
 ) => {
-  return `button-${variant}-${property}` as ButtonVarKeys;
+  return `button-${variant}-${property}` satisfies ButtonVarKeys;
 };
 
 const getIntentStyleKey = (
   intent: ButtonIntent,
   property: ButtonIntentProperty,
 ) => {
-  return `button-${intent}-${property}` as ButtonVarKeys;
+  return `button-${intent}-${property}` satisfies ButtonVarKeys;
 };
 
 const getSizeStyleKey = (size: ButtonSize, property: ButtonSizeProperty) => {
-  return `button-${size}-${property}` as ButtonVarKeys;
+  return `button-${size}-${property}` satisfies ButtonVarKeys;
 };
 
 const getVarFromTheme = ({
