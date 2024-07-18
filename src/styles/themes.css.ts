@@ -19,7 +19,6 @@ import {
   baseLightPalettes,
   baseDarkPalettes,
 } from "./tokens";
-import { slotVars } from "./theme-builder/contract";
 
 const fontInterName = "Inter";
 
@@ -324,7 +323,6 @@ export const themeContractTemplate = {
     error900: "",
     error950: "",
   },
-  slotThemes: slotVars,
 } as const;
 
 export type ThemeContractValues = typeof themeContractTemplate;
@@ -415,7 +413,6 @@ export const lightThemeClass = createTheme(themeVars, {
     ...colors,
   },
   palettes: baseLightPalettes,
-  slotThemes: slotVars,
 });
 
 export const darkThemeClass = createTheme(themeVars, {
@@ -484,7 +481,6 @@ export const darkThemeClass = createTheme(themeVars, {
     ...colors,
   },
   palettes: baseDarkPalettes,
-  slotThemes: slotVars,
 });
 
 export const meshLightThemeClass = createTheme(themeVars, {
@@ -566,7 +562,6 @@ export const meshLightThemeClass = createTheme(themeVars, {
     gray900: "#0C0C0D",
   },
   palettes: baseLightPalettes,
-  slotThemes: slotVars,
 });
 
 export const meshDarkThemeClass = createTheme(themeVars, {
@@ -648,7 +643,6 @@ export const meshDarkThemeClass = createTheme(themeVars, {
     gray900: "#0C0C0D",
   },
   palettes: baseDarkPalettes,
-  slotThemes: slotVars,
 });
 
 export const nobleLightThemeClass = createTheme(themeVars, {
@@ -739,7 +733,6 @@ export const nobleLightThemeClass = createTheme(themeVars, {
     gray900: "#F6F6FE",
   },
   palettes: baseLightPalettes,
-  slotThemes: slotVars,
 });
 
 export const nobleDarkThemeClass = createTheme(themeVars, {
@@ -830,5 +823,4 @@ export const nobleDarkThemeClass = createTheme(themeVars, {
     gray900: "#F6F6FE",
   },
   palettes: baseDarkPalettes,
-  slotThemes: slotVars,
 });

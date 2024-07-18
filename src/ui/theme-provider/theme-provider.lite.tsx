@@ -6,18 +6,13 @@ import {
   useRef,
   useMetadata,
 } from "@builder.io/mitosis";
+import clsx from "clsx";
 import isEqual from "lodash/isEqual";
-import {
-  mediaQueryColorScheme,
-  resolveThemeMode,
-  getAccent,
-  getAccentText,
-} from "../../helpers/style";
+import { mediaQueryColorScheme, resolveThemeMode } from "../../helpers/style";
 import { lightThemeClass, darkThemeClass } from "../../styles/themes.css";
 import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
 import { ThemeVariant } from "../../models/system.model";
-import { assignThemeVars } from "../../styles/override/override";
 import type { ThemeDef } from "../../styles/override/override.types";
 import type { ThemeProviderProps } from "./theme-provider.types";
 
@@ -29,6 +24,7 @@ useMetadata({
 
 export default function ThemeProvider(props: ThemeProviderProps) {
   let cleanupRef = useRef<() => void>(null);
+  let themeProviderRef = useRef<HTMLDivElement | null>(null);
 
   const state = useStore<{
     lightQuery: any;
@@ -45,11 +41,21 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     // Local custom theme state for nested themes
     localCustomTheme: string | null;
     localThemeDefs: Array<ThemeDef>;
+    applySlotVars: (el: HTMLElement) => void;
   }>({
     preferredMode: null,
     isMounted: false,
     localCustomTheme: null,
     localThemeDefs: [],
+    applySlotVars(el) {
+      if (!themeProviderRef || !props.themeBuilderConfig) {
+        return;
+      }
+
+      const currentTheme = state.theme;
+      const varsApplier = props.themeBuilderConfig[currentTheme ?? "light"];
+      varsApplier(el);
+    },
     get isControlled() {
       return props.themeMode != null;
     },
@@ -124,6 +130,13 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     }
   }, [props.themeDefs]);
 
+  // Custom theme in controlled mode
+  onUpdate(() => {
+    if (state.isControlled) {
+      state.storeState.setThemeMode(props.themeMode);
+    }
+  }, [state.isControlled, props.themeMode]);
+
   // Handle select customTheme
   onUpdate(() => {
     if (!props.customTheme) return;
@@ -132,36 +145,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     state.storeState.setCustomTheme(props.customTheme);
   }, [props.customTheme]);
 
-  onUpdate(() => {
-    const overrideStyleManager = state.storeState.overrideStyleManager;
-    if (!overrideStyleManager) return;
-    overrideStyleManager.update(props.overrides, null);
-  }, [props.overrides]);
-
-  onUpdate(() => {
-    // Skip if accent is not provided
-    if (!props.accent) return;
-
-    const prevAccent = state.storeState.themeAccent;
-    const currentColorMode = state.storeState.theme;
-
-    if (prevAccent !== props.accent) {
-      state.storeState.setThemeAccent(props.accent ?? "blue");
-
-      assignThemeVars(
-        {
-          colors: {
-            // @ts-ignore
-            accent: getAccent(props.accent, currentColorMode ?? "light"),
-            // @ts-ignore
-            accentText: getAccentText(currentColorMode ?? "light"),
-          },
-        },
-        currentColorMode,
-      );
-    }
-  }, [props.accent]);
-
+  // Update theme on media query change
   onMount(() => {
     state.isMounted = true;
 
@@ -181,6 +165,8 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       }
     };
 
+    state.applySlotVars(themeProviderRef);
+
     if (state.darkQuery && state.lightQuery) {
       if (
         typeof state.darkQuery.addEventListener === "function" &&
@@ -197,6 +183,10 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     };
   });
 
+  onUpdate(() => {
+    state.applySlotVars(themeProviderRef);
+  }, [state.theme, props.themeMode]);
+
   onUnMount(() => {
     if (typeof cleanupRef === "function") {
       cleanupRef();
@@ -205,14 +195,15 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   return (
     <div
+      ref={themeProviderRef}
       data-is-controlled={state.isControlled}
       data-interchain-theme-mode={
         props.themeMode == null ? undefined : props.themeMode
       }
+      className={state.themeClass}
       style={{
         visibility: state.isMounted ? "visible" : "hidden",
       }}
-      className={state.themeClass}
     >
       {props.children}
     </div>

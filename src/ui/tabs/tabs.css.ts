@@ -11,7 +11,8 @@ import {
   TabVariantProperty,
   TabSizeProperty,
   TabsVarKeys,
-} from "./tabs.vars";
+} from "./tabs.vars.css";
+import { slotVars } from "../../styles/theme-builder/slot-vars.css";
 
 export const pillSelectionBgVar = createVar();
 export const tabTextFontSizeVar = createVar();
@@ -129,7 +130,7 @@ const getVarFromTheme = ({
     const varKey = getVariantStyleKey(variant, property as TabVariantProperty);
 
     return (
-      themeVars.slotThemes[varKey] ??
+      slotVars[varKey] ??
       fallbackVariantScheme[variant][property as TabVariantProperty]
     );
   }
@@ -137,8 +138,7 @@ const getVarFromTheme = ({
   if (size) {
     const varKey = getSizeStyleKey(size, property as TabSizeProperty);
     return (
-      themeVars.slotThemes[varKey] ??
-      defaultSizeScheme[size][property as TabSizeProperty]
+      slotVars[varKey] ?? defaultSizeScheme[size][property as TabSizeProperty]
     );
   }
 
@@ -159,7 +159,7 @@ export const tabsPill = recipe({
       (acc, size) => {
         const getValue = (property: TabSizeProperty) => {
           return (
-            themeVars.slotThemes[getSizeStyleKey(size, property)] ??
+            slotVars[getSizeStyleKey(size, property)] ??
             defaultSizeScheme[size][property]
           );
         };
@@ -271,7 +271,7 @@ export const tabsLine = recipe({
       (acc, size) => {
         const getValue = (property: TabSizeProperty) => {
           return (
-            themeVars.slotThemes[getSizeStyleKey(size, property)] ??
+            slotVars[getSizeStyleKey(size, property)] ??
             defaultSizeScheme[size][property]
           );
         };
@@ -283,7 +283,7 @@ export const tabsLine = recipe({
           paddingRight: getValue("paddingX"),
           paddingTop: getValue("paddingY"),
           paddingBottom: getValue("paddingY"),
-          height: getValue("height"),
+          height: themeVars.space["14"],
         };
 
         return acc;

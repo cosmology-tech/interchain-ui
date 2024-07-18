@@ -1,4 +1,9 @@
-import { style, createVar, ComplexStyleRule } from "@vanilla-extract/css";
+import {
+  style,
+  createVar,
+  fallbackVar,
+  ComplexStyleRule,
+} from "@vanilla-extract/css";
 import { recipe, RecipeVariants } from "@vanilla-extract/recipes";
 import { ThemeVariant } from "../../models/system.model";
 import { themeVars } from "../../styles/themes.css";
@@ -14,7 +19,8 @@ import {
   ButtonSizeProperty,
   ButtonVarKeys,
   buttonSizes,
-} from "./button.vars";
+} from "./button.vars.css";
+import { slotVars } from "../../styles/theme-builder/slot-vars.css";
 
 export const buttonBgVar = createVar();
 export const buttonTextColorVar = createVar();
@@ -290,26 +296,26 @@ const getVarFromTheme = ({
       property as ButtonVariantProperty,
     );
 
-    return (
-      themeVars.slotThemes[varKey] ??
-      fallbackVariantScheme[variant][property as ButtonVariantProperty]
+    return fallbackVar(
+      slotVars[varKey],
+      fallbackVariantScheme[variant][property as ButtonVariantProperty],
     );
   }
 
   if (intent) {
     const varKey = getIntentStyleKey(intent, property as ButtonIntentProperty);
 
-    return (
-      themeVars.slotThemes[varKey] ??
-      defaultColorScheme[intent][property as ButtonIntentProperty]
+    return fallbackVar(
+      slotVars[varKey],
+      defaultColorScheme[intent][property as ButtonIntentProperty],
     );
   }
 
   if (size) {
     const varKey = getSizeStyleKey(size, property as ButtonSizeProperty);
-    return (
-      themeVars.slotThemes[varKey] ??
-      defaultSizeScheme[size][property as ButtonSizeProperty]
+    return fallbackVar(
+      slotVars[varKey],
+      defaultSizeScheme[size][property as ButtonSizeProperty],
     );
   }
 
@@ -322,9 +328,9 @@ export const button = recipe({
     variant: buttonVariants.reduce(
       (acc, variant) => {
         const getValue = (property: ButtonVariantProperty) => {
-          return (
-            themeVars.slotThemes[getVariantStyleKey(variant, property)] ??
-            defaultVariantScheme[variant][property]
+          return fallbackVar(
+            slotVars[getVariantStyleKey(variant, property)],
+            defaultVariantScheme[variant][property],
           );
         };
 
@@ -349,9 +355,9 @@ export const button = recipe({
     size: buttonSizes.reduce(
       (acc, size) => {
         const getValue = (property: ButtonSizeProperty) => {
-          return (
-            themeVars.slotThemes[getSizeStyleKey(size, property)] ??
-            defaultSizeScheme[size][property]
+          return fallbackVar(
+            slotVars[getSizeStyleKey(size, property)],
+            defaultSizeScheme[size][property],
           );
         };
 

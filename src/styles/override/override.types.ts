@@ -1,5 +1,5 @@
 import { createVar } from "@vanilla-extract/css";
-import { themeContractTemplate } from "../../styles/theme-builder/contract";
+import { themeContractTemplate } from "../themes.css";
 import type { LiteralUnion, PartialDeep } from "type-fest";
 import type { DeepStringConstructor } from "../../helpers/types";
 
