@@ -8,12 +8,7 @@ import {
 } from "@builder.io/mitosis";
 import clsx from "clsx";
 import { isEqual } from "lodash";
-import {
-  mediaQueryColorScheme,
-  resolveThemeMode,
-  getAccent,
-  getAccentText,
-} from "../../helpers/style";
+import { mediaQueryColorScheme, resolveThemeMode } from "../../helpers/style";
 import { lightThemeClass, darkThemeClass } from "../../styles/themes.css";
 import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
