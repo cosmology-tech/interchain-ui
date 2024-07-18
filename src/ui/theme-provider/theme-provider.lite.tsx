@@ -6,7 +6,6 @@ import {
   useRef,
   useMetadata,
 } from "@builder.io/mitosis";
-import clsx from "clsx";
 import isEqual from "lodash/isEqual";
 import { mediaQueryColorScheme, resolveThemeMode } from "../../helpers/style";
 import { lightThemeClass, darkThemeClass } from "../../styles/themes.css";

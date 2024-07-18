@@ -1,4 +1,9 @@
-import { style, createVar, ComplexStyleRule } from "@vanilla-extract/css";
+import {
+  style,
+  createVar,
+  fallbackVar,
+  ComplexStyleRule,
+} from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { ThemeVariant } from "../../models/system.model";
 import { themeVars } from "../../styles/themes.css";
@@ -129,16 +134,18 @@ const getVarFromTheme = ({
 
     const varKey = getVariantStyleKey(variant, property as TabVariantProperty);
 
-    return (
-      slotVars[varKey] ??
-      fallbackVariantScheme[variant][property as TabVariantProperty]
+    return fallbackVar(
+      slotVars[varKey],
+      fallbackVariantScheme[variant][property as TabVariantProperty],
     );
   }
 
   if (size) {
     const varKey = getSizeStyleKey(size, property as TabSizeProperty);
-    return (
-      slotVars[varKey] ?? defaultSizeScheme[size][property as TabSizeProperty]
+
+    return fallbackVar(
+      slotVars[varKey],
+      defaultSizeScheme[size][property as TabSizeProperty],
     );
   }
 
@@ -158,9 +165,9 @@ export const tabsPill = recipe({
     size: tabSizes.reduce(
       (acc, size) => {
         const getValue = (property: TabSizeProperty) => {
-          return (
-            slotVars[getSizeStyleKey(size, property)] ??
-            defaultSizeScheme[size][property]
+          return fallbackVar(
+            slotVars[getSizeStyleKey(size, property)],
+            defaultSizeScheme[size][property],
           );
         };
 
