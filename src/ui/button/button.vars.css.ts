@@ -1,8 +1,6 @@
-import {
-  ButtonIntent,
-  ButtonSize,
-  ButtonVariant,
-} from "../../ui/button/button.types";
+import { ButtonIntent, ButtonSize, ButtonVariant } from "./button.types";
+import { createVar } from "@vanilla-extract/css";
+import { StringifyValues } from "../../helpers/types";
 
 export const buttonSizes: ButtonSize[] = ["xs", "sm", "md", "lg"] as const;
 export const buttonVariants: ButtonVariant[] = [
@@ -26,62 +24,66 @@ const buttonStates = [
 
 export type ButtonState = (typeof buttonStates)[number];
 
-export interface ButtonIntentProperties {
+const intentProps = {
   // Default state
-  bgColor: string;
-  textColor: string;
-  borderColor: string;
+  bgColor: "",
+  textColor: "",
+  borderColor: "",
   // Hover state
-  hoverBgColor: string;
-  hoverTextColor: string;
-  hoverBorderColor: string;
+  hoverBgColor: "",
+  hoverTextColor: "",
+  hoverBorderColor: "",
   // Active state
-  activeBgColor: string;
-  activeTextColor: string;
-  activeBorderColor: string;
+  activeBgColor: "",
+  activeTextColor: "",
+  activeBorderColor: "",
   // Disabled state
-  disabledBgColor: string;
-  disabledTextColor: string;
-  disabledBorderColor: string;
-}
+  disabledBgColor: "",
+  disabledTextColor: "",
+  disabledBorderColor: "",
+} as const;
 
-export interface ButtonVariantProperties {
+const variantProps = {
   // Default state
-  bgColor: string;
-  textColor: string;
-  borderColor: string;
-  borderStyle: string;
-  borderRadius: string;
-  borderWidth: string;
-  boxShadow: string;
+  bgColor: "",
+  textColor: "",
+  borderColor: "",
+  borderStyle: "",
+  borderRadius: "",
+  borderWidth: "",
+  boxShadow: "",
   // Hover state
-  hoverBgColor: string;
-  hoverTextColor: string;
-  hoverBorderColor: string;
-  hoverBorderRadius: string;
-  hoverBorderWidth: string;
+  hoverBgColor: "",
+  hoverTextColor: "",
+  hoverBorderColor: "",
+  hoverBorderRadius: "",
+  hoverBorderWidth: "",
   // Active state
-  activeBgColor: string;
-  activeTextColor: string;
-  activeBorderColor: string;
-  activeBorderRadius: string;
-  activeBorderWidth: string;
+  activeBgColor: "",
+  activeTextColor: "",
+  activeBorderColor: "",
+  activeBorderRadius: "",
+  activeBorderWidth: "",
   // Disabled state
-  disabledBgColor: string;
-  disabledTextColor: string;
-  disabledBorderColor: string;
-  disabledBorderRadius: string;
-  disabledBorderWidth: string;
-}
+  disabledBgColor: "",
+  disabledTextColor: "",
+  disabledBorderColor: "",
+  disabledBorderRadius: "",
+  disabledBorderWidth: "",
+} as const;
 
-export interface ButtonSizeProperties {
-  fontSize: string;
-  fontWeight: string;
-  paddingX: string;
-  paddingY: string;
-  height: string;
-  minWidth: string;
-}
+const sizeProps = {
+  fontSize: "",
+  fontWeight: "",
+  paddingX: "",
+  paddingY: "",
+  height: "",
+  minWidth: "",
+} as const;
+
+export type ButtonIntentProperties = StringifyValues<typeof intentProps>;
+export type ButtonVariantProperties = StringifyValues<typeof variantProps>;
+export type ButtonSizeProperties = StringifyValues<typeof sizeProps>;
 
 export type ButtonIntentProperty = keyof ButtonIntentProperties;
 export type ButtonVariantProperty = keyof ButtonVariantProperties;
@@ -109,29 +111,28 @@ export type ButtonVars = {
 export function generateButtonVars() {
   const buttonVars = {} as ButtonVars;
 
+  // return buttonVars;
   // Generate intent-based variables
   buttonIntents.forEach((intent) => {
-    Object.keys({} as Record<ButtonIntentProperty, string>).forEach(
-      (colorProp) => {
-        const key = `button-${intent}-${colorProp}` as const;
-        buttonVars[key] = "";
-      },
-    );
+    Object.keys(intentProps).forEach((colorProp) => {
+      const key = `button-${intent}-${colorProp}` as const;
+      buttonVars[key] = createVar();
+    });
   });
 
   // Generate variant-based variables
   buttonVariants.forEach((variant) => {
-    Object.keys({} as Record<ButtonVariantProperty, string>).forEach((prop) => {
+    Object.keys(variantProps).forEach((prop) => {
       const key = `button-${variant}-${prop}` as const;
-      buttonVars[key] = "";
+      buttonVars[key] = createVar();
     });
   });
 
   // Generate size-based variables
   buttonSizes.forEach((size) => {
-    Object.keys({} as Record<ButtonSizeProperty, string>).forEach((prop) => {
+    Object.keys(sizeProps).forEach((prop) => {
       const key = `button-${size}-${prop}` as const;
-      buttonVars[key] = "";
+      buttonVars[key] = createVar();
     });
   });
 

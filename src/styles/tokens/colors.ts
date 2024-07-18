@@ -145,6 +145,27 @@ export const accentsForeground: { [key in ThemeVariant]: string } = {
   dark: "#EEF2F8",
 } as const;
 
+export type PaletteWeight =
+  | "50"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900"
+  | "950";
+
+export type PaletteScale =
+  | "neutral"
+  | "primary"
+  | "success"
+  | "warning"
+  | "error";
+export type PaletteScaleKey = `${PaletteScale}${PaletteWeight}`;
+
 export const baseLightPalettes = {
   neutral50: "#ffffff",
   neutral100: "#f7f9fa",

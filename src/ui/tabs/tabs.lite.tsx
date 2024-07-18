@@ -121,7 +121,9 @@ export default function Tabs(props: TabsProps) {
     });
 
     const cleanupListeners = () => {
-      resizeObserver.unobserve(tabListRef);
+      if (tabListRef && resizeObserver) {
+        resizeObserver.unobserve(tabListRef);
+      }
       window.removeEventListener("resize", handleResize);
     };
 

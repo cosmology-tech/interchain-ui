@@ -6,6 +6,10 @@ export type Resolve<T> = {
 // Utility type to convert string literal types to String constructor
 export type StringifyLeaf<T> = T extends string ? String : T;
 
+export type StringifyValues<T> = {
+  [K in keyof T]: T[K] extends object ? StringifyValues<T[K]> : string;
+};
+
 // Recursive type to walk through the object tree
 export type DeepStringConstructor<T> = {
   [P in keyof T]: T[P] extends object

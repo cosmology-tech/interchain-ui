@@ -1,31 +1,36 @@
-import { TabVariant, TabSize } from "../../ui/tabs/tabs.types";
+import { createVar } from "@vanilla-extract/css";
+import { TabVariant, TabSize } from "./tabs.types";
+import { StringifyValues } from "../../helpers/types";
 
 export const tabVariants: TabVariant[] = ["pill", "line"];
 export const tabSizes: TabSize[] = ["sm", "md"];
 
-export interface TabVariantProperties {
+const variantProps = {
   // Default state
-  bgColor: string;
-  textColor: string;
+  bgColor: "",
+  textColor: "",
   // Hover state
-  hoverBgColor: string;
-  hoverTextColor: string;
+  hoverBgColor: "",
+  hoverTextColor: "",
   // Active state
-  activeBgColor: string;
-  activeTextColor: string;
+  activeBgColor: "",
+  activeTextColor: "",
   // Disabled state
-  disabledBgColor: string;
-  disabledTextColor: string;
-}
+  disabledBgColor: "",
+  disabledTextColor: "",
+} as const;
 
-export interface TabSizeProperties {
-  fontSize: string;
-  fontWeight: string;
-  paddingX: string;
-  paddingY: string;
-  height: string;
-  minWidth: string;
-}
+const sizeProps = {
+  fontSize: "",
+  fontWeight: "",
+  paddingX: "",
+  paddingY: "",
+  height: "",
+  minWidth: "",
+} as const;
+
+export type TabVariantProperties = StringifyValues<typeof variantProps>;
+export type TabSizeProperties = StringifyValues<typeof sizeProps>;
 
 export type TabVariantProperty = keyof TabVariantProperties;
 export type TabSizeProperty = keyof TabSizeProperties;
@@ -49,16 +54,16 @@ export function generateTabsVars() {
   const tabsVars = {} as TabsVars;
 
   tabVariants.forEach((variant) => {
-    Object.keys({} as Record<TabVariantProperty, string>).forEach((prop) => {
+    Object.keys(variantProps).forEach((prop) => {
       const key = `tabs-${variant}-${prop}` as const;
-      tabsVars[key] = "";
+      tabsVars[key] = createVar();
     });
   });
 
   tabSizes.forEach((size) => {
-    Object.keys({} as Record<TabSizeProperty, string>).forEach((prop) => {
+    Object.keys(sizeProps).forEach((prop) => {
       const key = `tabs-${size}-${prop}` as const;
-      tabsVars[key] = "";
+      tabsVars[key] = createVar();
     });
   });
 

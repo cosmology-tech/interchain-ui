@@ -3,6 +3,7 @@ import type { UIState } from "../../models/store";
 import type { ThemeDef } from "../../styles/override/override.types";
 import type { ComponentOverrideMap } from "../../styles/override/override.types";
 import type { Accent } from "../../styles/tokens";
+import { ResultThemeVars } from "../../styles/theme-builder/create-theme-builder";
 
 export const DEFAULT_VALUES = {
   defaultTheme: "dark",
@@ -21,4 +22,7 @@ export interface ThemeProviderProps extends BaseComponentProps {
   children?: any;
   themeDefs?: Array<ThemeDef>;
   customTheme?: UIState["customTheme"];
+  // ==== V2 Theme builder
+  // This is the new theme builder API
+  themeBuilderConfig?: ResultThemeVars;
 }
