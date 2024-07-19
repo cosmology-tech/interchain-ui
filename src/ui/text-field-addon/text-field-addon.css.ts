@@ -1,15 +1,34 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { inputBorderVar } from "../text-field/text-field.css";
+import {
+  inputBgVar,
+  inputBorderColorVar,
+  inputBorderRadiusVar,
+  inputBorderWidthVar,
+  zIndexConfig,
+  input,
+  borderFocusedLight,
+  borderFocusedDark,
+} from "../text-field/text-field.css";
 import { themeVars } from "../../styles/themes.css";
 
 export const textFieldAddon = style({
   display: "flex",
   color: "inherit",
+  fontFamily: "inherit",
   fontSize: "inherit",
+  fontWeight: "inherit",
   position: "absolute",
   transitionProperty:
     "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
   transitionDuration: "200ms",
+  background: inputBgVar,
+  zIndex: zIndexConfig.inputAddon,
+  selectors: {
+    [`${input}[data-intent='none'][data-theme='light']:focus-within ~ &`]:
+      borderFocusedLight,
+    [`${input}[data-intent='none'][data-theme='dark']:focus-within ~ &`]:
+      borderFocusedDark,
+  },
 });
 
 export const textFieldAddonPositions = styleVariants({
@@ -18,6 +37,8 @@ export const textFieldAddonPositions = styleVariants({
       right: 0,
       top: 0,
       bottom: 0,
+      borderTopRightRadius: inputBorderRadiusVar,
+      borderBottomRightRadius: inputBorderRadiusVar,
     }),
   ],
   start: [
@@ -25,6 +46,8 @@ export const textFieldAddonPositions = styleVariants({
       left: 0,
       top: 0,
       bottom: 0,
+      borderTopLeftRadius: inputBorderRadiusVar,
+      borderBottomLeftRadius: inputBorderRadiusVar,
     }),
   ],
 });
@@ -51,16 +74,16 @@ export const textFieldAddonSizes = styleVariants({
 export const textFieldAddonDivider = styleVariants({
   end: [
     style({
-      borderLeftWidth: "1px",
+      borderLeftWidth: inputBorderWidthVar,
       borderLeftStyle: "solid",
-      borderLeftColor: inputBorderVar,
+      borderLeftColor: inputBorderColorVar,
     }),
   ],
   start: [
     style({
-      borderRightWidth: "1px",
+      borderRightWidth: inputBorderWidthVar,
       borderRightStyle: "solid",
-      borderRightColor: inputBorderVar,
+      borderRightColor: inputBorderColorVar,
     }),
   ],
 });

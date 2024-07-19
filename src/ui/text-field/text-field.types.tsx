@@ -81,16 +81,19 @@ export const defaultInputModesForType: Record<
   url: "url",
 };
 
+export type TextFieldSize = "sm" | "md";
+export type TextFieldIntent = "none" | "error";
+
 export interface TextFieldProps extends BaseComponentProps, FieldBaseProps {
   value: string;
   type?: keyof typeof validTypes;
   inputMode?: InputMode;
-  intent?: "default" | "error";
+  intent?: TextFieldIntent;
   onChange?: (e: any) => void;
   onBlur?: (e?: any) => void;
   onFocus?: (e?: any) => void;
   onClear?: (event?: any) => void;
-  size?: "sm" | "md";
+  size?: TextFieldSize;
   placeholder?: string | undefined;
   label?: Children | undefined;
   clearLabel?: string;

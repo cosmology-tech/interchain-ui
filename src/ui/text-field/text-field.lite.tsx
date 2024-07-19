@@ -13,16 +13,7 @@ import FieldLabel from "../field-label";
 import TextFieldAddon from "../text-field-addon";
 import Icon from "../icon";
 import { store } from "../../models/store";
-import {
-  inputStyles,
-  inputSizes,
-  inputIntent,
-  inputRootIntent,
-  clearIcon,
-  rootInput,
-  rootInputFocused,
-  clearButton,
-} from "./text-field.css";
+import * as styles from "./text-field.css";
 import { validTypes, defaultInputModesForType } from "./text-field.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { TextFieldProps } from "./text-field.types";
@@ -88,25 +79,35 @@ export default function TextField(props: TextFieldProps) {
 
       <div
         className={clx(
-          rootInput,
-          state.isFocused ? rootInputFocused : null,
-          props.disabled
-            ? inputRootIntent.disabled
-            : inputRootIntent[props.intent],
+          styles.textField({
+            intent: props.intent,
+            size: props.size,
+            theme: state.theme,
+          }),
           props.inputContainer,
         )}
+        tabIndex={props.disabled ? undefined : 0}
+        data-intent={props.intent ?? "none"}
+        data-state={
+          state.isFocused ? "focused" : props.disabled ? "disabled" : "default"
+        }
       >
-        <Show when={props.startAddon}>{props.startAddon}</Show>
+        <Show when={props.startAddon}>
+          <TextFieldAddon
+            position="start"
+            divider={true}
+            intent={props.intent}
+            disabled={props.disabled}
+            size={props.size}
+          >
+            {props.startAddon}
+          </TextFieldAddon>
+        </Show>
 
         <input
           {...props.inputAttributes}
           id={props.id}
-          className={clx(
-            inputStyles[state.theme],
-            inputSizes[props.size],
-            props.disabled ? inputIntent.disabled : inputIntent[props.intent],
-            props.inputClassName,
-          )}
+          className={clx(styles.input, props.inputClassName)}
           autocomplete={props.autoComplete}
           autoFocus={props.autoFocus}
           readOnly={props.readonly}
@@ -129,6 +130,21 @@ export default function TextField(props: TextFieldProps) {
           }}
           placeholder={!props.disabled ? props.placeholder : undefined}
           inputMode={props.inputMode || defaultInputModesForType[props.type]}
+          data-intent={props.intent ?? "none"}
+          data-theme={state.theme}
+        />
+
+        <div
+          className={styles.borderElement}
+          data-theme={state.theme}
+          data-intent={props.intent ?? "none"}
+          data-state={
+            state.isFocused
+              ? "focused"
+              : props.disabled
+                ? "disabled"
+                : "default"
+          }
         />
 
         <Show when={state.isClearable}>
@@ -141,15 +157,25 @@ export default function TextField(props: TextFieldProps) {
           >
             <button
               type="button"
-              className={clearButton}
+              className={styles.clearButton}
               onClick={() => props.onClear?.()}
             >
-              <Icon name="close" className={clearIcon} />
+              <Icon name="close" className={styles.clearIcon} />
             </button>
           </TextFieldAddon>
         </Show>
 
-        <Show when={props.endAddon}>{props.endAddon}</Show>
+        <Show when={props.endAddon}>
+          <TextFieldAddon
+            position="end"
+            divider={true}
+            intent={props.intent}
+            disabled={props.disabled}
+            size={props.size}
+          >
+            {props.endAddon}
+          </TextFieldAddon>
+        </Show>
       </div>
     </Stack>
   );
