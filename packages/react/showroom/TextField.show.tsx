@@ -3,12 +3,16 @@ import type { Story } from "@ladle/react";
 import Box from "../src/ui/box";
 import Text from "../src/ui/text";
 import TextField from "../src/ui/text-field";
+import Avatar from "../src/ui/avatar";
 import {
   TextFieldIntent,
   TextFieldSize,
+  TextFieldElementType,
 } from "../src/ui/text-field/text-field.types";
+import COSMOS_LOGO_URL from "../static/networks/Cosmos.png";
 
 export const DefaultTextField: Story<{
+  renderAs: TextFieldElementType;
   width: number;
   label: string;
   placeholder: string;
@@ -22,6 +26,7 @@ export const DefaultTextField: Story<{
     <Box maxWidth={props.width ? `${props.width}px` : "unset"}>
       <TextField
         id="address"
+        as={props.renderAs ?? "input"}
         label={props.label}
         placeholder={props.placeholder}
         disabled={props.disabled}
@@ -29,6 +34,7 @@ export const DefaultTextField: Story<{
         intent={props.intent}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        startAddon={<Avatar src={COSMOS_LOGO_URL} name="cosmos" size="xs" />}
         endAddon={
           <Text fontSize="$sm" color="$textSecondary">
             Autofill
@@ -51,6 +57,7 @@ DefaultTextField.args = {
   size: "sm",
   intent: "none",
   width: 300,
+  renderAs: "input",
 };
 
 DefaultTextField.argTypes = {
@@ -63,6 +70,11 @@ DefaultTextField.argTypes = {
     options: ["sm", "md"] satisfies TextFieldSize[],
     control: { type: "select" },
     defaultValue: "sm",
+  },
+  renderAs: {
+    options: ["input", "textarea"] satisfies TextFieldElementType[],
+    control: { type: "select" },
+    defaultValue: "input",
   },
   width: {
     control: { type: "number" },
