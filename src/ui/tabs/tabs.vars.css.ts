@@ -2,6 +2,7 @@ import { createVar } from "@vanilla-extract/css";
 import { TabVariant, TabSize } from "./tabs.types";
 import { StringifyValues } from "../../helpers/types";
 
+export const tabsVarPrefix = "Tabs" as const;
 export const tabVariants: TabVariant[] = ["pill", "line"];
 export const tabSizes: TabSize[] = ["sm", "md"];
 
@@ -43,8 +44,8 @@ export type TabSizeScheme = Partial<
 >;
 
 export type TabsVarKeys =
-  | `tabs-${TabVariant}-${TabVariantProperty}`
-  | `tabs-${TabSize}-${TabSizeProperty}`;
+  | `${typeof tabsVarPrefix}-${TabVariant}-${TabVariantProperty}`
+  | `${typeof tabsVarPrefix}-${TabSize}-${TabSizeProperty}`;
 
 export type TabsVars = {
   [K in TabsVarKeys]: string;
@@ -55,14 +56,16 @@ export function generateTabsVars() {
 
   tabVariants.forEach((variant) => {
     Object.keys(variantProps).forEach((prop) => {
-      const key = `tabs-${variant}-${prop}` as const;
+      const key =
+        `Tabs-${variant}-${prop as TabVariantProperty}` satisfies TabsVarKeys;
       tabsVars[key] = createVar();
     });
   });
 
   tabSizes.forEach((size) => {
     Object.keys(sizeProps).forEach((prop) => {
-      const key = `tabs-${size}-${prop}` as const;
+      const key =
+        `Tabs-${size}-${prop as TabSizeProperty}` satisfies TabsVarKeys;
       tabsVars[key] = createVar();
     });
   });

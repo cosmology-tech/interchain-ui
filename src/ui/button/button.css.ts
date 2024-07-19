@@ -11,6 +11,7 @@ import { ButtonIntent, ButtonVariant, ButtonSize } from "./button.types";
 import {
   buttonVariants,
   buttonIntents,
+  buttonSizes,
   ButtonColorScheme,
   ButtonVariantScheme,
   ButtonSizeScheme,
@@ -18,7 +19,6 @@ import {
   ButtonVariantProperty,
   ButtonSizeProperty,
   ButtonVarKeys,
-  buttonSizes,
 } from "./button.vars.css";
 import { slotVars } from "../../styles/theme-builder/slot-vars.css";
 
@@ -254,72 +254,6 @@ const defaultSizeScheme: ButtonSizeScheme = {
     height: themeVars.space["15"],
     minWidth: themeVars.space["15"],
   },
-};
-
-const getVariantStyleKey = (
-  variant: ButtonVariant,
-  property: ButtonVariantProperty,
-) => {
-  return `button-${variant}-${property}` satisfies ButtonVarKeys;
-};
-
-const getIntentStyleKey = (
-  intent: ButtonIntent,
-  property: ButtonIntentProperty,
-) => {
-  return `button-${intent}-${property}` satisfies ButtonVarKeys;
-};
-
-const getSizeStyleKey = (size: ButtonSize, property: ButtonSizeProperty) => {
-  return `button-${size}-${property}` satisfies ButtonVarKeys;
-};
-
-const getVarFromTheme = ({
-  variant,
-  intent,
-  size,
-  property,
-  theme,
-}: {
-  variant?: ButtonVariant;
-  intent?: ButtonIntent;
-  size?: ButtonSize;
-  property: ButtonVariantProperty | ButtonIntentProperty | ButtonSizeProperty;
-  theme: ThemeVariant;
-}) => {
-  if (variant) {
-    const fallbackVariantScheme =
-      theme === "light" ? defaultVariantScheme : defaultVariantSchemeDark;
-
-    const varKey = getVariantStyleKey(
-      variant,
-      property as ButtonVariantProperty,
-    );
-
-    return fallbackVar(
-      slotVars[varKey],
-      fallbackVariantScheme[variant][property as ButtonVariantProperty],
-    );
-  }
-
-  if (intent) {
-    const varKey = getIntentStyleKey(intent, property as ButtonIntentProperty);
-
-    return fallbackVar(
-      slotVars[varKey],
-      defaultColorScheme[intent][property as ButtonIntentProperty],
-    );
-  }
-
-  if (size) {
-    const varKey = getSizeStyleKey(size, property as ButtonSizeProperty);
-    return fallbackVar(
-      slotVars[varKey],
-      defaultSizeScheme[size][property as ButtonSizeProperty],
-    );
-  }
-
-  return "";
 };
 
 export const button = recipe({
@@ -615,3 +549,70 @@ export const buttonContent = style({
   alignItems: "center",
   zIndex: 1,
 });
+
+// ==== Helpers ====
+function getVariantStyleKey(
+  variant: ButtonVariant,
+  property: ButtonVariantProperty,
+) {
+  return `Button-${variant}-${property}` satisfies ButtonVarKeys;
+}
+
+function getIntentStyleKey(
+  intent: ButtonIntent,
+  property: ButtonIntentProperty,
+) {
+  return `Button-${intent}-${property}` satisfies ButtonVarKeys;
+}
+
+function getSizeStyleKey(size: ButtonSize, property: ButtonSizeProperty) {
+  return `Button-${size}-${property}` satisfies ButtonVarKeys;
+}
+
+function getVarFromTheme({
+  variant,
+  intent,
+  size,
+  property,
+  theme,
+}: {
+  variant?: ButtonVariant;
+  intent?: ButtonIntent;
+  size?: ButtonSize;
+  property: ButtonVariantProperty | ButtonIntentProperty | ButtonSizeProperty;
+  theme: ThemeVariant;
+}) {
+  if (variant) {
+    const fallbackVariantScheme =
+      theme === "light" ? defaultVariantScheme : defaultVariantSchemeDark;
+
+    const varKey = getVariantStyleKey(
+      variant,
+      property as ButtonVariantProperty,
+    );
+
+    return fallbackVar(
+      slotVars[varKey],
+      fallbackVariantScheme[variant][property as ButtonVariantProperty],
+    );
+  }
+
+  if (intent) {
+    const varKey = getIntentStyleKey(intent, property as ButtonIntentProperty);
+
+    return fallbackVar(
+      slotVars[varKey],
+      defaultColorScheme[intent][property as ButtonIntentProperty],
+    );
+  }
+
+  if (size) {
+    const varKey = getSizeStyleKey(size, property as ButtonSizeProperty);
+    return fallbackVar(
+      slotVars[varKey],
+      defaultSizeScheme[size][property as ButtonSizeProperty],
+    );
+  }
+
+  return "";
+}

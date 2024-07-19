@@ -110,11 +110,11 @@ const getVariantStyleKey = (
   variant: TabVariant,
   property: TabVariantProperty,
 ) => {
-  return `tabs-${variant}-${property}` satisfies TabsVarKeys;
+  return `Tabs-${variant}-${property}` satisfies TabsVarKeys;
 };
 
 const getSizeStyleKey = (size: TabSize, property: TabSizeProperty) => {
-  return `tabs-${size}-${property}` satisfies TabsVarKeys;
+  return `Tabs-${size}-${property}` satisfies TabsVarKeys;
 };
 
 const getVarFromTheme = ({
