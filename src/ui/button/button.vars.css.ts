@@ -2,6 +2,7 @@ import { ButtonIntent, ButtonSize, ButtonVariant } from "./button.types";
 import { createVar } from "@vanilla-extract/css";
 import { StringifyValues } from "../../helpers/types";
 
+export const buttonVarPrefix = "Button" as const;
 export const buttonSizes: ButtonSize[] = ["xs", "sm", "md", "lg"] as const;
 export const buttonVariants: ButtonVariant[] = [
   "primary",
@@ -100,9 +101,9 @@ export type ButtonSizeScheme = Partial<
 >;
 
 export type ButtonVarKeys =
-  | `button-${ButtonIntent}-${ButtonIntentProperty}`
-  | `button-${ButtonVariant}-${ButtonVariantProperty}`
-  | `button-${ButtonSize}-${ButtonSizeProperty}`;
+  | `${typeof buttonVarPrefix}-${ButtonIntent}-${ButtonIntentProperty}`
+  | `${typeof buttonVarPrefix}-${ButtonVariant}-${ButtonVariantProperty}`
+  | `${typeof buttonVarPrefix}-${ButtonSize}-${ButtonSizeProperty}`;
 
 export type ButtonVars = {
   [K in ButtonVarKeys]: string;
@@ -111,27 +112,26 @@ export type ButtonVars = {
 export function generateButtonVars() {
   const buttonVars = {} as ButtonVars;
 
-  // return buttonVars;
-  // Generate intent-based variables
   buttonIntents.forEach((intent) => {
-    Object.keys(intentProps).forEach((colorProp) => {
-      const key = `button-${intent}-${colorProp}` as const;
+    Object.keys(intentProps).forEach((prop) => {
+      const key =
+        `${buttonVarPrefix}-${intent}-${prop as ButtonIntentProperty}` satisfies ButtonVarKeys;
       buttonVars[key] = createVar();
     });
   });
 
-  // Generate variant-based variables
   buttonVariants.forEach((variant) => {
     Object.keys(variantProps).forEach((prop) => {
-      const key = `button-${variant}-${prop}` as const;
+      const key =
+        `${buttonVarPrefix}-${variant}-${prop as ButtonVariantProperty}` satisfies ButtonVarKeys;
       buttonVars[key] = createVar();
     });
   });
 
-  // Generate size-based variables
   buttonSizes.forEach((size) => {
     Object.keys(sizeProps).forEach((prop) => {
-      const key = `button-${size}-${prop}` as const;
+      const key =
+        `${buttonVarPrefix}-${size}-${prop as ButtonSizeProperty}` satisfies ButtonVarKeys;
       buttonVars[key] = createVar();
     });
   });
