@@ -3,7 +3,7 @@ import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { IconProps } from "../icon/icon.types";
 
 export type ButtonSize = "xs" | "sm" | "md" | "lg";
-export type ButtonVariant = "primary" | "secondary" | "unstyled";
+export type ButtonVariant = "primary" | "secondary" | "tag" | "unstyled";
 export type ButtonIntent = "none" | "warning" | "success" | "danger";
 
 export interface ButtonProps extends BaseComponentProps {
