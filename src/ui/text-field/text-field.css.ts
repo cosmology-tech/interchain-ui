@@ -17,7 +17,6 @@ import {
   TextFieldSizeProperty,
   TextFieldVarKeys,
 } from "./text-field.vars.css";
-import { textFieldAddon } from "../text-field-addon/text-field-addon.css";
 import { slotVars } from "../../styles/theme-builder/slot-vars.css";
 
 import { unstyledButton } from "../button/button.css";
@@ -34,6 +33,7 @@ export const inputOpacityVar = createVar();
 export const inputHeightVar = createVar();
 export const inputPaddingXVar = createVar();
 export const inputPaddingYVar = createVar();
+export const inputDividerColorVar = createVar();
 
 // Manage z-index values
 export const zIndexConfig = {
@@ -421,6 +421,7 @@ function genCompoundVariants({
         }),
         [inputBoxShadowVar]: varGetter({ intent, property: "boxShadow" }),
         [inputOpacityVar]: varGetter({ intent, property: "opacity" }),
+        [inputDividerColorVar]: varGetter({ intent, property: "borderColor" }),
       },
       selectors: {
         "&:hover": {
