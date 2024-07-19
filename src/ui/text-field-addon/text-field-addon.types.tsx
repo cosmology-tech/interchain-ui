@@ -6,5 +6,4 @@ export interface TextFieldAddonProps extends BaseComponentProps {
   position: "start" | "end";
   intent?: TextFieldProps["intent"];
   disabled?: TextFieldProps["disabled"];
-  size?: TextFieldProps["size"];
 }

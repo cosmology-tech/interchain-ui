@@ -7,7 +7,7 @@ export const fieldlabelStyle = style([
   style({
     lineHeight: "normal",
     fontWeight: themeVars.fontWeight.semibold,
-    color: themeVars.colors.textSecondary,
+    color: themeVars.colors.text,
   }),
 ]);
 

@@ -17,6 +17,7 @@ import {
   TextFieldSizeProperty,
   TextFieldVarKeys,
 } from "./text-field.vars.css";
+import { textFieldAddon } from "../text-field-addon/text-field-addon.css";
 import { slotVars } from "../../styles/theme-builder/slot-vars.css";
 
 import { unstyledButton } from "../button/button.css";
@@ -29,6 +30,10 @@ export const inputBorderRadiusVar = createVar();
 export const inputPlaceholderColorVar = createVar();
 export const inputBoxShadowVar = createVar();
 export const inputOpacityVar = createVar();
+
+export const inputHeightVar = createVar();
+export const inputPaddingXVar = createVar();
+export const inputPaddingYVar = createVar();
 
 // Manage z-index values
 export const zIndexConfig = {
@@ -200,7 +205,7 @@ const defaultSizeScheme: TextFieldSizeScheme = {
   sm: {
     fontSize: themeVars.fontSize.sm,
     fontWeight: themeVars.fontWeight.normal,
-    paddingX: themeVars.space[6],
+    paddingX: themeVars.space[5],
     paddingY: themeVars.space[4],
     height: themeVars.space[14],
     minWidth: "0px",
@@ -208,8 +213,8 @@ const defaultSizeScheme: TextFieldSizeScheme = {
   md: {
     fontSize: themeVars.fontSize.sm,
     fontWeight: themeVars.fontWeight.normal,
-    paddingX: themeVars.space[10],
-    paddingY: themeVars.space[8],
+    paddingX: themeVars.space[5],
+    paddingY: themeVars.space[4],
     height: "70px",
     minWidth: "0px",
   },
@@ -217,6 +222,8 @@ const defaultSizeScheme: TextFieldSizeScheme = {
 
 export const rootInput = style({
   position: "relative",
+  justifyContent: "center",
+  alignItems: "center",
   display: "flex",
   transitionProperty:
     "background-color,border-color,color,fill,stroke,opacity,box-shadow,transform",
@@ -268,6 +275,10 @@ export const input = style({
       WebkitAppearance: "none",
       margin: "0",
     },
+    [`${rootInput}[data-element-type="textarea"] &`]: {
+      resize: "vertical",
+      overflow: "auto",
+    },
   },
 });
 
@@ -318,7 +329,7 @@ export const textField = recipe({
         acc[intent] = {};
         return acc;
       },
-      {} as Record<TextFieldIntent, any>,
+      {} as Record<TextFieldIntent, ComplexStyleRule>,
     ),
     size: textFieldSizes.reduce(
       (acc, size) => {
@@ -336,13 +347,25 @@ export const textField = recipe({
           paddingRight: getValue("paddingX"),
           paddingTop: getValue("paddingY"),
           paddingBottom: getValue("paddingY"),
-          height: getValue("height"),
           minWidth: getValue("minWidth"),
+          vars: {
+            [inputHeightVar]: getValue("height"),
+            [inputPaddingXVar]: getValue("paddingX"),
+            [inputPaddingYVar]: getValue("paddingY"),
+          },
+          selectors: {
+            '&[data-element-type="input"]': {
+              height: getValue("height"),
+            },
+            '&[data-element-type="textarea"]': {
+              minHeight: getValue("height"),
+            },
+          },
         };
 
         return acc;
       },
-      {} as Record<TextFieldSize, any>,
+      {} as Record<TextFieldSize, ComplexStyleRule>,
     ),
     theme: {
       light: {},

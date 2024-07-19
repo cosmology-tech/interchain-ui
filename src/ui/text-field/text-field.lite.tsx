@@ -14,7 +14,11 @@ import TextFieldAddon from "../text-field-addon";
 import Icon from "../icon";
 import { store } from "../../models/store";
 import * as styles from "./text-field.css";
-import { validTypes, defaultInputModesForType } from "./text-field.types";
+import {
+  validTypes,
+  defaultInputModesForType,
+  RenderAsTextareaProps,
+} from "./text-field.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { TextFieldProps } from "./text-field.types";
 
@@ -87,6 +91,7 @@ export default function TextField(props: TextFieldProps) {
           props.inputContainer,
         )}
         tabIndex={props.disabled ? undefined : 0}
+        data-element-type={props.as}
         data-intent={props.intent ?? "none"}
         data-state={
           state.isFocused ? "focused" : props.disabled ? "disabled" : "default"
@@ -98,41 +103,82 @@ export default function TextField(props: TextFieldProps) {
             divider={true}
             intent={props.intent}
             disabled={props.disabled}
-            size={props.size}
           >
             {props.startAddon}
           </TextFieldAddon>
         </Show>
 
-        <input
-          {...props.inputAttributes}
-          id={props.id}
-          className={clx(styles.input, props.inputClassName)}
-          autocomplete={props.autoComplete}
-          autoFocus={props.autoFocus}
-          readOnly={props.readonly}
-          disabled={props.disabled}
-          type={validTypes[props.type]}
-          value={props.value}
-          onChange={(e) => {
-            props.onChange?.(e);
-            props.inputAttributes?.onChange?.(e);
-          }}
-          onFocus={(e) => {
-            state.isFocused = true;
-            props.onFocus?.(e);
-            props.inputAttributes?.onFocus?.(e);
-          }}
-          onBlur={(e) => {
-            state.isFocused = false;
-            props.onBlur?.(e);
-            props.inputAttributes?.onBlur?.(e);
-          }}
-          placeholder={!props.disabled ? props.placeholder : undefined}
-          inputMode={props.inputMode || defaultInputModesForType[props.type]}
-          data-intent={props.intent ?? "none"}
-          data-theme={state.theme}
-        />
+        <Show when={props.as === "input"}>
+          <input
+            {...props.inputAttributes}
+            id={props.id}
+            className={clx(styles.input, props.inputClassName)}
+            autocomplete={props.autoComplete}
+            autoFocus={props.autoFocus}
+            readOnly={props.readonly}
+            disabled={props.disabled}
+            type={validTypes[props.type]}
+            value={props.value}
+            onChange={(e) => {
+              props.onChange?.(e);
+              props.inputAttributes?.onChange?.(e);
+            }}
+            onFocus={(e) => {
+              state.isFocused = true;
+              props.onFocus?.(e);
+              props.inputAttributes?.onFocus?.(e);
+            }}
+            onBlur={(e) => {
+              state.isFocused = false;
+              props.onBlur?.(e);
+              props.inputAttributes?.onBlur?.(e);
+            }}
+            placeholder={!props.disabled ? props.placeholder : undefined}
+            inputMode={props.inputMode || defaultInputModesForType[props.type]}
+            data-intent={props.intent ?? "none"}
+            data-theme={state.theme}
+          />
+        </Show>
+
+        <Show when={props.as === "textarea"}>
+          <textarea
+            {...props.inputAttributes}
+            id={props.id}
+            className={clx(styles.input, props.inputClassName)}
+            autocomplete={props.autoComplete}
+            autoFocus={props.autoFocus}
+            readOnly={props.readonly}
+            disabled={props.disabled}
+            type={validTypes[props.type]}
+            value={props.value}
+            onChange={(e) => {
+              props.onChange?.(e);
+              props.inputAttributes?.onChange?.(e);
+            }}
+            onFocus={(e) => {
+              state.isFocused = true;
+              props.onFocus?.(e);
+              props.inputAttributes?.onFocus?.(e);
+            }}
+            onBlur={(e) => {
+              state.isFocused = false;
+              props.onBlur?.(e);
+              props.inputAttributes?.onBlur?.(e);
+            }}
+            placeholder={!props.disabled ? props.placeholder : undefined}
+            inputMode={props.inputMode || defaultInputModesForType[props.type]}
+            data-intent={props.intent ?? "none"}
+            data-theme={state.theme}
+            // textarea specific props
+            rows={(props as RenderAsTextareaProps).rows}
+            cols={(props as RenderAsTextareaProps).cols ?? 3}
+            wrap={(props as RenderAsTextareaProps).wrap}
+            style={{
+              ...props?.inputAttributes?.style,
+              resize: (props as RenderAsTextareaProps).resize,
+            }}
+          />
+        </Show>
 
         <div
           className={styles.borderElement}
@@ -153,7 +199,6 @@ export default function TextField(props: TextFieldProps) {
             divider={true}
             intent={props.intent}
             disabled={props.disabled}
-            size={props.size}
           >
             <button
               type="button"
@@ -171,7 +216,6 @@ export default function TextField(props: TextFieldProps) {
             divider={true}
             intent={props.intent}
             disabled={props.disabled}
-            size={props.size}
           >
             {props.endAddon}
           </TextFieldAddon>
