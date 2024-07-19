@@ -9,6 +9,7 @@ import {
   TextFieldSize,
   TextFieldElementType,
 } from "../src/ui/text-field/text-field.types";
+// @ts-ignore
 import COSMOS_LOGO_URL from "../static/networks/Cosmos.png";
 
 export const DefaultTextField: Story<{
@@ -34,11 +35,29 @@ export const DefaultTextField: Story<{
         intent={props.intent}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        startAddon={<Avatar src={COSMOS_LOGO_URL} name="cosmos" size="xs" />}
+        startAddon={
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            height="100%"
+          >
+            <Avatar src={COSMOS_LOGO_URL} name="cosmos" size="xs" />
+          </Box>
+        }
         endAddon={
-          <Text fontSize="$sm" color="$textSecondary">
-            Autofill
-          </Text>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            height="100%"
+          >
+            <Text fontSize="$sm" color="$textSecondary">
+              Autofill
+            </Text>
+          </Box>
         }
       />
 

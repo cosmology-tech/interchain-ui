@@ -221,6 +221,7 @@ const defaultSizeScheme: TextFieldSizeScheme = {
 };
 
 export const rootInput = style({
+  fontFamily: themeVars.font.body,
   position: "relative",
   justifyContent: "center",
   alignItems: "center",

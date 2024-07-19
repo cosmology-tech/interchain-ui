@@ -42,7 +42,7 @@ export default function Tabs(props: TabsProps) {
     // Active state styles
     width: number;
     transform: string;
-    setActiveStyles: (activeTab: number) => void;
+    setActiveStyles: () => void;
     isControlled: () => boolean;
     getActiveTabId: () => number;
   }>({
@@ -82,11 +82,11 @@ export default function Tabs(props: TabsProps) {
       }
       return state.theme === "light" ? "$white" : "$gray900";
     },
-    setActiveStyles(activeTab: number) {
+    setActiveStyles() {
       if (!tabListRef) return;
 
       const nextTab = tabListRef.querySelector(
-        `[role="tab"][data-tab-key="tab-${activeTab}"]`,
+        `[role="tab"][aria-selected="true"]`,
       ) as HTMLElement;
 
       state.width = nextTab?.offsetWidth ?? 0;
@@ -99,14 +99,17 @@ export default function Tabs(props: TabsProps) {
     state.theme = store.getState().theme;
     state.isMounted = true;
 
-    setTimeout(() => {
-      const finalActiveTab = state.getActiveTabId();
-      state.setActiveStyles(props.defaultActiveTab ?? finalActiveTab);
-    }, 100);
+    const updateActiveStyles = () => {
+      setTimeout(() => {
+        state.setActiveStyles();
+      }, 100);
+    };
+
+    // Update default active tab styles
+    updateActiveStyles();
 
     const handleResize = () => {
-      const finalActiveTab = state.getActiveTabId();
-      state.setActiveStyles(finalActiveTab);
+      updateActiveStyles();
     };
 
     const resizeObserver = new ResizeObserver((entries) => {
@@ -211,8 +214,11 @@ export default function Tabs(props: TabsProps) {
                     if (!state.isControlled()) {
                       state.active = index;
                     }
-                    state.setActiveStyles(index);
                     props.onActiveTabChange?.(index);
+
+                    setTimeout(() => {
+                      state.setActiveStyles();
+                    }, 100);
                   },
                 }}
               >

@@ -153,6 +153,7 @@ const getVarFromTheme = ({
 };
 
 const tabsPillBase = style({
+  fontFamily: themeVars.font.body,
   listStyle: "none",
   display: "flex",
   borderRadius: "50px",
@@ -263,6 +264,7 @@ function genPillCompoundVariants({
 }
 
 const tabsLineBase = style({
+  fontFamily: themeVars.font.body,
   listStyle: "none",
   display: "inline-flex",
   flexDirection: "row",
@@ -373,6 +375,7 @@ function genLineCompoundVariants({
 }
 
 export const tabButtonPill = style({
+  fontFamily: "inherit",
   all: "unset",
   cursor: "pointer",
   textAlign: "center",
@@ -391,6 +394,7 @@ export const tabButtonPill = style({
 });
 
 export const tabButtonLine = style({
+  fontFamily: "inherit",
   all: "unset",
   cursor: "pointer",
   textAlign: "center",
@@ -427,6 +431,7 @@ export const tabButtonLine = style({
 export const tabButtonContent = style({
   display: "inline-block",
   color: "inherit",
+  fontFamily: "inherit",
   fontSize: "inherit",
   fontWeight: "inherit",
 });
