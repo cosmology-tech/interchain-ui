@@ -135,7 +135,6 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
       // Default mode, fallback to react-aria logic
       if (clampValueOnBlur) {
-        console.log("old mode");
         newValue = state.numberValue;
         applyFormatting(newValue);
         inputProps.onBlur?.(e);
