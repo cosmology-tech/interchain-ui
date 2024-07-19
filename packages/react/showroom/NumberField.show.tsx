@@ -2,9 +2,7 @@ import * as React from "react";
 import type { Story } from "@ladle/react";
 import Box from "../src/ui/box";
 import Button from "../src/ui/button";
-import Text from "../src/ui/text";
 import NumberField from "../src/ui/number-field";
-import Avatar from "../src/ui/avatar";
 import {
   NumberFieldIntent,
   NumberFieldSize,
@@ -43,12 +41,14 @@ export const DefaultNumberField: Story<{
         borderless={props.borderless}
         textAlign={props.textAlign}
         clampValueOnBlur={props.clampValueOnBlur}
+        minValue={props.minValue}
+        maxValue={props.maxValue}
         decrementButton={
           <Button
             size="xs"
             variant="unstyled"
             leftIcon="minusRound"
-            onClick={() => setValue(value - 1)}
+            onClick={() => setValue(Math.max(value - 1, props.minValue))}
           />
         }
         incrementButton={
@@ -56,11 +56,11 @@ export const DefaultNumberField: Story<{
             size="xs"
             variant="unstyled"
             leftIcon="plusRound"
-            onClick={() => setValue(value + 1)}
+            onClick={() => setValue(Math.min(value + 1, props.maxValue))}
           />
         }
         onChange={(value) => {
-          console.log("[sb1] Change", value);
+          console.log("NumberField Change", value);
           setValue(value);
         }}
       />
