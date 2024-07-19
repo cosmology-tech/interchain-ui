@@ -113,6 +113,7 @@ export type CommonInputProps = {
   inputAttributes?: any;
   startAddon?: Children | undefined;
   endAddon?: Children | undefined;
+  addonDivider?: boolean;
   inputContainer?: string;
   inputClassName?: string;
   as?: TextFieldElementType;

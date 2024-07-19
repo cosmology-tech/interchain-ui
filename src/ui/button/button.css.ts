@@ -27,7 +27,7 @@ export const buttonTextColorVar = createVar();
 export const buttonBorderColorVar = createVar();
 
 export const baseButton = style({
-  fontFamily: "inherit",
+  fontFamily: themeVars.font.body,
   cursor: "pointer",
   appearance: "none",
   border: "none",
@@ -528,6 +528,10 @@ function genCompoundVariants({
           },
         },
       } satisfies ComplexStyleRule;
+    }
+
+    if (variant === "unstyled") {
+      return unstyledButton;
     }
 
     return {};

@@ -100,7 +100,7 @@ export default function TextField(props: TextFieldProps) {
         <Show when={props.startAddon}>
           <TextFieldAddon
             position="start"
-            divider={true}
+            divider={props.addonDivider ?? true}
             intent={props.intent}
             disabled={props.disabled}
           >
@@ -196,7 +196,7 @@ export default function TextField(props: TextFieldProps) {
         <Show when={state.isClearable}>
           <TextFieldAddon
             position="end"
-            divider={true}
+            divider={props.addonDivider ?? true}
             intent={props.intent}
             disabled={props.disabled}
           >
@@ -213,7 +213,7 @@ export default function TextField(props: TextFieldProps) {
         <Show when={props.endAddon}>
           <TextFieldAddon
             position="end"
-            divider={true}
+            divider={props.addonDivider ?? true}
             intent={props.intent}
             disabled={props.disabled}
           >

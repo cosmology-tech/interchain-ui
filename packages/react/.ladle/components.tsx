@@ -8,6 +8,7 @@ import {
   ThemeProviderProps,
   createThemes,
 } from "../src";
+import "./reset.css";
 import "../src/styles/global.css";
 
 export const Provider: GlobalProvider = ({
