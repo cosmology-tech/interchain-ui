@@ -1,18 +1,19 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants, createVar } from "@vanilla-extract/css";
 import {
   inputBgVar,
-  inputBorderColorVar,
   inputBorderRadiusVar,
-  inputBorderWidthVar,
   inputPaddingXVar,
   inputPaddingYVar,
   inputHeightVar,
+  inputDividerColorVar,
   zIndexConfig,
   rootInput,
   input,
   borderFocusedLight,
   borderFocusedDark,
 } from "../text-field/text-field.css";
+
+const borderWidthVar = createVar();
 
 export const textFieldAddon = style({
   display: "flex",
@@ -30,6 +31,9 @@ export const textFieldAddon = style({
   borderColor: "transparent",
   borderWidth: "1px",
   borderStyle: "solid",
+  vars: {
+    [borderWidthVar]: "1px",
+  },
   selectors: {
     [`${rootInput}[data-element-type='textarea'] &`]: {
       display: "none",
@@ -64,25 +68,6 @@ export const textFieldAddonPositions = styleVariants({
   ],
 });
 
-// export const textFieldAddonSizes = styleVariants({
-//   sm: [
-//     style({
-//       paddingLeft: themeVars.space[6],
-//       paddingRight: themeVars.space[6],
-//       paddingTop: themeVars.space[4],
-//       paddingBottom: themeVars.space[4],
-//     }),
-//   ],
-//   md: [
-//     style({
-//       paddingLeft: themeVars.space[8],
-//       paddingRight: themeVars.space[8],
-//       paddingTop: themeVars.space[4],
-//       paddingBottom: themeVars.space[4],
-//     }),
-//   ],
-// });
-
 export const textFieldAddonDivider = styleVariants({
   end: [
     style({
@@ -96,11 +81,11 @@ export const textFieldAddonDivider = styleVariants({
         "&:before": {
           content: '""',
           position: "absolute",
-          top: `calc(-1 * ${inputBorderWidthVar})`,
-          bottom: `calc(-1 * ${inputBorderWidthVar})`,
+          top: `calc(-1 * ${borderWidthVar})`,
+          bottom: `calc(-1 * ${borderWidthVar})`,
           left: 0,
-          width: inputBorderWidthVar,
-          background: inputBorderColorVar,
+          width: borderWidthVar,
+          background: inputDividerColorVar,
           transition: "all 200ms",
         },
       },
@@ -118,11 +103,11 @@ export const textFieldAddonDivider = styleVariants({
         "&:before": {
           content: '""',
           position: "absolute",
-          top: `calc(-1 * ${inputBorderWidthVar})`,
-          bottom: `calc(-1 * ${inputBorderWidthVar})`,
+          top: `calc(-1 * ${borderWidthVar})`,
+          bottom: `calc(-1 * ${borderWidthVar})`,
           right: 0,
-          width: inputBorderWidthVar,
-          background: inputBorderColorVar,
+          width: borderWidthVar,
+          background: inputDividerColorVar,
           transition: "all 200ms",
         },
       },
