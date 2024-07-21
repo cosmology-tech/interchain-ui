@@ -1,5 +1,6 @@
 import {
   Show,
+  For,
   useStore,
   useDefaultProps,
   onMount,
@@ -35,6 +36,20 @@ useMetadata({
 useDefaultProps<Partial<AssetWithdrawTokensProps>>({
   transferLabel: "Transfer",
   cancelLabel: "Cancel",
+  partials: [
+    {
+      label: "Max",
+      percentage: 1,
+    },
+    {
+      label: "1/2",
+      percentage: 0.5,
+    },
+    {
+      label: "1/3",
+      percentage: 1 / 3,
+    },
+  ],
 });
 
 export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
@@ -403,28 +418,20 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
             justifyContent: "flex-end",
           }}
         >
-          <Button
-            intent="text"
-            size="xs"
-            onClick={() => state.handleAmountChange(1)}
-          >
-            Max
-          </Button>
-          <Button
-            intent="text"
-            size="xs"
-            onClick={() => state.handleAmountChange(1 / 2)}
-          >
-            1/2
-          </Button>
-          <Button
-            intent="text"
-            size="xs"
-            onClick={() => state.handleAmountChange(1 / 3)}
-          >
-            1/3
-          </Button>
+          <For each={props.partials}>
+            {(partial, index) => (
+              <Button
+                key={index}
+                intent="text"
+                size="xs"
+                onClick={() => state.handleAmountChange(partial.percentage)}
+              >
+                {partial.label}
+              </Button>
+            )}
+          </For>
         </Stack>
+
         <Stack
           className={styles.onlyLg}
           attributes={{
@@ -443,8 +450,14 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               marginRight: "$7",
             }}
           />
-          <Text>Estimated time:</Text>
-          <Text fontWeight="$semibold"> 20 seconds</Text>
+          <Text
+            attributes={{
+              marginRight: "$7",
+            }}
+          >
+            Estimated time:
+          </Text>
+          <Text fontWeight="$semibold">{props.timeEstimateLabel}</Text>
         </Stack>
 
         <Button
