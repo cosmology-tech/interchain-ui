@@ -20,11 +20,11 @@ import {
 import Box from "@/ui/box";
 import ChainSwapInput from "@/ui/chain-swap-input";
 import ChainListItem from "@/ui/chain-list-item";
-import { closestBodyElement } from "@/helpers/platform";
 
 import * as styles from "./chain-swap-combobox.css";
 import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.types";
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
+import { overlays } from "@/ui/overlays-manager/overlays";
 import useTheme from "@/ui/hooks/use-theme";
 
 interface ItemProps {
@@ -212,7 +212,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
       return setMountRoot(props.rootNode);
     }
 
-    setMountRoot(closestBodyElement(containerRef.current));
+    setMountRoot(overlays.getOrCreateOverlayRoot(containerRef.current));
   }, []);
 
   return (
