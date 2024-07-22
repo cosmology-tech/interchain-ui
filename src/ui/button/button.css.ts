@@ -48,7 +48,7 @@ export const unstyledButton = style([
   baseButton,
   {
     background: "transparent",
-    color: "inherit",
+    color: themeVars.colors.text,
   },
 ]);
 

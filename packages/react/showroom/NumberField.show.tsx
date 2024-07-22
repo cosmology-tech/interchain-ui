@@ -73,6 +73,10 @@ export const DefaultNumberField: Story<{
   );
 };
 
+DefaultNumberField.meta = {
+  component: "TextField",
+};
+
 DefaultNumberField.args = {
   label: "Enter ATOM amount you want to stake",
   placeholder: "Your amount",

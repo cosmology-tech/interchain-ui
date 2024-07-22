@@ -79,6 +79,10 @@ export const DefaultListItem: Story<{
   </Box>
 );
 
+DefaultListItem.meta = {
+  component: "ListItem",
+};
+
 DefaultListItem.args = {
   size: "sm",
 };

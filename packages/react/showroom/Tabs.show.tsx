@@ -58,6 +58,10 @@ export const DefaultTabs: Story<{
   );
 };
 
+DefaultTabs.meta = {
+  component: "Tabs",
+};
+
 DefaultTabs.args = {
   variant: "pill",
   size: "sm",
