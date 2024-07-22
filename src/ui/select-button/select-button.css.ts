@@ -48,6 +48,7 @@ export const arrowDropDown = style({
 });
 
 export const buttonContent = style({
+  color: selectButtonTextColorVar,
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -141,7 +142,7 @@ const defaultIntentSchemeDark: SelectButtonIntentScheme = {
     borderColor: themeVars.palettes.neutral800,
     borderWidth: themeVars.borderWidth.sm,
     borderRadius: themeVars.radii.base,
-    placeholderColor: themeVars.colors.textMuted,
+    placeholderColor: themeVars.colors.textSecondary,
     boxShadow: "none",
     opacity: "1",
     // Hover state
