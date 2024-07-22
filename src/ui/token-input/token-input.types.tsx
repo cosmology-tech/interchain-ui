@@ -14,7 +14,11 @@ export interface TokenInputProps {
   tokenIcon?: LiteralUnion<IconName, string>;
   title?: string | undefined;
   hasProgressBar?: boolean;
-  availableAsMax?: boolean;
+  minValue?: number;
+  maxValue?: number;
+  // Formatted value for the token amount in stablecoin value
+  notionalValue?: string;
+  formatNotionalValue?: (tokenAmount: number, pricePerToken: number) => string;
   onProgressChange?: (progress: number) => void;
   onAmountChange?: (value: number) => void;
   onFocus?: (e?: any) => void;

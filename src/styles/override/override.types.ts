@@ -1,5 +1,5 @@
 import { createVar } from "@vanilla-extract/css";
-import { themeContractTemplate } from "../../styles/themes.css";
+import { themeContractTemplate } from "../themes.css";
 import type { LiteralUnion, PartialDeep } from "type-fest";
 import type { DeepStringConstructor } from "../../helpers/types";
 
@@ -20,7 +20,6 @@ export type OverridableProp = Bg | TextColor | Shadow | BorderColor;
 // Add more slots here when you need a component to be overridable
 // TODO: infer through a register() function so that we don't need to do this manually
 export type OverridableComponents =
-  | "button"
   | "clipboard-copy-text"
   | "connect-modal"
   | "connect-modal-install-button"

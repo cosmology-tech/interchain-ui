@@ -13,7 +13,7 @@ export const listBoxBase = style({
   display: "flex",
   flexDirection: "column",
   borderRadius: themeVars.radii.md,
-  backgroundColor: themeVars.colors.menuItemBg,
+  backgroundColor: themeVars.colors.background,
 });
 
 export const listBoxDimensions = style({
@@ -65,8 +65,4 @@ export const selectRoot = style({
 
 export const selectFullWidth = style({
   width: "100%",
-});
-
-export const selectButton = style({
-  position: "relative",
 });

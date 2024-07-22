@@ -61,7 +61,7 @@ export const token = style({
 
 export const inputContainer = style({
   height: "100%",
-  overflow: 'hidden',
+  overflow: "hidden",
   borderRadius: themeVars.radii["md"],
   borderWidth: "1px",
   borderStyle: "solid",

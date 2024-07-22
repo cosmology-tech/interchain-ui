@@ -13,7 +13,7 @@ import Icon from "@/ui/icon";
 import Box from "@/ui/box";
 import useTheme from "@/ui/hooks/use-theme";
 import type { BoxProps } from "@/ui/box/box.types";
-import { inputSizes } from "@/ui/text-field/text-field.css";
+// import { inputSizes } from "@/ui/text-field/text-field.css";
 import { ComboboxContext } from "./combobox.context";
 import { ListBox } from "./list-box";
 import { Popover } from "./popover";
@@ -175,8 +175,9 @@ export default function Combobox<T extends object>(props: ComboboxProps<T>) {
             border="none"
             backgroundColor="$transparent"
             className={clx(styles.comboboxInputElement, {
-              [inputSizes.sm]: size === "sm",
-              [inputSizes.md]: size === "md",
+              // TODO: fix inputSizes
+              // [inputSizes.sm]: size === "sm",
+              // [inputSizes.md]: size === "md",
               [styles.noStartPadding]: !!inputAddonStart,
               [styles.noEndPadding]: !!inputAddonEnd,
             })}

@@ -12,6 +12,7 @@ const extendedSpace = {
 };
 
 const allSpace = { ...themeVars.space, ...extendedSpace };
+const allColors = { ...themeVars.colors, ...themeVars.palettes };
 
 const margins = themeVars.space;
 
@@ -169,26 +170,26 @@ const interactiveProperties = defineProperties({
   },
   defaultCondition: "base",
   dynamicProperties: {
-    color: themeVars.colors,
+    color: allColors,
     outline: true,
     visibility: true,
     filter: true,
-    fill: themeVars.colors,
-    stroke: themeVars.colors,
-    backgroundColor: themeVars.colors,
+    fill: allColors,
+    stroke: allColors,
+    backgroundColor: allColors,
     borderWidth: themeVars.borderWidth,
     borderStyle: themeVars.borderStyle,
-    borderColor: themeVars.colors,
-    borderBottomColor: themeVars.colors,
+    borderColor: allColors,
+    borderBottomColor: allColors,
     borderBottomStyle: true,
     borderBottomWidth: true,
-    borderTopColor: themeVars.colors,
+    borderTopColor: allColors,
     borderTopStyle: true,
     borderTopWidth: true,
-    borderLeftColor: themeVars.colors,
+    borderLeftColor: allColors,
     borderLeftStyle: true,
     borderLeftWidth: true,
-    borderRightColor: themeVars.colors,
+    borderRightColor: allColors,
     borderRightStyle: true,
     borderRightWidth: true,
     borderCollapse: true,
@@ -203,9 +204,9 @@ const interactiveProperties = defineProperties({
     fontVariantNumeric: true,
   },
   staticProperties: {
-    color: themeVars.colors,
-    backgroundColor: themeVars.colors,
-    borderColor: themeVars.colors,
+    color: allColors,
+    backgroundColor: allColors,
+    borderColor: allColors,
     boxShadow: themeVars.boxShadow,
     visibility: ["collapse", "hidden", "visible"],
   },

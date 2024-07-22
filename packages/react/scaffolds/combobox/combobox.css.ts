@@ -1,10 +1,11 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { scrollBar } from "@/ui/shared/shared.css";
 import { themeVars } from "@/styles/themes.css";
+// TODO: fix this
 import {
-  inputBorderVar,
+  // inputBorderVar,
   inputBgVar,
-  inputRingShadowVar,
+  // inputRingShadowVar,
 } from "@/ui/text-field/text-field.css";
 import { baseTextStyles } from "@/ui/text/text.css";
 import { listBoxBaseWithShadow } from "@/ui/select/select.css";
@@ -14,25 +15,25 @@ export const inputBorderAndShadow = style({
   borderStyle: "solid",
   borderWidth: "1px",
   borderRadius: "6px",
-  borderColor: inputBorderVar,
+  // borderColor: inputBorderVar,
   vars: {
     [inputBgVar]: themeVars.colors.inputBg,
-    [inputBorderVar]: themeVars.colors.inputBorder,
+    // [inputBorderVar]: themeVars.colors.inputBorder,
   },
   selectors: {
     "&:hover": {
       vars: {
-        [inputBorderVar]: themeVars.colors.text,
+        // [inputBorderVar]: themeVars.colors.text,
       },
     },
     '&[data-focused="true"]': {
       vars: {
-        [inputBorderVar]: themeVars.colors.inputBorderFocus,
-        [inputRingShadowVar]: `${themeVars.colors.inputBg} 0px 0px 0px 0px, ${themeVars.colors.textPlaceholder} 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
+        // [inputBorderVar]: themeVars.colors.inputBorderFocus,
+        // [inputRingShadowVar]: `${themeVars.colors.inputBg} 0px 0px 0px 0px, ${themeVars.colors.textPlaceholder} 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px`,
       },
       outline: `2px solid transparent`,
       outlineOffset: "2px",
-      boxShadow: inputRingShadowVar,
+      // boxShadow: inputRingShadowVar,
     },
   },
 });

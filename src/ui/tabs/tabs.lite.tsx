@@ -10,7 +10,6 @@ import {
 } from "@builder.io/mitosis";
 import clsx from "clsx";
 import Box from "../box";
-import Text from "../text";
 import { store } from "../../models/store";
 import {
   standardTransitionProperties,
@@ -43,7 +42,7 @@ export default function Tabs(props: TabsProps) {
     // Active state styles
     width: number;
     transform: string;
-    setActiveStyles: (activeTab: number) => void;
+    setActiveStyles: () => void;
     isControlled: () => boolean;
     getActiveTabId: () => number;
   }>({
@@ -83,11 +82,11 @@ export default function Tabs(props: TabsProps) {
       }
       return state.theme === "light" ? "$white" : "$gray900";
     },
-    setActiveStyles(activeTab: number) {
+    setActiveStyles() {
       if (!tabListRef) return;
 
       const nextTab = tabListRef.querySelector(
-        `[role="tab"][data-tab-key="tab-${activeTab}"]`
+        `[role="tab"][aria-selected="true"]`,
       ) as HTMLElement;
 
       state.width = nextTab?.offsetWidth ?? 0;
@@ -100,22 +99,41 @@ export default function Tabs(props: TabsProps) {
     state.theme = store.getState().theme;
     state.isMounted = true;
 
-    setTimeout(() => {
-      const finalActiveTab = state.getActiveTabId();
-      state.setActiveStyles(props.defaultActiveTab ?? finalActiveTab);
-    }, 100);
-
-    const handleResize = () => {
-      const finalActiveTab = state.getActiveTabId();
-      state.setActiveStyles(finalActiveTab);
+    const updateActiveStyles = () => {
+      setTimeout(() => {
+        state.setActiveStyles();
+      }, 100);
     };
 
-    window.addEventListener("resize", handleResize, true);
+    // Update default active tab styles
+    updateActiveStyles();
 
-    cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
-      window.removeEventListener("resize", handleResize);
+    const handleResize = () => {
+      updateActiveStyles();
+    };
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      handleResize();
     });
+
+    window.addEventListener("resize", handleResize, true);
+    resizeObserver.observe(tabListRef);
+
+    const cleanupStore = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+
+    const cleanupListeners = () => {
+      if (tabListRef && resizeObserver) {
+        resizeObserver.unobserve(tabListRef);
+      }
+      window.removeEventListener("resize", handleResize);
+    };
+
+    cleanupRef = () => {
+      cleanupStore();
+      cleanupListeners();
+    };
   });
 
   onUpdate(() => {
@@ -133,45 +151,47 @@ export default function Tabs(props: TabsProps) {
   return (
     <Box className={props.className} {...props.attributes}>
       <Box
-        className={clsx(styles.tabsHorizontal, scrollBar[state.theme])}
-        bg={state.getBgColor()}
+        className={clsx(
+          props.variant === "pill"
+            ? styles.tabsPill({
+                size: props.size,
+                theme: state.theme,
+              })
+            : styles.tabsLine({
+                size: props.size,
+                theme: state.theme,
+              }),
+          scrollBar[state.theme],
+        )}
         as="ul"
         position="relative"
         m="$0"
         p="$0"
         zIndex={0}
-        minWidth={{
-          mobile: "350px",
-          tablet: "465px",
-          desktop: "465px",
-        }}
-        maxWidth={{
-          mobile: "350px",
-          tablet: "unset",
-          desktop: "unset",
-        }}
-        backgroundColor="$progressBg"
         boxRef={tabListRef}
         attributes={{
           role: "tablist",
         }}
       >
-        {/* Tab selection background */}
-        <Box
-          className={styles.tabSelection}
-          backgroundColor={state.theme === "light" ? "$accentText" : "#F5F7FB"}
-          width={`${state.width}px`}
-          transform={state.transform}
-          attributes={{
-            "data-part-id": "tab-selection",
-          }}
-        />
+        {/* Tab selection background - pill variant */}
+
+        <Show when={props.variant === "pill"}>
+          <Box
+            className={styles.tabSelection}
+            width={`${state.width}px`}
+            transform={state.transform}
+            attributes={{
+              "data-part-id": "tab-selection",
+            }}
+          />
+        </Show>
 
         <For each={props?.tabs}>
           {(tab: TabProps, index: number) => (
             <Box
               as="li"
-              flex={1}
+              flex={props.variant === "pill" ? 1 : "0 0 auto"}
+              width="auto"
               className="tab-item"
               attributes={{
                 role: "tab",
@@ -183,43 +203,33 @@ export default function Tabs(props: TabsProps) {
             >
               <Box
                 as="button"
-                className={styles.tabButton}
+                className={clsx(
+                  props.variant === "pill"
+                    ? styles.tabButtonPill
+                    : styles.tabButtonLine,
+                )}
                 attributes={{
+                  "data-active": state.getActiveTabId() === index,
                   onClick: () => {
                     if (!state.isControlled()) {
                       state.active = index;
                     }
-                    state.setActiveStyles(index);
                     props.onActiveTabChange?.(index);
+
+                    setTimeout(() => {
+                      state.setActiveStyles();
+                    }, 100);
                   },
                 }}
               >
-                <Text
-                  fontSize={{
-                    mobile: "$xs",
-                    tablet: "$sm",
-                    desktop: "$sm",
-                  }}
-                  color={state.getTextColor(index)}
-                  fontWeight="$semibold"
-                  className={clsx(standardTransitionProperties)}
-                  attributes={{
-                    px: {
-                      mobile: "$6",
-                      tablet: "$14",
-                      desktop: "$14",
-                    },
-                    py: {
-                      mobile: "$4",
-                      tablet: "$7",
-                      desktop: "$7",
-                    },
-                    borderRadius: "50px",
-                    zIndex: state.getActiveTabId() === index ? -1 : undefined,
+                <span
+                  className={styles.tabButtonContent}
+                  style={{
+                    zIndex: state.getActiveTabId() === index ? "-1" : undefined,
                   }}
                 >
                   {tab.label}
-                </Text>
+                </span>
               </Box>
             </Box>
           )}

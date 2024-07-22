@@ -11,6 +11,8 @@ export type { GridColumn } from "./models/components.model";
 export type { Sprinkles } from "./styles/rainbow-sprinkles.css";
 export { store } from "./models/store";
 export { skeleton as skeletonClass } from "./ui/shared/shared.css";
+export { createThemes } from "./styles/theme-builder/create-theme-builder";
+export type { ResultThemeVars } from "./styles/theme-builder/create-theme-builder";
 
 // Init Components
 export { default as Box } from "./ui/box";
@@ -30,6 +32,8 @@ export { default as ClipboardCopyText } from "./ui/clipboard-copy-text";
 export type { ClipboardCopyTextProps } from "./ui/clipboard-copy-text/clipboard-copy-text.types";
 export { default as ThemeProvider } from "./ui/theme-provider";
 export type { ThemeProviderProps } from "./ui/theme-provider/theme-provider.types";
+export { default as OverlaysManager } from "./ui/overlays-manager";
+export type { OverlaysManagerProps } from "./ui/overlays-manager/overlays-manager.types";
 export { default as InterchainUIProvider } from "./ui/interchain-ui-provider";
 export { default as FadeIn } from "./ui/fade-in";
 export { default as PoolsHeader } from "./ui/pools-header";

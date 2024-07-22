@@ -4,17 +4,11 @@ import { useNumberField, useLocale, AriaNumberFieldProps } from "react-aria";
 import { mergeRefs } from "@react-aria/utils";
 
 import clx from "clsx";
-import {
-  inputStyles,
-  inputSizes,
-  inputIntent,
-  inputRootIntent,
-  rootInput,
-  rootInputFocused,
-} from "@/ui/text-field/text-field.css";
+import * as textFieldStyles from "@/ui/text-field/text-field.css";
 import FieldLabel from "@/ui/field-label";
 import Stack from "@/ui/stack";
 import Box from "@/ui/box";
+import TextFieldAddon from "@/ui/text-field-addon";
 import useTheme from "../hooks/use-theme";
 import * as styles from "./number-field.css";
 import type { NumberInputProps } from "./number-field.types";
@@ -39,11 +33,17 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       id = useId(),
       label,
       isDisabled,
-      size = "sm",
-      intent = "default",
+      disabled,
+      readOnly,
+      isReadOnly,
+      size,
+      intent,
       clampValueOnBlur = true,
       formatOptions = defaultFormatOptions,
     } = props;
+
+    const isFinalDisabled = isDisabled ?? disabled ?? false;
+    const isFinalReadOnly = isReadOnly ?? readOnly ?? false;
 
     const { theme } = useTheme();
     const { locale } = useLocale();
@@ -201,6 +201,9 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       }
     }, [state.inputValue, formatValue, internalValue, strValue]);
 
+    const hasStartAddon = props.canDecrement && props.decrementButton != null;
+    const hasEndAddon = props.canIncrement && props.incrementButton != null;
+
     return (
       <Box className={props.className} {...props.attributes}>
         <Stack direction="vertical" space="$4">
@@ -209,22 +212,51 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           <div
             {...groupProps}
             className={clx(
-              rootInput,
-              isFocused ? rootInputFocused : null,
-              props.isDisabled
-                ? inputRootIntent.disabled
-                : inputRootIntent[props.intent],
+              textFieldStyles.textField({
+                intent: intent,
+                size: size,
+                theme: theme,
+              }),
               props.inputContainer,
             )}
+            tabIndex={props.disabled ? undefined : 0}
+            data-element-type="input"
+            data-intent={props.intent ?? "none"}
+            data-state={
+              isFocused ? "focused" : props.disabled ? "disabled" : "default"
+            }
           >
-            {props.canDecrement && React.isValidElement(props.decrementButton)
-              ? React.cloneElement(props.decrementButton, decrementButtonProps)
-              : props?.decrementButton}
+            {hasStartAddon && (
+              <TextFieldAddon
+                position="start"
+                divider={props.addonDivider ?? true}
+                intent={props.intent}
+                disabled={props.disabled}
+              >
+                {hasStartAddon && React.isValidElement(props.decrementButton)
+                  ? React.cloneElement(
+                      props.decrementButton,
+                      decrementButtonProps,
+                    )
+                  : props?.decrementButton}
+              </TextFieldAddon>
+            )}
 
             <Box
               as="input"
               attributes={{
                 ...inputProps,
+                "data-state": isFinalReadOnly
+                  ? "readonly"
+                  : isFocused
+                    ? "focused"
+                    : isFinalDisabled
+                      ? "disabled"
+                      : "default",
+                "data-intent": props.intent ?? "none",
+                "data-theme": theme,
+                readOnly: isFinalReadOnly,
+                disabled: isFinalDisabled,
                 value: inputValue,
                 onChange: clampValueOnBlur ? inputProps.onChange : handleChange,
                 onBlur: clampValueOnBlur ? inputProps.onBlur : handleBlur,
@@ -233,23 +265,42 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
               textAlign={props.textAlign}
               fontSize={props.fontSize}
               className={clx(
-                inputStyles[theme],
-                inputSizes[size],
-                props.isDisabled ? inputIntent.disabled : inputIntent[intent],
-                props.inputClassName,
-                isDisabled && props.decrementButton
+                textFieldStyles.input,
+                isFinalDisabled && props.decrementButton
                   ? styles.withDecrementButton
                   : null,
-                isDisabled && props.incrementButton
+                isFinalDisabled && props.incrementButton
                   ? styles.withIncrementButton
                   : null,
                 props.borderless ? styles.borderless : null,
+                props.inputClassName,
               )}
             />
 
-            {props.canIncrement && React.isValidElement(props.incrementButton)
-              ? React.cloneElement(props.incrementButton, incrementButtonProps)
-              : props?.incrementButton}
+            <div
+              className={textFieldStyles.borderElement}
+              data-theme={theme}
+              data-intent={props.intent ?? "none"}
+              data-state={
+                isFocused ? "focused" : props.disabled ? "disabled" : "default"
+              }
+            />
+
+            {hasEndAddon && (
+              <TextFieldAddon
+                position="end"
+                divider={props.addonDivider ?? true}
+                intent={props.intent}
+                disabled={props.disabled}
+              >
+                {hasEndAddon && React.isValidElement(props.incrementButton)
+                  ? React.cloneElement(
+                      props.incrementButton,
+                      incrementButtonProps,
+                    )
+                  : props?.incrementButton}
+              </TextFieldAddon>
+            )}
           </div>
         </Stack>
       </Box>
