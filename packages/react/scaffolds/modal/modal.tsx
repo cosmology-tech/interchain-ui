@@ -14,6 +14,7 @@ import {
 import clx from "clsx";
 import React, { cloneElement, forwardRef } from "react";
 import useTheme from "../hooks/use-theme";
+import { overlays } from "@/ui/overlays-manager/overlays";
 import * as styles from "./modal.css";
 
 interface DialogOptions {
@@ -149,6 +150,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     childrenClassName,
   } = props;
 
+  const [defaultRoot, setDefaultRoot] = React.useState<HTMLElement | null>(
+    null,
+  );
+
   const dialog = useDialog({
     initialOpen,
     open: isOpen,
@@ -165,6 +170,16 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
   const id = useId();
 
   const { styles: transitionStyles } = useTransitionStyles(dialog.context);
+
+  React.useEffect(() => {
+    // User-provided root
+    if (root) {
+      return;
+    }
+
+    // Default lib root
+    setDefaultRoot(overlays.getOrCreateOverlayRoot(window.document));
+  }, []);
 
   React.useEffect(() => {
     dialog.setLabelId(id);
@@ -186,7 +201,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
       {typeof renderTrigger === "function" ? renderTrigger(triggerProps) : null}
 
       {dialog.open && (
-        <FloatingPortal root={root}>
+        <FloatingPortal root={root ? root : defaultRoot}>
           <FloatingOverlay
             className={clx(themeClassName)}
             lockScroll={preventScroll}

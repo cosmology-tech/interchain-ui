@@ -8,6 +8,7 @@ import {
   ThemeProvider,
   Select,
   SelectOption,
+  OverlaysManager,
   useTheme,
 } from "../src";
 import { DEFAULT_ACCENTS, Accent } from "../src/styles/tokens";
@@ -109,6 +110,7 @@ const WithThemeDecorator = (props) => {
       // }}
     >
       <ThemeShell {...props} />
+      <OverlaysManager />
     </ThemeProvider>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { asset_list, assets } from "@chain-registry/osmosis";
-import { getAssetByDenom } from "@chain-registry/utils";
 import { Asset as OsmosisAsset } from "@chain-registry/types";
 
 import TokenInput from "../src/ui/token-input";
@@ -18,14 +17,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const osmosisAssets: OsmosisAsset[] = [...assets.assets, ...asset_list.assets];
-const OSMO = getAssetByDenom(osmosisAssets, "uosmo");
+const OSMO = osmosisAssets.find((asset) => asset.symbol === "OSMO")!;
 
 /* This is primary TokenInput */
 export const Primary: Story = {
   args: {
     symbol: OSMO.symbol,
     name: OSMO.name,
-    available: 0.71263,
+    available: 23345.44,
     priceDisplayAmount: 0.5,
     tokenIcon: OSMO.logo_URIs?.png,
     onAmountChange: (value) => {
@@ -34,14 +33,20 @@ export const Primary: Story = {
   },
   render: (props) => {
     const [progress, setProgress] = useState(50);
+    const [amount, setAmount] = useState(0);
 
     const onProgressChange = (value) => {
       console.log("onProgressChange", value);
       setProgress(value);
     };
+
     return (
       <TokenInput
         {...props}
+        amount={amount}
+        onAmountChange={(value) => {
+          setAmount(value);
+        }}
         progress={progress}
         onProgressChange={onProgressChange}
       />

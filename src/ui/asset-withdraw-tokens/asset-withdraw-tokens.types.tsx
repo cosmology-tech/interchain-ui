@@ -1,6 +1,11 @@
 import type { BaseComponentProps } from "../../models/components.model";
 import type { AvailableItem } from "../transfer-item/transfer-item.types";
 
+export type TransferPartial = {
+  percentage: number;
+  label: string;
+};
+
 export interface AssetWithdrawTokensProps extends BaseComponentProps {
   isDropdown?: boolean;
   fromSymbol: AvailableItem["symbol"];
@@ -18,6 +23,7 @@ export interface AssetWithdrawTokensProps extends BaseComponentProps {
   cancelLabel?: string;
   timeEstimateLabel: string;
   isSubmitDisabled?: boolean;
+  partials?: Array<TransferPartial>;
   onChange?: (value: string) => void;
   onTransfer?: (event?: any) => void;
   onCancel?: (event?: any) => void;

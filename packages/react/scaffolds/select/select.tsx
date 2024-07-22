@@ -28,6 +28,7 @@ import {
   selectFullWidth,
 } from "./select.css";
 import { Item, SelectContext, SelectContextValue } from "./select.context";
+import { overlays } from "@/ui/overlays-manager/overlays";
 
 const DEFAULT_LIST_WIDTH = "220";
 
@@ -142,6 +143,15 @@ export default function Select(props: SelectProps) {
     [elementsRef, handleSelect],
   );
 
+  const [defaultRoot, setDefaultRoot] = React.useState<HTMLElement | null>(
+    null,
+  );
+
+  React.useEffect(() => {
+    // Default lib root
+    setDefaultRoot(overlays.getOrCreateOverlayRoot(window.document));
+  }, []);
+
   React.useEffect(() => {
     if (!!props.defaultSelectedItem) {
       handleSelect(props.defaultSelectedItem);
@@ -235,7 +245,7 @@ export default function Select(props: SelectProps) {
       </div>
 
       <SelectContext.Provider value={selectContext}>
-        <FloatingPortal>
+        <FloatingPortal root={defaultRoot}>
           <div
             ref={refs.setFloating}
             tabIndex={-1}
