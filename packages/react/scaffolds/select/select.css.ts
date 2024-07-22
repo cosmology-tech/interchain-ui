@@ -13,7 +13,7 @@ export const listBoxBase = style({
   display: "flex",
   flexDirection: "column",
   borderRadius: themeVars.radii.md,
-  backgroundColor: themeVars.colors.menuItemBg,
+  backgroundColor: themeVars.colors.background,
 });
 
 export const listBoxDimensions = style({
