@@ -10,14 +10,7 @@ import clx from "clsx";
 import Icon from "../icon";
 import Box from "../box";
 import { store } from "../../models/store";
-import {
-  buttonStyles,
-  buttonRoot,
-  buttonIntent,
-  selectSizes,
-  arrowDropDown,
-  buttonContent,
-} from "./select-button.css";
+import * as styles from "./select-button.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { SelectButtonProps } from "./select-button.types";
 
@@ -27,16 +20,18 @@ useMetadata({
   },
 });
 
-export default function SelectButton(props: SelectButtonProps) {
-  useDefaultProps({
-    intent: "default",
-    size: "sm",
-  });
+useDefaultProps<Partial<SelectButtonProps>>({
+  intent: "none",
+  size: "sm",
+});
 
+export default function SelectButton(props: SelectButtonProps) {
   const state = useStore<{
     theme: ThemeVariant;
+    isFocused: boolean;
   }>({
     theme: "light",
+    isFocused: false,
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -56,25 +51,51 @@ export default function SelectButton(props: SelectButtonProps) {
   return (
     <Box
       {...props._css}
-      className={clx(
-        buttonRoot,
-        props.disabled ? buttonIntent.disabled : buttonIntent[props.intent],
-        props.className
-      )}
-      attributes={props.attributes}
+      className={clx(styles.buttonRoot, styles.cursor, props.className)}
+      attributes={{
+        ...props.attributes,
+        "data-intent": props.intent ?? "none",
+        "data-state": state.isFocused
+          ? "focused"
+          : props.disabled
+            ? "disabled"
+            : "default",
+      }}
     >
       <button
         type="button"
-        className={clx(buttonStyles[state.theme], selectSizes[props.size])}
+        className={clx(
+          styles.selectButton({
+            intent: props.intent,
+            size: props.size,
+            theme: state.theme,
+          }),
+        )}
         onClick={() => props?.onClick()}
         ref={props.buttonRef}
         {...props.buttonAttributes}
+        disabled={props.disabled}
+        aria-disabled={props.disabled}
+        data-intent={props.intent ?? "none"}
+        data-theme={state.theme}
+        data-state={
+          state.isFocused ? "focused" : props.disabled ? "disabled" : "default"
+        }
+        data-active={!!props.active}
+        onFocus={() => {
+          state.isFocused = true;
+          props.buttonAttributes?.onFocus?.();
+        }}
+        onBlur={() => {
+          state.isFocused = false;
+          props.buttonAttributes?.onBlur?.();
+        }}
       >
-        <span className={buttonContent}>
+        <span className={styles.buttonContent}>
           <span {...props.valueProps}>
             {props.placeholder ?? "Select option"}
           </span>
-          <Icon name="arrowDropDown" className={arrowDropDown} />
+          <Icon name="arrowDropDown" className={styles.arrowDropDown} />
         </span>
       </button>
     </Box>

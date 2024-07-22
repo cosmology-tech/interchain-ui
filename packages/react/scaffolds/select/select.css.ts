@@ -66,7 +66,3 @@ export const selectRoot = style({
 export const selectFullWidth = style({
   width: "100%",
 });
-
-export const selectButton = style({
-  position: "relative",
-});
