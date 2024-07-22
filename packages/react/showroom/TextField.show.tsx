@@ -69,6 +69,10 @@ export const DefaultTextField: Story<{
   );
 };
 
+DefaultTextField.meta = {
+  component: "TextField",
+};
+
 DefaultTextField.args = {
   label: "Enter ATOM address",
   placeholder: "Your address here...",

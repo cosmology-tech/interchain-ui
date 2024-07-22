@@ -204,7 +204,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   onUpdate(() => {
     state.applySlotVars(themeProviderRef);
-  }, [state.theme, props.themeMode]);
+  }, [state.theme, props.themeMode, props.themeBuilderConfig]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") {

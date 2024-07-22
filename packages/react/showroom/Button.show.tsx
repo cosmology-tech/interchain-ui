@@ -32,6 +32,10 @@ export const DefaultButton: Story<{
   </Box>
 );
 
+DefaultButton.meta = {
+  component: "Button",
+};
+
 DefaultButton.args = {
   label: "Hello world",
   disabled: false,

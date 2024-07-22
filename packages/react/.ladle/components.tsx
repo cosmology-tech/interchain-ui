@@ -7,20 +7,66 @@ import {
   ThemeProvider,
   ThemeProviderProps,
   OverlaysManager,
+  ThemeVariant,
   createThemes,
+  ResultThemeVars,
 } from "../src";
 import "./reset.css";
 import "../src/styles/global.css";
+import { ConfigPane, ConfigChangeEvent } from "./config-pane";
 
 export const Provider: GlobalProvider = ({
   children,
   globalState,
   storyMeta,
 }) => {
+  const [themeBuilderConfig, setThemeBuilderConfig] = React.useState<
+    ResultThemeVars | undefined
+  >();
+  const [prevLightVars, setPrevLightVars] = React.useState<
+    Record<string, string>
+  >({});
+  const [prevDarkVars, setPrevDarkVars] = React.useState<
+    Record<string, string>
+  >({});
+
+  console.log("meta", storyMeta);
+
+  const onPaneConfigChange = (event: ConfigChangeEvent) => {
+    const { light, dark } = event;
+
+    const newLightVars = {
+      ...prevLightVars,
+      [light.varKey]: light.varValue,
+    };
+
+    const newDarkVars = {
+      ...prevDarkVars,
+      [dark.varKey]: dark.varValue,
+    };
+
+    setPrevLightVars(newLightVars);
+    setPrevDarkVars(newDarkVars);
+
+    console.log("Setting vars", newLightVars, newDarkVars);
+
+    const config = createThemes()
+      .addSlotThemes("light", {
+        ...newLightVars,
+      })
+      .addSlotThemes("dark", {
+        ...newDarkVars,
+      })
+      .build();
+
+    setThemeBuilderConfig(config);
+  };
+
   return (
     <div id="ladle-global-provider">
       <InterchainThemeProvider
         theme={globalState.theme === ThemeState.Light ? "light" : "dark"}
+        themeBuilderConfig={themeBuilderConfig}
       >
         <Box
           display="flex"
@@ -40,35 +86,36 @@ export const Provider: GlobalProvider = ({
 
         {children}
 
+        <Box
+          maxHeight="400px"
+          overflow="auto"
+          attributes={{
+            id: "config-pane-container",
+          }}
+        />
+
         <OverlaysManager />
+
+        <ConfigPane
+          component={storyMeta?.component}
+          onConfigChange={onPaneConfigChange}
+        />
       </InterchainThemeProvider>
     </div>
   );
 };
 
-// Try out theme builder
-// const themeBuilderConfig = createThemes()
-//   .addSlotThemes("light", {
-//     "button-primary-bgColor": "pink",
-//   })
-//   .addSlotThemes("dark", {
-//     "button-primary-bgColor": "red",
-//   })
-//   .build();
-
 function InterchainThemeProvider({
   children,
   theme,
+  themeBuilderConfig,
 }: {
   children?: React.ReactNode;
   theme: ThemeProviderProps["themeMode"];
+  themeBuilderConfig?: ResultThemeVars;
 }) {
   return (
-    <ThemeProvider
-      themeMode={theme}
-      // Try out theme builder
-      // themeBuilderConfig={themeBuilderConfig}
-    >
+    <ThemeProvider themeMode={theme} themeBuilderConfig={themeBuilderConfig}>
       {children}
     </ThemeProvider>
   );

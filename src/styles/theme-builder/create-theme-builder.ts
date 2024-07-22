@@ -51,7 +51,9 @@ class ThemeBuilder {
 
   private isPartiallySet(obj: ByThemeVariant<Partial<any>>): boolean {
     return (
-      Object.keys(obj.light).length > 0 || Object.keys(obj.dark).length > 0
+      (Object.keys(obj.light).length > 0 &&
+        Object.keys(obj.dark).length === 0) ||
+      (Object.keys(obj.dark).length > 0 && Object.keys(obj.light).length === 0)
     );
   }
 
@@ -124,18 +126,22 @@ class ThemeBuilder {
   }
 
   build(): ResultThemeVars {
-    if (
-      this.isPartiallySet(this._palettes) &&
-      !this.isPartiallySet(this._baseTokens)
-    ) {
-      throw new Error("Base tokens must be set if palettes are set");
+    if (this.isPartiallySet(this._palettes)) {
+      throw new Error(
+        "Both Light and Dark palettes must be set if one of them is set",
+      );
     }
 
-    if (
-      this.isPartiallySet(this._baseTokens) &&
-      !this.isPartiallySet(this._palettes)
-    ) {
-      throw new Error("Palettes must be set if base tokens are set");
+    if (this.isPartiallySet(this._baseTokens)) {
+      throw new Error(
+        "Both Light and Dark base tokens must be set if one of them is set",
+      );
+    }
+
+    if (this.isPartiallySet(this._slotThemes)) {
+      throw new Error(
+        "Both Light and Dark slot themes must be set if one of them is set",
+      );
     }
 
     const lightTheme = this.buildTheme("light");

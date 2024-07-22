@@ -28,13 +28,13 @@ useMetadata({
   },
 });
 
-export default function TextField(props: TextFieldProps) {
-  useDefaultProps({
-    type: "text",
-    size: "sm",
-    intent: "default",
-  });
+useDefaultProps<Partial<TextFieldProps>>({
+  type: "text",
+  size: "sm",
+  intent: "none",
+});
 
+export default function TextField(props: TextFieldProps) {
   const state = useStore<{
     theme: ThemeVariant;
     isFocused: boolean;

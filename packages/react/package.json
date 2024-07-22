@@ -143,6 +143,7 @@
     "@storybook/react": "^8.3.0",
     "@storybook/react-vite": "^8.3.0",
     "@storybook/test": "^8.3.0",
+    "@tweakpane/core": "^2.0.4",
     "@types/react": "latest",
     "@vanilla-extract/parcel-transformer": "^1.0.9",
     "@vanilla-extract/vite-plugin": "^4.0.15",
@@ -156,7 +157,9 @@
     "prop-types": "^15.8.1",
     "storybook": "^8.3.0",
     "storybook-react-rsbuild": "^0.1.0",
-    "vite": "^5.4.2",
+    "tweakpane": "^4.0.4",
+    "type-fest": "^4.21.0",
+    "vite": "^5.3.3",
     "vite-plugin-replace": "^0.1.1"
   },
   "gitHead": "05adf69046d07d6f764b96cf54cbaa492de06d95"

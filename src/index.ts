@@ -12,6 +12,7 @@ export type { Sprinkles } from "./styles/rainbow-sprinkles.css";
 export { store } from "./models/store";
 export { skeleton as skeletonClass } from "./ui/shared/shared.css";
 export { createThemes } from "./styles/theme-builder/create-theme-builder";
+export type { ResultThemeVars } from "./styles/theme-builder/create-theme-builder";
 
 // Init Components
 export { default as Box } from "./ui/box";

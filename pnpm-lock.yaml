@@ -17,14 +17,10 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.6.7
         version: 1.6.7
-<<<<<<< HEAD
       "@types/lodash":
         specifier: ^4.17.7
         version: 4.17.7
       "@vanilla-extract/css":
-=======
-      '@vanilla-extract/css':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: ^1.15.3
         version: 1.15.3
       '@vanilla-extract/css-utils':
@@ -58,7 +54,6 @@ importers:
       '@babel/core':
         specifier: ^7.24.7
         version: 7.24.7
-<<<<<<< HEAD
       "@babel/generator":
         specifier: ^7.25.6
         version: 7.25.6
@@ -66,9 +61,6 @@ importers:
         specifier: ^7.25.6
         version: 7.25.6
       "@babel/plugin-proposal-decorators":
-=======
-      '@babel/plugin-proposal-decorators':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.24.7)
       '@babel/preset-env':
@@ -80,7 +72,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.24.7
         version: 7.24.7(@babel/core@7.24.7)
-<<<<<<< HEAD
       "@babel/traverse":
         specifier: ^7.25.6
         version: 7.25.6
@@ -97,15 +88,6 @@ importers:
         specifier: 0.4.3
         version: 0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
       "@formkit/auto-animate":
-=======
-      '@builder.io/eslint-plugin-mitosis':
-        specifier: ^0.0.16
-        version: 0.0.16(eslint@8.57.0)
-      '@builder.io/mitosis-cli':
-        specifier: 0.3.11
-        version: 0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.39))(postcss@8.4.39)(pug@3.0.3)
-      '@formkit/auto-animate':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: ^0.8.2
         version: 0.8.2
       '@parcel/packager-ts':
@@ -146,13 +128,8 @@ importers:
         version: 20.14.9
       '@types/react':
         specifier: latest
-<<<<<<< HEAD
         version: 18.3.7
       "@typescript-eslint/eslint-plugin":
-=======
-        version: 18.3.3
-      '@typescript-eslint/eslint-plugin':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: ^7.15.0
         version: 7.15.0(@typescript-eslint/parser@7.15.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)
       '@typescript-eslint/parser':
@@ -163,13 +140,8 @@ importers:
         version: 2.1.1
       '@vitejs/plugin-vue':
         specifier: ^5.0.5
-<<<<<<< HEAD
         version: 5.0.5(vite@5.4.2(@types/node@20.14.9)(lightningcss@1.26.0)(terser@5.31.6))(vue@3.4.31(typescript@5.5.3))
       "@vue/babel-preset-app":
-=======
-        version: 5.0.5(vite@5.3.3(@types/node@20.14.9)(lightningcss@1.25.1)(terser@5.31.1))(vue@3.4.31(typescript@5.5.3))
-      '@vue/babel-preset-app':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: ^5.0.8
         version: 5.0.8(@babel/core@7.24.7)(core-js@3.36.1)(vue@3.4.31(typescript@5.5.3))
       "@vue/compiler-sfc":
@@ -307,13 +279,8 @@ importers:
         version: 22.5.5
       "@types/react":
         specifier: latest
-<<<<<<< HEAD
         version: 18.3.7
       "@types/react-dom":
-=======
-        version: 18.3.3
-      '@types/react-dom':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: latest
         version: 18.3.0
       eslint:
@@ -598,19 +565,13 @@ importers:
     dependencies:
       '@parcel/plugin':
         specifier: ^2.12.0
-<<<<<<< HEAD
         version: 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       "@parcel/utils":
-=======
-        version: 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
-      '@parcel/utils':
->>>>>>> adc38e6 (feat: select button and select)
         specifier: ^2.12.0
         version: 2.12.0
 
   packages/react:
     dependencies:
-<<<<<<< HEAD
       "@floating-ui/core":
         specifier: ^1.6.7
         version: 1.6.7
@@ -638,40 +599,10 @@ importers:
       "@react-aria/utils":
         specifier: ^3.25.2
         version: 3.25.2(react@18.3.1)
-=======
-      '@floating-ui/core':
-        specifier: ^1.6.4
-        version: 1.6.4
-      '@floating-ui/dom':
-        specifier: ^1.6.7
-        version: 1.6.7
-      '@floating-ui/react':
-        specifier: ^0.26.19
-        version: 0.26.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@floating-ui/react-dom':
-        specifier: ^2.1.1
-        version: 2.1.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@floating-ui/utils':
-        specifier: ^0.2.4
-        version: 0.2.4
-      '@formkit/auto-animate':
-        specifier: ^0.8.2
-        version: 0.8.2
-      '@react-aria/listbox':
-        specifier: ^3.12.1
-        version: 3.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-aria/overlays':
-        specifier: ^3.22.1
-        version: 3.22.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-aria/utils':
-        specifier: ^3.24.1
-        version: 3.24.1(react@18.3.1)
->>>>>>> adc38e6 (feat: select button and select)
       "@tanstack/react-virtual":
         specifier: ^3.10.5
         version: 3.10.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       "@vanilla-extract/css":
-<<<<<<< HEAD
         specifier: ^1.15.5
         version: 1.15.5
       "@vanilla-extract/dynamic":
@@ -680,16 +611,6 @@ importers:
       "@vanilla-extract/recipes":
         specifier: ^0.5.5
         version: 0.5.5(@vanilla-extract/css@1.15.5)
-=======
-        specifier: ^1.15.3
-        version: 1.15.3
-      '@vanilla-extract/dynamic':
-        specifier: ^2.1.1
-        version: 2.1.1
-      '@vanilla-extract/recipes':
-        specifier: ^0.5.3
-        version: 0.5.3(@vanilla-extract/css@1.15.3)
->>>>>>> adc38e6 (feat: select button and select)
       animejs:
         specifier: ^3.2.2
         version: 3.2.2
