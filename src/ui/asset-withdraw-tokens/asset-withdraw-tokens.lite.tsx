@@ -21,11 +21,14 @@ import { store } from "../../models/store";
 import { truncateTextMiddle } from "../../helpers/string";
 import IconButton from "../icon-button";
 import TextField from "../text-field";
-import { rootInput, inputBorderAndShadow } from "../text-field/text-field.css";
+
+import { rootInput } from "../text-field/text-field.css";
 import { standardTransitionProperties } from "../shared/shared.css";
 
 import type { ThemeVariant } from "../../models/system.model";
 import type { AssetWithdrawTokensProps } from "./asset-withdraw-tokens.types";
+
+// TODO: fix inputBorderAndShadow and buttons intent
 
 useMetadata({
   rsc: {
@@ -203,11 +206,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 borderRadius: "$lg",
                 alignItems: "center",
               }}
-              className={clsx(
-                rootInput,
-                inputBorderAndShadow,
-                standardTransitionProperties,
-              )}
+              className={clsx(rootInput, standardTransitionProperties)}
             >
               <Box
                 as="img"
@@ -266,11 +265,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
               domAttributes={{
                 "data-part-id": "to-address-input",
               }}
-              className={clsx(
-                rootInput,
-                inputBorderAndShadow,
-                standardTransitionProperties,
-              )}
+              className={clsx(rootInput, standardTransitionProperties)}
             >
               <Box
                 as="img"
@@ -294,7 +289,6 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
 
               <IconButton
                 icon="pencilLine"
-                intent="text"
                 size="sm"
                 iconSize="$lg"
                 attributes={{
@@ -381,7 +375,6 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
                 </Stack>
                 <IconButton
                   icon="checkFill"
-                  intent="tertiary"
                   size="md"
                   attributes={{
                     px: "$0",
@@ -461,7 +454,6 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
         </Stack>
 
         <Button
-          intent="tertiary"
           size="lg"
           fluidWidth
           onClick={() => props.onTransfer?.()}
@@ -645,7 +637,6 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
             </Stack>
             <IconButton
               icon="checkFill"
-              intent="tertiary"
               size="lg"
               attributes={{
                 minWidth: "$15",

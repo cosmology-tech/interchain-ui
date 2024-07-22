@@ -1,11 +1,11 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { unstyledButton } from "../button/button.css";
-import {
-  inputSizes,
-  inputStyles,
-  rootInput,
-  inputRootIntent,
-} from "../text-field/text-field.css";
+// import {
+//   inputSizes,
+//   inputStyles,
+//   rootInput,
+//   inputRootIntent,
+// } from "../text-field/text-field.css";
 import { themeVars } from "../../styles/themes.css";
 
 const hideShadow = style({
@@ -26,16 +26,28 @@ const buttonBase = style([
   }),
 ]);
 
+// TODO: fix this
 export const buttonStyles = styleVariants({
-  light: [inputStyles.light, buttonBase],
-  dark: [inputStyles.dark, buttonBase],
+  light: [buttonBase],
+  dark: [buttonBase],
 });
 
-export const selectSizes = inputSizes;
+export const selectSizes = styleVariants({});
 
-export const buttonRoot = rootInput;
+export const buttonRoot = styleVariants({});
 
-export const buttonIntent = inputRootIntent;
+export const buttonIntent = styleVariants({});
+
+// export const buttonStyles = styleVariants({
+//   light: [inputStyles.light, buttonBase],
+//   dark: [inputStyles.dark, buttonBase],
+// });
+
+// export const selectSizes = inputSizes;
+
+// export const buttonRoot = rootInput;
+
+// export const buttonIntent = inputRootIntent;
 
 export const arrowDropDown = style({
   fontSize: themeVars.fontSize["3xl"],
