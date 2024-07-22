@@ -6,6 +6,7 @@ import {
   Icon,
   ThemeProvider,
   ThemeProviderProps,
+  OverlaysManager,
   createThemes,
 } from "../src";
 import "./reset.css";
@@ -38,6 +39,8 @@ export const Provider: GlobalProvider = ({
         </Box>
 
         {children}
+
+        <OverlaysManager />
       </InterchainThemeProvider>
     </div>
   );

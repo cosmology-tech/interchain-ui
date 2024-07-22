@@ -23,7 +23,6 @@ import SelectButton from "@/ui/select-button";
 import {
   listBoxWidthVar,
   selectRoot,
-  selectButton,
   listboxStyle,
   selectFullWidth,
 } from "./select.css";
@@ -242,6 +241,7 @@ export default function Select(props: SelectProps) {
           placeholder={
             selectedItem?.label || props.placeholder || "Select an option"
           }
+          active={isOpen}
           _css={{
             width: props.width
               ? typeof props.width === "number"
@@ -253,7 +253,6 @@ export default function Select(props: SelectProps) {
             tabIndex: 0,
             ...getReferenceProps(),
           }}
-          className={selectButton}
         />
       </div>
 
