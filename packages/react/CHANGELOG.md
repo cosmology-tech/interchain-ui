@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.27](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.26...@interchain-ui/react@1.23.27) (2024-07-23)
+
+### Bug Fixes
+
+- **overlays:** guard against SSR env ([d72a6cf](https://github.com/cosmology-tech/interchain-ui/commit/d72a6cf729b1667aa53ebb82e1935a03110f15d4))
+
 ## [1.23.26](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.25...@interchain-ui/react@1.23.26) (2024-07-22)
 
 **Note:** Version bump only for package @interchain-ui/react
