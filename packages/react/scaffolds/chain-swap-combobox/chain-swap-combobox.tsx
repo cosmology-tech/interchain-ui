@@ -26,6 +26,7 @@ import type { ChainListItemProps } from "@/ui/chain-list-item/chain-list-item.ty
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
 import { overlays } from "@/ui/overlays-manager/overlays";
 import useTheme from "@/ui/hooks/use-theme";
+import { getOwnerDocument } from "@/helpers/platform";
 
 interface ItemProps {
   isActive: boolean;
@@ -211,8 +212,12 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     if (props.rootNode) {
       return setMountRoot(props.rootNode);
     }
+    if (!containerRef.current) return;
 
-    setMountRoot(overlays.getOrCreateOverlayRoot(containerRef.current));
+    const ownerDocument = getOwnerDocument(containerRef.current);
+    if (!ownerDocument) return;
+
+    setMountRoot(overlays.getOrCreateOverlayRoot(ownerDocument));
   }, []);
 
   return (
