@@ -80,6 +80,8 @@ export default function Reveal(props: RevealProps) {
       if (elementRef.offsetHeight > props.hideThresholdHeight) {
         // Listen the resize event to get container height
         resizeListenerRef = debounce(() => {
+          if (!elementRef) return;
+
           elementRef.style.height = "auto";
           eleHeight = elementRef.offsetHeight + TOGGLE_SPACE;
           elementRef.style.height = isVisibleRef
