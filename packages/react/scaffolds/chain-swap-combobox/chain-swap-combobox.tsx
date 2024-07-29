@@ -10,7 +10,6 @@ import {
   useInteractions,
   useListNavigation,
   useRole,
-  useFocus,
   useTransitionStyles,
   FloatingFocusManager,
   FloatingList,

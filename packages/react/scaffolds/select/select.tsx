@@ -147,6 +147,19 @@ export default function Select(props: SelectProps) {
     null,
   );
 
+  const overlayId = React.useRef(overlays.generateId("chain-swap-combobox"));
+
+  React.useEffect(() => {
+    if (isOpen) {
+      overlays.pushOverlay(overlayId.current);
+    }
+    return () => {
+      if (isOpen) {
+        overlays.popOverlay(overlayId.current);
+      }
+    };
+  }, [isOpen]);
+
   React.useEffect(() => {
     // Default lib root
     setDefaultRoot(overlays.getOrCreateOverlayRoot(window.document));
