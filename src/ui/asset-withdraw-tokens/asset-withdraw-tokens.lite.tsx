@@ -78,9 +78,11 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
       state.reverseAnimation = false;
     },
     handleAmountChange(percent) {
-      state.inputAmount = new BigNumber(props.available)
+      const newAmount = new BigNumber(props.available)
         .multipliedBy(percent)
         .toNumber();
+      state.inputAmount = newAmount;
+      props.onChange?.(new BigNumber(newAmount).toString());
     },
     onAmountChange(value) {
       state.inputAmount = value;
