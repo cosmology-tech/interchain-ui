@@ -1,20 +1,21 @@
 import { style } from "@vanilla-extract/css";
 import { globalStyle } from "@vanilla-extract/css";
-import { themeVars } from "@/styles/themes.css";
+
+export const modalRoot = style({
+  position: "fixed",
+  inset: 0,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 0,
+});
 
 export const modalContainer = style({
-  position: `fixed`,
-  top: 0,
-  left: 0,
-  zIndex: themeVars.zIndex[50],
-  width: `100%`,
-  height: `100%`,
   overflow: `hidden`,
   display: `flex`,
   alignItems: `center`,
   justifyContent: `center`,
   transition: `opacity 300ms ease-in-out`,
-  padding: themeVars.space[8], // top and bottom gutters
   selectors: {
     '&[data-modal-open="true"]': {
       opacity: 1,
