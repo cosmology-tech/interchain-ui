@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.29](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.28...@interchain-ui/react@1.23.29) (2024-07-29)
+
+### Bug Fixes
+
+- overview transfer and other combobox/select bugs ([#197](https://github.com/cosmology-tech/interchain-ui/issues/197)) ([a82ad9c](https://github.com/cosmology-tech/interchain-ui/commit/a82ad9c83c22eb85d6ecf09a72d6f9e2c4fea6d1))
+
 ## [1.23.28](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.27...@interchain-ui/react@1.23.28) (2024-07-23)
 
 **Note:** Version bump only for package @interchain-ui/react
