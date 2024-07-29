@@ -60,7 +60,9 @@ export const Primary: Story = {
           )}
           isOpen={isDepositOpen}
           title="Deposit"
-          onClose={() => setIsDepositOpen(false)}
+          onClose={() => {
+            setIsDepositOpen(false);
+          }}
         >
           {isReady && selected != null ? (
             <OverviewTransfer

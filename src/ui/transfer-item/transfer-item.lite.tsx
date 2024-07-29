@@ -6,10 +6,10 @@ import {
   useRef,
   useDefaultProps,
   Show,
+  For,
   useMetadata,
 } from "@builder.io/mitosis";
 import clx from "clsx";
-import cloneDeep from "lodash/cloneDeep";
 import BigNumber from "bignumber.js";
 import Stack from "../stack";
 import Text from "../text";
@@ -20,8 +20,8 @@ import * as styles from "./transfer-item.css";
 import {
   TransferItemProps,
   AvailableItem,
-  ComboboxListType,
-  ComboboxListItemType,
+  ComboboxListItem,
+  PartialAmount,
 } from "./transfer-item.types";
 import type { ThemeVariant } from "../../models/system.model";
 
@@ -33,28 +33,34 @@ useMetadata({
   },
 });
 
-export default function TransferItem(props: TransferItemProps) {
-  useDefaultProps({
-    halfBtn: false,
-    maxBtn: false,
-    hasAvailable: false,
-    title: "",
-  });
+useDefaultProps<Partial<TransferItemProps>>({
+  hasAvailable: false,
+  title: "",
+  partials: [
+    {
+      label: "Half",
+      percentage: 0.5,
+    },
+    {
+      label: "Max",
+      percentage: 1,
+    },
+  ],
+});
 
-  let lastItemRef = useRef<AvailableItem>(null);
+export default function TransferItem(props: TransferItemProps) {
   let lastValueRef = useRef<number>(0);
 
   const state = useStore<{
     currentItem: AvailableItem;
     amountPrice: number;
-    comboboxList: ComboboxListType;
+    comboboxList: ComboboxListItem[];
+    handlePartialAmountChange: (partial: PartialAmount) => void;
     handleAmountInput: (value: number) => void;
-    handleHalf: () => void;
-    handleMax: () => void;
-    getComboboxItem: (item: AvailableItem) => ComboboxListItemType;
+    getComboboxItem: (item: AvailableItem) => ComboboxListItem;
     mapToComboboxList: (list: AvailableItem[]) => void;
-    getSelectedItem: (selectedItem: ComboboxListItemType) => AvailableItem;
-    itemSelected: (selectedItem: ComboboxListItemType) => void;
+    getSelectedItem: (selectedItem: ComboboxListItem) => AvailableItem;
+    itemSelected: (selectedItem: ComboboxListItem) => void;
     // === UI states
     theme: ThemeVariant;
   }>({
@@ -75,29 +81,25 @@ export default function TransferItem(props: TransferItemProps) {
       if (value === lastValueRef) {
         return;
       }
-      lastItemRef = cloneDeep(state.currentItem);
       lastValueRef = value;
       props?.onChange?.(state.currentItem, value);
     },
-    handleHalf() {
-      let value = new BigNumber(state.currentItem.available)
-        .dividedBy(2)
+    handlePartialAmountChange(partial: PartialAmount) {
+      const value = new BigNumber(state.currentItem?.available)
+        .multipliedBy(partial.percentage)
         .toNumber();
-      state.handleAmountInput(value);
-    },
-    handleMax() {
-      let value = new BigNumber(state.currentItem.available).toNumber();
       state.handleAmountInput(value);
     },
     getComboboxItem(item: AvailableItem) {
       let dollarAmount = new BigNumber(item?.available)
         .multipliedBy(item?.priceDisplayAmount)
-        .decimalPlaces(2)
         .toString();
+
       dollarAmount = store.getState().formatNumber({
         value: dollarAmount,
         style: "currency",
       });
+
       return {
         iconUrl: item?.imgSrc,
         name: item?.name,
@@ -112,14 +114,14 @@ export default function TransferItem(props: TransferItemProps) {
       });
       state.comboboxList = res;
     },
-    getSelectedItem(selectedItem: ComboboxListItemType) {
+    getSelectedItem(selectedItem: ComboboxListItem) {
       return props.dropdownList.find(
-        (item: AvailableItem) => item.symbol === selectedItem.tokenName
+        (item: AvailableItem) => item.symbol === selectedItem.tokenName,
       );
     },
-    itemSelected(selectedItem: ComboboxListItemType) {
+    itemSelected(selectedItem: ComboboxListItem) {
       state.currentItem = props.dropdownList.find(
-        (item) => item.symbol === selectedItem.tokenName
+        (item) => item.symbol === selectedItem.tokenName,
       );
       props?.onItemSelected?.(state.getSelectedItem(selectedItem));
     },
@@ -222,11 +224,11 @@ export default function TransferItem(props: TransferItemProps) {
             </Stack>
           </Show>
 
-          {/* Half and max buttons */}
-          <Show when={props.halfBtn || props.maxBtn}>
+          {/* Partial amounts */}
+          <Show when={props.partials && props.partials.length > 0}>
             <Stack
               direction="horizontal"
-              space="$0"
+              space="$4"
               align="center"
               attributes={{
                 justifyContent: "flex-end",
@@ -234,29 +236,19 @@ export default function TransferItem(props: TransferItemProps) {
                 flexShrink: "1",
               }}
             >
-              <Show when={props.halfBtn}>
-                <button
-                  className={styles.textBtn[state.theme]}
-                  onClick={() => state.handleHalf()}
-                >
-                  <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
-                    {props.halfBtnLabel ?? "Half"}
-                  </Box>
-                </button>
-              </Show>
-
-              <Box width={props.isSmall ? "$2" : "$5"} />
-
-              <Show when={props.maxBtn}>
-                <button
-                  className={styles.textBtn[state.theme]}
-                  onClick={() => state.handleMax()}
-                >
-                  <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
-                    {props.maxBtnLabel ?? "Max"}
-                  </Box>
-                </button>
-              </Show>
+              <For each={props.partials}>
+                {(partial, index) => (
+                  <button
+                    key={index}
+                    className={styles.textBtn[state.theme]}
+                    onClick={() => state.handlePartialAmountChange(partial)}
+                  >
+                    <Box as="span" fontSize={props.isSmall ? "$2xs" : "$sm"}>
+                      {partial.label}
+                    </Box>
+                  </button>
+                )}
+              </For>
             </Stack>
           </Show>
         </Box>
@@ -274,6 +266,7 @@ export default function TransferItem(props: TransferItemProps) {
             size={props.isSmall ? "sm" : "md"}
             filterFn={props.filterFn}
             placeholder={props.placeholder}
+            selectedItem={state.getComboboxItem(state.currentItem)}
             defaultSelected={props.defaultSelectedItem ?? state.comboboxList[0]}
             options={state.comboboxList}
             onItemSelected={(item) => {
@@ -305,7 +298,7 @@ export default function TransferItem(props: TransferItemProps) {
                         if (typeof props.onInput === "function") {
                           props.onInput(
                             state.currentItem,
-                            (event.target as HTMLInputElement).value
+                            (event.target as HTMLInputElement).value,
                           );
                         }
                       }}
@@ -314,7 +307,7 @@ export default function TransferItem(props: TransferItemProps) {
                       }}
                       inputClassName={clx(
                         styles.transferInput,
-                        props.isSmall ? styles.smComboboxInput : null
+                        props.isSmall ? styles.smComboboxInput : null,
                       )}
                       minValue={0}
                       maxValue={
@@ -342,14 +335,14 @@ export default function TransferItem(props: TransferItemProps) {
             attributes={
               props.isSmall
                 ? {
-                    pr: "$5",
-                    pl: "$6",
-                    py: "$4",
+                    pr: "10px",
+                    pl: "12px",
+                    py: "8px",
                   }
                 : {
-                    pr: "$5",
-                    pl: "$9",
-                    py: "$7",
+                    pr: "10px",
+                    pl: "20px",
+                    py: "14px",
                   }
             }
           />

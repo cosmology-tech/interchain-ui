@@ -76,15 +76,6 @@ function useDialog({
       !rootRef.contains(event.target as Node) &&
       overlays.isTopMostOverlay(overlayId.current)
     ) {
-      console.log("CLickaway", {
-        closeOnClickaway,
-        rootRef,
-        event,
-        contains: !rootRef.contains(event.target as Node),
-        overlays: overlays.overlays,
-        isControlled: controlledOpen != null,
-      });
-
       setOpen(false);
     }
   });

@@ -1,7 +1,7 @@
 import type { BaseComponentProps } from "../../models/components.model";
 import type { ChainListItemProps } from "../chain-list-item/chain-list-item.types";
 
-export type ComboboxListItemType = {
+export type ComboboxListItem = {
   iconUrl?: string;
   name: string;
   tokenName: string;
@@ -9,7 +9,7 @@ export type ComboboxListItemType = {
   notionalValue?: string;
 };
 
-export type ComboboxListType = Array<ComboboxListItemType>;
+export type ComboboxList = Array<ComboboxListItem>;
 
 export type AvailableItem = {
   imgSrc: string;
@@ -26,6 +26,11 @@ export type AvailableItem = {
   priceDisplayAmount?: number;
 };
 
+export type PartialAmount = {
+  label: string;
+  percentage: number;
+};
+
 export interface TransferItemProps extends BaseComponentProps {
   /**
    * Drop down list of available items
@@ -36,16 +41,7 @@ export interface TransferItemProps extends BaseComponentProps {
    */
   hasAvailable?: boolean;
   availableLabel?: string;
-  /**
-   * Is there a half button
-   */
-  halfBtn?: boolean;
-  halfBtnLabel?: string;
-  /**
-   * Is there a max button
-   */
-  maxBtn?: boolean;
-  maxBtnLabel?: string;
+  partials?: PartialAmount[];
   /**
    * Title of the transfer-item
    */
@@ -72,6 +68,6 @@ export interface TransferItemProps extends BaseComponentProps {
   isSmall?: boolean;
   filterFn?: (
     options: Array<ChainListItemProps>,
-    query: string
+    query: string,
   ) => Array<ChainListItemProps>;
 }

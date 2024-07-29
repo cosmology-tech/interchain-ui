@@ -19,6 +19,7 @@ import {
   chainSwapLogo,
   logoMd,
   logoSm,
+  rotate,
 } from "./chain-swap-input.css";
 import type { ThemeVariant } from "../../models/system.model";
 import type { ChainSwapInputProps } from "./chain-swap-input.types";
@@ -128,10 +129,11 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                   placeholder={props.placeholder}
                   className={clx(
                     chainSwapInput[props.size],
-                    props.inputClassName
+                    props.inputClassName,
                   )}
                   data-input-value={!!props.value}
                   data-part-id="chain-swap-input"
+                  data-size={props.size}
                   {...props.inputAttributes}
                 />
 
@@ -147,7 +149,7 @@ export default function ChainSwapInput(props: ChainSwapInputProps) {
                 >
                   <button
                     type="button"
-                    className={baseButton}
+                    className={clx(baseButton, props.isOpen ? rotate : null)}
                     onClick={() => props.onDropdownArrowClicked?.()}
                     style={{
                       backgroundColor: "transparent",

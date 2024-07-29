@@ -4,7 +4,7 @@ import {
   autoUpdate,
   size,
   offset,
-  useId,
+  useClick,
   useDismiss,
   useFloating,
   useInteractions,
@@ -16,6 +16,7 @@ import {
   FloatingList,
   FloatingPortal,
 } from "@floating-ui/react";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 import Box from "@/ui/box";
 import ChainSwapInput from "@/ui/chain-swap-input";
@@ -27,6 +28,7 @@ import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
 import { overlays } from "@/ui/overlays-manager/overlays";
 import useTheme from "@/ui/hooks/use-theme";
 import { getOwnerDocument } from "@/helpers/platform";
+import { themeVars } from "@/styles/themes.css";
 
 interface ItemProps {
   isActive: boolean;
@@ -50,22 +52,18 @@ const Item = React.forwardRef<HTMLDivElement, ItemProps>((props, ref) => {
     amount,
     notionalValue,
     isSelected,
-    ...rest
   } = props;
-  const id = useId();
   return (
-    <div ref={ref} role="option" id={id} aria-selected={isActive} {...rest}>
-      <ChainListItem
-        isActive={isActive}
-        size={size}
-        iconUrl={iconUrl}
-        name={name}
-        tokenName={tokenName}
-        amount={amount}
-        notionalValue={notionalValue}
-        isSelected={isSelected}
-      />
-    </div>
+    <ChainListItem
+      isActive={isActive}
+      size={size}
+      iconUrl={iconUrl}
+      name={name}
+      tokenName={tokenName}
+      amount={amount}
+      notionalValue={notionalValue}
+      isSelected={isSelected}
+    />
   );
 });
 
@@ -76,6 +74,7 @@ export type ComboboxOption = Omit<
 
 export interface ChainSwapComboboxProps {
   size: ChainListItemProps["size"];
+  // Maximum height of the dropdown list
   maxHeight?: number;
   options: Array<ComboboxOption>;
   filterFn?: (
@@ -92,6 +91,13 @@ export interface ChainSwapComboboxProps {
   rootNode?: HTMLElement;
   inputClassName?: string;
   attributes?: Sprinkles;
+  // Popover positioning props
+  offsetX?: number;
+  // Virtualization props
+  virtualization?: {
+    itemSize: number;
+    overscan: number;
+  };
 }
 
 export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
@@ -107,54 +113,86 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     props.defaultSelected ?? null,
   );
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState<number | null>(null);
+  const [pointer, setPointer] = React.useState(false);
 
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const listRef = React.useRef<Array<HTMLElement | null>>([]);
+  const isTypingRef = React.useRef(false);
 
-  const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
-    whileElementsMounted: autoUpdate,
-    open,
-    placement: "bottom-start",
-    onOpenChange: setOpen,
-    middleware: [
-      offset(({ rects }) => {
-        const containerX = containerRef.current.getBoundingClientRect().left;
-        const referenceX = rects.reference.x;
+  const overlayId = React.useRef(overlays.generateId("chain-swap-combobox"));
 
-        return {
-          crossAxis: containerX - referenceX,
-        };
-      }),
-      size({
-        apply({ rects, availableHeight, elements }) {
-          const containerWidth =
-            containerRef.current.getBoundingClientRect().width;
-          Object.assign(elements.floating.style, {
-            width: `${containerWidth}px`,
-            maxHeight: `${props.maxHeight ?? availableHeight}px`,
-          });
-        },
-      }),
-    ],
+  if (!open && pointer) {
+    setPointer(false);
+  }
+
+  React.useEffect(() => {
+    if (open) {
+      overlays.pushOverlay(overlayId.current);
+    }
+    return () => {
+      if (open) {
+        overlays.popOverlay(overlayId.current);
+      }
+    };
+  }, [open]);
+
+  const rowVirtualizer = useVirtualizer({
+    count: props.options.length,
+    getScrollElement: () => refs.floating.current,
+    estimateSize: () => 64,
+    overscan: 10,
   });
+
+  const { refs, floatingStyles, context, isPositioned } =
+    useFloating<HTMLInputElement>({
+      open,
+      onOpenChange: setOpen,
+      whileElementsMounted: autoUpdate,
+      placement: "bottom-start",
+      middleware: [
+        offset(({ rects }) => {
+          const containerX = containerRef.current.getBoundingClientRect().left;
+          const referenceX = rects.reference.x;
+          const offsetX = props.offsetX ?? 0;
+
+          return {
+            crossAxis: containerX - referenceX - offsetX,
+          };
+        }),
+        size({
+          apply({ rects, availableHeight, elements }) {
+            const containerWidth =
+              containerRef.current.getBoundingClientRect().width;
+            Object.assign(elements.floating.style, {
+              width: `${containerWidth}px`,
+              maxHeight: `${Math.min(props.maxHeight ?? availableHeight, 500)}px`,
+            });
+          },
+        }),
+      ],
+    });
 
   const { isMounted, styles: transitionStyles } = useTransitionStyles(context);
 
-  const focus = useFocus(context, {
-    visibleOnly: false,
-  });
+  const click = useClick(context);
   const role = useRole(context, { role: "listbox" });
   const dismiss = useDismiss(context);
   const listNav = useListNavigation(context, {
     listRef,
     activeIndex,
+    selectedIndex,
     onNavigate: setActiveIndex,
     virtual: true,
-    loop: true,
+    loop: false,
+    disabledIndices: [],
+    openOnArrowKeyDown: true,
+    allowEscape: true,
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, focus, dismiss, listNav],
+    [click, role, dismiss, listNav],
   );
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -185,24 +223,38 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
     }
   }
 
-  const items =
-    typeof props.filterFn === "function"
+  const items = React.useMemo(() => {
+    return typeof props.filterFn === "function"
       ? props.filterFn(props.options, inputValue)
       : defaultFilterOptions(props.options);
+  }, [props.filterFn, props.options, inputValue]);
 
-  React.useEffect(() => {
-    if (!inputFocusing) {
-      setSelectedItem(props?.valueItem);
-      setInputValue(props?.valueItem?.tokenName);
+  function handleSelect() {
+    if (activeIndex !== null) {
+      const selected = items[activeIndex];
+      setInputValue(selected.tokenName);
+      setSelectedIndex(activeIndex);
+      setActiveIndex(null);
+      setSelectedItem(selected);
+      setOpen(false);
+      // refs.domReference.current?.focus();
+      props.onItemSelected?.(selected);
     }
-  }, [props.valueItem]);
+  }
 
-  // Make sure onBlur can reset value to the selectedItem
-  React.useEffect(() => {
-    if (!open && selectedItem && !inputFocusing) {
-      setInputValue(selectedItem.tokenName);
+  React.useLayoutEffect(() => {
+    if (isPositioned && !pointer) {
+      // Scrolling is restored, but the item will be scrolled
+      // into view when necessary
+      if (activeIndex !== null) {
+        wrapperRef.current?.focus({ preventScroll: true });
+        rowVirtualizer.scrollToIndex(activeIndex, {
+          // @ts-ignore
+          smoothScroll: false,
+        });
+      }
     }
-  }, [open, selectedItem, inputValue]);
+  }, [rowVirtualizer, isPositioned, activeIndex, selectedIndex, pointer, refs]);
 
   const [mountRoot, setMountRoot] = React.useState<HTMLElement | undefined>(
     undefined,
@@ -240,6 +292,7 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
           endAddon={props.endAddon}
           placeholder={props.placeholder}
           {...selectedItem}
+          isOpen={open}
           label={selectedItem?.name ?? null}
           inputClassName={props.inputClassName}
           inputAttributes={getReferenceProps({
@@ -266,69 +319,165 @@ export default function ChainSwapCombobox(props: ChainSwapComboboxProps) {
             },
             onFocus() {
               setInputFocusing(true);
-              setInputValue("");
             },
             onBlur(e) {
               setInputFocusing(false);
               handleEmptyInputEscape();
+
+              // Nothing has been selected, reset scrolling upon open
+              if (activeIndex === null && selectedIndex === null) {
+                rowVirtualizer.scrollToIndex(0, {
+                  // @ts-ignore
+                  smoothScroll: false,
+                });
+              }
             },
           })}
         />
       </div>
 
-      {open && (
-        <FloatingFocusManager
-          context={context}
-          initialFocus={-1}
-          visuallyHiddenDismiss
-        >
-          <FloatingPortal root={mountRoot}>
+      <FloatingPortal root={mountRoot}>
+        {open && (
+          <FloatingFocusManager
+            context={context}
+            initialFocus={-1}
+            visuallyHiddenDismiss
+          >
             <div
-              {...getFloatingProps({
-                ref: refs.setFloating,
-                style: {
-                  ...floatingStyles,
-                  ...(isMounted ? transitionStyles : {}),
-                  zIndex: 999,
-                  overflowY: "auto",
-                },
-              })}
+              ref={refs.setFloating}
+              tabIndex={-1}
               className={clx(
                 themeClass,
                 props.size === "md"
                   ? styles.chainSwapListBox[theme]
                   : styles.chainSwapListBoxSm[theme],
               )}
+              style={{
+                ...floatingStyles,
+                ...(isMounted ? transitionStyles : {}),
+                zIndex: 999,
+                overflowY: "auto",
+                overflowX: "hidden",
+                outline: "none",
+                border: "none",
+                boxShadow: "none",
+              }}
             >
               <FloatingList elementsRef={listRef}>
-                {items.map((item, index) => (
-                  <Item
-                    key={item.tokenName}
-                    size={props.size}
-                    isActive={activeIndex === index}
-                    isSelected={item.tokenName === selectedItem?.tokenName}
-                    {...item}
-                    {...getItemProps({
-                      ref(node) {
-                        listRef.current[index] = node;
-                      },
-                      onClick() {
-                        setInputValue(item.tokenName);
-                        setOpen(false);
-                        if (item) {
-                          setSelectedItem(item);
-                          props.onItemSelected?.(item);
-                        }
-                        refs.domReference.current?.focus();
-                      },
-                    })}
-                  />
-                ))}
+                <div
+                  ref={wrapperRef}
+                  // Some screen readers do not like any wrapper tags inside
+                  // of the element with the role, so we spread it onto the
+                  // virtualizer wrapper.
+                  {...getFloatingProps({
+                    onKeyDown(e) {
+                      setPointer(false);
+
+                      if (e.key === "Enter" && activeIndex !== null) {
+                        e.preventDefault();
+                        handleSelect();
+                      }
+
+                      if (e.key === " " && !isTypingRef.current) {
+                        e.preventDefault();
+                      }
+                    },
+                    onKeyUp(e) {
+                      if (e.key === " " && !isTypingRef.current) {
+                        handleSelect();
+                      }
+                    },
+                  })}
+                  // Ensure this element receives focus upon open so keydowning works.
+                  tabIndex={0}
+                  className="virtual-parent"
+                  style={{
+                    height: `${rowVirtualizer.getTotalSize()}px`,
+                    width:
+                      refs.reference.current?.getBoundingClientRect().width,
+                    outline: "none",
+                    border: "none",
+                    boxShadow: "none",
+                    overflow: "auto",
+                  }}
+                >
+                  {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                    const item = items[virtualRow.index];
+
+                    return (
+                      <div
+                        key={virtualRow.key}
+                        tabIndex={-1}
+                        role="option"
+                        aria-selected={activeIndex === virtualRow.index}
+                        // As the list is virtualized, this lets the assistive tech know
+                        // how many options there are total without looking at the DOM.
+                        aria-setsize={rowVirtualizer.getTotalSize()}
+                        aria-posinset={virtualRow.index + 1}
+                        ref={(node) => {
+                          listRef.current[virtualRow.index] = node;
+                        }}
+                        className={clx(themeClass, "virtual-row")}
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          paddingLeft: getPadding(refs.floating.current)
+                            .paddingLeft,
+                          paddingRight: getPadding(refs.floating.current)
+                            .paddingRight,
+                          paddingTop: themeVars.space["4"],
+                          paddingBottom: themeVars.space["4"],
+                          width: "100%",
+                          outline: "none",
+                          border: "none",
+                          boxShadow: "none",
+                          height: `${virtualRow.size}px`,
+                          transform: `translateY(${virtualRow.start}px)`,
+                        }}
+                        {...getItemProps({
+                          onClick: (e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            handleSelect();
+                          },
+                        })}
+                      >
+                        <Item
+                          size={props.size}
+                          isActive={activeIndex === virtualRow.index}
+                          isSelected={
+                            item
+                              ? item?.tokenName === selectedItem?.tokenName
+                              : false
+                          }
+                          {...item}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </FloatingList>
             </div>
-          </FloatingPortal>
-        </FloatingFocusManager>
-      )}
+          </FloatingFocusManager>
+        )}
+      </FloatingPortal>
     </Box>
   );
+}
+function getPadding(element: HTMLElement | null): {
+  paddingLeft: number;
+  paddingRight: number;
+} {
+  const defaultPadding = { paddingLeft: 0, paddingRight: 0 };
+
+  if (typeof window === "undefined" || !element) {
+    return defaultPadding;
+  }
+
+  const computedStyle = window.getComputedStyle(element);
+  const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
+  const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
+
+  return { paddingLeft, paddingRight };
 }
