@@ -63,8 +63,6 @@ export const DepositAsset: Story = {
 
       const fromItem = assets.find((item) => item.symbol === "ATOM");
       const toItem = assets.find((item) => item.symbol === "STRD");
-      if (fromItem || toItem) return;
-
       setFromData({
         fromSymbol: fromItem?.symbol,
         fromDenom: fromItem?.name,

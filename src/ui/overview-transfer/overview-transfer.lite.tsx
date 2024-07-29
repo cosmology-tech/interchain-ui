@@ -5,7 +5,6 @@ import {
   onUnMount,
   useRef,
   useDefaultProps,
-  onUpdate,
   useMetadata,
 } from "@builder.io/mitosis";
 import Box from "../box";
@@ -36,15 +35,15 @@ useDefaultProps<Partial<OverviewTransferProps>>({
 export default function OverviewTransfer(props: OverviewTransferProps) {
   const state = useStore<{
     theme: ThemeVariant;
-    curSelectedItem: AvailableItem;
+    selectedItem: AvailableItem;
     amount: number;
     handleTransferChange: (item: AvailableItem, value: number) => void;
   }>({
     theme: "light",
-    curSelectedItem: null,
+    selectedItem: null,
     amount: 0,
     handleTransferChange(item: AvailableItem, value: number) {
-      state.curSelectedItem = item;
+      state.selectedItem = item;
       state.amount = value;
       props.onChange?.(item, value);
     },
@@ -64,10 +63,6 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
     if (typeof cleanupRef === "function") cleanupRef();
   });
 
-  onUpdate(() => {
-    state.curSelectedItem = props.selectedItem ?? props.dropdownList[0];
-  }, [props.dropdownList, props.selectedItem]);
-
   return (
     <Stack
       direction="vertical"
@@ -79,18 +74,17 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
       }}
     >
       <TransferItem
-        maxBtn
         hasAvailable
         title={props.inputLabel}
         defaultSelectedItem={props.defaultSelected}
         dropdownList={props.dropdownList}
-        selectedItem={state.curSelectedItem}
+        selectedItem={props.selectedItem}
         amount={state.amount}
         onChange={(item: AvailableItem, value: number) =>
           state.handleTransferChange(item, value)
         }
         onItemSelected={(selectedItem: AvailableItem) => {
-          state.curSelectedItem = selectedItem;
+          state.selectedItem = selectedItem;
           props.onChange?.(selectedItem, state.amount);
         }}
       />

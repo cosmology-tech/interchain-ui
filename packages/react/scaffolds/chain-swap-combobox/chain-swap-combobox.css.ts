@@ -34,7 +34,7 @@ const spacingSm = style({
 
 export const listBoxBg = styleVariants({
   light: {
-    backgroundColor: `${themeVars.colors.progressBg} !important`,
+    backgroundColor: `${themeVars.colors.menuItemBg} !important`,
   },
   dark: {},
 });

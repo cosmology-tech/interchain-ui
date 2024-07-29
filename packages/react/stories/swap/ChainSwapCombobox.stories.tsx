@@ -50,6 +50,8 @@ export const Primary: Story = {
       return <div>Loading...</div>;
     }
 
+    // console.log("options", options);
+
     return (
       <ChainSwapCombobox
         size="md"

@@ -228,7 +228,6 @@ export default function TokenInput(props: TokenInputProps) {
                 ) : null}
               </Stack>
             }
-            clampValueOnBlur={false}
             onChange={(value: number) => {
               state.handleTokenInput(value);
             }}

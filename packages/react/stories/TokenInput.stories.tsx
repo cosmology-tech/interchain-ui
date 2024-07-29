@@ -43,6 +43,7 @@ export const Primary: Story = {
     return (
       <TokenInput
         {...props}
+        hasProgressBar={false}
         amount={amount}
         onAmountChange={(value) => {
           setAmount(value);

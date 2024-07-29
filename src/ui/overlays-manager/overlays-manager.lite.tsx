@@ -52,6 +52,11 @@ export default function OverlaysManager(props: OverlaysManagerProps) {
       // Cleanup function
       cleanupRef = () => {
         observer.disconnect();
+
+        if (!containerRef) {
+          return;
+        }
+
         while (containerRef.firstChild) {
           containerRef.removeChild(containerRef.firstChild);
         }
