@@ -4,8 +4,10 @@ import {
   useRef,
   onUpdate,
   onMount,
+  onUnMount,
   useMetadata,
 } from "@builder.io/mitosis";
+import clx from "clsx";
 import {
   computePosition,
   offset,
@@ -17,6 +19,10 @@ import {
 } from "@floating-ui/dom";
 import Box from "../box";
 import { standardTransitionProperties } from "../shared/shared.css";
+import * as styles from "./tooltip.css";
+
+import { store } from "../../models/store";
+import type { ThemeVariant } from "../../models/system.model";
 import type { TooltipProps } from "./tooltip.types";
 
 useMetadata({
@@ -25,15 +31,17 @@ useMetadata({
   },
 });
 
+useDefaultProps<Partial<TooltipProps>>({
+  placement: "top",
+});
+
 export default function Tooltip(props: TooltipProps) {
-  useDefaultProps({
-    placement: "top",
-  });
   const anchorRef = useRef(null);
   const tooltipRef = useRef(null);
   const arrowRef = useRef(null);
 
   const state = useStore<{
+    theme: ThemeVariant;
     isMounted: boolean;
     isShown: boolean;
     setTooltip: (isShown: boolean) => void;
@@ -44,6 +52,7 @@ export default function Tooltip(props: TooltipProps) {
       tooltip: HTMLDivElement;
     };
   }>({
+    theme: "light",
     isMounted: false,
     isShown: false,
     setTooltip: (shouldShow) => {
@@ -125,8 +134,19 @@ export default function Tooltip(props: TooltipProps) {
     },
   });
 
+  let cleanupRef = useRef<() => void>(null);
+
   onMount(() => {
     state.isMounted = true;
+    state.theme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.theme = newState.theme;
+    });
+  });
+
+  onUnMount(() => {
+    if (typeof cleanupRef === "function") cleanupRef();
   });
 
   onUpdate(() => {
@@ -154,6 +174,7 @@ export default function Tooltip(props: TooltipProps) {
           display="flex"
           alignItems="center"
           cursor="help"
+          width="fit-content"
           attributes={{
             tabIndex: "0",
             onMouseEnter: () => state.setTooltip(true),
@@ -166,39 +187,26 @@ export default function Tooltip(props: TooltipProps) {
         </Box>
       </Box>
 
-      <Box
-        attributes={{
-          role: "tooltip",
-        }}
-        display={state.isShown ? "block" : "none"}
-        boxRef={tooltipRef}
-        px="$5"
-        py="$3"
-        backgroundColor="$text"
-        borderRadius="$md"
-        position="absolute"
-        width="max-content"
-        zIndex="1"
-        className={standardTransitionProperties}
-        rawCSS={{
-          left: "0",
-          top: "0",
-        }}
+      <div
+        role="tooltip"
+        data-is-open={state.isShown}
+        ref={tooltipRef}
+        className={clx(
+          standardTransitionProperties,
+          styles.tooltip({
+            theme: state.theme,
+            variant: "default",
+          }),
+        )}
       >
         {props.title}
 
-        <Box
-          boxRef={arrowRef}
-          position="absolute"
-          transform="rotate(45deg)"
-          width="$5"
-          height="$5"
-          backgroundColor="$text"
-          attributes={{
-            "data-part-id": "tooltip-arrow",
-          }}
+        <div
+          ref={arrowRef}
+          className={styles.tooltipArrow}
+          data-part-id="tooltip-arrow"
         />
-      </Box>
+      </div>
     </>
   );
 }

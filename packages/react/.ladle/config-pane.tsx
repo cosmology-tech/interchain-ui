@@ -90,6 +90,7 @@ export const ConfigPane = (props: ConfigPaneProps) => {
       const varValue = ev.value;
 
       console.log("DEBUG", { state, ev });
+
       const bindingInLight = lightTheme.children.find(
         (item) => item.binding.key === varKey,
       );
@@ -108,14 +109,14 @@ export const ConfigPane = (props: ConfigPaneProps) => {
         },
       };
 
-      console.log({
-        state,
-        bindingInLight,
-        bindingInDark,
-        lightTheme,
-        darkTheme,
-        event,
-      });
+      // console.log({
+      //   state,
+      //   bindingInLight,
+      //   bindingInDark,
+      //   lightTheme,
+      //   darkTheme,
+      //   event,
+      // });
 
       props.onConfigChange?.(event);
     });

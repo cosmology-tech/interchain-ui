@@ -28,6 +28,8 @@ export const ALL_ICON_NAMES = [
   "coinsLine",
   "shoppingBagLine",
   "informationLine",
+  "informationFill",
+  "informationSimpleLine",
   "arrowDownLine",
   "arrowUpDownLine",
   "arrowLeftRightLine",
@@ -40,8 +42,6 @@ export const ALL_ICON_NAMES = [
   "errorWarningFill",
   "checkLine",
   "checkFill",
-  "informationLine",
-  "informationFill",
   "loaderFill",
   "lock",
   "bardFill",
@@ -71,6 +71,8 @@ export const ALL_ICON_NAMES = [
   "minusRound",
   "xCircle",
   "magnifier",
+  "logout",
+  "copied",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];

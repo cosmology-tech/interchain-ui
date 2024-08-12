@@ -245,6 +245,14 @@ export { default as TableCell } from "./ui/table/table-cell.lite";
 export { default as TableRowHeaderCell } from "./ui/table/table-row-header-cell.lite";
 export { default as TableColumnHeaderCell } from "./ui/table/table-column-header-cell.lite";
 
+// WalletConnector V2
+export { default as WalletConnectorFrame } from "./ui/wallet-connector/wallet-connector-frame.lite";
+export { default as WalletConnectorInfo } from "./ui/wallet-connector/wallet-connector-info.lite";
+export { default as WalletConnectorQRCode } from "./ui/wallet-connector/wallet-connector-qr-code.lite";
+export { default as WalletConnectorStatus } from "./ui/wallet-connector/wallet-connector-status.lite";
+export { default as WalletConnectorStatusRing } from "./ui/wallet-connector/wallet-connector-status-ring.lite";
+export { default as WalletConnectorWalletList } from "./ui/wallet-connector/wallet-connector-wallet-list.lite";
+
 // Marketing components
 export { default as Timeline } from "./ui/timeline";
 

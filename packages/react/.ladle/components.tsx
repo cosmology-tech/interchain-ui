@@ -7,7 +7,6 @@ import {
   ThemeProvider,
   ThemeProviderProps,
   OverlaysManager,
-  ThemeVariant,
   createThemes,
   ResultThemeVars,
 } from "../src";
@@ -30,8 +29,6 @@ export const Provider: GlobalProvider = ({
     Record<string, string>
   >({});
 
-  console.log("meta", storyMeta);
-
   const onPaneConfigChange = (event: ConfigChangeEvent) => {
     const { light, dark } = event;
 
@@ -48,8 +45,7 @@ export const Provider: GlobalProvider = ({
     setPrevLightVars(newLightVars);
     setPrevDarkVars(newDarkVars);
 
-    console.log("Setting vars", newLightVars, newDarkVars);
-
+    // console.log("Setting vars", newLightVars, newDarkVars);
     const config = createThemes()
       .addSlotThemes("light", {
         ...newLightVars,
