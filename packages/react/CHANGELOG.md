@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.30](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.29...@interchain-ui/react@1.23.30) (2024-08-15)
+
+### Bug Fixes
+
+- **popover:** loosen up props type ([#198](https://github.com/cosmology-tech/interchain-ui/issues/198)) ([ba27521](https://github.com/cosmology-tech/interchain-ui/commit/ba27521dcb66196a7356b0f38607f7920540dd31))
+
 ## [1.23.29](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.28...@interchain-ui/react@1.23.29) (2024-07-29)
 
 ### Bug Fixes
