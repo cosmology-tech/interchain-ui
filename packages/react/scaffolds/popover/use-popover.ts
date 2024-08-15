@@ -13,9 +13,9 @@ import {
   useRole,
 } from "@floating-ui/react";
 import * as React from "react";
-import type { UsePopoverReturnValue } from "./popover.types";
+import type { PopoverOptions } from "./popover.types";
 
-export const usePopover = (props: UsePopoverReturnValue) => {
+export const usePopover = (props: PopoverOptions) => {
   const {
     modal = false,
     triggerType = "hover",

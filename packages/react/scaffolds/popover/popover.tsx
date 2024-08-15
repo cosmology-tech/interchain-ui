@@ -5,7 +5,7 @@ import { usePopover } from "./use-popover";
 
 export type PopoverProps = {
   children: React.ReactNode;
-} & UsePopoverReturnValue;
+} & Partial<UsePopoverReturnValue>;
 
 const Popover = ({ children, ...popoverOptions }: PopoverProps) => {
   const popover = usePopover(popoverOptions);
