@@ -1,16 +1,25 @@
 import * as React from "react";
 import type { Story } from "@ladle/react";
 import Box from "../src/ui/box";
-import ListItem from "../src/ui/list-item";
-import {
-  ListItemSize,
-  ListItemShape,
-} from "../src/ui/list-item/list-item.types";
+import ChainListItem from "../src/ui/chain-list-item";
+import { ChainListItemProps } from "../src/ui/chain-list-item/chain-list-item.types";
 
-export const DefaultListItem: Story<{
+// @ts-ignore
+import ATOM_ICON from "../static/networks/Cosmos.png";
+
+const chainItem: Pick<
+  ChainListItemProps,
+  "iconUrl" | "name" | "tokenName" | "amount" | "notionalValue"
+> = {
+  iconUrl: ATOM_ICON,
+  name: "Cosmos",
+  tokenName: "ATOM",
+  amount: "0.00000000022",
+};
+
+export const DefaultChainListItem: Story<{
   width: number;
-  size: ListItemSize;
-  shape: ListItemShape;
+  size: ChainListItemProps["size"];
 }> = (props) => (
   <Box>
     <Box
@@ -25,8 +34,7 @@ export const DefaultListItem: Story<{
       flexDirection="column"
       gap="$4"
     >
-      <ListItem
-        as="li"
+      <ChainListItem
         size={props.size}
         _css={{
           width: "100%",
@@ -34,12 +42,10 @@ export const DefaultListItem: Story<{
           justifyContent: "flex-start",
           alignItems: "center",
         }}
-      >
-        <Box>Item 1</Box>
-      </ListItem>
+        {...chainItem}
+      />
 
-      <ListItem
-        as="li"
+      <ChainListItem
         size={props.size}
         isDisabled
         _css={{
@@ -48,26 +54,10 @@ export const DefaultListItem: Story<{
           justifyContent: "flex-start",
           alignItems: "center",
         }}
-      >
-        <Box>Item 2 (disabled)</Box>
-      </ListItem>
+        {...chainItem}
+      />
 
-      <ListItem
-        as="li"
-        size={props.size}
-        isActive
-        _css={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      >
-        <Box>Item 3 (active)</Box>
-      </ListItem>
-
-      <ListItem
-        as="li"
+      <ChainListItem
         size={props.size}
         isSelected
         _css={{
@@ -76,35 +66,40 @@ export const DefaultListItem: Story<{
           justifyContent: "flex-start",
           alignItems: "center",
         }}
-      >
-        <Box>Item 4 (selected)</Box>
-      </ListItem>
+        {...chainItem}
+      />
+
+      <ChainListItem
+        size={props.size}
+        isActive
+        _css={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+        }}
+        {...chainItem}
+      />
     </Box>
   </Box>
 );
 
-DefaultListItem.meta = {
+DefaultChainListItem.meta = {
   component: "ListItem",
 };
 
-DefaultListItem.args = {
+DefaultChainListItem.args = {
   size: "sm",
-  shape: "default",
 };
 
-DefaultListItem.argTypes = {
+DefaultChainListItem.argTypes = {
   width: {
     control: { type: "number" },
     defaultValue: 200,
   },
   size: {
-    options: ["sm", "md"] satisfies ListItemSize[],
+    options: ["sm", "md"] satisfies ChainListItemProps["size"][],
     control: { type: "select" },
     defaultValue: "md",
-  },
-  shape: {
-    options: ["default", "rounded"] satisfies ListItemShape[],
-    control: { type: "select" },
-    defaultValue: "default",
   },
 };

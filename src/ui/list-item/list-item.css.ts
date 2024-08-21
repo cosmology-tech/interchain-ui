@@ -251,6 +251,9 @@ function genCompoundVariants({
             }),
           },
         },
+        '&[data-shape="default"]': {
+          borderRadius: 0,
+        },
       },
     };
   };

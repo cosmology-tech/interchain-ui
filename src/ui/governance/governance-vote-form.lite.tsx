@@ -142,7 +142,7 @@ export default function GovernanceVoteForm(props: GovernanceVoteFormProps) {
 
       {/* Submit button */}
       <Button
-        intent="tertiary"
+        variant="secondary"
         className={fullWidth}
         disabled={state.getIsDisabled()}
         onClick={() => {

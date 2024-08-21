@@ -417,7 +417,7 @@ export default function AssetWithdrawTokens(props: AssetWithdrawTokensProps) {
             {(partial, index) => (
               <Button
                 key={index}
-                intent="text"
+                variant="unstyled"
                 size="xs"
                 onClick={() => state.handleAmountChange(partial.percentage)}
               >

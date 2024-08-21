@@ -212,7 +212,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           >
             <Button
               fluidWidth
-              intent="tertiary"
+              variant="secondary"
               onClick={() => {
                 props?.onAdd?.();
               }}
@@ -230,7 +230,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
           >
             <Button
               fluidWidth
-              intent="tertiary"
+              variant="secondary"
               onClick={() => {
                 props?.onRemove?.();
               }}
@@ -283,8 +283,7 @@ export default function ManageLiquidityCard(props: ManageLiquidityCardProps) {
         <Box pt="$10" width="100%">
           <Button
             fluidWidth
-            intent="secondary"
-            variant="outlined"
+            variant="secondary"
             onClick={() => props?.onStartEarning()}
             isLoading={props.isEarningLoading}
           >

@@ -11,6 +11,8 @@ useMetadata({
   },
 });
 
+// TODO: replace buttons
+
 export default function APR(props: {
   className?: string;
   apr: string;
@@ -46,9 +48,9 @@ export default function APR(props: {
 
       <IconButton
         variant="ghost"
+        intent="text"
         className={props.innerClassName}
         icon="verticalMore"
-        intent="text"
       />
     </Stack>
   );

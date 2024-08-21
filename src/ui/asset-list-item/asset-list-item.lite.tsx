@@ -124,7 +124,7 @@ export default function AssetListItem(props: AssetListItemProps) {
         >
           <Show when={!!props.onDeposit && props.showDeposit}>
             <Button
-              intent="text"
+              variant="unstyled"
               size="sm"
               onClick={(event) => props?.onDeposit?.(event)}
             >
@@ -134,7 +134,7 @@ export default function AssetListItem(props: AssetListItemProps) {
 
           <Show when={!!props.onWithdraw && props.showWithdraw}>
             <Button
-              intent="text"
+              variant="unstyled"
               size="sm"
               onClick={(event) => props?.onWithdraw?.(event)}
             >

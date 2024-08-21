@@ -194,7 +194,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       </Stack>
       <Box paddingBottom="$14">
         <TokenInput
-          availableAsMax={false}
           amount={state.amount1}
           progress={state.progress1}
           symbol={props?.poolAssets[0]?.symbol}
@@ -211,7 +210,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       </Box>
       <Box paddingBottom="$14">
         <TokenInput
-          availableAsMax={false}
           amount={state.amount2}
           progress={state.progress2}
           symbol={props?.poolAssets[1]?.symbol}
@@ -231,7 +229,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         fluidWidth
         size="lg"
         disabled={state.disabled}
-        intent="tertiary"
+        variant="secondary"
         onClick={() => props.onAddLiquidity()}
         isLoading={props.isLoading}
       >

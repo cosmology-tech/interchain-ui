@@ -201,7 +201,7 @@ export default function NftDetail(props: NftDetailProps) {
             <Button
               fluidWidth
               size="md"
-              intent="tertiary"
+              variant="secondary"
               leftIcon="priceTagLine"
               onClick={() => (props as ListForSale).onListForSale?.()}
             >
@@ -213,7 +213,7 @@ export default function NftDetail(props: NftDetailProps) {
                 <Button
                   fluidWidth
                   size="sm"
-                  intent="text"
+                  variant="secondary"
                   leftIcon="sendLine"
                   onClick={() => (props as ListForSale).onTransfer?.()}
                 >
@@ -224,7 +224,7 @@ export default function NftDetail(props: NftDetailProps) {
                 <Button
                   fluidWidth
                   size="sm"
-                  intent="text"
+                  variant="secondary"
                   leftIcon="fireLine"
                   onClick={() => (props as ListForSale).onBurn?.()}
                 >
@@ -237,7 +237,7 @@ export default function NftDetail(props: NftDetailProps) {
           <Show when={props.type === "makeOffer"}>
             <Button
               fluidWidth
-              intent="tertiary"
+              variant="secondary"
               size="md"
               leftIcon="coinsLine"
               onClick={() => (props as MakeOffer).onMakeOffer?.()}
@@ -250,7 +250,7 @@ export default function NftDetail(props: NftDetailProps) {
             <Stack space="$8">
               <Button
                 fluidWidth
-                intent="tertiary"
+                variant="secondary"
                 size="md"
                 leftIcon="shoppingBagLine"
                 onClick={() => (props as BuyNow).onBuyNow?.()}
@@ -259,7 +259,7 @@ export default function NftDetail(props: NftDetailProps) {
               </Button>
               <Button
                 fluidWidth
-                intent="text"
+                variant="secondary"
                 size="md"
                 leftIcon="coinsLine"
                 onClick={() => (props as BuyNow).onMakeOffer?.()}
@@ -291,13 +291,17 @@ export default function NftDetail(props: NftDetailProps) {
       </Stack>
 
       <Stack space="$8" attributes={{ marginBottom: "$11" }}>
-        <Button size="sm" intent="text" onClick={() => props.onDownload?.()}>
+        <Button
+          size="sm"
+          variant="unstyled"
+          onClick={() => props.onDownload?.()}
+        >
           Download
         </Button>
         <IconButton
           size="sm"
           icon="uploadLine"
-          intent="text"
+          variant="unstyled"
           onClick={() => props.onShare?.()}
         />
       </Stack>

@@ -69,7 +69,7 @@ export default function NftFixedPrice(props: NftFixedPriceProps) {
 
       <Button
         fluidWidth
-        intent="tertiary"
+        variant="secondary"
         size="lg"
         attributes={{ marginBottom: "$10" }}
       >

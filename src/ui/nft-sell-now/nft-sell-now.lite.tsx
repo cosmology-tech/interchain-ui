@@ -73,7 +73,7 @@ export default function NftSellNow(props: NftSellNowProps) {
       <Box pt="$9">
         <Button
           fluidWidth
-          intent="tertiary"
+          variant="secondary"
           size="lg"
           attributes={{ marginBottom: "$10" }}
           onClick={() => props.onList?.()}

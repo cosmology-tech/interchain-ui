@@ -29,6 +29,8 @@ useMetadata({
   },
 });
 
+// TODO: replace buttons
+
 useDefaultProps<Partial<TokenInputProps>>({
   hasProgressBar: true,
 });

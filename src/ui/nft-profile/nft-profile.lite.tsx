@@ -13,6 +13,8 @@ useMetadata({
   },
 });
 
+// TODO: replace buttons
+
 export default function NftProfile(props: NftProfileProps) {
   return (
     <Stack
@@ -64,7 +66,12 @@ export default function NftProfile(props: NftProfileProps) {
             desktop: "none",
           }}
         >
-          <Button size="xs" intent="text" onClick={() => props.onView?.()}>
+          <Button
+            size="xs"
+            intent="none"
+            variant="unstyled"
+            onClick={() => props.onView?.()}
+          >
             {props.headerButtonLabel}
           </Button>
         </Box>
@@ -77,7 +84,12 @@ export default function NftProfile(props: NftProfileProps) {
             desktop: "block",
           }}
         >
-          <Button size="sm" intent="text" onClick={() => props.onView?.()}>
+          <Button
+            size="sm"
+            intent="none"
+            variant="unstyled"
+            onClick={() => props.onView?.()}
+          >
             {props.headerButtonLabel}
           </Button>
         </Box>

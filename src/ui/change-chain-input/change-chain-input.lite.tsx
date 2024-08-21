@@ -103,7 +103,6 @@ export default function ChangeChainInput(props: ChangeChainInputProps) {
           divider={true}
           intent={props.intent}
           disabled={props.disabled}
-          size="sm"
         >
           <Box
             position="relative"

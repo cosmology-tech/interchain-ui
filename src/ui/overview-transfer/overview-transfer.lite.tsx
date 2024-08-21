@@ -127,7 +127,7 @@ export default function OverviewTransfer(props: OverviewTransferProps) {
       </Stack>
 
       <Button
-        intent="tertiary"
+        variant="secondary"
         size="lg"
         disabled={props.isSubmitDisabled}
         onClick={() => props.onTransfer()}

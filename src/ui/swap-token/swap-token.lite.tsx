@@ -140,8 +140,6 @@ export default function SwapToken(props: SwapTokenProps) {
       minWidth="250px"
     >
       <TransferItem
-        halfBtn
-        maxBtn
         hasAvailable
         isSmall={state.isSmallSize()}
         title={props.from.label ?? "From"}
@@ -182,8 +180,7 @@ export default function SwapToken(props: SwapTokenProps) {
       </Stack>
 
       <TransferItem
-        halfBtn={false}
-        maxBtn={false}
+        partials={[]}
         disabled
         isSmall={state.isSmallSize()}
         title={props.to.label ?? "To"}
@@ -241,7 +238,7 @@ export default function SwapToken(props: SwapTokenProps) {
             <IconButton
               icon="settingFill"
               size="sm"
-              intent="text"
+              variant="unstyled"
               onClick={(e) => state.toggleToteranceStatus()}
             />
           </Stack>
@@ -275,7 +272,9 @@ export default function SwapToken(props: SwapTokenProps) {
                     }}
                     key={percent}
                     size={state.isSmallSize() ? "xs" : "sm"}
-                    intent={state.tolerance === percent ? "tertiary" : "text"}
+                    variant={
+                      state.tolerance === percent ? "primary" : "secondary"
+                    }
                   >
                     {percent}%
                   </Button>
@@ -284,7 +283,7 @@ export default function SwapToken(props: SwapTokenProps) {
               <IconButton
                 icon="closeFilled"
                 size="sm"
-                intent="text"
+                variant="unstyled"
                 onClick={(e) => state.toggleToteranceStatus()}
               />
             </Stack>
@@ -309,7 +308,7 @@ export default function SwapToken(props: SwapTokenProps) {
           fluidWidth
           onClick={() => props?.onSwap?.()}
           disabled={props.swapDisabled}
-          intent="tertiary"
+          variant="primary"
           size="lg"
         >
           {`${props.swapDisabled ? props.swapDisabledLabel : props.swapLabel}`}

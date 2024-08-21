@@ -73,6 +73,7 @@ export const ALL_ICON_NAMES = [
   "magnifier",
   "logout",
   "copied",
+  "reload",
 ] as const;
 
 export type IconName = (typeof ALL_ICON_NAMES)[number];

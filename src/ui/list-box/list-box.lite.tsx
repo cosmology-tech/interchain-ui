@@ -9,8 +9,7 @@ import {
 import clx from "clsx";
 import Box from "../box";
 import { store } from "../../models/store";
-import { listItem } from "./list-item.css";
-import type { ListItemProps } from "./list-item.types";
+import type { ListBoxProps } from "./list-box.types";
 import type { ThemeVariant } from "../../models/system.model";
 
 useMetadata({
@@ -19,13 +18,7 @@ useMetadata({
   },
 });
 
-useDefaultProps<Partial<ListItemProps>>({
-  isActive: false,
-  size: "sm",
-  shape: "default",
-});
-
-export default function ComboboxItem(props: ListItemProps) {
+export default function ListBox(props: ListBoxProps) {
   const state = useStore<{
     theme: ThemeVariant;
   }>({
@@ -49,23 +42,9 @@ export default function ComboboxItem(props: ListItemProps) {
   return (
     <Box
       as={props.as}
-      attributes={{
-        ...props.attributes,
-        "data-is-active": props.isActive,
-        "data-is-selected": props.isSelected,
-        "data-is-disabled": props.isDisabled,
-        "data-shape": props.shape,
-      }}
-      display="flex"
-      justifyContent="flex-start"
-      alignItems="center"
-      width="100%"
       {...props._css}
-      className={clx(
-        listItem({ intent: "none", size: props.size, theme: state.theme }),
-        props.className,
-      )}
-      boxRef={props.itemRef}
+      className={clx(props.className)}
+      boxRef={props.listBoxRef}
     >
       {props.children}
     </Box>

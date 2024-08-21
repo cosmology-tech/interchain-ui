@@ -206,8 +206,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
           >
             <Button
               fluidWidth
-              intent="primary"
-              variant="solid"
+              variant="primary"
               leftIcon="walletFilled"
               onClick={() => props.onDisconnect?.()}
             >
