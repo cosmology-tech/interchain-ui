@@ -24,10 +24,30 @@ useMetadata({
 
 useDefaultProps<Partial<GovernanceProposalItemProps>>({
   endTimeLabel: "Voting end time",
+  voteTypeLabels: {
+    yes: "Yes",
+    no: "No",
+    abstain: "Abstain",
+    noWithVeto: "No with veto",
+  },
+  formatLegend: (
+    voteType: GovernanceVoteType,
+    votes: number,
+    totalVotes: number,
+  ) => {
+    const defaultLabels: Record<GovernanceVoteType, string> = {
+      yes: "Yes",
+      no: "No",
+      abstain: "Abstain",
+      noWithVeto: "No with veto",
+    };
+
+    return `${defaultLabels[voteType]} (${((votes / totalVotes) * 100).toFixed(2)}%)`;
+  },
 });
 
 export default function GovernanceProposalItem(
-  props: GovernanceProposalItemProps
+  props: GovernanceProposalItemProps,
 ) {
   const state = useStore({
     getStatusLabel: () => {
@@ -41,6 +61,21 @@ export default function GovernanceProposalItem(
       };
 
       return defaultLabels[props.status];
+    },
+    getVoteTypeLabel: (voteKind: GovernanceVoteType) => {
+      const vote = props.votes[voteKind];
+
+      if (typeof props.formatLegend === "function") {
+        const total =
+          props.votes.abstain +
+          props.votes.no +
+          props.votes.noWithVeto +
+          props.votes.yes;
+
+        return props.formatLegend(voteKind, vote, total);
+      }
+
+      return props.voteTypeLabels[voteKind];
     },
     getWidthFor: (voteKind: GovernanceVoteType) => {
       const total =
@@ -151,7 +186,8 @@ export default function GovernanceProposalItem(
               tablet: "center",
               desktop: "center",
             },
-            // @ts-expect-error
+          }}
+          domAttributes={{
             "data-part-id": "mid",
           }}
         >
@@ -264,16 +300,31 @@ export default function GovernanceProposalItem(
                 borderTopLeftRadius="4px"
                 borderBottomLeftRadius="4px"
               >
-                <Tooltip title="Yes" placement="bottom">
+                <Tooltip
+                  title={
+                    <Text fontSize="$xs" color="$textInverse">
+                      {state.getVoteTypeLabel("yes")}
+                    </Text>
+                  }
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
+
               <Box
                 height="$2"
                 backgroundColor="#486A94"
                 width={state.getWidthFor("abstain")}
               >
-                <Tooltip title="Abstain" placement="bottom">
+                <Tooltip
+                  title={
+                    <Text fontSize="$xs" color="$textInverse">
+                      {state.getVoteTypeLabel("abstain")}
+                    </Text>
+                  }
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
@@ -283,7 +334,14 @@ export default function GovernanceProposalItem(
                 backgroundColor="$red600"
                 width={state.getWidthFor("no")}
               >
-                <Tooltip title="No" placement="bottom">
+                <Tooltip
+                  title={
+                    <Text fontSize="$xs" color="$textInverse">
+                      {state.getVoteTypeLabel("no")}
+                    </Text>
+                  }
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
@@ -295,7 +353,14 @@ export default function GovernanceProposalItem(
                 borderTopRightRadius="4px"
                 borderBottomRightRadius="4px"
               >
-                <Tooltip title="No with veto" placement="bottom">
+                <Tooltip
+                  title={
+                    <Text fontSize="$xs" color="$textInverse">
+                      {state.getVoteTypeLabel("noWithVeto")}
+                    </Text>
+                  }
+                  placement="bottom"
+                >
                   <Box backgroundColor="transparent" width="100%" height="$2" />
                 </Tooltip>
               </Box>
