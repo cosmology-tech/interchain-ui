@@ -11,7 +11,7 @@ useMetadata({
 });
 
 export default function GovernanceProposalList(
-  props: GovernanceProposalListProps
+  props: GovernanceProposalListProps,
 ) {
   return (
     <For each={props.list}>
@@ -52,6 +52,8 @@ export default function GovernanceProposalList(
                 endTimeLabel={proposal.endTimeLabel}
                 votes={proposal.votes}
                 key={`${proposal.id}-${index}`}
+                formatLegend={props.formatLegend}
+                voteTypeLabels={props.voteTypeLabels}
               />
             )}
           </For>

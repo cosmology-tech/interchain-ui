@@ -7,6 +7,12 @@ export type GovernanceVoteType = "yes" | "abstain" | "no" | "noWithVeto";
 export type GovernanceVoteStructure = Record<GovernanceVoteType, number>;
 export type GovernanceVoteFormStatus = "pending" | "voted" | "expired";
 
+export type LegendFormatter = (
+  voteType: GovernanceVoteType,
+  votes: number,
+  totalVotes: number,
+) => string;
+
 export type GovernanceProposalItem = {
   status: GovernanceProposalStatus;
   statusLabel?: string;
@@ -15,6 +21,8 @@ export type GovernanceProposalItem = {
   endTimeLabel?: string;
   endTime: string;
   votes: GovernanceVoteStructure;
+  voteTypeLabels?: Record<GovernanceVoteType, string>;
+  formatLegend?: LegendFormatter;
 };
 
 export type GovernanceProposalListItem = {
@@ -33,6 +41,8 @@ export interface GovernanceProposalItemProps
 
 export interface GovernanceProposalListProps extends BaseComponentProps {
   list: GovernanceProposalList;
+  voteTypeLabels?: Record<GovernanceVoteType, string>;
+  formatLegend?: LegendFormatter;
   attributes?: Sprinkles;
 }
 
