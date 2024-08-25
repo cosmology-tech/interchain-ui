@@ -14,7 +14,7 @@ const startCase = require("lodash/startCase");
 const scaffolds = require("./scaffold.config.js");
 const { cwd } = require("process");
 const { Cache } = require("./cache.js");
-const { fixReactTypeIssues } = require("./plugins/react.plugin");
+// const { fixReactTypeIssues } = require("./plugins/react.plugin");
 
 const cache = new Cache();
 
@@ -80,7 +80,31 @@ async function compile(rawOptions) {
     }
 
     // Move src to all the package folder
-    fs.copySync("src", `${outPath}/src`);
+    // fs.copySync("src", `${outPath}/src`);
+
+    // Move src to all the package folder
+    const srcFiles = glob.sync("src/**/*");
+    const allowList = compileAllowList[options.target];
+    const doesTargetHaveAllowList = allowList != null;
+
+    srcFiles.forEach((file) => {
+      const relativePath = path.relative("src", file);
+      const destPath = path.join(outPath, "src", relativePath);
+
+      if (doesTargetHaveAllowList) {
+        const isAllowed = allowList.some(
+          (allowed) =>
+            file.includes(`src/ui/${allowed}/`) || !file.startsWith("src/ui/"),
+        );
+        if (!isAllowed) return;
+      }
+
+      if (fs.lstatSync(file).isDirectory()) {
+        fs.ensureDirSync(destPath);
+      } else {
+        fs.copySync(file, destPath);
+      }
+    });
 
     // For Vue, we need to add .vue to the export statement
     if (options.target === "vue") {
@@ -118,8 +142,6 @@ async function compile(rawOptions) {
     // Export only the elements we want with matching filters:
     // - CLI flag --elements
     // - allowList
-    const doesTargetHaveAllowList = compileAllowList[options.target] != null;
-
     if (cliConfig.elements || doesTargetHaveAllowList) {
       const filterWithAllowList = (elements) => {
         const elementsToFilter = doesTargetHaveAllowList
