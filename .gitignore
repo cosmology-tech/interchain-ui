@@ -19,3 +19,5 @@ packages/vue/src
 .parcel-cache
 parcel-bundle-reports
 /src/**/dist
+
+*storybook.log

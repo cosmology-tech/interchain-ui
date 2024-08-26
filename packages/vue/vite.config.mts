@@ -1,6 +1,7 @@
 import { copyFileSync } from "node:fs";
 import Vue from "@vitejs/plugin-vue";
 import VueJsx from "@vitejs/plugin-vue-jsx";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { globbySync } from "globby";
 import dts from "vite-plugin-dts";
 import { defineConfig } from "vitest/config";
@@ -27,6 +28,7 @@ export default defineConfig({
     }),
     Vue(),
     VueJsx(),
+    vanillaExtractPlugin(),
   ],
   build: {
     target: "esnext",

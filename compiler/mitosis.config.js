@@ -13,7 +13,9 @@ module.exports = {
       plugins: [reactPlugin],
     },
     vue: {
-      typescript: false,
+      typescript: true,
+      defineComponent: true,
+      namePrefix: "interchain",
       api: "composition",
     },
   },

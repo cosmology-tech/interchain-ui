@@ -262,13 +262,13 @@ async function compile(rawOptions) {
           api: options.api,
           state: options.state,
           styles: options.styles,
-          config: "./compiler/mitosis.config.js",
+          config: "./mitosis.config.js",
         },
         array: [filepath],
       },
       strings: stringTools.strings,
       filesystem: filesystemTools.filesystem,
-      print: { ...printTools.print, info: () => null },
+      print: { ...printTools.print },
     });
 
     return {
