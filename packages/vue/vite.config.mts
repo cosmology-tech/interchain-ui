@@ -1,6 +1,8 @@
+import path from "node:path";
 import { copyFileSync } from "node:fs";
 import Vue from "@vitejs/plugin-vue";
 import VueJsx from "@vitejs/plugin-vue-jsx";
+import VueComplexTypes from "@vue.ts/complex-types/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { globbySync } from "globby";
 import dts from "vite-plugin-dts";
@@ -26,10 +28,29 @@ export default defineConfig({
         });
       },
     }),
-    Vue(),
-    VueJsx(),
-    vanillaExtractPlugin(),
+    VueComplexTypes({
+      tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
+    }),
+    Vue({
+      include: [/\.vue$/, /\.md$/],
+      exclude: [/\.css\.ts$/],
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes("-"),
+        },
+      },
+    }),
+    VueJsx({
+      include: [/\.vue$/, /\.md$/],
+      exclude: [/\.css\.ts$/],
+    }),
+    vanillaExtractPlugin({
+      identifiers: "short",
+    }),
   ],
+  resolve: {
+    extensions: [".ts", ".tsx", ".vue"],
+  },
   build: {
     target: "esnext",
     minify: false,
@@ -59,8 +80,5 @@ export default defineConfig({
         },
       ],
     },
-  },
-  resolve: {
-    conditions: ["source"],
   },
 });

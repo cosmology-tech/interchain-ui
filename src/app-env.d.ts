@@ -1,5 +1,3 @@
-import { createRainbowSprinkles } from "rainbow-sprinkles";
-
 // Workaround for importing images
 declare module "*.svg" {
   const svgContent: string;
@@ -12,6 +10,8 @@ declare module "*.png" {
 }
 
 // Workaround for Vue SFC compiler: Failed to resolve index type into finite keys
+import { createRainbowSprinkles } from "rainbow-sprinkles";
+
 export const rainbowSprinkles: ReturnType<typeof createRainbowSprinkles>;
 
 export type Sprinkles = Parameters<typeof rainbowSprinkles>[0];

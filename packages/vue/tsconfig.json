@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "lib": ["ESNext", "DOM"],
-    "jsx": "preserve",
-    "jsxImportSource": "vue",
+    "declaration": true,
+    "declarationDir": "dist",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "target": "es2015",
+    "module": "es2015",
+    "lib": ["es2015", "es2016", "es2017", "dom"],
     "strict": true,
+    "sourceMap": true,
+    "jsx": "preserve",
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "resolveJsonModule": true,
-    "types": ["vitest/globals"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declarationMap": true,
+    "types": ["vite/client"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

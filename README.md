@@ -28,6 +28,7 @@ The Design System for the Interchain
   - [Compiler](#compiler)
   - [Icons](#icons)
   - [Customizing theme](#customizing-theme)
+  - [Package dev scripts in root package.json](#package-dev-scripts-in-root-packagejson)
   - [Related](#related)
   - [Credits](#credits)
 
@@ -78,6 +79,11 @@ Check [Icon guide](./docs/icons.md) to know how to add more icons
 ## Customizing theme
 
 Check [Customizing guide](./docs/custom-theme.md) to know how to customize the default theme.
+
+## Package dev scripts in root package.json
+- `t:<target>` to compile target framework (t is short for transpile)
+- `b:<target>` to bundle target framework
+- `c:<target>` to compile and bundle target framework, it's equivalent to sequentially running `pnpm run t:<target> && pnpm run b:<target>`
 
 ## Related
 

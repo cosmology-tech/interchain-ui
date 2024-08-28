@@ -1,7 +1,7 @@
 // @ts-check
 const scaffolds = require("../scaffold.config.js");
 const scaffoldConfig = scaffolds.scaffoldConfig;
-const log = require("../log.js");
+// const log = require("../log.js");
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}
@@ -142,6 +142,27 @@ function transformForwardRef(codeStr) {
   );
 
   return transformedFunctionSignature;
+}
+
+function fixBoxForwardRef(codeStr) {
+  const isBoxComponent = codeStr.match(/const\s+Box\s*=\s*forwardRef/);
+
+  console.log("isBoxComponent", isBoxComponent);
+  if (isBoxComponent) {
+    // Add import for BoxProps
+    codeStr = codeStr.replace(
+      /import { DEFAULT_VALUES } from "\.\/box\.types";/,
+      `import { DEFAULT_VALUES, BoxProps } from "./box.types";`,
+    );
+
+    // Modify forwardRef call to include BoxProps
+    codeStr = codeStr.replace(
+      /const Box = forwardRef\(function Box\(props, boxRef\)/,
+      `const Box = forwardRef(function Box(props: BoxProps, boxRef)`,
+    );
+  }
+
+  return codeStr;
 }
 
 function fixIncorrectRefName(codeStr) {

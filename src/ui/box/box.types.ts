@@ -1,13 +1,13 @@
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
-export type BoxProps<T = any> = Sprinkles & {
+export type BoxProps = Sprinkles & {
   as?: any;
   className?: string;
   class?: string;
   children?: any;
   attributes?: any;
   rawCSS?: any;
-  boxRef?: T;
+  boxRef?: any;
 };
 
 export const DEFAULT_VALUES = {

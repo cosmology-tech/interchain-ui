@@ -14,7 +14,7 @@ const startCase = require("lodash/startCase");
 const scaffolds = require("./scaffold.config.js");
 const { cwd } = require("process");
 const { Cache } = require("./cache.js");
-// const { fixReactTypeIssues } = require("./plugins/react.plugin");
+const { fixReactTypeIssues } = require("./plugins/react.plugin");
 
 const cache = new Cache();
 
@@ -35,6 +35,13 @@ const optionDefinitions = [
   { name: "elements", alias: "e", type: String, multiple: true },
   { name: "dev", type: Boolean },
 ];
+
+function applyFixReactTypeIssues(content, filePath, target) {
+  if (target === "react" && !filePath.endsWith(".lite.tsx")) {
+    return fixReactTypeIssues(content);
+  }
+  return content;
+}
 
 async function compile(rawOptions) {
   const { watcherEvents, ...defaultOptions } = rawOptions;
@@ -91,7 +98,7 @@ async function compile(rawOptions) {
       const relativePath = path.relative("src", file);
       const destPath = path.join(outPath, "src", relativePath);
 
-      if (doesTargetHaveAllowList) {
+      if (doesTargetHaveAllowList && !file.startsWith("src/ui/shared")) {
         const isAllowed = allowList.some(
           (allowed) =>
             file.includes(`src/ui/${allowed}/`) || !file.startsWith("src/ui/"),
@@ -133,6 +140,8 @@ async function compile(rawOptions) {
         // Fix alias
         data.replace(/\~\//g, "../../"),
       );
+
+      result = applyFixReactTypeIssues(result, element, options.target);
 
       fs.writeFileSync(element, result, "utf8");
     });
@@ -227,8 +236,16 @@ async function compile(rawOptions) {
       if (isLiteJSXComponent || isScaffold) return;
 
       try {
-        const fileContent = await fsPromise.readFile(event.path, "utf-8");
-        await fsPromise.writeFile(targetPath, removeLiteExtension(fileContent));
+        let fileContent = await fsPromise.readFile(event.path, "utf-8");
+        fileContent = removeLiteExtension(fileContent);
+
+        fileContent = applyFixReactTypeIssues(
+          fileContent,
+          event.path,
+          options.target,
+        );
+
+        await fsPromise.writeFile(targetPath, fileContent);
       } catch (err) {
         console.log(`handleWatcherEvents() [${event.type}] event error `, err);
       }
@@ -262,7 +279,7 @@ async function compile(rawOptions) {
           api: options.api,
           state: options.state,
           styles: options.styles,
-          config: "./mitosis.config.js",
+          config: path.resolve(__dirname, "./mitosis.config.js"),
         },
         array: [filepath],
       },

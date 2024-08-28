@@ -1,7 +1,7 @@
-import { mergeConfig } from "vite";
 import type { StorybookConfig } from "@storybook/vue3-vite";
-import vue from "@vitejs/plugin-vue";
-import vueJSX from "@vitejs/plugin-vue-jsx";
+import { mergeConfig, optimizeDeps } from "vite";
+import Vue from "@vitejs/plugin-vue";
+import VueJsx from "@vitejs/plugin-vue-jsx";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 const config: StorybookConfig = {
@@ -22,9 +22,19 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [vue(), vueJSX(), vanillaExtractPlugin()],
+      plugins: [
+        // Vue({
+        //   include: [/\.vue$/, /\.md$/],
+        //   template: {
+        //     compilerOptions: {
+        //       isCustomElement: (tag) => tag.includes("-"),
+        //     },
+        //   },
+        // }),
+        // VueJsx(),
+        vanillaExtractPlugin(),
+      ],
     });
   },
 };
-
 export default config;
