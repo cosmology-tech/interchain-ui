@@ -28,6 +28,7 @@ export default defineConfig({
         });
       },
     }),
+    // @ts-ignore
     VueComplexTypes({
       tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
     }),

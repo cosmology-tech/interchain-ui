@@ -43,6 +43,17 @@ function applyFixReactTypeIssues(content, filePath, target) {
   return content;
 }
 
+function stripVueJsxExtension(filePath) {
+  // .lite.tsx file is processed by Mitosis compiler
+  if (filePath.endsWith(".lite.tsx")) {
+    return filePath;
+  }
+
+  return filePath.endsWith(".tsx")
+    ? filePath.replace(/\.tsx$/, ".ts")
+    : filePath;
+}
+
 async function compile(rawOptions) {
   const { watcherEvents, ...defaultOptions } = rawOptions;
 
@@ -96,7 +107,7 @@ async function compile(rawOptions) {
 
     srcFiles.forEach((file) => {
       const relativePath = path.relative("src", file);
-      const destPath = path.join(outPath, "src", relativePath);
+      let destPath = path.join(outPath, "src", relativePath);
 
       if (doesTargetHaveAllowList && !file.startsWith("src/ui/shared")) {
         const isAllowed = allowList.some(
@@ -109,6 +120,9 @@ async function compile(rawOptions) {
       if (fs.lstatSync(file).isDirectory()) {
         fs.ensureDirSync(destPath);
       } else {
+        if (options.target === "vue") {
+          destPath = stripVueJsxExtension(destPath);
+        }
         fs.copySync(file, destPath);
       }
     });
@@ -225,11 +239,15 @@ async function compile(rawOptions) {
       parsedPath.ext === ".tsx" && parsedPath.name.includes(".lite");
     const isScaffold = parsedPath.dir.includes("scaffolds");
 
-    const targetPath = path.join(
+    let targetPath = path.join(
       outPath,
       parsedPath.dir.slice(parsedPath.dir.indexOf("src")),
       parsedPath.base,
     );
+
+    if (options.target === "vue") {
+      targetPath = stripVueJsxExtension(targetPath);
+    }
 
     if (event.type === "create" || event.type === "update") {
       // Only process non lite jsx files in this handler
@@ -262,7 +280,7 @@ async function compile(rawOptions) {
 
   async function compileMitosisComponent(filepath) {
     const file = path.parse(filepath);
-    const outFile = `${outPath}/${file.dir}/${file.name.replace(".lite", "")}.${
+    let outFile = `${outPath}/${file.dir}/${file.name.replace(".lite", "")}.${
       options.extension
     }`;
 

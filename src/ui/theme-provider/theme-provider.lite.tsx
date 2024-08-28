@@ -6,7 +6,7 @@ import {
   useRef,
   useMetadata,
 } from "@builder.io/mitosis";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash";
 import {
   mediaQueryColorScheme,
   resolveThemeMode,

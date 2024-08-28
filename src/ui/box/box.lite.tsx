@@ -1,6 +1,6 @@
 import { useMetadata, useStore } from "@builder.io/mitosis";
 import clsx from "clsx";
-import omit from "lodash/omit";
+import { omit } from "lodash";
 import { rainbowSprinkles } from "../../styles/rainbow-sprinkles.css";
 import type { BoxProps } from "./box.types";
 import { DEFAULT_VALUES } from "./box.types";

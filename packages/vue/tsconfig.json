@@ -1,21 +1,30 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "dist",
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "target": "es2015",
-    "module": "es2015",
-    "lib": ["es2015", "es2016", "es2017", "dom"],
+    // Enable latest features
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "allowJs": true,
+
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Best practices
     "strict": true,
-    "sourceMap": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "customConditions": ["source"],
+    "types": ["vite/client"],
+
     "jsx": "preserve",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "declarationMap": true,
-    "types": ["vite/client"]
+    "jsxImportSource": "vue"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

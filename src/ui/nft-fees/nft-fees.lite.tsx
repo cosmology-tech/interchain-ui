@@ -1,6 +1,5 @@
 import { useMetadata, useStore, onUpdate, For } from "@builder.io/mitosis";
-import isNil from "lodash/isNil";
-import cloneDeep from "lodash/cloneDeep";
+import { isNil, cloneDeep } from "lodash";
 import Stack from "../stack";
 import Text from "../text";
 import Tooltip from "../tooltip";

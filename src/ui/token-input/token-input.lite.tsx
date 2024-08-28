@@ -7,8 +7,7 @@ import {
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
-import isNil from "lodash/isNil";
-import uniqueId from "lodash/uniqueId";
+import { uniqueId, isNil } from "lodash";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
