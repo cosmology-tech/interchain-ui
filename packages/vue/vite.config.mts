@@ -1,16 +1,14 @@
-import path from "node:path";
-import { copyFileSync } from "node:fs";
-import Vue from "@vitejs/plugin-vue";
-import VueJsx from "@vitejs/plugin-vue-jsx";
-import VueComplexTypes from "@vue.ts/complex-types/vite";
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { globbySync } from "globby";
+import { copyFileSync } from "node:fs";
+import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
-import { defineConfig } from "vitest/config";
+import vue from "@vitejs/plugin-vue";
+import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import ViteVueComplexTypes from "@vue.ts/complex-types/vite";
 import pkg from "./package.json";
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  logLevel: "warn",
   plugins: [
     dts({
       entryRoot: "src",
@@ -28,31 +26,12 @@ export default defineConfig({
         });
       },
     }),
-    // @ts-ignore
-    VueComplexTypes({
-      tsconfigPath: path.resolve(__dirname, "./tsconfig.json"),
-    }),
-    Vue({
-      include: [/\.vue$/, /\.md$/],
-      exclude: [/\.css\.ts$/],
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.includes("-"),
-        },
-      },
-    }),
-    VueJsx({
-      include: [/\.vue$/, /\.md$/],
-      exclude: [/\.css\.ts$/],
-    }),
-    vanillaExtractPlugin({
-      identifiers: "short",
-    }),
+    ViteVueComplexTypes(),
+    vanillaExtractPlugin(),
+    vue(),
   ],
-  resolve: {
-    extensions: [".ts", ".tsx", ".vue"],
-  },
   build: {
+    outDir: "dist",
     target: "esnext",
     minify: false,
     lib: {
@@ -81,5 +60,8 @@ export default defineConfig({
         },
       ],
     },
+  },
+  resolve: {
+    conditions: ["source"],
   },
 });

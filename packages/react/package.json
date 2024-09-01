@@ -152,7 +152,6 @@
     "prop-types": "^15.8.1",
     "storybook": "^8.2.9",
     "storybook-react-rsbuild": "^0.0.7",
-    "type-fest": "^4.25.0",
     "vite": "^5.4.2",
     "vite-plugin-replace": "^0.1.1"
   },

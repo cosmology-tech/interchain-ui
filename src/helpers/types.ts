@@ -12,3 +12,29 @@ export type DeepStringConstructor<T> = {
     ? DeepStringConstructor<T[P]>
     : StringifyLeaf<T[P]>;
 };
+
+export type Primitive =
+  | string
+  | number
+  | boolean
+  | bigint
+  | symbol
+  | null
+  | undefined;
+
+export type LiteralUnion<
+  LiteralType extends Primitive,
+  BaseType extends Primitive,
+> = LiteralType | (BaseType & { _?: never });
+
+export type PartialDeep<T> = T extends object
+  ? {
+      [P in keyof T]?: PartialDeep<T[P]>;
+    }
+  : T;
+
+export type UnknownRecord = Record<string, unknown>;
+
+export type Writable<T> = {
+  -readonly [P in keyof T]: T[P];
+};

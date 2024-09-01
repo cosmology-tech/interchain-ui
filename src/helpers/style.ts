@@ -1,5 +1,5 @@
 import { globalStyle, GlobalStyleRule } from "@vanilla-extract/css";
-import { Writable } from "type-fest";
+import type { Writable } from "../helpers/types";
 import { store } from "../models/store";
 import {
   Accent,

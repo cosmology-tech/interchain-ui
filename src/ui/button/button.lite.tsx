@@ -18,7 +18,7 @@ import { isDefaultAccent, getAccentHover } from "../../helpers/style";
 import { themeVars } from "../../styles/themes.css";
 import { fullWidth, fullWidthHeight } from "../shared/shared.css";
 
-import type { UnknownRecord } from "type-fest";
+import type { UnknownRecord } from "../../helpers/types";
 import type { ButtonProps } from "./button.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { OverrideStyleManager } from "../../styles/override/override";

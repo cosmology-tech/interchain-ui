@@ -1,7 +1,5 @@
 import type { StorybookConfig } from "@storybook/vue3-vite";
-import { mergeConfig, optimizeDeps } from "vite";
-import Vue from "@vitejs/plugin-vue";
-import VueJsx from "@vitejs/plugin-vue-jsx";
+import { mergeConfig } from "vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 const config: StorybookConfig = {
@@ -22,18 +20,7 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [
-        // Vue({
-        //   include: [/\.vue$/, /\.md$/],
-        //   template: {
-        //     compilerOptions: {
-        //       isCustomElement: (tag) => tag.includes("-"),
-        //     },
-        //   },
-        // }),
-        // VueJsx(),
-        vanillaExtractPlugin(),
-      ],
+      plugins: [vanillaExtractPlugin()],
     });
   },
 };
