@@ -21,37 +21,36 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: "Default Box",
+    as: "div",
+    backgroundColor: "$background",
+    padding: "$10",
+    margin: "$10",
+    borderRadius: "$sm",
   },
+  render: (args) => ({
+    components: { Box },
+    setup() {
+      return { args };
+    },
+    template:
+      '<Box v-bind="args" fontFamily="$body">This is a Box component</Box>',
+  }),
 };
 
 export const CustomElement: Story = {
   args: {
-    as: "section",
-    children: "Box as section",
+    as: "span",
+    backgroundColor: "$background",
+    padding: "$10",
+    margin: "$10",
+    borderRadius: "$sm",
   },
-};
-
-export const WithStyles: Story = {
-  args: {
-    backgroundColor: "blue",
-    padding: "1rem",
-    margin: "1rem",
-    borderRadius: "0.5rem",
-    children: "Styled Box",
-  },
-};
-
-export const WithRawCSS: Story = {
-  args: {
-    rawCSS: { fontWeight: "bold", textDecoration: "underline" },
-    children: "Box with raw CSS",
-  },
-};
-
-export const WithClassName: Story = {
-  args: {
-    className: "custom-class",
-    children: "Box with custom class",
-  },
+  render: (args) => ({
+    components: { Box },
+    setup() {
+      return { args };
+    },
+    template:
+      '<Box v-bind="args" fontFamily="$body">This is a Box as a span</Box>',
+  }),
 };

@@ -1,4 +1,5 @@
 const reactPlugin = require("./plugins/react.plugin");
+const vuePlugin = require("./plugins/vue.plugin");
 
 /**
  * @type {import('@builder.io/mitosis').MitosisConfig}
@@ -17,6 +18,7 @@ module.exports = {
       defineComponent: true,
       namePrefix: "interchain",
       api: "composition",
+      plugins: [vuePlugin],
     },
   },
 };
