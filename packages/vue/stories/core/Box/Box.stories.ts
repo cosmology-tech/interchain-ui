@@ -25,6 +25,9 @@ export const Default: Story = {
     backgroundColor: "$background",
     padding: "$10",
     margin: "$10",
+    fontSize: "$2xl",
+    fontFamily: "$body",
+    color: "$accent",
     borderRadius: "$sm",
   },
   render: (args) => ({
@@ -32,8 +35,7 @@ export const Default: Story = {
     setup() {
       return { args };
     },
-    template:
-      '<Box v-bind="args" fontFamily="$body">This is a Box component</Box>',
+    template: '<Box v-bind="args">This is a Box component</Box>',
   }),
 };
 
@@ -43,6 +45,9 @@ export const CustomElement: Story = {
     backgroundColor: "$background",
     padding: "$10",
     margin: "$10",
+    fontSize: "$2xl",
+    fontFamily: "$body",
+    color: "$accent",
     borderRadius: "$sm",
   },
   render: (args) => ({
@@ -50,7 +55,6 @@ export const CustomElement: Story = {
     setup() {
       return { args };
     },
-    template:
-      '<Box v-bind="args" fontFamily="$body">This is a Box as a span</Box>',
+    template: '<Box v-bind="args">This is a Box as a span</Box>',
   }),
 };

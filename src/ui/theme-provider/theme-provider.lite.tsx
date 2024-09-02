@@ -192,8 +192,13 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     }
 
     cleanupRef = () => {
-      state.darkQuery?.removeEventListener("change", darkListener);
-      state.lightQuery?.removeEventListener("change", lightListener);
+      if (typeof state.darkQuery.removeEventListener === "function") {
+        state.darkQuery?.removeEventListener("change", darkListener);
+      }
+
+      if (typeof state.lightQuery.removeEventListener === "function") {
+        state.lightQuery?.removeEventListener("change", lightListener);
+      }
     };
   });
 
