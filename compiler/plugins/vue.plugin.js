@@ -26,8 +26,6 @@ module.exports = function vueCompilerPlugin() {
 
 function fixCleanupRefAst(ast) {
   if (ast.hooks && ast.hooks.onUnMount) {
-    console.log(ast.hooks);
-
     const onUnMountCode = ast.hooks.onUnMount.code;
 
     let updatedCode = onUnMountCode;
@@ -88,11 +86,5 @@ function fixCleanupRefAst(ast) {
 }
 
 function fixVueClassName(codeStr) {
-  return codeStr
-    .replace(/\.className/g, ".class")
-    .replace(/\bclassName\b/g, "class")
-    .replace(
-      /:class="boxStyles\.class"/g,
-      ':class="clsx(boxStyles.class, class)"',
-    );
+  return codeStr.replace(/\bprops\.className\b/g, "props.class");
 }

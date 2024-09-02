@@ -16,21 +16,17 @@ export default function Box(props: BoxProps) {
   const state = useStore<{
     comp: string;
     boxStyles: {
-      className: string;
+      combinedClassName: string;
       style: Record<string, unknown>;
       passThroughProps: Record<string, unknown>;
     };
     finalPassThroughProps: Record<string, unknown>;
-    combinedClassName: string;
   }>({
     get comp() {
       return props.as ?? DEFAULT_VALUES.as;
     },
     get finalPassThroughProps() {
       return state.boxStyles.passThroughProps;
-    },
-    get combinedClassName() {
-      return clsx(state.boxStyles.className, props.className);
     },
     get boxStyles() {
       const sprinklesObj = rainbowSprinkles({
@@ -39,7 +35,7 @@ export default function Box(props: BoxProps) {
       });
 
       return {
-        className: clsx(sprinklesObj.className, props.className),
+        combinedClassName: clsx(sprinklesObj.className, props.className),
         style: sprinklesObj.style,
         passThroughProps: omit(sprinklesObj.otherProps, [
           "attributes",
@@ -53,7 +49,7 @@ export default function Box(props: BoxProps) {
 
   return (
     <state.comp
-      className={state.combinedClassName}
+      className={state.boxStyles.combinedClassName}
       style={{
         ...state.boxStyles.style,
         ...props.attributes?.style,
