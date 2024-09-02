@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Box from "../../../src/ui/box/box.vue";
+import Box from "../../src/ui/box/box.vue";
 
 const meta = {
   title: "Core/Box",

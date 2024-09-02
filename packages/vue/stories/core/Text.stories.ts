@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import Text from "../../../src/ui/text/text.vue";
+import Text from "../../src/ui/text/text.vue";
 
 const meta: Meta<typeof Text> = {
   title: "Core/Text",

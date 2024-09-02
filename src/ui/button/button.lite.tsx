@@ -47,6 +47,8 @@ export default function Button(props: ButtonProps) {
     _overrideManager: OverrideStyleManager | null;
     getVars: () => UnknownRecord;
     getStoreState: () => any;
+    combinedClassName: string;
+    spreadAttributes: UnknownRecord;
   }>({
     _overrideManager: null,
     _theme: "light",
@@ -77,6 +79,39 @@ export default function Button(props: ButtonProps) {
             [styles.buttonHoverBgVar]: getAccentHover(themeVars.colors.accent),
           });
     },
+    get combinedClassName() {
+      return clx(
+        styles.buttonSize[props.size],
+        recipe({
+          as: props.as,
+          variant: props.variant,
+          intent: props.intent ?? "primary",
+          isDisabled: props.disabled || props.isLoading,
+          theme: state.getStoreState().theme,
+        }),
+        props.fluidWidth ? fullWidth : null,
+        props.fluid ? fullWidthHeight : null,
+        props.className,
+      );
+    },
+    get spreadAttributes() {
+      return Object.assign(
+        {
+          as: props.as,
+        },
+        {
+          attributes: {
+            ...props.attributes,
+            onClick: (event) => props.onClick?.(event),
+            onMouseEnter: (event) => props.onHoverStart?.(event),
+            onMouseLeave: (event) => props.onHoverEnd?.(event),
+            disabled: props.disabled,
+            // style: state.getVars(),
+            ...props.domAttributes,
+          },
+        },
+      );
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -96,35 +131,16 @@ export default function Button(props: ButtonProps) {
   });
 
   onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
+    if (typeof cleanupRef === "function") {
+      cleanupRef();
+    }
   });
 
   return (
     <Box
-      as={props.as}
       boxRef={props.buttonRef}
-      {...props.attributes}
-      className={clx(
-        styles.buttonSize[props.size],
-        recipe({
-          as: props.as,
-          variant: props.variant,
-          intent: props.intent ?? "primary",
-          isDisabled: props.disabled || props.isLoading,
-          theme: state.getStoreState().theme,
-        }),
-        props.fluidWidth ? fullWidth : null,
-        props.fluid ? fullWidthHeight : null,
-        props.className,
-      )}
-      attributes={{
-        onClick: (event) => props.onClick?.(event),
-        onMouseEnter: (event) => props.onHoverStart?.(event),
-        onMouseLeave: (event) => props.onHoverEnd?.(event),
-        disabled: props.disabled,
-        // style: state.getVars(),
-        ...props.domAttributes,
-      }}
+      className={state.combinedClassName}
+      {...state.spreadAttributes}
     >
       <Spinner
         size={props.iconSize}

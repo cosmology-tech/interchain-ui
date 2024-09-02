@@ -5,10 +5,17 @@
  */
 module.exports = function vueCompilerPlugin() {
   return {
+    json: {
+      // Happens after getting json
+      post: (json) => {
+        json = fixCleanupRefAst(json);
+        return json;
+      },
+    },
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return [fixCleanupRefIssues].reduce((acc, transform) => {
+        return [fixVueClassName].reduce((acc, transform) => {
           acc = transform(codeStr);
           return acc;
         }, codeStr);
@@ -17,9 +24,75 @@ module.exports = function vueCompilerPlugin() {
   };
 };
 
-function fixCleanupRefIssues(codeStr) {
-  return codeStr.replace(
-    /if \(typeof cleanupRef\.value === "function"\) \{\s*cleanupRef\(\);\s*\}/g,
-    'if (typeof cleanupRef.value === "function") {\n    cleanupRef.value();\n  }',
-  );
+function fixCleanupRefAst(ast) {
+  if (ast.hooks && ast.hooks.onUnMount) {
+    console.log(ast.hooks);
+
+    const onUnMountCode = ast.hooks.onUnMount.code;
+
+    let updatedCode = onUnMountCode;
+
+    if (
+      onUnMountCode &&
+      /if\s*\(\s*typeof\s+cleanupRef\.value\s*===\s*["']function["']\s*\)/.test(
+        onUnMountCode,
+      )
+    ) {
+      // Case 1: With braces
+      const { parse } = require("@babel/parser");
+      const traverse = require("@babel/traverse").default;
+      const generate = require("@babel/generator").default;
+      const t = require("@babel/types");
+
+      const ast = parse(onUnMountCode, {
+        sourceType: "module",
+        plugins: ["typescript"],
+      });
+
+      traverse(ast, {
+        IfStatement(path) {
+          const { test, consequent } = path.node;
+          if (
+            t.isBinaryExpression(test) &&
+            t.isUnaryExpression(test.left) &&
+            t.isMemberExpression(test.left.argument) &&
+            t.isIdentifier(test.left.argument.object) &&
+            test.left.argument.object.name === "cleanupRef" &&
+            t.isIdentifier(test.left.argument.property) &&
+            test.left.argument.property.name === "value" &&
+            t.isStringLiteral(test.right) &&
+            test.right.value === "function"
+          ) {
+            const newConsequent = t.blockStatement([
+              t.expressionStatement(
+                t.callExpression(
+                  t.memberExpression(
+                    t.identifier("cleanupRef"),
+                    t.identifier("value"),
+                  ),
+                  [],
+                ),
+              ),
+            ]);
+            path.node.consequent = newConsequent;
+          }
+        },
+      });
+
+      updatedCode = generate(ast).code;
+    }
+
+    ast.hooks.onUnMount.code = updatedCode;
+  }
+  return ast;
+}
+
+function fixVueClassName(codeStr) {
+  return codeStr
+    .replace(/\.className/g, ".class")
+    .replace(/\bclassName\b/g, "class")
+    .replace(
+      /:class="boxStyles\.class"/g,
+      ':class="clsx(boxStyles.class, class)"',
+    );
 }
