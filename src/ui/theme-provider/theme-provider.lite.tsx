@@ -6,6 +6,7 @@ import {
   useRef,
   useMetadata,
 } from "@builder.io/mitosis";
+import clsx from "clsx";
 import { isEqual } from "lodash";
 import {
   mediaQueryColorScheme,
@@ -39,42 +40,25 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     isMounted: boolean;
     isControlled: boolean;
     preferredMode: ThemeVariant | null;
-    storeState: ReturnType<typeof store.getState>;
     theme: string;
     themeClass: string;
+    UIStore: ReturnType<typeof store.getState>;
     // Local custom theme state for nested themes
     localCustomTheme: string | null;
     localThemeDefs: Array<ThemeDef>;
+    getNewThemeClass: (uiStore: ReturnType<typeof store.getState>) => string;
   }>({
     preferredMode: null,
     isMounted: false,
     localCustomTheme: null,
     localThemeDefs: [],
+    theme: "light",
+    UIStore: store.getState(),
     get isControlled() {
       return props.themeMode != null;
     },
     get isReady() {
       return state.preferredMode && state.isMounted;
-    },
-    get themeClass() {
-      if (state.isControlled) {
-        if (props.themeMode === "system") {
-          const finalThemeMode = state.isReady
-            ? state.preferredMode
-            : props.themeMode;
-          return finalThemeMode === "dark" ? darkThemeClass : lightThemeClass;
-        }
-
-        return props.themeMode === "dark" ? darkThemeClass : lightThemeClass;
-      }
-
-      return store.getState().themeClass;
-    },
-    get storeState() {
-      return store.getState();
-    },
-    get theme() {
-      return state.storeState.theme;
     },
     get lightQuery() {
       if (isSSR()) return null;
@@ -90,18 +74,44 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     get isLight() {
       return !!state.lightQuery?.matches;
     },
+    get themeClass() {
+      return state.getNewThemeClass(store.getState());
+    },
+    getNewThemeClass: (uiStore: ReturnType<typeof store.getState>) => {
+      if (state.isControlled) {
+        if (props.themeMode === "system") {
+          const finalThemeMode = state.isReady
+            ? state.preferredMode
+            : props.themeMode;
+          return finalThemeMode === "dark" ? darkThemeClass : lightThemeClass;
+        }
+
+        return props.themeMode === "dark" ? darkThemeClass : lightThemeClass;
+      }
+
+      return uiStore.themeClass;
+    },
   });
 
+  // NOTE: every mention of .theme will be referencing theme from state because mitosis is not smart enough
   // System mode: change based on user preference
   onUpdate(() => {
-    if (!state.isReady) return;
-
-    const themeMode = state.storeState.themeMode;
-
-    if (themeMode === "system") {
-      return state.storeState.setThemeMode(themeMode);
+    if (!state.isReady) {
+      return;
     }
-  }, [state.preferredMode, state.theme, state.isMounted]);
+
+    const themeMode = store.getState().themeMode;
+    const setThemeModeFn = store.getState().setThemeMode;
+
+    console.log("[theme provider] themeMode", {
+      themeMode,
+    });
+
+    if (themeMode === "system" || themeMode == null) {
+      console.log("[theme provider] set system");
+      return setThemeModeFn("system");
+    }
+  }, [state.preferredMode, state.theme, state.isReady, state.UIStore]);
 
   // Handle custom themes change
   onUpdate(() => {
@@ -118,23 +128,27 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     if (state.isControlled) {
       return;
     } else {
-      if (!isEqual(state.storeState.themeDefs, finalThemeDefs)) {
-        state.storeState.setThemeDefs(finalThemeDefs);
+      if (!isEqual(store.getState().themeDefs, finalThemeDefs)) {
+        store.getState().setThemeDefs(finalThemeDefs);
       }
     }
-  }, [props.themeDefs]);
+  }, [props.themeDefs, state.isControlled]);
 
   // Handle select customTheme
   onUpdate(() => {
     if (!props.customTheme) return;
 
     // TODO: handle custom theme for controlled mode
-    state.storeState.setCustomTheme(props.customTheme);
+    store.getState().setCustomTheme(props.customTheme);
   }, [props.customTheme]);
 
   onUpdate(() => {
-    const overrideStyleManager = state.storeState.overrideStyleManager;
-    if (!overrideStyleManager) return;
+    const overrideStyleManager = store.getState().overrideStyleManager;
+
+    if (!overrideStyleManager) {
+      return;
+    }
+
     overrideStyleManager.update(props.overrides, null);
   }, [props.overrides]);
 
@@ -142,11 +156,11 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     // Skip if accent is not provided
     if (!props.accent) return;
 
-    const prevAccent = state.storeState.themeAccent;
-    const currentColorMode = state.storeState.theme;
+    const prevAccent = state.UIStore.themeAccent;
+    const currentColorMode = state.UIStore.theme;
 
     if (prevAccent !== props.accent) {
-      state.storeState.setThemeAccent(props.accent ?? "blue");
+      state.UIStore.setThemeAccent(props.accent ?? "blue");
 
       assignThemeVars(
         {
@@ -181,6 +195,11 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       }
     };
 
+    const cleanupStore = store.subscribe((newState) => {
+      state.UIStore = newState;
+      state.theme = newState.theme;
+    });
+
     if (state.darkQuery && state.lightQuery) {
       if (
         typeof state.darkQuery.addEventListener === "function" &&
@@ -198,6 +217,10 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
       if (typeof state.lightQuery.removeEventListener === "function") {
         state.lightQuery?.removeEventListener("change", lightListener);
+      }
+
+      if (typeof cleanupStore === "function") {
+        cleanupStore();
       }
     };
   });

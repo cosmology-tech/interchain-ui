@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/vue3";
-import ThemeProvider from "../src/ui/theme-provider/theme-provider.vue";
+import WithThemeDecorator from "./WithThemeDecorator.vue";
 
 const preview: Preview = {
   parameters: {
@@ -11,12 +11,10 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (story) => {
-      return {
-        components: { themeProvider: ThemeProvider, story },
-        template: "<themeProvider><story /></themeProvider>",
-      };
-    },
+    (story) => ({
+      components: { WithThemeDecorator, story: story as any },
+      template: "<WithThemeDecorator><story /></WithThemeDecorator>",
+    }),
   ],
 };
 

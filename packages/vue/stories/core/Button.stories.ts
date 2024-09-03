@@ -55,6 +55,7 @@ export const Primary: Story = {
   args: {
     intent: "primary",
     variant: "solid",
+    onClick: () => alert("Button clicked"),
   },
   render: (args) => ({
     components: { Button },

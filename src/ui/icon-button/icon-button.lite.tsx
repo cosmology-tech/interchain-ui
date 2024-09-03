@@ -1,4 +1,4 @@
-import { useMetadata } from "@builder.io/mitosis";
+import { useMetadata, useStore } from "@builder.io/mitosis";
 import clsx from "clsx";
 import Icon from "../icon";
 import Button from "../button";
@@ -12,6 +12,14 @@ useMetadata({
 });
 
 export default function IconButton(props: IconButtonProps) {
+  const state = useStore({
+    handleClick: (e?: any) => {
+      if (props.onClick) {
+        props.onClick(e);
+      }
+    },
+  });
+
   return (
     <Button
       attributes={{
@@ -23,9 +31,7 @@ export default function IconButton(props: IconButtonProps) {
       intent={props.intent}
       size={props.size}
       disabled={props.disabled}
-      onClick={(e) => props.onClick?.(e)}
-      onHoverStart={(e) => props.onHoverStart?.(e)}
-      onHoverEnd={(e) => props.onHoverEnd?.(e)}
+      onClick={state.handleClick}
     >
       <Icon name={props.icon} size={props.iconSize} />
     </Button>

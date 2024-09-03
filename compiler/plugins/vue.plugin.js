@@ -15,10 +15,13 @@ module.exports = function vueCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return [fixVueClassName].reduce((acc, transform) => {
-          acc = transform(codeStr);
-          return acc;
-        }, codeStr);
+        return [fixVueClassName, fixVueEventHandlers].reduce(
+          (acc, transform) => {
+            acc = transform(acc);
+            return acc;
+          },
+          codeStr,
+        );
       },
     },
   };
@@ -83,6 +86,99 @@ function fixCleanupRefAst(ast) {
     ast.hooks.onUnMount.code = updatedCode;
   }
   return ast;
+}
+
+function fixVueEventHandlers(codeStr) {
+  const eventMappings = {
+    onClick: "click",
+    onDoubleClick: "dblclick",
+    onMouseDown: "mousedown",
+    onMouseUp: "mouseup",
+    onMouseEnter: "mouseenter",
+    onMouseLeave: "mouseleave",
+    onMouseMove: "mousemove",
+    onMouseOver: "mouseover",
+    onMouseOut: "mouseout",
+    onKeyDown: "keydown",
+    onKeyUp: "keyup",
+    onKeyPress: "keypress",
+    onFocus: "focus",
+    onBlur: "blur",
+    onInput: "input",
+    onChange: "change",
+    onSubmit: "submit",
+    onReset: "reset",
+    onScroll: "scroll",
+    onWheel: "wheel",
+    onDragStart: "dragstart",
+    onDrag: "drag",
+    onDragEnd: "dragend",
+    onDragEnter: "dragenter",
+    onDragLeave: "dragleave",
+    onDragOver: "dragover",
+    onDrop: "drop",
+    // Add more event mappings as needed
+  };
+
+  let updatedCode = codeStr;
+  const detectedEvents = new Set();
+
+  // Convert event syntax and detect custom events
+  Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
+    const regex = new RegExp(`:(${mitosisEvent})\\s*=\\s*"([^"]*)"`, "g");
+    updatedCode = updatedCode.replace(regex, (match, event, handler) => {
+      detectedEvents.add(vueEvent);
+      return `@${vueEvent}="${handler}"`;
+    });
+
+    // Detect props events
+    const propsRegex = new RegExp(`props\\.${mitosisEvent}`, "g");
+    if (propsRegex.test(updatedCode)) {
+      detectedEvents.add(vueEvent);
+    }
+  });
+
+  // Add defineEmits
+  if (detectedEvents.size > 0) {
+    const emitsArray = Array.from(detectedEvents)
+      .map((event) => `'${event}'`)
+      .join(", ");
+    const defineEmitsStatement = `const emit = defineEmits([${emitsArray}]);\n`;
+
+    // Insert defineEmits after the last import statement or at the beginning of the <script> block
+    const importRegex = /^import .+$/gm;
+    const lastImportMatch = [...updatedCode.matchAll(importRegex)].pop();
+
+    if (lastImportMatch) {
+      const insertIndex = lastImportMatch.index + lastImportMatch[0].length;
+      updatedCode =
+        updatedCode.slice(0, insertIndex) +
+        "\n" +
+        defineEmitsStatement +
+        updatedCode.slice(insertIndex);
+    } else {
+      const scriptSetupIndex = updatedCode.indexOf("<script setup");
+      if (scriptSetupIndex !== -1) {
+        const insertIndex = updatedCode.indexOf(">", scriptSetupIndex) + 1;
+        updatedCode =
+          updatedCode.slice(0, insertIndex) +
+          "\n" +
+          defineEmitsStatement +
+          updatedCode.slice(insertIndex);
+      }
+    }
+  }
+
+  // Replace props event handlers with emit calls
+  Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
+    const regex = new RegExp(
+      `(props\\.${mitosisEvent})\\s*\\?\\.(\\w+)\\((.*?)\\)`,
+      "g",
+    );
+    updatedCode = updatedCode.replace(regex, `emit('${vueEvent}', $3)`);
+  });
+
+  return updatedCode;
 }
 
 function fixVueClassName(codeStr) {
