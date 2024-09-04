@@ -8,6 +8,7 @@ export type BoxProps = Sprinkles & {
   attributes?: any;
   rawCSS?: any;
   boxRef?: any;
+
   // Common DOM events with 'any' type for event parameters
   onClick?: (event: any) => void;
   onDoubleClick?: (event: any) => void;

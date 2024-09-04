@@ -27,7 +27,7 @@ export const Default: Story = {
     margin: "$10",
     fontSize: "$2xl",
     fontFamily: "$body",
-    color: "$accent",
+    color: "$primary400",
     borderRadius: "$sm",
   },
   render: (args) => ({
@@ -36,10 +36,22 @@ export const Default: Story = {
       const handleClick = () => {
         console.log("Box clicked");
       };
-      return { args, handleClick };
+      const handleMouseEnter = () => {
+        console.log("Box mouse enter");
+      };
+      const handleMouseLeave = () => {
+        console.log("Box mouse up");
+      };
+      return { args, handleClick, handleMouseEnter, handleMouseLeave };
     },
-    template:
-      '<Box v-bind="args" @click="handleClick">This is a Box component</Box>',
+    template: `<Box
+        v-bind="args"
+        @click="handleClick"
+        :onMouseEnter="handleMouseEnter"
+        :onMouseLeave="handleMouseLeave"
+      >
+        This is a Box component
+      </Box>`,
   }),
 };
 

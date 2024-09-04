@@ -32,6 +32,10 @@ module.exports = function vueCompilerPlugin() {
   };
 };
 
+// Export for testing
+// @ts-ignore
+module.exports.fixVueEventHandlers = fixVueEventHandlers;
+
 function fixCleanupRefAst(ast) {
   if (ast.hooks && ast.hooks.onUnMount) {
     const onUnMountCode = ast.hooks.onUnMount.code;
@@ -226,21 +230,28 @@ function fixVueEventHandlers(codeStr) {
               t.expressionStatement(
                 t.callExpression(
                   t.memberExpression(
-                    t.arrayExpression(
-                      Object.keys(eventMappings).map((event) =>
-                        t.stringLiteral(event),
+                    t.callExpression(
+                      t.memberExpression(
+                        t.identifier("Object"),
+                        t.identifier("entries"),
                       ),
+                      [t.identifier("eventMappings")],
                     ),
                     t.identifier("forEach"),
                   ),
                   [
                     t.arrowFunctionExpression(
-                      [t.identifier("eventName")],
+                      [
+                        t.arrayPattern([
+                          t.identifier("propName"),
+                          t.identifier("eventName"),
+                        ]),
+                      ],
                       t.blockStatement([
                         t.ifStatement(
                           t.binaryExpression(
                             "in",
-                            t.identifier("eventName"),
+                            t.identifier("propName"),
                             t.identifier("props"),
                           ),
                           t.blockStatement([
@@ -254,21 +265,41 @@ function fixVueEventHandlers(codeStr) {
                                 ),
                                 t.arrowFunctionExpression(
                                   [t.identifier("event")],
-                                  t.callExpression(t.identifier("emit"), [
-                                    t.conditionalExpression(
+                                  t.blockStatement([
+                                    t.variableDeclaration("const", [
+                                      t.variableDeclarator(
+                                        t.identifier("propEventHandler"),
+                                        t.memberExpression(
+                                          t.identifier("props"),
+                                          t.identifier("propName"),
+                                          true,
+                                        ),
+                                      ),
+                                    ]),
+                                    t.ifStatement(
                                       t.binaryExpression(
-                                        "in",
-                                        t.identifier("eventName"),
-                                        t.identifier("eventMappings"),
+                                        "===",
+                                        t.unaryExpression(
+                                          "typeof",
+                                          t.identifier("propEventHandler"),
+                                        ),
+                                        t.stringLiteral("function"),
                                       ),
-                                      t.memberExpression(
-                                        t.identifier("eventMappings"),
-                                        t.identifier("eventName"),
-                                        true,
-                                      ),
-                                      t.identifier("eventName"),
+                                      t.blockStatement([
+                                        t.expressionStatement(
+                                          t.callExpression(
+                                            t.identifier("propEventHandler"),
+                                            [t.identifier("event")],
+                                          ),
+                                        ),
+                                      ]),
                                     ),
-                                    t.identifier("event"),
+                                    t.expressionStatement(
+                                      t.callExpression(t.identifier("emit"), [
+                                        t.identifier("eventName"),
+                                        t.identifier("event"),
+                                      ]),
+                                    ),
                                   ]),
                                 ),
                               ),
@@ -312,58 +343,102 @@ function fixVueEventHandlers(codeStr) {
 
   // Update template event bindings
   let updatedTemplateContent = templateContent;
-  Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
-    const regex = new RegExp(`:(${mitosisEvent})\\s*=\\s*"([^"]*)"`, "g");
-    updatedTemplateContent = updatedTemplateContent.replace(
-      regex,
-      `@${vueEvent}="$2"`,
-    );
-  });
+
+  // Handle v-bind with or without eventHandlers, including custom components
+  updatedTemplateContent = updatedTemplateContent.replace(
+    /<([A-Z][a-zA-Z0-9]*|[a-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*)([^>]*?)v-bind=["'](\{[^}]+\})["']([^>]*?)>|v-bind=["'](\{[^}]+\})["']|v-bind=["']([^"']+)["']/g,
+    (
+      match,
+      componentName,
+      _,
+      beforeAttr,
+      objectContent,
+      afterAttr,
+      objectContentNoComponent,
+      singleVariable,
+    ) => {
+      const processContent = (content) => {
+        const parts = content.split(",").map((part) => part.trim());
+        const eventHandlersPart = parts.find((part) =>
+          part.startsWith("...eventHandlers"),
+        );
+        const spreadAttributesPart = parts.find((part) =>
+          part.startsWith("...spreadAttributes"),
+        );
+
+        let otherParts = parts.filter(
+          (part) =>
+            !part.startsWith("...eventHandlers") &&
+            !part.startsWith("...spreadAttributes"),
+        );
+
+        let result = "";
+        if (spreadAttributesPart) {
+          result += `v-bind="${spreadAttributesPart.replace(/^\.\.\./, "")}"`;
+        }
+        if (otherParts.length > 0) {
+          if (result) result += " ";
+          result += `v-bind="${otherParts.join(", ")}"`;
+        }
+        if (eventHandlersPart) {
+          if (result) result += " ";
+          result += `v-on="eventHandlers"`;
+        }
+        return result;
+      };
+
+      if (componentName) {
+        // Custom component case
+        const processedContent = processContent(objectContent);
+        return `<${componentName}${beforeAttr}${processedContent}${afterAttr}>`;
+      } else if (objectContent || objectContentNoComponent) {
+        return processContent(objectContent || objectContentNoComponent);
+      } else if (singleVariable) {
+        if (singleVariable === "...eventHandlers") {
+          return `v-on="eventHandlers"`;
+        } else if (singleVariable === "...spreadAttributes") {
+          return `v-bind="spreadAttributes"`;
+        } else {
+          return `v-bind="${singleVariable}"`;
+        }
+      }
+      return match;
+    },
+  );
+
+  // Remove extra curly braces and fix quotes
+  updatedTemplateContent = updatedTemplateContent.replace(
+    /v-bind=["']\{\{(.+?)\}\}["']/g,
+    (match, content) =>
+      `v-bind="${content.replace(/"/g, "'").replace(/^\s*\.\.\./g, "")}"`,
+  );
+
+  updatedTemplateContent = updatedTemplateContent.replace(
+    /v-on=["']\{\{(.+?)\}\}["']/g,
+    'v-on="$1"',
+  );
+
+  // Fix any remaining issues with quotes and remove extra spread operators
+  updatedTemplateContent = updatedTemplateContent.replace(
+    /v-bind=["'](.+?)["']/g,
+    (match, content) =>
+      `v-bind="${content.replace(/"/g, "'").replace(/^\s*\.\.\./g, "")}"`,
+  );
 
   // Add eventMappings object to emit manually all events
   const eventMappingsObject = `
-const eventMappings = {
-  onClick: "click",
-  onDoubleClick: "dblclick",
-  onMouseDown: "mousedown",
-  onMouseUp: "mouseup",
-  onMouseEnter: "mouseenter",
-  onMouseLeave: "mouseleave",
-  onMouseMove: "mousemove",
-  onMouseOver: "mouseover",
-  onMouseOut: "mouseout",
-  onKeyDown: "keydown",
-  onKeyUp: "keyup",
-  onKeyPress: "keypress",
-  onFocus: "focus",
-  onBlur: "blur",
-  onInput: "input",
-  onChange: "change",
-  onSubmit: "submit",
-  onReset: "reset",
-  onScroll: "scroll",
-  onWheel: "wheel",
-  onDragStart: "dragstart",
-  onDrag: "drag",
-  onDragEnd: "dragend",
-  onDragEnter: "dragenter",
-  onDragLeave: "dragleave",
-  onDragOver: "dragover",
-  onDrop: "drop",
-  onTouchStart: "touchstart",
-  onTouchMove: "touchmove",
-  onTouchEnd: "touchend",
-  onTouchCancel: "touchcancel",
-};
-`;
+    const eventMappings = ${JSON.stringify(eventMappings, null, 2)};
+  `;
+
+  const hasEventHandlers = updatedScriptContent.includes("eventHandlers");
 
   // Reassemble the Vue file, keeping template and script separate
   const updatedCode = `${beforeTemplate}${updatedTemplateContent}${afterTemplate.replace(
     /<script[^>]*>[\s\S]*?<\/script>/,
     `<script setup lang="ts">
-${eventMappingsObject}
-${updatedScriptContent.trim()}
-</script>`,
+    ${hasEventHandlers ? eventMappingsObject : ""}
+    ${updatedScriptContent.trim()}
+    </script>`,
   )}`;
 
   return updatedCode;

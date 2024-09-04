@@ -20,6 +20,7 @@ export interface ButtonProps extends BaseComponentProps {
   domAttributes?: any;
   isLoading?: boolean;
   spinnerPlacement?: "start" | "end";
+  // Common DOM events with 'any' type for event parameters
   onClick?: (event: any) => void;
   onDoubleClick?: (event: any) => void;
   onMouseDown?: (event: any) => void;

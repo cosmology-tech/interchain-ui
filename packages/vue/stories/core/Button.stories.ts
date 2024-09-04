@@ -60,9 +60,12 @@ export const Primary: Story = {
   render: (args) => ({
     components: { Button },
     setup() {
-      return { args };
+      const handleClick = () => {
+        alert("Button clicked");
+      };
+      return { args, handleClick };
     },
-    template: '<Button v-bind="args">Button</Button>',
+    template: '<Button v-bind="args" @click="handleClick">Button</Button>',
   }),
 };
 
