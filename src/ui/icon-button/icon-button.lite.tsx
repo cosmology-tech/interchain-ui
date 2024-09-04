@@ -13,10 +13,49 @@ useMetadata({
 
 export default function IconButton(props: IconButtonProps) {
   const state = useStore({
-    handleClick: (e?: any) => {
-      if (props.onClick) {
-        props.onClick(e);
-      }
+    get eventHandlers() {
+      const handlers: Record<string, (event: any) => void> = {};
+      const eventProps = [
+        "onClick",
+        "onDoubleClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onKeyDown",
+        "onKeyUp",
+        "onKeyPress",
+        "onFocus",
+        "onBlur",
+        "onInput",
+        "onChange",
+        "onSubmit",
+        "onReset",
+        "onScroll",
+        "onWheel",
+        "onDragStart",
+        "onDrag",
+        "onDragEnd",
+        "onDragEnter",
+        "onDragLeave",
+        "onDragOver",
+        "onDrop",
+        "onTouchStart",
+        "onTouchMove",
+        "onTouchEnd",
+        "onTouchCancel",
+      ];
+
+      eventProps.forEach((eventName) => {
+        if (props[eventName]) {
+          handlers[eventName] = (event: any) => props[eventName](event);
+        }
+      });
+
+      return handlers;
     },
   });
 
@@ -31,7 +70,7 @@ export default function IconButton(props: IconButtonProps) {
       intent={props.intent}
       size={props.size}
       disabled={props.disabled}
-      onClick={state.handleClick}
+      {...state.eventHandlers}
     >
       <Icon name={props.icon} size={props.iconSize} />
     </Button>

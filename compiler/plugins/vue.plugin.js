@@ -19,13 +19,14 @@ module.exports = function vueCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return [fixVueClassName, fixVueEventHandlers].reduce(
-          (acc, transform) => {
-            acc = transform(acc);
-            return acc;
-          },
-          codeStr,
-        );
+        return [
+          fixVueClassName,
+          fixVueEventHandlers,
+          // Hello
+        ].reduce((acc, transform) => {
+          acc = transform(acc);
+          return acc;
+        }, codeStr);
       },
     },
   };
@@ -123,10 +124,17 @@ function fixVueEventHandlers(codeStr) {
     onTouchCancel: "touchcancel",
   };
 
-  // Match all template sections, including named slots
-  const templateMatches =
-    codeStr.match(/<template[^>]*>[\s\S]*?<\/template>/g) || [];
-  const scriptMatch = codeStr.match(/<script[^>]*>([\s\S]*?)<\/script>/);
+  // Match the entire content, including multiple template and script sections
+  const fullMatch = codeStr.match(
+    /([\s\S]*<template[^>]*>)([\s\S]*?)(<\/template>[\s\S]*)/,
+  );
+
+  if (!fullMatch) {
+    return codeStr; // If there's no match, return the original code
+  }
+
+  const [, beforeTemplate, templateContent, afterTemplate] = fullMatch;
+  const scriptMatch = afterTemplate.match(/<script[^>]*>([\s\S]*?)<\/script>/);
 
   if (!scriptMatch) {
     return codeStr; // If there's no script section, return the original code
@@ -141,11 +149,14 @@ function fixVueEventHandlers(codeStr) {
 
   const detectedEvents = new Set();
 
+  // Add all possible events to detectedEvents
+  Object.values(eventMappings).forEach((event) => detectedEvents.add(event));
+
   traverse(ast, {
     // Detect events in JSX attributes
     JSXAttribute(path) {
       const name = path.node.name;
-      if (t.isJSXIdentifier(name) && name.name in eventMappings) {
+      if (t.isJSXIdentifier(name) && name.name && name.name in eventMappings) {
         const vueEvent = eventMappings[name.name];
         detectedEvents.add(vueEvent);
         name.name = `@${vueEvent}`;
@@ -155,6 +166,7 @@ function fixVueEventHandlers(codeStr) {
     Property(path) {
       if (
         t.isIdentifier(path.node.key) &&
+        path.node.key.name &&
         path.node.key.name in eventMappings
       ) {
         detectedEvents.add(eventMappings[path.node.key.name]);
@@ -169,21 +181,111 @@ function fixVueEventHandlers(codeStr) {
         });
       }
     },
-    // Convert props event handlers to emit calls
+    // Merged CallExpression visitor
     CallExpression(path) {
       if (
         t.isMemberExpression(path.node.callee) &&
         t.isIdentifier(path.node.callee.object, { name: "props" }) &&
         t.isIdentifier(path.node.callee.property) &&
+        path.node.callee.property.name &&
         path.node.callee.property.name in eventMappings
       ) {
         const vueEvent = eventMappings[path.node.callee.property.name];
-        path.replaceWith(
-          t.callExpression(t.identifier("emit"), [
-            t.stringLiteral(vueEvent),
-            ...path.node.arguments,
-          ]),
-        );
+        if (vueEvent) {
+          path.replaceWith(
+            t.callExpression(t.identifier("emit"), [
+              t.stringLiteral(vueEvent),
+              ...path.node.arguments,
+            ]),
+          );
+        }
+      } else if (
+        t.isIdentifier(path.node.callee, { name: "computed" }) &&
+        path.node.arguments.length === 1 &&
+        t.isArrowFunctionExpression(path.node.arguments[0])
+      ) {
+        const functionBody = path.node.arguments[0].body;
+        if (t.isBlockStatement(functionBody)) {
+          // Check if this computed property is for event handlers
+          const isEventHandlers = functionBody.body.some(
+            (node) =>
+              t.isVariableDeclaration(node) &&
+              node.declarations.some((decl) =>
+                t.isIdentifier(decl.id, { name: "handlers" }),
+              ),
+          );
+
+          if (isEventHandlers) {
+            const newBody = t.blockStatement([
+              t.variableDeclaration("const", [
+                t.variableDeclarator(
+                  t.identifier("handlers"),
+                  t.objectExpression([]),
+                ),
+              ]),
+              t.expressionStatement(
+                t.callExpression(
+                  t.memberExpression(
+                    t.arrayExpression(
+                      Object.keys(eventMappings).map((event) =>
+                        t.stringLiteral(event),
+                      ),
+                    ),
+                    t.identifier("forEach"),
+                  ),
+                  [
+                    t.arrowFunctionExpression(
+                      [t.identifier("eventName")],
+                      t.blockStatement([
+                        t.ifStatement(
+                          t.binaryExpression(
+                            "in",
+                            t.identifier("eventName"),
+                            t.identifier("props"),
+                          ),
+                          t.blockStatement([
+                            t.expressionStatement(
+                              t.assignmentExpression(
+                                "=",
+                                t.memberExpression(
+                                  t.identifier("handlers"),
+                                  t.identifier("eventName"),
+                                  true,
+                                ),
+                                t.arrowFunctionExpression(
+                                  [t.identifier("event")],
+                                  t.callExpression(t.identifier("emit"), [
+                                    t.conditionalExpression(
+                                      t.binaryExpression(
+                                        "in",
+                                        t.identifier("eventName"),
+                                        t.identifier("eventMappings"),
+                                      ),
+                                      t.memberExpression(
+                                        t.identifier("eventMappings"),
+                                        t.identifier("eventName"),
+                                        true,
+                                      ),
+                                      t.identifier("eventName"),
+                                    ),
+                                    t.identifier("event"),
+                                  ]),
+                                ),
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
+              ),
+              t.returnStatement(t.identifier("handlers")),
+            ]);
+
+            functionBody.body = newBody.body;
+          }
+        }
       }
     },
   });
@@ -208,24 +310,61 @@ function fixVueEventHandlers(codeStr) {
 
   const updatedScriptContent = generate(ast).code;
 
-  // Update template event bindings for all template sections
-  const updatedTemplates = templateMatches.map((template) => {
-    let updatedTemplate = template;
-    Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
-      const regex = new RegExp(`:(${mitosisEvent})\\s*=\\s*"([^"]*)"`, "g");
-      updatedTemplate = updatedTemplate.replace(regex, `@${vueEvent}="$2"`);
-    });
-    return updatedTemplate;
+  // Update template event bindings
+  let updatedTemplateContent = templateContent;
+  Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
+    const regex = new RegExp(`:(${mitosisEvent})\\s*=\\s*"([^"]*)"`, "g");
+    updatedTemplateContent = updatedTemplateContent.replace(
+      regex,
+      `@${vueEvent}="$2"`,
+    );
   });
 
-  // Reassemble the Vue file
-  const updatedCode = `
-    ${updatedTemplates.join("\n")}
-
-    <script setup lang="ts">
-    ${updatedScriptContent.trim()}
-    </script>
+  // Add eventMappings object to emit manually all events
+  const eventMappingsObject = `
+const eventMappings = {
+  onClick: "click",
+  onDoubleClick: "dblclick",
+  onMouseDown: "mousedown",
+  onMouseUp: "mouseup",
+  onMouseEnter: "mouseenter",
+  onMouseLeave: "mouseleave",
+  onMouseMove: "mousemove",
+  onMouseOver: "mouseover",
+  onMouseOut: "mouseout",
+  onKeyDown: "keydown",
+  onKeyUp: "keyup",
+  onKeyPress: "keypress",
+  onFocus: "focus",
+  onBlur: "blur",
+  onInput: "input",
+  onChange: "change",
+  onSubmit: "submit",
+  onReset: "reset",
+  onScroll: "scroll",
+  onWheel: "wheel",
+  onDragStart: "dragstart",
+  onDrag: "drag",
+  onDragEnd: "dragend",
+  onDragEnter: "dragenter",
+  onDragLeave: "dragleave",
+  onDragOver: "dragover",
+  onDrop: "drop",
+  onTouchStart: "touchstart",
+  onTouchMove: "touchmove",
+  onTouchEnd: "touchend",
+  onTouchCancel: "touchcancel",
+};
 `;
+
+  // Reassemble the Vue file, keeping template and script separate
+  const updatedCode = `${beforeTemplate}${updatedTemplateContent}${afterTemplate.replace(
+    /<script[^>]*>[\s\S]*?<\/script>/,
+    `<script setup lang="ts">
+${eventMappingsObject}
+${updatedScriptContent.trim()}
+</script>`,
+  )}`;
 
   return updatedCode;
 }

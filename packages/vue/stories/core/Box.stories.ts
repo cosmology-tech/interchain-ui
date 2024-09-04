@@ -33,9 +33,13 @@ export const Default: Story = {
   render: (args) => ({
     components: { Box },
     setup() {
-      return { args };
+      const handleClick = () => {
+        console.log("Box clicked");
+      };
+      return { args, handleClick };
     },
-    template: '<Box v-bind="args">This is a Box component</Box>',
+    template:
+      '<Box v-bind="args" @click="handleClick">This is a Box component</Box>',
   }),
 };
 

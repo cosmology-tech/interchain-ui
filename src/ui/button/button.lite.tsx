@@ -49,6 +49,7 @@ export default function Button(props: ButtonProps) {
     getStoreState: () => any;
     combinedClassName: string;
     spreadAttributes: UnknownRecord;
+    eventHandlers: Record<string, (event: any) => void>;
   }>({
     _overrideManager: null,
     _theme: "light",
@@ -109,6 +110,50 @@ export default function Button(props: ButtonProps) {
         },
       );
     },
+    get eventHandlers() {
+      const handlers: Record<string, (event: any) => void> = {};
+      const eventProps = [
+        "onClick",
+        "onDoubleClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onKeyDown",
+        "onKeyUp",
+        "onKeyPress",
+        "onFocus",
+        "onBlur",
+        "onInput",
+        "onChange",
+        "onSubmit",
+        "onReset",
+        "onScroll",
+        "onWheel",
+        "onDragStart",
+        "onDrag",
+        "onDragEnd",
+        "onDragEnter",
+        "onDragLeave",
+        "onDragOver",
+        "onDrop",
+        "onTouchStart",
+        "onTouchMove",
+        "onTouchEnd",
+        "onTouchCancel",
+      ];
+
+      eventProps.forEach((eventName) => {
+        if (props[eventName]) {
+          handlers[eventName] = (event: any) => props[eventName](event);
+        }
+      });
+
+      return handlers;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -137,8 +182,8 @@ export default function Button(props: ButtonProps) {
     <Box
       boxRef={props.buttonRef}
       className={state.combinedClassName}
-      onClick={(event) => props.onClick(event)}
       {...state.spreadAttributes}
+      {...state.eventHandlers}
     >
       <Spinner
         size={props.iconSize}
