@@ -102,9 +102,6 @@ export default function Button(props: ButtonProps) {
         {
           attributes: {
             ...props.attributes,
-            onClick: (event) => props.onClick?.(event),
-            onMouseEnter: (event) => props.onHoverStart?.(event),
-            onMouseLeave: (event) => props.onHoverEnd?.(event),
             disabled: props.disabled,
             // style: state.getVars(),
             ...props.domAttributes,
@@ -140,6 +137,7 @@ export default function Button(props: ButtonProps) {
     <Box
       boxRef={props.buttonRef}
       className={state.combinedClassName}
+      onClick={(event) => props.onClick(event)}
       {...state.spreadAttributes}
     >
       <Spinner

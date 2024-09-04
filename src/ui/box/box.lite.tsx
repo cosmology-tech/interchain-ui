@@ -21,6 +21,7 @@ export default function Box(props: BoxProps) {
       passThroughProps: Record<string, unknown>;
     };
     finalPassThroughProps: Record<string, unknown>;
+    eventHandlers: Record<string, (event: any) => void>;
   }>({
     get comp() {
       return props.as ?? DEFAULT_VALUES.as;
@@ -45,6 +46,50 @@ export default function Box(props: BoxProps) {
         ]),
       };
     },
+    get eventHandlers() {
+      const handlers: Record<string, (event: any) => void> = {};
+      const eventProps = [
+        "onClick",
+        "onDoubleClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onKeyDown",
+        "onKeyUp",
+        "onKeyPress",
+        "onFocus",
+        "onBlur",
+        "onInput",
+        "onChange",
+        "onSubmit",
+        "onReset",
+        "onScroll",
+        "onWheel",
+        "onDragStart",
+        "onDrag",
+        "onDragEnd",
+        "onDragEnter",
+        "onDragLeave",
+        "onDragOver",
+        "onDrop",
+        "onTouchStart",
+        "onTouchMove",
+        "onTouchEnd",
+        "onTouchCancel",
+      ];
+
+      eventProps.forEach((eventName) => {
+        if (props[eventName]) {
+          handlers[eventName] = (event: any) => props[eventName](event);
+        }
+      });
+
+      return handlers;
+    },
   });
 
   return (
@@ -56,6 +101,7 @@ export default function Box(props: BoxProps) {
         ...props.rawCSS,
       }}
       {...state.finalPassThroughProps}
+      {...state.eventHandlers}
       ref={props.boxRef}
     >
       {props.children}

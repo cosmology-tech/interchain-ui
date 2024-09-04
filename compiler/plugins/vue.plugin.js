@@ -1,4 +1,8 @@
 // @ts-check
+const { parse } = require("@babel/parser");
+const traverse = require("@babel/traverse").default;
+const generate = require("@babel/generator").default;
+const t = require("@babel/types");
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}
@@ -40,10 +44,6 @@ function fixCleanupRefAst(ast) {
       )
     ) {
       // Case 1: With braces
-      const { parse } = require("@babel/parser");
-      const traverse = require("@babel/traverse").default;
-      const generate = require("@babel/generator").default;
-      const t = require("@babel/types");
 
       const ast = parse(onUnMountCode, {
         sourceType: "module",
@@ -117,66 +117,115 @@ function fixVueEventHandlers(codeStr) {
     onDragLeave: "dragleave",
     onDragOver: "dragover",
     onDrop: "drop",
-    // Add more event mappings as needed
+    onTouchStart: "touchstart",
+    onTouchMove: "touchmove",
+    onTouchEnd: "touchend",
+    onTouchCancel: "touchcancel",
   };
 
-  let updatedCode = codeStr;
+  // Match all template sections, including named slots
+  const templateMatches =
+    codeStr.match(/<template[^>]*>[\s\S]*?<\/template>/g) || [];
+  const scriptMatch = codeStr.match(/<script[^>]*>([\s\S]*?)<\/script>/);
+
+  if (!scriptMatch) {
+    return codeStr; // If there's no script section, return the original code
+  }
+
+  const scriptContent = scriptMatch[1];
+
+  const ast = parse(scriptContent, {
+    sourceType: "module",
+    plugins: ["typescript", "jsx"],
+  });
+
   const detectedEvents = new Set();
 
-  // Convert event syntax and detect custom events
-  Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
-    const regex = new RegExp(`:(${mitosisEvent})\\s*=\\s*"([^"]*)"`, "g");
-    updatedCode = updatedCode.replace(regex, (match, event, handler) => {
-      detectedEvents.add(vueEvent);
-      return `@${vueEvent}="${handler}"`;
-    });
-
-    // Detect props events
-    const propsRegex = new RegExp(`props\\.${mitosisEvent}`, "g");
-    if (propsRegex.test(updatedCode)) {
-      detectedEvents.add(vueEvent);
-    }
+  traverse(ast, {
+    // Detect events in JSX attributes
+    JSXAttribute(path) {
+      const name = path.node.name;
+      if (t.isJSXIdentifier(name) && name.name in eventMappings) {
+        const vueEvent = eventMappings[name.name];
+        detectedEvents.add(vueEvent);
+        name.name = `@${vueEvent}`;
+      }
+    },
+    // Detect events in object properties or variable declarations
+    Property(path) {
+      if (
+        t.isIdentifier(path.node.key) &&
+        path.node.key.name in eventMappings
+      ) {
+        detectedEvents.add(eventMappings[path.node.key.name]);
+      }
+    },
+    VariableDeclarator(path) {
+      if (t.isArrayExpression(path.node.init)) {
+        path.node.init.elements.forEach((element) => {
+          if (t.isStringLiteral(element) && element.value in eventMappings) {
+            detectedEvents.add(eventMappings[element.value]);
+          }
+        });
+      }
+    },
+    // Convert props event handlers to emit calls
+    CallExpression(path) {
+      if (
+        t.isMemberExpression(path.node.callee) &&
+        t.isIdentifier(path.node.callee.object, { name: "props" }) &&
+        t.isIdentifier(path.node.callee.property) &&
+        path.node.callee.property.name in eventMappings
+      ) {
+        const vueEvent = eventMappings[path.node.callee.property.name];
+        path.replaceWith(
+          t.callExpression(t.identifier("emit"), [
+            t.stringLiteral(vueEvent),
+            ...path.node.arguments,
+          ]),
+        );
+      }
+    },
   });
 
   // Add defineEmits
   if (detectedEvents.size > 0) {
-    const emitsArray = Array.from(detectedEvents)
-      .map((event) => `'${event}'`)
-      .join(", ");
-    const defineEmitsStatement = `const emit = defineEmits([${emitsArray}]);\n`;
+    const emitsArray = Array.from(detectedEvents).map((event) =>
+      t.stringLiteral(event),
+    );
+    const defineEmitsStatement = t.variableDeclaration("const", [
+      t.variableDeclarator(
+        t.identifier("emit"),
+        t.callExpression(t.identifier("defineEmits"), [
+          t.arrayExpression(emitsArray),
+        ]),
+      ),
+    ]);
 
-    // Insert defineEmits after the last import statement or at the beginning of the <script> block
-    const importRegex = /^import .+$/gm;
-    const lastImportMatch = [...updatedCode.matchAll(importRegex)].pop();
-
-    if (lastImportMatch) {
-      const insertIndex = lastImportMatch.index + lastImportMatch[0].length;
-      updatedCode =
-        updatedCode.slice(0, insertIndex) +
-        "\n" +
-        defineEmitsStatement +
-        updatedCode.slice(insertIndex);
-    } else {
-      const scriptSetupIndex = updatedCode.indexOf("<script setup");
-      if (scriptSetupIndex !== -1) {
-        const insertIndex = updatedCode.indexOf(">", scriptSetupIndex) + 1;
-        updatedCode =
-          updatedCode.slice(0, insertIndex) +
-          "\n" +
-          defineEmitsStatement +
-          updatedCode.slice(insertIndex);
-      }
-    }
+    // Insert defineEmits at the beginning of the script
+    ast.program.body.unshift(defineEmitsStatement);
   }
 
-  // Replace props event handlers with emit calls
-  Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
-    const regex = new RegExp(
-      `(props\\.${mitosisEvent})\\s*\\?\\.(\\w+)\\((.*?)\\)`,
-      "g",
-    );
-    updatedCode = updatedCode.replace(regex, `emit('${vueEvent}', $3)`);
+  const updatedScriptContent = generate(ast).code;
+
+  // Update template event bindings for all template sections
+  const updatedTemplates = templateMatches.map((template) => {
+    let updatedTemplate = template;
+    Object.entries(eventMappings).forEach(([mitosisEvent, vueEvent]) => {
+      const regex = new RegExp(`:(${mitosisEvent})\\s*=\\s*"([^"]*)"`, "g");
+      updatedTemplate = updatedTemplate.replace(regex, `@${vueEvent}="$2"`);
+    });
+    return updatedTemplate;
   });
+
+  // Reassemble the Vue file
+  const updatedCode = `
+    ${updatedTemplates.join("\n")}
+
+    <script setup lang="ts">
+    ${updatedScriptContent.trim()}
+    </script>
+`;
 
   return updatedCode;
 }

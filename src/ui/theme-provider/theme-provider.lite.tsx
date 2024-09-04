@@ -240,7 +240,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       style={{
         visibility: state.isMounted ? "visible" : "hidden",
       }}
-      className={state.themeClass}
+      className={clsx(state.themeClass, props.className)}
     >
       {props.children}
     </div>
