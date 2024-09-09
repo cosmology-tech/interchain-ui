@@ -16,6 +16,7 @@
     "dist"
   ],
   "dependencies": {
+    "lodash": "^4.17.21",
     "vue-metamorph": "^3.1.16"
   },
   "devDependencies": {
