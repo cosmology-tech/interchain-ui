@@ -21,7 +21,7 @@ module.exports = function vueCompilerPlugin() {
       pre: (codeStr) => {
         return [
           fixVueClassName,
-          fixVueEventHandlers,
+          // fixVueEventHandlers,
           // Hello
         ].reduce((acc, transform) => {
           acc = transform(acc);
@@ -48,8 +48,6 @@ function fixCleanupRefAst(ast) {
         onUnMountCode,
       )
     ) {
-      // Case 1: With braces
-
       const ast = parse(onUnMountCode, {
         sourceType: "module",
         plugins: ["typescript"],

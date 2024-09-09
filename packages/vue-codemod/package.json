@@ -1,0 +1,49 @@
+{
+  "name": "@interchain-ui/vue-codemod",
+  "version": "0.0.0",
+  "description": "Codemod for interchain-ui vue",
+  "author": "yyyyaaa <phatghaa@gmail.com>",
+  "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/vue-codemod#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "src/index.ts",
+  "bin": {
+    "vue-codemod": "dist/cli.js"
+  },
+  "directories": {
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "vue-metamorph": "^3.1.16"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmology-tech/interchain-ui.git"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:w": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "build": "tsc",
+    "dev": "vite"
+  },
+  "bugs": {
+    "url": "https://github.com/cosmology-tech/interchain-ui/issues"
+  }
+}
