@@ -42,7 +42,7 @@ export const vueMitosisCodeMod: CodemodPlugin = {
 
   transform({ scriptASTs, sfcAST, utils: { traverseTemplateAST } }) {
     let transformCount = 0;
-    let didModifyTemplate = false;
+    let didModEventHandlers = false;
 
     if (sfcAST) {
       traverseTemplateAST(sfcAST, {
@@ -55,7 +55,6 @@ export const vueMitosisCodeMod: CodemodPlugin = {
             node.key.name.name === "bind";
 
           if (isVBindNode) {
-            // console.log("isVBindNode", node);
             const containsExpression =
               node.value?.type === "VExpressionContainer";
 
@@ -104,14 +103,14 @@ export const vueMitosisCodeMod: CodemodPlugin = {
                     );
                     node.parent.attributes = newAttributes;
                     transformCount++;
-                    didModifyTemplate = true;
+                    didModEventHandlers = true;
                     return;
                   }
                 } else if (node.value?.expression) {
                   // @ts-ignore-next-line
                   node.value.expression.properties = restProperties;
                   transformCount++;
-                  didModifyTemplate = true;
+                  didModEventHandlers = true;
                   return;
                 }
               }
@@ -149,7 +148,7 @@ export const vueMitosisCodeMod: CodemodPlugin = {
 
               node.parent.attributes = restAttributes;
               transformCount++;
-              didModifyTemplate = true;
+              didModEventHandlers = true;
               return;
             }
           }
@@ -164,29 +163,51 @@ export const vueMitosisCodeMod: CodemodPlugin = {
           if (
             namedTypes.MemberExpression.check(node.callee) &&
             namedTypes.Identifier.check(node.callee.object) &&
-            node.callee.object.name === "props" &&
+            node.callee.object.name === "eventProps" &&
             namedTypes.Identifier.check(node.callee.property) &&
-            node.callee.property.name in eventMappings
+            node.callee.property.name === "forEach"
           ) {
-            const vueEvent = eventMappings[node.callee.property.name];
-            if (vueEvent) {
-              path.replace(
-                builders.callExpression(builders.identifier("emit"), [
-                  builders.stringLiteral(vueEvent),
-                  ...node.arguments,
-                ]),
-              );
-              transformCount++;
+            const arrowFunction = node.arguments[0];
+            if (
+              namedTypes.ArrowFunctionExpression.check(arrowFunction) &&
+              namedTypes.Identifier.check(arrowFunction.params[0])
+            ) {
+              const paramName = arrowFunction.params[0].name;
+              visit(arrowFunction.body, {
+                visitMemberExpression(innerPath) {
+                  const { node: innerNode } = innerPath;
+                  if (
+                    namedTypes.Identifier.check(innerNode.object) &&
+                    innerNode.object.name === "props" &&
+                    namedTypes.Identifier.check(innerNode.property) &&
+                    innerNode.property.name === "eventName"
+                  ) {
+                    innerPath.replace(
+                      builders.memberExpression(
+                        builders.identifier("props"),
+                        builders.identifier(paramName),
+                        true,
+                      ),
+                    );
+                    transformCount++;
+                  }
+                  this.traverse(innerPath);
+                },
+              });
             }
           }
           this.traverse(path);
         },
       });
 
-      // Add defineEmits
+      // Add defineEmits for relevant events detected in eventHandlers variable
       const detectedEvents = new Set(Object.values(eventMappings));
 
-      if (detectedEvents.size > 0) {
+      if (
+        detectedEvents.size > 0 &&
+        scriptAST.isScriptSetup &&
+        didModEventHandlers
+      ) {
         const emitsArray = Array.from(detectedEvents).map((event) =>
           builders.stringLiteral(event),
         );
@@ -198,10 +219,6 @@ export const vueMitosisCodeMod: CodemodPlugin = {
             ]),
           ),
         ]);
-
-        if (!scriptAST.isScriptSetup) {
-          return;
-        }
 
         scriptAST.body.unshift(defineEmitsStatement);
         transformCount++;

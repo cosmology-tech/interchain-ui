@@ -287,7 +287,7 @@ it("should remove eventHandlers in a v-bind only containing itself in a spread",
   expect(trimWhitespace(result)).toBe(trimWhitespace(expected));
 });
 
-it.only("should add defineEmits to script setup if eventHandlers is present", () => {
+it("should add defineEmits to script setup if eventHandlers is present and fix eventName in expressions", () => {
   const source = `
   <template>
   <Box
@@ -480,7 +480,9 @@ function getStoreState() {
   <Box
     :boxRef="buttonRef"
     :class="combinedClassName"
-    v-bind="{ ...spreadAttributes, ...eventHandlers }"
+    v-bind="{
+  ...spreadAttributes,
+}"
     ><Spinner
       :size="iconSize"
       :attributes="{
@@ -519,25 +521,60 @@ function getStoreState() {
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from "vue";
+const emit = defineEmits([
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseenter',
+  'mouseleave',
+  'mousemove',
+  'mouseover',
+  'mouseout',
+  'keydown',
+  'keyup',
+  'keypress',
+  'focus',
+  'blur',
+  'input',
+  'change',
+  'submit',
+  'reset',
+  'scroll',
+  'wheel',
+  'dragstart',
+  'drag',
+  'dragend',
+  'dragenter',
+  'dragleave',
+  'dragover',
+  'drop',
+  'touchstart',
+  'touchmove',
+  'touchend',
+  'touchcancel',
+]);
 
-import { assignInlineVars } from "@vanilla-extract/dynamic";
-import clx from "clsx";
-import Icon from "../icon";
-import Box from "../box";
-import Spinner from "../spinner";
-import { store } from "../../models/store";
-import { recipe, buttonOverrides } from "./button.helper";
-import { isDefaultAccent, getAccentHover } from "../../helpers/style";
-import { themeVars } from "../../styles/themes.css";
-import { fullWidth, fullWidthHeight } from "../shared/shared.css";
-import * as styles from "./button.css";
+
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import clx from 'clsx';
+import Icon from '../icon';
+import Box from '../box';
+import Spinner from '../spinner';
+import { store } from '../../models/store';
+import { recipe, buttonOverrides } from './button.helper';
+import { isDefaultAccent, getAccentHover } from '../../helpers/style';
+import { themeVars } from '../../styles/themes.css';
+import { fullWidth, fullWidthHeight } from '../shared/shared.css';
+import * as styles from './button.css';
 
 const props = withDefaults(defineProps(), {
-  intent: "primary",
-  size: "md",
-  as: "button",
-  variant: "solid",
+  intent: 'primary',
+  size: 'md',
+  as: 'button',
+  variant: 'solid',
   disabled: undefined,
   isLoading: undefined,
   fluidWidth: undefined,
@@ -547,13 +584,13 @@ const props = withDefaults(defineProps(), {
   domAttributes: undefined,
   buttonRef: undefined,
   iconSize: undefined,
-  spinnerPlacement: "start",
+  spinnerPlacement: 'start',
   leftIcon: undefined,
   children: undefined,
   rightIcon: undefined,
 });
 const _overrideManager = ref(null);
-const _theme = ref("light");
+const _theme = ref('light');
 const _themeAccent = ref(null);
 
 const cleanupRef = ref(null);
@@ -570,7 +607,7 @@ onMounted(() => {
   });
 });
 onUnmounted(() => {
-  if (typeof cleanupRef.value === "function") {
+  if (typeof cleanupRef.value === 'function') {
     cleanupRef();
   }
 });
@@ -580,7 +617,7 @@ const combinedClassName = computed(() => {
     recipe({
       as: props.as,
       variant: props.variant,
-      intent: "primary",
+      intent: 'primary',
       isDisabled: props.disabled || props.isLoading,
       theme: getStoreState().theme,
     }),
@@ -607,41 +644,41 @@ const spreadAttributes = computed(() => {
 const eventHandlers = computed(() => {
   const handlers = {};
   const eventProps = [
-    "onClick",
-    "onDoubleClick",
-    "onMouseDown",
-    "onMouseUp",
-    "onMouseEnter",
-    "onMouseLeave",
-    "onMouseMove",
-    "onMouseOver",
-    "onMouseOut",
-    "onKeyDown",
-    "onKeyUp",
-    "onKeyPress",
-    "onFocus",
-    "onBlur",
-    "onInput",
-    "onChange",
-    "onSubmit",
-    "onReset",
-    "onScroll",
-    "onWheel",
-    "onDragStart",
-    "onDrag",
-    "onDragEnd",
-    "onDragEnter",
-    "onDragLeave",
-    "onDragOver",
-    "onDrop",
-    "onTouchStart",
-    "onTouchMove",
-    "onTouchEnd",
-    "onTouchCancel",
+    'onClick',
+    'onDoubleClick',
+    'onMouseDown',
+    'onMouseUp',
+    'onMouseEnter',
+    'onMouseLeave',
+    'onMouseMove',
+    'onMouseOver',
+    'onMouseOut',
+    'onKeyDown',
+    'onKeyUp',
+    'onKeyPress',
+    'onFocus',
+    'onBlur',
+    'onInput',
+    'onChange',
+    'onSubmit',
+    'onReset',
+    'onScroll',
+    'onWheel',
+    'onDragStart',
+    'onDrag',
+    'onDragEnd',
+    'onDragEnter',
+    'onDragLeave',
+    'onDragOver',
+    'onDrop',
+    'onTouchStart',
+    'onTouchMove',
+    'onTouchEnd',
+    'onTouchCancel',
   ];
   eventProps.forEach((eventName) => {
-    if (props.eventName) {
-      handlers[eventName] = (event) => props.eventName(event);
+    if (props[eventName]) {
+      handlers[eventName] = (event) => props[eventName](event);
     }
   });
   return handlers;
@@ -658,7 +695,6 @@ function getStoreState() {
     overrideStyleManager: store.getState().overrideStyleManager,
   };
 }
-
 </script>
   `;
   const result = transformCode(source);
