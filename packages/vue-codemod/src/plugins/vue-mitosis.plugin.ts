@@ -1,4 +1,5 @@
-import type { CodemodPlugin, AST } from "vue-metamorph";
+import type { CodemodPlugin } from "vue-metamorph";
+import { builders, namedTypes, visit } from "ast-types";
 import { isEmpty } from "lodash";
 
 const eventMappings = {
@@ -39,56 +40,9 @@ export const vueMitosisCodeMod: CodemodPlugin = {
   type: "codemod",
   name: "vue mitosis",
 
-  transform({
-    scriptASTs,
-    sfcAST,
-    utils: { traverseScriptAST, traverseTemplateAST },
-  }) {
+  transform({ scriptASTs, sfcAST, utils: { traverseTemplateAST } }) {
     let transformCount = 0;
-
-    // for (const scriptAST of scriptASTs) {
-    //   traverseScriptAST(scriptAST, {
-    //     // Convert event handlers in script
-    //     visitCallExpression(path) {
-    //       if (
-    //         t.isMemberExpression(path.node.callee!) &&
-    //         t.isIdentifier(path.node.callee.object, { name: "props" }) &&
-    //         t.isIdentifier(path.node.callee.property) &&
-    //         path.node.callee.property.name &&
-    //         path.node.callee.property.name in eventMappings
-    //       ) {
-    //         const vueEvent = eventMappings[path.node.callee.property.name];
-    //         if (vueEvent) {
-    //           path.replaceWith(
-    //             t.callExpression(t.identifier("emit"), [
-    //               t.stringLiteral(vueEvent),
-    //               ...path.node.arguments,
-    //             ]),
-    //           );
-    //           transformCount++;
-    //         }
-    //       }
-    //     },
-    //   });
-
-    //   // Add defineEmits
-    //   const detectedEvents = new Set(Object.values(eventMappings));
-    //   if (detectedEvents.size > 0) {
-    //     const emitsArray = Array.from(detectedEvents).map((event) =>
-    //       t.stringLiteral(event),
-    //     );
-    //     const defineEmitsStatement = t.variableDeclaration("const", [
-    //       t.variableDeclarator(
-    //         t.identifier("emit"),
-    //         t.callExpression(t.identifier("defineEmits"), [
-    //           t.arrayExpression(emitsArray),
-    //         ]),
-    //       ),
-    //     ]);
-    //     scriptAST.program.body.unshift(defineEmitsStatement);
-    //     transformCount++;
-    //   }
-    // }
+    let didModifyTemplate = false;
 
     if (sfcAST) {
       traverseTemplateAST(sfcAST, {
@@ -150,12 +104,14 @@ export const vueMitosisCodeMod: CodemodPlugin = {
                     );
                     node.parent.attributes = newAttributes;
                     transformCount++;
+                    didModifyTemplate = true;
                     return;
                   }
                 } else if (node.value?.expression) {
                   // @ts-ignore-next-line
                   node.value.expression.properties = restProperties;
                   transformCount++;
+                  didModifyTemplate = true;
                   return;
                 }
               }
@@ -193,11 +149,63 @@ export const vueMitosisCodeMod: CodemodPlugin = {
 
               node.parent.attributes = restAttributes;
               transformCount++;
+              didModifyTemplate = true;
               return;
             }
           }
         },
       });
+    }
+
+    for (const scriptAST of scriptASTs) {
+      visit(scriptAST, {
+        visitCallExpression(path) {
+          const { node } = path;
+          if (
+            namedTypes.MemberExpression.check(node.callee) &&
+            namedTypes.Identifier.check(node.callee.object) &&
+            node.callee.object.name === "props" &&
+            namedTypes.Identifier.check(node.callee.property) &&
+            node.callee.property.name in eventMappings
+          ) {
+            const vueEvent = eventMappings[node.callee.property.name];
+            if (vueEvent) {
+              path.replace(
+                builders.callExpression(builders.identifier("emit"), [
+                  builders.stringLiteral(vueEvent),
+                  ...node.arguments,
+                ]),
+              );
+              transformCount++;
+            }
+          }
+          this.traverse(path);
+        },
+      });
+
+      // Add defineEmits
+      const detectedEvents = new Set(Object.values(eventMappings));
+
+      if (detectedEvents.size > 0) {
+        const emitsArray = Array.from(detectedEvents).map((event) =>
+          builders.stringLiteral(event),
+        );
+        const defineEmitsStatement = builders.variableDeclaration("const", [
+          builders.variableDeclarator(
+            builders.identifier("emit"),
+            builders.callExpression(builders.identifier("defineEmits"), [
+              builders.arrayExpression(emitsArray),
+            ]),
+          ),
+        ]);
+
+        if (!scriptAST.isScriptSetup) {
+          return;
+        }
+
+        scriptAST.body.unshift(defineEmitsStatement);
+        transformCount++;
+      }
     }
 
     return transformCount;
