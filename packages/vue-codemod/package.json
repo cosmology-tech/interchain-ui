@@ -1,5 +1,6 @@
 {
   "name": "@interchain-ui/vue-codemod",
+  "private": true,
   "version": "0.0.0",
   "description": "Codemod for interchain-ui vue",
   "author": "yyyyaaa <phatghaa@gmail.com>",
@@ -18,14 +19,33 @@
     },
     "./package.json": "./package.json"
   },
+  "targets": {
+    "main": {
+      "includeNodeModules": [
+        "vue-metamorph"
+      ]
+    },
+    "module": {
+      "includeNodeModules": [
+        "vue-metamorph"
+      ]
+    }
+  },
+  "sideEffects": false,
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "@parcel/resolver-default": {
+    "packageExports": true
+  },
   "scripts": {
     "test": "vitest",
     "test:w": "vitest --watch",
     "test:coverage": "vitest run --coverage",
     "build": "parcel build",
-    "dev": "parcel watch"
+    "dev": "parcel watch",
+    "prepare": "parcel build"
   },
   "directories": {
+    "lib": "src",
     "test": "__tests__"
   },
   "files": [
@@ -33,7 +53,12 @@
   ],
   "dependencies": {
     "ast-types": "^0.14.2",
+    "commander": "^12.1.0",
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "magic-string": "^0.30.11",
+    "postcss": "^8.4.45",
+    "recast": "^0.23.9",
     "vue-metamorph": "^3.1.16"
   },
   "devDependencies": {

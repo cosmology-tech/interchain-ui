@@ -913,16 +913,31 @@ importers:
       ast-types:
         specifier: ^0.14.2
         version: 0.14.2
+      commander:
+        specifier: ^12.1.0
+        version: 12.1.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      magic-string:
+        specifier: ^0.30.11
+        version: 0.30.11
+      postcss:
+        specifier: ^8.4.45
+        version: 8.4.45
+      recast:
+        specifier: ^0.23.9
+        version: 0.23.9
       vue-metamorph:
         specifier: ^3.1.16
         version: 3.1.16(eslint@9.10.0(jiti@1.21.6))
     devDependencies:
       '@parcel/config-default':
         specifier: ^2.12.0
-        version: 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
+        version: 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
       '@parcel/transformer-typescript-tsc':
         specifier: ^2.12.0
         version: 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(typescript@5.5.4)
@@ -946,7 +961,7 @@ importers:
         version: 9.27.0(eslint@9.10.0(jiti@1.21.6))
       parcel:
         specifier: ^2.12.0
-        version: 2.12.0(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
+        version: 2.12.0(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -10801,10 +10816,6 @@ packages:
     resolution: {integrity: sha512-7iB/v/r7Woof0glKLH8b1SPHrsX7uhdO+Geb41QpF/+mWZHU3uxxSlN+UXGVit1PawOYDToO+AbZzhBzWRDwbQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.4.41:
-    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.4.45:
     resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
     engines: {node: ^10 || ^12 || >=14}
@@ -13236,7 +13247,7 @@ snapshots:
   '@babel/code-frame@7.24.7':
     dependencies:
       '@babel/highlight': 7.24.7
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   '@babel/compat-data@7.24.7': {}
 
@@ -13647,7 +13658,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   '@babel/parser@7.25.4':
     dependencies:
@@ -16540,14 +16551,14 @@ snapshots:
       - '@parcel/core'
       - '@swc/helpers'
 
-  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)':
+  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)':
     dependencies:
       '@parcel/bundler-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/compressor-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.12)
       '@parcel/namer-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/optimizer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
-      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
+      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)
       '@parcel/optimizer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/optimizer-svgo': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/optimizer-swc': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
@@ -16585,14 +16596,14 @@ snapshots:
       - typescript
       - uncss
 
-  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)':
+  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)':
     dependencies:
       '@parcel/bundler-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/compressor-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.12)
       '@parcel/namer-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/optimizer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
-      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)
+      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
       '@parcel/optimizer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/optimizer-svgo': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
       '@parcel/optimizer-swc': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
@@ -16867,10 +16878,10 @@ snapshots:
       - '@parcel/core'
       - '@swc/helpers'
 
-  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)':
+  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)':
     dependencies:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
-      htmlnano: 2.1.1(postcss@8.4.41)(relateurl@0.2.7)(svgo@2.8.0)(terser@5.31.6)(typescript@5.5.4)
+      htmlnano: 2.1.1(postcss@8.4.45)(relateurl@0.2.7)(svgo@2.8.0)(terser@5.31.6)(typescript@5.4.5)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -16886,10 +16897,10 @@ snapshots:
       - typescript
       - uncss
 
-  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)':
+  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)':
     dependencies:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)
-      htmlnano: 2.1.1(postcss@8.4.45)(relateurl@0.2.7)(svgo@2.8.0)(terser@5.31.6)(typescript@5.4.5)
+      htmlnano: 2.1.1(postcss@8.4.45)(relateurl@0.2.7)(svgo@2.8.0)(terser@5.31.6)(typescript@5.5.4)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -21062,7 +21073,7 @@ snapshots:
       '@vue/shared': 3.4.38
       entities: 4.5.0
       estree-walker: 2.0.2
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   '@vue/compiler-dom@3.4.21':
     dependencies:
@@ -21088,8 +21099,8 @@ snapshots:
       '@vue/shared': 3.4.21
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.37
-      source-map-js: 1.2.0
+      postcss: 8.4.45
+      source-map-js: 1.2.1
 
   '@vue/compiler-sfc@3.4.31':
     dependencies:
@@ -21101,7 +21112,7 @@ snapshots:
       estree-walker: 2.0.2
       magic-string: 0.30.11
       postcss: 8.4.45
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   '@vue/compiler-sfc@3.4.38':
     dependencies:
@@ -21112,7 +21123,7 @@ snapshots:
       '@vue/shared': 3.4.38
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.41
+      postcss: 8.4.45
       source-map-js: 1.2.0
 
   '@vue/compiler-ssr@3.4.21':
@@ -25070,19 +25081,6 @@ snapshots:
 
   html-void-elements@3.0.0: {}
 
-  htmlnano@2.1.1(postcss@8.4.41)(relateurl@0.2.7)(svgo@2.8.0)(terser@5.31.6)(typescript@5.5.4):
-    dependencies:
-      cosmiconfig: 9.0.0(typescript@5.5.4)
-      posthtml: 0.16.6
-      timsort: 0.3.0
-    optionalDependencies:
-      postcss: 8.4.41
-      relateurl: 0.2.7
-      svgo: 2.8.0
-      terser: 5.31.6
-    transitivePeerDependencies:
-      - typescript
-
   htmlnano@2.1.1(postcss@8.4.45)(relateurl@0.2.7)(svgo@2.8.0)(terser@5.31.6)(typescript@5.4.5):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.4.5)
@@ -28112,9 +28110,9 @@ snapshots:
       jsonc-parser: 3.3.1
       parcel: 2.12.0(@swc/helpers@0.5.3)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
 
-  parcel@2.12.0(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4):
+  parcel@2.12.0(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5):
     dependencies:
-      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.41)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
+      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.12)
       '@parcel/diagnostic': 2.12.0
       '@parcel/events': 2.12.0
@@ -28139,9 +28137,9 @@ snapshots:
       - typescript
       - uncss
 
-  parcel@2.12.0(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5):
+  parcel@2.12.0(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4):
     dependencies:
-      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.4.5)
+      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.12))(@swc/helpers@0.5.12)(postcss@8.4.45)(relateurl@0.2.7)(terser@5.31.6)(typescript@5.5.4)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.12)
       '@parcel/diagnostic': 2.12.0
       '@parcel/events': 2.12.0
@@ -28371,28 +28369,21 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-import@15.1.0(postcss@8.4.37):
+  postcss-import@15.1.0(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.37
+      postcss: 8.4.45
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.4.37):
+  postcss-js@4.0.1(postcss@8.4.45):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.37
+      postcss: 8.4.45
 
-  postcss-less@6.0.0(postcss@8.4.41):
+  postcss-less@6.0.0(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
-
-  postcss-load-config@4.0.2(postcss@8.4.37):
-    dependencies:
-      lilconfig: 3.1.1
-      yaml: 2.4.1
-    optionalDependencies:
-      postcss: 8.4.37
+      postcss: 8.4.45
 
   postcss-load-config@4.0.2(postcss@8.4.45):
     dependencies:
@@ -28400,7 +28391,6 @@ snapshots:
       yaml: 2.4.1
     optionalDependencies:
       postcss: 8.4.45
-    optional: true
 
   postcss-modules-extract-imports@3.1.0(postcss@8.4.45):
     dependencies:
@@ -28423,19 +28413,19 @@ snapshots:
       icss-utils: 5.1.0(postcss@8.4.45)
       postcss: 8.4.45
 
-  postcss-nested@6.0.1(postcss@8.4.37):
+  postcss-nested@6.0.1(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.37
+      postcss: 8.4.45
       postcss-selector-parser: 6.1.2
 
   postcss-sass@0.5.0:
     dependencies:
       gonzales-pe: 4.3.0
-      postcss: 8.4.41
+      postcss: 8.4.45
 
-  postcss-scss@4.0.9(postcss@8.4.41):
+  postcss-scss@4.0.9(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
 
   postcss-selector-parser@6.0.16:
     dependencies:
@@ -28452,7 +28442,7 @@ snapshots:
       debug: 4.3.7
       fast-diff: 1.3.0
       lodash.sortedlastindex: 4.1.0
-      postcss: 8.4.41
+      postcss: 8.4.45
       stylus: 0.57.0
     transitivePeerDependencies:
       - supports-color
@@ -28463,18 +28453,12 @@ snapshots:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.1.0
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   postcss@8.4.37:
     dependencies:
       nanoid: 3.3.7
       picocolors: 1.0.0
-      source-map-js: 1.2.0
-
-  postcss@8.4.41:
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.1
       source-map-js: 1.2.0
 
   postcss@8.4.45:
@@ -29970,11 +29954,11 @@ snapshots:
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
-      postcss: 8.4.37
-      postcss-import: 15.1.0(postcss@8.4.37)
-      postcss-js: 4.0.1(postcss@8.4.37)
-      postcss-load-config: 4.0.2(postcss@8.4.37)
-      postcss-nested: 6.0.1(postcss@8.4.37)
+      postcss: 8.4.45
+      postcss-import: 15.1.0(postcss@8.4.45)
+      postcss-js: 4.0.1(postcss@8.4.45)
+      postcss-load-config: 4.0.2(postcss@8.4.45)
+      postcss-nested: 6.0.1(postcss@8.4.45)
       postcss-selector-parser: 6.0.16
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -30545,13 +30529,13 @@ snapshots:
     dependencies:
       browserslist: 4.23.0
       escalade: 3.1.2
-      picocolors: 1.0.0
+      picocolors: 1.1.0
 
   update-browserslist-db@1.0.16(browserslist@4.23.1):
     dependencies:
       browserslist: 4.23.1
       escalade: 3.1.2
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   update-browserslist-db@1.1.0(browserslist@4.23.3):
     dependencies:
@@ -30799,7 +30783,7 @@ snapshots:
   vite@5.4.2(@types/node@20.14.9)(lightningcss@1.26.0)(terser@5.31.6):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.4.41
+      postcss: 8.4.45
       rollup: 4.21.1
     optionalDependencies:
       '@types/node': 20.14.9
@@ -30810,7 +30794,7 @@ snapshots:
   vite@5.4.2(@types/node@20.16.2)(lightningcss@1.26.0)(stylus@0.57.0)(terser@5.31.6):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.4.41
+      postcss: 8.4.45
       rollup: 4.21.1
     optionalDependencies:
       '@types/node': 20.16.2
@@ -30822,7 +30806,7 @@ snapshots:
   vite@5.4.2(@types/node@22.5.4)(lightningcss@1.26.0)(stylus@0.57.0)(terser@5.31.6):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.4.41
+      postcss: 8.4.45
       rollup: 4.21.1
     optionalDependencies:
       '@types/node': 22.5.4
@@ -31099,10 +31083,10 @@ snapshots:
       lodash-es: 4.17.21
       magic-string: 0.30.11
       node-html-parser: 6.1.13
-      postcss: 8.4.41
-      postcss-less: 6.0.0(postcss@8.4.41)
+      postcss: 8.4.45
+      postcss-less: 6.0.0(postcss@8.4.45)
       postcss-sass: 0.5.0
-      postcss-scss: 4.0.9(postcss@8.4.41)
+      postcss-scss: 4.0.9(postcss@8.4.45)
       postcss-styl: 0.12.3
       recast: 0.23.9
       table: 6.8.2
@@ -31124,10 +31108,10 @@ snapshots:
       lodash-es: 4.17.21
       magic-string: 0.30.11
       node-html-parser: 6.1.13
-      postcss: 8.4.41
-      postcss-less: 6.0.0(postcss@8.4.41)
+      postcss: 8.4.45
+      postcss-less: 6.0.0(postcss@8.4.45)
       postcss-sass: 0.5.0
-      postcss-scss: 4.0.9(postcss@8.4.41)
+      postcss-scss: 4.0.9(postcss@8.4.45)
       postcss-styl: 0.12.3
       recast: 0.23.9
       table: 6.8.2
