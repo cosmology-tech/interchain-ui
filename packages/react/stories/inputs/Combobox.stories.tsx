@@ -86,6 +86,25 @@ export const Default: Story = {
   ),
 };
 
+export const PreventClearValueOnBlur: Story = {
+  render: () => (
+    <Box display="flex" flexDirection="column" gap="$6">
+      <Combobox
+        label="Favorite Animal"
+        openOnFocus
+        allowsCustomValue
+        styleProps={{
+          width: "350px",
+        }}
+      >
+        {defaultOptions.map((option) => (
+          <Combobox.Item key={option.value}>{option.label}</Combobox.Item>
+        ))}
+      </Combobox>
+    </Box>
+  ),
+};
+
 const ChainOption = (props: Option & { iconUrl: string }) => {
   return (
     <Stack
