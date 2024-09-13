@@ -1,11 +1,8 @@
-import glob from "glob";
+import { globSync } from "glob";
 import fsPromise from "fs/promises";
 import fs from "fs-extra";
 import path from "node:path";
 import { cwd } from "node:process";
-// import { filesystem as filesystemTools } from "gluegun/filesystem";
-// import { strings as stringTools } from "gluegun/strings";
-// import { print as printTools } from "gluegun/print";
 import commandLineArgs from "command-line-args";
 import ora from "ora";
 import { Event } from "@parcel/watcher";
@@ -16,6 +13,8 @@ import startCase from "lodash/startCase";
 import * as scaffolds from "./scaffold.config.js";
 import { Cache } from "./cache";
 import { fixReactTypeIssues } from "./utils/react.utils";
+
+const { print, filesystem, strings } = require("gluegun");
 
 const cache = new Cache();
 
@@ -98,7 +97,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
 
   const files = cliConfig.elements
     ? options.elements
-    : glob.sync(options.elements as string);
+    : globSync(options.elements);
 
   const targetAllowList = compileAllowList[options.target as ValidTarget];
 
@@ -124,7 +123,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     }
 
     // Move src to all the package folder
-    const srcFiles = glob.sync("src/**/*");
+    const srcFiles = globSync("src/**/*");
     const allowList = compileAllowList[options.target as ValidTarget];
     const doesTargetHaveAllowList = allowList != null;
 
@@ -152,7 +151,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
 
     // For Vue, we need to add .vue to the export statement
     if (options.target === "vue") {
-      const reExportIndexFiles = glob.sync(`${outPath}/src/ui/**/index.ts`);
+      const reExportIndexFiles = globSync(`${outPath}/src/ui/**/index.ts`);
 
       reExportIndexFiles.forEach((indexFile: string) => {
         const data = fs.readFileSync(indexFile, "utf8");
@@ -164,11 +163,11 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     }
 
     // Remove unnecessary files moved
-    const unnecessaryFiles = glob.sync(`${outPath}/src/**/*.lite.tsx`);
+    const unnecessaryFiles = globSync(`${outPath}/src/**/*.lite.tsx`);
     unnecessaryFiles.forEach((element: string) => fs.removeSync(element));
 
     // Output file to <package>/src
-    const targetSrcFiles = glob.sync(`${outPath}/src/**/*.{ts,tsx}`);
+    const targetSrcFiles = globSync(`${outPath}/src/**/*.{ts,tsx}`);
 
     targetSrcFiles.forEach((element: string) => {
       const data = fs.readFileSync(element, "utf8");
@@ -304,6 +303,21 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     const to =
       options.target === "webcomponents" ? "webcomponent" : options.target;
 
+    // console.log("compileMitosisComponent()", {
+    //   parameters: {
+    //     options: {
+    //       from: "mitosis",
+    //       to: to,
+    //       out: outFile,
+    //       state: options.state,
+    //     },
+    //     array: [filepath],
+    //   },
+    //   strings: Object.keys(strings),
+    //   filesystem: filesystem,
+    //   print: print,
+    // });
+
     await compileCommand.run({
       parameters: {
         options: {
@@ -311,8 +325,6 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
           to: to,
           out: outFile,
           force: true,
-          // @ts-ignore
-          api: options.api,
           state: options.state,
           styles: options.styles,
           outFile: outPath,
@@ -320,9 +332,9 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
         },
         array: [filepath],
       },
-      // strings: stringTools,
-      // filesystem: filesystemTools,
-      // print: { ...printTools },
+      strings: strings,
+      filesystem: filesystem,
+      print: print,
     });
 
     return {

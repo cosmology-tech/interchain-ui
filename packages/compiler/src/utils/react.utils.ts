@@ -52,7 +52,6 @@ function transformForwardRef(codeStr: string): string {
 export function fixBoxForwardRef(codeStr: string): string {
   const isBoxComponent = codeStr.match(/const\s+Box\s*=\s*forwardRef/);
 
-  console.log("isBoxComponent", isBoxComponent);
   if (isBoxComponent) {
     // Add import for BoxProps
     codeStr = codeStr.replace(

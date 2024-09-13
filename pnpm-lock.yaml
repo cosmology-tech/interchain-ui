@@ -76,11 +76,11 @@ importers:
         specifier: ^0.0.16
         version: 0.0.16(eslint@8.57.0)
       '@builder.io/mitosis':
-        specifier: 0.3.11
-        version: 0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
+        specifier: 0.4.3
+        version: 0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
       '@builder.io/mitosis-cli':
-        specifier: 0.3.11
-        version: 0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
+        specifier: 0.4.3
+        version: 0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
       '@formkit/auto-animate':
         specifier: ^0.8.2
         version: 0.8.2
@@ -172,8 +172,8 @@ importers:
         specifier: ^11.2.0
         version: 11.2.0
       glob:
-        specifier: ^10.4.2
-        version: 10.4.2
+        specifier: ^11.0.0
+        version: 11.0.0
       gluegun:
         specifier: ^5.1.6
         version: 5.1.6
@@ -467,11 +467,11 @@ importers:
         specifier: ^7.25.6
         version: 7.25.6
       '@builder.io/mitosis':
-        specifier: 0.3.11
-        version: 0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
+        specifier: 0.4.3
+        version: 0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
       '@builder.io/mitosis-cli':
-        specifier: 0.3.11
-        version: 0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
+        specifier: 0.4.3
+        version: 0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
       '@parcel/watcher':
         specifier: ^2.4.1
         version: 2.4.1
@@ -488,11 +488,11 @@ importers:
         specifier: ^11.2.0
         version: 11.2.0
       glob:
-        specifier: ^10.4.2
-        version: 10.4.2
+        specifier: ^11.0.0
+        version: 11.0.0
       gluegun:
         specifier: ^5.1.6
-        version: 5.2.0(debug@4.3.5)
+        version: 5.2.0(debug@4.3.7)
       listr2:
         specifier: ^8.2.4
         version: 8.2.4
@@ -2025,12 +2025,12 @@ packages:
     peerDependencies:
       eslint: '>=0.8.0'
 
-  '@builder.io/mitosis-cli@0.3.11':
-    resolution: {integrity: sha512-w9rArWb7E5OwdyjWUtKoe/Hz6SpLjOpQYerULr23DkGcRgrXH/p101AHGh5JqZWgbUg2gFeD/DBX3y+hbJpPAQ==}
+  '@builder.io/mitosis-cli@0.4.3':
+    resolution: {integrity: sha512-k3NgmirWvfnzhORcghH2UMYYMK4rdEWtDkGJzTOJU3N59c782AFpfDa/tug3b/e6eMW8SBwK5At+JLwcUnxs/Q==}
     hasBin: true
 
-  '@builder.io/mitosis@0.3.11':
-    resolution: {integrity: sha512-s2T5shqLHMI7c9l1zntQazijkp94d0poF8IUGvpZL859BypmFLoknvTFPjuUL4b19WwA5B0zTN++qHfOeLo41Q==}
+  '@builder.io/mitosis@0.4.3':
+    resolution: {integrity: sha512-D5KohNYhRvfe46hL8KYv/pmn6FrfFwuR2wv3oUfwyhZo+bTwvYQiOqI+WZ9smm5D9ZEBQkL3ci2rlL+VlVD/UQ==}
 
   '@builder.io/sdk@2.2.4':
     resolution: {integrity: sha512-IvY55wVVhwEgUtdX/Dmz/rgCaWa6nnUv7cQuhogECoXCdJbGFOwfkO3sZS1nOhrdXB2wk5qbYOsEWB7G1S+hAQ==}
@@ -10183,9 +10183,9 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  neotraverse@0.6.14:
-    resolution: {integrity: sha512-co+mqQYo1wf3CRWRHWOT1ZgG7gsdNZSrrQkWxVnGAlD/UA/IZuPlE9UNkGZRwTLeml+dT5BytRW4ANqzPQeNLg==}
-    engines: {node: '>= 18'}
+  neotraverse@0.6.18:
+    resolution: {integrity: sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA==}
+    engines: {node: '>= 10'}
 
   next-mdx-remote@4.4.1:
     resolution: {integrity: sha512-1BvyXaIou6xy3XoNF4yaMZUCb6vD2GTAa5ciOa6WoO+gAUTYsb1K4rI/HSC2ogAWLrb/7VSV52skz07vOzmqIQ==}
@@ -13422,11 +13422,11 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.24.7
       '@babel/generator': 7.25.6
-      '@babel/helper-compilation-targets': 7.24.7
-      '@babel/helper-module-transforms': 7.24.7(@babel/core@7.14.5)
-      '@babel/helpers': 7.24.7
+      '@babel/helper-compilation-targets': 7.25.2
+      '@babel/helper-module-transforms': 7.25.2(@babel/core@7.14.5)
+      '@babel/helpers': 7.25.0
       '@babel/parser': 7.25.6
-      '@babel/template': 7.24.7
+      '@babel/template': 7.25.0
       '@babel/traverse': 7.25.6
       '@babel/types': 7.25.6
       convert-source-map: 1.9.0
@@ -13681,6 +13681,16 @@ snapshots:
       '@babel/helper-simple-access': 7.24.7
       '@babel/helper-split-export-declaration': 7.24.7
       '@babel/helper-validator-identifier': 7.24.7
+    transitivePeerDependencies:
+      - supports-color
+
+  '@babel/helper-module-transforms@7.25.2(@babel/core@7.14.5)':
+    dependencies:
+      '@babel/core': 7.14.5
+      '@babel/helper-module-imports': 7.24.7
+      '@babel/helper-simple-access': 7.24.7
+      '@babel/helper-validator-identifier': 7.24.7
+      '@babel/traverse': 7.25.6
     transitivePeerDependencies:
       - supports-color
 
@@ -14145,6 +14155,11 @@ snapshots:
     dependencies:
       '@babel/core': 7.25.2
       '@babel/helper-plugin-utils': 7.24.7
+
+  '@babel/plugin-syntax-typescript@7.25.4(@babel/core@7.14.5)':
+    dependencies:
+      '@babel/core': 7.14.5
+      '@babel/helper-plugin-utils': 7.24.8
 
   '@babel/plugin-syntax-typescript@7.25.4(@babel/core@7.25.2)':
     dependencies:
@@ -15262,16 +15277,16 @@ snapshots:
       eslint: 8.57.0
       ts-pattern: 3.3.5
 
-  '@builder.io/mitosis-cli@0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)':
+  '@builder.io/mitosis-cli@0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)':
     dependencies:
-      '@builder.io/mitosis': 0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
-      debug: 4.3.5
+      '@builder.io/mitosis': 0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)
+      debug: 4.3.7
       dedent: 0.7.0
       esbuild: 0.12.29
       fast-glob: 3.3.2
       fp-ts: 2.16.7
       fs-extra: 9.1.0
-      gluegun: 5.2.0(debug@4.3.5)
+      gluegun: 5.2.0(debug@4.3.7)
       lodash: 4.17.21
       prettier: 2.8.8
       ts-morph: 19.0.0
@@ -15289,13 +15304,13 @@ snapshots:
       - sugarss
       - supports-color
 
-  '@builder.io/mitosis@0.3.11(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)':
+  '@builder.io/mitosis@0.4.3(encoding@0.1.13)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)':
     dependencies:
       '@angular/compiler': 11.2.14
       '@babel/core': 7.14.5
       '@babel/generator': 7.25.6
       '@babel/plugin-syntax-decorators': 7.24.7(@babel/core@7.14.5)
-      '@babel/plugin-syntax-typescript': 7.24.7(@babel/core@7.14.5)
+      '@babel/plugin-syntax-typescript': 7.25.4(@babel/core@7.14.5)
       '@babel/plugin-transform-react-jsx': 7.24.7(@babel/core@7.14.5)
       '@babel/preset-typescript': 7.24.7(@babel/core@7.14.5)
       '@builder.io/sdk': 2.2.4(encoding@0.1.13)
@@ -15305,15 +15320,15 @@ snapshots:
       hash-sum: 2.0.0
       json5: 2.2.3
       lodash: 4.17.21
-      neotraverse: 0.6.14
+      neotraverse: 0.6.18
       object-hash: 2.2.0
       prettier: 2.8.8
-      prettier-plugin-organize-imports: 3.2.4(prettier@2.8.8)(typescript@5.5.3)
+      prettier-plugin-organize-imports: 3.2.4(prettier@2.8.8)(typescript@5.5.4)
       prettier-plugin-svelte: 2.10.1(prettier@2.8.8)(svelte@3.59.2)
       svelte: 3.59.2
-      svelte-preprocess: 5.1.4(@babel/core@7.14.5)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)(svelte@3.59.2)(typescript@5.5.3)
+      svelte-preprocess: 5.1.4(@babel/core@7.14.5)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)(svelte@3.59.2)(typescript@5.5.4)
       ts-morph: 19.0.0
-      typescript: 5.5.3
+      typescript: 5.5.4
     transitivePeerDependencies:
       - '@volar/vue-language-plugin-pug'
       - '@volar/vue-typescript'
@@ -16874,7 +16889,7 @@ snapshots:
       '@parcel/source-map': 2.1.1
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       abortcontroller-polyfill: 1.7.5
       base-x: 3.0.10
       browserslist: 4.23.3
@@ -16913,7 +16928,7 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/utils': 2.12.0
       '@parcel/watcher': 2.4.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -16923,7 +16938,7 @@ snapshots:
       '@parcel/types': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/utils': 2.12.0
       '@parcel/watcher': 2.4.1
-      '@parcel/workers': 2.12.0(@swc/helpers@0.5.11)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -17095,7 +17110,7 @@ snapshots:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/rust': 2.12.0
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -17179,7 +17194,7 @@ snapshots:
       '@parcel/node-resolver-core': 3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.12)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       '@swc/core': 1.7.18(@swc/helpers@0.5.12)
       semver: 7.6.3
     transitivePeerDependencies:
@@ -17194,7 +17209,7 @@ snapshots:
       '@parcel/node-resolver-core': 3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       '@parcel/types': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       '@swc/core': 1.7.18(@swc/helpers@0.5.3)
       semver: 7.6.3
     transitivePeerDependencies:
@@ -17208,7 +17223,7 @@ snapshots:
       '@parcel/node-resolver-core': 3.3.0
       '@parcel/types': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@swc/helpers@0.5.11)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       '@swc/core': 1.7.18(@swc/helpers@0.5.11)
       semver: 7.6.3
     transitivePeerDependencies:
@@ -17639,7 +17654,7 @@ snapshots:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.3)
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -17667,7 +17682,7 @@ snapshots:
       '@parcel/rust': 2.12.0
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       '@swc/helpers': 0.5.12
       browserslist: 4.23.3
       nullthrows: 1.1.1
@@ -17962,7 +17977,7 @@ snapshots:
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.12)
       '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@parcel/core'
@@ -17975,7 +17990,7 @@ snapshots:
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
       '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@parcel/core'
@@ -17988,7 +18003,7 @@ snapshots:
       '@parcel/fs': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/package-manager': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.12.0(@swc/helpers@0.5.11)
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@parcel/core'
@@ -18073,28 +18088,15 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)':
+  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.3)
-      '@parcel/diagnostic': 2.12.0
-      '@parcel/logger': 2.12.0
-      '@parcel/profiler': 2.12.0
-      '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)
-      '@parcel/utils': 2.12.0
-      nullthrows: 1.1.1
-    transitivePeerDependencies:
-      - '@swc/helpers'
-
-  '@parcel/workers@2.12.0(@swc/helpers@0.5.11)':
-    dependencies:
       '@parcel/diagnostic': 2.12.0
       '@parcel/logger': 2.12.0
       '@parcel/profiler': 2.12.0
       '@parcel/types': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
-    transitivePeerDependencies:
-      - '@swc/helpers'
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -21737,9 +21739,9 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  apisauce@2.1.6(debug@4.3.5):
+  apisauce@2.1.6(debug@4.3.7):
     dependencies:
-      axios: 0.21.4(debug@4.3.5)
+      axios: 0.21.4(debug@4.3.7)
     transitivePeerDependencies:
       - debug
 
@@ -21927,15 +21929,15 @@ snapshots:
 
   axe-core@4.7.0: {}
 
-  axios@0.21.4(debug@4.3.5):
+  axios@0.21.4(debug@4.3.7):
     dependencies:
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.7)
     transitivePeerDependencies:
       - debug
 
   axios@1.7.2:
     dependencies:
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.7)
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -24606,9 +24608,9 @@ snapshots:
 
   focus-visible@5.2.0: {}
 
-  follow-redirects@1.15.6(debug@4.3.5):
+  follow-redirects@1.15.6(debug@4.3.7):
     optionalDependencies:
-      debug: 4.3.5
+      debug: 4.3.7
 
   for-each@0.3.3:
     dependencies:
@@ -24924,7 +24926,7 @@ snapshots:
 
   gluegun@5.1.6:
     dependencies:
-      apisauce: 2.1.6(debug@4.3.5)
+      apisauce: 2.1.6(debug@4.3.7)
       app-module-path: 2.2.0
       cli-table3: 0.6.0
       colors: 1.4.0
@@ -24957,9 +24959,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  gluegun@5.2.0(debug@4.3.5):
+  gluegun@5.2.0(debug@4.3.7):
     dependencies:
-      apisauce: 2.1.6(debug@4.3.5)
+      apisauce: 2.1.6(debug@4.3.7)
       app-module-path: 2.2.0
       cli-table3: 0.6.0
       colors: 1.4.0
@@ -27576,7 +27578,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  neotraverse@0.6.14: {}
+  neotraverse@0.6.18: {}
 
   next-mdx-remote@4.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -28659,10 +28661,10 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-organize-imports@3.2.4(prettier@2.8.8)(typescript@5.5.3):
+  prettier-plugin-organize-imports@3.2.4(prettier@2.8.8)(typescript@5.5.4):
     dependencies:
       prettier: 2.8.8
-      typescript: 5.5.3
+      typescript: 5.5.4
 
   prettier-plugin-svelte@2.10.1(prettier@2.8.8)(svelte@3.59.2):
     dependencies:
@@ -30068,7 +30070,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-preprocess@5.1.4(@babel/core@7.14.5)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)(svelte@3.59.2)(typescript@5.5.3):
+  svelte-preprocess@5.1.4(@babel/core@7.14.5)(postcss-load-config@4.0.2(postcss@8.4.45))(postcss@8.4.45)(pug@3.0.3)(svelte@3.59.2)(typescript@5.5.4):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -30081,7 +30083,7 @@ snapshots:
       postcss: 8.4.45
       postcss-load-config: 4.0.2(postcss@8.4.45)
       pug: 3.0.3
-      typescript: 5.5.3
+      typescript: 5.5.4
 
   svelte@3.59.2: {}
 

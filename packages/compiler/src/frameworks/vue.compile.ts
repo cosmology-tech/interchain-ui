@@ -1,5 +1,5 @@
 import fs from "fs-extra";
-import glob from "glob";
+import { globSync } from "glob";
 import * as compiler from "../base";
 import log from "../log";
 
@@ -48,7 +48,7 @@ function customReplaceVue(props: CustomReplaceProps): void {
     fs.writeFileSync(`${outPath}/src/index.ts`, result, "utf8");
 
     // Add .vue extension to all the indexes in src folder
-    glob.sync(`${outPath}/src/ui/**/index.ts`).forEach((src: string) => {
+    globSync(`${outPath}/src/ui/**/index.ts`).forEach((src: string) => {
       const data = fs
         .readFileSync(src, "utf8")
         // add vue to index
