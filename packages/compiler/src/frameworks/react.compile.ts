@@ -6,10 +6,10 @@ import log from "../log";
 import type { CustomReplaceProps } from "../base";
 
 const DEFAULT_OPTIONS = {
-  target: "react" as const,
-  extension: "tsx" as const,
-  state: "useState" as const,
-  styles: "style-tag" as const,
+  target: "react",
+  extension: "tsx",
+  state: "useState",
+  styles: "style-tag",
 };
 
 function customReplaceReact(props: CustomReplaceProps): void {
