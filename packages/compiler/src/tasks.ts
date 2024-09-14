@@ -72,7 +72,7 @@ const shouldSkipBundling = process.env.NO_BUILD === "true";
             title: `Compile ${platform}`,
             task: () =>
               execa(
-                `node ./compiler/frameworks/${platform}.compile.js ${
+                `tsx packages/compiler/src/frameworks/${platform}.compile.ts ${
                   cliConfig.elements
                     ? `--elements ${cliConfig.elements.join(" ")}`
                     : ""

@@ -38,6 +38,7 @@ interface CompileOptions {
   extension: string;
   state: string;
   styles: string;
+  api?: string;
   isDev?: boolean;
   customReplace?: (props: CustomReplaceProps) => void;
 }
@@ -310,6 +311,8 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     const to =
       options.target === "webcomponents" ? "webcomponent" : options.target;
 
+    const configPath = path.resolve(__dirname, "./mitosis.config.js");
+
     await compileCommand.run({
       parameters: {
         options: {
@@ -319,8 +322,9 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
           force: true,
           state: options.state,
           styles: options.styles,
+          api: options.api,
           outFile: outPath,
-          config: "./mitosis.config.js",
+          config: configPath,
         },
         array: [filepath],
       },
