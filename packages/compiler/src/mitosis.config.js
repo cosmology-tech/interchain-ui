@@ -16,7 +16,6 @@ module.exports = {
     vue: {
       typescript: true,
       defineComponent: true,
-      namePrefix: "interchain",
       api: "composition",
       plugins: [vuePlugin],
     },

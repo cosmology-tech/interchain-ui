@@ -45,7 +45,8 @@
     "gluegun": "^5.1.6",
     "listr2": "^8.2.4",
     "lodash": "^4.17.21",
-    "ora": "^5.4.1"
+    "ora": "^5.4.1",
+    "@interchain-ui/vue-codemod": "link:../vue-codemod"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",

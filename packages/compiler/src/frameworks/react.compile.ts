@@ -3,6 +3,7 @@ import { Event } from "@parcel/watcher";
 import * as compiler from "../base";
 import { fixReactTypeIssues } from "../utils/react.utils";
 import log from "../log";
+import type { CustomReplaceProps } from "../base";
 
 const DEFAULT_OPTIONS = {
   target: "react" as const,
@@ -10,14 +11,6 @@ const DEFAULT_OPTIONS = {
   state: "useState" as const,
   styles: "style-tag" as const,
 };
-
-interface CustomReplaceProps {
-  name: string;
-  pascalName: string;
-  outFile: string;
-  _outPath: string;
-  _isFirstCompilation: boolean;
-}
 
 function customReplaceReact(props: CustomReplaceProps): void {
   const { name, pascalName, outFile } = props;

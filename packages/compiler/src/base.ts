@@ -22,6 +22,14 @@ const { scaffoldConfig, compileAllowList } = scaffolds;
 
 type ValidTarget = "react" | "vue";
 
+export type CustomReplaceProps = {
+  name: string;
+  pascalName: string;
+  outFile: string;
+  outPath: string;
+  isFirstCompilation: boolean;
+};
+
 interface CompileOptions {
   elements: string | string[];
   dest: string;
@@ -30,8 +38,8 @@ interface CompileOptions {
   extension: string;
   state: string;
   styles: string;
-  customReplace: (outFile: string, isFirstCompilation: boolean) => void | null;
   isDev?: boolean;
+  customReplace?: (props: CustomReplaceProps) => void;
 }
 
 const DEFAULT_OPTIONS: CompileOptions = {
@@ -42,7 +50,6 @@ const DEFAULT_OPTIONS: CompileOptions = {
   extension: "",
   state: "",
   styles: "",
-  customReplace: (_outFile: string, _isFirstCompilation: boolean) => null,
 };
 
 const optionDefinitions = [
@@ -203,7 +210,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
         .map((fileName: string) => {
           const file = path.parse(fileName);
           const name = file.name.replace(".lite", "");
-          return `export { default as ${pascalName(
+          return `export { default as ${toPascalName(
             name,
           )} } from './${file.dir.replace("src/", "")}';`;
         })
@@ -218,13 +225,13 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
         /(\/\/ Init Components)(.+?)(\/\/ End Components)/s,
         `$1\n${fileExports}\n$3`,
       )
-      .replace(/Platform.Default/g, `Platform.${pascalName(options.target)}`);
+      .replace(/Platform.Default/g, `Platform.${toPascalName(options.target)}`);
 
     // Adding scaffolds imports to index.ts
     if (scaffoldsExist) {
       const scaffoldNames = Object.keys(scaffoldConfig).map((name) => ({
         name,
-        Comp: pascalName(name),
+        Comp: toPascalName(name),
       }));
 
       const scaffoldImports = scaffoldNames
@@ -303,21 +310,6 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     const to =
       options.target === "webcomponents" ? "webcomponent" : options.target;
 
-    // console.log("compileMitosisComponent()", {
-    //   parameters: {
-    //     options: {
-    //       from: "mitosis",
-    //       to: to,
-    //       out: outFile,
-    //       state: options.state,
-    //     },
-    //     array: [filepath],
-    //   },
-    //   strings: Object.keys(strings),
-    //   filesystem: filesystem,
-    //   print: print,
-    // });
-
     await compileCommand.run({
       parameters: {
         options: {
@@ -328,7 +320,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
           state: options.state,
           styles: options.styles,
           outFile: outPath,
-          config: path.resolve(__dirname, "./mitosis.config.js"),
+          config: "./mitosis.config.js",
         },
         array: [filepath],
       },
@@ -425,8 +417,18 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
 
     // Compile using Mitosis CLI
     const { outFile } = await compileMitosisComponent(fileName);
+
     replacePropertiesFromCompiledFiles(outFile);
-    options.customReplace(outFile, isFirstCompilation);
+
+    if (typeof options.customReplace === "function") {
+      options.customReplace({
+        outFile,
+        isFirstCompilation,
+        name,
+        pascalName: toPascalName(name),
+        outPath,
+      });
+    }
 
     spinner.text = `[Done] ${fileName}`;
   }
@@ -447,7 +449,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
   spinner.stop();
 }
 
-function pascalName(str: string): string {
+function toPascalName(str: string): string {
   return startCase(str).replace(/\s/g, "");
 }
 

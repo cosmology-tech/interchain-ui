@@ -3,7 +3,7 @@ const { parse } = require("@babel/parser");
 const traverse = require("@babel/traverse").default;
 const generate = require("@babel/generator").default;
 const t = require("@babel/types");
-const { vueCodemod } = require("../../packages/vue-codemod");
+const vueCodemod = require("@interchain-ui/vue-codemod");
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}
@@ -20,10 +20,13 @@ module.exports = function vueCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return [fixVueClassName, vueCodemod].reduce((acc, transform) => {
-          acc = transform(acc);
-          return acc;
-        }, codeStr);
+        return [fixVueClassName, vueCodemod.default].reduce(
+          (acc, transform) => {
+            acc = transform(acc);
+            return acc;
+          },
+          codeStr,
+        );
       },
     },
   };

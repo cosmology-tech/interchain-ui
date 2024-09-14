@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import { globSync } from "glob";
 import * as compiler from "../base";
 import log from "../log";
+import type { CustomReplaceProps } from "../base";
 
 const DEFAULT_OPTIONS = {
   target: "vue",
@@ -10,14 +11,6 @@ const DEFAULT_OPTIONS = {
   state: "",
   styles: "",
 };
-
-interface CustomReplaceProps {
-  name: string;
-  pascalName: string;
-  outFile: string;
-  outPath: string;
-  isFirstCompilation: boolean;
-}
 
 function customReplaceVue(props: CustomReplaceProps): void {
   const { name, pascalName, outFile, outPath, isFirstCompilation } = props;
