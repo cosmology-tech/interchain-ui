@@ -36,4 +36,4 @@ jobs:
         run: pnpm install
 
       - name: Build and lint
-        run: pnpm mitosis:react && pnpm b:react
+        run: pnpm c:react

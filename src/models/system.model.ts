@@ -7,7 +7,7 @@ export enum Intent {
 }
 
 export const intents = Object.entries(Intent).map(
-  ([key, value]: [string, string]) => ({ key, value })
+  ([key, value]: [string, string]) => ({ key, value }),
 );
 
 export type IntentValues = "none" | "info" | "warning" | "success" | "error";
@@ -20,7 +20,7 @@ export const ModePreferences: ModePreference[] = ["light", "dark", "system"];
 
 export interface NumberFormatProps {
   value: number | string;
-  style?: string;
+  style?: keyof Intl.NumberFormatOptionsStyleRegistry;
 }
 export type NumberFormatter = (props: NumberFormatProps) => string;
 

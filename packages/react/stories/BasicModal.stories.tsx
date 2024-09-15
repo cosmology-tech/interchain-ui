@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import BasicModal from "../src/ui/basic-modal";
+import Box from "../src/ui/box";
 import Button from "../src/ui/button";
 import Text from "../src/ui/text";
 import Select from "../src/ui/select";
@@ -35,9 +36,11 @@ export const Primary: Story = {
           title="List for Sale"
           onClose={() => setIsOpen(false)}
         >
-          <Text fontSize="$4xl" fontWeight="$semibold">
-            content
-          </Text>
+          <Box>
+            <Text fontSize="$4xl" fontWeight="$semibold">
+              content
+            </Text>
+          </Box>
         </BasicModal>
       </div>
     );

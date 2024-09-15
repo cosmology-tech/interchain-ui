@@ -21,25 +21,23 @@ class Cache {
   }
 
   async build(filePaths = []) {
-    const promises = [];
-
-    const putCache = async (filePath) => {
-      try {
-        const fileContent = await fs.readFile(filePath, "utf8");
-        const hash = this.hash(fileContent);
-        this.cache.set(filePath, hash);
-      } catch (err) {
-        console.error("Cannot build cache, error reading file ", filePath);
-        throw err;
-      }
-    };
-
-    for (const filePath of filePaths) {
-      const fileExists = fsSync.existsSync(filePath);
-      if (!fileExists) continue;
-
-      promises.push(putCache(filePath));
-    }
+    const promises = filePaths
+      .filter((filePath) => fsSync.existsSync(filePath))
+      .map(async (filePath) => {
+        try {
+          const fileContent = await fs.readFile(filePath, "utf8");
+          const hash = this.hash(fileContent);
+          // Check if the file still exists and its content hasn't changed
+          // before setting the cache to avoid race conditions
+          const currentContent = await fs.readFile(filePath, "utf8");
+          if (currentContent === fileContent) {
+            this.cache.set(filePath, hash);
+          }
+        } catch (err) {
+          console.error("Cannot build cache, error reading file ", filePath);
+          // Don't throw here, allow other files to be processed
+        }
+      });
 
     try {
       await Promise.all(promises);

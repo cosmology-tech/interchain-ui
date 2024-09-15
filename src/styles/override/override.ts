@@ -1,5 +1,5 @@
 import { assignInlineVars, setElementVars } from "@vanilla-extract/dynamic";
-import merge from "lodash/merge";
+import { merge } from "lodash";
 import type {
   OverridableProp,
   OverrideValue,
@@ -138,7 +138,7 @@ function groupByTheme(config: OverrideValue) {
 
 export function assignThemeVars(
   customTheme: CustomThemeVars,
-  colorMode: ThemeVariant
+  colorMode: ThemeVariant,
 ) {
   const schemeClass = colorMode === "light" ? lightThemeClass : darkThemeClass;
   const elements = document.getElementsByClassName(schemeClass);

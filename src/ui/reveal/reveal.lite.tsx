@@ -9,7 +9,7 @@ import {
 import clsx from "clsx";
 import anime from "animejs";
 import type { AnimeInstance } from "animejs";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";

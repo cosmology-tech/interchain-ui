@@ -1,0 +1,88 @@
+{
+  "name": "@interchain-ui/vue-codemod",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Codemod for interchain-ui vue",
+  "author": "yyyyaaa <phatghaa@gmail.com>",
+  "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/vue-codemod#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "source": "src/index.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.esm.js",
+      "import": "./dist/index.cjs.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "targets": {
+    "main": {
+      "includeNodeModules": [
+        "vue-metamorph"
+      ]
+    },
+    "module": {
+      "includeNodeModules": [
+        "vue-metamorph"
+      ]
+    }
+  },
+  "sideEffects": false,
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "@parcel/resolver-default": {
+    "packageExports": true
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:w": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "build": "parcel build",
+    "dev": "parcel watch",
+    "prepare": "parcel build"
+  },
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "ast-types": "^0.14.2",
+    "commander": "^12.1.0",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "magic-string": "^0.30.11",
+    "postcss": "^8.4.45",
+    "recast": "^0.23.9",
+    "vue-metamorph": "^3.1.16"
+  },
+  "devDependencies": {
+    "@parcel/config-default": "^2.12.0",
+    "@parcel/transformer-typescript-tsc": "^2.12.0",
+    "@types/node": "^20.16.5",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.15.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "parcel": "^2.12.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmology-tech/interchain-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cosmology-tech/interchain-ui/issues"
+  }
+}

@@ -7,7 +7,7 @@ import {
   onUpdate,
   onUnMount,
 } from "@builder.io/mitosis";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash";
 
 import Box from "../box";
 import { NobleTxProgressBarProps } from "./noble.types";

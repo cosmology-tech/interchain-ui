@@ -36,6 +36,24 @@ const optionDefinitions = [
   { name: "dev", type: Boolean },
 ];
 
+function applyFixReactTypeIssues(content, filePath, target) {
+  if (target === "react" && !filePath.endsWith(".lite.tsx")) {
+    return fixReactTypeIssues(content);
+  }
+  return content;
+}
+
+function stripVueJsxExtension(filePath) {
+  // .lite.tsx file is processed by Mitosis compiler
+  if (filePath.endsWith(".lite.tsx")) {
+    return filePath;
+  }
+
+  return filePath.endsWith(".tsx")
+    ? filePath.replace(/\.tsx$/, ".ts")
+    : filePath;
+}
+
 async function compile(rawOptions) {
   const { watcherEvents, ...defaultOptions } = rawOptions;
 
@@ -80,7 +98,34 @@ async function compile(rawOptions) {
     }
 
     // Move src to all the package folder
-    fs.copySync("src", `${outPath}/src`);
+    // fs.copySync("src", `${outPath}/src`);
+
+    // Move src to all the package folder
+    const srcFiles = glob.sync("src/**/*");
+    const allowList = compileAllowList[options.target];
+    const doesTargetHaveAllowList = allowList != null;
+
+    srcFiles.forEach((file) => {
+      const relativePath = path.relative("src", file);
+      let destPath = path.join(outPath, "src", relativePath);
+
+      if (doesTargetHaveAllowList && !file.startsWith("src/ui/shared")) {
+        const isAllowed = allowList.some(
+          (allowed) =>
+            file.includes(`src/ui/${allowed}/`) || !file.startsWith("src/ui/"),
+        );
+        if (!isAllowed) return;
+      }
+
+      if (fs.lstatSync(file).isDirectory()) {
+        fs.ensureDirSync(destPath);
+      } else {
+        if (options.target === "vue") {
+          destPath = stripVueJsxExtension(destPath);
+        }
+        fs.copySync(file, destPath);
+      }
+    });
 
     // For Vue, we need to add .vue to the export statement
     if (options.target === "vue") {
@@ -110,6 +155,8 @@ async function compile(rawOptions) {
         data.replace(/\~\//g, "../../"),
       );
 
+      result = applyFixReactTypeIssues(result, element, options.target);
+
       fs.writeFileSync(element, result, "utf8");
     });
 
@@ -118,8 +165,6 @@ async function compile(rawOptions) {
     // Export only the elements we want with matching filters:
     // - CLI flag --elements
     // - allowList
-    const doesTargetHaveAllowList = compileAllowList[options.target] != null;
-
     if (cliConfig.elements || doesTargetHaveAllowList) {
       const filterWithAllowList = (elements) => {
         const elementsToFilter = doesTargetHaveAllowList
@@ -194,19 +239,31 @@ async function compile(rawOptions) {
       parsedPath.ext === ".tsx" && parsedPath.name.includes(".lite");
     const isScaffold = parsedPath.dir.includes("scaffolds");
 
-    const targetPath = path.join(
+    let targetPath = path.join(
       outPath,
       parsedPath.dir.slice(parsedPath.dir.indexOf("src")),
       parsedPath.base,
     );
+
+    if (options.target === "vue") {
+      targetPath = stripVueJsxExtension(targetPath);
+    }
 
     if (event.type === "create" || event.type === "update") {
       // Only process non lite jsx files in this handler
       if (isLiteJSXComponent || isScaffold) return;
 
       try {
-        const fileContent = await fsPromise.readFile(event.path, "utf-8");
-        await fsPromise.writeFile(targetPath, removeLiteExtension(fileContent));
+        let fileContent = await fsPromise.readFile(event.path, "utf-8");
+        fileContent = removeLiteExtension(fileContent);
+
+        fileContent = applyFixReactTypeIssues(
+          fileContent,
+          event.path,
+          options.target,
+        );
+
+        await fsPromise.writeFile(targetPath, fileContent);
       } catch (err) {
         console.log(`handleWatcherEvents() [${event.type}] event error `, err);
       }
@@ -223,7 +280,7 @@ async function compile(rawOptions) {
 
   async function compileMitosisComponent(filepath) {
     const file = path.parse(filepath);
-    const outFile = `${outPath}/${file.dir}/${file.name.replace(".lite", "")}.${
+    let outFile = `${outPath}/${file.dir}/${file.name.replace(".lite", "")}.${
       options.extension
     }`;
 
@@ -240,13 +297,13 @@ async function compile(rawOptions) {
           api: options.api,
           state: options.state,
           styles: options.styles,
-          config: "./compiler/mitosis.config.js",
+          config: path.resolve(__dirname, "./mitosis.config.js"),
         },
         array: [filepath],
       },
       strings: stringTools.strings,
       filesystem: filesystemTools.filesystem,
-      print: { ...printTools.print, info: () => null },
+      print: { ...printTools.print },
     });
 
     return {

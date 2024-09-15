@@ -1,4 +1,4 @@
-import { useMetadata } from "@builder.io/mitosis";
+import { useMetadata, useStore } from "@builder.io/mitosis";
 import clx from "clsx";
 import Icon from "../icon";
 import { loader } from "./spinner.css";
@@ -11,9 +11,17 @@ useMetadata({
 });
 
 export default function Spinner(props: SpinnerProps) {
+  const state = useStore<{
+    combinedClassName: string;
+  }>({
+    get combinedClassName() {
+      return clx(loader, props.className);
+    },
+  });
+
   return (
     <Icon
-      className={clx(loader, props.className)}
+      className={state.combinedClassName}
       name="loaderLine"
       size={props.size}
       title={props.title}

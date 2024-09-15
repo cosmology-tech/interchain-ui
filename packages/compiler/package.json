@@ -1,0 +1,68 @@
+{
+  "name": "@interchain-ui/compiler",
+  "version": "1.0.0",
+  "description": "Compiler for Interchain UI component",
+  "author": "yyyyaaa <phatghaa@gmail.com>",
+  "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/compiler#readme",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmology-tech/interchain-ui.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "bugs": {
+    "url": "https://github.com/cosmology-tech/interchain-ui/issues"
+  },
+  "dependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/generator": "^7.25.6",
+    "@babel/parser": "^7.25.6",
+    "@babel/traverse": "^7.25.6",
+    "@babel/types": "^7.25.6",
+    "@builder.io/mitosis": "0.4.3",
+    "@builder.io/mitosis-cli": "0.4.3",
+    "@parcel/watcher": "^2.4.1",
+    "cli-color": "^2.0.4",
+    "command-line-args": "^5.2.1",
+    "execa": "^5.1.1",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "gluegun": "^5.1.6",
+    "listr2": "^8.2.4",
+    "lodash": "^4.17.21",
+    "ora": "^5.4.1",
+    "@interchain-ui/vue-codemod": "link:../vue-codemod"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.5",
+    "@types/cli-color": "^2.0.6",
+    "@types/command-line-args": "^5.2.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/glob": "^8.1.0",
+    "@types/jest": "^29.5.12",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^20.14.9",
+    "@types/parcel__watcher": "^2.0.5",
+    "chalk": "^5.3.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.3"
+  }
+}

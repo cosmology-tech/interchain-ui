@@ -1,5 +1,5 @@
 import { For, useStore, useMetadata } from "@builder.io/mitosis";
-import noop from "lodash/noop";
+import { noop } from "lodash";
 import Box from "../box";
 import Text from "../text";
 import Stack from "../stack";

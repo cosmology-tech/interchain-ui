@@ -5,7 +5,7 @@ import Text from "../text";
 import Icon from "../icon";
 import StarText from "../star-text";
 import type { NftDetailInfoProps } from "./nft-detail-info.type";
-import isNumber from "lodash/isNumber";
+import { isNumber } from "lodash";
 
 useMetadata({
   rsc: {

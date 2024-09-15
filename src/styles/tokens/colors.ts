@@ -1,4 +1,4 @@
-import { LiteralUnion } from "type-fest";
+import type { LiteralUnion } from "../../helpers/types";
 import type { ThemeVariant } from "../../models/system.model";
 
 export const colors = {

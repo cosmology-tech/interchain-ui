@@ -1,4 +1,4 @@
-import { Show, useMetadata } from "@builder.io/mitosis";
+import { Show, useMetadata, useStore } from "@builder.io/mitosis";
 import Box from "../box";
 import { IconProps } from "./icon.types";
 
@@ -9,8 +9,18 @@ useMetadata({
 });
 
 export default function Icon(props: IconProps) {
+  const state = useStore({
+    get spreadAttributes() {
+      return {
+        ...props.attributes,
+        ...props.domAttributes,
+      };
+    },
+  });
+
   return (
     <Box
+      {...state.spreadAttributes}
       as="svg"
       width="1em"
       height="1em"
@@ -18,8 +28,6 @@ export default function Icon(props: IconProps) {
       fontSize={props.size}
       color={props.color}
       className={props.className}
-      {...props.attributes}
-      {...props.domAttributes}
     >
       <Show when={!!props.title}>
         <title>{props.title}</title>

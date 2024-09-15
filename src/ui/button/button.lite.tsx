@@ -18,7 +18,7 @@ import { isDefaultAccent, getAccentHover } from "../../helpers/style";
 import { themeVars } from "../../styles/themes.css";
 import { fullWidth, fullWidthHeight } from "../shared/shared.css";
 
-import type { UnknownRecord } from "type-fest";
+import type { UnknownRecord } from "../../helpers/types";
 import type { ButtonProps } from "./button.types";
 import type { ThemeVariant } from "../../models/system.model";
 import type { OverrideStyleManager } from "../../styles/override/override";
@@ -47,6 +47,9 @@ export default function Button(props: ButtonProps) {
     _overrideManager: OverrideStyleManager | null;
     getVars: () => UnknownRecord;
     getStoreState: () => any;
+    combinedClassName: string;
+    spreadAttributes: UnknownRecord;
+    eventHandlers: Record<string, (event: any) => void>;
   }>({
     _overrideManager: null,
     _theme: "light",
@@ -77,6 +80,80 @@ export default function Button(props: ButtonProps) {
             [styles.buttonHoverBgVar]: getAccentHover(themeVars.colors.accent),
           });
     },
+    get combinedClassName() {
+      return clx(
+        styles.buttonSize[props.size],
+        recipe({
+          as: props.as,
+          variant: props.variant,
+          intent: props.intent ?? "primary",
+          isDisabled: props.disabled || props.isLoading,
+          theme: state.getStoreState().theme,
+        }),
+        props.fluidWidth ? fullWidth : null,
+        props.fluid ? fullWidthHeight : null,
+        props.className,
+      );
+    },
+    get spreadAttributes() {
+      return Object.assign(
+        {
+          as: props.as,
+        },
+        {
+          attributes: {
+            ...props.attributes,
+            disabled: props.disabled,
+            // style: state.getVars(),
+            ...props.domAttributes,
+          },
+        },
+      );
+    },
+    get eventHandlers() {
+      const handlers: Record<string, (event: any) => void> = {};
+      const eventProps = [
+        "onClick",
+        "onDoubleClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onKeyDown",
+        "onKeyUp",
+        "onKeyPress",
+        "onFocus",
+        "onBlur",
+        "onInput",
+        "onChange",
+        "onSubmit",
+        "onReset",
+        "onScroll",
+        "onWheel",
+        "onDragStart",
+        "onDrag",
+        "onDragEnd",
+        "onDragEnter",
+        "onDragLeave",
+        "onDragOver",
+        "onDrop",
+        "onTouchStart",
+        "onTouchMove",
+        "onTouchEnd",
+        "onTouchCancel",
+      ];
+
+      eventProps.forEach((eventName) => {
+        if (props[eventName]) {
+          handlers[eventName] = (event: any) => props[eventName](event);
+        }
+      });
+
+      return handlers;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
@@ -96,35 +173,17 @@ export default function Button(props: ButtonProps) {
   });
 
   onUnMount(() => {
-    if (typeof cleanupRef === "function") cleanupRef();
+    if (typeof cleanupRef === "function") {
+      cleanupRef();
+    }
   });
 
   return (
     <Box
-      as={props.as}
       boxRef={props.buttonRef}
-      {...props.attributes}
-      className={clx(
-        styles.buttonSize[props.size],
-        recipe({
-          as: props.as,
-          variant: props.variant,
-          intent: props.intent ?? "primary",
-          isDisabled: props.disabled || props.isLoading,
-          theme: state.getStoreState().theme,
-        }),
-        props.fluidWidth ? fullWidth : null,
-        props.fluid ? fullWidthHeight : null,
-        props.className,
-      )}
-      attributes={{
-        onClick: (event) => props.onClick?.(event),
-        onMouseEnter: (event) => props.onHoverStart?.(event),
-        onMouseLeave: (event) => props.onHoverEnd?.(event),
-        disabled: props.disabled,
-        // style: state.getVars(),
-        ...props.domAttributes,
-      }}
+      className={state.combinedClassName}
+      {...state.spreadAttributes}
+      {...state.eventHandlers}
     >
       <Spinner
         size={props.iconSize}

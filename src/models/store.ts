@@ -95,7 +95,7 @@ export const store = createStore(
               const themeClass = {
                 dark: darkThemeClass,
                 light: lightThemeClass,
-              }[newThemeMode];
+              }[themeMode];
 
               return [themeMode, themeClass];
             }
@@ -104,7 +104,7 @@ export const store = createStore(
           const [resolvedTheme, resolvedClass] =
             resolveSystemMode(newThemeMode);
 
-          state.overrideStyleManager.update(null, resolvedTheme);
+          state.overrideStyleManager?.update(null, resolvedTheme);
           state.themeMode = newThemeMode;
           state.theme = resolvedTheme;
           state.themeClass = resolvedClass;
