@@ -155,13 +155,11 @@ export const store = createStore(
     })),
     {
       name: STORAGE_NAME,
-      // NOTE: this is a workaround for SSR frameworks like Next.js
-      // We need to call store.persist.rehydrate() ourselves
-      // More details: https://github.com/pmndrs/zustand/issues/938#issuecomment-1752885433
-      skipHydration: true,
-      onRehydrateStorage: () => (state) => {
-        state.setHasHydrated(true);
-        state.setThemeMode(state.themeMode);
+      onRehydrateStorage: (state) => {
+        return (persistedState) => {
+          state.setHasHydrated(true);
+          state.setThemeMode(persistedState.themeMode);
+        };
       },
       // Only choose to persist theme preference, ignore other state
       partialize: (state) => ({

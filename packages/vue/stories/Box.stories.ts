@@ -15,6 +15,7 @@ type Story = StoryObj<typeof Box>;
 export const Primary: Story = {
   args: {
     bg: "$background",
+    color: "$text",
     p: "$4",
     borderRadius: "$md",
     borderWidth: "1px",

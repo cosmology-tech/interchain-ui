@@ -179,9 +179,12 @@ export default function ThemeProvider(props: ThemeProviderProps) {
   onMount(() => {
     state.isMounted = true;
 
-    // Dont set global theme mode if in controlled mode
+    // Resolve the theme mode
+    const resolvedThemeMode = resolveThemeMode(props.defaultTheme);
+
+    // Set the initial theme based on the resolved mode
     if (!state.isControlled) {
-      resolveThemeMode(props.defaultTheme);
+      store.getState().setThemeMode(resolvedThemeMode);
     }
 
     const darkListener = ({ matches }: MediaQueryListEvent) => {

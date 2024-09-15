@@ -67,24 +67,28 @@ export const resolveThemeMode = (
   const hasHydrated = store.getState()._hasHydrated;
 
   // While in SSR, return a default theme
-  // TODO: document for package consumer to provide fallback UI using _hasHydrated to prevent flashing content
-  if (isSSR() || !hasHydrated) return "light";
+  if (isSSR() || !hasHydrated) {
+    return "light";
+  }
+
+  const savedTheme = store.getState().themeMode;
 
   if (isValidThemeMode(defaultThemeMode)) {
-    store.getState().setThemeMode(defaultThemeMode);
+    // Only set the theme if it's different from the saved theme
+    if (defaultThemeMode !== savedTheme) {
+      store.getState().setThemeMode(defaultThemeMode);
+    }
     return defaultThemeMode;
   }
 
   // props.defaultThemeMode is not provided or invalid, rely on persisted theme
-  const savedTheme = store.getState().themeMode;
-
   if (isValidThemeMode(savedTheme)) {
-    store.getState().setThemeMode(savedTheme);
     return savedTheme;
   }
 
   // persisted value not a valid theme mode, fallback to 'system'
   store.getState().setThemeMode("system");
+  console.log("[resolveThemeMode] using system theme mode");
   return "system";
 };
 
