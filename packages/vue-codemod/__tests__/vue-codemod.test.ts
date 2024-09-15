@@ -63,6 +63,7 @@ it("should remove eventHandlers in a v-bind with spread operator", () => {
     v-bind="{
       ...spreadAttributes, ...obj,
     }"
+    v-on="eventHandlers"
     ><Spinner
       :size="iconSize"
       :attributes="{
@@ -155,6 +156,7 @@ it("should remove eventHandlers in a v-bind only containing itself", () => {
   <Box
     :boxRef="buttonRef"
     :class="combinedClassName"
+    v-on="eventHandlers"
     ><Spinner
       :size="iconSize"
       :attributes="{
@@ -246,6 +248,7 @@ it("should remove eventHandlers in a v-bind only containing itself in a spread",
   <Box
     :boxRef="buttonRef"
     :class="combinedClassName"
+    v-on="eventHandlers"
     ><Spinner
       :size="iconSize"
       :attributes="{
@@ -481,8 +484,9 @@ function getStoreState() {
     :boxRef="buttonRef"
     :class="combinedClassName"
     v-bind="{
-  ...spreadAttributes,
-}"
+      ...spreadAttributes,
+    }"
+    v-on="eventHandlers"
     ><Spinner
       :size="iconSize"
       :attributes="{

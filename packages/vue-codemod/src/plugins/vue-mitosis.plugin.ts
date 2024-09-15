@@ -1,4 +1,4 @@
-import type { CodemodPlugin } from "vue-metamorph";
+import { CodemodPlugin, builders as vueBuilders } from "vue-metamorph";
 import { builders, namedTypes, visit } from "ast-types";
 import { isEmpty } from "lodash";
 
@@ -34,6 +34,13 @@ const eventMappings = {
   onTouchMove: "touchmove",
   onTouchEnd: "touchend",
   onTouchCancel: "touchcancel",
+};
+
+const createVOnDirective = (identifier: string) => {
+  return vueBuilders.vDirective(
+    vueBuilders.vDirectiveKey(vueBuilders.vIdentifier("on")),
+    vueBuilders.vExpressionContainer(vueBuilders.identifier(identifier)),
+  );
 };
 
 export const vueMitosisCodeMod: CodemodPlugin = {
@@ -91,7 +98,7 @@ export const vueMitosisCodeMod: CodemodPlugin = {
                 if (isEmpty(restProperties)) {
                   if (node.parent.type === "VStartTag") {
                     // Remove the v-bind
-                    const newAttributes = node.parent.attributes.filter(
+                    let newAttributes = node.parent.attributes.filter(
                       (attr) => {
                         return !(
                           attr.key.type === "VDirectiveKey" &&
@@ -101,14 +108,21 @@ export const vueMitosisCodeMod: CodemodPlugin = {
                         );
                       },
                     );
+                    const vOnWithEventHandlers =
+                      createVOnDirective("eventHandlers");
+                    newAttributes.push(vOnWithEventHandlers);
                     node.parent.attributes = newAttributes;
                     transformCount++;
                     didModEventHandlers = true;
                     return;
                   }
                 } else if (node.value?.expression) {
+                  const vOnWithEventHandlers =
+                    createVOnDirective("eventHandlers");
+
                   // @ts-ignore-next-line
                   node.value.expression.properties = restProperties;
+                  node.parent.attributes.push(vOnWithEventHandlers);
                   transformCount++;
                   didModEventHandlers = true;
                   return;
@@ -146,7 +160,10 @@ export const vueMitosisCodeMod: CodemodPlugin = {
                 (attr, index) => index !== eventHandlersAttributeIndex,
               );
 
+              const vOnWithEventHandlers = createVOnDirective("eventHandlers");
+
               node.parent.attributes = restAttributes;
+              node.parent.attributes.push(vOnWithEventHandlers);
               transformCount++;
               didModEventHandlers = true;
               return;
