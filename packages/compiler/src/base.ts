@@ -10,15 +10,17 @@ import { Event } from "@parcel/watcher";
 import compileCommand from "@builder.io/mitosis-cli/dist/commands/compile";
 import camelCase from "lodash/camelCase";
 import startCase from "lodash/startCase";
-import * as scaffolds from "./scaffold.config.js";
+import {
+  reactScaffoldConfig,
+  vueScaffoldConfig,
+  compileAllowList,
+} from "./scaffold.config.js";
 import { Cache } from "./cache";
 import { fixReactTypeIssues } from "./utils/react.utils";
 
 const { print, filesystem, strings } = require("gluegun");
 
 const cache = new Cache();
-
-const { scaffoldConfig, compileAllowList } = scaffolds;
 
 type ValidTarget = "react" | "vue";
 
@@ -119,6 +121,8 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
           .some((allowed) => allowed === file);
       })
     : files;
+
+  console.log("[base.ts] filteredGlobbedFiles", filteredGlobbedFiles);
 
   const outPath = `${options.dest}/${options.target}`;
 
@@ -230,16 +234,21 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
 
     // Adding scaffolds imports to index.ts
     if (scaffoldsExist) {
+      const scaffoldConfig =
+        options.target === "vue" ? vueScaffoldConfig : reactScaffoldConfig;
       const scaffoldNames = Object.keys(scaffoldConfig).map((name) => ({
         name,
         Comp: toPascalName(name),
       }));
 
       const scaffoldImports = scaffoldNames
-        .map(
-          (item) =>
-            `export { default as ${item.Comp} } from './ui/${item.name}';`,
-        )
+        .map((item) => {
+          const importPath =
+            options.target === "vue"
+              ? `./ui/${item.name}/${item.name}.vue`
+              : `./ui/${item.name}`;
+          return `export { default as ${item.Comp} } from '${importPath}';`;
+        })
         .join("\n");
 
       indexResult = indexResult.replace(
@@ -338,7 +347,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     };
   }
 
-  async function addReactRSCPatch(): Promise<void> {
+  async function addFrameworkSpecificPatches(): Promise<void> {
     const targetRootPath = path.resolve(
       cwd(),
       `packages/${options.target}/src`,
@@ -360,21 +369,31 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
         const indexData = fs.readFileSync(indexPath, "utf8");
 
         const hooksExports = hookNamesByFolder
-          .map(
-            (item) =>
-              `export { default as ${item.hookName} } from './ui/hooks/${item.folder}';`,
-          )
+          .map((item) => {
+            if (options.target === "vue") {
+              // Due to SFC compiler not understanding the barrel file, we need to import the hooks manually
+              return `export { default as ${item.hookName} } from './ui/hooks/${item.folder}/${item.folder}';`;
+            } else {
+              return `export { default as ${item.hookName} } from './ui/hooks/${item.folder}';`;
+            }
+          })
           .filter((exportLine) => {
             // Don't include exports if it's already there
             return indexData.indexOf(exportLine) === -1;
           })
           .join("\n");
 
-        const clientOnlyMarker = `import "client-only";`;
+        let indexResult = indexData;
 
-        const indexResult = `${indexData}\n${clientOnlyMarker}\n${hooksExports}`;
+        if (options.target === "react") {
+          const clientOnlyMarker = `import "client-only";`;
+          indexResult = `${indexData}\n${clientOnlyMarker}\n${hooksExports}`;
+        } else if (options.target === "vue") {
+          // For Vue, we don't need the client-only import
+          indexResult = `${indexData}\n${hooksExports}`;
+        }
 
-        // Skip if hooks exports are the same
+        // Skip if the result is the same as the original
         if (indexResult === indexData) {
           return;
         }
@@ -382,7 +401,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
         fs.writeFileSync(indexPath, indexResult, "utf8");
       })
       .catch((err) => {
-        console.log("Failed to add hooks exports", err);
+        console.log(`Failed to add ${options.target} specific patches:`, err);
       });
   }
 
@@ -411,6 +430,22 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
 
     if (scaffoldsExist) {
       fs.copySync(inDir, outDir);
+
+      // For Vue, we need to rename .tsx files to .vue and copy the hooks
+      if (options.target === "vue") {
+        const scaffoldFiles = globSync(`${outDir}/**/*.tsx`);
+        scaffoldFiles.forEach((file) => {
+          const newFile = file.replace(/\.tsx$/, ".vue");
+          fs.renameSync(file, newFile);
+        });
+
+        // Copy hooks to the correct location
+        const hooksDir = path.join(inDir, "hooks");
+        const vueHooksDir = path.join(outPath, "src", "ui", "hooks");
+        if (fs.existsSync(hooksDir)) {
+          fs.copySync(hooksDir, vueHooksDir);
+        }
+      }
     }
 
     const changed = await cache.isChanged(fileName);
@@ -445,9 +480,8 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
     await cache.build(Array.isArray(files) ? files : [files]);
   }
 
-  if (options.target === "react") {
-    addReactRSCPatch();
-  }
+  // Call the new function for both React and Vue
+  await addFrameworkSpecificPatches();
 
   spinner.succeed();
   spinner.stop();

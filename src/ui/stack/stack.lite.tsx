@@ -8,13 +8,13 @@ useMetadata({
   },
 });
 
-export default function Stack(props: StackProps) {
-  useDefaultProps({
-    as: "div",
-    direction: "horizontal",
-    space: "$0",
-  });
+useDefaultProps<Partial<StackProps>>({
+  as: "div",
+  direction: "horizontal",
+  space: "$0",
+});
 
+export default function Stack(props: StackProps) {
   return (
     <Box
       as={props.as}

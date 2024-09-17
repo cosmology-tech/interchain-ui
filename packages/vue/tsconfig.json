@@ -1,31 +1,52 @@
 {
   "compilerOptions": {
-    // Enable latest features
-    "lib": ["ESNext", "DOM"],
-    "target": "ESNext",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleDetection": "force",
-    "allowJs": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
 
-    // Bundler mode
+    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": false,
+    "isolatedModules": true,
+    "moduleDetection": "force",
     "noEmit": true,
+    "jsx": "preserve",
 
-    // Best practices
+    /* Linting */
     "strict": true,
-    "skipLibCheck": true,
-    "noFallthroughCasesInSwitch": true,
-    "noPropertyAccessFromIndexSignature": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "customConditions": ["source"],
-    "types": ["vite/client"],
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": true,
 
-    "jsx": "preserve",
-    "jsxImportSource": "vue"
+    "noPropertyAccessFromIndexSignature": false,
+    "customConditions": ["source"],
+    "types": ["vite/client", "node"],
+
+    // Added from React tsconfig
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+
+    // Path aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/ui/*": ["./src/ui/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/models/*": ["./src/models/*"],
+      "@/helpers/*": ["./src/helpers/*"]
+    }
   },
-  "include": ["src"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "scaffolds/**/*.ts",
+    "scaffolds/**/*.d.ts",
+    "scaffolds/**/*.vue"
+  ],
   "exclude": ["node_modules", "dist"]
 }

@@ -23,11 +23,12 @@ export default function AvatarImage(props: AvatarImageProps) {
 
   const state = useStore<{
     status: "loading" | "failed" | "pending" | "loaded";
-    resolvedStatus: "loading" | "failed" | "pending" | "loaded";
-    showFallback: boolean;
+    getShowFallback(): boolean;
+    getResolvedStatus(): "loading" | "failed" | "pending" | "loaded";
     transitionState: "idle" | "entered";
     load: () => void;
     flush: () => void;
+    getInlineStyles(): Record<string, string>;
   }>({
     status: "pending",
     transitionState: "idle",
@@ -65,11 +66,20 @@ export default function AvatarImage(props: AvatarImageProps) {
         state.transitionState = "idle";
       }
     },
-    get resolvedStatus() {
+    getResolvedStatus() {
       return props.ignoreFallback ? "loaded" : state.status;
     },
-    get showFallback() {
-      return !props.src || state.resolvedStatus !== "loaded";
+    getShowFallback() {
+      return !props.src || state.getResolvedStatus() !== "loaded";
+    },
+    getInlineStyles() {
+      return {
+        opacity: `${state.transitionState === "idle" ? 0 : 1}`,
+        transition:
+          state.transitionState === "entered"
+            ? "opacity 150ms cubic-bezier(0.7, 0, 0.84, 0)"
+            : "none !important",
+      };
     },
   });
 
@@ -106,7 +116,7 @@ export default function AvatarImage(props: AvatarImageProps) {
 
   return (
     <Show
-      when={state.showFallback}
+      when={state.getShowFallback()}
       else={
         <img
           ref={imgRef}
@@ -120,14 +130,8 @@ export default function AvatarImage(props: AvatarImageProps) {
           crossOrigin={(props.crossOrigin as any) ?? undefined}
           loading={props.loading}
           className={cls(avatarImg, props.className)}
-          data-status={state.resolvedStatus}
-          style={{
-            opacity: `${state.transitionState === "idle" ? 0 : 1}`,
-            transition:
-              state.transitionState === "entered"
-                ? "opacity 150ms cubic-bezier(0.7, 0, 0.84, 0)"
-                : "none !important",
-          }}
+          data-status={state.getResolvedStatus()}
+          style={state.getInlineStyles()}
         />
       }
     >

@@ -26,16 +26,15 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
   });
 
   const state = useStore({
-    theme: "light",
+    internalTheme: "light",
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
-
+    state.internalTheme = store.getState().theme;
     cleanupRef = store.subscribe((newState, prevState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
     });
   });
 
@@ -56,7 +55,7 @@ export default function AvatarBadge(props: AvatarBadgeProps) {
       width={props.size}
       height={props.size}
       className={clx(
-        avatarBadge[state.theme],
+        avatarBadge[state.internalTheme],
         avatarBadgePlacement[props.placement],
         props.className,
       )}

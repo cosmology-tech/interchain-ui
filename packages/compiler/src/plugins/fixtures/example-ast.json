@@ -1,0 +1,98 @@
+{
+  "@type": "@builder.io/mitosis/component",
+  "imports": [
+    {
+      "imports": {
+        "animateLayout": "animateLayout"
+      },
+      "path": "./animate-layout.helper",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "AnimateLayoutProps": "AnimateLayoutProps"
+      },
+      "path": "./animate-layout.types",
+      "importKind": "type"
+    }
+  ],
+  "exports": {},
+  "inputs": [],
+  "meta": {
+    "useMetadata": {
+      "rsc": {
+        "componentType": "client"
+      }
+    }
+  },
+  "refs": {
+    "parentRef": {
+      "argument": "null",
+      "typeParameter": "HTMLDivElement"
+    }
+  },
+  "state": {},
+  "children": [
+    {
+      "@type": "@builder.io/mitosis/node",
+      "name": "div",
+      "meta": {},
+      "scope": {},
+      "properties": {
+        "data-part-id": "animate-layout"
+      },
+      "bindings": {
+        "ref": {
+          "code": "parentRef",
+          "type": "single"
+        },
+        "style": {
+          "code": "{\n  backfaceVisibility: \"hidden\"\n}",
+          "type": "single"
+        },
+        "class": {
+          "code": "className",
+          "type": "single"
+        }
+      },
+      "children": [
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "div",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "_text": {
+              "code": "$slots.default",
+              "type": "single"
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "context": {
+    "get": {},
+    "set": {}
+  },
+  "subComponents": [],
+  "name": "AnimateLayout",
+  "hooks": {
+    "onMount": [
+      {
+        "code": "if (parentRef) {\n  animateLayout(parentRef);\n}",
+        "onSSR": false
+      }
+    ],
+    "onEvent": [],
+    "onUpdate": [
+      {
+        "code": "if (parentRef) {\n  animateLayout(parentRef);\n}",
+        "deps": "[parentRef, props.children]"
+      }
+    ]
+  },
+  "propsTypeRef": "AnimateLayoutProps"
+}

@@ -44,17 +44,23 @@ useMetadata({
 });
 
 export default function ConnectModalStatus(props: ConnectModalStatusProps) {
-  const state = useStore<{ theme: ThemeVariant }>({
-    theme: "light",
+  const state = useStore({
+    internalTheme: "light",
+    getConnectedInfo: () => {
+      return props.connectedInfo;
+    },
+    getWallet: () => {
+      return props.wallet;
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
     });
   });
 
@@ -63,21 +69,28 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
   });
 
   return (
-    <div className={clx(modalStatusContainer[state.theme], props.className)}>
+    <div
+      className={clx(
+        modalStatusContainer[state.internalTheme],
+        props.className,
+      )}
+    >
       {/* Status disconnected */}
       <Show when={props.status === "Disconnected"}>
         <Box marginBottom="$5" className={statusLogo}>
-          <div className={disconnectedLogoFrame[state.theme]} />
+          <div className={disconnectedLogoFrame[state.internalTheme]} />
           <div className={statusLogoImage}>
             <img
-              src={props.wallet.logo}
-              alt={props.wallet.name}
+              src={state.getWallet().logo}
+              alt={state.getWallet().name}
               className={flexImg}
             />
           </div>
         </Box>
 
-        <p className={disconnectedDesc[state.theme]}>Wallet is disconnected</p>
+        <p className={disconnectedDesc[state.internalTheme]}>
+          Wallet is disconnected
+        </p>
 
         <div className={widthContainer}>
           <Button
@@ -108,17 +121,19 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       {/* Status connecting */}
       <Show when={props.status === "Connecting"}>
         <Box marginBottom="$8" className={statusLogo}>
-          <div className={connectingLogoFrame[state.theme]} />
+          <div className={connectingLogoFrame[state.internalTheme]} />
           <div className={statusLogoImage}>
             <img
-              src={props.wallet.logo}
-              alt={props.wallet.name}
+              src={state.getWallet().logo}
+              alt={state.getWallet().name}
               className={flexImg}
             />
           </div>
         </Box>
 
-        <p className={connectingHeader[state.theme]}>{props.contentHeader}</p>
+        <p className={connectingHeader[state.internalTheme]}>
+          {props.contentHeader}
+        </p>
 
         <Box
           as="p"
@@ -135,11 +150,11 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       {/* Status connected */}
       <Show when={props.status === "Connected"}>
         <Box marginBottom="$8" className={statusLogo}>
-          <Show when={typeof props.connectedInfo.avatar === "string"}>
+          <Show when={typeof state.getConnectedInfo().avatar === "string"}>
             <div className={statusLogoImage}>
               <img
-                src={props.connectedInfo.avatar}
-                alt={props.connectedInfo.name}
+                src={state.getConnectedInfo().avatar}
+                alt={state.getConnectedInfo().name}
                 className={flexImg}
               />
             </div>
@@ -147,37 +162,34 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
 
           <Show
             when={
-              !!props.connectedInfo.avatar &&
-              typeof props.connectedInfo.avatar !== "string"
+              !!state.getConnectedInfo().avatar &&
+              typeof state.getConnectedInfo().avatar !== "string"
             }
           >
             <div className={statusLogoImageSvg}>
-              {props.connectedInfo.avatar}
+              {state.getConnectedInfo().avatar}
             </div>
           </Show>
         </Box>
         <Box display="flex" alignItems="center" marginBottom="$5">
-          <Box
-            as="img"
-            attributes={{
-              src: props.wallet.logo,
-              alt: props.wallet.name,
-            }}
-            width="$8"
-            height="$8"
+          <img
+            src={state.getWallet().logo}
+            alt={state.getWallet().name}
+            width="16px"
+            height="16px"
           />
 
-          <Show when={!!props.connectedInfo?.name}>
-            <p className={connectedInfo[state.theme]}>
-              {props.connectedInfo.name}
+          <Show when={!!state.getConnectedInfo().name}>
+            <p className={connectedInfo[state.internalTheme]}>
+              {state.getConnectedInfo().name}
             </p>
           </Show>
         </Box>
 
         <div className={widthContainer}>
-          <Box maxWidth="$29" mx="auto">
+          <Box maxWidth="$29" mx="auto" marginBottom="$6">
             <ClipboardCopyText
-              text={props.connectedInfo.address}
+              text={state.getConnectedInfo().address}
               truncate="middle"
               className={copyText}
             />
@@ -208,19 +220,19 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       {/* Status notExist */}
       <Show when={props.status === "NotExist"}>
         <Box marginBottom="$7" className={statusLogo}>
-          <div className={notExistLogoFrame[state.theme]} />
+          <div className={notExistLogoFrame[state.internalTheme]} />
           <div className={statusLogoImage}>
             <img
-              src={props.wallet.logo}
-              alt={props.wallet.name}
+              src={state.getWallet().logo}
+              alt={state.getWallet().name}
               className={flexImg}
             />
           </div>
         </Box>
 
-        <p className={dangerText[state.theme]}>{props.contentHeader}</p>
+        <p className={dangerText[state.internalTheme]}>{props.contentHeader}</p>
 
-        <p className={clx(baseTextStyles, desc[state.theme])}>
+        <p className={clx(baseTextStyles, desc[state.internalTheme])}>
           {props.contentDesc}
         </p>
 
@@ -239,7 +251,8 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               >
                 <span>{props.installIcon}</span>
                 <Box as="span" marginLeft="$4">
-                  Install {props.wallet.prettyName ?? props.wallet.name}
+                  Install &nbsp;
+                  {state.getWallet().prettyName ?? state.getWallet().name}
                 </Box>
               </Box>
             </InstallButton>
@@ -250,19 +263,19 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       {/* Status rejected */}
       <Show when={props.status === "Rejected"}>
         <Box marginBottom="$7" className={statusLogo}>
-          <div className={notExistLogoFrame[state.theme]} />
+          <div className={notExistLogoFrame[state.internalTheme]} />
           <div className={statusLogoImage}>
             <img
-              src={props.wallet.logo}
-              alt={props.wallet.name}
+              src={state.getWallet().logo}
+              alt={state.getWallet().name}
               className={flexImg}
             />
           </div>
         </Box>
 
-        <p className={dangerText[state.theme]}>{props.contentHeader}</p>
+        <p className={dangerText[state.internalTheme]}>{props.contentHeader}</p>
 
-        <p className={desc[state.theme]}>{props.contentDesc}</p>
+        <p className={desc[state.internalTheme]}>{props.contentDesc}</p>
 
         <div className={widthContainer}>
           <Button
@@ -281,23 +294,23 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
       {/* Status error */}
       <Show when={props.status === "Error"}>
         <Box marginBottom="$7" className={statusLogo}>
-          <div className={notExistLogoFrame[state.theme]} />
+          <div className={notExistLogoFrame[state.internalTheme]} />
           <div className={statusLogoImage}>
             <img
-              src={props.wallet.logo}
-              alt={props.wallet.name}
+              src={state.getWallet().logo}
+              alt={state.getWallet().name}
               className={flexImg}
             />
           </div>
         </Box>
 
-        <p className={dangerText[state.theme]}>{props.contentHeader}</p>
+        <p className={dangerText[state.internalTheme]}>{props.contentHeader}</p>
 
         <Box position="relative">
           <div className={errorDescription}>
-            <p className={desc[state.theme]}>{props.contentDesc}</p>
+            <p className={desc[state.internalTheme]}>{props.contentDesc}</p>
           </div>
-          <div className={bottomShadow[state.theme]} />
+          <div className={bottomShadow[state.internalTheme]} />
         </Box>
 
         <div className={widthContainer}>

@@ -43,21 +43,21 @@ export default function ConnectModalWalletButton(
   props: ConnectModalWalletButtonProps,
 ) {
   const state = useStore<{
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
   }>({
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -69,7 +69,7 @@ export default function ConnectModalWalletButton(
   return (
     <button
       class={clx(
-        connectButtonStyle[state.theme],
+        connectButtonStyle[state.internalTheme],
         connectButtonVariants({
           variant: props.variant,
         }),
@@ -92,15 +92,13 @@ export default function ConnectModalWalletButton(
           <Box position="relative">
             {/* When there is only logo, use normal image */}
             <Show when={props.logo && !props.btmLogo}>
-              <Box
-                as="img"
-                attributes={{
-                  alt: props.name,
-                  src: props.logo,
-                  referrerPolicy: "no-referrer",
-                }}
-                width={props.variant === "square" ? "$16" : "$12"}
-                height={props.variant === "square" ? "$16" : "$12"}
+              <img
+                alt={props.name}
+                src={props.logo}
+                referrerPolicy="no-referrer"
+                width={props.variant === "square" ? "56px" : "32px"}
+                height={props.variant === "square" ? "56px" : "32px"}
+                style={{ objectFit: "contain" }}
               />
             </Show>
 
@@ -119,22 +117,23 @@ export default function ConnectModalWalletButton(
                   borderWidth="0.1em"
                   attributes={{
                     backgroundColor:
-                      state.theme === "dark" ? "$gray300" : "$white",
+                      state.internalTheme === "dark" ? "$gray300" : "$white",
                   }}
                 >
-                  <Box
-                    as="img"
+                  <img
                     width="100%"
                     height="100%"
-                    borderRadius="$full"
-                    attributes={{
-                      alt: ["MetaMask"].includes(props.btmLogo)
+                    style={{ borderRadius: "9999px", objectFit: "contain" }}
+                    alt={
+                      ["MetaMask"].includes(props.btmLogo)
                         ? props.btmLogo
-                        : `${props.name} logo`,
-                      src: ["MetaMask"].includes(props.btmLogo)
+                        : `${props.name} logo`
+                    }
+                    src={
+                      ["MetaMask"].includes(props.btmLogo)
                         ? WalletPluginSystem[props.btmLogo].logo
-                        : props.btmLogo,
-                    }}
+                        : props.btmLogo
+                    }
                   />
                 </AvatarBadge>
               </Avatar>
@@ -158,22 +157,23 @@ export default function ConnectModalWalletButton(
                   borderWidth="0.1em"
                   attributes={{
                     backgroundColor:
-                      state.theme === "dark" ? "$gray300" : "$white",
+                      state.internalTheme === "dark" ? "$gray300" : "$white",
                   }}
                 >
-                  <Box
-                    as="img"
+                  <img
                     width="100%"
                     height="100%"
-                    borderRadius="$full"
-                    attributes={{
-                      alt: ["MetaMask"].includes(props.btmLogo)
+                    style={{ borderRadius: "9999px", objectFit: "contain" }}
+                    alt={
+                      ["MetaMask"].includes(props.btmLogo)
                         ? props.btmLogo
-                        : `${props.name} logo`,
-                      src: ["MetaMask"].includes(props.btmLogo)
+                        : `${props.name} logo`
+                    }
+                    src={
+                      ["MetaMask"].includes(props.btmLogo)
                         ? WalletPluginSystem[props.btmLogo].logo
-                        : props.btmLogo,
-                    }}
+                        : props.btmLogo
+                    }
                   />
                 </AvatarBadge>
               </Avatar>
@@ -189,7 +189,7 @@ export default function ConnectModalWalletButton(
             }
           >
             <span
-              className={subLogoSquare[state.theme]}
+              className={subLogoSquare[state.internalTheme]}
               style={state.overrideManager?.applyOverrides(
                 buttonSublogoOverrides.name,
               )}
@@ -199,14 +199,12 @@ export default function ConnectModalWalletButton(
               </Show>
 
               <Show when={props.subLogo !== "walletConnect"}>
-                <Box
-                  as="img"
-                  attributes={{
-                    src: props.subLogo,
-                    alt: `${props.name} sub logo`,
-                  }}
-                  width="$10"
-                  height="$10"
+                <img
+                  src={props.subLogo}
+                  alt={`${props.name} sub logo`}
+                  width="24px"
+                  height="24px"
+                  style={{ objectFit: "contain" }}
                 />
               </Show>
             </span>
@@ -216,7 +214,7 @@ export default function ConnectModalWalletButton(
 
       <Box
         className={clx(
-          buttonTextStyle[state.theme],
+          buttonTextStyle[state.internalTheme],
           buttonTextVariants({ variant: props.variant }),
         )}
         rawCSS={{
@@ -270,9 +268,9 @@ export default function ConnectModalWalletButton(
                 position: "absolute",
                 top: "$-3",
                 left: "$full",
-                color: state.theme === "dark" ? "$gray300" : "$gray800",
+                color: state.internalTheme === "dark" ? "$gray300" : "$gray800",
                 backgroundColor:
-                  state.theme === "dark" ? "$gray600" : "$gray200",
+                  state.internalTheme === "dark" ? "$gray600" : "$gray200",
               }}
             >
               {props.badge}
@@ -290,14 +288,12 @@ export default function ConnectModalWalletButton(
           </Show>
 
           <Show when={props.subLogo !== "walletConnect"}>
-            <Box
-              as="img"
-              attributes={{
-                src: props.subLogo,
-                alt: `${props.name} sub logo`,
-              }}
-              width="$9"
-              height="$9"
+            <img
+              src={props.subLogo}
+              alt={`${props.name} sub logo`}
+              width="20px"
+              height="20px"
+              style={{ objectFit: "contain" }}
             />
           </Show>
         </span>

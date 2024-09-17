@@ -33,12 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { ThemeProvider, Box, Stack, IconButton } from "../src";
-import { useTheme } from "./useTheme";
+import { ThemeProvider, Box, Stack, IconButton, useTheme } from "../src";
 import "../src/styles/global.css";
 
-const accent = ref("blue");
 const { theme, themeClass, setTheme } = useTheme();
 
 const toggleTheme = () => {
