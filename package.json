@@ -18,7 +18,7 @@
     "t:vue": "rm -rf packages/vue/src && tsx packages/compiler/src/frameworks/vue.compile.ts",
     "c:react": "tsx packages/compiler/src/tasks.ts -p react",
     "b:react": "pnpm run --stream --filter '@interchain-ui/react' build",
-    "c:vue": "pnpm run mitosis:vue && pnpm run b:vue",
+    "c:vue": "pnpm run t:vue && pnpm run b:vue",
     "b:vue": "pnpm run --stream --filter '@interchain-ui/vue' build",
     "dev": "tsx packages/compiler/src/dev.ts",
     "story:react": "pnpm run --stream --filter '@interchain-ui/react' storybook",
