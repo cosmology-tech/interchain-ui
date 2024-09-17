@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 import {
   Dialog,
   DialogPanel,
@@ -7,6 +7,7 @@ import {
   TransitionRoot,
 } from "@headlessui/vue";
 import * as styles from "./modal.css";
+import useTheme from "@/ui/hooks/use-theme/use-theme";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -40,6 +41,11 @@ const emit = defineEmits(["update:isOpen"]);
 
 const defaultRoot = ref<HTMLElement | null>(null);
 const isOpen = ref(props.isOpen ?? props.initialOpen);
+const { theme, themeClass, getThemeRef } = useTheme();
+
+const modalContentClass = computed(() => {
+  return styles.modalContent[theme.value];
+});
 
 watch(
   () => props.isOpen,
@@ -81,11 +87,11 @@ defineExpose({ isOpen });
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog
       as="div"
-      :class="[styles.modalRoot, themeClassName]"
+      :class="[styles.modalRoot, themeClassName, themeClass]"
       @close="closeModal"
       :role="role"
     >
-      <div :class="styles.modalContainer">
+      <div :class="styles.modalContainer" ref="getThemeRef">
         <TransitionChild
           as="template"
           :enter="styles.backdropTransitionEnter"
@@ -96,12 +102,12 @@ defineExpose({ isOpen });
           :leave-to="styles.backdropTransitionLeaveTo"
         >
           <div
-            :class="[styles.modalBackdrop, backdropClassName]"
+            :class="[styles.modalBackdrop, backdropClassName, themeClass]"
             @click="closeOnClickaway ? closeModal : undefined"
           />
         </TransitionChild>
 
-        <div :class="styles.modalWrapper">
+        <div :class="[styles.modalWrapper, themeClass]">
           <TransitionChild
             as="template"
             :enter="styles.transitionEnter"
@@ -112,25 +118,41 @@ defineExpose({ isOpen });
             :leave-to="styles.transitionLeaveTo"
           >
             <DialogPanel
-              :class="[styles.modalPanel, className]"
-              :style="contentStyles"
+              :class="[
+                styles.modalPanel,
+                modalContentClass,
+                className,
+                themeClass,
+              ]"
+              :style="[
+                {
+                  '--modal-bg': styles.modalBgVar,
+                  '--modal-shadow': styles.modalShadowVar,
+                },
+                contentStyles,
+              ]"
             >
               <div
-                :class="[styles.modalContent, contentClassName]"
+                :class="[styles.modalContent, contentClassName, themeClass]"
                 data-modal-part="content"
               >
-                <div :class="styles.modalHeader">
+                <div :class="[styles.modalHeader, themeClass]">
                   <component
                     :is="header"
                     :closeButtonProps="{
                       onClick: onCloseButtonClick,
-                      class: styles.modalCloseButton,
+                      class: [styles.modalCloseButton, themeClass],
                     }"
                   />
                 </div>
 
                 <div
-                  :class="[styles.modalBody, childrenClassName]"
+                  :class="[
+                    styles.modalBody,
+                    styles.modalChildren,
+                    childrenClassName,
+                    themeClass,
+                  ]"
                   data-modal-part="children"
                 >
                   <slot></slot>

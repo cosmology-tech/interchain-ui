@@ -1,6 +1,6 @@
 // @ts-check
 const scaffolds = require("../scaffold.config.js");
-const scaffoldConfig = scaffolds.scaffoldConfig;
+const scaffoldConfig = scaffolds.reactScaffoldConfig;
 
 /**
  * @type {import('@builder.io/mitosis').Plugin}

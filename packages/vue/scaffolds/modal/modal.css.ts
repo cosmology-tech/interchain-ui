@@ -1,25 +1,10 @@
-import { style, keyframes } from "@vanilla-extract/css";
-import { globalStyle } from "@vanilla-extract/css";
-
-const fadeIn = keyframes({
-  from: { opacity: 0 },
-  to: { opacity: 1 },
-});
-
-const fadeOut = keyframes({
-  from: { opacity: 1 },
-  to: { opacity: 0 },
-});
-
-const scaleIn = keyframes({
-  from: { transform: "scale(0.95)" },
-  to: { transform: "scale(1)" },
-});
-
-const scaleOut = keyframes({
-  from: { transform: "scale(1)" },
-  to: { transform: "scale(0.95)" },
-});
+import {
+  style,
+  globalStyle,
+  styleVariants,
+  createVar,
+} from "@vanilla-extract/css";
+import { themeVars } from "@/styles/themes.css";
 
 export const modalRoot = style({
   position: "fixed",
@@ -90,12 +75,60 @@ export const modalPanel = style({
   boxShadow:
     "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
   overflow: "hidden",
-  maxWidth: "28rem",
-  width: "100%",
+  display: "inline-block", // Change to inline-block
+  minWidth: "280px", // Add a minimum width
 });
 
-export const modalContent = style({
-  padding: "1.5rem",
+// Define the CSS variables
+export const modalBgVar = createVar();
+export const modalShadowVar = createVar();
+
+const modalContentBase = style({
+  boxShadow: modalShadowVar,
+  backgroundColor: modalBgVar,
+  display: "flex",
+  height: "auto",
+  flexDirection: "column",
+  borderRadius: themeVars.radii.xl,
+  width: "auto", // Change to auto
+  maxWidth: "100%", // Add maxWidth
+});
+
+export const modalContent = styleVariants({
+  light: [
+    style({
+      vars: {
+        [modalBgVar]: themeVars.colors.white,
+        [modalShadowVar]:
+          "0 10px 15px -3px rgba(0, 0, 0, 0.1),0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      },
+    }),
+    modalContentBase,
+  ],
+  dark: [
+    style({
+      vars: {
+        [modalBgVar]: themeVars.colors.gray700,
+        [modalShadowVar]:
+          "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px,rgba(0, 0, 0, 0.2) 0px 5px 10px,rgba(0, 0, 0, 0.4) 0px 15px 40px",
+      },
+    }),
+    modalContentBase,
+  ],
+});
+
+export const modalAnimateContainer = style({
+  minHeight: `clamp(100%, ${themeVars.space[30]}px, ${themeVars.space[30]}px)`,
+});
+
+export const modalChildren = style({
+  width: "100%", // Change to 100%
+  minWidth: "280px", // Add minWidth
+  boxSizing: "border-box",
+  paddingLeft: themeVars.space[7],
+  paddingRight: themeVars.space[7],
+  paddingTop: themeVars.space[3],
+  paddingBottom: themeVars.space[10],
 });
 
 export const modalHeader = style({

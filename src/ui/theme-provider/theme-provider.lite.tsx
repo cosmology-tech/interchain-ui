@@ -103,12 +103,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     const themeMode = store.getState().themeMode;
     const setThemeModeFn = store.getState().setThemeMode;
 
-    console.log("[theme provider] themeMode", {
-      themeMode,
-    });
-
     if (themeMode === "system" || themeMode == null) {
-      console.log("[theme provider] set system");
       return setThemeModeFn("system");
     }
   }, [state.preferredMode, state.theme, state.isReady, state.UIStore]);
