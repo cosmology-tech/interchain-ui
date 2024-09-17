@@ -3,7 +3,7 @@ import FieldLabel from "../src/ui/field-label/field-label.vue";
 
 const meta: Meta<typeof FieldLabel> = {
   component: FieldLabel,
-  title: "FieldLabel",
+  title: "Core/FieldLabel",
   tags: ["autodocs"],
   argTypes: {},
 };

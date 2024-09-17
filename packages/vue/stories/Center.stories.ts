@@ -4,7 +4,7 @@ import Box from "../src/ui/box/box.vue";
 
 const meta: Meta<typeof Center> = {
   component: Center,
-  title: "Center",
+  title: "Core/Center",
   tags: ["autodocs"],
   argTypes: {},
 };

@@ -94,10 +94,8 @@ export const vueMitosisCodeMod: CodemodPlugin = {
 
               // Remove eventHandlers from the spread operator
               if (eventHandlersPropertyIndex !== -1) {
-                // Nothing left to spread, remove the v-bind
                 if (isEmpty(restProperties)) {
                   if (node.parent.type === "VStartTag") {
-                    // Remove the v-bind
                     let newAttributes = node.parent.attributes.filter(
                       (attr) => {
                         return !(
@@ -174,39 +172,104 @@ export const vueMitosisCodeMod: CodemodPlugin = {
     }
 
     for (const scriptAST of scriptASTs) {
+      // Add eventMappings object to the script
+      const eventMappingsDeclaration = builders.variableDeclaration("const", [
+        builders.variableDeclarator(
+          builders.identifier("eventMappings"),
+          builders.objectExpression(
+            Object.entries(eventMappings).map(([key, value]) =>
+              builders.objectProperty(
+                builders.stringLiteral(key),
+                builders.stringLiteral(value),
+              ),
+            ),
+          ),
+        ),
+      ]);
+
+      scriptAST.body.unshift(eventMappingsDeclaration);
+      transformCount++;
+
       visit(scriptAST, {
-        visitCallExpression(path) {
+        visitVariableDeclaration(path) {
           const { node } = path;
           if (
-            namedTypes.MemberExpression.check(node.callee) &&
-            namedTypes.Identifier.check(node.callee.object) &&
-            node.callee.object.name === "eventProps" &&
-            namedTypes.Identifier.check(node.callee.property) &&
-            node.callee.property.name === "forEach"
+            node.declarations.length === 1 &&
+            namedTypes.VariableDeclarator.check(node.declarations[0]) &&
+            namedTypes.Identifier.check(node.declarations[0].id) &&
+            node.declarations[0].id.name === "eventHandlers" &&
+            namedTypes.CallExpression.check(node.declarations[0].init) &&
+            namedTypes.Identifier.check(node.declarations[0].init.callee) &&
+            node.declarations[0].init.callee.name === "computed"
           ) {
-            const arrowFunction = node.arguments[0];
-            if (
-              namedTypes.ArrowFunctionExpression.check(arrowFunction) &&
-              namedTypes.Identifier.check(arrowFunction.params[0])
-            ) {
-              const paramName = arrowFunction.params[0].name;
-              visit(arrowFunction.body, {
-                visitMemberExpression(innerPath) {
+            const computedFunction = node.declarations[0].init.arguments[0];
+            if (namedTypes.ArrowFunctionExpression.check(computedFunction)) {
+              visit(computedFunction.body, {
+                visitCallExpression(innerPath) {
                   const { node: innerNode } = innerPath;
                   if (
-                    namedTypes.Identifier.check(innerNode.object) &&
-                    innerNode.object.name === "props" &&
-                    namedTypes.Identifier.check(innerNode.property) &&
-                    innerNode.property.name === "eventName"
+                    namedTypes.MemberExpression.check(innerNode.callee) &&
+                    namedTypes.Identifier.check(innerNode.callee.object) &&
+                    innerNode.callee.object.name === "eventProps" &&
+                    namedTypes.Identifier.check(innerNode.callee.property) &&
+                    innerNode.callee.property.name === "forEach"
                   ) {
-                    innerPath.replace(
-                      builders.memberExpression(
-                        builders.identifier("props"),
-                        builders.identifier(paramName),
-                        true,
-                      ),
-                    );
-                    transformCount++;
+                    const forEachCallback = innerNode.arguments[0];
+                    if (
+                      namedTypes.ArrowFunctionExpression.check(
+                        forEachCallback,
+                      ) &&
+                      namedTypes.Identifier.check(forEachCallback.params[0])
+                    ) {
+                      const eventNameParam = forEachCallback.params[0];
+                      forEachCallback.body = builders.blockStatement([
+                        builders.ifStatement(
+                          builders.memberExpression(
+                            builders.identifier("props"),
+                            eventNameParam,
+                            true,
+                          ),
+                          builders.blockStatement([
+                            builders.expressionStatement(
+                              builders.assignmentExpression(
+                                "=",
+                                builders.memberExpression(
+                                  builders.identifier("handlers"),
+                                  builders.memberExpression(
+                                    builders.identifier("eventMappings"),
+                                    eventNameParam,
+                                    true,
+                                  ),
+                                  true,
+                                ),
+                                builders.arrowFunctionExpression(
+                                  [builders.identifier("event")],
+                                  builders.blockStatement([
+                                    builders.expressionStatement(
+                                      builders.callExpression(
+                                        builders.identifier("emit"),
+                                        [
+                                          builders.memberExpression(
+                                            builders.identifier(
+                                              "eventMappings",
+                                            ),
+                                            eventNameParam,
+                                            true,
+                                          ),
+                                          builders.identifier("event"),
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ]);
+                      transformCount++;
+                      didModEventHandlers = true;
+                    }
                   }
                   this.traverse(innerPath);
                 },

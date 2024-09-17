@@ -5,7 +5,7 @@ import { ref } from "vue";
 
 const meta: Meta<typeof FadeIn> = {
   component: FadeIn,
-  title: "FadeIn",
+  title: "Core/FadeIn",
   tags: ["autodocs"],
   argTypes: {},
 };

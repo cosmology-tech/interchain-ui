@@ -3,7 +3,7 @@ import QRCode from "../src/ui/qrcode/qrcode.vue";
 
 const meta: Meta<typeof QRCode> = {
   component: QRCode,
-  title: "QRCode",
+  title: "Core/QRCode",
   tags: ["autodocs"],
   argTypes: {
     value: { control: "text" },

@@ -3,7 +3,7 @@ import Link from "../src/ui/link/link.vue";
 
 const meta: Meta<typeof Link> = {
   component: Link,
-  title: "Link",
+  title: "Core/Link",
   tags: ["autodocs"],
   argTypes: {
     href: { control: "text" },

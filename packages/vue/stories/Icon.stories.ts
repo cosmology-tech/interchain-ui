@@ -3,7 +3,7 @@ import Icon from "../src/ui/icon/icon.vue";
 
 const meta: Meta<typeof Icon> = {
   component: Icon,
-  title: "Icon",
+  title: "Core/Icon",
   tags: ["autodocs"],
   argTypes: {
     name: {

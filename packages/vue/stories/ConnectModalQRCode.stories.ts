@@ -3,7 +3,7 @@ import ConnectModalQRCode from "../src/ui/connect-modal-qrcode/connect-modal-qrc
 
 const meta: Meta<typeof ConnectModalQRCode> = {
   component: ConnectModalQRCode,
-  title: "ConnectModalQRCode",
+  title: "ConnectModal/ConnectModalQRCode",
   tags: ["autodocs"],
   argTypes: {
     uri: { control: "text" },

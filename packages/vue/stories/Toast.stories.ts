@@ -5,14 +5,15 @@ import { ref } from "vue";
 
 const meta: Meta<typeof Toast> = {
   component: Toast,
-  title: "Toast",
+  title: "Core/Toast",
   tags: ["autodocs"],
   argTypes: {
-    message: { control: "text" },
-    type: {
+    intent: {
       control: "select",
       options: ["info", "success", "warning", "error"],
     },
+    title: { control: "text" },
+    description: { control: "text" },
   },
 };
 
@@ -22,8 +23,9 @@ type Story = StoryObj<typeof Toast>;
 
 export const Primary: Story = {
   args: {
-    message: "This is a toast message",
-    type: "info",
+    intent: "info",
+    title: "Toast Title",
+    description: "This is a toast message",
   },
   render: (args) => ({
     components: { Toast, Button },

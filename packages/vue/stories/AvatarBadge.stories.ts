@@ -4,7 +4,7 @@ import Avatar from "../src/ui/avatar/avatar.vue";
 
 const meta: Meta<typeof AvatarBadge> = {
   component: AvatarBadge,
-  title: "AvatarBadge",
+  title: "Core/AvatarBadge",
   tags: ["autodocs"],
   argTypes: {},
 };

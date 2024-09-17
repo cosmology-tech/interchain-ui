@@ -456,8 +456,8 @@ const eventHandlers = computed(() => {
     "onTouchCancel",
   ];
   eventProps.forEach((eventName) => {
-    if (props.eventName) {
-      handlers[eventName] = (event) => props.eventName(event);
+    if (props[eventName]) {
+      handlers[eventName] = (event) => props[eventName](event);
     }
   });
   return handlers;
@@ -559,7 +559,39 @@ const emit = defineEmits([
   'touchcancel',
 ]);
 
-
+const eventMappings = {
+  'onClick': 'click',
+  'onDoubleClick': 'dblclick',
+  'onMouseDown': 'mousedown',
+  'onMouseUp': 'mouseup',
+  'onMouseEnter': 'mouseenter',
+  'onMouseLeave': 'mouseleave',
+  'onMouseMove': 'mousemove',
+  'onMouseOver': 'mouseover',
+  'onMouseOut': 'mouseout',
+  'onKeyDown': 'keydown',
+  'onKeyUp': 'keyup',
+  'onKeyPress': 'keypress',
+  'onFocus': 'focus',
+  'onBlur': 'blur',
+  'onInput': 'input',
+  'onChange': 'change',
+  'onSubmit': 'submit',
+  'onReset': 'reset',
+  'onScroll': 'scroll',
+  'onWheel': 'wheel',
+  'onDragStart': 'dragstart',
+  'onDrag': 'drag',
+  'onDragEnd': 'dragend',
+  'onDragEnter': 'dragenter',
+  'onDragLeave': 'dragleave',
+  'onDragOver': 'dragover',
+  'onDrop': 'drop',
+  'onTouchStart': 'touchstart',
+  'onTouchMove': 'touchmove',
+  'onTouchEnd': 'touchend',
+  'onTouchCancel': 'touchcancel',
+};
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 import { assignInlineVars } from '@vanilla-extract/dynamic';
@@ -682,7 +714,9 @@ const eventHandlers = computed(() => {
   ];
   eventProps.forEach((eventName) => {
     if (props[eventName]) {
-      handlers[eventName] = (event) => props[eventName](event);
+      handlers[eventMappings[eventName]] = (event) => {
+        emit(eventMappings[eventName], event);
+      };
     }
   });
   return handlers;
@@ -702,5 +736,7 @@ function getStoreState() {
 </script>
   `;
   const result = transformCode(source);
+  // console.log(result);
+  // expect(result).toBe(expected);
   expect(trimWhitespace(result)).toBe(trimWhitespace(expected));
 });

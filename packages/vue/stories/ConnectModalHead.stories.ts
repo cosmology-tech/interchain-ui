@@ -3,7 +3,7 @@ import ConnectModalHead from "../src/ui/connect-modal-head/connect-modal-head.vu
 
 const meta: Meta<typeof ConnectModalHead> = {
   component: ConnectModalHead,
-  title: "ConnectModalHead",
+  title: "ConnectModal/ConnectModalHead",
   tags: ["autodocs"],
   argTypes: {
     title: { control: "text" },

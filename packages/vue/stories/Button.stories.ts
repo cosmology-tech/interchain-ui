@@ -3,7 +3,7 @@ import Button from "../src/ui/button/button.vue";
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: "Button",
+  title: "Core/Button",
   tags: ["autodocs"],
   argTypes: {
     intent: {
@@ -66,7 +66,7 @@ export const Primary: Story = {
       return { args, handleClick };
     },
     template:
-      '<Button v-bind="args" @click="handleClick">Primary Button</Button>',
+      '<Button v-bind="args" @onClick="handleClick">Primary Button</Button>',
   }),
 };
 

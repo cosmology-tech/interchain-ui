@@ -3,7 +3,7 @@ import ClipboardCopyText from "../src/ui/clipboard-copy-text/clipboard-copy-text
 
 const meta: Meta<typeof ClipboardCopyText> = {
   component: ClipboardCopyText,
-  title: "ClipboardCopyText",
+  title: "Core/ClipboardCopyText",
   tags: ["autodocs"],
   argTypes: {},
 };

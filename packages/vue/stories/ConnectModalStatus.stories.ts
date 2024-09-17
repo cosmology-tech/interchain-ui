@@ -3,7 +3,7 @@ import ConnectModalStatus from "../src/ui/connect-modal-status/connect-modal-sta
 
 const meta: Meta<typeof ConnectModalStatus> = {
   component: ConnectModalStatus,
-  title: "ConnectModalStatus",
+  title: "ConnectModal/ConnectModalStatus",
   tags: ["autodocs"],
   argTypes: {
     status: {

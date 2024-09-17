@@ -3,7 +3,7 @@ import ConnectModalInstallButton from "../src/ui/connect-modal-install-button/co
 
 const meta: Meta<typeof ConnectModalInstallButton> = {
   component: ConnectModalInstallButton,
-  title: "ConnectModalInstallButton",
+  title: "ConnectModal/ConnectModalInstallButton",
   tags: ["autodocs"],
   argTypes: {
     walletName: { control: "text" },

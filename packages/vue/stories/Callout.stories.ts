@@ -3,7 +3,7 @@ import Callout from "../src/ui/callout/callout.vue";
 
 const meta: Meta<typeof Callout> = {
   component: Callout,
-  title: "Callout",
+  title: "Core/Callout",
   tags: ["autodocs"],
   argTypes: {
     intent: {

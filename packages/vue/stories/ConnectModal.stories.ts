@@ -5,7 +5,7 @@ import { ref } from "vue";
 
 const meta: Meta<typeof ConnectModal> = {
   component: ConnectModal,
-  title: "ConnectModal",
+  title: "ConnectModal/ConnectModal",
   tags: ["autodocs"],
   argTypes: {},
 };

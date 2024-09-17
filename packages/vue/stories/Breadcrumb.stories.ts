@@ -3,7 +3,7 @@ import Breadcrumb from "../src/ui/breadcrumb/breadcrumb.vue";
 
 const meta: Meta<typeof Breadcrumb> = {
   component: Breadcrumb,
-  title: "Breadcrumb",
+  title: "Core/Breadcrumb",
   tags: ["autodocs"],
   argTypes: {
     children: { control: "object" },

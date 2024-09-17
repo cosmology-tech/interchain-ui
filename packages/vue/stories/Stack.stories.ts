@@ -4,7 +4,7 @@ import Box from "../src/ui/box/box.vue";
 
 const meta: Meta<typeof Stack> = {
   component: Stack,
-  title: "Stack",
+  title: "Core/Stack",
   tags: ["autodocs"],
   argTypes: {
     direction: {

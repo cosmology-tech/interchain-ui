@@ -71,10 +71,6 @@ export default defineConfig({
         find: `@/${alias}`,
         replacement: path.resolve(__dirname, `src/${alias}`),
       })),
-      {
-        find: "@ark-ui/vue",
-        replacement: "@ark-ui/vue/dist/index.mjs",
-      },
     ],
   },
 });

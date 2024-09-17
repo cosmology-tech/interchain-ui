@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import { ref } from "vue";
-import Modal from "../src/ui/modal/modal.vue";
+import Modal from "../scaffolds/modal/modal.vue";
 import useTheme from "../src/ui/hooks/use-theme/use-theme";
 
 const meta: Meta<typeof Modal> = {
-  title: "Modal",
+  title: "Core/Modal",
   component: Modal,
   tags: ["autodocs"],
   argTypes: {
@@ -37,13 +37,13 @@ const DefaultTemplate: Story = {
     template: `
       <div :class="themeClass">
         <Modal v-bind="args" v-model:isOpen="isOpen" :themeClassName="themeClass">
-          <template #trigger="slotProps">
-            <button v-bind="slotProps">Open Modal</button>
+          <template #trigger="{ open }">
+            <button @click="open">Open Modal</button>
           </template>
-          <template #header="{ closeButtonProps }">
+          <template #header="{ close }">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <h2>Modal Header</h2>
-              <button v-bind="closeButtonProps">Close</button>
+              <button @click="close">Close</button>
             </div>
           </template>
           <p>This is the modal content.</p>

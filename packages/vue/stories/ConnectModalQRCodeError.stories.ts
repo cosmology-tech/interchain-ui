@@ -3,7 +3,7 @@ import ConnectModalQRCodeError from "../src/ui/connect-modal-qrcode-error/connec
 
 const meta: Meta<typeof ConnectModalQRCodeError> = {
   component: ConnectModalQRCodeError,
-  title: "ConnectModalQRCodeError",
+  title: "ConnectModal/ConnectModalQRCodeError",
   tags: ["autodocs"],
   argTypes: {
     errorTitle: { control: "text" },

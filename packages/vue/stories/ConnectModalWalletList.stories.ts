@@ -4,7 +4,7 @@ import { Wallet } from "../src/ui/connect-modal-wallet-list/connect-modal-wallet
 
 const meta: Meta<typeof ConnectModalWalletList> = {
   component: ConnectModalWalletList,
-  title: "ConnectModalWalletList",
+  title: "ConnectModal/ConnectModalWalletList",
   tags: ["autodocs"],
   argTypes: {},
 };

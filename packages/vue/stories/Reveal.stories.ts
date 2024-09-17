@@ -4,7 +4,7 @@ import Box from "../src/ui/box/box.vue";
 
 const meta: Meta<typeof Reveal> = {
   component: Reveal,
-  title: "Reveal",
+  title: "Core/Reveal",
   tags: ["autodocs"],
   argTypes: {
     showMoreLabel: { control: "text" },

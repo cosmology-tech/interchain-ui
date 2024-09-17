@@ -4,7 +4,7 @@ import Box from "../src/ui/box/box.vue";
 
 const meta: Meta<typeof Divider> = {
   component: Divider,
-  title: "Divider",
+  title: "Core/Divider",
   tags: ["autodocs"],
   argTypes: {},
 };

@@ -4,13 +4,14 @@ import Button from "../src/ui/button/button.vue";
 
 const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
-  title: "Tooltip",
+  title: "Core/Tooltip",
   tags: ["autodocs"],
   argTypes: {
     placement: {
       control: "select",
       options: ["top", "bottom", "left", "right"],
     },
+    content: { control: "text" },
   },
 };
 
@@ -20,7 +21,7 @@ type Story = StoryObj<typeof Tooltip>;
 
 export const Primary: Story = {
   args: {
-    title: "This is a tooltip",
+    content: "This is a tooltip",
     placement: "top",
   },
   render: (args) => ({

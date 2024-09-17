@@ -5,7 +5,7 @@ import Text from "../src/ui/text/text.vue";
 
 const meta: Meta<typeof ThemeProvider> = {
   component: ThemeProvider,
-  title: "ThemeProvider",
+  title: "Core/ThemeProvider",
   tags: ["autodocs"],
   argTypes: {
     themeMode: {

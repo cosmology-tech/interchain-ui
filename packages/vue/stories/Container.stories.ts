@@ -4,7 +4,7 @@ import Box from "../src/ui/box/box.vue";
 
 const meta: Meta<typeof Container> = {
   component: Container,
-  title: "Container",
+  title: "Core/Container",
   tags: ["autodocs"],
   argTypes: {
     maxWidth: {

@@ -3,7 +3,7 @@ import Skeleton from "../src/ui/skeleton/skeleton.vue";
 
 const meta: Meta<typeof Skeleton> = {
   component: Skeleton,
-  title: "Skeleton",
+  title: "Core/Skeleton",
   tags: ["autodocs"],
   argTypes: {
     width: { control: "text" },

@@ -3,7 +3,7 @@ import Text from "../src/ui/text/text.vue";
 
 const meta: Meta<typeof Text> = {
   component: Text,
-  title: "Text",
+  title: "Core/Text",
   tags: ["autodocs"],
   argTypes: {
     as: {

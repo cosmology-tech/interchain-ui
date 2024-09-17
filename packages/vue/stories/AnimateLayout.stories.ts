@@ -5,7 +5,7 @@ import { ref } from "vue";
 
 const meta: Meta<typeof AnimateLayout> = {
   component: AnimateLayout,
-  title: "AnimateLayout",
+  title: "Core/AnimateLayout",
   tags: ["autodocs"],
   argTypes: {},
 };

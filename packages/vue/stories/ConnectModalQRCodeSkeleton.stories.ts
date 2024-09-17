@@ -3,7 +3,7 @@ import ConnectModalQRCodeSkeleton from "../src/ui/connect-modal-qrcode-skeleton/
 
 const meta: Meta<typeof ConnectModalQRCodeSkeleton> = {
   component: ConnectModalQRCodeSkeleton,
-  title: "ConnectModalQRCodeSkeleton",
+  title: "ConnectModal/ConnectModalQRCodeSkeleton",
   tags: ["autodocs"],
   argTypes: {},
 };

@@ -6,7 +6,7 @@ import Stack from "../src/ui/stack/stack.vue";
 
 const meta: Meta<typeof Avatar> = {
   component: Avatar,
-  title: "Avatar",
+  title: "Core/Avatar",
   tags: ["autodocs"],
   argTypes: {},
 };

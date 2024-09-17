@@ -3,7 +3,7 @@ import Box from "../src/ui/box/box.vue";
 
 const meta: Meta<typeof Box> = {
   component: Box,
-  title: "Box",
+  title: "Core/Box",
   tags: ["autodocs"],
   argTypes: {},
 };
@@ -25,10 +25,13 @@ export const Primary: Story = {
   render: (args) => ({
     components: { Box },
     setup() {
-      return { args };
+      const handleClick = () => {
+        alert("Box clicked");
+      };
+      return { args, handleClick };
     },
     template: `
-      <Box v-bind="args">
+      <Box v-bind="args" @click="handleClick">
         This is a Box component
       </Box>
     `,

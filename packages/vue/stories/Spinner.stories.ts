@@ -3,7 +3,7 @@ import Spinner from "../src/ui/spinner/spinner.vue";
 
 const meta: Meta<typeof Spinner> = {
   component: Spinner,
-  title: "Spinner",
+  title: "Core/Spinner",
   tags: ["autodocs"],
   argTypes: {
     size: {

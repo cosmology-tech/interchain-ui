@@ -3,7 +3,7 @@ import ConnectModalWalletButton from "../src/ui/connect-modal-wallet-button/conn
 
 const meta: Meta<typeof ConnectModalWalletButton> = {
   component: ConnectModalWalletButton,
-  title: "ConnectModalWalletButton",
+  title: "ConnectModal/ConnectModalWalletButton",
   tags: ["autodocs"],
   argTypes: {
     name: { control: "text" },
