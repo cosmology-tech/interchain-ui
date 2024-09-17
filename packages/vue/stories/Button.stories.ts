@@ -51,6 +51,10 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
+const handleClick = () => {
+  alert("Button clicked");
+};
+
 export const Primary: Story = {
   args: {
     intent: "primary",
@@ -59,12 +63,10 @@ export const Primary: Story = {
   render: (args) => ({
     components: { Button },
     setup() {
-      const handleClick = () => {
-        alert("Button clicked");
-      };
       return { args, handleClick };
     },
-    template: '<Button v-bind="args" @click="handleClick">Button</Button>',
+    template:
+      '<Button v-bind="args" @click="handleClick">Primary Button</Button>',
   }),
 };
 
@@ -75,10 +77,78 @@ export const Secondary: Story = {
   render: (args) => ({
     components: { Button },
     setup() {
-      return { args };
+      return { args, handleClick };
     },
-    template: '<Button v-bind="args">Button</Button>',
+    template:
+      '<Button v-bind="args" @click="handleClick">Secondary Button</Button>',
   }),
 };
 
-// Add more stories for other button variants and states...
+export const Tertiary: Story = {
+  args: {
+    intent: "tertiary",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args, handleClick };
+    },
+    template:
+      '<Button v-bind="args" @click="handleClick">Tertiary Button</Button>',
+  }),
+};
+
+export const Success: Story = {
+  args: {
+    intent: "success",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args, handleClick };
+    },
+    template:
+      '<Button v-bind="args" @click="handleClick">Success Button</Button>',
+  }),
+};
+
+export const Warning: Story = {
+  args: {
+    intent: "warning",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args, handleClick };
+    },
+    template:
+      '<Button v-bind="args" @click="handleClick">Warning Button</Button>',
+  }),
+};
+
+export const Danger: Story = {
+  args: {
+    intent: "danger",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args, handleClick };
+    },
+    template:
+      '<Button v-bind="args" @click="handleClick">Danger Button</Button>',
+  }),
+};
+
+export const Text: Story = {
+  args: {
+    intent: "text",
+  },
+  render: (args) => ({
+    components: { Button },
+    setup() {
+      return { args, handleClick };
+    },
+    template: '<Button v-bind="args" @click="handleClick">Text Button</Button>',
+  }),
+};

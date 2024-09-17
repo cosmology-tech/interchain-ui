@@ -3,6 +3,7 @@ import { globSync } from "glob";
 import * as compiler from "../base";
 import log from "../log";
 import type { CustomReplaceProps } from "../base";
+import { compileAllowList } from "../scaffold.config";
 
 const DEFAULT_OPTIONS = {
   target: "vue",
@@ -23,18 +24,29 @@ function customReplaceVue(props: CustomReplaceProps): void {
     log.info("\n ============== before edit index.ts =========== \n" + data);
 
     const result = data
-      // Add .vue to index
+      // Add .vue to index and filter by compileAllowList
       .replace(
         /(export)(.*)\/ui\/(?!.*(\.css|\.css\.ts)")(.+)";/g,
-        `$1$2/ui/$3/$3.vue";`,
+        (match, p1, p2, p3, p4) => {
+          const componentName = p4.split("/").pop();
+          return compileAllowList["vue"]?.includes(componentName)
+            ? `${p1}${p2}/ui/${componentName}/${componentName}.vue";`
+            : "";
+        },
       )
       .replace(/(extensions)\/(.*)\.vue/g, "$1/$2")
       .replace(/\/helpers\.vue/g, "")
-      // Add .vue and a subpath to each export
+      // Add .vue and a subpath to each export, and filter by compileAllowList
       .replace(
         /(export { default as (\w+) } from '\.\/ui\/)([^';]+)';/g,
-        `$1$3/$3.vue';`,
-      );
+        (match, p1, p2, p3) => {
+          return compileAllowList["vue"]?.includes(p3)
+            ? `${p1}${p3}/${p3}.vue';`
+            : "";
+        },
+      )
+      // Remove empty lines created by filtered out exports
+      .replace(/^\s*[\r\n]/gm, "");
 
     log.warn("\n ============== after edit index.ts =========== \n" + result);
 

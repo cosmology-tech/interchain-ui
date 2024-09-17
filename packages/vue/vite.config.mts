@@ -1,11 +1,14 @@
 import { globbySync } from "globby";
 import { copyFileSync } from "node:fs";
+import path from "node:path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import vue from "@vitejs/plugin-vue";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import ViteVueComplexTypes from "@vue.ts/complex-types/vite";
 import pkg from "./package.json";
+
+const aliases = ["ui", "styles", "models", "helpers"];
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -63,5 +66,15 @@ export default defineConfig({
   },
   resolve: {
     conditions: ["source"],
+    alias: [
+      ...aliases.map((alias) => ({
+        find: `@/${alias}`,
+        replacement: path.resolve(__dirname, `src/${alias}`),
+      })),
+      {
+        find: "@ark-ui/vue",
+        replacement: "@ark-ui/vue/dist/index.mjs",
+      },
+    ],
   },
 });

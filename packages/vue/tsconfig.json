@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Enable latest features
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
@@ -21,11 +21,34 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "customConditions": ["source"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
 
+    // Added from React tsconfig
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    // Path aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    // Vue specific
     "jsx": "preserve",
     "jsxImportSource": "vue"
   },
-  "include": ["src"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "scaffolds/**/*.ts",
+    "scaffolds/**/*.d.ts",
+    "scaffolds/**/*.tsx",
+    "scaffolds/**/*.vue"
+  ],
   "exclude": ["node_modules", "dist"]
 }
