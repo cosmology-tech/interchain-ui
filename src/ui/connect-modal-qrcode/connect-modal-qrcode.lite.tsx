@@ -40,11 +40,11 @@ useMetadata({
   },
 });
 
-export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
-  useDefaultProps({
-    qrCodeSize: 230,
-  });
+useDefaultProps<Partial<ConnectModalQRCodeProps>>({
+  qrCodeSize: 230,
+});
 
+export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
   const measureRef = useRef<HTMLDivElement>(null);
   const shadowRef = useRef<HTMLDivElement>(null);
   let animationRef = useRef<AnimeInstance | null>(null);
@@ -52,16 +52,16 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
 
   const state = useStore<{
     displayBlur: boolean;
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
   }>({
     displayBlur: false,
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
   });
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     if (measureRef) {
@@ -75,7 +75,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
         const height = Math.abs(
           measureRef.scrollHeight -
             measureRef.clientHeight -
-            measureRef.scrollTop
+            measureRef.scrollTop,
         );
         if (height < 1) {
           state.displayBlur = false;
@@ -87,7 +87,7 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       measureRef.addEventListener("scroll", scrollHandler);
 
       const storeUnsub = store.subscribe((newState) => {
-        state.theme = newState.theme;
+        state.internalTheme = newState.theme;
         state.overrideManager = newState.overrideStyleManager;
       });
 
@@ -149,9 +149,9 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
       <Show when={props.status === "Done"}>
         <Box height="$4" />
         <div
-          className={qrCodeContainer[state.theme]}
+          className={qrCodeContainer[state.internalTheme]}
           style={state.overrideManager?.applyOverrides(
-            connectQRCodeOverrides.name
+            connectQRCodeOverrides.name,
           )}
         >
           <QRCode
@@ -214,9 +214,9 @@ export default function ConnectModalQRCode(props: ConnectModalQRCodeProps) {
 
           <div
             ref={shadowRef}
-            className={qrCodeDescShadow[state.theme]}
+            className={qrCodeDescShadow[state.internalTheme]}
             style={state.overrideManager?.applyOverrides(
-              connectQRCodeShadowOverrides.name
+              connectQRCodeShadowOverrides.name,
             )}
           ></div>
         </div>

@@ -31,16 +31,16 @@ useDefaultProps<Partial<CalloutProps>>({
 
 export default function Callout(props: CalloutProps) {
   const state = useStore<{
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     colorsProperties: {
       color: Sprinkles["color"];
       bg: Sprinkles["bg"];
     };
     isValidIconName: () => boolean;
   }>({
-    theme: "light",
+    internalTheme: "light",
     get colorsProperties() {
-      return getIntentColors(props.intent, state.theme as ThemeVariant);
+      return getIntentColors(props.intent, state.internalTheme as ThemeVariant);
     },
     isValidIconName() {
       return ALL_ICON_NAMES.includes(props.iconName);
@@ -50,10 +50,10 @@ export default function Callout(props: CalloutProps) {
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
 
     cleanupRef = store.subscribe((newState, prevState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
     });
   });
 

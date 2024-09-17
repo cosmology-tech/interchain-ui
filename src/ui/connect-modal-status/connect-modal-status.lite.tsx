@@ -187,7 +187,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
         </Box>
 
         <div className={widthContainer}>
-          <Box maxWidth="$29" mx="auto">
+          <Box maxWidth="$29" mx="auto" marginBottom="$6">
             <ClipboardCopyText
               text={state.getConnectedInfo().address}
               truncate="middle"
@@ -251,7 +251,7 @@ export default function ConnectModalStatus(props: ConnectModalStatusProps) {
               >
                 <span>{props.installIcon}</span>
                 <Box as="span" marginLeft="$4">
-                  Install{" "}
+                  Install &nbsp;
                   {state.getWallet().prettyName ?? state.getWallet().name}
                 </Box>
               </Box>

@@ -40,7 +40,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     isMounted: boolean;
     isControlled: boolean;
     preferredMode: ThemeVariant | null;
-    theme: string;
+    internalTheme: string;
     themeClass: string;
     UIStore: ReturnType<typeof store.getState>;
     // Local custom theme state for nested themes
@@ -52,7 +52,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     isMounted: false,
     localCustomTheme: null,
     localThemeDefs: [],
-    theme: "light",
+    internalTheme: "light",
     UIStore: store.getState(),
     get isControlled() {
       return props.themeMode != null;
@@ -106,7 +106,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     if (themeMode === "system" || themeMode == null) {
       return setThemeModeFn("system");
     }
-  }, [state.preferredMode, state.theme, state.isReady, state.UIStore]);
+  }, [state.preferredMode, state.internalTheme, state.isReady, state.UIStore]);
 
   // Handle custom themes change
   onUpdate(() => {
@@ -195,7 +195,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
     const cleanupStore = store.subscribe((newState) => {
       state.UIStore = newState;
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
     });
 
     if (state.darkQuery && state.lightQuery) {

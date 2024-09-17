@@ -91,7 +91,11 @@ export const NotExist: Story = {
   ...Template,
   args: {
     status: "NotExist",
-    wallet: defaultWallet,
+    wallet: {
+      ...defaultWallet,
+      name: "Keplr",
+      prettyName: "Keplr",
+    },
     contentHeader: "Wallet Not Installed",
     contentDesc: "Please install the wallet to continue.",
     disableInstall: false,

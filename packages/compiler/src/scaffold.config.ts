@@ -205,7 +205,7 @@ const compileAllowList: CompileAllowList = {
     "connect-modal-wallet-button",
     "connect-modal-wallet-list",
     "connected-wallet",
-    "modal", // Added modal to the Vue allow list
+    "modal",
   ],
 };
 

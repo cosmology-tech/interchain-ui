@@ -20,21 +20,21 @@ useMetadata({
 
 export default function ConnectModalQrCodeSkeleton(props) {
   const state = useStore<{
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
   }>({
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -54,9 +54,9 @@ export default function ConnectModalQrCodeSkeleton(props) {
       className={props.className}
     >
       <div
-        className={qrcodeSkeleton[state.theme]}
+        className={qrcodeSkeleton[state.internalTheme]}
         style={state.overrideManager?.applyOverrides(
-          connectModalQRCodeSkeletonOverrides.name
+          connectModalQRCodeSkeletonOverrides.name,
         )}
       />
     </Box>

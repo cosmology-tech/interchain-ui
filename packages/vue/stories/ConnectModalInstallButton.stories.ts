@@ -1,13 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
+import Box from "../src/ui/box/box.vue";
+import Icon from "../src/ui/icon/icon.vue";
 import ConnectModalInstallButton from "../src/ui/connect-modal-install-button/connect-modal-install-button.vue";
+import { ref } from "vue";
 
 const meta: Meta<typeof ConnectModalInstallButton> = {
   component: ConnectModalInstallButton,
   title: "ConnectModal/ConnectModalInstallButton",
   tags: ["autodocs"],
   argTypes: {
-    walletName: { control: "text" },
-    walletUrl: { control: "text" },
+    disabled: { control: "boolean" },
+    fluidWidth: { control: "boolean" },
+    onClick: { action: "clicked" },
+    onHoverStart: { action: "hover started" },
+    onHoverEnd: { action: "hover ended" },
   },
 };
 
@@ -17,14 +23,39 @@ type Story = StoryObj<typeof ConnectModalInstallButton>;
 
 export const Primary: Story = {
   args: {
-    walletName: "Example Wallet",
-    walletUrl: "https://example.com/wallet",
+    disabled: false,
+    fluidWidth: false,
   },
   render: (args) => ({
-    components: { ConnectModalInstallButton },
+    components: { ConnectModalInstallButton, Icon, Box },
     setup() {
-      return { args };
+      const theme = ref("light");
+
+      return { args, theme };
     },
-    template: '<ConnectModalInstallButton v-bind="args" />',
+    template: `
+      <ConnectModalInstallButton v-bind="args">
+        <Box as="span" display="flex" alignItems="center" gap="8px">
+          Install Wallet
+          <Icon name="chromeBrowser" />
+        </Box>
+      </ConnectModalInstallButton>
+    `,
   }),
+};
+
+export const Disabled: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    disabled: true,
+  },
+};
+
+export const FluidWidth: Story = {
+  ...Primary,
+  args: {
+    ...Primary.args,
+    fluidWidth: true,
+  },
 };
