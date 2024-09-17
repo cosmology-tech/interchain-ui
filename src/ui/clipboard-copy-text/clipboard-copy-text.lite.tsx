@@ -32,14 +32,14 @@ useMetadata({
 export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   const state = useStore<{
     idle: boolean;
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
     transform: (text: string) => string;
     handleOnClick: (event?: any) => void;
     getTruncateClass: () => string;
   }>({
     idle: true,
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
     transform: (text: string) => {
       if (props.truncate === "middle") {
@@ -51,7 +51,7 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
 
         return truncateTextMiddle(
           text,
-          truncateLength[props.midTruncateLimit ?? "md"]
+          truncateLength[props.midTruncateLimit ?? "md"],
         );
       }
 
@@ -77,11 +77,11 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -92,10 +92,10 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
 
   return (
     <div
-      className={clx(containerStyle[state.theme], props.className)}
+      className={clx(containerStyle[state.internalTheme], props.className)}
       onClick={(event) => state.handleOnClick(event)}
       style={state.overrideManager?.applyOverrides(
-        clipboardCopyTextOverrides.name
+        clipboardCopyTextOverrides.name,
       )}
     >
       <Text color="$textSecondary" className={state.getTruncateClass()}>
@@ -108,7 +108,7 @@ export default function ClipboardCopyText(props: ClipboardCopyTextProps) {
           <Icon
             name={"checkboxCircle"}
             size="$md"
-            className={iconStyle.copied[state.theme]}
+            className={iconStyle.copied[state.internalTheme]}
           />
         }
       >

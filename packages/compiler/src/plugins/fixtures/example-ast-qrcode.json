@@ -1,0 +1,298 @@
+{
+  "@type": "@builder.io/mitosis/component",
+  "imports": [
+    {
+      "imports": {
+        "qrcodegen": "default"
+      },
+      "path": "./qrcodegen/qrcodegen",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "DEFAULT_SIZE": "DEFAULT_SIZE",
+        "DEFAULT_LEVEL": "DEFAULT_LEVEL",
+        "DEFAULT_BGCOLOR": "DEFAULT_BGCOLOR",
+        "DEFAULT_FGCOLOR": "DEFAULT_FGCOLOR",
+        "DEFAULT_INCLUDEMARGIN": "DEFAULT_INCLUDEMARGIN",
+        "ERROR_LEVEL_MAP": "ERROR_LEVEL_MAP"
+      },
+      "path": "./qrcode.types",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "QRProps": "QRProps"
+      },
+      "path": "./qrcode.types",
+      "importKind": "type"
+    },
+    {
+      "imports": {
+        "excavateModules": "excavateModules",
+        "generatePath": "generatePath",
+        "getImageSettings": "getImageSettings",
+        "getMarginSize": "getMarginSize"
+      },
+      "path": "./qrcode.helpers",
+      "importKind": "value"
+    }
+  ],
+  "exports": {},
+  "inputs": [],
+  "meta": {
+    "useMetadata": {
+      "rsc": {
+        "componentType": "client"
+      }
+    }
+  },
+  "refs": {},
+  "state": {
+    "available": {
+      "code": "false",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "cells": {
+      "code": "null",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "calculatedImageSettings": {
+      "code": "null",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "margin": {
+      "code": "null",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "fgPath": {
+      "code": "null",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "generateNewPath": {
+      "code": "function generateNewPath(newMargin: number) {\n  // Drawing strategy: instead of a rect per module, we're going to create a\n  // single path for the dark modules and layer that on top of a light rect,\n  // for a total of 2 DOM nodes. We pay a bit more in string concat but that's\n  // way faster than DOM ops.\n  // For level 1, 441 nodes -> 2\n  // For level 40, 31329 -> 2\n  return generatePath(cells ?? [], newMargin);\n}",
+      "type": "method"
+    },
+    "genCells": {
+      "code": "function genCells() {\n  return qrcodegen.QrCode.encodeText(props.value, ERROR_LEVEL_MAP[props.level]).getModules();\n}",
+      "type": "method"
+    },
+    "numCells": {
+      "code": "function numCells() {\n  return (cells.value?.length ?? 0) + (margin.value ?? 0) * 2;\n}",
+      "type": "method"
+    }
+  },
+  "children": [
+    {
+      "@type": "@builder.io/mitosis/node",
+      "name": "svg",
+      "meta": {},
+      "scope": {},
+      "properties": {},
+      "bindings": {
+        "height": {
+          "code": "size",
+          "type": "single"
+        },
+        "width": {
+          "code": "size",
+          "type": "single"
+        },
+        "viewBox": {
+          "code": "`0 0 ${numCells()} ${numCells()}`",
+          "type": "single"
+        },
+        "class": {
+          "code": "className",
+          "type": "single"
+        }
+      },
+      "children": [
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Show",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "when": {
+              "code": "!!title",
+              "type": "single"
+            }
+          },
+          "children": [
+            {
+              "@type": "@builder.io/mitosis/node",
+              "name": "title",
+              "meta": {},
+              "scope": {},
+              "properties": {},
+              "bindings": {},
+              "children": [
+                {
+                  "@type": "@builder.io/mitosis/node",
+                  "name": "div",
+                  "meta": {},
+                  "scope": {},
+                  "properties": {},
+                  "bindings": {
+                    "_text": {
+                      "code": "title",
+                      "type": "single"
+                    }
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "path",
+          "meta": {},
+          "scope": {},
+          "properties": {
+            "shape-rendering": "crispEdges"
+          },
+          "bindings": {
+            "fill": {
+              "code": "bgColor",
+              "type": "single"
+            },
+            "d": {
+              "code": "`M0,0 h${numCells()}v${numCells()}H0z`",
+              "type": "single"
+            }
+          },
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "path",
+          "meta": {},
+          "scope": {},
+          "properties": {
+            "shape-rendering": "crispEdges"
+          },
+          "bindings": {
+            "fill": {
+              "code": "fgColor",
+              "type": "single"
+            },
+            "d": {
+              "code": "fgPath",
+              "type": "single"
+            }
+          },
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Show",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "when": {
+              "code": "available && !!imageSettings?.src",
+              "type": "single"
+            }
+          },
+          "children": [
+            {
+              "@type": "@builder.io/mitosis/node",
+              "name": "image",
+              "meta": {},
+              "scope": {},
+              "properties": {
+                "preserveAspectRatio": "none"
+              },
+              "bindings": {
+                "href": {
+                  "code": "imageSettings.src",
+                  "type": "single"
+                },
+                "height": {
+                  "code": "calculatedImageSettings.h",
+                  "type": "single"
+                },
+                "width": {
+                  "code": "calculatedImageSettings.w",
+                  "type": "single"
+                },
+                "x": {
+                  "code": "calculatedImageSettings.x + margin",
+                  "type": "single"
+                },
+                "y": {
+                  "code": "calculatedImageSettings.y + margin",
+                  "type": "single"
+                }
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "context": {
+    "get": {},
+    "set": {}
+  },
+  "subComponents": [],
+  "name": "QRCode",
+  "hooks": {
+    "onMount": [
+      {
+        "code": "cells.value = genCells()",
+        "onSSR": false
+      }
+    ],
+    "onEvent": [],
+    "onUpdate": [
+      {
+        "code": "if (props.imageSettings != null && calculatedImageSettings.value != null) {\n  if (calculatedImageSettings.value.excavation != null) {\n    cells.value = excavateModules(cells, calculatedImageSettings.excavation);\n  }\n  if (!available.value) {\n    available.value = true;\n  }\n}",
+        "deps": "[props.imageSettings, calculatedImageSettings]"
+      },
+      {
+        "code": "const newMargin = getMarginSize(props.includeMargin, props.marginSize);\nmargin.value = newMargin;\ncalculatedImageSettings.value = getImageSettings(cells, props.size, newMargin, props.imageSettings);\nfgPath.value = generateNewPath(newMargin)",
+        "deps": "[props.size, props.imageSettings, props.includeMargin, props.marginSize, cells]"
+      }
+    ]
+  },
+  "defaultProps": {
+    "size": {
+      "code": "DEFAULT_SIZE",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "level": {
+      "code": "DEFAULT_LEVEL",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "bgColor": {
+      "code": "DEFAULT_BGCOLOR",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "fgColor": {
+      "code": "DEFAULT_FGCOLOR",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "includeMargin": {
+      "code": "DEFAULT_INCLUDEMARGIN",
+      "type": "property",
+      "propertyType": "normal"
+    }
+  },
+  "propsTypeRef": "QRProps"
+}

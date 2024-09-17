@@ -8,7 +8,6 @@ module.exports = function vueCompilerPlugin() {
   return {
     json: {
       post: (json) => {
-        // console.log("Processing JSON for component:", json.name);
         return fixRefUsages(json);
       },
     },
@@ -27,8 +26,10 @@ module.exports = function vueCompilerPlugin() {
 };
 
 function fixRefUsages(ast) {
-  // Find all ref bindings
+  // Find all ref bindings and state variables
   const refBindings = new Set();
+  const stateVariables = new Set();
+
   if (ast.children) {
     ast.children.forEach((child) => {
       if (child.bindings && child.bindings.ref) {
@@ -44,12 +45,29 @@ function fixRefUsages(ast) {
     });
   }
 
-  // Helper function to replace ref usages in code
-  function replaceRefUsages(code) {
+  // Add state variables
+  if (ast.state) {
+    Object.entries(ast.state).forEach(([key, value]) => {
+      if (value.type === "property" && value.propertyType === "normal") {
+        stateVariables.add(key);
+      }
+    });
+  }
+
+  // Helper function to replace ref and state variable usages in code
+  function replaceUsages(code) {
     let updatedCode = code;
+
+    // Replace ref usages
     refBindings.forEach((refName) => {
       const refRegex = new RegExp(`\\b${refName}\\b(?!\\.value)`, "g");
       updatedCode = updatedCode.replace(refRegex, `${refName}.value`);
+    });
+
+    // Replace state variable usages
+    stateVariables.forEach((varName) => {
+      const varRegex = new RegExp(`\\b${varName}\\b(?!\\.value)`, "g");
+      updatedCode = updatedCode.replace(varRegex, `${varName}.value`);
     });
 
     // Handle useSlots and similar composition API functions
@@ -79,19 +97,19 @@ function fixRefUsages(ast) {
     return updatedCode;
   }
 
-  // Fix ref usages in all hooks
+  // Fix ref and state variable usages in all hooks
   if (ast.hooks) {
     Object.keys(ast.hooks).forEach((hookType) => {
       const hook = ast.hooks[hookType];
       if (Array.isArray(hook)) {
         hook.forEach((item) => {
           if (item.code) {
-            item.code = replaceRefUsages(item.code);
+            item.code = replaceUsages(item.code);
           }
         });
       } else if (typeof hook === "object" && hook !== null) {
         if (hook.code) {
-          hook.code = replaceRefUsages(hook.code);
+          hook.code = replaceUsages(hook.code);
         }
       }
     });
@@ -102,7 +120,7 @@ function fixRefUsages(ast) {
         ast.hooks.onUnMount.code = ast.hooks.onUnMount.code.replace(
           /(\w+)\(\)/g,
           (match, funcName) => {
-            if (refBindings.has(funcName)) {
+            if (refBindings.has(funcName) || stateVariables.has(funcName)) {
               return `${funcName}.value()`;
             }
             return match;
@@ -112,11 +130,11 @@ function fixRefUsages(ast) {
     }
   }
 
-  // Fix ref usages in state
+  // Fix ref and state variable usages in state
   if (ast.state) {
     Object.keys(ast.state).forEach((key) => {
-      if (typeof ast.state[key] === "string") {
-        ast.state[key] = replaceRefUsages(ast.state[key]);
+      if (typeof ast.state[key] === "object" && ast.state[key].code) {
+        ast.state[key].code = replaceUsages(ast.state[key].code);
       }
     });
   }
@@ -222,5 +240,21 @@ function addMissingImports(codeStr) {
 }
 
 function fixVueClassName(codeStr) {
-  return codeStr.replace(/\bprops\.className\b/g, "props.class");
+  return codeStr
+    .replace(/\bprops\.className\b/g, "props.class")
+    .replace(/:class="([^"]+)"/g, (match, classContent) => {
+      const parts = classContent.split(/(\s*,\s*|\s+)/);
+      const fixedParts = parts.map((part) => {
+        if (part.trim() === "class" || part.trim() === "className") {
+          return "(props.class ?? props.className)";
+        } else if (
+          /^(?!props\.)([\w.]+\.)?(?:class|className)$/.test(part.trim())
+        ) {
+          return part;
+        } else {
+          return part;
+        }
+      });
+      return `:class="${fixedParts.join("")}"`;
+    });
 }
