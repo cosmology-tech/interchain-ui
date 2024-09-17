@@ -10,10 +10,8 @@ interface ScaffoldConfigs {
   [key: string]: ScaffoldConfig;
 }
 
-const scaffoldConfig: ScaffoldConfigs = {
+const reactScaffoldConfig: ScaffoldConfigs = {
   modal: {
-    // {from, to}
-    // Maps from <Scaffold<something> /> to <something /> JSX tag name
     jsxMap: {
       ScaffoldModal: "Modal",
     },
@@ -150,15 +148,25 @@ const scaffoldConfig: ScaffoldConfigs = {
   },
 };
 
+const vueScaffoldConfig: ScaffoldConfigs = {
+  modal: {
+    jsxMap: {
+      ScaffoldModal: "Modal",
+    },
+    import: {
+      imports: { Modal: "default" },
+      path: "../modal",
+    },
+  },
+};
+
 type CompileAllowList = {
-  react: null;
+  react: string[] | null;
   vue: string[] | null;
 };
 
-// Only allow these components for each target, if null = allow all
-// This is kinda like feature flag for components
 const compileAllowList: CompileAllowList = {
-  react: null,
+  react: null, // Allow all for React
   vue: [
     "avatar",
     "avatar-badge",
@@ -196,10 +204,9 @@ const compileAllowList: CompileAllowList = {
     "connect-modal-status",
     "connect-modal-wallet-button",
     "connect-modal-wallet-list",
-    // ====
-    // "interchain-ui-provider",
-    // "basic-modal",
+    "connected-wallet",
+    "modal", // Added modal to the Vue allow list
   ],
 };
 
-export { scaffoldConfig, compileAllowList };
+export { reactScaffoldConfig, vueScaffoldConfig, compileAllowList };

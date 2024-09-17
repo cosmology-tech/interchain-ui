@@ -43,7 +43,7 @@ importers:
         version: 3.4.31(typescript@5.5.3)
       zustand:
         specifier: ^4.5.4
-        version: 4.5.4(@types/react@18.3.6)(immer@10.1.1)(react@18.3.1)
+        version: 4.5.4(@types/react@18.3.7)(immer@10.1.1)(react@18.3.1)
     devDependencies:
       '@babel/core':
         specifier: ^7.24.7
@@ -119,7 +119,7 @@ importers:
         version: 20.14.9
       '@types/react':
         specifier: latest
-        version: 18.3.6
+        version: 18.3.7
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.15.0
         version: 7.15.0(@typescript-eslint/parser@7.15.0(eslint@8.57.0)(typescript@5.5.3))(eslint@8.57.0)(typescript@5.5.3)
@@ -245,7 +245,7 @@ importers:
     dependencies:
       '@interchain-ui/react':
         specifier: ^1.11.0
-        version: 1.23.13(@types/react@18.3.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 1.23.13(@types/react@18.3.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
         specifier: ^14.1.2
         version: 14.1.4(@babel/core@7.24.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -270,7 +270,7 @@ importers:
         version: 22.5.5
       '@types/react':
         specifier: latest
-        version: 18.3.6
+        version: 18.3.7
       '@types/react-dom':
         specifier: latest
         version: 18.3.0
@@ -447,7 +447,7 @@ importers:
         version: 1.8.27(typescript@5.4.2)
       zustand:
         specifier: ^4.5.2
-        version: 4.5.2(@types/react@18.3.6)(immer@10.0.4)(react@18.3.1)
+        version: 4.5.2(@types/react@18.3.7)(immer@10.0.4)(react@18.3.1)
 
   packages/compiler:
     dependencies:
@@ -640,7 +640,7 @@ importers:
         version: 3.32.2(react@18.3.1)
       zustand:
         specifier: ^4.5.5
-        version: 4.5.5(@types/react@18.3.6)(immer@10.1.1)(react@18.3.1)
+        version: 4.5.5(@types/react@18.3.7)(immer@10.1.1)(react@18.3.1)
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.15.4
@@ -722,7 +722,7 @@ importers:
         version: 8.3.0(storybook@8.3.0)
       '@types/react':
         specifier: latest
-        version: 18.3.6
+        version: 18.3.7
       '@vanilla-extract/parcel-transformer':
         specifier: ^1.0.9
         version: 1.0.9(@parcel/core@2.12.0(@swc/helpers@0.5.3))(@swc/helpers@0.5.3)(@types/node@22.5.5)(lightningcss@1.26.0)(stylus@0.57.0)(terser@5.31.6)
@@ -888,8 +888,11 @@ importers:
         version: 4.5.4(@vueuse/core@10.9.0(vue@3.4.31(typescript@5.5.4)))(@vueuse/integrations@10.9.0(axios@1.7.2)(change-case@4.1.2)(focus-trap@7.5.4)(vue@3.4.31(typescript@5.5.4)))(focus-trap@7.5.4)(vue@3.4.31(typescript@5.5.4))
       zustand:
         specifier: ^4.5.5
-        version: 4.5.5(@types/react@18.3.6)(immer@10.1.1)(react@18.3.1)
+        version: 4.5.5(@types/react@18.3.7)(immer@10.1.1)(react@18.3.1)
     devDependencies:
+      '@chain-registry/client':
+        specifier: ^1.48.59
+        version: 1.48.59(encoding@0.1.13)
       '@chromatic-com/storybook':
         specifier: ^2.0.2
         version: 2.0.2(react@18.3.1)
@@ -4951,8 +4954,8 @@ packages:
   '@types/react@18.3.3':
     resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
 
-  '@types/react@18.3.6':
-    resolution: {integrity: sha512-CnGaRYNu2iZlkGXGrOYtdg5mLK8neySj0woZ4e2wF/eli2E6Sazmq5X+Nrj6OBrrFVQfJWTUFeqAzoRhWQXYvg==}
+  '@types/react@18.3.7':
+    resolution: {integrity: sha512-KUnDCJF5+AiZd8owLIeVHqmW9yM4sqmDVf2JRJiBMFkGvkoZ4/WyV2lL4zVsoinmRS/W3FeEdZLEWFRofnT2FQ==}
 
   '@types/resolve@1.20.6':
     resolution: {integrity: sha512-A4STmOXPhMUtHH+S6ymgE2GiBSMqf4oTvcQZMcHzokuTLVYzXTB8ttjcgxOVaAp2lGwEdzZ0J+cRbbeevQj1UQ==}
@@ -15230,7 +15233,7 @@ snapshots:
       '@iconify/types': 2.0.0
       vue: 3.4.21(typescript@5.4.2)
 
-  '@interchain-ui/react@1.23.13(@types/react@18.3.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@interchain-ui/react@1.23.13(@types/react@18.3.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@floating-ui/core': 1.6.7
       '@floating-ui/dom': 1.6.10
@@ -15255,7 +15258,7 @@ snapshots:
       react-aria: 3.34.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
       react-stately: 3.32.2(react@18.3.1)
-      zustand: 4.5.5(@types/react@18.3.6)(immer@10.1.1)(react@18.3.1)
+      zustand: 4.5.5(@types/react@18.3.7)(immer@10.1.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - babel-plugin-macros
@@ -15618,13 +15621,13 @@ snapshots:
   '@mdx-js/react@2.3.0(react@18.3.1)':
     dependencies:
       '@types/mdx': 2.0.11
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
       react: 18.3.1
 
-  '@mdx-js/react@3.0.1(@types/react@18.3.6)(react@18.3.1)':
+  '@mdx-js/react@3.0.1(@types/react@18.3.7)(react@18.3.1)':
     dependencies:
       '@types/mdx': 2.0.13
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
       react: 18.3.1
 
   '@microsoft/api-extractor-model@7.28.13(@types/node@20.16.2)':
@@ -18828,12 +18831,12 @@ snapshots:
 
   '@storybook/addon-docs@8.3.0(storybook@8.3.0)':
     dependencies:
-      '@mdx-js/react': 3.0.1(@types/react@18.3.6)(react@18.3.1)
+      '@mdx-js/react': 3.0.1(@types/react@18.3.7)(react@18.3.1)
       '@storybook/blocks': 8.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)
       '@storybook/csf-plugin': 8.3.0(storybook@8.3.0)
       '@storybook/global': 5.0.0
       '@storybook/react-dom-shim': 8.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.0)
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
       fs-extra: 11.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -19592,15 +19595,15 @@ snapshots:
 
   '@types/react-dom@18.2.22':
     dependencies:
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
 
   '@types/react-dom@18.2.25':
     dependencies:
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
 
   '@types/react-dom@18.3.0':
     dependencies:
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
 
   '@types/react@18.2.69':
     dependencies:
@@ -19618,7 +19621,7 @@ snapshots:
       '@types/prop-types': 15.7.11
       csstype: 3.1.3
 
-  '@types/react@18.3.6':
+  '@types/react@18.3.7':
     dependencies:
       '@types/prop-types': 15.7.12
       csstype: 3.1.3
@@ -31369,27 +31372,27 @@ snapshots:
 
   zod@3.22.4: {}
 
-  zustand@4.5.2(@types/react@18.3.6)(immer@10.0.4)(react@18.3.1):
+  zustand@4.5.2(@types/react@18.3.7)(immer@10.0.4)(react@18.3.1):
     dependencies:
       use-sync-external-store: 1.2.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
       immer: 10.0.4
       react: 18.3.1
 
-  zustand@4.5.4(@types/react@18.3.6)(immer@10.1.1)(react@18.3.1):
+  zustand@4.5.4(@types/react@18.3.7)(immer@10.1.1)(react@18.3.1):
     dependencies:
       use-sync-external-store: 1.2.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
       immer: 10.1.1
       react: 18.3.1
 
-  zustand@4.5.5(@types/react@18.3.6)(immer@10.1.1)(react@18.3.1):
+  zustand@4.5.5(@types/react@18.3.7)(immer@10.1.1)(react@18.3.1):
     dependencies:
       use-sync-external-store: 1.2.2(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.6
+      '@types/react': 18.3.7
       immer: 10.1.1
       react: 18.3.1
 

@@ -1,0 +1,353 @@
+{
+  "@type": "@builder.io/mitosis/component",
+  "imports": [
+    {
+      "imports": {
+        "assignInlineVars": "assignInlineVars"
+      },
+      "path": "@vanilla-extract/dynamic",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "clx": "default"
+      },
+      "path": "clsx",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "Icon": "default"
+      },
+      "path": "../icon",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "Box": "default"
+      },
+      "path": "../box",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "Spinner": "default"
+      },
+      "path": "../spinner",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "store": "store",
+        "UIState": "UIState"
+      },
+      "path": "../../models/store",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "recipe": "recipe",
+        "buttonOverrides": "buttonOverrides"
+      },
+      "path": "./button.helper",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "isDefaultAccent": "isDefaultAccent",
+        "getAccentHover": "getAccentHover"
+      },
+      "path": "../../helpers/style",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "themeVars": "themeVars"
+      },
+      "path": "../../styles/themes.css",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "fullWidth": "fullWidth",
+        "fullWidthHeight": "fullWidthHeight"
+      },
+      "path": "../shared/shared.css",
+      "importKind": "value"
+    },
+    {
+      "imports": {
+        "UnknownRecord": "UnknownRecord"
+      },
+      "path": "../../helpers/types",
+      "importKind": "type"
+    },
+    {
+      "imports": {
+        "ButtonProps": "ButtonProps"
+      },
+      "path": "./button.types",
+      "importKind": "type"
+    },
+    {
+      "imports": {
+        "ThemeVariant": "ThemeVariant"
+      },
+      "path": "../../models/system.model",
+      "importKind": "type"
+    },
+    {
+      "imports": {
+        "OverrideStyleManager": "OverrideStyleManager"
+      },
+      "path": "../../styles/override/override",
+      "importKind": "type"
+    },
+    {
+      "imports": {
+        "styles": "*"
+      },
+      "path": "./button.css",
+      "importKind": "value"
+    }
+  ],
+  "exports": {},
+  "inputs": [],
+  "meta": {
+    "useMetadata": {
+      "isAttachedToShadowDom": true,
+      "rsc": {
+        "componentType": "client"
+      }
+    }
+  },
+  "refs": {
+    "cleanupRef": {
+      "argument": "null",
+      "typeParameter": "() => void"
+    }
+  },
+  "state": {
+    "_overrideManager": {
+      "code": "null",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "_theme": {
+      "code": "\"light\"",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "_themeAccent": {
+      "code": "null",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "getStoreState": {
+      "code": "function getStoreState() {\n  // This seems weird but it's a workaround for one minor bug from mitosis\n  // If we have any variables in any function scope that has the same name as the store state, mitosis understands that it's the same variable\n  // and will attempt to transform those unwanted/unrelated variables into the ones in the state.<variable>\n  // So we need to name these values differently (e.g. _keyA: valueA) or inverse\n  return {\n    theme: store.getState().theme,\n    themeAccent: store.getState().themeAccent,\n    overrideStyleManager: store.getState().overrideStyleManager\n  };\n}",
+      "type": "method"
+    },
+    "getVars": {
+      "code": "function getVars() {\n  const accent = _themeAccent.value;\n  const isDefaultAppearance = isDefaultAccent(accent) && accent === \"blue\";\n\n  // Only allow accent customization for 'primary' Intent\n  const isPrimaryIntent = props.intent === \"primary\";\n  return isDefaultAppearance || !isPrimaryIntent ? _overrideManager.value?.applyOverrides(buttonOverrides.name) : assignInlineVars({\n    [styles.buttonBgVar]: themeVars.colors.accent,\n    [styles.buttonTextColorVar]: themeVars.colors.accentText,\n    [styles.buttonHoverBgVar]: getAccentHover(themeVars.colors.accent)\n  });\n}",
+      "type": "method"
+    },
+    "combinedClassName": {
+      "code": "combinedClassName() {\n  return clx(styles.buttonSize[props.size], recipe({\n    as: props.as,\n    variant: props.variant,\n    intent: props.intent ?? \"primary\",\n    isDisabled: props.disabled || props.isLoading,\n    theme: getStoreState().theme\n  }), props.fluidWidth ? fullWidth : null, props.fluid ? fullWidthHeight : null, props.className);\n}",
+      "type": "getter"
+    },
+    "spreadAttributes": {
+      "code": "spreadAttributes() {\n  return Object.assign({\n    as: props.as\n  }, {\n    attributes: {\n      ...props.attributes,\n      disabled: props.disabled,\n      // style: state.getVars(),\n      ...props.domAttributes\n    }\n  });\n}",
+      "type": "getter"
+    },
+    "eventHandlers": {
+      "code": "eventHandlers() {\n  const handlers: Record<string, (event: any) => void> = {};\n  const eventProps = [\"onClick\", \"onDoubleClick\", \"onMouseDown\", \"onMouseUp\", \"onMouseEnter\", \"onMouseLeave\", \"onMouseMove\", \"onMouseOver\", \"onMouseOut\", \"onKeyDown\", \"onKeyUp\", \"onKeyPress\", \"onFocus\", \"onBlur\", \"onInput\", \"onChange\", \"onSubmit\", \"onReset\", \"onScroll\", \"onWheel\", \"onDragStart\", \"onDrag\", \"onDragEnd\", \"onDragEnter\", \"onDragLeave\", \"onDragOver\", \"onDrop\", \"onTouchStart\", \"onTouchMove\", \"onTouchEnd\", \"onTouchCancel\"];\n  eventProps.forEach(eventName => {\n    if (props.eventName) {\n      handlers[eventName] = (event: any) => props.eventName(event);\n    }\n  });\n  return handlers;\n}",
+      "type": "getter"
+    }
+  },
+  "children": [
+    {
+      "@type": "@builder.io/mitosis/node",
+      "name": "Box",
+      "meta": {},
+      "scope": {},
+      "properties": {},
+      "bindings": {
+        "boxRef": {
+          "code": "buttonRef",
+          "type": "single"
+        },
+        "state.spreadAttributes": {
+          "code": "spreadAttributes",
+          "type": "spread",
+          "spreadType": "normal"
+        },
+        "state.eventHandlers": {
+          "code": "eventHandlers",
+          "type": "spread",
+          "spreadType": "normal"
+        },
+        "class": {
+          "code": "combinedClassName",
+          "type": "single"
+        }
+      },
+      "children": [
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Spinner",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "size": {
+              "code": "iconSize",
+              "type": "single"
+            },
+            "attributes": {
+              "code": "{\n  display: isLoading && spinnerPlacement === \"start\" ? \"inline-block\" : \"none\"\n}",
+              "type": "single"
+            }
+          },
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Icon",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "name": {
+              "code": "leftIcon",
+              "type": "single"
+            },
+            "size": {
+              "code": "iconSize",
+              "type": "single"
+            },
+            "attributes": {
+              "code": "{\n  display: !!leftIcon && !isLoading ? \"inline-block\" : \"none\",\n  marginRight: !$slots.default ? \"$0\" : \"$2\"\n}",
+              "type": "single"
+            }
+          },
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Show",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "when": {
+              "code": "!isLoading",
+              "type": "single"
+            }
+          },
+          "children": [
+            {
+              "@type": "@builder.io/mitosis/node",
+              "name": "div",
+              "meta": {},
+              "scope": {},
+              "properties": {},
+              "bindings": {
+                "_text": {
+                  "code": "$slots.default",
+                  "type": "single"
+                }
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Icon",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "name": {
+              "code": "rightIcon",
+              "type": "single"
+            },
+            "size": {
+              "code": "iconSize",
+              "type": "single"
+            },
+            "attributes": {
+              "code": "{\n  display: !!rightIcon && !isLoading ? \"inline-block\" : \"none\",\n  marginLeft: !$slots.default ? \"$0\" : \"$2\"\n}",
+              "type": "single"
+            }
+          },
+          "children": []
+        },
+        {
+          "@type": "@builder.io/mitosis/node",
+          "name": "Spinner",
+          "meta": {},
+          "scope": {},
+          "properties": {},
+          "bindings": {
+            "size": {
+              "code": "iconSize",
+              "type": "single"
+            },
+            "attributes": {
+              "code": "{\n  display: isLoading && spinnerPlacement === \"end\" ? \"inline-block\" : \"none\"\n}",
+              "type": "single"
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "context": {
+    "get": {},
+    "set": {}
+  },
+  "subComponents": [],
+  "name": "Button",
+  "hooks": {
+    "onMount": [
+      {
+        "code": "const uiStore = getStoreState();\n_theme.value = uiStore[0];\n_themeAccent.value = uiStore[1];\n_overrideManager.value = uiStore[2];\ncleanupRef.value = store.subscribe((newState, prevState) => {\n  _theme.value = newState.theme;\n  _themeAccent.value = newState.themeAccent;\n  _overrideManager.value = newState.overrideStyleManager;\n})",
+        "onSSR": false
+      }
+    ],
+    "onEvent": [],
+    "onUnMount": {
+      "code": "if (typeof cleanupRef.value === \"function\") {\n  cleanupRef();\n}"
+    }
+  },
+  "defaultProps": {
+    "as": {
+      "code": "\"button\"",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "size": {
+      "code": "\"md\"",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "intent": {
+      "code": "\"primary\"",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "variant": {
+      "code": "\"solid\"",
+      "type": "property",
+      "propertyType": "normal"
+    },
+    "spinnerPlacement": {
+      "code": "\"start\"",
+      "type": "property",
+      "propertyType": "normal"
+    }
+  },
+  "propsTypeRef": "ButtonProps"
+}

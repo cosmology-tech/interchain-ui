@@ -10,15 +10,17 @@ import { Event } from "@parcel/watcher";
 import compileCommand from "@builder.io/mitosis-cli/dist/commands/compile";
 import camelCase from "lodash/camelCase";
 import startCase from "lodash/startCase";
-import * as scaffolds from "./scaffold.config.js";
+import {
+  reactScaffoldConfig,
+  vueScaffoldConfig,
+  compileAllowList,
+} from "./scaffold.config.js";
 import { Cache } from "./cache";
 import { fixReactTypeIssues } from "./utils/react.utils";
 
 const { print, filesystem, strings } = require("gluegun");
 
 const cache = new Cache();
-
-const { scaffoldConfig, compileAllowList } = scaffolds;
 
 type ValidTarget = "react" | "vue";
 
@@ -232,6 +234,8 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
 
     // Adding scaffolds imports to index.ts
     if (scaffoldsExist) {
+      const scaffoldConfig =
+        options.target === "vue" ? vueScaffoldConfig : reactScaffoldConfig;
       const scaffoldNames = Object.keys(scaffoldConfig).map((name) => ({
         name,
         Comp: toPascalName(name),
