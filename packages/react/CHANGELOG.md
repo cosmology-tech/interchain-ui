@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.31...@interchain-ui/react@1.24.0) (2024-09-18)
+
+### Bug Fixes
+
+- add sb for combobox ([3e19dcc](https://github.com/cosmology-tech/interchain-ui/commit/3e19dcc5ee37b45f85f2273d64e03328542806ed))
+- vuejs build ([#200](https://github.com/cosmology-tech/interchain-ui/issues/200)) ([29cd673](https://github.com/cosmology-tech/interchain-ui/commit/29cd6737408fe1151967012facf4dc8683743552))
+
+### Features
+
+- stories for vue ([#201](https://github.com/cosmology-tech/interchain-ui/issues/201)) ([6d318c6](https://github.com/cosmology-tech/interchain-ui/commit/6d318c620100ac67b34f6e16431f31971c026c52))
+
 ## [1.23.31](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.30...@interchain-ui/react@1.23.31) (2024-08-21)
 
 **Note:** Version bump only for package @interchain-ui/react
