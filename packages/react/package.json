@@ -147,7 +147,7 @@
     "match-sorter": "^6.3.4",
     "mkdirp": "^3.0.1",
     "parcel": "^2.12.0",
-    "parcel-optimizer-unlink-css": "link:../parcel-optimizer-unlink-css",
+    "parcel-optimizer-unlink-css": "^1.1.0",
     "parcel-resolver-ts-base-url": "^1.3.1",
     "prop-types": "^15.8.1",
     "storybook": "^8.3.0",
@@ -155,5 +155,5 @@
     "vite": "^5.4.2",
     "vite-plugin-replace": "^0.1.1"
   },
-  "gitHead": "bf66300d7fe3621b4de7ccbd4ef7593c8a84867d"
+  "gitHead": "05adf69046d07d6f764b96cf54cbaa492de06d95"
 }
