@@ -9,6 +9,13 @@ import { command as execa } from "execa";
 (async () => {
   let unsub: (() => void) | undefined;
 
+  // Add this block
+  process.on("SIGINT", () => {
+    console.log("\nReceived SIGINT. Cleaning up...");
+    if (unsub) unsub();
+    process.exit(0);
+  });
+
   const tasks = new Listr([
     {
       title: "Clean output",
@@ -63,7 +70,9 @@ import { command as execa } from "execa";
                   const timingLabel = `[t:${t}] Recompile took`;
                   console.time(timingLabel);
 
-                  compile(_events, { cancel: () => {} })
+                  const compilationPromise = compile(_events, {
+                    cancel: () => {},
+                  })
                     .then(() => {
                       spinner.succeed("Compiled successfully.");
                       console.timeEnd(timingLabel);
@@ -76,20 +85,35 @@ import { command as execa } from "execa";
                     spinner.fail(
                       `Error watching src/ for changes ${err?.message}.`,
                     );
-                    return;
                   }
+
+                  return () => {
+                    if (compilationPromise) {
+                      compilationPromise.then(() => {
+                        spinner.stop();
+                      });
+                    }
+                  };
                 },
                 500,
               );
 
               const watchSrc = watcher.subscribe(srcDir, (err, _events) => {
-                onChange(err, _events);
+                const cleanup = onChange(err, _events);
+
+                return () => {
+                  cleanup?.();
+                };
               });
 
               const watchScaffold = watcher.subscribe(
                 scaffoldDir,
                 (err, _events) => {
-                  onChange(err, _events);
+                  const cleanup = onChange(err, _events);
+
+                  return () => {
+                    cleanup?.();
+                  };
                 },
               );
 
@@ -117,6 +141,7 @@ import { command as execa } from "execa";
   tasks.run().catch((err: Error) => {
     if (unsub) unsub();
     console.error(err);
+    process.exit(1);
   });
 })();
 
