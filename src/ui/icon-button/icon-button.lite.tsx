@@ -1,4 +1,4 @@
-import { useMetadata } from "@builder.io/mitosis";
+import { useMetadata, useStore } from "@builder.io/mitosis";
 import clsx from "clsx";
 import Icon from "../icon";
 import Button from "../button";
@@ -12,6 +12,53 @@ useMetadata({
 });
 
 export default function IconButton(props: IconButtonProps) {
+  const state = useStore({
+    get eventHandlers() {
+      const handlers: Record<string, (event: any) => void> = {};
+      const eventProps = [
+        "onClick",
+        "onDoubleClick",
+        "onMouseDown",
+        "onMouseUp",
+        "onMouseEnter",
+        "onMouseLeave",
+        "onMouseMove",
+        "onMouseOver",
+        "onMouseOut",
+        "onKeyDown",
+        "onKeyUp",
+        "onKeyPress",
+        "onFocus",
+        "onBlur",
+        "onInput",
+        "onChange",
+        "onSubmit",
+        "onReset",
+        "onScroll",
+        "onWheel",
+        "onDragStart",
+        "onDrag",
+        "onDragEnd",
+        "onDragEnter",
+        "onDragLeave",
+        "onDragOver",
+        "onDrop",
+        "onTouchStart",
+        "onTouchMove",
+        "onTouchEnd",
+        "onTouchCancel",
+      ];
+
+      eventProps.forEach((eventName) => {
+        if (props[eventName]) {
+          handlers[eventName] = (event: any) => props[eventName](event);
+        }
+      });
+
+      return handlers;
+    },
+  });
+
   return (
     <Button
       attributes={{
@@ -23,9 +70,7 @@ export default function IconButton(props: IconButtonProps) {
       intent={props.intent}
       size={props.size}
       disabled={props.disabled}
-      onClick={(e) => props.onClick?.(e)}
-      onHoverStart={(e) => props.onHoverStart?.(e)}
-      onHoverEnd={(e) => props.onHoverEnd?.(e)}
+      {...state.eventHandlers}
     >
       <Icon name={props.icon} size={props.iconSize} />
     </Button>

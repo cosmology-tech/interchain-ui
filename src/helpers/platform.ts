@@ -42,3 +42,7 @@ export function closestBodyElement(node: HTMLElement) {
   }
   return null;
 }
+
+export function getOwnerDocument(node: HTMLElement) {
+  return node.ownerDocument;
+}

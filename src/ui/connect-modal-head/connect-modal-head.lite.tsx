@@ -58,8 +58,7 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
       <Show when={props.hasBackButton}>
         <div className={styles.modalBackButton}>
           <Button
-            variant="ghost"
-            intent="secondary"
+            variant="secondary"
             size="sm"
             className={styles.headerButton}
             onClick={(e) => {
@@ -85,8 +84,7 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
       <Show when={props.hasCloseButton}>
         <div className={styles.modalCloseButton}>
           <Button
-            variant="ghost"
-            intent="secondary"
+            variant="secondary"
             size="sm"
             className={styles.headerButton}
             domAttributes={props.closeButtonProps}

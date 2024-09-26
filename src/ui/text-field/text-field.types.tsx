@@ -5,6 +5,9 @@ import type {
 import type { FieldLabelProps } from "../field-label/field-label.types";
 import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
 
+// You can render a text field as either an input or a textarea.
+export type TextFieldElementType = "input" | "textarea";
+
 export type FieldLabelVariant =
   | {
       "aria-labelledby": string;
@@ -81,16 +84,28 @@ export const defaultInputModesForType: Record<
   url: "url",
 };
 
-export interface TextFieldProps extends BaseComponentProps, FieldBaseProps {
+export type TextFieldSize = "sm" | "md";
+export type TextFieldIntent = "none" | "error";
+
+type TextareaSpecificProps = {
+  rows?: number;
+  cols?: number;
+  wrap?: "soft" | "hard";
+  resize?: "none" | "both" | "horizontal" | "vertical";
+};
+
+export type BaselineProps = BaseComponentProps & FieldBaseProps;
+
+export type CommonInputProps = {
   value: string;
   type?: keyof typeof validTypes;
   inputMode?: InputMode;
-  intent?: "default" | "error";
+  intent?: TextFieldIntent;
   onChange?: (e: any) => void;
   onBlur?: (e?: any) => void;
   onFocus?: (e?: any) => void;
   onClear?: (event?: any) => void;
-  size?: "sm" | "md";
+  size?: TextFieldSize;
   placeholder?: string | undefined;
   label?: Children | undefined;
   clearLabel?: string;
@@ -98,6 +113,15 @@ export interface TextFieldProps extends BaseComponentProps, FieldBaseProps {
   inputAttributes?: any;
   startAddon?: Children | undefined;
   endAddon?: Children | undefined;
+  addonDivider?: boolean;
   inputContainer?: string;
   inputClassName?: string;
-}
+  as?: TextFieldElementType;
+};
+
+export type RenderAsInputProps = BaselineProps & CommonInputProps;
+export type RenderAsTextareaProps = BaselineProps &
+  CommonInputProps &
+  TextareaSpecificProps;
+
+export type TextFieldProps = RenderAsInputProps | RenderAsTextareaProps;

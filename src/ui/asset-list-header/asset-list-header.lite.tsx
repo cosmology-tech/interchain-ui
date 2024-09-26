@@ -105,8 +105,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             >
               <Button
                 fluidWidth
-                variant="outlined"
-                intent="secondary"
+                variant="secondary"
                 onClick={() => props.onWithdraw?.()}
               >
                 {props.withdrawButtonLabel ?? "Withdraw"}
@@ -127,7 +126,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
             >
               <Button
                 fluidWidth
-                intent="tertiary"
+                variant="secondary"
                 onClick={() => props.onDeposit?.()}
               >
                 {props.depositButtonLabel ?? "Deposit"}
@@ -199,8 +198,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               >
                 <Button
                   fluidWidth
-                  variant="outlined"
-                  intent="secondary"
+                  variant="secondary"
                   onClick={() => props.onWithdraw?.()}
                 >
                   {props.withdrawButtonLabel}
@@ -224,7 +222,7 @@ export default function AssetListHeader(props: AssetListHeaderProps) {
               >
                 <Button
                   fluidWidth
-                  intent="tertiary"
+                  variant="secondary"
                   onClick={() => props.onDeposit?.()}
                 >
                   {props.depositButtonLabel}

@@ -15,7 +15,9 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    // Only needed for compiler code, which is to avoid problems with CLI packages
+    "allowJs": true
   },
   "include": ["src"]
 }

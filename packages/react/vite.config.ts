@@ -14,4 +14,10 @@ export default defineConfig({
       replacement: path.resolve(__dirname, `src/${alias}`),
     })),
   },
+  css: {
+    transformer: "lightningcss",
+  },
+  build: {
+    cssMinify: "lightningcss",
+  },
 });

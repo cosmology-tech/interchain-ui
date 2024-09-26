@@ -22,16 +22,16 @@ useMetadata({
 });
 
 export default function ConnectModalInstallButton(
-  props: ConnectModalInstallButtonProps
+  props: ConnectModalInstallButtonProps,
 ) {
   const state = useStore({
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
     getClassName: () => {
       return clx(
-        installButtonStyles[state.theme],
+        installButtonStyles[state.internalTheme],
         props.fluidWidth ? fluidWidth : "",
-        props.className
+        props.className,
       );
     },
   });
@@ -39,11 +39,11 @@ export default function ConnectModalInstallButton(
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -58,7 +58,7 @@ export default function ConnectModalInstallButton(
       {...props.attributes}
       className={state.getClassName()}
       rawCSS={state.overrideManager?.applyOverrides(
-        installButtonOverrides.name
+        installButtonOverrides.name,
       )}
       attributes={{
         onClick: (event) => props.onClick?.(event),

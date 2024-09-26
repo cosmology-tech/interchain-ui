@@ -9,7 +9,7 @@ import {
 import clsx from "clsx";
 import anime from "animejs";
 import type { AnimeInstance } from "animejs";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash";
 import Stack from "../stack";
 import Box from "../box";
 import Text from "../text";
@@ -41,9 +41,9 @@ export default function Reveal(props: RevealProps) {
     isVisible: boolean;
     toggle: () => void;
     updateAnimationRef: () => void;
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
   }>({
-    theme: "light",
+    internalTheme: "light",
     isVisible: false,
     toggle() {
       isVisibleRef = !state.isVisible;
@@ -67,9 +67,9 @@ export default function Reveal(props: RevealProps) {
   let resizeListenerRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     cleanupRef = store.subscribe((newState, prevState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
     });
 
     setTimeout(() => {
@@ -80,6 +80,8 @@ export default function Reveal(props: RevealProps) {
       if (elementRef.offsetHeight > props.hideThresholdHeight) {
         // Listen the resize event to get container height
         resizeListenerRef = debounce(() => {
+          if (!elementRef) return;
+
           elementRef.style.height = "auto";
           eleHeight = elementRef.offsetHeight + TOGGLE_SPACE;
           elementRef.style.height = isVisibleRef
@@ -133,14 +135,16 @@ export default function Reveal(props: RevealProps) {
           height="$23"
           flexShrink="0"
           width="$full"
-          className={styles.shadow[state.theme]}
+          className={styles.shadow[state.internalTheme]}
         />
 
         <Box
           width="$full"
           display="flex"
           alignItems="center"
-          backgroundColor={state.theme === "light" ? "$white" : "$gray900"}
+          backgroundColor={
+            state.internalTheme === "light" ? "$white" : "$gray900"
+          }
           justifyContent="center"
           flex="1"
           attributes={{

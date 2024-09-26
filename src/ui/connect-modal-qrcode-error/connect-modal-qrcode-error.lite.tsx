@@ -35,24 +35,24 @@ useMetadata({
 });
 
 export default function ConnectModalQrCodeError(
-  props: ConnectModalQRCodeErrorProps
+  props: ConnectModalQRCodeErrorProps,
 ) {
   const state = useStore<{
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
   }>({
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -66,18 +66,18 @@ export default function ConnectModalQrCodeError(
       className={clx(qrcodeErrorContainer, qrCodeContainer, props.className)}
     >
       <div
-        className={qrcodeBlur[state.theme]}
+        className={qrcodeBlur[state.internalTheme]}
         style={state.overrideManager?.applyOverrides(
-          connectModalQRCodeErrorOverrides.name
+          connectModalQRCodeErrorOverrides.name,
         )}
       />
 
       <div className={qrcodeReloadButtonContainer}>
         <button
           onClick={(event) => props.onRefresh?.(event)}
-          className={qrcodeReloadButton[state.theme]}
+          className={qrcodeReloadButton[state.internalTheme]}
           style={state.overrideManager?.applyOverrides(
-            connectModalQRCodeErrorButtonOverrides.name
+            connectModalQRCodeErrorButtonOverrides.name,
           )}
         >
           <span>

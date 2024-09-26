@@ -251,7 +251,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 >
                   {formatNumeric(
                     props.stakeToken.available ?? 0,
-                    props.precision
+                    props.precision,
                   )}
                 </Text>
               </Stack>
@@ -398,7 +398,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                     styles.resetNumberInputBg,
                     state.isSmallSize()
                       ? styles.numberInputSm
-                      : styles.numberInputMd
+                      : styles.numberInputMd,
                   )}
                 />
 
@@ -410,7 +410,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                   $
                   {formatNumeric(
                     props.stakeToken.priceDisplayAmount,
-                    props.precision
+                    props.precision,
                   )}
                 </Text>
               </Stack>
@@ -530,7 +530,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 $
                 {formatNumeric(
                   props.reward.priceDisplayAmount,
-                  props.precision
+                  props.precision,
                 )}
               </Text>
             </Stack>
@@ -613,7 +613,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
             <Show when={typeof props.renderAccordionButton !== "function"}>
               <IconButton
                 size="sm"
-                intent={state.expanded ? "tertiary" : "secondary"}
+                variant="secondary"
                 icon={state.expanded ? "arrowUpS" : "arrowDownS"}
                 iconSize={state.isSmallSize() ? "$4xl" : "$3xl"}
                 onClick={() => state.handleToggleExpand()}
@@ -660,7 +660,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
                 !state.expanded && state.isDirty,
               [styles.accordionPanel.init]: !state.isDirty,
             },
-            scrollBar[state.theme]
+            scrollBar[state.theme],
           )}
           data-part-id="scroll-container"
         >
@@ -769,7 +769,7 @@ export default function LiquidStaking(props: LiquidStakingProps) {
 
           <Show when={typeof props.renderSubmitButton !== "function"}>
             <Button
-              intent="tertiary"
+              variant="primary"
               {...props.submitButtonProps}
               fluidWidth
               onClick={(event) => props.onSubmit?.(event)}

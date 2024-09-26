@@ -1,4 +1,4 @@
-import { LiteralUnion } from "type-fest";
+import type { LiteralUnion } from "../../helpers/types";
 import type { ThemeVariant } from "../../models/system.model";
 
 export const colors = {
@@ -144,3 +144,140 @@ export const accentsForeground: { [key in ThemeVariant]: string } = {
   light: colors.white,
   dark: "#EEF2F8",
 } as const;
+
+export type PaletteWeight =
+  | "50"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900"
+  | "950";
+
+export type PaletteScale =
+  | "neutral"
+  | "primary"
+  | "success"
+  | "warning"
+  | "error";
+export type PaletteScaleKey = `${PaletteScale}${PaletteWeight}`;
+
+export const baseLightPalettes = {
+  neutral50: "#ffffff",
+  neutral100: "#f7f9fa",
+  neutral200: "#EFF2F4",
+  neutral300: "#DCE2E9",
+  neutral400: "#c2d0db",
+  neutral500: "#9EACBD",
+  neutral600: "#6D7987",
+  neutral700: "#5E6773",
+  neutral800: "#383E45",
+  neutral900: "#343C44",
+  neutral950: "#232A31",
+  primary50: "#dce2e9",
+  primary100: "#d4dfe8",
+  primary200: "#DCE2E9",
+  primary300: "#C6E7FF",
+  primary400: "#68C7FF",
+  primary500: "#01a1ff",
+  primary600: "#0183cf",
+  primary700: "#0168a3",
+  primary800: "#01507b",
+  primary900: "#003a58",
+  primary950: "#003048",
+  success50: "#edfaf3",
+  success100: "#d7f5e6",
+  success200: "#bef0d6",
+  success300: "#a9e8c7",
+  success400: "#86d6a9",
+  success500: "#63c892",
+  success600: "#38a169",
+  success700: "#2d8c58",
+  success800: "#217c4b",
+  success900: "#165c36",
+  success950: "#0f4a2a",
+  warning50: "#fef6ee",
+  warning100: "#fde9d9",
+  warning200: "#fad9be",
+  warning300: "#f5d1b4",
+  warning400: "#f0c097",
+  warning500: "#ebb07f",
+  warning600: "#ed8936",
+  warning700: "#e47229",
+  warning800: "#d27121",
+  warning900: "#b35c1b",
+  warning950: "#9e4f17",
+  error50: "#fef2f2",
+  error100: "#fde3e3",
+  error200: "#fad1d1",
+  error300: "#f1c4c4",
+  error400: "#e9a2a2",
+  error500: "#e18080",
+  error600: "#e65858",
+  error700: "#d83a3a",
+  error800: "#b91f1f",
+  error900: "#961919",
+  error950: "#801515",
+} as const;
+
+export const baseDarkPalettes = {
+  neutral50: "#ffffff",
+  neutral100: "#f7f9fa",
+  neutral200: "#EFF2F4",
+  neutral300: "#DCE2E9",
+  neutral400: "#c2d0db",
+  neutral500: "#9EACBD",
+  neutral600: "#6D7987",
+  neutral700: "#5E6773",
+  neutral800: "#383E45",
+  neutral900: "#343C44",
+  neutral950: "#232A31",
+  primary50: "#002d4d",
+  primary100: "#003358",
+  primary200: "#00406d",
+  primary300: "#194F8F",
+  primary400: "#0e5ea1",
+  primary500: "#01a1ff",
+  primary600: "#68C7FF",
+  primary700: "#C6E7FF",
+  primary800: "#b8e4ff",
+  primary900: "#c6e7ff",
+  primary950: "#DCE2E9",
+  success50: "#edfaf3",
+  success100: "#d7f5e6",
+  success200: "#bef0d6",
+  success300: "#a9e8c7",
+  success400: "#86d6a9",
+  success500: "#63c892",
+  success600: "#38a169",
+  success700: "#2d8c58",
+  success800: "#217c4b",
+  success900: "#165c36",
+  success950: "#0f4a2a",
+  warning50: "#fef6ee",
+  warning100: "#fde9d9",
+  warning200: "#fad9be",
+  warning300: "#f5d1b4",
+  warning400: "#f0c097",
+  warning500: "#ebb07f",
+  warning600: "#ed8936",
+  warning700: "#e47229",
+  warning800: "#d27121",
+  warning900: "#b35c1b",
+  warning950: "#9e4f17",
+  error50: "#fef2f2",
+  error100: "#fde3e3",
+  error200: "#fad1d1",
+  error300: "#f1c4c4",
+  error400: "#e9a2a2",
+  error500: "#e18080",
+  error600: "#e65858",
+  error700: "#d83a3a",
+  error800: "#b91f1f",
+  error900: "#961919",
+  error950: "#801515",
+};

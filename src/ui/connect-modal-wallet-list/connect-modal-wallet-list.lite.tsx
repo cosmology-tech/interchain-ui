@@ -31,7 +31,7 @@ useMetadata({
 });
 
 export default function ConnectModalWalletList(
-  props: ConnectModalWalletListProps
+  props: ConnectModalWalletListProps,
 ) {
   const measureRef = useRef<HTMLDivElement>(null);
   const shadowRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export default function ConnectModalWalletList(
 
   const state = useStore({
     displayBlur: false,
-    theme: "light",
+    internalTheme: "light",
     onWalletItemClickAsync: (exec) => {
       void (async function () {
         await exec();
@@ -57,10 +57,10 @@ export default function ConnectModalWalletList(
   });
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
 
     const unsubTheme = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
     });
 
     if (measureRef) {
@@ -74,7 +74,7 @@ export default function ConnectModalWalletList(
         const height = Math.abs(
           measureRef.scrollHeight -
             measureRef.clientHeight -
-            measureRef.scrollTop
+            measureRef.scrollTop,
         );
         if (height < 1) {
           state.displayBlur = false;
@@ -144,7 +144,7 @@ export default function ConnectModalWalletList(
                     subLogo={wallet.subLogo}
                     btmLogo={wallet.btmLogo}
                     onClick={state.onWalletItemClickAsync(async () =>
-                      props.onWalletItemClick?.(wallet.originalWallet)
+                      props.onWalletItemClick?.(wallet.originalWallet),
                     )}
                   />
                 )}
@@ -167,7 +167,7 @@ export default function ConnectModalWalletList(
                     subLogo={wallet.subLogo}
                     btmLogo={wallet.btmLogo}
                     onClick={state.onWalletItemClickAsync(async () =>
-                      props.onWalletItemClick?.(wallet.originalWallet)
+                      props.onWalletItemClick?.(wallet.originalWallet),
                     )}
                   />
                 )}
@@ -177,7 +177,7 @@ export default function ConnectModalWalletList(
         </Show>
       </div>
 
-      <div ref={shadowRef} className={bottomShadow[state.theme]} />
+      <div ref={shadowRef} className={bottomShadow[state.internalTheme]} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { BoxProps } from "../box/box.types";
 import { AvailableItem } from "../transfer-item/transfer-item.types";
 import type { IconName } from "../icon/icon.types";
-import type { LiteralUnion } from "type-fest";
+import type { LiteralUnion } from "../../helpers/types";
 
 export interface TokenInputProps {
   attributes?: BoxProps["attributes"];
@@ -14,7 +14,11 @@ export interface TokenInputProps {
   tokenIcon?: LiteralUnion<IconName, string>;
   title?: string | undefined;
   hasProgressBar?: boolean;
-  availableAsMax?: boolean;
+  minValue?: number;
+  maxValue?: number;
+  // Formatted value for the token amount in stablecoin value
+  notionalValue?: string;
+  formatNotionalValue?: (tokenAmount: number, pricePerToken: number) => string;
   onProgressChange?: (progress: number) => void;
   onAmountChange?: (value: number) => void;
   onFocus?: (e?: any) => void;

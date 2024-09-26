@@ -35,13 +35,14 @@ Then in your root route/layout, import `ThemeProvider` and CSS
 
 ```TSX
 // layout.tsx
-import { ThemeProvider } from '@interchain-ui/react';
+import { ThemeProvider, OverlaysManager } from '@interchain-ui/react';
 import '@interchain-ui/react/styles';
 
 export function RootLayout(props: LayoutProps) {
   return (
     <ThemeProvider>
       {props.children}
+      <OverlaysManager />
     </ThemeProvider>
   )
 }

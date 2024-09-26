@@ -131,3 +131,8 @@ globalStyle(`${skeleton} *, ${skeleton}:after, ${skeleton}:before`, {
   // @ts-ignore
   visibility: "hidden !important",
 });
+
+export const rotateUpsideDown = keyframes({
+  "0%": { transform: "rotate(0deg)" },
+  "100%": { transform: "rotate(180deg)" },
+});

@@ -6,18 +6,13 @@ import {
   useRef,
   useMetadata,
 } from "@builder.io/mitosis";
-import isEqual from "lodash/isEqual";
-import {
-  mediaQueryColorScheme,
-  resolveThemeMode,
-  getAccent,
-  getAccentText,
-} from "../../helpers/style";
+import clsx from "clsx";
+import { isEqual } from "lodash";
+import { mediaQueryColorScheme, resolveThemeMode } from "../../helpers/style";
 import { lightThemeClass, darkThemeClass } from "../../styles/themes.css";
 import { isSSR } from "../../helpers/platform";
 import { store } from "../../models/store";
 import { ThemeVariant } from "../../models/system.model";
-import { assignThemeVars } from "../../styles/override/override";
 import type { ThemeDef } from "../../styles/override/override.types";
 import type { ThemeProviderProps } from "./theme-provider.types";
 
@@ -29,6 +24,7 @@ useMetadata({
 
 export default function ThemeProvider(props: ThemeProviderProps) {
   let cleanupRef = useRef<() => void>(null);
+  let themeProviderRef = useRef<HTMLDivElement | null>(null);
 
   const state = useStore<{
     lightQuery: any;
@@ -39,42 +35,35 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     isMounted: boolean;
     isControlled: boolean;
     preferredMode: ThemeVariant | null;
-    storeState: ReturnType<typeof store.getState>;
-    theme: string;
+    internalTheme: string;
     themeClass: string;
+    UIStore: ReturnType<typeof store.getState>;
     // Local custom theme state for nested themes
     localCustomTheme: string | null;
     localThemeDefs: Array<ThemeDef>;
+    getNewThemeClass: (uiStore: ReturnType<typeof store.getState>) => string;
+    applySlotVars: (el: HTMLElement) => void;
   }>({
     preferredMode: null,
     isMounted: false,
     localCustomTheme: null,
     localThemeDefs: [],
+    internalTheme: "light",
+    UIStore: store.getState(),
+    applySlotVars(el) {
+      if (!themeProviderRef || !props.themeBuilderConfig) {
+        return;
+      }
+
+      const currentTheme = state.theme;
+      const varsApplier = props.themeBuilderConfig[currentTheme ?? "light"];
+      varsApplier(el);
+    },
     get isControlled() {
       return props.themeMode != null;
     },
     get isReady() {
       return state.preferredMode && state.isMounted;
-    },
-    get themeClass() {
-      if (state.isControlled) {
-        if (props.themeMode === "system") {
-          const finalThemeMode = state.isReady
-            ? state.preferredMode
-            : props.themeMode;
-          return finalThemeMode === "dark" ? darkThemeClass : lightThemeClass;
-        }
-
-        return props.themeMode === "dark" ? darkThemeClass : lightThemeClass;
-      }
-
-      return store.getState().themeClass;
-    },
-    get storeState() {
-      return store.getState();
-    },
-    get theme() {
-      return state.storeState.theme;
     },
     get lightQuery() {
       if (isSSR()) return null;
@@ -90,18 +79,39 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     get isLight() {
       return !!state.lightQuery?.matches;
     },
+    get themeClass() {
+      return state.getNewThemeClass(store.getState());
+    },
+    getNewThemeClass: (uiStore: ReturnType<typeof store.getState>) => {
+      if (state.isControlled) {
+        if (props.themeMode === "system") {
+          const finalThemeMode = state.isReady
+            ? state.preferredMode
+            : props.themeMode;
+          return finalThemeMode === "dark" ? darkThemeClass : lightThemeClass;
+        }
+
+        return props.themeMode === "dark" ? darkThemeClass : lightThemeClass;
+      }
+
+      return uiStore.themeClass;
+    },
   });
 
+  // NOTE: every mention of .theme will be referencing theme from state because mitosis is not smart enough
   // System mode: change based on user preference
   onUpdate(() => {
-    if (!state.isReady) return;
-
-    const themeMode = state.storeState.themeMode;
-
-    if (themeMode === "system") {
-      return state.storeState.setThemeMode(themeMode);
+    if (!state.isReady) {
+      return;
     }
-  }, [state.preferredMode, state.theme, state.isMounted]);
+
+    const themeMode = store.getState().themeMode;
+    const setThemeModeFn = store.getState().setThemeMode;
+
+    if (themeMode === "system" || themeMode == null) {
+      return setThemeModeFn("system");
+    }
+  }, [state.preferredMode, state.internalTheme, state.isReady, state.UIStore]);
 
   // Handle custom themes change
   onUpdate(() => {
@@ -118,56 +128,37 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     if (state.isControlled) {
       return;
     } else {
-      if (!isEqual(state.storeState.themeDefs, finalThemeDefs)) {
-        state.storeState.setThemeDefs(finalThemeDefs);
+      if (!isEqual(store.getState().themeDefs, finalThemeDefs)) {
+        store.getState().setThemeDefs(finalThemeDefs);
       }
     }
-  }, [props.themeDefs]);
+  }, [props.themeDefs, state.isControlled]);
+
+  // Custom theme in controlled mode
+  onUpdate(() => {
+    if (state.isControlled) {
+      state.storeState.setThemeMode(props.themeMode);
+    }
+  }, [state.isControlled, props.themeMode]);
 
   // Handle select customTheme
   onUpdate(() => {
     if (!props.customTheme) return;
 
     // TODO: handle custom theme for controlled mode
-    state.storeState.setCustomTheme(props.customTheme);
+    store.getState().setCustomTheme(props.customTheme);
   }, [props.customTheme]);
 
-  onUpdate(() => {
-    const overrideStyleManager = state.storeState.overrideStyleManager;
-    if (!overrideStyleManager) return;
-    overrideStyleManager.update(props.overrides, null);
-  }, [props.overrides]);
-
-  onUpdate(() => {
-    // Skip if accent is not provided
-    if (!props.accent) return;
-
-    const prevAccent = state.storeState.themeAccent;
-    const currentColorMode = state.storeState.theme;
-
-    if (prevAccent !== props.accent) {
-      state.storeState.setThemeAccent(props.accent ?? "blue");
-
-      assignThemeVars(
-        {
-          colors: {
-            // @ts-ignore
-            accent: getAccent(props.accent, currentColorMode ?? "light"),
-            // @ts-ignore
-            accentText: getAccentText(currentColorMode ?? "light"),
-          },
-        },
-        currentColorMode,
-      );
-    }
-  }, [props.accent]);
-
+  // Update theme on media query change
   onMount(() => {
     state.isMounted = true;
 
-    // Dont set global theme mode if in controlled mode
+    // Resolve the theme mode
+    const resolvedThemeMode = resolveThemeMode(props.defaultTheme);
+
+    // Set the initial theme based on the resolved mode
     if (!state.isControlled) {
-      resolveThemeMode(props.defaultTheme);
+      store.getState().setThemeMode(resolvedThemeMode);
     }
 
     const darkListener = ({ matches }: MediaQueryListEvent) => {
@@ -181,6 +172,11 @@ export default function ThemeProvider(props: ThemeProviderProps) {
       }
     };
 
+    const cleanupStore = store.subscribe((newState) => {
+      state.UIStore = newState;
+      state.internalTheme = newState.theme;
+    });
+
     if (state.darkQuery && state.lightQuery) {
       if (
         typeof state.darkQuery.addEventListener === "function" &&
@@ -192,10 +188,23 @@ export default function ThemeProvider(props: ThemeProviderProps) {
     }
 
     cleanupRef = () => {
-      state.darkQuery?.removeEventListener("change", darkListener);
-      state.lightQuery?.removeEventListener("change", lightListener);
+      if (typeof state.darkQuery.removeEventListener === "function") {
+        state.darkQuery?.removeEventListener("change", darkListener);
+      }
+
+      if (typeof state.lightQuery.removeEventListener === "function") {
+        state.lightQuery?.removeEventListener("change", lightListener);
+      }
+
+      if (typeof cleanupStore === "function") {
+        cleanupStore();
+      }
     };
   });
+
+  onUpdate(() => {
+    state.applySlotVars(themeProviderRef);
+  }, [state.theme, props.themeMode, props.themeBuilderConfig]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") {
@@ -205,14 +214,16 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   return (
     <div
+      ref={themeProviderRef}
       data-is-controlled={state.isControlled}
       data-interchain-theme-mode={
         props.themeMode == null ? undefined : props.themeMode
       }
+      className={state.themeClass}
       style={{
         visibility: state.isMounted ? "visible" : "hidden",
       }}
-      className={state.themeClass}
+      className={clsx(state.themeClass, props.className)}
     >
       {props.children}
     </div>

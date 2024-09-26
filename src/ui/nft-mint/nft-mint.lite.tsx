@@ -533,7 +533,7 @@ export default function NftMint(props: NftMintProps) {
         >
           <Button
             size="md"
-            intent="tertiary"
+            variant="primary"
             fluidWidth
             disabled={props.isMintButtonDisabled}
             onClick={() => props?.onMint?.()}
@@ -558,7 +558,7 @@ export default function NftMint(props: NftMintProps) {
         >
           <Button
             size="lg"
-            intent="tertiary"
+            variant="primary"
             fluidWidth
             disabled={props.isMintButtonDisabled}
             onClick={() => props?.onMint?.()}

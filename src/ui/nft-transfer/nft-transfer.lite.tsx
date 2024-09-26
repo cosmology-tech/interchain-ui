@@ -53,7 +53,7 @@ export default function NftTransfer(props: NftTransferProps) {
 
       <Button
         fluidWidth
-        intent="tertiary"
+        variant="secondary"
         size="lg"
         disabled={props.disabled}
         onClick={() => props.onTransfer?.()}

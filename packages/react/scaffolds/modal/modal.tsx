@@ -14,6 +14,7 @@ import {
 import clx from "clsx";
 import React, { cloneElement, forwardRef } from "react";
 import useTheme from "../hooks/use-theme";
+import { overlays } from "@/ui/overlays-manager/overlays";
 import * as styles from "./modal.css";
 
 interface DialogOptions {
@@ -63,11 +64,18 @@ function useDialog({
     string | undefined
   >();
 
+  const [rootRef, setRootRef] = React.useState<HTMLElement | null>(null);
+  const overlayId = React.useRef(overlays.generateId("modal"));
   const open = controlledOpen ?? uncontrolledOpen;
   const setOpen = setControlledOpen ?? setUncontrolledOpen;
 
-  const clickawayRef = useClickAway(() => {
-    if (closeOnClickaway) {
+  const clickawayRef = useClickAway((event) => {
+    if (
+      closeOnClickaway &&
+      rootRef &&
+      !rootRef.contains(event.target as Node) &&
+      overlays.isTopMostOverlay(overlayId.current)
+    ) {
       setOpen(false);
     }
   });
@@ -87,11 +95,23 @@ function useDialog({
 
   const interactions = useInteractions([click, dismiss, role]);
 
+  React.useEffect(() => {
+    if (open) {
+      overlays.pushOverlay(overlayId.current);
+    }
+    return () => {
+      if (open) {
+        overlays.popOverlay(overlayId.current);
+      }
+    };
+  }, [open]);
+
   return React.useMemo(
     () => ({
       open,
       setOpen,
       clickawayRef,
+      rootRef: setRootRef,
       ...interactions,
       ...data,
       labelId,
@@ -99,7 +119,7 @@ function useDialog({
       setLabelId,
       setDescriptionId,
     }),
-    [open, setOpen, interactions, data, labelId, descriptionId],
+    [open, setOpen, setRootRef, interactions, data, labelId, descriptionId],
   );
 }
 
@@ -108,8 +128,8 @@ export interface ModalProps {
   initialOpen?: boolean;
   onOpen?: (event?: React.SyntheticEvent) => void;
   onClose?: (event?: React.SyntheticEvent) => void;
-  initialFocusRef?: React.MutableRefObject<any>;
-  renderTrigger?: (props: any) => React.ReactNode;
+  initialFocusRef?: React.MutableRefObject<unknown>;
+  renderTrigger?: (props: unknown) => React.ReactNode;
   header: React.ReactNode;
   children?: React.ReactNode;
   closeOnClickaway?: boolean;
@@ -149,6 +169,10 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
     childrenClassName,
   } = props;
 
+  const [defaultRoot, setDefaultRoot] = React.useState<HTMLElement | null>(
+    null,
+  );
+
   const dialog = useDialog({
     initialOpen,
     open: isOpen,
@@ -167,11 +191,21 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
   const { styles: transitionStyles } = useTransitionStyles(dialog.context);
 
   React.useEffect(() => {
+    // User-provided root
+    if (root) {
+      return;
+    }
+
+    // Default lib root
+    setDefaultRoot(overlays.getOrCreateOverlayRoot(window.document));
+  }, []);
+
+  React.useEffect(() => {
     dialog.setLabelId(id);
     return () => dialog.setLabelId(undefined);
   }, [id, dialog.setLabelId]);
 
-  const onCloseButtonClick = (event: any) => {
+  const onCloseButtonClick = (event: React.SyntheticEvent) => {
     dialog.setOpen(false);
     onClose?.(event);
   };
@@ -186,7 +220,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
       {typeof renderTrigger === "function" ? renderTrigger(triggerProps) : null}
 
       {dialog.open && (
-        <FloatingPortal root={root}>
+        <FloatingPortal root={root ? root : defaultRoot}>
           <FloatingOverlay
             className={clx(themeClassName)}
             lockScroll={preventScroll}
@@ -196,7 +230,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
             }}
           >
             <FloatingFocusManager context={dialog.context}>
-              <div>
+              <div ref={dialog.rootRef} className={styles.modalRoot}>
                 <div
                   ref={dialogRef}
                   aria-labelledby={dialog.labelId}
@@ -253,6 +287,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>((props, forwardedRef) => {
                       : styles.modalBackdrop,
                   )}
                   data-testid="modal-backdrop"
+                  style={{
+                    zIndex: -1,
+                  }}
                 />
               </div>
             </FloatingFocusManager>

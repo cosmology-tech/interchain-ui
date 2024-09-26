@@ -1,11 +1,6 @@
 import { useDefaultProps, useMetadata } from "@builder.io/mitosis";
 import clx from "clsx";
-import {
-  textFieldAddon,
-  textFieldAddonSizes,
-  textFieldAddonPositions,
-  textFieldAddonDivider,
-} from "./text-field-addon.css";
+import * as styles from "./text-field-addon.css";
 import type { TextFieldAddonProps } from "./text-field-addon.types";
 
 useMetadata({
@@ -24,14 +19,18 @@ export default function TextFieldAddon(props: TextFieldAddonProps) {
   return (
     <div
       className={clx(
-        textFieldAddon,
-        textFieldAddonSizes[props.size],
-        textFieldAddonPositions[props.position],
-        props.divider ? textFieldAddonDivider[props.position] : null,
-        props.className
+        styles.textFieldAddon,
+        styles.textFieldAddonPositions[props.position],
+        props.className,
       )}
     >
-      {props.children}
+      <div
+        className={clx(
+          props.divider ? styles.textFieldAddonDivider[props.position] : null,
+        )}
+      >
+        {props.children}
+      </div>
     </div>
   );
 }

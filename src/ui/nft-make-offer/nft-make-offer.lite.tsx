@@ -48,7 +48,7 @@ export default function NftMakeOffer(props: NftMakeOfferProps) {
 
       <Button
         size="lg"
-        intent="tertiary"
+        variant="secondary"
         fluidWidth
         attributes={{ marginBottom: "$9" }}
         onClick={() => props?.onMakeOffer?.()}

@@ -5,6 +5,7 @@ import {
   useRef,
   onMount,
   onUnMount,
+  onUpdate,
 } from "@builder.io/mitosis";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import Box from "../box";
@@ -28,17 +29,27 @@ useDefaultProps<Partial<AvatarProps>>({
 
 export default function Avatar(props: AvatarProps) {
   const state = useStore({
-    theme: "light",
+    internalTheme: "light",
     isLoaded: false,
+    sizeValue: avatarSize(props.size),
+    get cssVars() {
+      return assignInlineVars({
+        [avatarSizeVar]: state.sizeValue,
+      });
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
 
-  onMount(() => {
-    state.theme = store.getState().theme;
+  onUpdate(() => {
+    state.sizeValue = avatarSize(props.size);
+  }, [props.size]);
 
-    cleanupRef = store.subscribe((newState, prevState) => {
-      state.theme = newState.theme;
+  onMount(() => {
+    state.internalTheme = store.getState().theme;
+
+    cleanupRef = store.subscribe((newState) => {
+      state.internalTheme = newState.theme;
     });
   });
 
@@ -58,12 +69,10 @@ export default function Avatar(props: AvatarProps) {
       attributes={props.attributes}
     >
       <span
-        className={avatar[state.theme]}
+        className={avatar[state.internalTheme]}
         data-loaded={state.isLoaded}
         data-custom-bg={!!props.backgroundColor}
-        style={assignInlineVars({
-          [avatarSizeVar]: `${avatarSize(props.size)}`,
-        })}
+        style={state.cssVars}
       >
         <AvatarImage
           src={props.src}
@@ -74,8 +83,8 @@ export default function Avatar(props: AvatarProps) {
             props.onLoad?.(event);
             state.isLoaded = true;
           }}
-          width={avatarSize(props.size) as string}
-          height={avatarSize(props.size) as string}
+          width={state.sizeValue}
+          height={state.sizeValue}
           onError={props.onError}
           getInitials={props.getInitials}
           name={props.name}

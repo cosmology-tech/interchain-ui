@@ -80,7 +80,7 @@ export default function BondingMore(props: BondingMoreProps) {
 
       <Button
         fluidWidth
-        intent="tertiary"
+        variant="secondary"
         size="lg"
         disabled={state.disabled}
         onClick={() => props?.onBond?.()}

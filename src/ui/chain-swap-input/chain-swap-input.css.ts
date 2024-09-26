@@ -39,7 +39,7 @@ export const chainSwapInput = styleVariants({
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
       selectors: {
-        "&:focus": {
+        "&[data-size='sm']:focus": {
           fontSize: themeVars.fontSize["sm"],
         },
       },
@@ -68,7 +68,7 @@ export const chainSwapInput = styleVariants({
       fontSize: themeVars.fontSize["lg"],
       fontWeight: themeVars.fontWeight.semibold,
       selectors: {
-        "&:focus": {
+        "&[data-size='sm']:focus": {
           fontSize: themeVars.fontSize["sm"],
         },
       },
@@ -92,6 +92,8 @@ export const chainSwapInput = styleVariants({
 });
 
 export const logoMd = style({
+  width: "100%",
+  height: "100%",
   maxWidth: "50px",
   maxHeight: "50px",
   "@container": {
@@ -134,4 +136,8 @@ const logoBase = style({
 export const chainSwapLogo = styleVariants({
   md: [logoBase, logoMd],
   sm: [logoBase, logoSm],
+});
+
+export const rotate = style({
+  transform: "rotate(180deg)",
 });

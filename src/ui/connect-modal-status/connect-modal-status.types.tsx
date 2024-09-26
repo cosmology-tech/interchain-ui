@@ -7,15 +7,17 @@ export interface ConnectedInfo {
   address: string;
 }
 
+export type ConnectionStatus =
+  | "Disconnected"
+  | "Connecting"
+  | "Connected"
+  | "NotExist"
+  | "Rejected"
+  | "Error";
+
 export interface ConnectModalStatusProps extends BaseComponentProps {
   wallet: Wallet;
-  status:
-    | "Disconnected"
-    | "Connecting"
-    | "Connected"
-    | "NotExist"
-    | "Rejected"
-    | "Error";
+  status: ConnectionStatus;
   contentHeader?: string;
   contentDesc?: string;
   bottomLink?: string;

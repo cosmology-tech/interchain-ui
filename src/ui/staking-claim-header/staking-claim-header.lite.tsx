@@ -92,7 +92,7 @@ export default function StakingClaimHeader(props: StakingClaimHeaderProps) {
         </Stack>
 
         <Button
-          intent="tertiary"
+          variant="secondary"
           disabled={props.isDisabled}
           isLoading={props.isLoading}
           onClick={() => {

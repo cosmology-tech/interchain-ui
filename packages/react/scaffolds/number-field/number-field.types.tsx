@@ -1,6 +1,11 @@
 import { ReactNode } from "react";
 import type { Sprinkles } from "@/styles/rainbow-sprinkles.css";
 import type { AriaNumberFieldProps } from "react-aria";
+import { TextFieldProps } from "@/ui/text-field/text-field.types";
+
+export type NumberFieldSize = TextFieldProps["size"];
+export type NumberFieldIntent = TextFieldProps["intent"];
+export type NumberFieldTextAlignment = Sprinkles["textAlign"];
 
 export interface NumberInputProps {
   // ==== Core logic props
@@ -16,7 +21,9 @@ export interface NumberInputProps {
   // ==== Form field props
   id?: string;
   isDisabled?: boolean;
+  disabled?: boolean;
   isReadOnly?: boolean;
+  readOnly?: boolean;
   autoFocus?: boolean;
   formatOptions?: AriaNumberFieldProps["formatOptions"];
   name?: string;
@@ -29,14 +36,15 @@ export interface NumberInputProps {
   onKeyDown?: AriaNumberFieldProps["onKeyDown"];
   onKeyUp?: AriaNumberFieldProps["onKeyUp"];
   // ==== Style props
-  textAlign?: Sprinkles["textAlign"];
+  textAlign?: NumberFieldTextAlignment;
   fontSize?: Sprinkles["fontSize"];
   attributes?: Sprinkles & React.HTMLAttributes<HTMLDivElement>;
-  size?: "sm" | "md" | "lg";
+  size?: NumberFieldSize;
   placeholder?: string | undefined;
-  intent?: "default" | "error";
+  intent?: NumberFieldIntent;
   className?: string;
   inputContainer?: string;
   inputClassName?: string;
   borderless?: boolean;
+  addonDivider?: boolean;
 }

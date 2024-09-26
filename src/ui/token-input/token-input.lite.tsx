@@ -7,8 +7,7 @@ import {
 } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
 import clsx from "clsx";
-import isNil from "lodash/isNil";
-import uniqueId from "lodash/uniqueId";
+import { uniqueId, isNil } from "lodash";
 import Stack from "../stack";
 import Text from "../text";
 import Box from "../box";
@@ -16,7 +15,6 @@ import Icon from "../icon";
 import { ALL_ICON_NAMES } from "../icon/icon.types";
 import IconButton from "../icon-button";
 import CicularProgressBar from "../circular-progress-bar";
-import { toNumber } from "../../helpers/number";
 import * as styles from "./token-input.css";
 
 import type { TokenInputProps } from "./token-input.types";
@@ -31,25 +29,39 @@ useMetadata({
   },
 });
 
+// TODO: replace buttons
+
 useDefaultProps<Partial<TokenInputProps>>({
   hasProgressBar: true,
-  availableAsMax: false,
 });
 
 export default function TokenInput(props: TokenInputProps) {
   const inputIdRef = useRef(uniqueId("token-input-"));
 
   const state = useStore<{
-    symbolValue: string;
+    notionalValue: string;
     isDisabled: boolean;
     handleTokenInput: (value: number) => void;
     handleIconClick: () => void;
   }>({
-    get symbolValue() {
-      return new BigNumber(props.amount || 0)
-        .multipliedBy(props.priceDisplayAmount)
-        .decimalPlaces(2)
-        .toString();
+    get notionalValue() {
+      if (props.notionalValue) {
+        return props.notionalValue;
+      }
+
+      const defaultFormat = (tokenAmount: number, pricePerToken: number) => {
+        return new BigNumber(tokenAmount ?? 0)
+          .multipliedBy(pricePerToken)
+          .decimalPlaces(4)
+          .toString();
+      };
+
+      const formatter =
+        typeof props.formatNotionalValue === "function"
+          ? props.formatNotionalValue
+          : defaultFormat;
+
+      return formatter(props.amount, props.priceDisplayAmount);
     },
     get isDisabled() {
       return props.progress === 0;
@@ -174,8 +186,8 @@ export default function TokenInput(props: TokenInputProps) {
           <ScaffoldNumberField
             id={inputIdRef}
             size="lg"
-            minValue={0}
-            maxValue={props.availableAsMax ? toNumber(props.available) : 0}
+            minValue={props.minValue}
+            maxValue={props.maxValue}
             value={props.amount}
             borderless
             isDisabled={state.isDisabled}
@@ -217,7 +229,9 @@ export default function TokenInput(props: TokenInputProps) {
                 ) : null}
               </Stack>
             }
-            onChange={(value) => state.handleTokenInput(value)}
+            onChange={(value: number) => {
+              state.handleTokenInput(value);
+            }}
             onFocus={(e?: any) => props?.onFocus?.(e)}
             className={styles.token}
             inputContainer={styles.inputContainer}
@@ -236,10 +250,18 @@ export default function TokenInput(props: TokenInputProps) {
           }}
         >
           <Text fontWeight="$semibold">{props.symbol} &nbsp;</Text>
+
           <Show when={!!props.amount && !new BigNumber(props.amount).eq(0)}>
-            <Text color="$textSecondary" attributes={{ ml: "$2" }}>
-              ≈ ${store.getState().formatNumber({ value: state.symbolValue })}
-            </Text>
+            <Show when={!props.notionalValue && !props.formatNotionalValue}>
+              <Text color="$textSecondary" attributes={{ ml: "$2" }}>
+                ≈ $
+                {store.getState().formatNumber({ value: state.notionalValue })}
+              </Text>
+            </Show>
+
+            <Show when={props.notionalValue || props.formatNotionalValue}>
+              {store.getState().formatNumber({ value: state.notionalValue })}
+            </Show>
           </Show>
         </Stack>
       </Stack>

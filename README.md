@@ -28,6 +28,8 @@ The Design System for the Interchain
   - [Compiler](#compiler)
   - [Icons](#icons)
   - [Customizing theme](#customizing-theme)
+  - [Package dev scripts in root package.json](#package-dev-scripts-in-root-packagejson)
+  - [Convention](#convention)
   - [Related](#related)
   - [Credits](#credits)
 
@@ -78,6 +80,42 @@ Check [Icon guide](./docs/icons.md) to know how to add more icons
 ## Customizing theme
 
 Check [Customizing guide](./docs/custom-theme.md) to know how to customize the default theme.
+
+## Package dev scripts in root package.json
+- `t:<target>` to compile target framework (t is short for transpile)
+- `b:<target>` to bundle target framework
+- `c:<target>` to compile and bundle target framework, it's equivalent to sequentially running `pnpm run t:<target> && pnpm run b:<target>`
+
+## Convention
+
+- Component file names must end with `*.lite.tsx`
+- Style sheets must be in `*.css.ts` files, this is because we use a styling solution called `vanilla-extract` to have a CSS-in-JS API across all frameworks.
+- For a component, you must use default export, not named export. This is a limitation of Mitosis
+- There are more rules and limitations, please read more about Mitosis [here](https://github.com/BuilderIO/mitosis/tree/main/docs)
+- To quickly test to see the compilation result from one Mitosis to any framework source code, please use
+[mitosis sandbox](https://mitosis.builder.io/). It's similar to TS playground but for Mitosis testing purpose.
+- [Vue specifics] Event handlers
+  - Event handlers in `<template>` must be prefixed with `on`
+  - Event handlers must be defined in `useStore` hook with a getter function `get eventHandlers()` with exact name. A template for this is as below:
+
+  ```ts
+  get eventHandlers() {
+    const handlers: Record<string, (event: any) => void> = {};
+    const eventProps = [
+      "onClick",
+      "onDoubleClick",
+      // Add other event names here
+    ]
+    eventProps.forEach((eventName) => {
+        if (props[eventName]) {
+          handlers[eventName] = (event: any) => props[eventName](event);
+        }
+      });
+
+    return handlers;
+  }
+  ```
+  - You can then attach the event handlers to the JSX tag with spread attribute `{...state.eventHandlers}`, this will be transformed to be a `v-on` directive in Vue
 
 ## Related
 

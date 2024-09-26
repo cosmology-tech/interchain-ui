@@ -54,9 +54,12 @@ export default function ChainListItem(props: ChainListItemProps) {
       itemRef={props.itemRef}
       isActive={props.isActive}
       isSelected={props.isSelected}
+      isDisabled={props.isDisabled}
+      shape="rounded"
+      _css={props._css}
       size={props.size}
       attributes={props.attributes}
-      className={clx(props.className, styles.listItem[state.theme])}
+      className={clx(props.className)}
     >
       <Box
         height="$full"
@@ -79,19 +82,19 @@ export default function ChainListItem(props: ChainListItemProps) {
           />
           <Stack direction="vertical" space="$0">
             <Show when={props.size === "md"}>
-              <Text color="$text" fontWeight="$semibold" fontSize="$20">
+              <Text color="inherit" fontWeight="$semibold" fontSize="$20">
                 {props.tokenName}
               </Text>
             </Show>
 
             <Show when={props.size === "md"}>
-              <Text color="$text" fontWeight="$normal" fontSize="$xs">
+              <Text color="inherit" fontWeight="$normal" fontSize="$xs">
                 {props.name}
               </Text>
             </Show>
 
             <Show when={props.size === "sm"}>
-              <Text color="$text" fontWeight="$normal" fontSize="$sm">
+              <Text color="inherit" fontWeight="$normal" fontSize="$sm">
                 {props.name}
               </Text>
             </Show>
@@ -108,7 +111,7 @@ export default function ChainListItem(props: ChainListItemProps) {
         >
           <Stack direction="vertical" space="$0">
             <Text
-              color="$text"
+              color="inherit"
               fontWeight="$semibold"
               fontSize="$20"
               textAlign="right"
@@ -116,7 +119,7 @@ export default function ChainListItem(props: ChainListItemProps) {
               {props.amount}
             </Text>
             <Text
-              color="$text"
+              color="inherit"
               fontWeight="$normal"
               fontSize="$xs"
               textAlign="right"

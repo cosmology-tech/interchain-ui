@@ -11,6 +11,7 @@ export interface ChainSwapInputProps extends BaseComponentProps {
   containerRef?: any;
   inputAttributes?: any;
   inputClassName?: string;
+  isOpen?: boolean;
   // ====
   value: string;
   placeholder?: string;

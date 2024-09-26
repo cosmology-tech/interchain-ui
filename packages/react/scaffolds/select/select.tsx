@@ -23,11 +23,11 @@ import SelectButton from "@/ui/select-button";
 import {
   listBoxWidthVar,
   selectRoot,
-  selectButton,
   listboxStyle,
   selectFullWidth,
 } from "./select.css";
 import { Item, SelectContext, SelectContextValue } from "./select.context";
+import { overlays } from "@/ui/overlays-manager/overlays";
 
 const DEFAULT_LIST_WIDTH = "220";
 
@@ -142,6 +142,28 @@ export default function Select(props: SelectProps) {
     [elementsRef, handleSelect],
   );
 
+  const [defaultRoot, setDefaultRoot] = React.useState<HTMLElement | null>(
+    null,
+  );
+
+  const overlayId = React.useRef(overlays.generateId("chain-swap-combobox"));
+
+  React.useEffect(() => {
+    if (isOpen) {
+      overlays.pushOverlay(overlayId.current);
+    }
+    return () => {
+      if (isOpen) {
+        overlays.popOverlay(overlayId.current);
+      }
+    };
+  }, [isOpen]);
+
+  React.useEffect(() => {
+    // Default lib root
+    setDefaultRoot(overlays.getOrCreateOverlayRoot(window.document));
+  }, []);
+
   React.useEffect(() => {
     if (!!props.defaultSelectedItem) {
       handleSelect(props.defaultSelectedItem);
@@ -219,6 +241,7 @@ export default function Select(props: SelectProps) {
           placeholder={
             selectedItem?.label || props.placeholder || "Select an option"
           }
+          active={isOpen}
           _css={{
             width: props.width
               ? typeof props.width === "number"
@@ -230,12 +253,11 @@ export default function Select(props: SelectProps) {
             tabIndex: 0,
             ...getReferenceProps(),
           }}
-          className={selectButton}
         />
       </div>
 
       <SelectContext.Provider value={selectContext}>
-        <FloatingPortal>
+        <FloatingPortal root={defaultRoot}>
           <div
             ref={refs.setFloating}
             tabIndex={-1}

@@ -33,7 +33,7 @@ export const DepositAsset: Story = {
     available: 25.89,
     amount: "",
     priceDisplayAmount: 0.5,
-    timeEstimateLabel: "20 seconds",
+    timeEstimateLabel: "30 seconds",
     onChange: (value) => {
       console.log("onChange", value);
     },
@@ -63,8 +63,6 @@ export const DepositAsset: Story = {
 
       const fromItem = assets.find((item) => item.symbol === "ATOM");
       const toItem = assets.find((item) => item.symbol === "STRD");
-      if (fromItem || toItem) return;
-
       setFromData({
         fromSymbol: fromItem?.symbol,
         fromDenom: fromItem?.name,
@@ -104,7 +102,7 @@ export const DepositModalView: Story = {
     available: 25.89,
     amount: "",
     priceDisplayAmount: 0.5,
-    timeEstimateLabel: "20 seconds",
+    timeEstimateLabel: "30 seconds",
     onChange: (value) => {
       console.log("onChange", value);
     },

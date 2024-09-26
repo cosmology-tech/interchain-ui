@@ -11,16 +11,18 @@ import {
   useInteractions,
   useListNavigation,
   useRole,
-  useFocus,
   useTransitionStyles,
   FloatingFocusManager,
   FloatingList,
+  FloatingPortal,
 } from "@floating-ui/react";
 
 import Box from "@/ui/box";
 import type { BoxProps } from "@/ui/box/box.types";
 import ChangeChainInput from "@/ui/change-chain-input";
 import ChangeChainInputBold from "@/ui/change-chain-input/change-chain-input-bold";
+import { overlays } from "@/ui/overlays-manager/overlays";
+import { getOwnerDocument } from "@/helpers/platform";
 
 import ChangeChainListItem from "@/ui/change-chain-list-item";
 import { changeChainListBox } from "./change-chain-combobox.css";
@@ -77,6 +79,12 @@ export interface ChangeChainCombobox {
   defaultOpen?: boolean;
   valueItem?: ComboboxOption;
   containerProp?: BoxProps;
+  rootNode?: HTMLElement;
+  // Virtualization props
+  virtualization?: {
+    itemSize: number;
+    overscan: number;
+  };
 }
 
 export default function ChangeChainCombobox(props: ChangeChainCombobox) {
@@ -91,8 +99,13 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
     props.defaultSelected ?? null,
   );
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [pointer, setPointer] = React.useState(false);
 
   const listRef = React.useRef<Array<HTMLElement | null>>([]);
+
+  if (!open && pointer) {
+    setPointer(false);
+  }
 
   const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
@@ -118,9 +131,6 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
 
   const { isMounted, styles: transitionStyles } = useTransitionStyles(context);
 
-  const focus = useFocus(context, {
-    visibleOnly: false,
-  });
   const role = useRole(context, { role: "listbox" });
   const dismiss = useDismiss(context);
   const listNav = useListNavigation(context, {
@@ -129,11 +139,45 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
     onNavigate: setActiveIndex,
     virtual: true,
     loop: true,
+    openOnArrowKeyDown: true,
+    allowEscape: true,
   });
 
   const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions(
-    [role, focus, dismiss, listNav],
+    [role, dismiss, listNav],
   );
+
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const overlayId = React.useRef(overlays.generateId("change-chain-combobox"));
+
+  React.useEffect(() => {
+    if (open) {
+      overlays.pushOverlay(overlayId.current);
+    }
+    return () => {
+      if (open) {
+        overlays.popOverlay(overlayId.current);
+      }
+    };
+  }, [open]);
+
+  const [mountRoot, setMountRoot] = React.useState<HTMLElement | undefined>(
+    undefined,
+  );
+
+  React.useEffect(() => {
+    if (props.rootNode) {
+      return setMountRoot(props.rootNode);
+    }
+    if (!refs.reference.current) return;
+
+    const ownerDocument = getOwnerDocument(
+      refs.reference.current as HTMLElement,
+    );
+    if (!ownerDocument) return;
+
+    setMountRoot(overlays.getOrCreateOverlayRoot(ownerDocument));
+  }, []);
 
   function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
@@ -243,54 +287,57 @@ export default function ChangeChainCombobox(props: ChangeChainCombobox) {
         />
       </div>
 
-      {open && (
-        <FloatingFocusManager
-          context={context}
-          initialFocus={-1}
-          visuallyHiddenDismiss
-        >
-          <div
-            {...getFloatingProps({
-              ref: refs.setFloating,
-              style: {
-                ...floatingStyles,
-                ...(isMounted ? transitionStyles : {}),
-                visibility: items.length > 0 ? "visible" : "hidden",
-                overflowY: "auto",
-              },
-            })}
-            className={clx(
-              themeClass,
-              changeChainListBox[theme],
-              listboxStyle[theme],
-            )}
+      <FloatingPortal root={mountRoot}>
+        {open && (
+          <FloatingFocusManager
+            context={context}
+            initialFocus={-1}
+            visuallyHiddenDismiss
           >
-            <FloatingList elementsRef={listRef}>
-              {items.map((item, index) => (
-                <Item
-                  key={item.value}
-                  size={props.appearance === "bold" ? "md" : props.size}
-                  isActive={activeIndex === index}
-                  {...item}
-                  {...getItemProps({
-                    ref(node) {
-                      listRef.current[index] = node;
-                    },
-                    onClick() {
-                      setInputValue(item.label);
-                      setOpen(false);
-                      setShowInputValue(false);
-                      setSelectedItem(item);
-                      props.onItemSelected?.(item);
-                      refs.domReference.current?.focus();
-                    },
-                  })}
-                />
-              ))}
-            </FloatingList>
-          </div>
-        </FloatingFocusManager>
-      )}
+            <div
+              ref={refs.setFloating}
+              tabIndex={-1}
+              {...getFloatingProps({
+                style: {
+                  ...floatingStyles,
+                  ...(isMounted ? transitionStyles : {}),
+                  visibility: items.length > 0 ? "visible" : "hidden",
+                  overflowY: "auto",
+                },
+              })}
+              className={clx(
+                themeClass,
+                changeChainListBox[theme],
+                listboxStyle[theme],
+              )}
+            >
+              <FloatingList elementsRef={listRef}>
+                {items.map((item, index) => (
+                  <Item
+                    key={item.value}
+                    size={props.appearance === "bold" ? "md" : props.size}
+                    isActive={activeIndex === index}
+                    {...item}
+                    {...getItemProps({
+                      ref(node) {
+                        listRef.current[index] = node;
+                      },
+                      onClick() {
+                        setInputValue(item.label);
+                        setOpen(false);
+                        setShowInputValue(false);
+                        setSelectedItem(item);
+                        props.onItemSelected?.(item);
+                        refs.domReference.current?.focus();
+                      },
+                    })}
+                  />
+                ))}
+              </FloatingList>
+            </div>
+          </FloatingFocusManager>
+        )}
+      </FloatingPortal>
     </Box>
   );
 }

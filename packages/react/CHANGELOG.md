@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.31...@interchain-ui/react@1.24.0) (2024-09-18)
+
+### Bug Fixes
+
+- add sb for combobox ([3e19dcc](https://github.com/cosmology-tech/interchain-ui/commit/3e19dcc5ee37b45f85f2273d64e03328542806ed))
+- vuejs build ([#200](https://github.com/cosmology-tech/interchain-ui/issues/200)) ([29cd673](https://github.com/cosmology-tech/interchain-ui/commit/29cd6737408fe1151967012facf4dc8683743552))
+
+### Features
+
+- stories for vue ([#201](https://github.com/cosmology-tech/interchain-ui/issues/201)) ([6d318c6](https://github.com/cosmology-tech/interchain-ui/commit/6d318c620100ac67b34f6e16431f31971c026c52))
+
+## [1.23.31](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.30...@interchain-ui/react@1.23.31) (2024-08-21)
+
+**Note:** Version bump only for package @interchain-ui/react
+
+## [1.23.30](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.29...@interchain-ui/react@1.23.30) (2024-08-15)
+
+### Bug Fixes
+
+- **popover:** loosen up props type ([#198](https://github.com/cosmology-tech/interchain-ui/issues/198)) ([ba27521](https://github.com/cosmology-tech/interchain-ui/commit/ba27521dcb66196a7356b0f38607f7920540dd31))
+
+## [1.23.29](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.28...@interchain-ui/react@1.23.29) (2024-07-29)
+
+### Bug Fixes
+
+- overview transfer and other combobox/select bugs ([#197](https://github.com/cosmology-tech/interchain-ui/issues/197)) ([a82ad9c](https://github.com/cosmology-tech/interchain-ui/commit/a82ad9c83c22eb85d6ecf09a72d6f9e2c4fea6d1))
+
+## [1.23.28](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.27...@interchain-ui/react@1.23.28) (2024-07-23)
+
+**Note:** Version bump only for package @interchain-ui/react
+
+## [1.23.27](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.26...@interchain-ui/react@1.23.27) (2024-07-23)
+
+### Bug Fixes
+
+- **overlays:** guard against SSR env ([d72a6cf](https://github.com/cosmology-tech/interchain-ui/commit/d72a6cf729b1667aa53ebb82e1935a03110f15d4))
+
+## [1.23.26](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.25...@interchain-ui/react@1.23.26) (2024-07-22)
+
+**Note:** Version bump only for package @interchain-ui/react
+
 ## [1.23.25](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.24...@interchain-ui/react@1.23.25) (2024-07-08)
 
 ### Bug Fixes

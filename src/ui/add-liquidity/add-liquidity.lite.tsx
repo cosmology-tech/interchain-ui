@@ -1,7 +1,6 @@
 import { useStore, onUpdate, useRef, useMetadata } from "@builder.io/mitosis";
 import BigNumber from "bignumber.js";
-import isEqual from "lodash/isEqual";
-import cloneDeep from "lodash/cloneDeep";
+import { isEqual, cloneDeep } from "lodash";
 import Stack from "../stack";
 import Text from "../text";
 import Button from "../button";
@@ -64,10 +63,10 @@ export default function AddLiquidity(props: AddLiquidityProps) {
     },
     get isInsufficient() {
       const amount1Invalid = new BigNumber(state.amount1 || 0).gt(
-        props?.poolAssets[0]?.available
+        props?.poolAssets[0]?.available,
       );
       const amount2Invalid = new BigNumber(state.amount2 || 0).gt(
-        props?.poolAssets[1]?.available
+        props?.poolAssets[1]?.available,
       );
       if (state.progress1 === 100) {
         return amount1Invalid;
@@ -195,7 +194,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       </Stack>
       <Box paddingBottom="$14">
         <TokenInput
-          availableAsMax={false}
           amount={state.amount1}
           progress={state.progress1}
           symbol={props?.poolAssets[0]?.symbol}
@@ -212,7 +210,6 @@ export default function AddLiquidity(props: AddLiquidityProps) {
       </Box>
       <Box paddingBottom="$14">
         <TokenInput
-          availableAsMax={false}
           amount={state.amount2}
           progress={state.progress2}
           symbol={props?.poolAssets[1]?.symbol}
@@ -232,7 +229,7 @@ export default function AddLiquidity(props: AddLiquidityProps) {
         fluidWidth
         size="lg"
         disabled={state.disabled}
-        intent="tertiary"
+        variant="secondary"
         onClick={() => props.onAddLiquidity()}
         isLoading={props.isLoading}
       >

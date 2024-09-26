@@ -1,0 +1,25 @@
+{
+  "extends": "@parcel/config-default",
+  "resolvers": [
+    "parcel-resolver-ts-base-url",
+    "..."
+  ],
+  "transformers": {
+    "*.{svg,png}": [
+      "@parcel/transformer-raw"
+    ],
+    "*.css.ts": [
+      "@vanilla-extract/parcel-transformer",
+      "@parcel/transformer-css"
+    ],
+    "*.{vue}": [
+      "@parcel/transformer-vue"
+    ]
+  },
+  "optimizers": {
+    "*.js": [
+      "parcel-optimizer-unlink-css",
+      "@parcel/optimizer-terser"
+    ]
+  }
+}

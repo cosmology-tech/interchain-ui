@@ -1,12 +1,18 @@
 import { BaseComponentProps } from "../../models/components.model";
-import { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+import type { Sprinkles } from "../../styles/rainbow-sprinkles.css";
+
+export type ListItemSize = "sm" | "md";
+
+export type ListItemShape = "rounded" | "default";
 
 export interface ListItemProps extends BaseComponentProps {
   isSelected?: boolean;
   isActive?: boolean;
   isDisabled?: boolean;
-  size?: "sm" | "md";
+  size?: ListItemSize;
+  shape?: ListItemShape;
+  as?: any;
   attributes?: any;
-  sprinkles?: Sprinkles;
+  _css?: Sprinkles;
   itemRef?: any;
 }

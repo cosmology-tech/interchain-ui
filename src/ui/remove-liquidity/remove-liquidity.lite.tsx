@@ -16,6 +16,8 @@ useMetadata({
   },
 });
 
+// TODO: replace buttons
+
 export default function RemoveLiquidity(props: RemoveLiquidityProps) {
   const state = useStore<{
     progress: number;
@@ -161,7 +163,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
           {(value: number, index: number) => (
             <Button
               size="xs"
-              intent="text"
+              variant="unstyled"
               onClick={() => state.handeProgressClick(value)}
             >
               {value}%
@@ -173,7 +175,7 @@ export default function RemoveLiquidity(props: RemoveLiquidityProps) {
       <Button
         fluidWidth
         size="lg"
-        intent="tertiary"
+        variant="primary"
         onClick={() => props.onRemoveLiquidity()}
         isLoading={props.isLoading}
       >
