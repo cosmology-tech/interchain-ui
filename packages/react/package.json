@@ -147,7 +147,7 @@
     "match-sorter": "^6.3.4",
     "mkdirp": "^3.0.1",
     "parcel": "^2.12.0",
-    "parcel-optimizer-unlink-css": "^1.1.0",
+    "parcel-optimizer-unlink-css": "link:../optimizer-unlink-css",
     "parcel-resolver-ts-base-url": "^1.3.1",
     "prop-types": "^15.8.1",
     "storybook": "^8.3.0",
