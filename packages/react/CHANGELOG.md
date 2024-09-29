@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.24.0...@interchain-ui/react@1.25.0) (2024-09-29)
+
+### Bug Fixes
+
+- incorrect dep name ([f350dd7](https://github.com/cosmology-tech/interchain-ui/commit/f350dd76828dbe2eacf0d1fbe053478d117a87fa))
+- lerna accidentally override local deps ([2109c98](https://github.com/cosmology-tech/interchain-ui/commit/2109c98cd13050487a23fbbcac0b0a46213079af))
+- package json ([345a92b](https://github.com/cosmology-tech/interchain-ui/commit/345a92b5848957b1d156a91a71b67d58d4914d9c))
+
+### Features
+
+- **timeline:** support secondary content and fix styles ([826c78b](https://github.com/cosmology-tech/interchain-ui/commit/826c78b8e91e94fb2d1d2739c51084d6e2769cbc))
+
 # [1.24.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.23.31...@interchain-ui/react@1.24.0) (2024-09-18)
 
 ### Bug Fixes

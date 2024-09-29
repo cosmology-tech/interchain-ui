@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.3.0...@interchain-ui/vue@1.3.1) (2024-09-29)
+
+### Bug Fixes
+
+- package json ([345a92b](https://github.com/cosmology-tech/interchain-ui/commit/345a92b5848957b1d156a91a71b67d58d4914d9c))
+
 # [1.3.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.2.55...@interchain-ui/vue@1.3.0) (2024-09-18)
 
 ### Bug Fixes
