@@ -26,7 +26,6 @@ import type { OverrideStyleManager } from "../../styles/override/override";
 import * as styles from "./button.css";
 
 useMetadata({
-  isAttachedToShadowDom: true,
   rsc: {
     componentType: "client",
   },
