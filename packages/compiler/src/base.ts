@@ -122,7 +122,7 @@ export async function compile(rawOptions: CompileParams): Promise<void> {
       })
     : files;
 
-  console.log("[base.ts] filteredGlobbedFiles", filteredGlobbedFiles);
+  // console.log("[base.ts] filteredGlobbedFiles", filteredGlobbedFiles);
 
   const outPath = `${options.dest}/${options.target}`;
 

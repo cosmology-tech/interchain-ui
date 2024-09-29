@@ -16,10 +16,42 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const dimensions = {
+  one: {
+    width: 320,
+    height: 180,
+  },
+  two: {
+    width: 240,
+    height: 120,
+  },
+};
+
+const SecondaryContent = () => {
+  const randomDimension = Math.random() < 0.5 ? dimensions.one : dimensions.two;
+
+  return (
+    <Box
+      as="img"
+      width={randomDimension.width}
+      height={randomDimension.height}
+      borderRadius="$md"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      attributes={{
+        src: `https://picsum.photos/${randomDimension.width}/${randomDimension.height}`,
+        alt: "Random image",
+        "data-testid": "secondary-content",
+      }}
+    />
+  );
+};
+
 export const Default: Story = {
   render() {
     return (
-      <Box height="1200px">
+      <Box height="4000px" paddingBottom="$24">
         <Timeline
           events={[
             {
@@ -27,11 +59,13 @@ export const Default: Story = {
               title: "Cosmology project initiated",
               description:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae diam eget risus varius blandit sit amet non magna.",
+              secondaryContent: <SecondaryContent />,
             },
             {
               timestamp: "July - Sept, 2019",
               title:
                 "Cosmology participates in Based Chads Accelerator Of The Century",
+              secondaryContent: <SecondaryContent />,
             },
             {
               timestamp: "Nov 2019 - Mar 2021",
@@ -44,9 +78,11 @@ export const Default: Story = {
               timestamp: "Jan 2021",
               title:
                 "Cosmology created the first ever NFT based on the CHAD token",
+              secondaryContent: <SecondaryContent />,
             },
             {
               timestamp: "June 2022",
+              secondaryContent: <SecondaryContent />,
               title: "Launch of $CHAD token on the Osmosis swap platform",
             },
             {
@@ -66,6 +102,21 @@ export const Default: Story = {
                   />
                 </Box>
               ),
+            },
+            {
+              timestamp: "Sept 2023",
+              title: "Cosmology introduces AI-powered trading algorithms",
+              description:
+                "Revolutionary machine learning models optimize trading strategies for $CHAD token holders.",
+              secondaryContent: <SecondaryContent />,
+            },
+            {
+              timestamp: "Feb 2024",
+              title:
+                "Launch of Cosmology DEX: The first interplanetary decentralized exchange",
+              description:
+                "Enabling seamless crypto transactions across Earth, Mars, and beyond.",
+              secondaryContent: <SecondaryContent />,
             },
           ]}
         />
