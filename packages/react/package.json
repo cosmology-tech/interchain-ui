@@ -1,6 +1,6 @@
 {
   "name": "@interchain-ui/react",
-  "version": "1.25.0",
+  "version": "1.25.1",
   "description": "UI building blocks for Interchain builders",
   "author": "yyyyaaa <phatghaa@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/ui-kit/tree/main/packages/react#readme",
@@ -63,9 +63,9 @@
     "@react-aria/overlays": "^3.23.2",
     "@react-aria/utils": "^3.25.2",
     "@tanstack/react-virtual": "^3.10.5",
-    "@vanilla-extract/dynamic": "^2.1.2",
     "@vanilla-extract/css": "^1.15.5",
     "@vanilla-extract/css-utils": "^0.1.4",
+    "@vanilla-extract/dynamic": "^2.1.2",
     "@vanilla-extract/recipes": "^0.5.5",
     "animejs": "^3.2.2",
     "bignumber.js": "^9.1.2",
