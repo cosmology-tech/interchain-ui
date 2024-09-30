@@ -67,7 +67,6 @@
     "@types/react": "latest",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
-    "@vanilla-extract/dynamic": "^2.1.1",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/babel-preset-app": "^5.0.8",
     "@vue/compiler-sfc": "^3.4.38",
@@ -111,9 +110,10 @@
     "@floating-ui/core": "^1.6.4",
     "@floating-ui/dom": "^1.6.7",
     "@types/lodash": "^4.17.7",
-    "@vanilla-extract/css": "^1.15.3",
+    "@vanilla-extract/dynamic": "^2.1.2",
+    "@vanilla-extract/css": "^1.15.5",
     "@vanilla-extract/css-utils": "^0.1.4",
-    "@vanilla-extract/recipes": "^0.5.3",
+    "@vanilla-extract/recipes": "^0.5.5",
     "animejs": "^3.2.2",
     "bignumber.js": "^9.1.2",
     "clsx": "^2.1.1",
@@ -131,6 +131,5 @@
       "enhancement": "Enhancement",
       "chore": "Chore"
     }
-  },
-  "packageManager": "pnpm@9.5.0"
+  }
 }
