@@ -37,7 +37,7 @@
     "@babel/types": "^7.25.6",
     "@builder.io/mitosis": "0.4.3",
     "@builder.io/mitosis-cli": "0.4.3",
-    "@interchain-ui/vue-codemod": "link:../vue-codemod",
+    "@interchain-ui/vue-codemod": "workspace:*",
     "@parcel/watcher": "^2.4.1",
     "cli-color": "^2.0.4",
     "command-line-args": "^5.2.1",

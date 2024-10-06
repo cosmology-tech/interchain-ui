@@ -41,6 +41,7 @@ useDefaultProps<Partial<ButtonProps>>({
 
 export default function Button(props: ButtonProps) {
   const state = useStore<{
+    isMounted: boolean;
     _theme: ThemeVariant;
     _themeAccent: UIState["themeAccent"];
     _overrideManager: OverrideStyleManager | null;
@@ -50,6 +51,7 @@ export default function Button(props: ButtonProps) {
     spreadAttributes: UnknownRecord;
     eventHandlers: Record<string, (event: any) => void>;
   }>({
+    isMounted: false,
     _overrideManager: null,
     _theme: "light",
     _themeAccent: null,
@@ -87,7 +89,7 @@ export default function Button(props: ButtonProps) {
           variant: props.variant,
           intent: props.intent ?? "primary",
           isDisabled: props.disabled || props.isLoading,
-          theme: state.getStoreState().theme,
+          theme: state.isMounted ? state.getStoreState().theme : "light",
         }),
         props.fluidWidth ? fullWidth : null,
         props.fluid ? fullWidthHeight : null,
@@ -160,6 +162,7 @@ export default function Button(props: ButtonProps) {
   onMount(() => {
     const uiStore = state.getStoreState();
 
+    state.isMounted = true;
     state._theme = uiStore[0];
     state._themeAccent = uiStore[1];
     state._overrideManager = uiStore[2];
