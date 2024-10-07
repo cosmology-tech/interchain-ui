@@ -1,6 +1,6 @@
 import Image from "next/image";
 import localFont from "next/font/local";
-import { Text } from "@interchain-ui/react";
+import { Text, Button, Box, Stack, TextField } from "@interchain-ui/react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,7 +18,7 @@ export default function Home() {
     <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
-      <main className="flex flex-col gap-8 row-start-2 items-center justify-center sm:items-start">
+      <main className="flex flex-col gap-8 row-start-2 items-center justify-center">
         <div className="flex flex-col gap-10 items-center justify-center">
           <Image
             src="/cosmology.svg"
@@ -32,6 +32,31 @@ export default function Home() {
             Interchain UI React + Next.js Pages Router
           </Text>
         </div>
+
+        <Box
+          padding="$6"
+          borderRadius="$lg"
+          backgroundColor="$cardBg"
+          minWidth="500px"
+        >
+          <Text
+            as="h2"
+            color="$text"
+            fontSize="$lg"
+            fontWeight="$bold"
+            attributes={{
+              marginBottom: "$10",
+            }}
+          >
+            Component playground
+          </Text>
+
+          <Stack direction="vertical" space="$10">
+            <Button intent="primary">Hello</Button>
+
+            <TextField id="validator" label="Validator" value="Cosmology" />
+          </Stack>
+        </Box>
       </main>
     </div>
   );
