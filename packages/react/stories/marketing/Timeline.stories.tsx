@@ -51,7 +51,7 @@ const SecondaryContent = () => {
 export const Default: Story = {
   render() {
     return (
-      <Box height="4000px" paddingBottom="$24">
+      <Box paddingBottom="$24">
         <Timeline
           events={[
             {

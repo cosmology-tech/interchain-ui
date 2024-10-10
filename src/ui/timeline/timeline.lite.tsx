@@ -1,6 +1,7 @@
 import {
   Show,
   For,
+  onUpdate,
   onMount,
   onUnMount,
   useMetadata,
@@ -21,19 +22,46 @@ useMetadata({
 });
 
 export default function Timeline(props: TimelineProps) {
-  const state = useStore<{
-    internalTheme: UIState["theme"];
-  }>({
-    internalTheme: store.getState().theme,
-  });
-
+  const timelineRef = useRef<HTMLDivElement>(null);
   let cleanupRef = useRef<() => void>(null);
 
+  const state = useStore<{
+    internalTheme: UIState["theme"];
+    timelineHeight: number;
+    updateTimelineHeight: () => void;
+  }>({
+    internalTheme: store.getState().theme,
+    timelineHeight: 0,
+    updateTimelineHeight: () => {
+      if (timelineRef) {
+        const height = timelineRef.scrollHeight;
+        state.timelineHeight = height;
+      }
+    },
+  });
+
   onMount(() => {
-    cleanupRef = store.subscribe((newState, prevState) => {
+    const handleResize = () => {
+      state.updateTimelineHeight();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    const cleanupStore = store.subscribe((newState, prevState) => {
       state.internalTheme = newState.theme;
     });
+
+    state.updateTimelineHeight();
+
+    cleanupRef = () => {
+      window.removeEventListener("resize", handleResize);
+      cleanupStore();
+    };
   });
+
+  onUpdate(() => {
+    state.updateTimelineHeight();
+  }, [props.events]);
 
   onUnMount(() => {
     if (typeof cleanupRef === "function") {
@@ -43,6 +71,8 @@ export default function Timeline(props: TimelineProps) {
 
   return (
     <Box
+      boxRef={timelineRef}
+      minHeight={`${state.timelineHeight}px`}
       display="flex"
       flexDirection="column"
       gap="$16"
