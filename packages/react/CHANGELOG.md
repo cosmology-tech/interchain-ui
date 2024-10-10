@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.25.2...@interchain-ui/react@1.25.3) (2024-10-10)
+
+### Bug Fixes
+
+- **timeline:** items container collapses height to zero ([ce44113](https://github.com/cosmology-tech/interchain-ui/commit/ce44113b40ce9256bf65778d49fdea17b8df9e2f))
+
 ## [1.25.2](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.25.1...@interchain-ui/react@1.25.2) (2024-10-06)
 
 ### Bug Fixes
