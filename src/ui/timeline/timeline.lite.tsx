@@ -30,7 +30,7 @@ export default function Timeline(props: TimelineProps) {
     timelineHeight: number;
     updateTimelineHeight: () => void;
   }>({
-    internalTheme: store.getState().theme,
+    internalTheme: "light",
     timelineHeight: 0,
     updateTimelineHeight: () => {
       if (timelineRef) {
