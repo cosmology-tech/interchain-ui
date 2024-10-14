@@ -89,6 +89,7 @@ export const Default: Story = {
               timestamp: "June 2023",
               customContent: (
                 <Box
+                  p="$8"
                   display="flex"
                   gap="$8"
                   justifyContent="center"

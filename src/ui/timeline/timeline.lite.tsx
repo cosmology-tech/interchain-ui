@@ -103,7 +103,7 @@ export default function Timeline(props: TimelineProps) {
               }}
             >
               <Box
-                p="$8"
+                p={event.customContent ? "$0" : "$8"}
                 backgroundColor="$cardBg"
                 borderColor="$divider"
                 borderStyle="solid"
