@@ -26,7 +26,7 @@
     "story:vue": "pnpm run --stream --filter '@interchain-ui/vue' sb",
     "lerna": "lerna run",
     "pub:beta": "lerna publish --no-private --preid beta",
-    "prepublishOnly": "pnpm run clear:cache && pnpm run c:react",
+    "prepublishOnly": "pnpm run clear:cache && pnpm run c:react && pnpm run c:vue",
     "clear": "pnpm run clear:cache & pnpm run clear:builds && pnpm run clear:artifacts & pnpm run clear:node_modules",
     "clear:artifacts": "find ./packages -name src -type d | grep -vE 'react-no-ssr|parcel-optimizer-unlink-css|compiler|vue-codemod' | xargs rm -rf",
     "clear:builds": "find ./packages -name dist -type d | grep -vE 'react-no-ssr|parcel-optimizer-unlink-css|compiler|vue-codemod' | xargs rm -rf",

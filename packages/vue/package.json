@@ -60,6 +60,7 @@
     "build:preview": "vite preview",
     "clean": "rimraf ./dist",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "ci": "pn run lint && pn run build",
     "format": "prettier --write src/",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
