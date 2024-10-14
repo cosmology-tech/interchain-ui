@@ -1,6 +1,6 @@
 {
   "name": "@interchain-ui/vue",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "type": "module",
   "description": "UI building blocks for Interchain builders",
   "author": "yyyyaaa <phatghaa@gmail.com>",
