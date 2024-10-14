@@ -67,6 +67,7 @@
     "@vanilla-extract/css-utils": "^0.1.4",
     "@vanilla-extract/dynamic": "^2.1.2",
     "@vanilla-extract/recipes": "^0.5.5",
+    "@vanilla-extract/private": "^1.0.6",
     "animejs": "^3.2.2",
     "bignumber.js": "^9.1.2",
     "client-only": "^0.0.1",

@@ -131,11 +131,13 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
   // Handle select customTheme
   onUpdate(() => {
-    if (!props.customTheme) return;
+    if (!props.customTheme || !state.isMounted) {
+      return;
+    }
 
     // TODO: handle custom theme for controlled mode
     store.getState().setCustomTheme(props.customTheme);
-  }, [props.customTheme]);
+  }, [props.customTheme, state.isMounted]);
 
   onUpdate(() => {
     const overrideStyleManager = store.getState().overrideStyleManager;
@@ -156,7 +158,6 @@ export default function ThemeProvider(props: ThemeProviderProps) {
 
     if (prevAccent !== props.accent) {
       state.UIStore.setThemeAccent(props.accent ?? "blue");
-
       assignThemeVars(
         {
           colors: {
@@ -232,6 +233,7 @@ export default function ThemeProvider(props: ThemeProviderProps) {
   return (
     <div
       data-is-controlled={state.isControlled}
+      data-interchain-ui-provider
       data-interchain-theme-mode={
         props.themeMode == null ? undefined : props.themeMode
       }

@@ -55,6 +55,10 @@ export default function Home() {
             <Button intent="primary">Hello</Button>
 
             <TextField id="validator" label="Validator" value="Cosmology" />
+
+            <Box bg="$primary100" width="200px" height="200px">
+              <Text color="$text">Custom theme</Text>
+            </Box>
           </Stack>
         </Box>
       </main>
