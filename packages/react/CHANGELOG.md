@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.4](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.25.3...@interchain-ui/react@1.25.4) (2024-10-14)
+
+### Bug Fixes
+
+- **theme-provider:** custom them vars not set after hydration ([d80996c](https://github.com/cosmology-tech/interchain-ui/commit/d80996cb106e16fbde2ef3b71da439d5f1b30538))
+- **timeline:** remove padding for custom content ([e219c00](https://github.com/cosmology-tech/interchain-ui/commit/e219c005648572e297284f9eefd24b0b1f98e3b6))
+
 ## [1.25.3](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/react@1.25.2...@interchain-ui/react@1.25.3) (2024-10-10)
 
 ### Bug Fixes
