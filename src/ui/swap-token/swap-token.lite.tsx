@@ -140,8 +140,6 @@ export default function SwapToken(props: SwapTokenProps) {
       minWidth="250px"
     >
       <TransferItem
-        halfBtn
-        maxBtn
         hasAvailable
         isSmall={state.isSmallSize()}
         title={props.from.label ?? "From"}
@@ -182,8 +180,7 @@ export default function SwapToken(props: SwapTokenProps) {
       </Stack>
 
       <TransferItem
-        halfBtn={false}
-        maxBtn={false}
+        partials={[]}
         disabled
         isSmall={state.isSmallSize()}
         title={props.to.label ?? "To"}

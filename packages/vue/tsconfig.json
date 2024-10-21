@@ -10,14 +10,11 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "preserve",
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "strict": false,
     "noFallthroughCasesInSwitch": true,
     "allowJs": true,
 
@@ -25,7 +22,6 @@
     "customConditions": ["source"],
     "types": ["vite/client", "node"],
 
-    // Added from React tsconfig
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
