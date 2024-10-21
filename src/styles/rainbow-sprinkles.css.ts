@@ -1,4 +1,8 @@
-import { createRainbowSprinkles, defineProperties } from "rainbow-sprinkles";
+import {
+  createRainbowSprinkles,
+  defineProperties,
+  SprinklesFn,
+} from "rainbow-sprinkles";
 import { themeVars } from "./themes.css";
 import { breakpoints } from "./tokens";
 

@@ -17,12 +17,6 @@
   },
   "devDependencies": {
     "@formkit/auto-animate": "^0.8.1",
-    "@vanilla-extract/dynamic": "^2.1.2",
-    "@vanilla-extract/css": "^1.15.5",
-    "@vanilla-extract/css-utils": "^0.1.4",
-    "@vanilla-extract/recipes": "^0.5.5",
-    "@vanilla-extract/private": "^1.0.6",
-    "@vanilla-extract/vite-plugin": "^4.0.4",
     "@vitejs/plugin-vue": "^5.0.4",
     "animejs": "^3.2.1",
     "autoprefixer": "^10.4.16",

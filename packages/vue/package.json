@@ -7,15 +7,15 @@
   "homepage": "https://github.com/cosmology-tech/interchain-ui/tree/main/packages/vue#readme",
   "license": "SEE LICENSE IN LICENSE",
   "source": "src/index.ts",
-  "main": "/dist/interchain-ui-vue.cjs.cjs",
-  "module": "/dist/interchain-ui-vue.esm.js",
+  "main": "/dist/index.cjs",
+  "module": "/dist/index.js",
   "types": "/dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "module": "./dist/interchain-ui-vue.esm.js",
-      "import": "./dist/interchain-ui-vue.cjs.js",
-      "require": "./dist/interchain-ui-vue.cjs.cjs"
+      "module": "./dist/index.js",
+      "import": "./dist/index.cjs",
+      "require": "./dist/index.cjs"
     },
     "./style.css": {
       "import": "./dist/style.css",
@@ -83,7 +83,7 @@
     "copy-to-clipboard": "^3.3.3",
     "immer": "^10.1.1",
     "lodash": "^4.17.21",
-    "rainbow-sprinkles": "^0.17.2",
+    "rainbow-sprinkles": "^0.17.3",
     "vue-final-modal": "^4.5.4",
     "zustand": "^4.5.5"
   },
