@@ -25,8 +25,8 @@
       "require": "./dist/styles/global.css.css"
     },
     "./walletConnector": {
-      "import": "./dist/styles/wallet-connector.css.css",
-      "require": "./dist/styles/wallet-connector.css.css"
+      "import": "./dist/modules/wallet-connector.css.css",
+      "require": "./dist/modules/wallet-connector.css.css"
     },
     "./package.json": "./package.json"
   },
