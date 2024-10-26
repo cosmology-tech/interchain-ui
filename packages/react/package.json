@@ -24,6 +24,10 @@
       "import": "./dist/styles/global.css.css",
       "require": "./dist/styles/global.css.css"
     },
+    "./walletConnector": {
+      "import": "./dist/styles/wallet-connector.css.css",
+      "require": "./dist/styles/wallet-connector.css.css"
+    },
     "./package.json": "./package.json"
   },
   "targets": {
@@ -45,9 +49,13 @@
       "source": "src/styles/global.css.ts",
       "context": "browser",
       "distDir": "./dist"
+    },
+    "walletConnector": {
+      "source": "modules/wallet-connector.css.ts",
+      "context": "browser",
+      "distDir": "./dist"
     }
   },
-  "sideEffects": false,
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "@parcel/resolver-default": {
     "packageExports": true
