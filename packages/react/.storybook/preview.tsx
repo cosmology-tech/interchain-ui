@@ -18,6 +18,7 @@ const preview: Preview = {
       viewports: INITIAL_VIEWPORTS,
     },
   },
+
   decorators: [
     (story) => (
       <WithThemeDecorator>
@@ -28,6 +29,8 @@ const preview: Preview = {
       </WithThemeDecorator>
     ),
   ],
+
+  tags: ["autodocs"]
 };
 
 export default preview;
