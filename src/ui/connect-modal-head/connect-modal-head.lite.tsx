@@ -11,10 +11,10 @@ import clx from "clsx";
 import Button from "../button";
 import Icon from "../icon";
 import { store } from "../../models/store";
-import * as styles from "./connect-modal-head.css";
 import { connectModalHeadTitleOverrides } from "./connect-modal-head.helper";
-import type { ThemeVariant } from "../../models/system.model";
 import type { OverrideStyleManager } from "../../styles/override/override";
+import * as styles from "./connect-modal-head.css";
+import type { ThemeVariant } from "../../models/system.model";
 import type { ConnectModalHeadProps } from "./connect-modal-head.types";
 
 useMetadata({
@@ -30,22 +30,24 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
   });
 
   const state = useStore<{
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
+    modalHeadTitleClassName: string;
   }>({
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
+    get modalHeadTitleClassName() {
+      return styles.modalHeaderText[state.internalTheme];
+    },
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
-    state.overrideManager = store.getState().overrideStyleManager;
+    state.internalTheme = store.getState().theme;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
-      state.overrideManager = newState.overrideStyleManager;
+      state.internalTheme = newState.theme;
     });
   });
 
@@ -72,12 +74,15 @@ export default function ConnectModalHead(props: ConnectModalHeadProps) {
       </Show>
 
       <p
+        {...props.titleProps}
         id={props.id}
-        className={styles.modalHeaderText[state.theme]}
+        className={clx(
+          state.modalHeadTitleClassName,
+          props.titleProps?.className,
+        )}
         style={state.overrideManager?.applyOverrides(
           connectModalHeadTitleOverrides.name,
         )}
-        {...props.titleProps}
       >
         {props.title}
       </p>

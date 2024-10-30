@@ -75,8 +75,10 @@ export const modalPanel = style({
   boxShadow:
     "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
   overflow: "hidden",
-  display: "inline-block", // Change to inline-block
-  minWidth: "280px", // Add a minimum width
+  display: "inline-block",
+  minWidth: "280px",
+  width: "fit-content",
+  margin: "0 auto",
 });
 
 // Define the CSS variables
@@ -90,8 +92,8 @@ const modalContentBase = style({
   height: "auto",
   flexDirection: "column",
   borderRadius: themeVars.radii.xl,
-  width: "auto", // Change to auto
-  maxWidth: "100%", // Add maxWidth
+  width: "auto",
+  maxWidth: "100%",
 });
 
 export const modalContent = styleVariants({
@@ -122,8 +124,8 @@ export const modalAnimateContainer = style({
 });
 
 export const modalChildren = style({
-  width: "100%", // Change to 100%
-  minWidth: "280px", // Add minWidth
+  width: "100%",
+  minWidth: "280px",
   boxSizing: "border-box",
   paddingLeft: themeVars.space[7],
   paddingRight: themeVars.space[7],
@@ -133,10 +135,6 @@ export const modalChildren = style({
 
 export const modalHeader = style({
   position: "relative",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "1rem",
 });
 
 export const modalCloseButton = style({

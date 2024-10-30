@@ -28,21 +28,21 @@ useMetadata({
 
 export default function ConnectModal(props: ConnectModalProps) {
   const state = useStore<{
-    theme: ThemeVariant;
+    internalTheme: ThemeVariant;
     overrideManager: OverrideStyleManager | null;
   }>({
-    theme: "light",
+    internalTheme: "light",
     overrideManager: null,
   });
 
   let cleanupRef = useRef<() => void>(null);
 
   onMount(() => {
-    state.theme = store.getState().theme;
+    state.internalTheme = store.getState().theme;
     state.overrideManager = store.getState().overrideStyleManager;
 
     cleanupRef = store.subscribe((newState) => {
-      state.theme = newState.theme;
+      state.internalTheme = newState.theme;
       state.overrideManager = newState.overrideStyleManager;
     });
   });
@@ -61,8 +61,8 @@ export default function ConnectModal(props: ConnectModalProps) {
       header={props.header}
       className={props.modalContainerClassName}
       contentClassName={clx(
-        modalContent[state.theme],
-        props.modalContentClassName
+        modalContent[state.internalTheme],
+        props.modalContentClassName,
       )}
       contentStyles={{
         ...state.overrideManager?.applyOverrides(connectModalOverrides.name),
