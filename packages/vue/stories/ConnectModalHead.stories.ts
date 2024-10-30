@@ -19,6 +19,7 @@ type Story = StoryObj<typeof ConnectModalHead>;
 export const Primary: Story = {
   args: {
     title: "Connect Wallet",
+    id: "connect-modal-head-title",
     hasCloseButton: true,
     hasBackButton: false,
   },

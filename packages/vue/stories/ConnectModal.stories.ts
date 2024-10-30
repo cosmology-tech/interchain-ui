@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 import Modal from "../src/ui/modal/modal.vue";
 import Button from "../src/ui/button/button.vue";
@@ -23,15 +23,22 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
-function convert(ws: typeof wallets) {
-  return ws.map((wallet) => ({
-    ...wallet,
-    logo: wallet.extends
-      ? WalletPluginSystem[wallet.extends].logo
-      : wallet.logo,
-    badge: wallet.extends ? WalletPluginSystem[wallet.extends].text : undefined,
-    btmLogo: wallet.extends ? wallet.logo : undefined,
-  }));
+const INITIAL_LIMIT = 4;
+const FINAL_LIMIT = 2;
+
+function convert(ws: typeof wallets, limit: number) {
+  return ws
+    .map((wallet) => ({
+      ...wallet,
+      logo: wallet.extends
+        ? WalletPluginSystem[wallet.extends].logo
+        : wallet.logo,
+      badge: wallet.extends
+        ? WalletPluginSystem[wallet.extends].text
+        : undefined,
+      btmLogo: wallet.extends ? wallet.logo : undefined,
+    }))
+    .slice(0, limit);
 }
 
 export const Primary: Story = {
@@ -47,6 +54,14 @@ export const Primary: Story = {
     setup() {
       const isOpen = ref(false);
       const hasBack = ref(false);
+      const walletLimit = ref(INITIAL_LIMIT);
+
+      onMounted(() => {
+        setTimeout(() => {
+          walletLimit.value = FINAL_LIMIT;
+        }, 1000);
+      });
+
       const onClose = () => {
         isOpen.value = false;
         hasBack.value = false;
@@ -57,7 +72,7 @@ export const Primary: Story = {
       const onNext = () => {
         hasBack.value = true;
       };
-      const convertedWallets = convert(wallets);
+      const convertedWallets = convert(wallets, walletLimit.value);
 
       return {
         args,
@@ -68,6 +83,9 @@ export const Primary: Story = {
         onNext,
         convertedWallets,
         qrCodeProps,
+        closeButtonProps: {
+          onClick: onClose,
+        },
       };
     },
     template: `
@@ -79,7 +97,8 @@ export const Primary: Story = {
         >
           <template #header="{ closeButtonProps }">
             <ConnectModalHead
-              title="Connect Wallet"
+              id="connect-modal-head-title"
+              title="Select your wallet"
               :hasCloseButton="true"
               :hasBackButton="hasBack"
               @back="onBack"

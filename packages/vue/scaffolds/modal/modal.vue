@@ -133,26 +133,34 @@ defineExpose({ isOpen });
               ]"
             >
               <div
-                :class="[styles.modalContent, contentClassName, themeClass]"
+                :class="[
+                  styles.modalContent[theme],
+                  contentClassName,
+                  themeClass,
+                ]"
                 data-modal-part="content"
               >
                 <div :class="[styles.modalHeader, themeClass]">
-                  <component
-                    :is="header"
+                  <slot
+                    name="header"
                     :closeButtonProps="{
                       onClick: onCloseButtonClick,
                       class: [styles.modalCloseButton, themeClass],
                     }"
-                  />
+                  >
+                    <component
+                      v-if="header"
+                      :is="header"
+                      :closeButtonProps="{
+                        onClick: onCloseButtonClick,
+                        class: [styles.modalCloseButton, themeClass],
+                      }"
+                    />
+                  </slot>
                 </div>
 
                 <div
-                  :class="[
-                    styles.modalBody,
-                    styles.modalChildren,
-                    childrenClassName,
-                    themeClass,
-                  ]"
+                  :class="[styles.modalChildren, childrenClassName, themeClass]"
                   data-modal-part="children"
                 >
                   <slot></slot>
