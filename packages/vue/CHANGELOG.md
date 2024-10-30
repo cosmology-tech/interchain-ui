@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.3.5...@interchain-ui/vue@1.4.0) (2024-10-30)
+
+### Bug Fixes
+
+- improve vue connect modal ([#210](https://github.com/cosmology-tech/interchain-ui/issues/210)) ([e61b1b9](https://github.com/cosmology-tech/interchain-ui/commit/e61b1b908b84273e2985820942fef16e0bfc2988))
+
+### Features
+
+- code split css bundle for wallet connector ([#209](https://github.com/cosmology-tech/interchain-ui/issues/209)) ([68b182b](https://github.com/cosmology-tech/interchain-ui/commit/68b182b4498edcf291e0b0d2ba5aa80c1401daf2))
+
 ## [1.3.5](https://github.com/cosmology-tech/interchain-ui/compare/@interchain-ui/vue@1.3.4...@interchain-ui/vue@1.3.5) (2024-10-21)
 
 ### Bug Fixes
