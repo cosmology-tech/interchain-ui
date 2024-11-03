@@ -1,5 +1,6 @@
 {
   "name": "@interchain-ui/react-codemod",
+  "private": true,
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "yyyyaaa <phatghaa@gmail.com>",
