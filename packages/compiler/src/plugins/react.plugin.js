@@ -1,4 +1,5 @@
 // @ts-check
+const { reactCodemod } = require("@interchain-ui/react-codemod");
 const scaffolds = require("../scaffold.config.js");
 const scaffoldConfig = scaffolds.reactScaffoldConfig;
 
@@ -38,13 +39,14 @@ module.exports = function reactCompilerPlugin() {
     code: {
       // Happens before formatting
       pre: (codeStr) => {
-        return [fixReactTypeIssuesPlugin, fixIncorrectRefNamePlugin].reduce(
-          (acc, transform) => {
-            acc = transform(codeStr);
-            return acc;
-          },
-          codeStr,
-        );
+        return [
+          fixReactTypeIssuesPlugin,
+          fixIncorrectRefNamePlugin,
+          reactCodemod,
+        ].reduce((acc, transform) => {
+          acc = transform(acc);
+          return acc;
+        }, codeStr);
       },
     },
   };
